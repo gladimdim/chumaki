@@ -4,14 +4,18 @@ import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/models/route.dart';
+
 const CITY_SIZE = 30;
+
 class MainView extends StatefulWidget {
   @override
   _MainViewState createState() => _MainViewState();
 }
 
 class _MainViewState extends State<MainView> {
+  double animationValue = 0;
   City? selected;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -27,12 +31,12 @@ class _MainViewState extends State<MainView> {
               width: 2000,
               height: 2000,
             ),
-
             ...CityRoute.allRoutes.map((route) {
               Point<double> bezierPoint = route.bezierPoint;
               var first = route.from;
               var second = route.to;
-              Point<double> finalPoint = Point(second.point.x - first.point.x, second.point.y - first.point.y);
+              Point<double> finalPoint = Point(second.point.x - first.point.x,
+                  second.point.y - first.point.y);
               bool highlight = false;
               if (selected != null) {
                 highlight = selected!.routes.contains(route);
@@ -45,10 +49,12 @@ class _MainViewState extends State<MainView> {
                   height: 50,
                   child: GestureDetector(
                     onTap: () {
-                      print("Pressed on route between ${first.name} and ${second.name}");
+                      print(
+                          "Pressed on route between ${first.name} and ${second.name}");
                     },
                     child: TweenAnimationBuilder<double>(
-                      tween: Tween<double>(begin: 0, end: 1),
+                      tween: Tween<double>(
+                          begin: animationValue, end: 1 - animationValue),
                       duration: Duration(seconds: 10),
                       builder: (context, value, child) {
                         return CustomPaint(
@@ -97,6 +103,18 @@ class _MainViewState extends State<MainView> {
                 ),
               );
             }).toList(),
+            Positioned(
+              left: 200,
+              top: 800,
+              child: TextButton(
+                child: Text("Reset"),
+                onPressed: () {
+                  setState(() {
+                    animationValue = 1 - animationValue;
+                  });
+                },
+              ),
+            )
           ],
         ),
       ),
