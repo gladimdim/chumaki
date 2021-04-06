@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:chumaki/models/route.dart';
 import 'package:tuple/tuple.dart';
 
 class City {
@@ -19,6 +20,13 @@ class City {
 
   bool equalsTo(City another) {
     return another.name == name;
+  }
+
+
+  List<CityRoute> get routes {
+    return CityRoute.allRoutes.where((route) {
+      return route.to.equalsTo(this) || route.from.equalsTo(this);
+    }).toList();
   }
 }
 
@@ -45,11 +53,3 @@ class Yagidne extends City {
 class Sloboda extends City {
   Sloboda(): super(point: Point(140, 525), name: "Слобода");
 }
-
-Map<Tuple2<City, City>, Point<double>> routes = {
-  Tuple2(Nizhin(), Sich()): Point<double>(80.0, 20.0),
-  Tuple2(Nizhin(), Sloboda()): Point<double>(80.0, 40.0),
-  Tuple2(Cherkasy(), Sloboda()): Point<double>(-80.0, 40.0),
-  Tuple2(Cherkasy(), Yagidne()): Point<double>(150.0, 150.0),
-  Tuple2(Cherkasy(), Kaniv()): Point<double>(250.0, 250.0),
-};

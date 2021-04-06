@@ -1,9 +1,17 @@
 import 'dart:math';
 
+import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:flutter/material.dart';
+import 'package:chumaki/models/route.dart';
 const CITY_SIZE = 30;
-class MainView extends StatelessWidget {
+class MainView extends StatefulWidget {
+  @override
+  _MainViewState createState() => _MainViewState();
+}
+
+class _MainViewState extends State<MainView> {
+  City? selected;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -26,13 +34,20 @@ class MainView extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     print("pressed city: ${city.name}");
+                    setState(() {
+                      if (selected == city) {
+                        selected = null;
+                      } else {
+                        selected = city;
+                      }
+                    });
                   },
                   child: ClipOval(
                     child: SizedBox(
                       width: CITY_SIZE * 2,
                       height: CITY_SIZE * 2,
                       child: Container(
-                        color: Colors.grey,
+                        color: selected == city ? Colors.grey : Colors.red,
                         child: Center(
                           child: Text(
                             "${city.name}",
@@ -45,11 +60,15 @@ class MainView extends StatelessWidget {
                 ),
               );
             }),
-            ...routes.keys.map((key) {
-              Point<double> bezierPoint = routes[key]!;
-              var first = key.item1;
-              var second = key.item2;
+            ...CityRoute.allRoutes.map((route) {
+              Point<double> bezierPoint = route.bezierPoint;
+              var first = route.from;
+              var second = route.to;
               Point<double> finalPoint = Point(second.point.x - first.point.x, second.point.y - first.point.y);
+              bool highlight = false;
+              if (selected != null) {
+                highlight = selected!.routes.contains(route);
+              }
               return Positioned(
                 left: first.point.x + CITY_SIZE,
                 top: first.point.y + CITY_SIZE,
@@ -61,7 +80,8 @@ class MainView extends StatelessWidget {
                       print("Pressed on route between ${first.name} and ${second.name}");
                     },
                     child: CustomPaint(
-                      painter: CurvePainter(
+                      painter: RoutePainter(
+                        color: highlight ? Colors.green : Colors.black,
                         path: Path()
                           ..moveTo(0, 0)
                           ..quadraticBezierTo(bezierPoint.x, bezierPoint.y, finalPoint.x, finalPoint.y),
@@ -93,27 +113,5 @@ class Clipper extends CustomClipper<Path> {
       ..close();
 
     return path;
-  }
-}
-
-class CurvePainter extends CustomPainter {
-  final Path path;
-
-  CurvePainter({required this.path});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    var paint = Paint()
-      ..color = Colors.black
-      ..strokeWidth = 3
-      ..style = PaintingStyle.stroke;
-
-    // canvas.drawRect(bounds, paint);
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
   }
 }
