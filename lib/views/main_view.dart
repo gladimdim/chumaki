@@ -27,6 +27,43 @@ class _MainViewState extends State<MainView> {
               width: 2000,
               height: 2000,
             ),
+
+            ...CityRoute.allRoutes.map((route) {
+              Point<double> bezierPoint = route.bezierPoint;
+              var first = route.from;
+              var second = route.to;
+              Point<double> finalPoint = Point(second.point.x - first.point.x, second.point.y - first.point.y);
+              bool highlight = false;
+              if (selected != null) {
+                highlight = selected!.routes.contains(route);
+              }
+              return Positioned(
+                left: first.point.x + CITY_SIZE,
+                top: first.point.y + CITY_SIZE,
+                child: SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: GestureDetector(
+                    onTap: () {
+                      print("Pressed on route between ${first.name} and ${second.name}");
+                    },
+                    child: TweenAnimationBuilder<double>(
+                      tween: Tween<double>(begin: 0, end: 1),
+                      duration: Duration(seconds: 10),
+                      builder: (context, value, child) {
+                        return CustomPaint(
+                          painter: RoutePainter(
+                            color: highlight ? Colors.green : Colors.black,
+                            route: route,
+                            progress: value,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
             ...City.allCities.map((city) {
               return Positioned(
                 top: city.point.y,
@@ -54,37 +91,6 @@ class _MainViewState extends State<MainView> {
                             style: TextStyle(fontSize: 12, color: Colors.black),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            }),
-            ...CityRoute.allRoutes.map((route) {
-              Point<double> bezierPoint = route.bezierPoint;
-              var first = route.from;
-              var second = route.to;
-              Point<double> finalPoint = Point(second.point.x - first.point.x, second.point.y - first.point.y);
-              bool highlight = false;
-              if (selected != null) {
-                highlight = selected!.routes.contains(route);
-              }
-              return Positioned(
-                left: first.point.x + CITY_SIZE,
-                top: first.point.y + CITY_SIZE,
-                child: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: GestureDetector(
-                    onTap: () {
-                      print("Pressed on route between ${first.name} and ${second.name}");
-                    },
-                    child: CustomPaint(
-                      painter: RoutePainter(
-                        color: highlight ? Colors.green : Colors.black,
-                        path: Path()
-                          ..moveTo(0, 0)
-                          ..quadraticBezierTo(bezierPoint.x, bezierPoint.y, finalPoint.x, finalPoint.y),
                       ),
                     ),
                   ),

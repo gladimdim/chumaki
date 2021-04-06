@@ -13,8 +13,11 @@ class CityRoute {
     CityRoute(Nizhin(), Sich(), Point<double>(80.0, 20.0)),
     CityRoute(Nizhin(), Sloboda(), Point<double>(80.0, 40.0)),
     CityRoute(Cherkasy(), Sloboda(), Point<double>(-80.0, 40.0)),
-    CityRoute(Cherkasy(), Yagidne(), Point<double>(150.0, 150.0)),
-    CityRoute(Cherkasy(), Kaniv(), Point<double>(250.0, 250.0)),
+    CityRoute(Cherkasy(), Yagidne(), Point<double>(50.0, 50.0)),
+    CityRoute(Cherkasy(), Nizhin(), Point<double>(0.0, 0.0)),
+    CityRoute(Yagidne(), Kaniv(), Point<double>(10.0, 30.0)),
+    CityRoute(Sich(), Kaniv(), Point<double>(5.0, 5.0)),
+    CityRoute(Sich(), Yagidne(), Point<double>(-75.0, -55.0)),
+    CityRoute(Sloboda(), Yagidne(), Point<double>(75.0, 55.0)),
   ];
-
 }

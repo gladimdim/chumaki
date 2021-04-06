@@ -47,7 +47,7 @@ class Sich extends City {
 }
 
 class Yagidne extends City {
-  Yagidne(): super(point: Point(180, 225), name: "Ягідне");
+  Yagidne(): super(point: Point(275, 225), name: "Ягідне");
 }
 
 class Sloboda extends City {
