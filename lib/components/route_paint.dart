@@ -20,6 +20,11 @@ class RoutePainter extends CustomPainter {
       ..quadraticBezierTo(route.bezierPoint.x, route.bezierPoint.y, finalPoint.x, finalPoint.y);
     var paint = Paint()
       ..color = color
+      ..strokeWidth = 10
+      ..style = PaintingStyle.stroke;
+
+    var carrierPaint = Paint()
+      ..color = Colors.blue
       ..strokeWidth = 3
       ..style = PaintingStyle.stroke;
 
@@ -29,7 +34,7 @@ class RoutePainter extends CustomPainter {
       var start = routeTask.from;
       Offset offsetStart;
       Offset offsetEnd;
-      if (start == route.from) {
+      if (start.equalsTo(route.from)) {
         offsetStart = Offset(0, 0);
         offsetEnd = Offset(finalPoint.x, finalPoint.y);
       } else {
@@ -41,7 +46,7 @@ class RoutePainter extends CustomPainter {
             offsetStart, Offset(route.bezierPoint.x, route.bezierPoint.y), offsetEnd, routeTask.leftProgress()),
         radius: 10,
       );
-      canvas.drawRect(rectPath, paint);
+      canvas.drawRect(rectPath, carrierPaint);
     });
   }
 

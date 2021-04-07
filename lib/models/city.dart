@@ -13,8 +13,9 @@ class City {
     Kaniv(),
     Sich(),
     Cherkasy(),
-    Yagidne(),
-    Sloboda(),
+    Chigirin(),
+    Pereyaslav(),
+    Kyiv(),
   ];
 
   bool equalsTo(City another) {
@@ -30,25 +31,28 @@ class City {
 }
 
 class Cherkasy extends City {
-  Cherkasy() : super(point: Point(25, 325), name: "Черкаси");
+  Cherkasy() : super(point: Point(2250, 2000), name: "Черкаси");
 }
 
 class Nizhin extends City {
-  Nizhin() : super(point: Point(100, 200), name: "Ніжин");
+  Nizhin() : super(point: Point(1600, 2500), name: "Ніжин");
 }
 
 class Kaniv extends City {
-  Kaniv() : super(point: Point(300, 50), name: "Канів");
+  Kaniv() : super(point: Point(2400, 2200), name: "Канів");
 }
 
 class Sich extends City {
-  Sich(): super(point: Point(200, 75), name: "Січ");
+  Sich(): super(point: Point(1200, 900), name: "Січ");
 }
 
-class Yagidne extends City {
-  Yagidne(): super(point: Point(275, 225), name: "Ягідне");
+class Chigirin extends City {
+  Chigirin(): super(point: Point(2000, 1750), name: "Чигирин");
 }
 
-class Sloboda extends City {
-  Sloboda(): super(point: Point(140, 525), name: "Слобода");
+class Pereyaslav extends City {
+  Pereyaslav(): super(point: Point(2360, 2450), name: "Переяслав");
+}
+class Kyiv extends City {
+  Kyiv(): super(point: Point(2700, 2830), name: "Київ");
 }

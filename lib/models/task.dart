@@ -9,6 +9,6 @@ class RouteTask extends ProgressDuration {
   RouteTask(
     this.to,
     this.from, {
-    duration = const Duration(seconds: 5),
+    duration = const Duration(seconds: 15),
   }): super(duration);
 }
