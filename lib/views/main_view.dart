@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/task.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/models/route.dart';
+import 'package:chumaki/extensions/list.dart';
 
 const CITY_SIZE = 30;
 
@@ -47,24 +49,13 @@ class _MainViewState extends State<MainView> {
                 child: SizedBox(
                   width: 50,
                   height: 50,
-                  child: GestureDetector(
-                    onTap: () {
-                      print(
-                          "Pressed on route between ${first.name} and ${second.name}");
-                    },
-                    child: TweenAnimationBuilder<double>(
-                      tween: Tween<double>(
-                          begin: animationValue, end: 1 - animationValue),
-                      duration: Duration(seconds: 10),
-                      builder: (context, value, child) {
-                        return CustomPaint(
-                          painter: RoutePainter(
-                            color: highlight ? Colors.green : Colors.black,
-                            route: route,
-                            progress: value,
-                          ),
-                        );
-                      },
+                  child: StreamBuilder(
+                    stream: Stream.periodic(Duration(milliseconds: 50),),
+                    builder: (context, data) => CustomPaint(
+                      painter: RoutePainter(
+                        color: highlight ? Colors.green : Colors.black,
+                        route: route,
+                      ),
                     ),
                   ),
                 ),
@@ -77,6 +68,13 @@ class _MainViewState extends State<MainView> {
                 child: GestureDetector(
                   onTap: () {
                     print("pressed city: ${city.name}");
+                    CityRoute cityRoute = city.routes.takeRandom();
+                    var newTask = RouteTask(cityRoute.to, cityRoute.from);
+                    cityRoute.addTask(newTask);
+                    newTask.start();
+                    newTask.changes.listen((event) {
+                      print(event);
+                    });
                     setState(() {
                       if (selected == city) {
                         selected = null;

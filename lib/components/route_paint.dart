@@ -7,8 +7,7 @@ class RoutePainter extends CustomPainter {
   // final Path path;
   final Color color;
   final CityRoute route;
-  final double progress;
-  RoutePainter({required this.color, required this.route, required this.progress});
+  RoutePainter({required this.color, required this.route,});
 
 
   @override
@@ -26,12 +25,24 @@ class RoutePainter extends CustomPainter {
 
     canvas.drawPath(path, paint);
 
-    var rectPath = Rect.fromCircle(
-      center: getQuadraticCurvePoint(
-          Offset(0, 0), Offset(route.bezierPoint.x, route.bezierPoint.y), Offset(finalPoint.x, finalPoint.y), progress),
-      radius: 10,
-    );
-    canvas.drawRect(rectPath, paint);
+    route.routeTasks.forEach((routeTask) {
+      var start = routeTask.from;
+      Offset offsetStart;
+      Offset offsetEnd;
+      if (start == route.from) {
+        offsetStart = Offset(0, 0);
+        offsetEnd = Offset(finalPoint.x, finalPoint.y);
+      } else {
+        offsetStart = Offset(finalPoint.x, finalPoint.y);
+        offsetEnd =  Offset(0, 0);
+      }
+      var rectPath = Rect.fromCircle(
+        center: getQuadraticCurvePoint(
+            offsetStart, Offset(route.bezierPoint.x, route.bezierPoint.y), offsetEnd, routeTask.leftProgress()),
+        radius: 10,
+      );
+      canvas.drawRect(rectPath, paint);
+    });
   }
 
   @override

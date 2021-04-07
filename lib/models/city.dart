@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:chumaki/models/route.dart';
-import 'package:tuple/tuple.dart';
 
 class City {
   final Point<double> point;
