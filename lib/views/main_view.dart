@@ -3,10 +3,11 @@ import 'dart:math';
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/task.dart';
+import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/models/route.dart';
 import 'package:chumaki/extensions/list.dart';
-
+import 'dart:ui' as ui;
 const CITY_SIZE = 30;
 
 class MainView extends StatefulWidget {
@@ -76,11 +77,22 @@ class _MainViewState extends State<MainView> {
                 height: 50,
                 child: StreamBuilder(
                   stream: Stream.periodic(Duration(milliseconds: 33),),
-                  builder: (context, data) => CustomPaint(
-                    painter: RoutePainter(
-                      color: highlight ? Colors.red : Colors.green,
-                      route: route,
-                    ),
+                  builder: (context, data) => FutureBuilder(
+                    future: ImageOnCanvas.wagonImage.asBytes(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        var data = snapshot.data as ui.Image;
+                        return CustomPaint(
+                          painter: RoutePainter(
+                            color: highlight ? Colors.red : Colors.green,
+                            route: route,
+                            image: data,
+                          ),
+                        );
+                      } else {
+                        return Container();
+                      }
+                    }
                   ),
                 ),
               ),

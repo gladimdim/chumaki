@@ -2,12 +2,13 @@ import 'dart:math';
 
 import 'package:chumaki/models/route.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:ui' as ui;
 class RoutePainter extends CustomPainter {
   // final Path path;
   final Color color;
   final CityRoute route;
-  RoutePainter({required this.color, required this.route,});
+  final ui.Image image;
+  RoutePainter({required this.color, required this.route, required this.image});
 
 
   @override
@@ -24,9 +25,9 @@ class RoutePainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     var carrierPaint = Paint()
-      ..color = Colors.blue
+      ..color = Colors.brown.withAlpha(180)
       ..strokeWidth = 3
-      ..style = PaintingStyle.stroke;
+      ..style = PaintingStyle.fill;
 
     canvas.drawPath(path, paint);
 
@@ -41,12 +42,12 @@ class RoutePainter extends CustomPainter {
         offsetStart = Offset(finalPoint.x, finalPoint.y);
         offsetEnd =  Offset(0, 0);
       }
-      var rectPath = Rect.fromCircle(
-        center: getQuadraticCurvePoint(
-            offsetStart, Offset(route.bezierPoint.x, route.bezierPoint.y), offsetEnd, routeTask.leftProgress()),
-        radius: 10,
-      );
-      canvas.drawRect(rectPath, carrierPaint);
+
+      var wagonOffset = getQuadraticCurvePoint(
+          offsetStart, Offset(route.bezierPoint.x, route.bezierPoint.y), offsetEnd, routeTask.leftProgress());
+
+      canvas.drawCircle(wagonOffset, 32, carrierPaint);
+      canvas.drawImage(image, wagonOffset - Offset(32, 32), Paint());
     });
   }
 
