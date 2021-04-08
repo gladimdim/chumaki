@@ -84,7 +84,7 @@ class _MainViewState extends State<MainView> {
                         var data = snapshot.data as ui.Image;
                         return CustomPaint(
                           painter: RoutePainter(
-                            color: highlight ? Colors.red : Colors.green,
+                            color: highlight ? Colors.amber : Colors.brown,
                             route: route,
                             image: data,
                           ),
@@ -121,11 +121,7 @@ class _MainViewState extends State<MainView> {
                     print(event);
                   });
                   setState(() {
-                    if (selected == city) {
-                      selected = null;
-                    } else {
                       selected = city;
-                    }
                   });
                 },
                 child: ClipOval(
