@@ -8,17 +8,9 @@ class CityRoute {
   final City from;
   final City to;
   final Point<double> bezierPoint;
-  List<RouteTask> routeTasks = List.empty(growable: true);
 
-
-  BehaviorSubject _innerChanges = BehaviorSubject();
-  late ValueStream changes;
 
   CityRoute(this.to, this.from, this.bezierPoint);
-
-  void addTask(RouteTask task) {
-    routeTasks.add(task);
-  }
 
   static List<CityRoute> allRoutes = [
     CityRoute(Nizhin(), Pereyaslav(), Point<double>(75.0, 140.0)),
