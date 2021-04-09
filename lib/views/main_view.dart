@@ -1,13 +1,16 @@
 import 'dart:math';
 
+import 'package:chumaki/components/animated_route_task.dart';
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/models/route.dart';
 import 'package:chumaki/extensions/list.dart';
 import 'dart:ui' as ui;
+
 const CITY_SIZE = 30;
 
 class MainView extends StatefulWidget {
@@ -34,37 +37,40 @@ class _MainViewState extends State<MainView> {
             height: 4195,
           ),
           if (showCoordinates)
-          ...List.generate(53, (index) {
-            return Positioned(
-              top: 0,
-              left: index * 100,
-              child: Container(
-                width: 5,
-                height: 4195,
-                color: Colors.black,
-                child: Text((index * 100).toString(), style: TextStyle(fontSize: 18, color: Colors.red),),
-              ),
-            );
-          }).toList(),
+            ...List.generate(53, (index) {
+              return Positioned(
+                top: 0,
+                left: index * 100,
+                child: Container(
+                  width: 5,
+                  height: 4195,
+                  color: Colors.black,
+                  child: Text(
+                    (index * 100).toString(),
+                    style: TextStyle(fontSize: 18, color: Colors.red),
+                  ),
+                ),
+              );
+            }).toList(),
           if (showCoordinates)
-          ...List.generate(42, (index) {
-            return Positioned(
-              top: index * 100,
-              left: 0,
-              child: Container(
-                height: 15,
-                width: 5430,
-                color: Colors.black,
-                child: Text((index * 100).toString(), style: TextStyle(fontSize: 18, color: Colors.red),),
-              ),
-            );
-          }).toList(),
+            ...List.generate(42, (index) {
+              return Positioned(
+                top: index * 100,
+                left: 0,
+                child: Container(
+                  height: 15,
+                  width: 5430,
+                  color: Colors.black,
+                  child: Text(
+                    (index * 100).toString(),
+                    style: TextStyle(fontSize: 18, color: Colors.red),
+                  ),
+                ),
+              );
+            }).toList(),
           ...CityRoute.allRoutes.map((route) {
-            Point<double> bezierPoint = route.bezierPoint;
             var first = route.from;
             var second = route.to;
-            Point<double> finalPoint = Point(second.point.x - first.point.x,
-                second.point.y - first.point.y);
             bool highlight = false;
             if (selected != null) {
               highlight = selected!.routes.contains(route);
@@ -75,28 +81,17 @@ class _MainViewState extends State<MainView> {
               child: SizedBox(
                 width: 50,
                 height: 50,
-                child: StreamBuilder(
-                  stream: Stream.periodic(Duration(milliseconds: 33),),
-                  builder: (context, data) => FutureBuilder(
-                    future: ImageOnCanvas.wagonImage.asBytes(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        var data = snapshot.data as ui.Image;
-                        return CustomPaint(
-                          painter: RoutePainter(
-                            color: highlight ? Colors.amber : Colors.brown,
-                            route: route,
-                            image: data,
-                          ),
-                        );
-                      } else {
-                        return Container();
-                      }
-                    }
+                child: CustomPaint(
+                  painter: RoutePainter(
+                    color: highlight ? Colors.amber : Colors.brown,
+                    route: route,
                   ),
                 ),
               ),
             );
+          }).toList(),
+          ...Company.instance.tasks.map((routeTask) {
+            return AnimatedRouteTask(routeTask);
           }).toList(),
           ...City.allCities.map((city) {
             return Positioned(
@@ -115,13 +110,10 @@ class _MainViewState extends State<MainView> {
                   }
                   print("from: ${from.name} to: ${to.name}");
                   var newTask = RouteTask(to, from);
-                  cityRoute.addTask(newTask);
+                  Company.instance.addTaskForRoute(newTask, cityRoute);
                   newTask.start();
-                  newTask.changes.listen((event) {
-                    print(event);
-                  });
                   setState(() {
-                      selected = city;
+                    selected = city;
                   });
                 },
                 child: ClipOval(
