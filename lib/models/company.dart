@@ -22,6 +22,8 @@ class Company {
   startTask(RouteTask routeTask) {
     print("starting task: ${routeTask.id}");
     tasks.add(routeTask);
+    var cityRoute = getRouteForTask(routeTask);
+    cityRoute.routeTasks.add(routeTask);
     routeTask.start();
     routeTask.changes.listen((event) {
       if (event == PROGRESS_DURACTION_EVENTS.FINISHED) {
@@ -34,6 +36,12 @@ class Company {
   CityRoute getRouteForTask(RouteTask routeTask) {
     var from = routeTask.from;
     var to = routeTask.to;
+    return cityRoutes.firstWhere((route) {
+      return (route.to.equalsTo(to) && route.from.equalsTo(from)) || (route.to.equalsTo(from) && route.from.equalsTo(to));
+    });
+  }
+
+  CityRoute getRouteFromTo({required City from, required City to}) {
     return cityRoutes.firstWhere((route) {
       return (route.to.equalsTo(to) && route.from.equalsTo(from)) || (route.to.equalsTo(from) && route.from.equalsTo(to));
     });

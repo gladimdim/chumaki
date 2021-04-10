@@ -8,6 +8,7 @@ class CityRoute {
   final City from;
   final City to;
   final Point<double> bezierPoint;
+  List<RouteTask> routeTasks = List.empty(growable: true);
 
 
   CityRoute(this.to, this.from, this.bezierPoint);
