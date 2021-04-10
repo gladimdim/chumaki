@@ -2,12 +2,12 @@ import 'dart:math';
 
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/task.dart';
-import 'package:rxdart/rxdart.dart';
 
 class CityRoute {
   final City from;
   final City to;
   final Point<double> bezierPoint;
+  List<RouteTask> routeTasks = List.empty(growable: true);
 
 
   CityRoute(this.to, this.from, this.bezierPoint);

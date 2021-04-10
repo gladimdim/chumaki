@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:intl/intl.dart';
 import 'package:clock/clock.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -63,6 +64,15 @@ class ProgressDuration {
 
   bool isDone() {
     return finishAt != null && clock.now().compareTo(finishAt!) >= 0;
+  }
+
+
+  String formatDuration() {
+    var format = DateFormat("HH:mm:ss");
+    var date = DateTime(
+        DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 0);
+    date = date.add(leftDurationProgress());
+    return format.format(date);
   }
 
   ///

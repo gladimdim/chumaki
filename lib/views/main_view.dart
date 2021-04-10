@@ -1,15 +1,11 @@
-import 'dart:math';
 
-import 'package:chumaki/components/animated_route_task.dart';
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/selected_city_view.dart';
 import 'package:chumaki/models/city.dart';
-import 'package:chumaki/models/company.dart';
-import 'package:chumaki/models/task.dart';
+
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/models/route.dart';
-import 'package:chumaki/extensions/list.dart';
 import 'dart:ui' as ui;
 
 const CITY_SIZE = 30;
@@ -71,7 +67,6 @@ class _MainViewState extends State<MainView> {
             }).toList(),
           ...CityRoute.allRoutes.map((route) {
             var first = route.from;
-            var second = route.to;
             bool highlight = false;
             if (selected != null) {
               highlight = selected!.routes.contains(route);
@@ -82,18 +77,32 @@ class _MainViewState extends State<MainView> {
               child: SizedBox(
                 width: 50,
                 height: 50,
-                child: CustomPaint(
-                  painter: RoutePainter(
-                    color: highlight ? Colors.amber : Colors.brown,
-                    route: route,
+                child: StreamBuilder(
+                  stream: Stream.periodic(Duration(milliseconds: 33)),
+                  builder: (context, snapshot) => FutureBuilder(
+                    future: ImageOnCanvas.wagonImage.asBytes(),
+                    builder: (context, snapshotImage) {
+                      if (snapshotImage.hasData) {
+                        var data = snapshotImage.data as ui.Image;
+                        return CustomPaint(
+                          painter: RoutePainter(
+                            color: highlight ? Colors.amber : Colors.brown,
+                            route: route,
+                            image: data,
+                          ),
+                        );
+                      } else {
+                        return Container();
+                      }
+                    },
                   ),
                 ),
               ),
             );
           }).toList(),
-          ...Company.instance.tasks.map((routeTask) {
-            return AnimatedRouteTask(routeTask);
-          }).toList(),
+          // ...Company.instance.tasks.map((routeTask) {
+          //   return AnimatedRouteTask(routeTask);
+          // }).toList(),
           ...City.allCities.map((city) {
             return Positioned(
               top: city.point.y,
@@ -101,18 +110,6 @@ class _MainViewState extends State<MainView> {
               child: GestureDetector(
                 onTap: () {
                   print("pressed city: ${city.name}");
-                  CityRoute cityRoute = city.routes.takeRandom();
-                  var from = city;
-                  var to;
-                  if (cityRoute.from.equalsTo(city)) {
-                    to = cityRoute.to;
-                  } else {
-                    to = cityRoute.from;
-                  }
-                  print("from: ${from.name} to: ${to.name}");
-                  var newTask = RouteTask(to, from);
-                  Company.instance.addTaskForRoute(newTask, cityRoute);
-                  newTask.start();
                   setState(() {
                     if (selected == city) {
                       selected = null;
@@ -165,19 +162,19 @@ class _MainViewState extends State<MainView> {
           ),
           if (selected != null)
             Positioned(
-                left: selected!.point.x - 150,
-                top: selected!.point.y + 64,
-                child: SizedBox(
-                  width: 300,
-                  height: 300,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 3),
-                      color: Colors.brown,
-                    ),
-                    child: SelectedCityView(city: selected!),
+              left: selected!.point.x - 150,
+              top: selected!.point.y + 64,
+              child: SizedBox(
+                width: 300,
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 3),
+                    color: Colors.brown,
                   ),
-                )),
+                  child: SelectedCityView(city: selected!),
+                ),
+              ),
+            ),
         ],
       ),
     );
