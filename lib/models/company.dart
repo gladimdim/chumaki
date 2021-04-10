@@ -1,6 +1,7 @@
+import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/route.dart';
 import 'package:chumaki/models/task.dart';
-
+import 'package:rxdart/rxdart.dart';
 class Company {
   List<RouteTask> tasks = List.empty(growable: true);
   final List<CityRoute> cityRoutes = CityRoute.allRoutes;
@@ -9,6 +10,12 @@ class Company {
 
   addTaskForRoute(RouteTask routeTask, CityRoute route) {
     tasks.add(routeTask);
+    routeTask.start();
+    routeTask.changes.listen((event) {
+      if (event == PROGRESS_DURACTION_EVENTS.FINISHED) {
+        tasks.remove(routeTask);
+      }
+    });
   }
 
   CityRoute getRouteForTask(RouteTask routeTask) {

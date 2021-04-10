@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:chumaki/components/animated_route_task.dart';
 import 'package:chumaki/components/route_paint.dart';
+import 'package:chumaki/components/selected_city_view.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/task.dart';
@@ -113,7 +114,11 @@ class _MainViewState extends State<MainView> {
                   Company.instance.addTaskForRoute(newTask, cityRoute);
                   newTask.start();
                   setState(() {
-                    selected = city;
+                    if (selected == city) {
+                      selected = null;
+                    } else {
+                      selected = city;
+                    }
                   });
                 },
                 child: ClipOval(
@@ -157,7 +162,22 @@ class _MainViewState extends State<MainView> {
                 });
               },
             ),
-          )
+          ),
+          if (selected != null)
+            Positioned(
+                left: selected!.point.x - 150,
+                top: selected!.point.y + 64,
+                child: SizedBox(
+                  width: 300,
+                  height: 300,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 3),
+                      color: Colors.brown,
+                    ),
+                    child: SelectedCityView(city: selected!),
+                  ),
+                )),
         ],
       ),
     );

@@ -22,6 +22,12 @@ class City {
     return another.name == name;
   }
 
+  List<City> connectsTo() {
+    return routes.map((route) {
+      return route.to.equalsTo(this) ? route.from : route.to;
+    }).toList();
+  }
+
 
   List<CityRoute> get routes {
     return CityRoute.allRoutes.where((route) {
