@@ -2,13 +2,11 @@ import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/route.dart';
 import 'package:chumaki/models/task.dart';
-import 'package:chumaki/extensions/list.dart';
 import 'package:rxdart/rxdart.dart';
 
 enum COMPANY_EVENTS { TASK_STARTED }
 
 class Company {
-  List<RouteTask> tasks = List.empty(growable: true);
   final List<CityRoute> cityRoutes = CityRoute.allRoutes;
   static final Company instance = Company._internal();
   Company._internal() {
@@ -21,13 +19,12 @@ class Company {
 
   startTask(RouteTask routeTask) {
     print("starting task: ${routeTask.id}");
-    tasks.add(routeTask);
     var cityRoute = getRouteForTask(routeTask);
     cityRoute.routeTasks.add(routeTask);
     routeTask.start();
     routeTask.changes.listen((event) {
       if (event == PROGRESS_DURACTION_EVENTS.FINISHED) {
-        tasks.remove(routeTask);
+        cityRoute.routeTasks.remove(routeTask);
       }
     });
     _innerChanges.add(COMPANY_EVENTS.TASK_STARTED);

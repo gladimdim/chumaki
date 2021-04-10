@@ -1,15 +1,11 @@
-import 'dart:math';
 
-import 'package:chumaki/components/animated_route_task.dart';
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/selected_city_view.dart';
 import 'package:chumaki/models/city.dart';
-import 'package:chumaki/models/company.dart';
-import 'package:chumaki/models/task.dart';
+
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/models/route.dart';
-import 'package:chumaki/extensions/list.dart';
 import 'dart:ui' as ui;
 
 const CITY_SIZE = 30;
@@ -71,7 +67,6 @@ class _MainViewState extends State<MainView> {
             }).toList(),
           ...CityRoute.allRoutes.map((route) {
             var first = route.from;
-            var second = route.to;
             bool highlight = false;
             if (selected != null) {
               highlight = selected!.routes.contains(route);
@@ -167,18 +162,19 @@ class _MainViewState extends State<MainView> {
           ),
           if (selected != null)
             Positioned(
-                left: selected!.point.x - 150,
-                top: selected!.point.y + 64,
-                child: SizedBox(
-                  width: 300,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 3),
-                      color: Colors.brown,
-                    ),
-                    child: SelectedCityView(city: selected!),
+              left: selected!.point.x - 150,
+              top: selected!.point.y + 64,
+              child: SizedBox(
+                width: 300,
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 3),
+                    color: Colors.brown,
                   ),
-                )),
+                  child: SelectedCityView(city: selected!),
+                ),
+              ),
+            ),
         ],
       ),
     );
