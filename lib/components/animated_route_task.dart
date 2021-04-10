@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/task.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +24,7 @@ class _AnimatedRouteTaskState extends State<AnimatedRouteTask>
     double lower = 0;
     _rotateController =
         AnimationController(vsync: this, upperBound: upper, lowerBound: lower)
-          ..duration = Duration(seconds: 5);
+          ..duration = widget.task.duration;
 
     _rotateController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
@@ -46,6 +45,7 @@ class _AnimatedRouteTaskState extends State<AnimatedRouteTask>
     var second = widget.task.to;
     var rotation = second.point.x < first.point.x ? -1 : 1;
     return AnimatedPositioned(
+      key: Key(widget.task.id),
       duration: widget.task.duration!,
       left: started ? second.point.x : first.point.x,
       top: started ? second.point.y : first.point.y,
