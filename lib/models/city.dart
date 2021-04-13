@@ -73,10 +73,11 @@ class City {
 class Cherkasy extends City {
   Cherkasy()
       : super(
-            point: Point(2250, 2000),
-            name: "Черкаси",
-            stock: Set()..add(Food(200))..add(Stone(300))..add(Firearm(500)),
-            wagons: [Wagon(), Wagon()]);
+          point: Point(2250, 2000),
+          name: "Черкаси",
+          stock: Set()..add(Food(200))..add(Stone(300))..add(Firearm(500)),
+          wagons: [Wagon(), Wagon()],
+        );
 }
 
 class Nizhin extends City {
@@ -85,6 +86,7 @@ class Nizhin extends City {
           point: Point(1600, 2500),
           name: "Ніжин",
           stock: Set()..add(Grains(200))..add(Wood(300))..add(Horse(500)),
+          wagons: [Wagon(), Wagon()],
         );
 }
 
@@ -99,6 +101,7 @@ class Kaniv extends City {
             ..add(
               Planks(500),
             ),
+          wagons: [Wagon(), Wagon()],
         );
 }
 
@@ -108,6 +111,7 @@ class Sich extends City {
           point: Point(1200, 900),
           name: "Січ",
           stock: Set()..add(Powder(1000)),
+          wagons: [Wagon(), Wagon()],
         );
 }
 
@@ -120,6 +124,7 @@ class Chigirin extends City {
             ..add(
               Firearm(300),
             ),
+          wagons: [Wagon(), Wagon()],
         );
 }
 
@@ -134,6 +139,7 @@ class Pereyaslav extends City {
             ..add(
               Cannon(100),
             ),
+          wagons: [Wagon(), Wagon()],
         );
 }
 
@@ -148,5 +154,6 @@ class Kyiv extends City {
             ..add(
               Planks(500),
             ),
+          wagons: [Wagon(), Wagon()],
         );
 }

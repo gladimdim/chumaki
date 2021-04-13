@@ -7,6 +7,8 @@ import 'package:chumaki/models/task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 
+const CITY_DETAILS_VIEW_WIDTH = 300.0;
+
 class SelectedCityView extends StatelessWidget {
   final City city;
 

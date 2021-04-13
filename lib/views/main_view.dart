@@ -176,7 +176,7 @@ class _MainViewState extends State<MainView> {
               left: selected!.point.x - 150,
               top: selected!.point.y + 64,
               child: SizedBox(
-                width: 300,
+                width: CITY_DETAILS_VIEW_WIDTH,
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 3),
