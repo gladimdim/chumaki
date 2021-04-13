@@ -60,7 +60,12 @@ class Kaniv extends City {
       : super(
           point: Point(2400, 2200),
           name: "Канів",
-          stock: Set()..add(Food(200))..add(Wood(300))..add(Planks(500)),
+          stock: Set()
+            ..add(Food(200))
+            ..add(Wood(300))
+            ..add(
+              Planks(500),
+            ),
         );
 }
 
@@ -69,7 +74,7 @@ class Sich extends City {
       : super(
           point: Point(1200, 900),
           name: "Січ",
-          stock: Set()..add(Wood(10)),
+          stock: Set()..add(Powder(1000)),
         );
 }
 
@@ -78,7 +83,10 @@ class Chigirin extends City {
       : super(
           point: Point(2000, 1750),
           name: "Чигирин",
-          stock: Set()..add(Firearm(30)),
+          stock: Set()
+            ..add(
+              Firearm(300),
+            ),
         );
 }
 
@@ -87,7 +95,12 @@ class Pereyaslav extends City {
       : super(
           point: Point(2360, 2450),
           name: "Переяслав",
-          stock: Set()..add(Food(100)),
+          stock: Set()
+            ..add(Food(1000))
+            ..add(Stone(1000))
+            ..add(
+              MetalParts(500),
+            ),
         );
 }
 
@@ -96,6 +109,11 @@ class Kyiv extends City {
       : super(
           point: Point(2700, 2830),
           name: "Київ",
-          stock: Set()..add(Food(200))..add(Wood(300))..add(Planks(500)),
+          stock: Set()
+            ..add(Food(200))
+            ..add(Wood(300))
+            ..add(
+              Planks(500),
+            ),
         );
 }

@@ -4,7 +4,7 @@ class Resource {
   Resource(this.localizedKey, this.amount);
 
   String get imagePath {
-    return "images/resources/${this.localizedKey}";
+    return "images/resources/${this.localizedKey}/${this.localizedKey}.png";
   }
 
   bool sameType(Resource another) {
@@ -47,7 +47,7 @@ class Fish extends Resource {
 }
 
 class Food extends Resource {
-  Food(int amount): super("fdood", amount);
+  Food(int amount): super("food", amount);
 }
 
 class Fur extends Resource {

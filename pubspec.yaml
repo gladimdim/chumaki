@@ -27,3 +27,18 @@ flutter:
   assets:
     - images/
     - images/wagon/
+    - images/resources/cannon/
+    - images/resources/charcoal/
+    - images/resources/firearm/
+    - images/resources/fish/
+    - images/resources/food/
+    - images/resources/fur/
+    - images/resources/grains/
+    - images/resources/horse/
+    - images/resources/ironore/
+    - images/resources/metalparts/
+    - images/resources/money/
+    - images/resources/planks/
+    - images/resources/powder/
+    - images/resources/stone/
+    - images/resources/wood/
