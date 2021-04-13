@@ -26,8 +26,8 @@ class Company {
     routeTask.changes.listen((event) {
       if (event == PROGRESS_DURACTION_EVENTS.FINISHED) {
         cityRoute.routeTasks.remove(routeTask);
-        routeTask.to.wagons.add(routeTask.wagon);
-        print(routeTask.to.wagons.length);
+        routeTask.to.routeTaskArrived(routeTask);
+        // print(routeTask.to.wagons.length);
       }
     });
     _innerChanges.add(COMPANY_EVENTS.TASK_STARTED);
@@ -54,7 +54,7 @@ class Company {
     }
     print("from: ${from.name} to: ${to.name}");
     var newTask = RouteTask(from, to, wagon: from.wagons.first);
-    from.wagons.removeAt(0);
+    from.routeTaskStarted(newTask);
     startTask(newTask);
   }
 

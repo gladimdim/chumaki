@@ -124,15 +124,21 @@ class _MainViewState extends State<MainView> {
                     child: Container(
                       color: selected == city ? Colors.grey : Colors.red,
                       child: Center(
-                        child: Stack(
-                          children: [
-                            Text(
-                              "${city.name}",
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.black),
-                            ),
-                            Text(city.wagons.length.toString()),
-                          ],
+                        child: StreamBuilder(
+                          stream: city.changes.stream,
+                          builder: (context, snapshot) => Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Center(
+                                child: Text(
+                                  "${city.name}",
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.black),
+                                ),
+                              ),
+                              Text(city.wagons.length.toString()),
+                            ],
+                          ),
                         ),
                       ),
                     ),

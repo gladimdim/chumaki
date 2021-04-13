@@ -19,12 +19,15 @@ class SelectedCityView extends StatelessWidget {
       builder: (context, data) => Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TitleText("${city.name}: ${city.wagons.length}"),
-              Image.asset(Wagon.imagePath, width: 64),
-            ],
+          StreamBuilder(
+            stream: city.changes.stream,
+            builder: (context, data) => Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TitleText("${city.name}: ${city.wagons.length}"),
+                Image.asset(Wagon.imagePath, width: 64),
+              ],
+            ),
           ),
           ...city.connectsTo().map(
             (toCity) {

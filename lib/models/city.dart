@@ -2,13 +2,16 @@ import 'dart:math';
 
 import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/route.dart';
+import 'package:chumaki/models/task.dart';
 import 'package:chumaki/models/wagon.dart';
+import 'package:rxdart/rxdart.dart';
 
 class City {
   final Point<double> point;
   final String name;
   final Set<Resource> stock;
   late List<Wagon> wagons;
+  BehaviorSubject changes = BehaviorSubject();
 
   City(
       {required this.point,
@@ -54,6 +57,16 @@ class City {
     return CityRoute.allRoutes.where((route) {
       return route.to.equalsTo(this) || route.from.equalsTo(this);
     }).toList();
+  }
+
+  void routeTaskArrived(RouteTask task) {
+    wagons.add(task.wagon);
+    changes.add(this);
+  }
+
+  void routeTaskStarted(RouteTask task) {
+    wagons.remove(task.wagon);
+    changes.add(this);
   }
 }
 
