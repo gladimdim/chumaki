@@ -4,6 +4,7 @@ import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/task.dart';
+import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 
 class SelectedCityView extends StatelessWidget {
@@ -16,8 +17,15 @@ class SelectedCityView extends StatelessWidget {
     return StreamBuilder(
       stream: Company.instance.changes,
       builder: (context, data) => Column(
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TitleText(city.name),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TitleText("${city.name}: ${city.wagons.length}"),
+              Image.asset(Wagon.imagePath, width: 64),
+            ],
+          ),
           ...city.connectsTo().map(
             (toCity) {
               return Row(
@@ -26,7 +34,7 @@ class SelectedCityView extends StatelessWidget {
                   Text("Connects to: ${toCity.name}"),
                   IconButton(
                     icon: Icon(Icons.not_started),
-                    onPressed: () => routeStart(toCity),
+                    onPressed: city.wagons.isEmpty ? null : () => routeStart(toCity),
                   ),
                 ],
               );

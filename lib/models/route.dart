@@ -13,14 +13,14 @@ class CityRoute {
   CityRoute(this.to, this.from, this.bezierPoint);
 
   static List<CityRoute> allRoutes = [
-    CityRoute(Nizhin(), Pereyaslav(), Point<double>(75.0, 140.0)),
-    CityRoute(Cherkasy(), Pereyaslav(), Point<double>(80.0, -200.0)),
-    CityRoute(Cherkasy(), Chigirin(), Point<double>(50.0, 50.0)),
-    CityRoute(Cherkasy(), Nizhin(), Point<double>(0.0, 0.0)),
-    CityRoute(Cherkasy(), Kaniv(), Point<double>(10.0, 10.0)),
-    CityRoute(Sich(), Chigirin(), Point<double>(-675.0, 0.0)),
-    CityRoute(Pereyaslav(), Chigirin(), Point<double>(-150.0, 155.0)),
-    CityRoute(Kyiv(), Nizhin(), Point<double>(-50, 50)),
-    CityRoute(Kyiv(), Pereyaslav(), Point<double>(300, 0)),
+    CityRoute(City.nizhin, City.pereyaslav, Point<double>(75.0, 140.0)),
+    CityRoute(City.cherkasy, City.pereyaslav, Point<double>(80.0, -200.0)),
+    CityRoute(City.cherkasy, City.chigirin, Point<double>(50.0, 50.0)),
+    CityRoute(City.cherkasy, City.nizhin, Point<double>(0.0, 0.0)),
+    CityRoute(City.cherkasy, City.kaniv, Point<double>(10.0, 10.0)),
+    CityRoute(City.sich, City.chigirin, Point<double>(-675.0, 0.0)),
+    CityRoute(City.pereyaslav, City.chigirin, Point<double>(-150.0, 155.0)),
+    CityRoute(City.kyiv, City.nizhin, Point<double>(-50, 50)),
+    CityRoute(City.kyiv, City.pereyaslav, Point<double>(300, 0)),
   ];
 }

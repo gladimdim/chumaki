@@ -1,30 +1,14 @@
-import 'dart:typed_data';
-import "dart:ui" as ui;
-import 'package:async/async.dart';
-import 'package:flutter/services.dart';
+import 'package:chumaki/models/resource.dart';
 
-class ImageOnCanvas {
-  final String imagePath;
-  ui.Image? image;
-  final AsyncMemoizer<ui.Image> _memoizer = AsyncMemoizer<ui.Image>();
+class Wagon {
+  late Set<Resource> stock;
+  static final String imagePath = "images/wagon/wagon.png";
 
-  ImageOnCanvas(this.imagePath);
-
-  Future asBytes() async {
-    return _memoizer.runOnce(()  async{
-      ByteData data = await rootBundle.load(imagePath);
-      final Uint8List bytes = Uint8List.view(data.buffer);
-      final ui.Codec codec = await ui.instantiateImageCodec(bytes);
-
-      image = (await codec.getNextFrame()).image;
-
-      return Future.value(image);
-    });
+  Wagon({Set<Resource>? stock}) {
+    if (stock == null) {
+      this.stock = Set();
+    } else {
+      this.stock = stock;
+    }
   }
-
-  static WagonImage wagonImage = WagonImage();
-}
-
-class WagonImage extends ImageOnCanvas {
-  WagonImage() : super("images/wagon/cart_64.png");
 }

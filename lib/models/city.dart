@@ -2,22 +2,42 @@ import 'dart:math';
 
 import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/route.dart';
+import 'package:chumaki/models/wagon.dart';
 
 class City {
   final Point<double> point;
   final String name;
   final Set<Resource> stock;
+  late List<Wagon> wagons;
 
-  City({required this.point, required this.name, required this.stock});
+  City(
+      {required this.point,
+      required this.name,
+      required this.stock,
+      List<Wagon>? wagons}) {
+    if (wagons == null) {
+      this.wagons = List.empty(growable: true);
+    } else {
+      this.wagons = wagons;
+    }
+  }
+
+  static City nizhin = Nizhin();
+  static City kaniv = Kaniv();
+  static City sich = Sich();
+  static City cherkasy = Cherkasy();
+  static City chigirin = Chigirin();
+  static City pereyaslav = Pereyaslav();
+  static City kyiv = Kyiv();
 
   static List<City> allCities = [
-    Nizhin(),
-    Kaniv(),
-    Sich(),
-    Cherkasy(),
-    Chigirin(),
-    Pereyaslav(),
-    Kyiv(),
+    nizhin,
+    kaniv,
+    sich,
+    cherkasy,
+    chigirin,
+    pereyaslav,
+    kyiv,
   ];
 
   bool equalsTo(City another) {
@@ -40,10 +60,10 @@ class City {
 class Cherkasy extends City {
   Cherkasy()
       : super(
-          point: Point(2250, 2000),
-          name: "Черкаси",
-          stock: Set()..add(Food(200))..add(Stone(300))..add(Firearm(500)),
-        );
+            point: Point(2250, 2000),
+            name: "Черкаси",
+            stock: Set()..add(Food(200))..add(Stone(300))..add(Firearm(500)),
+            wagons: [Wagon(), Wagon()]);
 }
 
 class Nizhin extends City {
@@ -99,7 +119,7 @@ class Pereyaslav extends City {
             ..add(Food(1000))
             ..add(Stone(1000))
             ..add(
-              MetalParts(500),
+              Cannon(100),
             ),
         );
 }
