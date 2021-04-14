@@ -51,7 +51,7 @@ class Food extends Resource {
 }
 
 class Fur extends Resource {
-  Fur(int amount): super("fure", amount);
+  Fur(int amount): super("fur", amount);
 }
 
 class Grains extends Resource {

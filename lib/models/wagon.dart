@@ -1,13 +1,13 @@
 import 'package:chumaki/models/resource.dart';
 
 class Wagon {
-  late Set<Resource> stock;
+  late List<Resource> stock;
   static final String imagePath = "images/wagon/wagon.png";
   final String name;
 
-  Wagon({required this.name, Set<Resource>? stock}) {
+  Wagon({required this.name, List<Resource>? stock}) {
     if (stock == null) {
-      this.stock = Set();
+      this.stock = List.empty(growable: true);
     } else {
       this.stock = stock;
     }

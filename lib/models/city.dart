@@ -76,6 +76,7 @@ class Cherkasy extends City {
           point: Point(2250, 2000),
           name: "Черкаси",
           stock: Set()..add(Food(200))..add(Stone(300))..add(Firearm(500)),
+    wagons: [Wagon(name: "Вальків", stock: [Food(10), Wood(30)]), Wagon(name: "Харченка", stock: [Firearm(5), Stone(15)]), Wagon(name: "Підлісного", stock: [Fur(30), Charcoal(25), Fish(15)]), Wagon(name: "Мітрась", stock: [Horse(3), Powder(25), IronOre(20)]),],
         );
 }
 
