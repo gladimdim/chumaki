@@ -1,4 +1,6 @@
+import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/stock_view.dart';
+import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
@@ -45,10 +47,27 @@ class _WagonsInCityState extends State<WagonsInCity> {
             ],
           ),
           body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              StockView(
-                wagon.stock,
-              ),
+              TitleText("Містить"),
+              if (wagon.stock.isNotEmpty)
+                Row(
+                    children: wagon.stock.toList().map<Widget>((resource) {
+                  return Column(
+                    children: [
+                      ResourceImageView(resource),
+                      IconButton(
+                        onPressed: () {
+                          widget.city.addResourceToStock(resource);
+                          wagon.stock.remove(resource);
+                          setState(() {});
+                        },
+                        icon: Icon(Icons.arrow_downward),
+                      ),
+                    ],
+                  );
+                }).toList()),
+              if (wagon.stock.isEmpty) Text("Нічого"),
             ],
           ),
         );

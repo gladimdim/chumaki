@@ -68,6 +68,19 @@ class City {
     wagons.remove(task.wagon);
     changes.add(this);
   }
+
+  void addResourceToStock(Resource resource) {
+    var existing = stock.where((res) => res.sameType(resource)).toList();
+    Resource? inStock;
+    if (existing.isEmpty) {
+      inStock = Resource(resource.localizedKey, 0);
+      stock.add(inStock);
+    } else {
+      inStock = existing.first;
+    }
+    inStock.amount += resource.amount;
+    changes.add(this);
+  }
 }
 
 class Cherkasy extends City {

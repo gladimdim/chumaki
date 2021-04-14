@@ -75,7 +75,12 @@ class SelectedCityView extends StatelessWidget {
                 top: BorderSide(width: 1, color: Colors.black),
               ),
             ),
-            child: StockView(city.stock.toList()),
+            child: StreamBuilder(
+              stream: city.changes.stream,
+              builder: (context, data) => StockView(
+                city.stock.toList(),
+              ),
+            ),
           ),
         ],
       ),
