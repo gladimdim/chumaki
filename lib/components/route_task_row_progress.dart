@@ -1,13 +1,13 @@
 import 'dart:math';
 
-import 'package:chumaki/components/selected_city_view.dart';
+import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/task.dart';
 import 'package:flutter/material.dart';
 
 class RouteTaskRowProgress extends StatelessWidget {
   final RouteTask task;
-
-  RouteTaskRowProgress(this.task);
+  final City forCity;
+  RouteTaskRowProgress(this.task, this.forCity);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class RouteTaskRowProgress extends StatelessWidget {
                   ),
                   if (task.isFinished) Text("Прибув!"),
                   if (!task.isFinished) Positioned(
-                    left: 200 * task.leftProgress(),
+                    left: calculateRelativePositionForProgress(),
                     child: Transform.rotate(
                       angle: 2 * pi * task.leftProgress(),
                       child: Image.asset("images/wagon/cart_64.png", width: 32),
@@ -58,12 +58,20 @@ class RouteTaskRowProgress extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Text(
-              "${task.to.name}",
+              ltr() ? "${task.to.name}" : "${task.from.name}",
               textDirection: TextDirection.rtl,
             ),
           ),
         ],
       ),
     );
+  }
+
+  bool ltr() {
+    return forCity == task.from;
+  }
+
+  calculateRelativePositionForProgress() {
+    return ltr() ? 200 * task.leftProgress() : (200 - 200 * task.leftProgress());
   }
 }

@@ -54,7 +54,7 @@ class SelectedCityView extends StatelessWidget {
                 return previousValue;
               })
               .where((routeTask) => routeTask.to.equalsTo(city))
-              .map<Widget>((routeTask) => RouteTaskRowProgress(routeTask)),
+              .map<Widget>((routeTask) => RouteTaskRowProgress(routeTask, city)),
           TitleText("Out: "),
           ...Company.instance.cityRoutes
               .where((route) =>
@@ -64,7 +64,7 @@ class SelectedCityView extends StatelessWidget {
                 return previousValue;
               })
               .where((routeTask) => routeTask.from.equalsTo(city))
-              .map<Widget>((routeTask) => RouteTaskRowProgress(routeTask)),
+              .map<Widget>((routeTask) => RouteTaskRowProgress(routeTask, city)),
           CityStockView(city),
         ],
       ),

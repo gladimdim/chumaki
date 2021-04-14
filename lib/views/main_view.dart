@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:chumaki/models/route.dart';
 import 'dart:ui' as ui;
 
-const CITY_SIZE = 30;
+const CITY_SIZE = 50;
 
 class MainView extends StatefulWidget {
   @override
