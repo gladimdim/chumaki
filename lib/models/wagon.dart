@@ -1,36 +1,41 @@
+import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/resource.dart';
 import 'package:rxdart/rxdart.dart';
 
 class Wagon {
-  late List<Resource> stock;
+  late Stock stock;
   static final String imagePath = "images/wagon/wagon.png";
   final String name;
   BehaviorSubject changes = BehaviorSubject();
 
-  Wagon({required this.name, List<Resource>? stock}) {
+  Wagon({required this.name, Stock? stock}) {
     if (stock == null) {
-      this.stock = List.empty(growable: true);
+      this.stock = Stock(List.empty(growable: true));
     } else {
       this.stock = stock;
     }
   }
 
+
   bool removeFromStock(Resource res) {
-    var existing = stock.where((element) => element.sameType(res));
-    if (existing.isEmpty) {
+    var existing = stock.resourceInStock(res);
+    if (existing == null) {
       return false;
     } else {
-      var currentRes = existing.first;
-      if (currentRes.amount < res.amount) {
+      if (existing.amount < res.amount) {
         return false;
       } else {
-        currentRes.amount = currentRes.amount - res.amount;
-        if (currentRes.amount <= 0) {
-          stock.remove(currentRes);
+        existing.amount = existing.amount - res.amount;
+        if (existing.amount <= 0) {
+          stock.removeResource(existing);
         }
         changes.add(this);
         return true;
       }
     }
+  }
+
+  void addToStock(Resource res) {
+
   }
 }

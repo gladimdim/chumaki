@@ -1,5 +1,5 @@
+import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/route_task_row_progress.dart';
-import 'package:chumaki/components/stock_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/wagons_in_city.dart';
 import 'package:chumaki/models/city.dart';
@@ -56,22 +56,43 @@ class SelectedCityView extends StatelessWidget {
               ),
             ),
             child: StreamBuilder(
-              stream: city.changes.stream,
-              builder: (context, data) => DragTarget<Tuple2<Wagon,Resource>>(
-                onAccept: (input) {
-                  var res = input.item2.cloneWithAmount(5);
-                  city.addResourceToStock(res);
-                  print("Stock processed: ${input.item1.removeFromStock(res)}");
-                },
-                builder: (context, candidates, rejects) {
-                  List<Resource> items = List.from(city.stock);
-                  items.addAll(candidates.map((input) => input!.item2));
-                  return StockView(
-                    items,
-                  );
-                }
-              ),
-            ),
+                stream: city.changes.stream,
+                builder: (context, data) {
+                  return DragTarget<Tuple2<Wagon, Resource>>(onAccept: (input) {
+                    var res = input.item2.cloneWithAmount(5);
+                    city.stock.addResource(res);
+                    print(
+                        "Stock processed: ${input.item1.removeFromStock(res)}");
+                  }, builder: (context, candidates, rejects) {
+                    List<Resource> items = List.from(city.stock.iterator);
+                    items.addAll(candidates.map((input) => input!.item2));
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TitleText("Містить"),
+                          if (!city.stock.isEmpty)
+                            Row(
+                                children:
+                                    city.stock.iterator.map<Widget>((resource) {
+                              return Draggable<Tuple2<City, Resource>>(
+                                data: Tuple2<City, Resource>(
+                                    city, resource.cloneWithAmount(5)),
+                                dragAnchorStrategy: pointerDragAnchorStrategy,
+                                feedback: ResourceImageView(
+                                    resource.cloneWithAmount(5)),
+                                child: ResourceImageView(
+                                  resource,
+                                ),
+                              );
+                            }).toList()),
+                          if (city.stock.isEmpty) Text("Нічого"),
+                        ],
+                      ),
+                    );
+                  });
+                }),
           ),
           TitleText("Вхідні: "),
           ...Company.instance.cityRoutes
@@ -95,7 +116,6 @@ class SelectedCityView extends StatelessWidget {
               .where((routeTask) => routeTask.from.equalsTo(city))
               .map<Widget>(
                   (routeTask) => RouteTaskRowProgress(routeTask, city)),
-
         ],
       ),
     );

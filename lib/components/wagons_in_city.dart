@@ -49,32 +49,42 @@ class _WagonsInCityState extends State<WagonsInCity> {
           ),
           body: StreamBuilder(
             stream: wagon.changes,
-            builder:(context, snap) => Column(
+            builder: (context, snap) => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TitleText("Містить"),
-                if (wagon.stock.isNotEmpty)
-                  Row(
-                      children: wagon.stock.toList().map<Widget>((resource) {
-                    return Draggable<Tuple2<Wagon, Resource>>(
-                      data: Tuple2<Wagon, Resource>(wagon, resource.cloneWithAmount(5)),
-                      dragAnchorStrategy: pointerDragAnchorStrategy,
-                      feedback: ResourceImageView(resource.cloneWithAmount(5)),
-                      child: Column(
-                        children: [
-                          ResourceImageView(resource),
-                          IconButton(
-                            onPressed: () {
-                              widget.city.addResourceToStock(resource);
-                              wagon.stock.remove(resource);
-                              setState(() {});
-                            },
-                            icon: Icon(Icons.arrow_downward),
-                          ),
-                        ],
-                      ),
-                    );
-                  }).toList()),
+                if (wagon.stock.isEmpty)
+                  DragTarget<Tuple2<City, Resource>>(onAccept: (input) {
+                    var res = input.item2;
+                    wagon.addToStock(res);
+                    input.item1.stock.removeResource(res);
+                    print(
+                        "Stock processed: ${input.item1.stock.removeResource(res)}");
+                  }, builder: (context, candidates, rejects) {
+                    return Row(
+                        children: wagon.stock.iterator.map<Widget>((resource) {
+                      return Draggable<Tuple2<Wagon, Resource>>(
+                        data: Tuple2<Wagon, Resource>(
+                            wagon, resource.cloneWithAmount(5)),
+                        dragAnchorStrategy: pointerDragAnchorStrategy,
+                        feedback:
+                            ResourceImageView(resource.cloneWithAmount(5)),
+                        child: Column(
+                          children: [
+                            ResourceImageView(resource),
+                            IconButton(
+                              onPressed: () {
+                                widget.city.stock.addResource(resource);
+                                wagon.stock.removeResource(resource);
+                                setState(() {});
+                              },
+                              icon: Icon(Icons.arrow_downward),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList());
+                  }),
                 if (wagon.stock.isEmpty) Text("Нічого"),
               ],
             ),
