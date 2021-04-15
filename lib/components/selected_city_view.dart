@@ -10,7 +10,7 @@ import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
-const CITY_DETAILS_VIEW_WIDTH = 300.0;
+const CITY_DETAILS_VIEW_WIDTH = 400.0;
 
 class SelectedCityView extends StatelessWidget {
   final City city;
@@ -61,8 +61,7 @@ class SelectedCityView extends StatelessWidget {
                   return DragTarget<Tuple2<Wagon, Resource>>(onAccept: (input) {
                     var res = input.item2;
                     city.stock.addResource(res);
-                    print(
-                        "Stock processed: ${input.item1.stock.removeResource(res)}");
+                    input.item1.stock.removeResource(res);
                   }, builder: (context, candidates, rejects) {
                     List<Resource> items = List.from(city.stock.iterator);
                     items.addAll(candidates.map((input) => input!.item2));
@@ -74,8 +73,7 @@ class SelectedCityView extends StatelessWidget {
                           TitleText("Містить"),
                           if (!city.stock.isEmpty)
                             Row(
-                                children:
-                                items.map<Widget>((resource) {
+                                children: items.map<Widget>((resource) {
                               return Draggable<Tuple2<City, Resource>>(
                                 data: Tuple2<City, Resource>(
                                     city, resource.cloneWithAmount(5)),
