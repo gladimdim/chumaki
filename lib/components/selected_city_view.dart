@@ -4,9 +4,11 @@ import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/wagons_in_city.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/company.dart';
+import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
+import 'package:tuple/tuple.dart';
 
 const CITY_DETAILS_VIEW_WIDTH = 300.0;
 
@@ -47,6 +49,30 @@ class SelectedCityView extends StatelessWidget {
             },
           ),
           WagonsInCity(city: city),
+          Container(
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(width: 1, color: Colors.black),
+              ),
+            ),
+            child: StreamBuilder(
+              stream: city.changes.stream,
+              builder: (context, data) => DragTarget<Tuple2<Wagon,Resource>>(
+                onAccept: (input) {
+                  var res = input.item2.cloneWithAmount(5);
+                  city.addResourceToStock(res);
+                  print("Stock processed: ${input.item1.removeFromStock(res)}");
+                },
+                builder: (context, candidates, rejects) {
+                  List<Resource> items = List.from(city.stock);
+                  items.addAll(candidates.map((input) => input!.item2));
+                  return StockView(
+                    items,
+                  );
+                }
+              ),
+            ),
+          ),
           TitleText("Вхідні: "),
           ...Company.instance.cityRoutes
               .where((route) =>
@@ -69,19 +95,7 @@ class SelectedCityView extends StatelessWidget {
               .where((routeTask) => routeTask.from.equalsTo(city))
               .map<Widget>(
                   (routeTask) => RouteTaskRowProgress(routeTask, city)),
-          Container(
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(width: 1, color: Colors.black),
-              ),
-            ),
-            child: StreamBuilder(
-              stream: city.changes.stream,
-              builder: (context, data) => StockView(
-                city.stock.toList(),
-              ),
-            ),
-          ),
+
         ],
       ),
     );

@@ -24,6 +24,10 @@ class Resource {
     return localizedKey.hashCode;
   }
 
+  Resource cloneWithAmount(int amount) {
+    return Resource(localizedKey, amount);
+  }
+
 }
 
 class Wood extends Resource {

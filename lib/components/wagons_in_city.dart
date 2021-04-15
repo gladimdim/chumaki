@@ -1,9 +1,10 @@
 import 'package:chumaki/components/resource_image_view.dart';
-import 'package:chumaki/components/stock_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
+import 'package:tuple/tuple.dart';
 
 class WagonsInCity extends StatefulWidget {
   final City city;
@@ -46,29 +47,37 @@ class _WagonsInCityState extends State<WagonsInCity> {
               ),
             ],
           ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TitleText("Містить"),
-              if (wagon.stock.isNotEmpty)
-                Row(
-                    children: wagon.stock.toList().map<Widget>((resource) {
-                  return Column(
-                    children: [
-                      ResourceImageView(resource),
-                      IconButton(
-                        onPressed: () {
-                          widget.city.addResourceToStock(resource);
-                          wagon.stock.remove(resource);
-                          setState(() {});
-                        },
-                        icon: Icon(Icons.arrow_downward),
+          body: StreamBuilder(
+            stream: wagon.changes,
+            builder:(context, snap) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TitleText("Містить"),
+                if (wagon.stock.isNotEmpty)
+                  Row(
+                      children: wagon.stock.toList().map<Widget>((resource) {
+                    return Draggable<Tuple2<Wagon, Resource>>(
+                      data: Tuple2<Wagon, Resource>(wagon, resource.cloneWithAmount(5)),
+                      dragAnchorStrategy: pointerDragAnchorStrategy,
+                      feedback: ResourceImageView(resource.cloneWithAmount(5)),
+                      child: Column(
+                        children: [
+                          ResourceImageView(resource),
+                          IconButton(
+                            onPressed: () {
+                              widget.city.addResourceToStock(resource);
+                              wagon.stock.remove(resource);
+                              setState(() {});
+                            },
+                            icon: Icon(Icons.arrow_downward),
+                          ),
+                        ],
                       ),
-                    ],
-                  );
-                }).toList()),
-              if (wagon.stock.isEmpty) Text("Нічого"),
-            ],
+                    );
+                  }).toList()),
+                if (wagon.stock.isEmpty) Text("Нічого"),
+              ],
+            ),
           ),
         );
       }).toList(),
