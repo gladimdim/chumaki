@@ -1,5 +1,4 @@
 import 'package:chumaki/extensions/stock.dart';
-import 'package:chumaki/models/resource.dart';
 import 'package:rxdart/rxdart.dart';
 
 class Wagon {
@@ -14,28 +13,13 @@ class Wagon {
     } else {
       this.stock = stock;
     }
+
+    this.stock.changes.listen((value) {
+      changes.add(value);
+    });
   }
 
-
-  bool removeFromStock(Resource res) {
-    var existing = stock.resourceInStock(res);
-    if (existing == null) {
-      return false;
-    } else {
-      if (existing.amount < res.amount) {
-        return false;
-      } else {
-        existing.amount = existing.amount - res.amount;
-        if (existing.amount <= 0) {
-          stock.removeResource(existing);
-        }
-        changes.add(this);
-        return true;
-      }
-    }
-  }
-
-  void addToStock(Resource res) {
-
+  void dispose() {
+    changes.close();
   }
 }

@@ -3,7 +3,7 @@ import 'package:rxdart/rxdart.dart';
 
 class Stock {
   final List<Resource> stock;
-  BehaviorSubject changes = BehaviorSubject();
+  final BehaviorSubject changes = BehaviorSubject();
 
   Stock(this.stock);
 
@@ -49,5 +49,9 @@ class Stock {
         return true;
       }
     }
+  }
+
+  void dispose() {
+    changes.close();
   }
 }

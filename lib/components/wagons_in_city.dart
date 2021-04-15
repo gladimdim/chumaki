@@ -53,10 +53,10 @@ class _WagonsInCityState extends State<WagonsInCity> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TitleText("Містить"),
-                if (wagon.stock.isEmpty)
+                if (!wagon.stock.isEmpty)
                   DragTarget<Tuple2<City, Resource>>(onAccept: (input) {
                     var res = input.item2;
-                    wagon.addToStock(res);
+                    wagon.stock.addResource(res);
                     input.item1.stock.removeResource(res);
                     print(
                         "Stock processed: ${input.item1.stock.removeResource(res)}");

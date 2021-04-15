@@ -24,6 +24,8 @@ class City {
     } else {
       this.wagons = wagons;
     }
+
+    stock.changes.listen(changes.add);
   }
 
   static City nizhin = Nizhin();

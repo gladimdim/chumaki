@@ -59,10 +59,10 @@ class SelectedCityView extends StatelessWidget {
                 stream: city.changes.stream,
                 builder: (context, data) {
                   return DragTarget<Tuple2<Wagon, Resource>>(onAccept: (input) {
-                    var res = input.item2.cloneWithAmount(5);
+                    var res = input.item2;
                     city.stock.addResource(res);
                     print(
-                        "Stock processed: ${input.item1.removeFromStock(res)}");
+                        "Stock processed: ${input.item1.stock.removeResource(res)}");
                   }, builder: (context, candidates, rejects) {
                     List<Resource> items = List.from(city.stock.iterator);
                     items.addAll(candidates.map((input) => input!.item2));
@@ -75,7 +75,7 @@ class SelectedCityView extends StatelessWidget {
                           if (!city.stock.isEmpty)
                             Row(
                                 children:
-                                    city.stock.iterator.map<Widget>((resource) {
+                                items.map<Widget>((resource) {
                               return Draggable<Tuple2<City, Resource>>(
                                 data: Tuple2<City, Resource>(
                                     city, resource.cloneWithAmount(5)),
