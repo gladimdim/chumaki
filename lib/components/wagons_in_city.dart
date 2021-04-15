@@ -1,5 +1,6 @@
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/weight_show.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/wagon.dart';
@@ -40,16 +41,10 @@ class _WagonsInCityState extends State<WagonsInCity> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Image.asset(Wagon.imagePath, width: 64),
-              Row(
-                children: [
-                  Text("Ватага ${wagon.name}"),
-                  StreamBuilder(
-                    stream: wagon.changes.stream,
-                    builder: (context, snap) => Text(
-                      "${wagon.currentWeight} / ${wagon.totalWeightCapacity}",
-                    ),
-                  ),
-                ],
+              Text("Ватага ${wagon.name}"),
+              StreamBuilder(
+                stream: wagon.changes.stream,
+                builder: (context, _) => WeightShow(wagon),
               ),
             ],
           ),

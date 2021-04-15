@@ -87,7 +87,7 @@ class Cherkasy extends City {
                 stock: Stock([Fur(30), Charcoal(25), Fish(15)])),
             Wagon(
                 name: "Мітрась",
-                stock: Stock([Horse(3), Powder(25), IronOre(20)])),
+                stock: Stock([Horse(5), Powder(25), IronOre(20)])),
           ],
         );
 }

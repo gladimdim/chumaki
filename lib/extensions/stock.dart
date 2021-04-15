@@ -22,6 +22,7 @@ class Stock {
     } else {
       inStock.amount += resource.amount;
     }
+    changes.add(this);
   }
 
   Resource? resourceInStock(Resource res) {
