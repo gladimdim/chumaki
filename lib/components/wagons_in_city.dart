@@ -43,6 +43,12 @@ class _WagonsInCityState extends State<WagonsInCity> {
               Row(
                 children: [
                   Text("Ватага ${wagon.name}"),
+                  StreamBuilder(
+                    stream: wagon.changes.stream,
+                    builder: (context, snap) => Text(
+                      "${wagon.currentWeight} / ${wagon.totalWeightCapacity}",
+                    ),
+                  ),
                 ],
               ),
             ],
