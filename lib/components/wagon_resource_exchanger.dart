@@ -18,7 +18,7 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: Resource.allResources.map(
+      children: Resource.allResources.where((fakeResource) => widget.wagon.stock.hasResource(fakeResource) || widget.city.stock.hasResource(fakeResource)).map(
         (fakeResource) {
           var wagonRes = widget.wagon.stock.resourceInStock(fakeResource);
           var cityRes = widget.city.stock.resourceInStock(fakeResource);
@@ -35,7 +35,7 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                   ),
                   child: Center(
                     child: Text(
-                      wagonRes == null ? "0" : wagonRes.amount.toString(),
+                      wagonRes == null ? "Пусто" : wagonRes.amount.toString(),
                     ),
                   ),
                 ),

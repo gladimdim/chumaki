@@ -25,6 +25,10 @@ class Stock {
     changes.add(this);
   }
 
+  bool hasResource(Resource res) {
+    return resourceInStock(res) != null;
+  }
+
   Resource? resourceInStock(Resource res) {
     try {
       return stock.firstWhere((inStock) => inStock.sameType(res));
