@@ -30,6 +30,10 @@ class Resource {
     return localizedKey.hashCode;
   }
 
+  double get totalWeight {
+    return amount * weightPerPoint;
+  }
+
   Resource cloneWithAmount(int amount) {
     return Resource(localizedKey, amount, color: color, weightPerPoint: weightPerPoint);
   }

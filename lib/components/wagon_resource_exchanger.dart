@@ -20,21 +20,24 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
     return Column(
       children: [
         Container(
-          width: 300,
+          width: 315,
           height: 50,
           decoration: BoxDecoration(
             border: Border.all(width: 3, color: Colors.black),
           ),
-          child: Row(
-            children: widget.wagon.stock.iterator.map<Widget>(
-              (res) {
-                return Container(
-                  width: res.amount * res.weightPerPoint * (300 / 100),
-                  height: 30,
-                  color: res.color,
-                );
-              },
-            ).toList(),
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Row(
+              children: widget.wagon.stock.iterator.map<Widget>(
+                (res) {
+                  return Container(
+                    width: res.totalWeight * (300 / 100),
+                    height: 30,
+                    color: res.color,
+                  );
+                },
+              ).toList(),
+            ),
           ),
         ),
         ...Resource.allResources
@@ -68,7 +71,8 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                 IconButton(
                   onPressed: () {
                     var res = fakeResource.cloneWithAmount(5);
-                    if (widget.city.stock.removeResource(res)) {
+                    if (widget.wagon.canFitNewResource(res) &&
+                        widget.city.stock.removeResource(res)) {
                       widget.wagon.stock.addResource(res);
                     }
                   },
