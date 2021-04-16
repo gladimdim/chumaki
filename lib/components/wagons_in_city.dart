@@ -18,14 +18,7 @@ class WagonsInCity extends StatefulWidget {
 }
 
 class _WagonsInCityState extends State<WagonsInCity> {
-  late List<bool> _isOpen;
-
-  @override
-  void initState() {
-    super.initState();
-    _isOpen = List.filled(widget.city.wagons.length, false, growable: true);
-  }
-
+  final List<bool> _isOpen = List.filled(100, false, growable: true);
   @override
   Widget build(BuildContext context) {
     return ExpansionPanelList(
