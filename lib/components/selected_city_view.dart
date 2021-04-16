@@ -82,6 +82,7 @@ class SelectedCityView extends StatelessWidget {
                                     resource.cloneWithAmount(5)),
                                 child: ResourceImageView(
                                   resource,
+                                  showAmount: true,
                                 ),
                               );
                             }).toList()),
