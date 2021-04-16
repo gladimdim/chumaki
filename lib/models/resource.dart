@@ -31,7 +31,7 @@ class Resource {
   }
 
   double get totalWeight {
-    return amount * weightPerPoint;
+    return (amount * weightPerPoint).floorToDouble();
   }
 
   Resource cloneWithAmount(int amount) {

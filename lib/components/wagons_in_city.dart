@@ -29,7 +29,7 @@ class _WagonsInCityState extends State<WagonsInCity> {
       },
       children: widget.city.wagons.map((wagon) {
         return ExpansionPanel(
-          backgroundColor: Colors.brown,
+          backgroundColor: Colors.grey[200],
           isExpanded: isOpenForWagon(wagon),
           headerBuilder: (context, isOpen) => Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

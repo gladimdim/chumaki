@@ -1,3 +1,4 @@
+import 'package:chumaki/components/resource_amount_selector.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/resource.dart';
@@ -15,6 +16,7 @@ class WagonResourceExchanger extends StatefulWidget {
 }
 
 class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
+  int amountTradeValue = 5;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,6 +42,7 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
             ),
           ),
         ),
+        ResourceAmountSelector(onSelectionChange: onAmountChanged, value: amountTradeValue),
         ...Resource.allResources
             .where(
           (fakeResource) =>
@@ -82,7 +85,7 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                 ),
                 IconButton(
                   onPressed: () {
-                    var res = fakeResource.cloneWithAmount(5);
+                    var res = fakeResource.cloneWithAmount(amountTradeValue);
                     if (widget.wagon.canFitNewResource(res) &&
                         widget.city.stock.removeResource(res)) {
                       widget.wagon.stock.addResource(res);
@@ -92,7 +95,7 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                 ),
                 IconButton(
                   onPressed: () {
-                    var res = fakeResource.cloneWithAmount(5);
+                    var res = fakeResource.cloneWithAmount(amountTradeValue);
                     widget.city.stock.addResource(res);
                     widget.wagon.stock.removeResource(res);
                   },
@@ -121,5 +124,11 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
         ).toList(),
       ],
     );
+  }
+
+  void onAmountChanged(int newValue) {
+    setState(() {
+      amountTradeValue = newValue;
+    });
   }
 }
