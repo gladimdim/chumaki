@@ -61,11 +61,23 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                     decoration: BoxDecoration(
                       border: Border.all(width: 3, color: Colors.black),
                     ),
-                    child: Center(
-                      child: Text(
-                        wagonRes == null ? "Пусто" : wagonRes.amount.toString(),
+                    child: Stack(children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          wagonRes == null
+                              ? "Пусто"
+                              : wagonRes.amount.toString(),
+                        ),
                       ),
-                    ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          height: 5,
+                          color: fakeResource.color,
+                        ),
+                      ),
+                    ]),
                   ),
                 ),
                 IconButton(
