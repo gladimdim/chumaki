@@ -1,7 +1,8 @@
 class Resource {
   final String localizedKey;
+  final double weightPerPoint ;
   int amount;
-  Resource(this.localizedKey, this.amount);
+  Resource(this.localizedKey, this.amount, {this.weightPerPoint = 1});
 
   String get imagePath {
     return "images/resources/${this.localizedKey}/${this.localizedKey}.png";
@@ -24,50 +25,54 @@ class Resource {
     return localizedKey.hashCode;
   }
 
+  Resource cloneWithAmount(int amount) {
+    return Resource(localizedKey, amount);
+  }
+
 }
 
 class Wood extends Resource {
-  Wood(int amount): super("wood", amount);
+  Wood(int amount): super("wood", amount, weightPerPoint: 0.5);
 }
 
 class Cannon extends Resource {
-  Cannon(int amount): super("cannon", amount);
+  Cannon(int amount): super("cannon", amount, weightPerPoint: 4);
 }
 
 class Charcoal extends Resource {
-  Charcoal(int amount): super("charcoal", amount);
+  Charcoal(int amount): super("charcoal", amount, weightPerPoint: 0.2);
 }
 
 class Firearm extends Resource {
-  Firearm(int amount): super("firearm", amount);
+  Firearm(int amount): super("firearm", amount, weightPerPoint: 0.8);
 }
 
 class Fish extends Resource {
-  Fish(int amount): super("fish", amount);
+  Fish(int amount): super("fish", amount, weightPerPoint: 0.1);
 }
 
 class Food extends Resource {
-  Food(int amount): super("food", amount);
+  Food(int amount): super("food", amount, weightPerPoint: 0.1);
 }
 
 class Fur extends Resource {
-  Fur(int amount): super("fure", amount);
+  Fur(int amount): super("fur", amount, weightPerPoint: 0.3);
 }
 
 class Grains extends Resource {
-  Grains(int amount): super("grains", amount);
+  Grains(int amount): super("grains", amount, weightPerPoint: 1);
 }
 
 class Horse extends Resource {
-  Horse(int amount): super("horse", amount);
+  Horse(int amount): super("horse", amount, weightPerPoint: 5);
 }
 
 class IronOre extends Resource {
-  IronOre(int amount): super("ironore", amount);
+  IronOre(int amount): super("ironore", amount, weightPerPoint: 1.5);
 }
 
 class MetalParts extends Resource {
-  MetalParts(int amount): super("metalparts", amount);
+  MetalParts(int amount): super("metalparts", amount, weightPerPoint: 2);
 }
 
 class Money extends Resource {
@@ -75,15 +80,15 @@ class Money extends Resource {
 }
 
 class Planks extends Resource {
-  Planks(int amount): super("planks", amount);
+  Planks(int amount): super("planks", amount, weightPerPoint: 1);
 }
 
 class Powder extends Resource {
-  Powder(int amount): super("powder", amount);
+  Powder(int amount): super("powder", amount, weightPerPoint: 0.8);
 }
 
 class Stone extends Resource {
-  Stone(int amount): super("stone", amount);
+  Stone(int amount): super("stone", amount, weightPerPoint: 5);
 }
 
 

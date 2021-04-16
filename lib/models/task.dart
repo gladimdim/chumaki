@@ -1,6 +1,7 @@
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/models/wagon.dart';
 import 'package:uuid/uuid.dart';
 
 class RouteTask extends ProgressDuration {
@@ -8,6 +9,7 @@ class RouteTask extends ProgressDuration {
   final City to;
   DateTime? endTaskDate;
   final String id = Uuid().v4().toString();
+  Wagon wagon;
 
   Set<Resource> stock = Set();
 
@@ -29,8 +31,9 @@ class RouteTask extends ProgressDuration {
   }
 
   RouteTask(
-    this.to,
-    this.from, {
-    duration = const Duration(seconds: 15),
+    this.from,
+    this.to, {
+      required this.wagon,
+    duration = const Duration(seconds: 5),
   }) : super(duration);
 }

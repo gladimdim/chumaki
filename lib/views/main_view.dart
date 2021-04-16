@@ -1,14 +1,13 @@
-
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/selected_city_view.dart';
 import 'package:chumaki/models/city.dart';
 
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/image_on_canvas.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/models/route.dart';
 import 'dart:ui' as ui;
 
-const CITY_SIZE = 30;
+const CITY_SIZE = 50;
 
 class MainView extends StatefulWidget {
   @override
@@ -17,7 +16,7 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
   double animationValue = 0;
-  bool showCoordinates = true;
+  bool showCoordinates = false;
   City? selected;
 
   @override
@@ -125,9 +124,21 @@ class _MainViewState extends State<MainView> {
                     child: Container(
                       color: selected == city ? Colors.grey : Colors.red,
                       child: Center(
-                        child: Text(
-                          "${city.name}",
-                          style: TextStyle(fontSize: 12, color: Colors.black),
+                        child: StreamBuilder(
+                          stream: city.changes.stream,
+                          builder: (context, snapshot) => Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Center(
+                                child: Text(
+                                  "${city.name}",
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.black),
+                                ),
+                              ),
+                              Text(city.wagons.length.toString()),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -165,7 +176,7 @@ class _MainViewState extends State<MainView> {
               left: selected!.point.x - 150,
               top: selected!.point.y + 64,
               child: SizedBox(
-                width: 300,
+                width: CITY_DETAILS_VIEW_WIDTH,
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 3),

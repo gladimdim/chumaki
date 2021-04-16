@@ -1,30 +1,32 @@
-import 'dart:typed_data';
-import "dart:ui" as ui;
-import 'package:async/async.dart';
-import 'package:flutter/services.dart';
+import 'package:chumaki/extensions/stock.dart';
+import 'package:rxdart/rxdart.dart';
 
-class ImageOnCanvas {
-  final String imagePath;
-  ui.Image? image;
-  final AsyncMemoizer<ui.Image> _memoizer = AsyncMemoizer<ui.Image>();
+class Wagon {
+  late Stock stock;
+  static final String imagePath = "images/wagon/wagon.png";
+  final String name;
+  double totalWeightCapacity;
+  BehaviorSubject changes = BehaviorSubject();
 
-  ImageOnCanvas(this.imagePath);
+  Wagon({required this.name, Stock? stock, this.totalWeightCapacity = 100.0}) {
+    if (stock == null) {
+      this.stock = Stock(List.empty(growable: true));
+    } else {
+      this.stock = stock;
+    }
 
-  Future asBytes() async {
-    return _memoizer.runOnce(()  async{
-      ByteData data = await rootBundle.load(imagePath);
-      final Uint8List bytes = Uint8List.view(data.buffer);
-      final ui.Codec codec = await ui.instantiateImageCodec(bytes);
-
-      image = (await codec.getNextFrame()).image;
-
-      return Future.value(image);
+    this.stock.changes.listen((value) {
+      changes.add(value);
     });
   }
 
-  static WagonImage wagonImage = WagonImage();
-}
+  double get currentWeight {
+    return stock.iterator.fold(0, (previousValue, resource) {
+      return previousValue + resource.amount * resource.weightPerPoint;
+    });
+  }
 
-class WagonImage extends ImageOnCanvas {
-  WagonImage() : super("images/wagon/cart_64.png");
+  void dispose() {
+    changes.close();
+  }
 }

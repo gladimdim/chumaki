@@ -9,8 +9,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Chumaki The Game',
-      home: Scaffold(body: MainView(),),
+      title: 'Дике Поле: Чумаки',
+      home: Scaffold(
+        body: MainView(),
+      ),
     );
   }
 }
