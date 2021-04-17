@@ -17,6 +17,7 @@ class WagonResourceExchanger extends StatefulWidget {
 
 class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
   int amountTradeValue = 5;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -42,7 +43,8 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
             ),
           ),
         ),
-        ResourceAmountSelector(onSelectionChange: onAmountChanged, value: amountTradeValue),
+        ResourceAmountSelector(
+            onSelectionChange: onAmountChanged, value: amountTradeValue),
         ...Resource.allResources
             .where(
           (fakeResource) =>
@@ -80,6 +82,16 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                           color: fakeResource.color,
                         ),
                       ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Opacity(
+                          opacity: 0.3,
+                          child: Image.asset(
+                            "images/wagon/wagon.png",
+                            width: 50,
+                          ),
+                        ),
+                      ),
                     ]),
                   ),
                 ),
@@ -108,12 +120,26 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                     decoration: BoxDecoration(
                       border: Border.all(width: 3, color: Colors.black),
                     ),
-                    child: Center(
-                      child: cityRes == null
-                          ? Text("Пусто")
-                          : Text(
-                              cityRes.amount.toString(),
+                    child: Stack(
+                      children: [
+                        Center(
+                          child: cityRes == null
+                              ? Text("Пусто")
+                              : Text(
+                                  cityRes.amount.toString(),
+                                ),
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Opacity(
+                            opacity: 0.3,
+                            child: Image.asset(
+                              "images/cities/church.png",
+                              width: 50,
                             ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
