@@ -11,7 +11,7 @@ class ResourceImageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.asset(resource.imagePath, width: 64),
+        Image.asset(resource.imagePath, width: 55),
         if (showAmount) Positioned(
           bottom: 0,
           right: 0,

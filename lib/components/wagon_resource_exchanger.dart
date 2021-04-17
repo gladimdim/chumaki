@@ -95,23 +95,72 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                     ]),
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    var res = fakeResource.cloneWithAmount(amountTradeValue);
-                    if (widget.wagon.canFitNewResource(res) &&
-                        widget.city.stock.removeResource(res)) {
-                      widget.wagon.stock.addResource(res);
-                    }
-                  },
-                  icon: Icon(Icons.arrow_back_outlined),
+                SizedBox(
+                  width: 64,
+                  height: 64,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          var res = fakeResource
+                              .cloneWithAmount(amountTradeValue);
+                          if (widget.wagon.canFitNewResource(res) &&
+                              widget.city.stock.removeResource(res)) {
+                            widget.wagon.stock.addResource(res);
+                          }
+                        },
+                        icon: Icon(Icons.arrow_back_outlined),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "images/resources/money/money.png",
+                            width: 22,
+                          ),
+                          Text(
+                            widget.city.prices
+                                .priceForResource(fakeResource,
+                                    withAmount: amountTradeValue)
+                                .toString(),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    var res = fakeResource.cloneWithAmount(amountTradeValue);
-                    widget.city.stock.addResource(res);
-                    widget.wagon.stock.removeResource(res);
-                  },
-                  icon: Icon(Icons.arrow_forward_outlined),
+                SizedBox(
+                  width: 64,
+                  height: 64,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          var res =
+                              fakeResource.cloneWithAmount(amountTradeValue);
+                          widget.city.stock.addResource(res);
+                          widget.wagon.stock.removeResource(res);
+                        },
+                        icon: Icon(Icons.arrow_forward_outlined),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "images/resources/money/money.png",
+                            width: 22,
+                          ),
+                          Text(
+                            widget.city.prices
+                                .priceForResource(fakeResource,withAmount: amountTradeValue)
+                                .toString(),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   width: 75,
