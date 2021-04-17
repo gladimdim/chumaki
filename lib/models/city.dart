@@ -57,6 +57,10 @@ class City {
     if (!hasMoney) {
       return false;
     }
+    var canSell = stock.removeResource(resource);
+    if (!canSell) {
+      return false;
+    }
     toWagon.stock.addResource(resource);
     Company.instance.removeMoney(price);
     return true;
