@@ -22,7 +22,7 @@ class Wagon {
   }
 
   bool canFitNewResource(Resource res) {
-      return totalWeightCapacity >= currentWeight + res.totalWeight;
+      return totalWeightCapacity > currentWeight + res.totalWeight;
   }
 
   double get currentWeight {

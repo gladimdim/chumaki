@@ -4,11 +4,12 @@ import 'package:chumaki/models/route.dart';
 import 'package:chumaki/models/task.dart';
 import 'package:rxdart/rxdart.dart';
 
-enum COMPANY_EVENTS { TASK_STARTED, TASK_ENDED }
+enum COMPANY_EVENTS { TASK_STARTED, TASK_ENDED, MONEY_ADDED, MONEY_REMOVED }
 
 class Company {
   final List<CityRoute> cityRoutes = CityRoute.allRoutes;
   static final Company instance = Company._internal();
+  double _money = 500;
 
   Company._internal() {
     changes = _innerChanges.stream;
@@ -17,7 +18,23 @@ class Company {
   final BehaviorSubject<COMPANY_EVENTS> _innerChanges = BehaviorSubject();
   late ValueStream<COMPANY_EVENTS> changes;
 
-  startTask(RouteTask routeTask) {}
+  addMoney(double value) {
+    _money += value;
+    _innerChanges.add(COMPANY_EVENTS.MONEY_ADDED);
+  }
+
+  bool removeMoney(double value) {
+    if (value <= _money) {
+      _money -= value;
+      _innerChanges.add(COMPANY_EVENTS.MONEY_REMOVED);
+      return true;
+    }
+    return false;
+  }
+
+  double getMoney() {
+    return double.parse(_money.toStringAsFixed(2));
+  }
 
   CityRoute getRouteForTask(RouteTask routeTask) {
     var from = routeTask.from;
@@ -63,5 +80,9 @@ class Company {
 
   void dispose() {
     _innerChanges.close();
+  }
+
+  bool hasMoney(double price) {
+    return price <= _money;
   }
 }

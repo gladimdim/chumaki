@@ -1,6 +1,9 @@
 import 'package:chumaki/components/resource_amount_selector.dart';
 import 'package:chumaki/components/resource_image_view.dart';
+import 'package:chumaki/components/selected_city_view.dart';
+import 'package:chumaki/components/wagon_stock_bar.dart';
 import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
@@ -17,34 +20,53 @@ class WagonResourceExchanger extends StatefulWidget {
 
 class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
   int amountTradeValue = 5;
+  double _maxWidth = 315;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          width: 315,
-          height: 50,
-          decoration: BoxDecoration(
-            border: Border.all(width: 3, color: Colors.black),
+        WagonStockBar(
+          wagon: widget.wagon,
+        ),
+        ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: 50,
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Row(
-              children: widget.wagon.stock.iterator.map<Widget>(
-                (res) {
-                  return Container(
-                    width: res.totalWeight * (300 / 100),
-                    height: 30,
-                    color: res.color,
-                  );
-                },
-              ).toList(),
-            ),
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: ResourceAmountSelector(
+                  onSelectionChange: onAmountChanged,
+                  value: amountTradeValue,
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: 120,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Image.asset("images/resources/money/money.png"),
+                        StreamBuilder(
+                            stream: Company.instance.changes,
+                            builder: (context, snap) {
+                              return Text(
+                                  Company.instance.getMoney().toString());
+                            }),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-        ResourceAmountSelector(
-            onSelectionChange: onAmountChanged, value: amountTradeValue),
         ...Resource.allResources
             .where(
           (fakeResource) =>
@@ -103,15 +125,14 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          var res = fakeResource
-                              .cloneWithAmount(amountTradeValue);
-                          if (widget.wagon.canFitNewResource(res) &&
-                              widget.city.stock.removeResource(res)) {
-                            widget.wagon.stock.addResource(res);
+                          var res =
+                              fakeResource.cloneWithAmount(amountTradeValue);
+                          if (widget.wagon.canFitNewResource(res)) {
+                            widget.city.sellResource(
+                                resource: res, toWagon: widget.wagon);
                           }
                         },
                         icon: Icon(Icons.arrow_back_outlined, size: 32),
-
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -122,7 +143,7 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                           ),
                           Text(
                             widget.city.prices
-                                .priceForResource(fakeResource,
+                                .sellPriceForResource(fakeResource,
                                     withAmount: amountTradeValue)
                                 .toString(),
                           ),
@@ -141,8 +162,8 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                         onPressed: () {
                           var res =
                               fakeResource.cloneWithAmount(amountTradeValue);
-                          widget.city.stock.addResource(res);
-                          widget.wagon.stock.removeResource(res);
+                          widget.city.buyResource(
+                              resource: res, fromWagon: widget.wagon);
                         },
                         icon: Icon(Icons.arrow_forward_outlined, size: 32),
                       ),
@@ -155,7 +176,8 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                           ),
                           Text(
                             widget.city.prices
-                                .priceForResource(fakeResource,withAmount: amountTradeValue)
+                                .buyPriceForResource(fakeResource,
+                                    withAmount: amountTradeValue)
                                 .toString(),
                           ),
                         ],

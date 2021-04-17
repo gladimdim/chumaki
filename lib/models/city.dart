@@ -1,19 +1,18 @@
 import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
+import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/route.dart';
 import 'package:chumaki/models/task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:tuple/tuple.dart';
 
 class City {
   final Point<double> point;
   final String name;
   final Stock stock;
-  final double _buyPriceAdjust = 0.8;
   late List<Wagon> wagons;
   BehaviorSubject changes = BehaviorSubject();
 
@@ -52,6 +51,28 @@ class City {
     kyiv,
   ];
 
+  bool sellResource({required Resource resource, required Wagon toWagon}) {
+    var price = prices.sellPriceForResource(resource);
+    var hasMoney = Company.instance.hasMoney(price);
+    if (!hasMoney) {
+      return false;
+    }
+    toWagon.stock.addResource(resource);
+    Company.instance.removeMoney(price);
+    return true;
+  }
+
+  bool buyResource({required Resource resource, required Wagon fromWagon}) {
+    var price = prices.buyPriceForResource(resource);
+
+    final canSell = fromWagon.stock.removeResource(resource);
+    if (canSell) {
+      stock.addResource(resource);
+      Company.instance.addMoney(price);
+    }
+    return canSell;
+  }
+
   bool equalsTo(City another) {
     return another.name == name;
   }
@@ -80,7 +101,6 @@ class City {
 }
 
 class Cherkasy extends City {
-
   Cherkasy()
       : super(
           point: Point(2250, 2000),
@@ -104,7 +124,7 @@ class Nizhin extends City {
   Nizhin()
       : super(
           point: Point(1600, 2500),
-              name: "Ніжин",
+          name: "Ніжин",
           prices: Price.defaultPrice,
           stock: Stock([Grains(200), Wood(300), Horse(50)]),
         );

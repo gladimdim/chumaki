@@ -3,6 +3,7 @@ import 'package:tuple/tuple.dart';
 
 class Price {
   List<Tuple2<Resource, double>> prices;
+  final double _buyPriceAdjust = 0.8;
   Price(this.prices);
 
   static Price defaultPrice = Price(List.from(Price.sellPrices));
@@ -61,8 +62,13 @@ class Price {
     return Tuple2(res, price);
   }).toList();
 
-  double priceForResource(Resource res, {int withAmount = 1}) {
-    return (prices.firstWhere((element) => element.item1.sameType(res)).item2 *
-            withAmount);
+  double sellPriceForResource(Resource res, {int withAmount = 1}) {
+    return double.parse((prices.firstWhere((element) => element.item1.sameType(res)).item2 *
+            withAmount).toStringAsFixed(1));
+  }
+
+  double buyPriceForResource(Resource res, {int withAmount = 1}) {
+    return double.parse((prices.firstWhere((element) => element.item1.sameType(res)).item2 *
+        withAmount * _buyPriceAdjust).toStringAsFixed(1));
   }
 }
