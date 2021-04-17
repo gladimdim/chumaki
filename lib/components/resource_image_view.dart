@@ -19,7 +19,6 @@ class ResourceImageView extends StatelessWidget {
             resource.amount.toString(),
             style: TextStyle(
               fontSize: 14,
-              color: Colors.yellow,
             ),
           ),
         ),

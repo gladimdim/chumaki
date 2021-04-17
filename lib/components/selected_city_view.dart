@@ -58,39 +58,25 @@ class SelectedCityView extends StatelessWidget {
             child: StreamBuilder(
                 stream: city.changes.stream,
                 builder: (context, data) {
-                  return DragTarget<Tuple2<Wagon, Resource>>(onAccept: (input) {
-                    var res = input.item2;
-                    city.stock.addResource(res);
-                    input.item1.stock.removeResource(res);
-                  }, builder: (context, candidates, rejects) {
-                    List<Resource> items = List.from(city.stock.iterator);
-                    items.addAll(candidates.map((input) => input!.item2));
-                    return SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TitleText("Містить"),
-                          if (!city.stock.isEmpty)
-                            Row(
-                                children: items.map<Widget>((resource) {
-                              return Draggable<Tuple2<City, Resource>>(
-                                data: Tuple2<City, Resource>(
-                                    city, resource.cloneWithAmount(5)),
-                                dragAnchorStrategy: pointerDragAnchorStrategy,
-                                feedback: ResourceImageView(
-                                    resource.cloneWithAmount(5)),
-                                child: ResourceImageView(
-                                  resource,
-                                  showAmount: true,
-                                ),
-                              );
-                            }).toList()),
-                          if (city.stock.isEmpty) Text("Нічого"),
-                        ],
-                      ),
-                    );
-                  });
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TitleText("Містить"),
+                        if (!city.stock.isEmpty)
+                          Row(
+                              children:
+                                  city.stock.iterator.map<Widget>((resource) {
+                            return ResourceImageView(
+                              resource,
+                              showAmount: true,
+                            );
+                          }).toList()),
+                        if (city.stock.isEmpty) Text("Нічого"),
+                      ],
+                    ),
+                  );
                 }),
           ),
           TitleText("Вхідні: "),
