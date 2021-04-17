@@ -1,12 +1,9 @@
-import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/wagon_resource_exchanger.dart';
 import 'package:chumaki/components/weight_show.dart';
 import 'package:chumaki/models/city.dart';
-import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
-import 'package:tuple/tuple.dart';
 
 class WagonsInCity extends StatefulWidget {
   final City city;

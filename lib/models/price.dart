@@ -2,9 +2,14 @@ import 'package:chumaki/models/resource.dart';
 import 'package:tuple/tuple.dart';
 
 class Price {
-  List<Tuple2<Resource, int>> prices =
-      Resource.allResources.map<Tuple2<Resource, int>>((res) {
-    int price = 1;
+  List<Tuple2<Resource, double>> prices;
+  Price(this.prices);
+
+  static Price defaultPrice = Price(List.from(Price.sellPrices));
+
+  static List<Tuple2<Resource, double>> sellPrices =
+      Resource.allResources.map<Tuple2<Resource, double>>((res) {
+    double price = 1;
     if (res is Wood) {
       price = 1;
     }
@@ -56,9 +61,8 @@ class Price {
     return Tuple2(res, price);
   }).toList();
 
-  int priceForResource(Resource res, {int withAmount = 1}) {
+  double priceForResource(Resource res, {int withAmount = 1}) {
     return (prices.firstWhere((element) => element.item1.sameType(res)).item2 *
-            withAmount)
-        .toInt();
+            withAmount);
   }
 }

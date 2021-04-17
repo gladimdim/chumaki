@@ -96,8 +96,8 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                   ),
                 ),
                 SizedBox(
-                  width: 64,
-                  height: 64,
+                  width: 65,
+                  height: 70,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -110,7 +110,8 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                             widget.wagon.stock.addResource(res);
                           }
                         },
-                        icon: Icon(Icons.arrow_back_outlined),
+                        icon: Icon(Icons.arrow_back_outlined, size: 32),
+
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -131,8 +132,8 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                   ),
                 ),
                 SizedBox(
-                  width: 64,
-                  height: 64,
+                  width: 65,
+                  height: 70,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -143,7 +144,7 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                           widget.city.stock.addResource(res);
                           widget.wagon.stock.removeResource(res);
                         },
-                        icon: Icon(Icons.arrow_forward_outlined),
+                        icon: Icon(Icons.arrow_forward_outlined, size: 32),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

@@ -1,4 +1,3 @@
-import 'package:chumaki/models/resource.dart';
 import 'package:flutter/material.dart';
 
 class ResourceAmountSelector extends StatelessWidget {

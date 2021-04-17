@@ -7,11 +7,13 @@ import 'package:chumaki/models/route.dart';
 import 'package:chumaki/models/task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:tuple/tuple.dart';
 
 class City {
   final Point<double> point;
   final String name;
   final Stock stock;
+  final double _buyPriceAdjust = 0.8;
   late List<Wagon> wagons;
   BehaviorSubject changes = BehaviorSubject();
 
@@ -78,11 +80,12 @@ class City {
 }
 
 class Cherkasy extends City {
+
   Cherkasy()
       : super(
           point: Point(2250, 2000),
           name: "Черкаси",
-          prices: Price(),
+          prices: Price.defaultPrice,
           stock: Stock([Food(200), Stone(300), Firearm(500)]),
           wagons: [
             Wagon(name: "Вальків", stock: Stock([Food(10), Wood(30)])),
@@ -101,8 +104,8 @@ class Nizhin extends City {
   Nizhin()
       : super(
           point: Point(1600, 2500),
-          name: "Ніжин",
-          prices: Price(),
+              name: "Ніжин",
+          prices: Price.defaultPrice,
           stock: Stock([Grains(200), Wood(300), Horse(50)]),
         );
 }
@@ -112,7 +115,7 @@ class Kaniv extends City {
       : super(
           point: Point(2400, 2200),
           name: "Канів",
-          prices: Price(),
+          prices: Price.defaultPrice,
           stock: Stock([
             Food(200),
             Wood(300),
@@ -126,7 +129,7 @@ class Sich extends City {
       : super(
           point: Point(1200, 900),
           name: "Січ",
-          prices: Price(),
+          prices: Price.defaultPrice,
           stock: Stock(
             [Powder(1000), Fish(1500), Horse(300), Fur(1500)],
           ),
@@ -161,7 +164,7 @@ class Chigirin extends City {
       : super(
           point: Point(2000, 1750),
           name: "Чигирин",
-          prices: Price(),
+          prices: Price.defaultPrice,
           stock: Stock([Firearm(300)]),
         );
 }
@@ -171,7 +174,7 @@ class Pereyaslav extends City {
       : super(
           point: Point(2360, 2450),
           name: "Переяслав",
-          prices: Price(),
+          prices: Price.defaultPrice,
           stock: Stock([
             Food(1000),
             Stone(1000),
@@ -185,7 +188,7 @@ class Kyiv extends City {
       : super(
           point: Point(2700, 2830),
           name: "Київ",
-          prices: Price(),
+          prices: Price.defaultPrice,
           stock: Stock([
             Food(200),
             Wood(300),
