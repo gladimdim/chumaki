@@ -97,7 +97,7 @@ class Nizhin extends City {
       : super(
           point: Point(1600, 2500),
           name: "Ніжин",
-          stock: Stock([Grains(200), Wood(300), Horse(500)]),
+          stock: Stock([Grains(200), Wood(300), Horse(50)]),
         );
 }
 
@@ -120,12 +120,30 @@ class Sich extends City {
           point: Point(1200, 900),
           name: "Січ",
           stock: Stock(
-            [Powder(1000)],
+            [Powder(1000), Fish(1500), Horse(300), Fur(1500)],
           ),
           wagons: [
-            Wagon(name: "Татарина"),
-            Wagon(name: "Остапа"),
-            Wagon(name: "Дмитра")
+            Wagon(
+                name: "Татарина",
+                stock: Stock([
+                  Charcoal(20),
+                  IronOre(10),
+                ])),
+            Wagon(
+                name: "Остапа",
+                stock: Stock([
+                  Powder(20),
+                  MetalParts(10),
+                ])),
+            Wagon(
+              name: "Дмитра",
+              stock: Stock(
+                [
+                  Grains(100),
+                  Fish(250),
+                ],
+              ),
+            ),
           ],
         );
 }

@@ -180,7 +180,7 @@ class _MainViewState extends State<MainView> {
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 3),
-                    color: Colors.brown,
+                    color: Colors.grey[400],
                   ),
                   child: SelectedCityView(city: selected!),
                 ),

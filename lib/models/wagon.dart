@@ -1,4 +1,5 @@
 import 'package:chumaki/extensions/stock.dart';
+import 'package:chumaki/models/resource.dart';
 import 'package:rxdart/rxdart.dart';
 
 class Wagon {
@@ -20,9 +21,13 @@ class Wagon {
     });
   }
 
+  bool canFitNewResource(Resource res) {
+      return totalWeightCapacity >= currentWeight + res.totalWeight;
+  }
+
   double get currentWeight {
     return stock.iterator.fold(0, (previousValue, resource) {
-      return previousValue + resource.amount * resource.weightPerPoint;
+      return previousValue + resource.totalWeight;
     });
   }
 

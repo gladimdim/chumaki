@@ -10,13 +10,13 @@ class WeightShow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       "${wagon.currentWeight} / ${wagon.totalWeightCapacity}",
-      style: TextStyle(color: getColor()),
+      style: getStyle()
     );
   }
 
-  Color getColor() {
+  TextStyle getStyle() {
     return wagon.currentWeight > wagon.totalWeightCapacity
-        ? Colors.red
-        : Colors.green;
+        ? TextStyle(color: Colors.red,)
+        : TextStyle(color: Colors.black, fontWeight: FontWeight.bold);
   }
 }
