@@ -2,7 +2,6 @@ import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/wagon_resource_exchanger.dart';
 import 'package:chumaki/components/weight_show.dart';
 import 'package:chumaki/models/city.dart';
-import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 

@@ -1,5 +1,4 @@
 import 'package:chumaki/models/resource.dart';
-import 'package:tuple/tuple.dart';
 
 class Price {
   List<PriceUnit> prices;
