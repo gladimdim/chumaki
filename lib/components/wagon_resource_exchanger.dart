@@ -1,3 +1,4 @@
+import 'package:chumaki/components/city_wagon_resource_exchange.dart';
 import 'package:chumaki/components/resource_amount_selector.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/wagon_stock_bar.dart';
@@ -46,12 +47,12 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      Image.asset("images/resources/money/money.png", width: 50),
+                      Image.asset("images/resources/money/money.png",
+                          width: 50),
                       StreamBuilder(
                           stream: Company.instance.changes,
                           builder: (context, snap) {
-                            return Text(
-                                Company.instance.getMoney().toString());
+                            return Text(Company.instance.getMoney().toString());
                           }),
                     ],
                   ),
@@ -68,148 +69,11 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
         )
             .map(
           (fakeResource) {
-            var wagonRes = widget.wagon.stock.resourceInStock(fakeResource);
-            var cityRes = widget.city.stock.resourceInStock(fakeResource);
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ResourceImageView(fakeResource),
-                SizedBox(
-                  width: 75,
-                  height: 64,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 3, color: Colors.black),
-                    ),
-                    child: Stack(children: [
-                      Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          wagonRes == null
-                              ? "Пусто"
-                              : wagonRes.amount.toString(),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          height: 5,
-                          color: fakeResource.color,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Opacity(
-                          opacity: 0.3,
-                          child: Image.asset(
-                            "images/wagon/wagon.png",
-                            width: 50,
-                          ),
-                        ),
-                      ),
-                    ]),
-                  ),
-                ),
-                SizedBox(
-                  width: 65,
-                  height: 70,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          var res =
-                              fakeResource.cloneWithAmount(amountTradeValue);
-                          if (widget.wagon.canFitNewResource(res)) {
-                            widget.city.sellResource(
-                                resource: res, toWagon: widget.wagon);
-                          }
-                        },
-                        icon: Icon(Icons.arrow_back_outlined, size: 32),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "images/resources/money/money.png",
-                            width: 22,
-                          ),
-                          Text(
-                            widget.city.prices
-                                .sellPriceForResource(fakeResource,
-                                    withAmount: amountTradeValue)
-                                .toString(),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 65,
-                  height: 70,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          var res =
-                              fakeResource.cloneWithAmount(amountTradeValue);
-                          widget.city.buyResource(
-                              resource: res, fromWagon: widget.wagon);
-                        },
-                        icon: Icon(Icons.arrow_forward_outlined, size: 32),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "images/resources/money/money.png",
-                            width: 22,
-                          ),
-                          Text(
-                            widget.city.prices
-                                .buyPriceForResource(fakeResource,
-                                    withAmount: amountTradeValue)
-                                .toString(),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 75,
-                  height: 64,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 3, color: Colors.black),
-                    ),
-                    child: Stack(
-                      children: [
-                        Center(
-                          child: cityRes == null
-                              ? Text("Пусто")
-                              : Text(
-                                  cityRes.amount.toString(),
-                                ),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Opacity(
-                            opacity: 0.3,
-                            child: Image.asset(
-                              "images/cities/church.png",
-                              width: 50,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                ResourceImageView(fakeResource),
-              ],
+            return CityWagonResourceExchange(
+              city: widget.city,
+              wagon: widget.wagon,
+              resource: fakeResource,
+              amountTradeValue: amountTradeValue,
             );
           },
         ).toList(),
