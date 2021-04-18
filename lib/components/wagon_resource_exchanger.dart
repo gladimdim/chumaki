@@ -1,5 +1,6 @@
 import 'package:chumaki/components/city_wagon_resource_exchange.dart';
 import 'package:chumaki/components/resource_amount_selector.dart';
+import 'package:chumaki/components/resource_category_group.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/wagon_stock_bar.dart';
 import 'package:chumaki/models/city.dart';
@@ -61,18 +62,19 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
             ],
           ),
         ),
-        ...Resource.allResources
-            .where(
-          (fakeResource) =>
-              widget.wagon.stock.hasResource(fakeResource) ||
-              widget.city.stock.hasResource(fakeResource),
-        )
+        ...groupResourcesByCategory(Resource.allResources
+                .where(
+                  (fakeResource) =>
+                      widget.wagon.stock.hasResource(fakeResource) ||
+                      widget.city.stock.hasResource(fakeResource),
+                )
+                .toList())
             .map(
-          (fakeResource) {
-            return CityWagonResourceExchange(
+          (List<Resource> groupedResources) {
+            return ResourceCategoryGroup(
               city: widget.city,
               wagon: widget.wagon,
-              resource: fakeResource,
+              resources: groupedResources,
               amountTradeValue: amountTradeValue,
             );
           },
@@ -85,5 +87,26 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
     setState(() {
       amountTradeValue = newValue;
     });
+  }
+
+  List<List<Resource>> groupResourcesByCategory(List<Resource> resources) {
+    List<List<Resource>> result = resources.fold([], (result, current) {
+      if (result.isEmpty) {
+        return [
+          [current]
+        ];
+      } else {
+        for (var i = 0; i < result.length; i++) {
+          var group = result[i];
+          if (group.first.category == current.category) {
+            group.add(current);
+            return result;
+          }
+        }
+        result.add([current]);
+        return result;
+      }
+    });
+    return result;
   }
 }
