@@ -29,36 +29,31 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
         ),
         ConstrainedBox(
           constraints: BoxConstraints(
-            maxHeight: 50,
+            maxHeight: 75,
           ),
-          child: Stack(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Align(
-                alignment: Alignment.center,
-                child: ResourceAmountSelector(
-                  onSelectionChange: onAmountChanged,
-                  value: amountTradeValue,
-                ),
+              ResourceAmountSelector(
+                onSelectionChange: onAmountChanged,
+                value: amountTradeValue,
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxWidth: 120,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Image.asset("images/resources/money/money.png"),
-                        StreamBuilder(
-                            stream: Company.instance.changes,
-                            builder: (context, snap) {
-                              return Text(
-                                  Company.instance.getMoney().toString());
-                            }),
-                      ],
-                    ),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: 120,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Image.asset("images/resources/money/money.png", width: 50),
+                      StreamBuilder(
+                          stream: Company.instance.changes,
+                          builder: (context, snap) {
+                            return Text(
+                                Company.instance.getMoney().toString());
+                          }),
+                    ],
                   ),
                 ),
               ),
