@@ -88,25 +88,4 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
       amountTradeValue = newValue;
     });
   }
-
-  List<List<Resource>> groupResourcesByCategory(List<Resource> resources) {
-    List<List<Resource>> result = resources.fold([], (result, current) {
-      if (result.isEmpty) {
-        return [
-          [current]
-        ];
-      } else {
-        for (var i = 0; i < result.length; i++) {
-          var group = result[i];
-          if (group.first.category == current.category) {
-            group.add(current);
-            return result;
-          }
-        }
-        result.add([current]);
-        return result;
-      }
-    });
-    return result;
-  }
 }

@@ -1,9 +1,11 @@
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/route_task_row_progress.dart';
+import 'package:chumaki/components/stock_resource_category_group.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/wagons_in_city.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/company.dart';
+import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
@@ -63,14 +65,22 @@ class SelectedCityView extends StatelessWidget {
                       children: [
                         TitleText("Містить"),
                         if (!city.stock.isEmpty)
-                          Row(
-                              children:
-                                  city.stock.iterator.map<Widget>((resource) {
-                            return ResourceImageView(
-                              resource,
-                              showAmount: true,
-                            );
-                          }).toList()),
+                          Column(
+                            children: groupResourcesByCategory(
+                                    city.stock.iterator.toList())
+                                .map<Widget>((resources) {
+                              return StockResourceCategoryGroup(
+                                  resources: resources);
+                            }).toList(),
+                          ),
+                        // Row(
+                        //     children:
+                        //         city.stock.iterator.map<Widget>((resource) {
+                        //   return ResourceImageView(
+                        //     resource,
+                        //     showAmount: true,
+                        //   );
+                        // }).toList()),
                         if (city.stock.isEmpty) Text("Нічого"),
                       ],
                     ),
