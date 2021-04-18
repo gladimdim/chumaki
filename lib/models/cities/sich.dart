@@ -28,7 +28,12 @@ class Sich extends City {
             PriceUnit.powder.adjustToModifier(0.6),
           ]),
           stock: Stock(
-            [Powder(1000), Fish(1500), Horse(300), Fur(1500)],
+            [
+              Powder(1000),
+              Fish(1500),
+              Horse(300),
+              Fur(1500),
+            ],
           ),
           wagons: [
             Wagon(

@@ -29,7 +29,18 @@ class Cherkasy extends City {
               PriceUnit.powder.adjustToModifier(0.8),
             ],
           ),
-          stock: Stock([Food(200), Stone(300), Firearm(500)]),
+          stock: Stock([
+            Food(200),
+            Stone(300),
+            Firearm(500),
+            Powder(1000),
+            Fish(1000),
+            Grains(3000),
+            Horse(200),
+            Planks(500),
+
+            Horse(250),
+          ]),
           wagons: [
             Wagon(name: "Вальків", stock: Stock([Food(10), Wood(30)])),
             Wagon(name: "Харченка", stock: Stock([Firearm(5), Stone(15)])),

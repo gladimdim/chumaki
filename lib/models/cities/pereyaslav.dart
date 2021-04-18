@@ -29,7 +29,13 @@ class Pereyaslav extends City {
           stock: Stock([
             Food(1000),
             Stone(1000),
-            Cannon(100),
+            Cannon(3),
+            Grains(1000),
+            Fur(100),
+            Planks(500),
+            Wood(1000),
+            MetalParts(100),
+            Firearm(40),
           ]),
         );
 }

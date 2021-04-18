@@ -29,9 +29,20 @@ class Kaniv extends City {
       ]
     ),
     stock: Stock([
-      Food(200),
-      Wood(300),
+      Food(2000),
+      Stone(300),
+      Firearm(500),
+      Powder(1000),
+      Grains(3000),
+      Horse(200),
+      Fish(2500),
       Planks(500),
+      IronOre(50),
+      Cannon(3),
+      Charcoal(200),
+      MetalParts(100),
+
+      Horse(400),
     ]),
   );
 }
