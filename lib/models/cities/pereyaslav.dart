@@ -17,7 +17,7 @@ class Pereyaslav extends City {
             PriceUnit.firearm.adjustToModifier(1.4),
             PriceUnit.horse.adjustToModifier(1),
             PriceUnit.cannon.adjustToModifier(1.5),
-            PriceUnit.food.adjustToModifier(0.8),
+            PriceUnit.bread.adjustToModifier(0.8),
             PriceUnit.charcoal.adjustToModifier(1.1),
             PriceUnit.fish.adjustToModifier(0.9),
             PriceUnit.fur.adjustToModifier(0.9),
@@ -27,7 +27,7 @@ class Pereyaslav extends City {
             PriceUnit.powder.adjustToModifier(1.1),
           ]),
           stock: Stock([
-            Food(1000),
+            Bread(1000),
             Stone(1000),
             Cannon(3),
             Grains(1000),

@@ -18,7 +18,7 @@ class Kaniv extends City {
         PriceUnit.firearm.adjustToModifier(1.7),
         PriceUnit.horse.adjustToModifier(0.8),
         PriceUnit.cannon.adjustToModifier(1.5),
-        PriceUnit.food.adjustToModifier(1),
+        PriceUnit.bread.adjustToModifier(1),
         PriceUnit.charcoal.adjustToModifier(1.2),
         PriceUnit.fish.adjustToModifier(0.7),
         PriceUnit.fur.adjustToModifier(0.7),
@@ -29,7 +29,7 @@ class Kaniv extends City {
       ]
     ),
     stock: Stock([
-      Food(2000),
+      Bread(2000),
       Stone(300),
       Firearm(500),
       Powder(1000),

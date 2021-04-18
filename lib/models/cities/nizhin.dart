@@ -18,7 +18,7 @@ class Nizhin extends City {
               PriceUnit.firearm.adjustToModifier(1.2),
               PriceUnit.horse.adjustToModifier(1.3),
               PriceUnit.cannon.adjustToModifier(1.2),
-              PriceUnit.food.adjustToModifier(0.7),
+              PriceUnit.bread.adjustToModifier(0.7),
               PriceUnit.charcoal.adjustToModifier(0.9),
               PriceUnit.fish.adjustToModifier(1.4),
               PriceUnit.fur.adjustToModifier(1.02),

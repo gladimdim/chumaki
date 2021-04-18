@@ -18,7 +18,7 @@ class Sich extends City {
             PriceUnit.firearm.adjustToModifier(2),
             PriceUnit.horse.adjustToModifier(0.6),
             PriceUnit.cannon.adjustToModifier(1.5),
-            PriceUnit.food.adjustToModifier(0.8),
+            PriceUnit.bread.adjustToModifier(0.8),
             PriceUnit.charcoal.adjustToModifier(1.1),
             PriceUnit.fish.adjustToModifier(0.5),
             PriceUnit.fur.adjustToModifier(0.6),

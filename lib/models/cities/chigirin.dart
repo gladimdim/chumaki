@@ -17,7 +17,7 @@ class Chigirin extends City {
             PriceUnit.firearm.adjustToModifier(1.8),
             PriceUnit.horse.adjustToModifier(0.7),
             PriceUnit.cannon.adjustToModifier(1.8),
-            PriceUnit.food.adjustToModifier(1),
+            PriceUnit.bread.adjustToModifier(1),
             PriceUnit.charcoal.adjustToModifier(1.1),
             PriceUnit.fish.adjustToModifier(0.9),
             PriceUnit.fur.adjustToModifier(0.9),
@@ -27,7 +27,7 @@ class Chigirin extends City {
             PriceUnit.powder.adjustToModifier(1.1),
           ]),
           stock: Stock([
-            Food(2000),
+            Bread(2000),
             Stone(300),
             Firearm(500),
             Powder(1000),

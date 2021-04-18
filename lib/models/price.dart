@@ -28,7 +28,7 @@ class Price {
     if (res is Cannon) {
       price = 500;
     }
-    if (res is Food) {
+    if (res is Bread) {
       price = 1;
     }
 
@@ -81,8 +81,8 @@ class PriceUnit {
     return PriceUnit(this.resource, price * mod);
   }
 
-  static PriceUnit get food {
-    return PriceUnit(Food(0), 1);
+  static PriceUnit get bread {
+    return PriceUnit(Bread(0), 1);
   }
 
   static PriceUnit get cannon {

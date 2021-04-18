@@ -17,7 +17,7 @@ class Kyiv extends City {
             PriceUnit.firearm.adjustToModifier(1.2),
             PriceUnit.horse.adjustToModifier(1.7),
             PriceUnit.cannon.adjustToModifier(1.3),
-            PriceUnit.food.adjustToModifier(0.6),
+            PriceUnit.bread.adjustToModifier(0.6),
             PriceUnit.charcoal.adjustToModifier(0.7),
             PriceUnit.fish.adjustToModifier(1.3),
             PriceUnit.fur.adjustToModifier(1.4),
@@ -29,7 +29,7 @@ class Kyiv extends City {
           stock: Stock([
             Wood(1000),
             Horse(200),
-            Food(20000),
+            Bread(20000),
             Stone(300),
             Firearm(700),
             Powder(1000),
