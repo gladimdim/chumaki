@@ -2,14 +2,14 @@ import 'package:chumaki/models/resource.dart';
 import 'package:tuple/tuple.dart';
 
 class Price {
-  List<Tuple2<Resource, double>> prices;
+  List<PriceUnit> prices;
   final double _buyPriceAdjust = 0.8;
   Price(this.prices);
 
   static Price defaultPrice = Price(List.from(Price.sellPrices));
 
-  static List<Tuple2<Resource, double>> sellPrices =
-      Resource.allResources.map<Tuple2<Resource, double>>((res) {
+  static List<PriceUnit> sellPrices =
+      Resource.allResources.map<PriceUnit>((res) {
     double price = 1;
     if (res is Wood) {
       price = 1;
@@ -59,16 +59,83 @@ class Price {
     if (res is Powder) {
       price = 4;
     }
-    return Tuple2(res, price);
+    return PriceUnit(res, price);
   }).toList();
 
   double sellPriceForResource(Resource res, {int withAmount = 1}) {
-    return double.parse((prices.firstWhere((element) => element.item1.sameType(res)).item2 *
+    return double.parse((prices.firstWhere((element) => element.resource.sameType(res)).price *
             withAmount).toStringAsFixed(1));
   }
 
   double buyPriceForResource(Resource res, {int withAmount = 1}) {
-    return double.parse((prices.firstWhere((element) => element.item1.sameType(res)).item2 *
+    return double.parse((prices.firstWhere((element) => element.resource.sameType(res)).price *
         withAmount * _buyPriceAdjust).toStringAsFixed(1));
   }
+}
+
+class PriceUnit {
+  final Resource resource;
+  final double price;
+  PriceUnit(this.resource, this.price);
+
+  PriceUnit adjustToModifier(double mod) {
+    return PriceUnit(this.resource, price * mod);
+  }
+
+  static PriceUnit get food {
+    return PriceUnit(Food(0), 1);
+  }
+
+  static PriceUnit get cannon {
+    return PriceUnit(Cannon(0), 500);
+  }
+
+  static PriceUnit get charcoal {
+    return PriceUnit(Charcoal(0), 8);
+  }
+
+  static PriceUnit get firearm {
+    return PriceUnit(Firearm(0), 20);
+  }
+
+  static PriceUnit get fish {
+    return PriceUnit(Fish(0), 2);
+  }
+
+  static PriceUnit get fur {
+    return PriceUnit(Fur(0), 5);
+  }
+
+  static PriceUnit get grains {
+    return PriceUnit(Grains(0), 0.8);
+  }
+
+  static PriceUnit get horse {
+    return PriceUnit(Horse(0), 50);
+  }
+
+  static PriceUnit get ironOre {
+    return PriceUnit(IronOre(0), 5);
+  }
+
+  static PriceUnit get metalParts {
+    return PriceUnit(MetalParts(0), 10);
+  }
+
+  static PriceUnit get planks {
+    return PriceUnit(Planks(0), 12);
+  }
+
+  static PriceUnit get powder {
+    return PriceUnit(Powder(0), 8);
+  }
+
+  static PriceUnit get stone {
+    return PriceUnit(Stone(0), 15);
+  }
+
+  static PriceUnit get wood {
+    return PriceUnit(Wood(0), 2);
+  }
+
 }

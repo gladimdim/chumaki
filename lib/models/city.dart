@@ -1,6 +1,13 @@
 import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
+import 'package:chumaki/models/cities/cherkasy.dart';
+import 'package:chumaki/models/cities/chigirin.dart';
+import 'package:chumaki/models/cities/kaniv.dart';
+import 'package:chumaki/models/cities/kyiv.dart';
+import 'package:chumaki/models/cities/nizhin.dart';
+import 'package:chumaki/models/cities/pereyaslav.dart';
+import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/resource.dart';
@@ -102,121 +109,4 @@ class City {
     wagons.remove(task.wagon);
     changes.add(this);
   }
-}
-
-class Cherkasy extends City {
-  Cherkasy()
-      : super(
-          point: Point(2250, 2000),
-          name: "Черкаси",
-          prices: Price.defaultPrice,
-          stock: Stock([Food(200), Stone(300), Firearm(500)]),
-          wagons: [
-            Wagon(name: "Вальків", stock: Stock([Food(10), Wood(30)])),
-            Wagon(name: "Харченка", stock: Stock([Firearm(5), Stone(15)])),
-            Wagon(
-                name: "Підлісного",
-                stock: Stock([Fur(30), Charcoal(25), Fish(15)])),
-            Wagon(
-                name: "Мітрась",
-                stock: Stock([Horse(5), Powder(25), IronOre(20)])),
-          ],
-        );
-}
-
-class Nizhin extends City {
-  Nizhin()
-      : super(
-          point: Point(1600, 2500),
-          name: "Ніжин",
-          prices: Price.defaultPrice,
-          stock: Stock([Grains(200), Wood(300), Horse(50)]),
-        );
-}
-
-class Kaniv extends City {
-  Kaniv()
-      : super(
-          point: Point(2400, 2200),
-          name: "Канів",
-          prices: Price.defaultPrice,
-          stock: Stock([
-            Food(200),
-            Wood(300),
-            Planks(500),
-          ]),
-        );
-}
-
-class Sich extends City {
-  Sich()
-      : super(
-          point: Point(1200, 900),
-          name: "Січ",
-          prices: Price.defaultPrice,
-          stock: Stock(
-            [Powder(1000), Fish(1500), Horse(300), Fur(1500)],
-          ),
-          wagons: [
-            Wagon(
-                name: "Татарина",
-                stock: Stock([
-                  Charcoal(20),
-                  IronOre(10),
-                ])),
-            Wagon(
-                name: "Остапа",
-                stock: Stock([
-                  Powder(20),
-                  MetalParts(10),
-                ])),
-            Wagon(
-              name: "Дмитра",
-              stock: Stock(
-                [
-                  Grains(100),
-                  Fish(250),
-                ],
-              ),
-            ),
-          ],
-        );
-}
-
-class Chigirin extends City {
-  Chigirin()
-      : super(
-          point: Point(2000, 1750),
-          name: "Чигирин",
-          prices: Price.defaultPrice,
-          stock: Stock([Firearm(300)]),
-        );
-}
-
-class Pereyaslav extends City {
-  Pereyaslav()
-      : super(
-          point: Point(2360, 2450),
-          name: "Переяслав",
-          prices: Price.defaultPrice,
-          stock: Stock([
-            Food(1000),
-            Stone(1000),
-            Cannon(100),
-          ]),
-        );
-}
-
-class Kyiv extends City {
-  Kyiv()
-      : super(
-          point: Point(2700, 2830),
-          name: "Київ",
-          prices: Price.defaultPrice,
-          stock: Stock([
-            Food(200),
-            Wood(300),
-            Planks(500),
-          ]),
-        );
 }
