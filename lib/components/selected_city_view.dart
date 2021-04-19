@@ -1,4 +1,3 @@
-import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/route_task_row_progress.dart';
 import 'package:chumaki/components/stock_resource_category_group.dart';
 import 'package:chumaki/components/title_text.dart';
@@ -33,21 +32,21 @@ class SelectedCityView extends StatelessWidget {
               ],
             ),
           ),
-          ...city.connectsTo().map(
-            (toCity) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Connects to: ${toCity.name}"),
-                  IconButton(
-                    icon: Icon(Icons.not_started),
-                    onPressed:
-                        city.wagons.isEmpty ? null : () => routeStart(toCity),
-                  ),
-                ],
-              );
-            },
-          ),
+          // ...city.connectsTo().map(
+          //   (toCity) {
+          //     return Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         Text("Connects to: ${toCity.name}"),
+          //         IconButton(
+          //           icon: Icon(Icons.not_started),
+          //           onPressed:
+          //               city.wagons.isEmpty ? null : () => routeStart(toCity),
+          //         ),
+          //       ],
+          //     );
+          //   },
+          // ),
           WagonsInCity(city: city),
           Container(
             decoration: BoxDecoration(
@@ -68,7 +67,7 @@ class SelectedCityView extends StatelessWidget {
                                   city.stock.iterator.toList())
                               .map<Widget>((resources) {
                             return Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(4.0),
                               child: StockResourceCategoryGroup(
                                   resources: resources, forCity: city),
                             );

@@ -24,42 +24,36 @@ class GroupedControl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        maxWidth: width,
-        maxHeight: height,
-      ),
-      child: Stack(
-        children: [
-          Container(
-            width: width,
-            height: height,
-            child: CustomPaint(
-              painter: GroupBorder(titleHeight: titleHeight,
-                  color: borderColor,
-                  borderWidth: borderWidth),
+    return Stack(
+      children: [
+        Container(
+          width: width,
+          height: height,
+          child: CustomPaint(
+            painter: GroupBorder(titleHeight: titleHeight,
+                color: borderColor,
+                borderWidth: borderWidth),
+          ),
+        ),
+
+        Align(
+          alignment: titleAlignmentToAlign,
+          child: Container(
+            color: Colors.grey[400],
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+              child: TitleText(title),
             ),
           ),
+        ),
 
-          Align(
-            alignment: titleAlignmentToAlign,
-            child: Container(
-              color: Colors.grey[400],
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                child: TitleText(title),
-              ),
-            ),
-          ),
-
-          //child
-          Positioned(
-            top: titleHeight,
-            left: 0,
-            child: child,
-          )
-        ],
-      ),
+        //child
+        Positioned(
+          top: titleHeight,
+          left: 0,
+          child: child,
+        )
+      ],
     );
   }
 
