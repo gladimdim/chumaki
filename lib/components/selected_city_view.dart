@@ -58,32 +58,24 @@ class SelectedCityView extends StatelessWidget {
             child: StreamBuilder(
                 stream: city.changes.stream,
                 builder: (context, data) {
-                  return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TitleText("Містить"),
-                        if (!city.stock.isEmpty)
-                          Column(
-                            children: groupResourcesByCategory(
-                                    city.stock.iterator.toList())
-                                .map<Widget>((resources) {
-                              return StockResourceCategoryGroup(
-                                  resources: resources);
-                            }).toList(),
-                          ),
-                        // Row(
-                        //     children:
-                        //         city.stock.iterator.map<Widget>((resource) {
-                        //   return ResourceImageView(
-                        //     resource,
-                        //     showAmount: true,
-                        //   );
-                        // }).toList()),
-                        if (city.stock.isEmpty) Text("Нічого"),
-                      ],
-                    ),
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TitleText("Містить"),
+                      if (!city.stock.isEmpty)
+                        Column(
+                          children: groupResourcesByCategory(
+                                  city.stock.iterator.toList())
+                              .map<Widget>((resources) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: StockResourceCategoryGroup(
+                                  resources: resources, forCity: city),
+                            );
+                          }).toList(),
+                        ),
+                      if (city.stock.isEmpty) Text("Нічого"),
+                    ],
                   );
                 }),
           ),
