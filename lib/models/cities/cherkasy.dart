@@ -18,7 +18,7 @@ class Cherkasy extends City {
               PriceUnit.planks.adjustToModifier(1),
               PriceUnit.firearm.adjustToModifier(1.2),
               PriceUnit.horse.adjustToModifier(1.05),
-              PriceUnit.cannon.adjustToModifier(1.4),
+              PriceUnit.cannon.adjustToModifier(1.5),
               PriceUnit.bread.adjustToModifier(1),
               PriceUnit.charcoal.adjustToModifier(1.05),
               PriceUnit.fish.adjustToModifier(1),

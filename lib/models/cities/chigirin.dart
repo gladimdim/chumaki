@@ -16,7 +16,7 @@ class Chigirin extends City {
             PriceUnit.planks.adjustToModifier(1.2),
             PriceUnit.firearm.adjustToModifier(1.8),
             PriceUnit.horse.adjustToModifier(0.7),
-            PriceUnit.cannon.adjustToModifier(1.8),
+            PriceUnit.cannon.adjustToModifier(1.5),
             PriceUnit.bread.adjustToModifier(1),
             PriceUnit.charcoal.adjustToModifier(1.1),
             PriceUnit.fish.adjustToModifier(0.9),

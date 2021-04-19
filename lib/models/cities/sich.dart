@@ -52,8 +52,8 @@ class Sich extends City {
               name: "Дмитра",
               stock: Stock(
                 [
-                  Grains(100),
-                  Fish(250),
+                  Grains(50),
+                  Fish(50),
                 ],
               ),
             ),

@@ -1,3 +1,4 @@
+import 'package:chumaki/components/price_comparison.dart';
 import 'package:chumaki/components/route_task_row_progress.dart';
 import 'package:chumaki/components/stock_resource_category_group.dart';
 import 'package:chumaki/components/title_text.dart';
@@ -11,10 +12,17 @@ import 'package:flutter/material.dart';
 
 const CITY_DETAILS_VIEW_WIDTH = 400.0;
 
-class SelectedCityView extends StatelessWidget {
+class SelectedCityView extends StatefulWidget {
   final City city;
 
   SelectedCityView({required this.city});
+
+  @override
+  _SelectedCityViewState createState() => _SelectedCityViewState();
+}
+
+class _SelectedCityViewState extends State<SelectedCityView> {
+  bool showLocalMarket = true;
 
   @override
   Widget build(BuildContext context) {
@@ -23,89 +31,110 @@ class SelectedCityView extends StatelessWidget {
       builder: (context, data) => Column(
         children: [
           StreamBuilder(
-            stream: city.changes.stream,
+            stream: widget.city.changes.stream,
             builder: (context, data) => Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                TitleText("${city.name}: ${city.wagons.length}"),
+                TitleText("${widget.city.name}: ${widget.city.wagons.length}"),
                 Image.asset(Wagon.imagePath, width: 64),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 2,),
+                  ),
+                  child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          showLocalMarket = !showLocalMarket;
+                        });
+                      },
+                      child: TitleText(showLocalMarket
+                          ? "Світовий ринок"
+                          : "Ринок ${widget.city.name}")),
+                ),
               ],
             ),
           ),
-          // ...city.connectsTo().map(
-          //   (toCity) {
-          //     return Row(
-          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //       children: [
-          //         Text("Connects to: ${toCity.name}"),
-          //         IconButton(
-          //           icon: Icon(Icons.not_started),
-          //           onPressed:
-          //               city.wagons.isEmpty ? null : () => routeStart(toCity),
-          //         ),
-          //       ],
-          //     );
-          //   },
-          // ),
-          WagonsInCity(city: city),
-          Container(
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(width: 1, color: Colors.black),
-              ),
+
+          if (!showLocalMarket) PriceComparison(currentCity: widget.city),
+          if (showLocalMarket) ...[
+            ...widget.city.connectsTo().map(
+              (toCity) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(toCity.name),
+                    IconButton(
+                      icon: Icon(Icons.not_started),
+                      onPressed: widget.city.wagons.isEmpty
+                          ? null
+                          : () => routeStart(toCity),
+                    ),
+                  ],
+                );
+              },
             ),
-            child: StreamBuilder(
-                stream: city.changes.stream,
-                builder: (context, data) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TitleText("Містить"),
-                      if (!city.stock.isEmpty)
-                        Column(
-                          children: groupResourcesByCategory(
-                                  city.stock.iterator.toList())
-                              .map<Widget>((resources) {
-                            return Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: StockResourceCategoryGroup(
-                                  resources: resources, forCity: city),
-                            );
-                          }).toList(),
-                        ),
-                      if (city.stock.isEmpty) Text("Нічого"),
-                    ],
-                  );
-                }),
-          ),
-          TitleText("Вхідні: "),
-          ...Company.instance.cityRoutes
-              .where((route) =>
-                  route.to.equalsTo(city) || route.from.equalsTo(city))
-              .fold<List<RouteTask>>([], (previousValue, route) {
-                previousValue.addAll(route.routeTasks);
-                return previousValue;
-              })
-              .where((routeTask) => routeTask.to.equalsTo(city))
-              .map<Widget>(
-                  (routeTask) => RouteTaskRowProgress(routeTask, city)),
-          TitleText("Вихідні: "),
-          ...Company.instance.cityRoutes
-              .where((route) =>
-                  route.to.equalsTo(city) || route.from.equalsTo(city))
-              .fold<List<RouteTask>>([], (previousValue, route) {
-                previousValue.addAll(route.routeTasks);
-                return previousValue;
-              })
-              .where((routeTask) => routeTask.from.equalsTo(city))
-              .map<Widget>(
-                  (routeTask) => RouteTaskRowProgress(routeTask, city)),
+            WagonsInCity(city: widget.city),
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(width: 1, color: Colors.black),
+                ),
+              ),
+              child: StreamBuilder(
+                  stream: widget.city.changes.stream,
+                  builder: (context, data) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TitleText("Містить"),
+                        if (!widget.city.stock.isEmpty)
+                          Column(
+                            children: groupResourcesByCategory(
+                                    widget.city.stock.iterator.toList())
+                                .map<Widget>((resources) {
+                              return Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: StockResourceCategoryGroup(
+                                    resources: resources, forCity: widget.city),
+                              );
+                            }).toList(),
+                          ),
+                        if (widget.city.stock.isEmpty) Text("Нічого"),
+                      ],
+                    );
+                  }),
+            ),
+            TitleText("Вхідні: "),
+            ...Company.instance.cityRoutes
+                .where((route) =>
+                    route.to.equalsTo(widget.city) ||
+                    route.from.equalsTo(widget.city))
+                .fold<List<RouteTask>>([], (previousValue, route) {
+                  previousValue.addAll(route.routeTasks);
+                  return previousValue;
+                })
+                .where((routeTask) => routeTask.to.equalsTo(widget.city))
+                .map<Widget>((routeTask) =>
+                    RouteTaskRowProgress(routeTask, widget.city)),
+            TitleText("Вихідні: "),
+            ...Company.instance.cityRoutes
+                .where((route) =>
+                    route.to.equalsTo(widget.city) ||
+                    route.from.equalsTo(widget.city))
+                .fold<List<RouteTask>>([], (previousValue, route) {
+                  previousValue.addAll(route.routeTasks);
+                  return previousValue;
+                })
+                .where((routeTask) => routeTask.from.equalsTo(widget.city))
+                .map<Widget>((routeTask) =>
+                    RouteTaskRowProgress(routeTask, widget.city)),
+          ],
         ],
       ),
     );
   }
 
   void routeStart(City to) {
-    Company.instance.startTaskFromTo(from: city, to: to);
+    Company.instance.startTaskFromTo(from: widget.city, to: to);
   }
 }

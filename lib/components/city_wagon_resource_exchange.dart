@@ -10,8 +10,12 @@ class CityWagonResourceExchange extends StatelessWidget {
   final Wagon wagon;
   final int amountTradeValue;
 
-  CityWagonResourceExchange(
-      {required this.city, required this.wagon, required this.resource, required this.amountTradeValue,});
+  CityWagonResourceExchange({
+    required this.city,
+    required this.wagon,
+    required this.resource,
+    required this.amountTradeValue,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +36,7 @@ class CityWagonResourceExchange extends StatelessWidget {
               Align(
                 alignment: Alignment.center,
                 child: Text(
-                  wagonRes == null
-                      ? "Пусто"
-                      : wagonRes.amount.toString(),
+                  wagonRes == null ? "Пусто" : wagonRes.amount.toString(),
                 ),
               ),
               Align(
@@ -65,11 +67,9 @@ class CityWagonResourceExchange extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () {
-                  var res =
-                  resource.cloneWithAmount(amountTradeValue);
+                  var res = resource.cloneWithAmount(amountTradeValue);
                   if (wagon.canFitNewResource(res)) {
-                    city.sellResource(
-                        resource: res, toWagon: wagon);
+                    city.sellResource(resource: res, toWagon: wagon);
                   }
                 },
                 icon: Icon(Icons.arrow_back_outlined, size: 32),
@@ -84,7 +84,7 @@ class CityWagonResourceExchange extends StatelessWidget {
                   Text(
                     city.prices
                         .sellPriceForResource(resource,
-                        withAmount: amountTradeValue)
+                            withAmount: amountTradeValue)
                         .toString(),
                   ),
                 ],
@@ -100,10 +100,8 @@ class CityWagonResourceExchange extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () {
-                  var res =
-                  resource.cloneWithAmount(amountTradeValue);
-                  city.buyResource(
-                      resource: res, fromWagon: wagon);
+                  var res = resource.cloneWithAmount(amountTradeValue);
+                  city.buyResource(resource: res, fromWagon: wagon);
                 },
                 icon: Icon(Icons.arrow_forward_outlined, size: 32),
               ),
@@ -117,7 +115,7 @@ class CityWagonResourceExchange extends StatelessWidget {
                   Text(
                     city.prices
                         .buyPriceForResource(resource,
-                        withAmount: amountTradeValue)
+                            withAmount: amountTradeValue)
                         .toString(),
                   ),
                 ],
@@ -138,8 +136,8 @@ class CityWagonResourceExchange extends StatelessWidget {
                   child: cityRes == null
                       ? Text("Пусто")
                       : Text(
-                    cityRes.amount.toString(),
-                  ),
+                          cityRes.amount.toString(),
+                        ),
                 ),
                 Align(
                   alignment: Alignment.center,

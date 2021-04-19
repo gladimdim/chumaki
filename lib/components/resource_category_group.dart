@@ -23,23 +23,29 @@ class ResourceCategoryGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(2.0),
-      child: GroupedControl(
-        height: resources.length * 80,
-        width: CITY_DETAILS_VIEW_WIDTH,
-        borderColor: Colors.blueGrey,
-        title: resourceCategoryToString(resources.first.category),
-        borderWidth: 3,
-        titleAlignment: GROUP_TITLE_ALIGNMENT.CENTER,
-        child: Column(
-          children: [
-            ...resources.map((resource) {
-              return CityWagonResourceExchange(
-                  wagon: wagon,
-                  city: city,
-                  resource: resource,
-                  amountTradeValue: amountTradeValue);
-            }).toList(),
-          ],
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: double.infinity,
+          maxHeight: double.infinity,
+        ),
+        child: GroupedControl(
+          height: resources.length * 80,
+          width: CITY_DETAILS_VIEW_WIDTH,
+          borderColor: Colors.blueGrey,
+          title: resourceCategoryToString(resources.first.category),
+          borderWidth: 3,
+          titleAlignment: GROUP_TITLE_ALIGNMENT.CENTER,
+          child: Column(
+            children: [
+              ...resources.map((resource) {
+                return CityWagonResourceExchange(
+                    wagon: wagon,
+                    city: city,
+                    resource: resource,
+                    amountTradeValue: amountTradeValue);
+              }).toList(),
+            ],
+          ),
         ),
       ),
     );
