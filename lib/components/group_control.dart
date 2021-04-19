@@ -13,15 +13,14 @@ class GroupedControl extends StatelessWidget {
   final double borderWidth;
   final GROUP_TITLE_ALIGNMENT titleAlignment;
 
-  GroupedControl(
-      {required this.title,
-      required this.child,
-      required this.width,
-      required this.borderColor,
-      required this.height,
-      this.borderWidth = 1,
-        this.titleAlignment = GROUP_TITLE_ALIGNMENT.LEFT,
-      this.titleHeight = 25});
+  GroupedControl({required this.title,
+    required this.child,
+    required this.width,
+    required this.borderColor,
+    required this.height,
+    this.borderWidth = 1,
+    this.titleAlignment = GROUP_TITLE_ALIGNMENT.LEFT,
+    this.titleHeight = 25});
 
   @override
   Widget build(BuildContext context) {
@@ -35,42 +34,13 @@ class GroupedControl extends StatelessWidget {
           Container(
             width: width,
             height: height,
-          ),
-          // top
-          Positioned(
-            top: titleHeight / 2,
-            left: 0,
-            child: Container(
-              height: borderWidth,
-              width: width,
-              color: borderColor,
+            child: CustomPaint(
+              painter: GroupBorder(titleHeight: titleHeight,
+                  color: borderColor,
+                  borderWidth: borderWidth),
             ),
           ),
-          // left
-          Positioned(
-            left: 0,
-            top: titleHeight / 2,
-            child: Container(
-                height: height - titleHeight / 2, width: borderWidth, color: borderColor),
-          ),
-          // right
-          Positioned(
-            top: titleHeight / 2,
-            right: 0,
-            child: Container(
-                height: height - titleHeight / 2, width: borderWidth, color: borderColor),
-          ),
-          // bottom
-          Positioned(
-            bottom: 0,
-            left: 0,
-            child: Container(
-              color: borderColor,
-              width: width,
-              height: borderWidth,
-            ),
-          ),
-          // title
+
           Align(
             alignment: titleAlignmentToAlign,
             child: Container(
@@ -95,13 +65,39 @@ class GroupedControl extends StatelessWidget {
 
   Alignment get titleAlignmentToAlign {
     switch (titleAlignment) {
-      case GROUP_TITLE_ALIGNMENT.LEFT: return Alignment.topLeft;
-      case GROUP_TITLE_ALIGNMENT.CENTER: return Alignment.topCenter;
-      case GROUP_TITLE_ALIGNMENT.RIGHT: return Alignment.topRight;
+      case GROUP_TITLE_ALIGNMENT.LEFT:
+        return Alignment.topLeft;
+      case GROUP_TITLE_ALIGNMENT.CENTER:
+        return Alignment.topCenter;
+      case GROUP_TITLE_ALIGNMENT.RIGHT:
+        return Alignment.topRight;
     }
   }
+}
 
-  BorderSide get _borderSide {
-    return BorderSide(width: 2, color: borderColor);
+class GroupBorder extends CustomPainter {
+  final double titleHeight;
+  final Color color;
+  final double borderWidth;
+
+  GroupBorder(
+      {required this.titleHeight, required this.color, required this.borderWidth});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    var path = Path()
+      ..moveTo(0, titleHeight / 2)
+      ..lineTo(size.width, titleHeight / 2)
+      ..lineTo(size.width, size.height)
+      ..lineTo(0, size.height)
+    ..close();
+    var paint = Paint()
+      ..color = color
+      ..strokeWidth = borderWidth
+      ..style = PaintingStyle.stroke;
+
+    canvas.drawPath(path, paint);
   }
+
+  bool shouldRepaint(GroupBorder oldDelegate) => true;
 }
