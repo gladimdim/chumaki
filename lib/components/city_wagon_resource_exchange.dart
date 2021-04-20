@@ -1,3 +1,4 @@
+import 'package:chumaki/components/group_control.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/resource.dart';
@@ -24,15 +25,10 @@ class CityWagonResourceExchange extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ResourceImageView(resource),
-        SizedBox(
-          width: 75,
-          height: 64,
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(width: 3, color: Colors.black),
-            ),
-            child: Stack(children: [
+        GroupedControl(
+          title: ResourceImageView(resource, size: 32),
+          titleAlignment: GROUP_TITLE_ALIGNMENT.CENTER,
+          child: Stack(children: [
               Align(
                 alignment: Alignment.center,
                 child: Text(
@@ -57,103 +53,94 @@ class CityWagonResourceExchange extends StatelessWidget {
                 ),
               ),
             ]),
-          ),
+          width: 100,
+          borderColor: Colors.blueGrey,
+          height: 100,
         ),
-        SizedBox(
-          width: 65,
-          height: 70,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              IconButton(
-                onPressed: () {
-                  var res = resource.cloneWithAmount(amountTradeValue);
-                  if (wagon.canFitNewResource(res)) {
-                    city.sellResource(resource: res, toWagon: wagon);
-                  }
-                },
-                icon: Icon(Icons.arrow_back_outlined, size: 32),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "images/resources/money/money.png",
-                    width: 22,
-                  ),
-                  Text(
-                    city.prices
-                        .sellPriceForResource(resource,
-                            withAmount: amountTradeValue)
-                        .toString(),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        SizedBox(
-          width: 65,
-          height: 70,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              IconButton(
-                onPressed: () {
-                  var res = resource.cloneWithAmount(amountTradeValue);
-                  city.buyResource(resource: res, fromWagon: wagon);
-                },
-                icon: Icon(Icons.arrow_forward_outlined, size: 32),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    Money(0).imagePath,
-                    width: 22,
-                  ),
-                  Text(
-                    city.prices
-                        .buyPriceForResource(resource,
-                            withAmount: amountTradeValue)
-                        .toString(),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        SizedBox(
-          width: 75,
-          height: 64,
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(width: 3, color: Colors.black),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            IconButton(
+              onPressed: () {
+                var res = resource.cloneWithAmount(amountTradeValue);
+                if (wagon.canFitNewResource(res)) {
+                  city.sellResource(resource: res, toWagon: wagon);
+                }
+              },
+              icon: Icon(Icons.arrow_back_outlined, size: 32),
             ),
-            child: Stack(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Center(
-                  child: cityRes == null
-                      ? Text("Пусто")
-                      : Text(
-                          cityRes.amount.toString(),
-                        ),
+                Image.asset(
+                  "images/resources/money/money.png",
+                  width: 22,
                 ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Opacity(
-                    opacity: 0.3,
-                    child: Image.asset(
-                      "images/cities/church.png",
-                      width: 50,
-                    ),
-                  ),
+                Text(
+                  city.prices
+                      .sellPriceForResource(resource,
+                          withAmount: amountTradeValue)
+                      .toString(),
                 ),
               ],
             ),
+          ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            IconButton(
+              onPressed: () {
+                var res = resource.cloneWithAmount(amountTradeValue);
+                city.buyResource(resource: res, fromWagon: wagon);
+              },
+              icon: Icon(Icons.arrow_forward_outlined, size: 32),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  Money(0).imagePath,
+                  width: 22,
+                ),
+                Text(
+                  city.prices
+                      .buyPriceForResource(resource,
+                          withAmount: amountTradeValue)
+                      .toString(),
+                ),
+              ],
+            ),
+          ],
+        ),
+        GroupedControl(
+          width: 100,
+          borderColor: Colors.blueGrey,
+          titleAlignment: GROUP_TITLE_ALIGNMENT.CENTER,
+          height: 100,
+          title: ResourceImageView(resource, size: 32),
+          child: Stack(
+            children: [
+              Center(
+                child: cityRes == null
+                    ? Text("Пусто")
+                    : Text(
+                        cityRes.amount.toString(),
+                      ),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Opacity(
+                  opacity: 0.3,
+                  child: Image.asset(
+                    "images/cities/church.png",
+                    width: 50,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-        ResourceImageView(resource),
       ],
     );
   }

@@ -5,6 +5,7 @@ import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/components/city_wagon_resource_exchange.dart';
+import 'package:chumaki/components/title_text.dart';
 
 class ResourceCategoryGroup extends StatelessWidget {
   final List<Resource> resources;
@@ -29,22 +30,25 @@ class ResourceCategoryGroup extends StatelessWidget {
           maxHeight: double.infinity,
         ),
         child: GroupedControl(
-          height: resources.length * 80,
+          height: resources.length * 110,
           width: CITY_DETAILS_VIEW_WIDTH,
           borderColor: Colors.blueGrey,
-          title: resourceCategoryToString(resources.first.category),
+          title: TitleText(resourceCategoryToString(resources.first.category)),
           borderWidth: 3,
           titleAlignment: GROUP_TITLE_ALIGNMENT.CENTER,
-          child: Column(
-            children: [
-              ...resources.map((resource) {
-                return CityWagonResourceExchange(
-                    wagon: wagon,
-                    city: city,
-                    resource: resource,
-                    amountTradeValue: amountTradeValue);
-              }).toList(),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.only(top: 18.0),
+            child: Column(
+              children: [
+                ...resources.map((resource) {
+                  return CityWagonResourceExchange(
+                      wagon: wagon,
+                      city: city,
+                      resource: resource,
+                      amountTradeValue: amountTradeValue);
+                }).toList(),
+              ],
+            ),
           ),
         ),
       ),

@@ -59,7 +59,7 @@ class City {
   ];
 
   bool sellResource({required Resource resource, required Wagon toWagon}) {
-    var price = prices.sellPriceForResource(resource);
+    var price = prices.sellPriceForResource(resource, withAmount: resource.amount);
     var hasMoney = Company.instance.hasMoney(price);
     if (!hasMoney) {
       return false;
@@ -74,7 +74,7 @@ class City {
   }
 
   bool buyResource({required Resource resource, required Wagon fromWagon}) {
-    var price = prices.buyPriceForResource(resource);
+    var price = prices.buyPriceForResource(resource, withAmount: resource.amount);
 
     final canSell = fromWagon.stock.removeResource(resource);
     if (canSell) {

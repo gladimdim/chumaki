@@ -65,22 +65,25 @@ class _PriceComparisonState extends State<PriceComparison> {
                   padding: const EdgeInsets.all(4.0),
                   child: GroupedControl(
                     borderColor: Colors.blueGrey,
-                    height: 100,
+                    height: 80,
                     titleHeight: 25,
                     titleAlignment: GROUP_TITLE_ALIGNMENT.CENTER,
-                    width: 130,
-                    title: city.name,
+                    width: 180,
+                    title: TitleText(city.name),
                     child: Padding(
-                      padding: const EdgeInsets.all(4.0),
+                      padding: const EdgeInsets.only(top: 22.0, left: 8.0,),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text("Купівля:"),
                               MoneyUnit(Money(buyPrice)),
                             ],
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text("Вигода:"),
                               MoneyUnit(Money(saldo)),

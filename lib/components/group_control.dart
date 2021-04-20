@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 enum GROUP_TITLE_ALIGNMENT { LEFT, CENTER, RIGHT }
 
 class GroupedControl extends StatelessWidget {
-  final String title;
+  final Widget title;
   final Widget child;
   final double width;
   final double titleHeight;
@@ -45,15 +45,14 @@ class GroupedControl extends StatelessWidget {
               color: Colors.grey[400],
               child: Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                child: TitleText(title),
+                child: title,
               ),
             ),
           ),
 
           //child
-          Positioned(
-            top: titleHeight,
-            left: 0,
+          Align(
+            alignment: Alignment.center,
             child: child,
           )
         ],

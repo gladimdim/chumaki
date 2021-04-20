@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 class ResourceImageView extends StatelessWidget {
   final Resource resource;
   final bool showAmount;
-
-  ResourceImageView(this.resource, {this.showAmount = false});
+  final double size;
+  ResourceImageView(this.resource, {this.showAmount = false, this.size = 55.0});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.asset(resource.imagePath, width: 55),
+        Image.asset(resource.imagePath, width: size),
         if (showAmount) Positioned(
           bottom: 0,
           right: 0,

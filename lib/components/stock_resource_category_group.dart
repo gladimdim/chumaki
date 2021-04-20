@@ -19,7 +19,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GroupedControl(
-      title: resourceCategoryToString(resources.first.category),
+      title: TitleText(resourceCategoryToString(resources.first.category)),
       borderColor: Colors.blueGrey,
       width: CITY_DETAILS_VIEW_WIDTH,
       height: 110,
