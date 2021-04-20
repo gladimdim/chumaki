@@ -3,6 +3,7 @@ import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/route.dart';
 import 'package:chumaki/models/task.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:chumaki/models/resource.dart';
 
 enum COMPANY_EVENTS { TASK_STARTED, TASK_ENDED, MONEY_ADDED, MONEY_REMOVED }
 
@@ -32,8 +33,8 @@ class Company {
     return false;
   }
 
-  double getMoney() {
-    return double.parse(_money.toStringAsFixed(2));
+  Money getMoney() {
+    return Money(double.parse(_money.toStringAsFixed(2)));
   }
 
   CityRoute getRouteForTask(RouteTask routeTask) {

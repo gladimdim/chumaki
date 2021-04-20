@@ -1,4 +1,5 @@
 import 'package:chumaki/components/city_wagon_resource_exchange.dart';
+import 'package:chumaki/components/money_unit.dart';
 import 'package:chumaki/components/resource_amount_selector.dart';
 import 'package:chumaki/components/resource_category_group.dart';
 import 'package:chumaki/components/resource_image_view.dart';
@@ -46,17 +47,11 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Image.asset("images/resources/money/money.png",
-                          width: 50),
-                      StreamBuilder(
-                          stream: Company.instance.changes,
-                          builder: (context, snap) {
-                            return Text(Company.instance.getMoney().toString());
-                          }),
-                    ],
-                  ),
+                  child: StreamBuilder(
+                      stream: Company.instance.changes,
+                      builder: (context, snap) {
+                        return MoneyUnit(Company.instance.getMoney());
+                      }),
                 ),
               ),
             ],
