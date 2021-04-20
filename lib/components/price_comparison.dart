@@ -1,3 +1,5 @@
+import 'package:chumaki/components/group_control.dart';
+import 'package:chumaki/components/money_unit.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/resource.dart';
@@ -28,6 +30,7 @@ class _PriceComparisonState extends State<PriceComparison> {
         widget.currentCity.prices.sellPriceForResource(selectedResource);
     return SingleChildScrollView(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -50,27 +53,37 @@ class _PriceComparisonState extends State<PriceComparison> {
               .where((city) => city != widget.currentCity)
               .map((city) {
             var buyPrice = city.prices.buyPriceForResource(selectedResource);
-            var saldo = currentSell - buyPrice;
-            return Column(
-              children: [
-                TitleText(city.name),
-                // Text("Продаж: $sellPrice"),
-                // Text(
-                //   diffSell.toStringAsFixed(1),
-                //   style: sellStyle(diffSell),
-                // ),
-                Text("Купівля: $buyPrice"),
-                Text(saldo.toStringAsFixed(1), style: saldoStyle(saldo)),
-              ],
+            var saldo = buyPrice - currentSell;
+            return GroupedControl(
+              borderColor: Colors.blueGrey,
+              height: 100,
+              titleHeight: 25,
+              titleAlignment: GROUP_TITLE_ALIGNMENT.LEFT,
+              width: 130,
+              title: city.name,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text("Купівля:"),
+                        MoneyUnit(Money(buyPrice)),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text("Вигода:"),
+                        MoneyUnit(Money(saldo)),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             );
           }).toList(),
         ],
       ),
     );
   }
-
-  TextStyle saldoStyle(double diff) {
-    return TextStyle(color: diff > 0 ? Colors.green : Colors.red);
-  }
-
 }

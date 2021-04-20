@@ -109,7 +109,7 @@ class CityWagonResourceExchange extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    "images/resources/money/money.png",
+                    Money(0).imagePath,
                     width: 22,
                   ),
                   Text(

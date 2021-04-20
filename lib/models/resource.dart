@@ -157,9 +157,15 @@ class MetalParts extends Resource {
             category: RESOURCE_CATEGORY.RESOURCES);
 }
 
-class Money extends Resource {
-  Money(int amount)
-      : super("money", amount, category: RESOURCE_CATEGORY.RESOURCES);
+class Money {
+  final String localizedKey = "money";
+  double amount;
+
+  Money(this.amount);
+
+  String get imagePath {
+    return "images/resources/${this.localizedKey}/${this.localizedKey}.png";
+  }
 }
 
 class Planks extends Resource {
@@ -188,11 +194,16 @@ class Stone extends Resource {
 
 String resourceCategoryToString(RESOURCE_CATEGORY category) {
   switch (category) {
-    case RESOURCE_CATEGORY.RESOURCES: return "Ресурси";
-    case RESOURCE_CATEGORY.CLOTH: return "Одяг";
-    case RESOURCE_CATEGORY.MILITARY: return "Військове";
-    case RESOURCE_CATEGORY.FOOD: return "Їжа";
-    case RESOURCE_CATEGORY.LUXURY: return "Коштовності";
+    case RESOURCE_CATEGORY.RESOURCES:
+      return "Ресурси";
+    case RESOURCE_CATEGORY.CLOTH:
+      return "Одяг";
+    case RESOURCE_CATEGORY.MILITARY:
+      return "Військове";
+    case RESOURCE_CATEGORY.FOOD:
+      return "Їжа";
+    case RESOURCE_CATEGORY.LUXURY:
+      return "Коштовності";
   }
 }
 
