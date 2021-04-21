@@ -1,4 +1,5 @@
 import 'package:chumaki/components/group_control.dart';
+import 'package:chumaki/components/money_unit.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/models/city.dart';
@@ -23,47 +24,30 @@ class CityWagonResourceExchange extends StatelessWidget {
   Widget build(BuildContext context) {
     var wagonRes = wagon.stock.resourceInStock(resource);
     var cityRes = city.stock.resourceInStock(resource);
-    return Padding(
-      padding: const EdgeInsets.only(top: 4.0, bottom: 2.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GroupedControl(
-            title: Text("Купити"),
-            titleHeight: 16,
-            titleAlignment: GROUP_TITLE_ALIGNMENT.CENTER,
-            child: Stack(children: [
-              Align(
-                alignment: Alignment.center,
-                child: TitleText(
-                  wagonRes == null ? "Пусто" : wagonRes.amount.toString(),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  height: 5,
-                  color: resource.color,
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Opacity(
-                  opacity: 0.3,
-                  child: Image.asset(
-                    "images/wagon/wagon.png",
-                    width: 50,
-                  ),
-                ),
-              ),
-            ]),
-            width: 100,
-            borderColor: resource.color,
-            borderWidth: 3,
-            height: 100,
+    var sellPricePerUnit =
+        city.prices.sellPriceForResource(resource, withAmount: 1);
+    var buyPricePerUnit =
+        city.prices.buyPriceForResource(resource, withAmount: 1);
+    var sellPrice = city.prices
+        .sellPriceForResource(resource, withAmount: amountTradeValue);
+    var buyPrice =
+        city.prices.buyPriceForResource(resource, withAmount: amountTradeValue);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Expanded(
+          flex: 1,
+          child: Column(
+            children: [
+              MoneyUnit(Money(sellPrice)),
+              Text("(${sellPricePerUnit}x$amountTradeValue)"),
+            ],
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+        ),
+        Expanded(
+          flex: 2,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
                 onPressed: () {
@@ -74,31 +58,28 @@ class CityWagonResourceExchange extends StatelessWidget {
                 },
                 icon: Icon(Icons.arrow_back_outlined, size: 32),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "images/resources/money/money.png",
-                    width: 22,
+              SizedBox(
+                width: 80,
+                height: 50,
+                child: Stack(children: [
+
+                  Align(
+                    alignment: Alignment.center,
+                    child: ResourceImageView(
+                      resource.cloneWithAmount(amountTradeValue),
+                      size: 64,
+                    ),
                   ),
-                  Text(
-                    city.prices
-                        .sellPriceForResource(resource,
-                            withAmount: amountTradeValue)
-                        .toString(),
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                      child: Text(wagonRes == null ? "0" : wagonRes.amount.toString())
                   ),
-                ],
+                  Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(cityRes == null ? "0" : cityRes.amount.toString())
+                  ),
+                ]),
               ),
-            ],
-          ),
-          ResourceImageView(
-            resource.cloneWithAmount(amountTradeValue),
-            size: 64,
-            showAmount: true,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
               IconButton(
                 onPressed: () {
                   var res = resource.cloneWithAmount(amountTradeValue);
@@ -106,53 +87,19 @@ class CityWagonResourceExchange extends StatelessWidget {
                 },
                 icon: Icon(Icons.arrow_forward_outlined, size: 32),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    Money(0).imagePath,
-                    width: 22,
-                  ),
-                  Text(
-                    city.prices
-                        .buyPriceForResource(resource,
-                            withAmount: amountTradeValue)
-                        .toString(),
-                  ),
-                ],
-              ),
             ],
           ),
-          GroupedControl(
-            width: 100,
-            borderColor: resource.color,
-            borderWidth: 3,
-            titleAlignment: GROUP_TITLE_ALIGNMENT.CENTER,
-            height: 100,
-            title: Text("Продати"),
-            titleHeight: 16,
-            child: Stack(
-              children: [
-                Center(
-                  child: TitleText(
-                    cityRes == null ? "Пусто" : cityRes.amount.toString(),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Opacity(
-                    opacity: 0.3,
-                    child: Image.asset(
-                      "images/cities/church.png",
-                      width: 50,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+        ),
+        Expanded(
+          flex: 1,
+          child: Column(
+            children: [
+              MoneyUnit(Money(buyPrice)),
+              Text("(${buyPricePerUnit}x$amountTradeValue)"),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

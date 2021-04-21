@@ -4,7 +4,7 @@ import 'package:rxdart/rxdart.dart';
 
 class Wagon {
   late Stock stock;
-  static final String imagePath = "images/wagon/wagon.png";
+  static final String imagePath = "images/wagon/cart.png";
   final String name;
   double totalWeightCapacity;
   BehaviorSubject changes = BehaviorSubject();

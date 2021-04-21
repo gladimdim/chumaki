@@ -40,7 +40,7 @@ class Sich extends City {
                 name: "Татарина",
                 stock: Stock([
                   Charcoal(20),
-                  IronOre(10),
+                  // IronOre(10),
                 ])),
             Wagon(
                 name: "Остапа",
