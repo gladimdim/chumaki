@@ -30,7 +30,7 @@ class ResourceCategoryGroup extends StatelessWidget {
           maxHeight: double.infinity,
         ),
         child: GroupedControl(
-          height: resources.length * 110,
+          height: resources.length * 115,
           width: CITY_DETAILS_VIEW_WIDTH,
           borderColor: Colors.blueGrey,
           title: TitleText(resourceCategoryToString(resources.first.category)),
