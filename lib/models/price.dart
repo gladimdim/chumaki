@@ -61,7 +61,10 @@ class Price {
     return PriceUnit(res, price);
   }).toList();
 
-  double sellPriceForResource(Resource res, {int withAmount = 1}) {
+  double sellPriceForResource(Resource res, {int? withAmount}) {
+    if (withAmount == null) {
+      withAmount = res.amount;
+    }
     return double.parse((prices.firstWhere((element) => element.resource.sameType(res)).price *
             withAmount).toStringAsFixed(1));
   }
