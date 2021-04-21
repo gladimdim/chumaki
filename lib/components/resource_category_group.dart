@@ -29,37 +29,44 @@ class ResourceCategoryGroup extends StatelessWidget {
           maxWidth: double.infinity,
           maxHeight: double.infinity,
         ),
-        child: GroupedControl(
-          height: resources.length * 118,
-          width: CITY_DETAILS_VIEW_WIDTH,
-          borderColor: Colors.black,
-          title: TitleText(resourceCategoryToString(resources.first.category)),
-          borderWidth: 1,
-          titleAlignment: GROUP_TITLE_ALIGNMENT.CENTER,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 14.0, left: 2, right: 2),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Image.asset(Wagon.imagePath, width: 64),
-                    Image.asset("images/cities/church.png", width: 64)
-                  ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(width: 3, color: Colors.black)),
+              ),
+              child: Center(
+                child: TitleText(
+                  resourceCategoryToString(resources.first.category),
                 ),
-                ...resources.map((resource) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                    child: CityWagonResourceExchange(
-                        wagon: wagon,
-                        city: city,
-                        resource: resource,
-                        amountTradeValue: amountTradeValue),
-                  );
-                }).toList(),
-              ],
+              ),
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.only(top: 14.0, left: 2, right: 2),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset(Wagon.imagePath, width: 64),
+                      Image.asset("images/cities/church.png", width: 64)
+                    ],
+                  ),
+                  ...resources.map((resource) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                      child: CityWagonResourceExchange(
+                          wagon: wagon,
+                          city: city,
+                          resource: resource,
+                          amountTradeValue: amountTradeValue),
+                    );
+                  }).toList(),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

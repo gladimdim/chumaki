@@ -37,6 +37,16 @@ class Stock {
     }
   }
 
+  bool hasEnough(Resource resource) {
+    var existing = resourceInStock(resource);
+    if (existing == null) {
+      return false;
+    } else {
+      return existing.amount >= resource.amount;
+    }
+  }
+
+
   bool removeResource(Resource res) {
     var existing = stock.where((element) => element.sameType(res));
     if (existing.isEmpty) {

@@ -3,6 +3,7 @@ import 'package:chumaki/components/money_unit.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
@@ -50,12 +51,12 @@ class CityWagonResourceExchange extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                onPressed: () {
+                onPressed: enableSellButton() ? () {
                   var res = resource.cloneWithAmount(amountTradeValue);
                   if (wagon.canFitNewResource(res)) {
                     city.sellResource(resource: res, toWagon: wagon);
                   }
-                },
+                } : null,
                 icon: Icon(Icons.arrow_back_outlined, size: 32),
               ),
               SizedBox(
@@ -81,10 +82,10 @@ class CityWagonResourceExchange extends StatelessWidget {
                 ]),
               ),
               IconButton(
-                onPressed: () {
+                onPressed: enableBuyButton() ? () {
                   var res = resource.cloneWithAmount(amountTradeValue);
                   city.buyResource(resource: res, fromWagon: wagon);
-                },
+                } : null,
                 icon: Icon(Icons.arrow_forward_outlined, size: 32),
               ),
             ],
@@ -101,5 +102,17 @@ class CityWagonResourceExchange extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  bool enableSellButton() {
+    var resToSell = resource.cloneWithAmount(amountTradeValue);
+    var money = city.prices.sellPriceForResource(resToSell);
+    var hasWagonEnoughMoney = Company.instance.hasMoney(money);
+    return hasWagonEnoughMoney && city.canSellResource(resToSell);
+  }
+
+  bool enableBuyButton() {
+    var resToBuy = resource.cloneWithAmount(amountTradeValue);
+    return wagon.stock.hasEnough(resToBuy);
   }
 }
