@@ -30,7 +30,7 @@ class ResourceCategoryGroup extends StatelessWidget {
           maxHeight: double.infinity,
         ),
         child: GroupedControl(
-          height: resources.length * 120,
+          height: resources.length * 110,
           width: CITY_DETAILS_VIEW_WIDTH,
           borderColor: Colors.blueGrey,
           title: TitleText(resourceCategoryToString(resources.first.category)),
@@ -41,7 +41,7 @@ class ResourceCategoryGroup extends StatelessWidget {
             child: Column(
               children: [
                 ...resources.map((resource) {
-                  return CityWagonResourceExchangeRowItem(
+                  return CityWagonResourceExchange(
                       wagon: wagon,
                       city: city,
                       resource: resource,

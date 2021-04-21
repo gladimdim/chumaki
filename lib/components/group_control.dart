@@ -52,7 +52,7 @@ class GroupedControl extends StatelessWidget {
 
           //child
           Align(
-            alignment: Alignment.bottomCenter,
+            alignment: Alignment.center,
             child: child,
           )
         ],
