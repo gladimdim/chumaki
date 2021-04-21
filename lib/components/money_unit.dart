@@ -3,16 +3,26 @@ import 'package:flutter/material.dart';
 
 class MoneyUnit extends StatelessWidget {
   final Money money;
-  MoneyUnit(this.money);
+  final Axis direction;
+  MoneyUnit(this.money, {this.direction = Axis.horizontal});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Image.asset(money.imagePath, width: 32),
-        Text(money.amount.toStringAsFixed(1), style: style(money.amount),)
-      ],
-    );
+    if (direction == Axis.horizontal) {
+      return Row(
+        children: [
+          Image.asset(money.imagePath, width: 32),
+          Text(money.amount.toStringAsFixed(1), style: style(money.amount),)
+        ],
+      );
+    } else {
+      return Column(
+        children: [
+          Image.asset(money.imagePath, width: 32),
+          Text(money.amount.toStringAsFixed(1), style: style(money.amount),)
+        ],
+      );
+    }
   }
 
   TextStyle style(double value) {
