@@ -28,7 +28,7 @@ class _PriceComparisonState extends State<PriceComparison> {
   @override
   Widget build(BuildContext context) {
     var currentSell =
-    widget.currentCity.prices.sellPriceForResource(selectedResource);
+    widget.currentCity.prices.sellPriceForResource(selectedResource.cloneWithAmount(1));
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,

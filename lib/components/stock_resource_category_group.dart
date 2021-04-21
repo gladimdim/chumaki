@@ -4,8 +4,10 @@ import 'package:chumaki/components/selected_city_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/resource.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/components/money_unit.dart';
 import 'package:flutter/material.dart';
+
+import 'package:chumaki/extensions/list.dart';
 
 class StockResourceCategoryGroup extends StatelessWidget {
   final List<Resource> resources;
@@ -22,36 +24,59 @@ class StockResourceCategoryGroup extends StatelessWidget {
       title: TitleText(resourceCategoryToString(resources.first.category)),
       borderColor: Colors.blueGrey,
       width: CITY_DETAILS_VIEW_WIDTH,
-      height: 110,
+      height: 130 * resources.length.toDouble() / 2,
       borderWidth: 3,
       titleAlignment: GROUP_TITLE_ALIGNMENT.CENTER,
       child: SingleChildScrollView(
-        child: Row(
-            children: resources
-                .map((resource) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 14.0),
+          child: Column(
+            children: resources.divideBy(2).toList().map((List<Resource> reses) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: reses.map((resource) {
+                  return GroupedControl(
+                    title: ResourceImageView(
+                      resource,
+                      size: 32,
+                    ),
+                    titleAlignment: GROUP_TITLE_ALIGNMENT.CENTER,
+                    titleHeight: 25,
+                    borderColor: resource.color,
+                    borderWidth: 3,
+                    height: 80,
+                    width: 130,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 24.0),
+                      child: Column(
                         children: [
-                          ResourceImageView(
-                            resource,
-                            showAmount: true,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Продаж:"),
+                              MoneyUnit(Money(forCity.prices
+                                  .sellPriceForResource(
+                                      resource.cloneWithAmount(1)))),
+                            ],
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(Wagon.imagePath, width: 16),
-                              Text(forCity.prices
-                                  .sellPriceForResource(resource)
-                                  .toString()),
-                              Image.asset("images/cities/church.png", width: 16),
-                              Text(forCity.prices
-                                  .buyPriceForResource(resource)
-                                  .toString())
+                              Text("Купівля:"),
+                              MoneyUnit(Money(forCity.prices
+                                  .buyPriceForResource(
+                                      resource.cloneWithAmount(1)))),
                             ],
                           ),
                         ],
                       ),
-                ))
-                .toList()),
+                    ),
+                  );
+                }).toList(),
+              );
+            }).toList(),
+          ),
+        ),
       ),
     );
   }
