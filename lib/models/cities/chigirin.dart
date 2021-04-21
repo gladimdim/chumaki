@@ -9,6 +9,8 @@ class Chigirin extends City {
   Chigirin()
       : super(
           point: Point(2000, 1750),
+          imagePath: "images/cities/church.png",
+          size: 2,
           name: "Чигирин",
           prices: Price([
             PriceUnit.wood.adjustToModifier(1.2),

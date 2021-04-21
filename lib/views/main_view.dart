@@ -1,8 +1,10 @@
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/selected_city_view.dart';
+import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/models/city.dart';
 
 import 'package:chumaki/models/image_on_canvas.dart';
+import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/models/route.dart';
 import 'dart:ui' as ui;
@@ -117,30 +119,63 @@ class _MainViewState extends State<MainView> {
                     }
                   });
                 },
-                child: ClipOval(
-                  child: SizedBox(
-                    width: CITY_SIZE * 2,
-                    height: CITY_SIZE * 2,
-                    child: Container(
-                      color: selected == city ? Colors.grey : Colors.red,
-                      child: Center(
-                        child: StreamBuilder(
-                          stream: city.changes.stream,
-                          builder: (context, snapshot) => Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Center(
-                                child: Text(
-                                  "${city.name}",
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.black),
-                                ),
-                              ),
-                              Text(city.wagons.length.toString()),
-                            ],
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.yellow,
+                        Colors.yellow,
+                        Colors.blue,
+                        Colors.blue,
+                      ],
+                      stops: [0, 0.49, 0.51, 1],
+                    ),
+                    border: Border.all(color: Colors.black, width: 3),
+                    borderRadius: BorderRadius.circular(10),
+                    color: city == selected ? Colors.grey : Colors.red,
+                  ),
+                  width: CITY_SIZE * city.size,
+                  height: CITY_SIZE * city.size,
+                  child: StreamBuilder(
+                    stream: city.changes.stream,
+                    builder: (context, snapshot) => Stack(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: Image.asset(city.imagePath,
+                              width: CITY_SIZE.toDouble() * city.size),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Text(
+                            "${city.name}",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 8 * city.size,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
-                      ),
+                        if (city.size > 1)
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Wrap(
+                              children: [
+                                Image.asset(
+                                  Wagon.imagePath,
+                                  width: 15 * city.size,
+                                ),
+                                Text(
+                                  city.wagons.length.toString(),
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
                     ),
                   ),
                 ),

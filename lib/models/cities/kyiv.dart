@@ -10,6 +10,9 @@ class Kyiv extends City {
       : super(
           point: Point(2700, 2830),
           name: "Київ",
+
+    imagePath: "images/cities/church.png",
+          size: 4,
           prices: Price([
             PriceUnit.wood.adjustToModifier(0.7),
             PriceUnit.stone.adjustToModifier(1.2),

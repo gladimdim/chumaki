@@ -20,6 +20,8 @@ class City {
   final Point<double> point;
   final String name;
   final Stock stock;
+  final String imagePath;
+  final double size;
   late List<Wagon> wagons;
   BehaviorSubject changes = BehaviorSubject();
 
@@ -30,6 +32,8 @@ class City {
       required this.name,
       required this.stock,
       required this.prices,
+      this.size = 1,
+      required this.imagePath,
       List<Wagon>? wagons}) {
     if (wagons == null) {
       this.wagons = List.empty(growable: true);

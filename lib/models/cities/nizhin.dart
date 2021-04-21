@@ -8,8 +8,10 @@ import 'package:chumaki/models/resource.dart';
 class Nizhin extends City {
   Nizhin()
       : super(
-          point: Point(1600, 2500),
+          point: Point(1950, 2950),
           name: "Ніжин",
+          imagePath: "images/cities/church.png",
+          size: 3,
           prices: Price(
             [
               PriceUnit.wood.adjustToModifier(0.7),

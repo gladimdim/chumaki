@@ -11,6 +11,8 @@ class Sich extends City {
       : super(
           point: Point(1200, 900),
           name: "Січ",
+          imagePath: "images/cities/sich.png",
+          size: 4,
           prices: Price([
             PriceUnit.wood.adjustToModifier(1.4),
             PriceUnit.stone.adjustToModifier(0.7),
