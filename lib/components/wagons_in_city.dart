@@ -1,5 +1,6 @@
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/wagon_resource_exchanger.dart';
+import 'package:chumaki/components/wagons/wagon_dispatcher.dart';
 import 'package:chumaki/components/weight_show.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/wagon.dart';
@@ -45,7 +46,9 @@ class _WagonsInCityState extends State<WagonsInCity> {
             builder: (context, snap) => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TitleText("Містить"),
+                TitleText("Відправити"),
+                WagonDispatcher(wagon: wagon, city: widget.city),
+                TitleText("Валка містить"),
                 WagonResourceExchanger(wagon, widget.city),
               ],
             ),

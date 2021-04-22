@@ -57,22 +57,6 @@ class _SelectedCityViewState extends State<SelectedCityView> {
 
           if (!showLocalMarket) PriceComparison(currentCity: widget.city),
           if (showLocalMarket) ...[
-            ...widget.city.connectsTo().map(
-              (toCity) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(toCity.name),
-                    IconButton(
-                      icon: Icon(Icons.not_started),
-                      onPressed: widget.city.wagons.isEmpty
-                          ? null
-                          : () => routeStart(toCity),
-                    ),
-                  ],
-                );
-              },
-            ),
             WagonsInCity(city: widget.city),
             Container(
               decoration: BoxDecoration(
@@ -132,9 +116,5 @@ class _SelectedCityViewState extends State<SelectedCityView> {
         ],
       ),
     );
-  }
-
-  void routeStart(City to) {
-    Company.instance.startTaskFromTo(from: widget.city, to: to);
   }
 }

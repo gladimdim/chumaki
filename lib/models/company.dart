@@ -2,6 +2,7 @@ import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/route.dart';
 import 'package:chumaki/models/task.dart';
+import 'package:chumaki/models/wagon.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/models/resource.dart';
 
@@ -53,11 +54,8 @@ class Company {
     });
   }
 
-  void startTaskFromTo({required City from, required City to}) {
-    if (from.wagons.isEmpty) {
-      return;
-    }
-    var newTask = RouteTask(from, to, wagon: from.wagons.first);
+  void startTask({required City from, required City to, required Wagon withWagon}) {
+    var newTask = RouteTask(from, to, wagon: withWagon);
     // notify from City that the trade company with the given wagon departed
     from.routeTaskStarted(newTask);
 
