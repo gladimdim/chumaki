@@ -1,6 +1,5 @@
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/selected_city_view.dart';
-import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/models/city.dart';
 
 import 'package:chumaki/models/image_on_canvas.dart';
@@ -134,7 +133,6 @@ class _MainViewState extends State<MainView> {
                     ),
                     border: Border.all(color: Colors.black, width: 3),
                     borderRadius: BorderRadius.circular(10),
-                    color: city == selected ? Colors.grey : Colors.red,
                   ),
                   width: CITY_SIZE * city.size,
                   height: CITY_SIZE * city.size,
@@ -144,7 +142,7 @@ class _MainViewState extends State<MainView> {
                       // mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
-                          child: Image.asset(city.imagePath,
+                          child: Image.asset(city.avatarImagePath,
                               width: CITY_SIZE.toDouble() * city.size),
                         ),
                         Align(

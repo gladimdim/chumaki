@@ -1,5 +1,3 @@
-import 'package:chumaki/components/group_control.dart';
-import 'package:chumaki/components/selected_city_view.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/wagon.dart';

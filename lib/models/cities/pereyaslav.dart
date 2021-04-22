@@ -10,7 +10,8 @@ class Pereyaslav extends City {
       : super(
           point: Point(2360, 2450),
           name: "Переяслав",
-          imagePath: "images/cities/church.png",
+
+    localizedKeyName: 'pereyaslav',
           size: 2,
           prices: Price([
             PriceUnit.wood.adjustToModifier(1),

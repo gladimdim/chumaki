@@ -1,4 +1,3 @@
-import 'package:chumaki/components/title_text.dart';
 import 'package:flutter/material.dart';
 
 enum GROUP_TITLE_ALIGNMENT { LEFT, CENTER, RIGHT }

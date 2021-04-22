@@ -10,8 +10,9 @@ class Nizhin extends City {
       : super(
           point: Point(1950, 2950),
           name: "Ніжин",
-          imagePath: "images/cities/church.png",
           size: 3,
+
+    localizedKeyName: 'nizhin',
           prices: Price(
             [
               PriceUnit.wood.adjustToModifier(0.7),

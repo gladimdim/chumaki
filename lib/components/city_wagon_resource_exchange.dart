@@ -1,7 +1,5 @@
-import 'package:chumaki/components/group_control.dart';
 import 'package:chumaki/components/money_unit.dart';
 import 'package:chumaki/components/resource_image_view.dart';
-import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/resource.dart';

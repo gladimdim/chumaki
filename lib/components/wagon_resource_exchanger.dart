@@ -1,8 +1,6 @@
-import 'package:chumaki/components/city_wagon_resource_exchange.dart';
 import 'package:chumaki/components/money_unit.dart';
 import 'package:chumaki/components/resource_amount_selector.dart';
 import 'package:chumaki/components/resource_category_group.dart';
-import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/wagon_stock_bar.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/company.dart';

@@ -10,7 +10,8 @@ class Kaniv extends City {
       : super(
     point: Point(2400, 2200),
     name: "Канів",
-    imagePath: "images/cities/church.png",
+
+    localizedKeyName: 'kaniv',
     size: 2,
     prices: Price(
       [

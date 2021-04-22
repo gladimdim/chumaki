@@ -11,7 +11,7 @@ class Kyiv extends City {
           point: Point(2700, 2830),
           name: "Київ",
 
-    imagePath: "images/cities/church.png",
+    localizedKeyName: 'kyiv',
           size: 4,
           prices: Price([
             PriceUnit.wood.adjustToModifier(0.7),
