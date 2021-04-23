@@ -45,7 +45,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
                     borderColor: resource.color,
                     borderWidth: 3,
                     height: 80,
-                    width: 130,
+                    width: 150,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 24.0),
                       child: Column(
@@ -65,7 +65,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
                               Text("Купівля:"),
                               MoneyUnit(Money(forCity.prices
                                   .buyPriceForResource(
-                                      resource.cloneWithAmount(1)))),
+                                      resource, withAmount: 1))),
                             ],
                           ),
                         ],

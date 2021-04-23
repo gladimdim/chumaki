@@ -69,7 +69,10 @@ class Price {
             withAmount).toStringAsFixed(1));
   }
 
-  double buyPriceForResource(Resource res, {int withAmount = 1}) {
+  double buyPriceForResource(Resource res, {int? withAmount}) {
+    if (withAmount == null) {
+      withAmount = res.amount;
+    }
     return double.parse((prices.firstWhere((element) => element.resource.sameType(res)).price *
         withAmount * _buyPriceAdjust).toStringAsFixed(1));
   }

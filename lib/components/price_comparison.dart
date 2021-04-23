@@ -59,7 +59,7 @@ class _PriceComparisonState extends State<PriceComparison> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: cityRow.map<Widget>((city) {
                 var buyPrice = city.prices.buyPriceForResource(
-                    selectedResource);
+                    selectedResource, withAmount: 1);
                 var saldo = buyPrice - currentSell;
                 return Padding(
                   padding: const EdgeInsets.all(4.0),
@@ -78,14 +78,14 @@ class _PriceComparisonState extends State<PriceComparison> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Купівля:"),
+                              Text("Price:"),
                               MoneyUnit(Money(buyPrice)),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Вигода:"),
+                              Text("Profit:"),
                               MoneyUnit(Money(saldo)),
                             ],
                           ),

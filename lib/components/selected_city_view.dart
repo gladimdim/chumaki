@@ -1,3 +1,4 @@
+import 'package:chumaki/components/advisor_for_city.dart';
 import 'package:chumaki/components/price_comparison.dart';
 import 'package:chumaki/components/route_task_row_progress.dart';
 import 'package:chumaki/components/stock_resource_category_group.dart';
@@ -8,7 +9,6 @@ import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/task.dart';
-import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 
 const CITY_DETAILS_VIEW_WIDTH = 400.0;
@@ -42,7 +42,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                   selected: showLocalMarket,
                   onPressed: localMarketSelected,
                   child: TitleText(
-                      "Ринок"),
+                      "Market"),
                 ),
                 SelectableButton(
                     selected: showAdvisor,
@@ -51,11 +51,11 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                 SelectableButton(
                     selected: showWorldMarket,
                     onPressed: worldMarketSelected,
-                    child: TitleText("Світовий ринок")),
+                    child: TitleText("World Market")),
               ],
             ),
           ),
-          if (showAdvisor) Text("Advisor"),
+          if (showAdvisor) AdvisorForCity(city: widget.city),
           if (showWorldMarket) PriceComparison(currentCity: widget.city),
           if (showLocalMarket) ...[
             WagonsInCity(city: widget.city),
