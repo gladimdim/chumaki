@@ -53,7 +53,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Продаж:"),
+                              Text("Buy:"),
                               MoneyUnit(Money(forCity.prices
                                   .sellPriceForResource(
                                       resource.cloneWithAmount(1)))),
@@ -62,7 +62,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Купівля:"),
+                              Text("Sell:"),
                               MoneyUnit(Money(forCity.prices
                                   .buyPriceForResource(
                                       resource, withAmount: 1))),

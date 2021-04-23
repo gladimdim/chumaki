@@ -34,7 +34,7 @@ class _WagonsInCityState extends State<WagonsInCity> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Image.asset(Wagon.imagePath, width: 64),
-              Text("Ватага ${wagon.name}"),
+              Text("Company ${wagon.name}"),
               StreamBuilder(
                 stream: wagon.changes.stream,
                 builder: (context, _) => WeightShow(wagon),

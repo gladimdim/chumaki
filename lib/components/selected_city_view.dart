@@ -89,7 +89,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                     );
                   }),
             ),
-            TitleText("Вхідні: "),
+            TitleText("Incoming companies: "),
             ...Company.instance.cityRoutes
                 .where((route) =>
                     route.to.equalsTo(widget.city) ||
@@ -101,7 +101,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                 .where((routeTask) => routeTask.to.equalsTo(widget.city))
                 .map<Widget>((routeTask) =>
                     RouteTaskRowProgress(routeTask, widget.city)),
-            TitleText("Вихідні: "),
+            TitleText("Outgoing companies: "),
             ...Company.instance.cityRoutes
                 .where((route) =>
                     route.to.equalsTo(widget.city) ||
