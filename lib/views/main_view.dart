@@ -152,6 +152,7 @@ class _MainViewState extends State<MainView> {
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 8 * city.size,
+                                backgroundColor: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),

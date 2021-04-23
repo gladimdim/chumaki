@@ -2,6 +2,7 @@ import 'package:chumaki/components/price_comparison.dart';
 import 'package:chumaki/components/route_task_row_progress.dart';
 import 'package:chumaki/components/stock_resource_category_group.dart';
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/selectable_button.dart';
 import 'package:chumaki/components/wagons_in_city.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/company.dart';
@@ -23,6 +24,8 @@ class SelectedCityView extends StatefulWidget {
 
 class _SelectedCityViewState extends State<SelectedCityView> {
   bool showLocalMarket = true;
+  bool showAdvisor = false;
+  bool showWorldMarket = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,27 +38,25 @@ class _SelectedCityViewState extends State<SelectedCityView> {
             builder: (context, data) => Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                TitleText("${widget.city.name}: ${widget.city.wagons.length}"),
-                Image.asset(Wagon.imagePath, width: 64),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 2,),
-                  ),
-                  child: TextButton(
-                      onPressed: () {
-                        setState(() {
-                          showLocalMarket = !showLocalMarket;
-                        });
-                      },
-                      child: TitleText(showLocalMarket
-                          ? "Світовий ринок"
-                          : "Ринок ${widget.city.name}")),
+                SelectableButton(
+                  selected: showLocalMarket,
+                  onPressed: localMarketSelected,
+                  child: TitleText(
+                      "Ринок"),
                 ),
+                SelectableButton(
+                    selected: showAdvisor,
+                    onPressed: advisorSelected,
+                    child: TitleText("Advisor")),
+                SelectableButton(
+                    selected: showWorldMarket,
+                    onPressed: worldMarketSelected,
+                    child: TitleText("Світовий ринок")),
               ],
             ),
           ),
-
-          if (!showLocalMarket) PriceComparison(currentCity: widget.city),
+          if (showAdvisor) Text("Advisor"),
+          if (showWorldMarket) PriceComparison(currentCity: widget.city),
           if (showLocalMarket) ...[
             WagonsInCity(city: widget.city),
             Container(
@@ -116,5 +117,25 @@ class _SelectedCityViewState extends State<SelectedCityView> {
         ],
       ),
     );
+  }
+
+  void worldMarketSelected() {
+    setFlags(false, false, true);
+  }
+
+  void localMarketSelected() {
+    setFlags(true, false, false);
+  }
+
+  void advisorSelected() {
+    setFlags(false, true, false);
+  }
+
+  setFlags(bool first, bool second, bool third) {
+    setState(() {
+      showLocalMarket = first;
+      showAdvisor = second;
+      showWorldMarket = third;
+    });
   }
 }
