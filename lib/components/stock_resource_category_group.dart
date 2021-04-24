@@ -2,6 +2,7 @@ import 'package:chumaki/components/group_control.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/selected_city_view.dart';
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/components/money_unit.dart';
@@ -21,17 +22,20 @@ class StockResourceCategoryGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GroupedControl(
-      title: TitleText(resourceCategoryToString(resources.first.category)),
+      title: TitleText(ChumakiLocalizations.of(context)
+          .getForKey(resourceCategoryToLocalizedKey(resources.first.category))),
       borderColor: Colors.blueGrey,
       width: CITY_DETAILS_VIEW_WIDTH,
-      height: 130 * ((resources.length > 1) ? resources.length.toDouble() : 2) / 2,
+      height:
+          130 * ((resources.length > 1) ? resources.length.toDouble() : 2) / 2,
       borderWidth: 3,
       titleAlignment: GROUP_TITLE_ALIGNMENT.CENTER,
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 14.0),
           child: Column(
-            children: resources.divideBy(2).toList().map((List<Resource> reses) {
+            children:
+                resources.divideBy(2).toList().map((List<Resource> reses) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: reses.map((resource) {
@@ -64,8 +68,8 @@ class StockResourceCategoryGroup extends StatelessWidget {
                             children: [
                               Text("Sell:"),
                               MoneyUnit(Money(forCity.prices
-                                  .buyPriceForResource(
-                                      resource, withAmount: 1))),
+                                  .buyPriceForResource(resource,
+                                      withAmount: 1))),
                             ],
                           ),
                         ],

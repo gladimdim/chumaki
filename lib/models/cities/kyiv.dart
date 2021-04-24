@@ -13,22 +13,7 @@ class Kyiv extends City {
 
     localizedKeyName: 'kyiv',
           size: 4,
-          prices: Price([
-            PriceUnit.wood.adjustToModifier(0.7),
-            PriceUnit.stone.adjustToModifier(1.2),
-            PriceUnit.planks.adjustToModifier(0.7),
-            PriceUnit.firearm.adjustToModifier(1.2),
-            PriceUnit.horse.adjustToModifier(1.7),
-            PriceUnit.cannon.adjustToModifier(1.3),
-            PriceUnit.bread.adjustToModifier(0.6),
-            PriceUnit.charcoal.adjustToModifier(0.7),
-            PriceUnit.fish.adjustToModifier(1.3),
-            PriceUnit.fur.adjustToModifier(1.4),
-            PriceUnit.grains.adjustToModifier(1.3),
-            PriceUnit.ironOre.adjustToModifier(1.4),
-            PriceUnit.metalParts.adjustToModifier(1.3),
-            PriceUnit.powder.adjustToModifier(1.3),
-          ]),
+          prices: Price(generatePriceUnits()),
           stock: Stock([
             Wood(1000),
             Horse(200),
@@ -44,6 +29,71 @@ class Kyiv extends City {
             MetalParts(400),
             Fur(200),
             Fish(1000),
+            Silk(200),
+            Salt(100),
+            Wool(200),
           ]),
         );
+
+
+  static List<PriceUnit> generatePriceUnits() {
+    return RESOURCES.values.map<PriceUnit>((resType) {
+      switch (resType) {
+        case RESOURCES.BREAD:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1);
+        case RESOURCES.WOOD:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(0.7);
+        case RESOURCES.STONE:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.2);
+        case RESOURCES.PLANKS:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(0.7);
+        case RESOURCES.FIREARM:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.2);
+        case RESOURCES.HORSE:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.7);
+        case RESOURCES.CANNON:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.3);
+        case RESOURCES.BREAD:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(0.7);
+        case RESOURCES.CHARCOAL:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(0.7);
+        case RESOURCES.FISH:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.3);
+        case RESOURCES.FUR:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.4);
+        case RESOURCES.GRAINS:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.3);
+        case RESOURCES.IRONORE:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.4);
+        case RESOURCES.METALPARTS:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.3);
+        case RESOURCES.POWDER:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.3);
+        case RESOURCES.SALT:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.1);
+        case RESOURCES.SILK:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(2.1);
+        case RESOURCES.WOOL:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.2);
+      }
+    }).toList();
+  }
 }

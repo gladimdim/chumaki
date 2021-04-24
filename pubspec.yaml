@@ -42,5 +42,8 @@ flutter:
     - images/resources/powder/
     - images/resources/stone/
     - images/resources/wood/
+    - images/resources/silk/
+    - images/resources/salt/
+    - images/resources/wool/
     - images/cities/
     - images/cities/avatars/

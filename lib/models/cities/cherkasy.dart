@@ -13,24 +13,7 @@ class Cherkasy extends City {
           name: "Черкаси",
           localizedKeyName: 'cherkasy',
           size: 2,
-          prices: Price(
-            [
-              PriceUnit.wood.adjustToModifier(1),
-              PriceUnit.stone.adjustToModifier(1.1),
-              PriceUnit.planks.adjustToModifier(1),
-              PriceUnit.firearm.adjustToModifier(1.2),
-              PriceUnit.horse.adjustToModifier(1.05),
-              PriceUnit.cannon.adjustToModifier(1.5),
-              PriceUnit.bread.adjustToModifier(1),
-              PriceUnit.charcoal.adjustToModifier(1.05),
-              PriceUnit.fish.adjustToModifier(1),
-              PriceUnit.fur.adjustToModifier(1.02),
-              PriceUnit.grains.adjustToModifier(1.3),
-              PriceUnit.ironOre.adjustToModifier(1.5),
-              PriceUnit.metalParts.adjustToModifier(1.3),
-              PriceUnit.powder.adjustToModifier(0.8),
-            ],
-          ),
+          prices: Price(Cherkasy.generatePriceUnits()),
           stock: Stock([
             Bread(200),
             Stone(300),
@@ -40,6 +23,8 @@ class Cherkasy extends City {
             Grains(3000),
             Horse(200),
             Planks(500),
+            Salt(300),
+            Wool(300),
           ]),
           wagons: [
             Wagon(name: "Вальків", stock: Stock([Bread(10), Wood(30)])),
@@ -52,4 +37,60 @@ class Cherkasy extends City {
                 stock: Stock([Horse(5), Powder(25), IronOre(20)])),
           ],
         );
+
+  static List<PriceUnit> generatePriceUnits() {
+    return RESOURCES.values.map<PriceUnit>((resType) {
+      switch (resType) {
+        case RESOURCES.BREAD:
+          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+        case RESOURCES.WOOD:
+          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+        case RESOURCES.STONE:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.1);
+        case RESOURCES.PLANKS:
+          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+        case RESOURCES.FIREARM:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.2);
+        case RESOURCES.HORSE:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.05);
+        case RESOURCES.CANNON:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.5);
+        case RESOURCES.BREAD:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(0.8);
+        case RESOURCES.CHARCOAL:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.05);
+        case RESOURCES.FISH:
+          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+        case RESOURCES.FUR:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.02);
+        case RESOURCES.GRAINS:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.03);
+        case RESOURCES.IRONORE:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.5);
+        case RESOURCES.METALPARTS:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.3);
+        case RESOURCES.POWDER:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(0.8);
+        case RESOURCES.SALT:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.05);
+        case RESOURCES.SILK:
+          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(2);
+        case RESOURCES.WOOL:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.3);
+      }
+    }).toList();
+  }
 }

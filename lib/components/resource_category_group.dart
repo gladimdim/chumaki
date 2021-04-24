@@ -1,3 +1,4 @@
+import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/wagon.dart';
@@ -32,11 +33,13 @@ class ResourceCategoryGroup extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(width: 3, color: Colors.black)),
+                border:
+                    Border(bottom: BorderSide(width: 3, color: Colors.black)),
               ),
               child: Center(
                 child: TitleText(
-                  resourceCategoryToString(resources.first.category),
+                  ChumakiLocalizations.of(context).getForKey(
+                      resourceCategoryToLocalizedKey(resources.first.category)),
                 ),
               ),
             ),
