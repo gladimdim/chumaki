@@ -84,7 +84,7 @@ class Cherkasy extends City {
               .adjustToModifier(0.8);
         case RESOURCES.SALT:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1.05);
+              .adjustToModifier(1.1);
         case RESOURCES.SILK:
           return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(2);
         case RESOURCES.WOOL:

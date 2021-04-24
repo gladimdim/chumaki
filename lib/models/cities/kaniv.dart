@@ -83,7 +83,7 @@ class Kaniv extends City {
               .adjustToModifier(0.9);
         case RESOURCES.SALT:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1.1);
+              .adjustToModifier(1.2);
         case RESOURCES.SILK:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(2.1);

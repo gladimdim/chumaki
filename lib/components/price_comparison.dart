@@ -1,6 +1,7 @@
 import 'package:chumaki/components/group_control.dart';
 import 'package:chumaki/components/money_unit.dart';
 import 'package:chumaki/components/resource_image_view.dart';
+import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/resource.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +70,7 @@ class _PriceComparisonState extends State<PriceComparison> {
                     titleHeight: 25,
                     titleAlignment: GROUP_TITLE_ALIGNMENT.CENTER,
                     width: 180,
-                    title: TitleText(city.name),
+                    title: TitleText(ChumakiLocalizations.of(context).getForKey(city.localizedKeyName)),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 22.0, left: 8.0,),
                       child: Column(

@@ -56,6 +56,8 @@ class ChumakiLocalizations {
       "cloths": "Cloths",
       "military": "Military",
       "luxury": "Luxury",
+      "labelSell": "Sell",
+      "labelBuy": "Buy",
     },
     "uk": {
       "stone": "Камінь",
@@ -100,6 +102,8 @@ class ChumakiLocalizations {
       "cloths": "Одяг",
       "military": "Військове",
       "luxury": "Розкіш",
+      "labelSell": "Продати",
+      "labelBuy": "Купити",
     },
     "ru": {
       "stone": "Камень",
@@ -142,6 +146,8 @@ class ChumakiLocalizations {
       "cloths": "Одежда",
       "military": "Военное",
       "luxury": "Розкош",
+      "labelSell": "Продажа",
+      "labelBuy": "Покупка",
     },
   };
 
@@ -224,6 +230,13 @@ class ChumakiLocalizations {
 
   String operator [](String key) {
     return _localizedValues[locale.languageCode]![key] ?? key;
+  }
+
+  String get labelSell {
+    return _localizedValues[locale.languageCode]!["labelSell"]!;
+  }
+  String get labelBuy {
+    return _localizedValues[locale.languageCode]!["labelBuy"]!;
   }
 }
 

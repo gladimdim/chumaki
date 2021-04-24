@@ -100,7 +100,7 @@ class Sich extends City {
               .adjustToModifier(0.6);
         case RESOURCES.SALT:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1.05);
+              .adjustToModifier(1);
         case RESOURCES.SILK:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(2);

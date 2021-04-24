@@ -2,7 +2,7 @@ import 'package:chumaki/models/resource.dart';
 
 class Price {
   List<PriceUnit> prices;
-  final double _buyPriceAdjust = 0.8;
+  final double _buyPriceAdjust = 0.85;
 
   Price(this.prices);
 
