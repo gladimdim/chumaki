@@ -1,5 +1,6 @@
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/selected_city_view.dart';
+import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/city.dart';
 
 import 'package:chumaki/models/image_on_canvas.dart';
@@ -148,7 +149,7 @@ class _MainViewState extends State<MainView> {
                         Align(
                           alignment: Alignment.bottomCenter,
                           child: Text(
-                            "${city.name}",
+                            ChumakiLocalizations.of(context).getForKey(city.localizedKeyName),
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 8 * city.size,

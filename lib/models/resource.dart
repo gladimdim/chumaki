@@ -1,3 +1,4 @@
+import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:flutter/material.dart';
 
 enum RESOURCE_CATEGORY { MILITARY, CLOTH, RESOURCES, LUXURY, FOOD }
@@ -216,7 +217,7 @@ class Silk extends Resource {
             type: RESOURCES.SILK,
             weightPerPoint: 0.3,
             color: Colors.yellow,
-            category: RESOURCE_CATEGORY.CLOTH);
+            category: RESOURCE_CATEGORY.LUXURY);
 }
 
 class Salt extends Resource {
@@ -275,18 +276,18 @@ class Stone extends Resource {
             category: RESOURCE_CATEGORY.RESOURCES);
 }
 
-String resourceCategoryToString(RESOURCE_CATEGORY category) {
+String resourceCategoryToLocalizedKey(RESOURCE_CATEGORY category) {
   switch (category) {
     case RESOURCE_CATEGORY.RESOURCES:
-      return "Ресурси";
+      return "resources";
     case RESOURCE_CATEGORY.CLOTH:
-      return "Одяг";
+      return "cloths";
     case RESOURCE_CATEGORY.MILITARY:
-      return "Військове";
+      return "military";
     case RESOURCE_CATEGORY.FOOD:
-      return "Їжа";
+      return "food";
     case RESOURCE_CATEGORY.LUXURY:
-      return "Коштовності";
+      return "luxury";
   }
 }
 
