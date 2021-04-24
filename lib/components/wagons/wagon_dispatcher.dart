@@ -1,3 +1,4 @@
+import 'package:chumaki/components/city/small_city_avatar.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/wagon.dart';
@@ -14,15 +15,9 @@ class WagonDispatcher extends StatelessWidget {
     return Column(
       children: city.connectsTo().map(
         (toCity) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(toCity.name),
-              IconButton(
-                icon: Icon(Icons.not_started),
-                onPressed: () => dispatch(toCity),
-              ),
-            ],
+          return TextButton(
+            child: SmallCityAvatar(toCity),
+            onPressed: () => dispatch(toCity),
           );
         },
       ).toList(),
