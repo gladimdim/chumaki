@@ -24,6 +24,8 @@ class Chigirin extends City {
             IronOre(100),
             Cannon(50),
             MetalParts(200),
+            Salt(300),
+            Wool(100),
           ]),
         );
 

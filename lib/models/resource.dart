@@ -201,7 +201,7 @@ class Silk extends Resource {
 
 class Salt extends Resource {
   Salt(int amount)
-      : super("silk", amount,
+      : super("salt", amount,
             type: RESOURCES.SALT,
             weightPerPoint: 0.2,
             color: Colors.white,

@@ -24,6 +24,8 @@ class Pereyaslav extends City {
             Wood(1000),
             MetalParts(100),
             Firearm(40),
+            Salt(150),
+            Wool(150),
           ]),
         );
 

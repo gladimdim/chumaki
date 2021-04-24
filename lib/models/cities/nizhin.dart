@@ -26,6 +26,8 @@ class Nizhin extends City {
               Stone(50),
               Fish(100),
               Cannon(10),
+              Salt(200),
+              Wool(100),
             ],
           ),
         );

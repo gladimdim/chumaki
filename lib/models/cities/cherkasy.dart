@@ -23,6 +23,8 @@ class Cherkasy extends City {
             Grains(3000),
             Horse(200),
             Planks(500),
+            Salt(300),
+            Wool(300),
           ]),
           wagons: [
             Wagon(name: "Вальків", stock: Stock([Bread(10), Wood(30)])),

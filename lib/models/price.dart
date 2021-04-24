@@ -42,39 +42,39 @@ class PriceUnit {
   static PriceUnit defaultPriceUnitForResourceType(RESOURCES resType) {
     switch (resType) {
       case RESOURCES.BREAD:
-        return PriceUnit(RESOURCES.BREAD, 1);
+        return PriceUnit(resType, 1);
       case RESOURCES.CANNON:
-        return PriceUnit(RESOURCES.CANNON, 500);
+        return PriceUnit(resType, 500);
       case RESOURCES.CHARCOAL:
-        return PriceUnit(RESOURCES.CHARCOAL, 8);
+        return PriceUnit(resType, 8);
       case RESOURCES.FIREARM:
-        return PriceUnit(RESOURCES.FIREARM, 20);
+        return PriceUnit(resType, 20);
       case RESOURCES.FISH:
-        return PriceUnit(RESOURCES.FISH, 2);
+        return PriceUnit(resType, 2);
       case RESOURCES.FUR:
-        return PriceUnit(RESOURCES.FUR, 5);
+        return PriceUnit(resType, 5);
       case RESOURCES.GRAINS:
-        return PriceUnit(RESOURCES.GRAINS, 0.8);
+        return PriceUnit(resType, 0.8);
       case RESOURCES.HORSE:
-        return PriceUnit(RESOURCES.HORSE, 50);
+        return PriceUnit(resType, 50);
       case RESOURCES.IRONORE:
-        return PriceUnit(RESOURCES.IRONORE, 5);
+        return PriceUnit(resType, 5);
       case RESOURCES.METALPARTS:
-        return PriceUnit(RESOURCES.METALPARTS, 10);
+        return PriceUnit(resType, 10);
       case RESOURCES.PLANKS:
-        return PriceUnit(RESOURCES.PLANKS, 12);
+        return PriceUnit(resType, 12);
       case RESOURCES.POWDER:
-        return PriceUnit(RESOURCES.POWDER, 8);
+        return PriceUnit(resType, 8);
       case RESOURCES.STONE:
-        return PriceUnit(RESOURCES.STONE, 15);
+        return PriceUnit(resType, 15);
       case RESOURCES.WOOD:
-        return PriceUnit(RESOURCES.WOOD, 2);
+        return PriceUnit(resType, 2);
       case RESOURCES.SALT:
-        return PriceUnit(RESOURCES.SALT, 6);
+        return PriceUnit(resType, 6);
       case RESOURCES.SILK:
-        return PriceUnit(RESOURCES.SILK, 20);
+        return PriceUnit(resType, 20);
       case RESOURCES.WOOL:
-        return PriceUnit(RESOURCES.SILK, 0.8);
+        return PriceUnit(resType, 0.8);
     }
   }
 }

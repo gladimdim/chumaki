@@ -29,6 +29,9 @@ class Kyiv extends City {
             MetalParts(400),
             Fur(200),
             Fish(1000),
+            Silk(200),
+            Salt(100),
+            Wool(200),
           ]),
         );
 

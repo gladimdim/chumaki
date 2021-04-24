@@ -27,6 +27,9 @@ class Kaniv extends City {
             Charcoal(200),
             MetalParts(100),
             Horse(400),
+            Salt(200),
+            Silk(50),
+            Wool(100),
           ]),
         );
 
