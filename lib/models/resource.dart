@@ -39,8 +39,47 @@ class Resource {
     return "images/resources/${this.localizedKey}/${this.localizedKey}.png";
   }
 
+  static Resource fromType(RESOURCES type) {
+    switch (type) {
+      case RESOURCES.BREAD:
+        return Bread(0);
+      case RESOURCES.CANNON:
+        return Cannon(0);
+      case RESOURCES.CHARCOAL:
+        return Charcoal(0);
+      case RESOURCES.FIREARM:
+        return Firearm(0);
+      case RESOURCES.FISH:
+        return Fish(0);
+      case RESOURCES.FUR:
+        return Fur(0);
+      case RESOURCES.GRAINS:
+        return Grains(0);
+      case RESOURCES.HORSE:
+        return Horse(0);
+      case RESOURCES.IRONORE:
+        return IronOre(0);
+      case RESOURCES.METALPARTS:
+        return MetalParts(0);
+      case RESOURCES.PLANKS:
+        return Planks(0);
+      case RESOURCES.POWDER:
+        return Powder(0);
+      case RESOURCES.STONE:
+        return Stone(0);
+      case RESOURCES.WOOD:
+        return Wood(0);
+      case RESOURCES.SALT:
+        return Salt(0);
+      case RESOURCES.SILK:
+        return Silk(0);
+      case RESOURCES.WOOL:
+        return Wool(0);
+    }
+  }
+
   bool sameType(Resource another) {
-    return another.localizedKey == localizedKey;
+    return another.type == type;
   }
 
   @override
@@ -69,25 +108,6 @@ class Resource {
       weightPerPoint: weightPerPoint,
       category: category,
     );
-  }
-
-  static List<Resource> get allResources {
-    return [
-      Wood(0),
-      Cannon(0),
-      Charcoal(0),
-      Firearm(0),
-      Fish(0),
-      Bread(0),
-      Fur(0),
-      Grains(0),
-      Horse(0),
-      IronOre(0),
-      MetalParts(0),
-      Planks(0),
-      Powder(0),
-      Stone(0),
-    ];
   }
 }
 

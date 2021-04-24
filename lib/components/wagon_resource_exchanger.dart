@@ -55,13 +55,11 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
             ],
           ),
         ),
-        ...groupResourcesByCategory(Resource.allResources
-                .where(
-                  (fakeResource) =>
-                      widget.wagon.stock.hasResource(fakeResource) ||
-                      widget.city.stock.hasResource(fakeResource),
-                )
-                .toList())
+        ...groupResourcesByCategory(RESOURCES.values.where((resType) {
+          var fakeResource = Resource.fromType(resType);
+          return widget.wagon.stock.hasResource(fakeResource) ||
+              widget.city.stock.hasResource(fakeResource);
+        }).map<Resource>(Resource.fromType).toList().toList())
             .map(
           (List<Resource> groupedResources) {
             return ResourceCategoryGroup(
