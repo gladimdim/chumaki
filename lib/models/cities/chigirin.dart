@@ -26,6 +26,7 @@ class Chigirin extends City {
             MetalParts(200),
             Salt(300),
             Wool(100),
+            Gorilka(500),
           ]),
         );
 
@@ -86,6 +87,8 @@ class Chigirin extends City {
         case RESOURCES.WOOL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.2);
+        case RESOURCES.GORILKA:
+          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
       }
     }).toList();
   }

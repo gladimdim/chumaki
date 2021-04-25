@@ -93,6 +93,8 @@ class Kyiv extends City {
         case RESOURCES.WOOL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.2);
+        case RESOURCES.GORILKA:
+          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1.3);
       }
     }).toList();
   }

@@ -25,6 +25,7 @@ class Cherkasy extends City {
             Planks(500),
             Salt(300),
             Wool(300),
+            Gorilka(500),
           ]),
           wagons: [
             Wagon(name: "Вальків", stock: Stock([Bread(10), Wood(30)])),
@@ -42,14 +43,17 @@ class Cherkasy extends City {
     return RESOURCES.values.map<PriceUnit>((resType) {
       switch (resType) {
         case RESOURCES.BREAD:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1);
         case RESOURCES.WOOD:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1);
         case RESOURCES.STONE:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.1);
         case RESOURCES.PLANKS:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1);
         case RESOURCES.FIREARM:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.2);
@@ -66,7 +70,8 @@ class Cherkasy extends City {
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.05);
         case RESOURCES.FISH:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1);
         case RESOURCES.FUR:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.02);
@@ -86,10 +91,14 @@ class Cherkasy extends City {
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.1);
         case RESOURCES.SILK:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(2);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(2);
         case RESOURCES.WOOL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.3);
+        case RESOURCES.GORILKA:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1);
       }
     }).toList();
   }

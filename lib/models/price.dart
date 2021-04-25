@@ -80,6 +80,8 @@ class PriceUnit {
         return PriceUnit(resType, 20);
       case RESOURCES.WOOL:
         return PriceUnit(resType, 0.8);
+      case RESOURCES.GORILKA:
+        return PriceUnit(resType, 0.5);
     }
   }
 }

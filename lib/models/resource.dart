@@ -1,4 +1,3 @@
-import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:flutter/material.dart';
 
 enum RESOURCE_CATEGORY { MILITARY, CLOTH, RESOURCES, LUXURY, FOOD }
@@ -19,7 +18,8 @@ enum RESOURCES {
   SILK,
   STONE,
   WOOD,
-  WOOL
+  WOOL,
+  GORILKA,
 }
 
 class Resource {
@@ -76,6 +76,8 @@ class Resource {
         return Silk(0);
       case RESOURCES.WOOL:
         return Wool(0);
+      case RESOURCES.GORILKA:
+        return Gorilka(0);
     }
   }
 
@@ -274,6 +276,15 @@ class Stone extends Resource {
             weightPerPoint: 5,
             color: Colors.black45,
             category: RESOURCE_CATEGORY.RESOURCES);
+}
+
+class Gorilka extends Resource {
+  Gorilka(int amount)
+      : super("gorilka", amount,
+      type: RESOURCES.GORILKA,
+      weightPerPoint: 5,
+      color: Colors.black45,
+      category: RESOURCE_CATEGORY.FOOD);
 }
 
 String resourceCategoryToLocalizedKey(RESOURCE_CATEGORY category) {

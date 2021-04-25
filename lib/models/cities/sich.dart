@@ -23,6 +23,7 @@ class Sich extends City {
               Salt(2000),
               Wool(100),
               Silk(300),
+              Gorilka(450),
             ],
           ),
           wagons: [
@@ -107,6 +108,8 @@ class Sich extends City {
         case RESOURCES.WOOL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.3);
+        case RESOURCES.GORILKA:
+          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
       }
     }).toList();
   }

@@ -70,7 +70,7 @@ class _PriceComparisonState extends State<PriceComparison> {
                     titleHeight: 25,
                     titleAlignment: GROUP_TITLE_ALIGNMENT.CENTER,
                     width: 180,
-                    title: TitleText(ChumakiLocalizations.of(context).getForKey(city.localizedKeyName)),
+                    title: TitleText(ChumakiLocalizations.getForKey(city.localizedKeyName)),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 22.0, left: 8.0,),
                       child: Column(

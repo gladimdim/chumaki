@@ -11,10 +11,8 @@ class Nizhin extends City {
           point: Point(1950, 2950),
           name: "Ніжин",
           size: 3,
-
-    localizedKeyName: 'nizhin',
-          prices: Price(generatePriceUnits()
-          ),
+          localizedKeyName: 'nizhin',
+          prices: Price(generatePriceUnits()),
           stock: Stock(
             [
               Grains(2000),
@@ -31,7 +29,6 @@ class Nizhin extends City {
             ],
           ),
         );
-
 
   static List<PriceUnit> generatePriceUnits() {
     return RESOURCES.values.map<PriceUnit>((resType) {
@@ -90,6 +87,9 @@ class Nizhin extends City {
         case RESOURCES.WOOL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);
+        case RESOURCES.GORILKA:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1);
       }
     }).toList();
   }

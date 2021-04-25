@@ -22,8 +22,8 @@ class StockResourceCategoryGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GroupedControl(
-      title: TitleText(ChumakiLocalizations.of(context)
-          .getForKey(resourceCategoryToLocalizedKey(resources.first.category))),
+      title: TitleText(ChumakiLocalizations.getForKey(
+          resourceCategoryToLocalizedKey(resources.first.category))),
       borderColor: Colors.blueGrey,
       width: CITY_DETAILS_VIEW_WIDTH,
       height:
@@ -57,7 +57,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("${ChumakiLocalizations.of(context).labelBuy}:"),
+                              Text("${ChumakiLocalizations.labelBuy}:"),
                               MoneyUnit(Money(forCity.prices
                                   .sellPriceForResource(
                                       resource.cloneWithAmount(1)))),
@@ -66,7 +66,8 @@ class StockResourceCategoryGroup extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("${ChumakiLocalizations.of(context).labelSell}:"),
+                              Text(
+                                  "${ChumakiLocalizations.labelSell}:"),
                               MoneyUnit(Money(forCity.prices
                                   .buyPriceForResource(resource,
                                       withAmount: 1))),

@@ -88,6 +88,8 @@ class Pereyaslav extends City {
         case RESOURCES.WOOL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);
+        case RESOURCES.GORILKA:
+          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
       }
     }).toList();
   }

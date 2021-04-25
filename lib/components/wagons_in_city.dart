@@ -20,41 +20,43 @@ class _WagonsInCityState extends State<WagonsInCity> {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionPanelList(
-      expansionCallback: (i, isOpen) {
-        setState(() {
-          _isOpen[i] = !isOpen;
-        });
-      },
-      children: widget.city.wagons.map((wagon) {
-        return ExpansionPanel(
-          backgroundColor: Colors.grey[400],
-          isExpanded: isOpenForWagon(wagon),
-          headerBuilder: (context, isOpen) => Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Image.asset(Wagon.imagePath, width: 64),
-              Text("Company ${wagon.name}"),
-              StreamBuilder(
-                stream: wagon.changes.stream,
-                builder: (context, _) => WeightShow(wagon),
-              ),
-            ],
-          ),
-          body: StreamBuilder(
-            stream: wagon.changes,
-            builder: (context, snap) => Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+    return Material(
+      child: ExpansionPanelList(
+        expansionCallback: (i, isOpen) {
+          setState(() {
+            _isOpen[i] = !isOpen;
+          });
+        },
+        children: widget.city.wagons.map((wagon) {
+          return ExpansionPanel(
+            backgroundColor: Colors.grey[400],
+            isExpanded: isOpenForWagon(wagon),
+            headerBuilder: (context, isOpen) => Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                TitleText("Відправити"),
-                WagonDispatcher(wagon: wagon, city: widget.city),
-                TitleText("Валка містить"),
-                WagonResourceExchanger(wagon, widget.city),
+                Image.asset(Wagon.imagePath, width: 64),
+                Text("Company ${wagon.name}"),
+                StreamBuilder(
+                  stream: wagon.changes.stream,
+                  builder: (context, _) => WeightShow(wagon),
+                ),
               ],
             ),
-          ),
-        );
-      }).toList(),
+            body: StreamBuilder(
+              stream: wagon.changes,
+              builder: (context, snap) => Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TitleText("Відправити"),
+                  WagonDispatcher(wagon: wagon, city: widget.city),
+                  TitleText("Валка містить"),
+                  WagonResourceExchanger(wagon, widget.city),
+                ],
+              ),
+            ),
+          );
+        }).toList(),
+      ),
     );
   }
 

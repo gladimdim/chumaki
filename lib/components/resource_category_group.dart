@@ -38,7 +38,7 @@ class ResourceCategoryGroup extends StatelessWidget {
               ),
               child: Center(
                 child: TitleText(
-                  ChumakiLocalizations.of(context).getForKey(
+                  ChumakiLocalizations.getForKey(
                       resourceCategoryToLocalizedKey(resources.first.category)),
                 ),
               ),

@@ -12,7 +12,7 @@ class SmallCityAvatar extends StatelessWidget {
     return Row(
       children: [
         Image.asset(city.avatarImagePath, width: 32,),
-        TitleText(ChumakiLocalizations.of(context).getForKey(city.localizedKeyName)),
+        TitleText(ChumakiLocalizations.getForKey(city.localizedKeyName)),
       ],
     );
   }

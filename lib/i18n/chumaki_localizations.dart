@@ -1,18 +1,57 @@
-import 'package:flutter/foundation.dart';
+import 'package:chumaki/i18n/resource_localizations.dart';
 import 'package:flutter/material.dart';
 
 const APP_VERSION = "1.0.6";
 
-class ChumakiLocalizations {
-  ChumakiLocalizations(this.locale);
-
-  static ChumakiLocalizations of(BuildContext context) {
-    return Localizations.of<ChumakiLocalizations>(
-        context, ChumakiLocalizations)!;
+String getDefaultOrUrlLanguage() {
+  var savedLangCode = "uk";
+  // try {
+  //   savedLangCode = AppPreferences.instance.getUILanguage();
+  // } catch (e) {
+  //   savedLangCode = 'uk';
+  // }
+  if (ChumakiLocalizations.supportedLanguageCodes.contains(savedLangCode)) {
+    return savedLangCode;
+  } else {
+    return 'uk';
   }
+}
 
+class InternalLocalizations {
+  late Map<String, Map<String, String>> _localizedMap;
+
+  String operator [](String key) {
+    final lang = _localizedMap[ChumakiLocalizations.locale.languageCode]!;
+    var value = lang[key];
+    if (value != null) {
+      return value;
+    } else {
+      return key;
+    }
+  }
+}
+
+class ChumakiLocalizations {
   static List supportedLanguageCodes = ["uk", "en", "ru"];
-  final Locale locale;
+
+  static Locale locale = Locale(getDefaultOrUrlLanguage());
+
+  static ResourceLocalizations resourceLocalizations = ResourceLocalizations();
+
+  static String getForKey(String key) {
+    final split = key.split('.');
+    if (split.length > 1) {
+      switch (split[0]) {
+        case 'resources':
+          return resourceLocalizations[split[1]];
+        default:
+          return key;
+      }
+    } else {
+      final translatedValue = _localizedValues[locale.languageCode]![split[0]];
+      return translatedValue != null ? translatedValue : split[0];
+    }
+  }
 
   static Map<String, Map<String, String>> _localizedValues = {
     "en": {
@@ -51,7 +90,6 @@ class ChumakiLocalizations {
       "pereyaslav": "Pereyaslav",
       "cherkasy": "Cherkasy",
       "chigirin": "Chigirin",
-      "food": "Food",
       "resources": "Resources",
       "cloths": "Cloths",
       "military": "Military",
@@ -97,7 +135,6 @@ class ChumakiLocalizations {
       "pereyaslav": "Переяслав",
       "cherkasy": "Черкаси",
       "chigirin": "Чигирин",
-      "food": "Їжа",
       "resources": "Ресурси",
       "cloths": "Одяг",
       "military": "Військове",
@@ -141,7 +178,6 @@ class ChumakiLocalizations {
       "pereyaslav": "Переяслав",
       "cherkasy": "Черкассы",
       "chigirin": "Чигирин",
-      "food": "Еда",
       "resources": "Ресурсы",
       "cloths": "Одежда",
       "military": "Военное",
@@ -150,15 +186,6 @@ class ChumakiLocalizations {
       "labelBuy": "Покупка",
     },
   };
-
-  String getForKey(String key) {
-    var value = _localizedValues[locale.languageCode]![key];
-    if (value == null) {
-      return key;
-    } else {
-      return value;
-    }
-  }
 
   String get labelTitle {
     return _localizedValues[locale.languageCode]!["labelTitle"]!;
@@ -200,31 +227,31 @@ class ChumakiLocalizations {
     return _localizedValues[locale.languageCode]!["tooltipSettings"]!;
   }
 
-  String get tooltipSounds {
+  static String get tooltipSounds {
     return _localizedValues[locale.languageCode]!["tooltipSounds"]!;
   }
 
-  String get tooltipNewGame {
+  static String get tooltipNewGame {
     return _localizedValues[locale.languageCode]!["tooltipNewGame"]!;
   }
 
-  String get tooltipShuffle {
+  static String get tooltipShuffle {
     return _localizedValues[locale.languageCode]!["tooltipShuffle"]!;
   }
 
-  String get labelOtherGames {
+  static String get labelOtherGames {
     return _localizedValues[locale.languageCode]!["labelOtherGames"]!;
   }
 
-  String get nizhin {
+  static String get nizhin {
     return _localizedValues[locale.languageCode]!["labelNizhin"]!;
   }
 
-  String get sich {
+  static String get sich {
     return _localizedValues[locale.languageCode]!["labelSich"]!;
   }
 
-  String get chigirin {
+  static String get chigirin {
     return _localizedValues[locale.languageCode]!["labelChigirin"]!;
   }
 
@@ -232,28 +259,11 @@ class ChumakiLocalizations {
     return _localizedValues[locale.languageCode]![key] ?? key;
   }
 
-  String get labelSell {
+  static String get labelSell {
     return _localizedValues[locale.languageCode]!["labelSell"]!;
   }
-  String get labelBuy {
+
+  static String get labelBuy {
     return _localizedValues[locale.languageCode]!["labelBuy"]!;
   }
-}
-
-class HexLocalizationsDelegate
-    extends LocalizationsDelegate<ChumakiLocalizations> {
-  const HexLocalizationsDelegate();
-
-  @override
-  bool isSupported(Locale locale) =>
-      ChumakiLocalizations.supportedLanguageCodes.contains(locale.languageCode);
-
-  @override
-  Future<ChumakiLocalizations> load(Locale locale) {
-    return SynchronousFuture<ChumakiLocalizations>(
-        ChumakiLocalizations(locale));
-  }
-
-  @override
-  bool shouldReload(HexLocalizationsDelegate old) => false;
 }

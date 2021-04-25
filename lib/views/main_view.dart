@@ -149,7 +149,7 @@ class _MainViewState extends State<MainView> {
                         Align(
                           alignment: Alignment.bottomCenter,
                           child: Text(
-                            ChumakiLocalizations.of(context).getForKey(city.localizedKeyName),
+                            ChumakiLocalizations.getForKey(city.localizedKeyName),
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 8 * city.size,
