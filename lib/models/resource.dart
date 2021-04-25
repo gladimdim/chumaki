@@ -161,7 +161,7 @@ class Fish extends Resource {
 
 class Bread extends Resource {
   Bread(int amount)
-      : super("bread", amount,
+      : super("resources.bread", amount,
             weightPerPoint: 0.1,
             type: RESOURCES.BREAD,
             color: Colors.amber,
@@ -290,15 +290,15 @@ class Gorilka extends Resource {
 String resourceCategoryToLocalizedKey(RESOURCE_CATEGORY category) {
   switch (category) {
     case RESOURCE_CATEGORY.RESOURCES:
-      return "resources";
+      return "resources.resources";
     case RESOURCE_CATEGORY.CLOTH:
-      return "cloths";
+      return "resources.cloths";
     case RESOURCE_CATEGORY.MILITARY:
-      return "military";
+      return "resources.military";
     case RESOURCE_CATEGORY.FOOD:
-      return "food";
+      return "resources.food";
     case RESOURCE_CATEGORY.LUXURY:
-      return "luxury";
+      return "resources.luxury";
   }
 }
 
