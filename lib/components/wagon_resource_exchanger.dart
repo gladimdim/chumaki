@@ -3,10 +3,11 @@ import 'package:chumaki/components/resource_amount_selector.dart';
 import 'package:chumaki/components/resource_category_group.dart';
 import 'package:chumaki/components/wagon_stock_bar.dart';
 import 'package:chumaki/models/city.dart';
-import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
+
+import 'package:chumaki/views/inherited_company.dart';
 
 class WagonResourceExchanger extends StatefulWidget {
   final Wagon wagon;
@@ -23,6 +24,7 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
 
   @override
   Widget build(BuildContext context) {
+    var company = InheritedCompany.of(context).company;
     return Column(
       children: [
         WagonStockBar(
@@ -46,20 +48,24 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: StreamBuilder(
-                      stream: Company.instance.changes,
+                      stream: company.changes,
                       builder: (context, snap) {
-                        return MoneyUnit(Company.instance.getMoney());
+                        return MoneyUnit(company.getMoney());
                       }),
                 ),
               ),
             ],
           ),
         ),
-        ...groupResourcesByCategory(RESOURCES.values.where((resType) {
-          var fakeResource = Resource.fromType(resType);
-          return widget.wagon.stock.hasResource(fakeResource) ||
-              widget.city.stock.hasResource(fakeResource);
-        }).map<Resource>(Resource.fromType).toList().toList())
+        ...groupResourcesByCategory(RESOURCES.values
+                .where((resType) {
+                  var fakeResource = Resource.fromType(resType);
+                  return widget.wagon.stock.hasResource(fakeResource) ||
+                      widget.city.stock.hasResource(fakeResource);
+                })
+                .map<Resource>(Resource.fromType)
+                .toList()
+                .toList())
             .map(
           (List<Resource> groupedResources) {
             return ResourceCategoryGroup(

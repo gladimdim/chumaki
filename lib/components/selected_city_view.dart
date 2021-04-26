@@ -6,9 +6,9 @@ import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/selectable_button.dart';
 import 'package:chumaki/components/wagons_in_city.dart';
 import 'package:chumaki/models/city.dart';
-import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/task.dart';
+import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 
 const CITY_DETAILS_VIEW_WIDTH = 400.0;
@@ -29,8 +29,9 @@ class _SelectedCityViewState extends State<SelectedCityView> {
 
   @override
   Widget build(BuildContext context) {
+    var company = InheritedCompany.of(context).company;
     return StreamBuilder(
-      stream: Company.instance.changes,
+      stream: company.changes,
       builder: (context, data) => Column(
         children: [
           StreamBuilder(
@@ -90,7 +91,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                   }),
             ),
             TitleText("Incoming companies: "),
-            ...Company.instance.cityRoutes
+            ...company.cityRoutes
                 .where((route) =>
                     route.to.equalsTo(widget.city) ||
                     route.from.equalsTo(widget.city))
@@ -102,7 +103,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                 .map<Widget>((routeTask) =>
                     RouteTaskRowProgress(routeTask, widget.city)),
             TitleText("Outgoing companies: "),
-            ...Company.instance.cityRoutes
+            ...company.cityRoutes
                 .where((route) =>
                     route.to.equalsTo(widget.city) ||
                     route.from.equalsTo(widget.city))

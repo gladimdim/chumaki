@@ -67,10 +67,10 @@ class City {
     kyiv,
   ];
 
-  bool sellResource({required Resource resource, required Wagon toWagon}) {
+  bool sellResource({required Resource resource, required Wagon toWagon, required Company company}) {
     var price =
         prices.sellPriceForResource(resource, withAmount: resource.amount);
-    var hasMoney = Company.instance.hasMoney(price);
+    var hasMoney = company.hasMoney(price);
     if (!hasMoney) {
       return false;
     }
@@ -79,18 +79,18 @@ class City {
       return false;
     }
     toWagon.stock.addResource(resource);
-    Company.instance.removeMoney(price);
+    company.removeMoney(price);
     return true;
   }
 
-  bool buyResource({required Resource resource, required Wagon fromWagon}) {
+  bool buyResource({required Resource resource, required Wagon fromWagon, required Company company}) {
     var price =
         prices.buyPriceForResource(resource, withAmount: resource.amount);
 
     final canSell = fromWagon.stock.removeResource(resource);
     if (canSell) {
       stock.addResource(resource);
-      Company.instance.addMoney(price);
+      company.addMoney(price);
     }
     return canSell;
   }
