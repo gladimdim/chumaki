@@ -19,6 +19,7 @@ dependencies:
   uuid: ^3.0.4
   flutter_localizations:
     sdk: flutter
+  shared_preferences: ^2.0.5
 
 dev_dependencies:
   flutter_test:

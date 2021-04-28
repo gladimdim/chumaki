@@ -1,3 +1,4 @@
+import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/route.dart';
@@ -10,11 +11,16 @@ enum COMPANY_EVENTS { TASK_STARTED, TASK_ENDED, MONEY_ADDED, MONEY_REMOVED }
 
 class Company {
   final List<CityRoute> cityRoutes = CityRoute.allRoutes;
-  static final Company instance = Company._internal();
   double _money = 500;
 
-  Company._internal() {
+  Company() {
     changes = _innerChanges.stream;
+    changes.listen((event) {
+      switch (event) {
+        case COMPANY_EVENTS.TASK_STARTED: save(); break;
+        case COMPANY_EVENTS.TASK_ENDED: save(); break;
+      }
+    });
   }
 
   final BehaviorSubject<COMPANY_EVENTS> _innerChanges = BehaviorSubject();
@@ -76,6 +82,23 @@ class Company {
     });
     _innerChanges.add(COMPANY_EVENTS.TASK_STARTED);
   }
+
+  Future save() async {
+    await AppPreferences.instance.saveGameToDisk(toJson());
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "money": _money,
+    };
+  }
+
+  static Company fromJson(Map<String, dynamic> inputJson) {
+    double money = inputJson["money"] as double;
+    var company = Company().._money = money;
+    return company;
+  }
+
 
   void dispose() {
     _innerChanges.close();
