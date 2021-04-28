@@ -5,6 +5,7 @@ import 'package:chumaki/components/stock_resource_category_group.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/selectable_button.dart';
 import 'package:chumaki/components/wagons_in_city.dart';
+import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/task.dart';
@@ -43,12 +44,12 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                   selected: showLocalMarket,
                   onPressed: localMarketSelected,
                   child: TitleText(
-                      "Market"),
+                      ChumakiLocalizations.labelMarket),
                 ),
                 SelectableButton(
                     selected: showAdvisor,
                     onPressed: advisorSelected,
-                    child: TitleText("Advisor")),
+                    child: TitleText(ChumakiLocalizations.labelPub)),
                 SelectableButton(
                     selected: showWorldMarket,
                     onPressed: worldMarketSelected,
@@ -72,7 +73,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TitleText("Містить"),
+                        TitleText(ChumakiLocalizations.labelContains),
                         if (!widget.city.stock.isEmpty)
                           Column(
                             children: groupResourcesByCategory(

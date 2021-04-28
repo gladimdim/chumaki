@@ -75,6 +75,10 @@ class ChumakiLocalizations {
       "chigirin": "Chigirin",
       "labelSell": "Sell",
       "labelBuy": "Buy",
+      "labelContains": "Contains",
+      "labelNothing": "Nothing",
+      "labelMarket": "Market",
+      "labelPub": "Pub",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -97,6 +101,10 @@ class ChumakiLocalizations {
       "chigirin": "Чигирин",
       "labelSell": "Продати",
       "labelBuy": "Купити",
+      "labelContains": "Містить",
+      "labelNothing": "Нічого",
+      "labelMarket": "Ринок",
+      "labelPub": "Шинок",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -118,6 +126,10 @@ class ChumakiLocalizations {
       "chigirin": "Чигирин",
       "labelSell": "Продажа",
       "labelBuy": "Покупка",
+      "labelContains": "Имеет",
+      "labelNothing": "Ничего",
+      "labelMarket": "Рынок",
+      "labelPub": "Шинок",
     },
   };
 
@@ -175,6 +187,22 @@ class ChumakiLocalizations {
 
   static String get labelOtherGames {
     return _localizedValues[locale.languageCode]!["labelOtherGames"]!;
+  }
+
+  static String get labelContains {
+    return _localizedValues[locale.languageCode]!["labelContains"]!;
+  }
+
+  static String get labelNothing {
+    return _localizedValues[locale.languageCode]!["labelNothing"]!;
+  }
+
+  static String get labelMarket {
+    return _localizedValues[locale.languageCode]!["labelMarket"]!;
+  }
+
+  static String get labelPub {
+    return _localizedValues[locale.languageCode]!["labelPub"]!;
   }
 
   static String get nizhin {

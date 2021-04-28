@@ -9,7 +9,6 @@ import 'package:chumaki/models/company.dart';
 
 import 'package:chumaki/models/image_on_canvas.dart';
 import 'package:chumaki/models/wagon.dart';
-import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/models/route.dart';
 import 'dart:ui' as ui;

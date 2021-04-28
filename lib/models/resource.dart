@@ -161,7 +161,7 @@ class Fish extends Resource {
 
 class Bread extends Resource {
   Bread(int amount)
-      : super("resources.bread", amount,
+      : super("bread", amount,
             weightPerPoint: 0.1,
             type: RESOURCES.BREAD,
             color: Colors.amber,
