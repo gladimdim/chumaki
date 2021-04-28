@@ -35,11 +35,16 @@ class Price {
   }
 
   Map<String, dynamic> toJson() {
-    throw UnimplementedError();
+    return {
+      "prices": prices
+          .map((e) => e.toJson()).toList(),
+    };
   }
 
   static Price fromJson(Map<String, dynamic> json) {
-    throw UnimplementedError();
+    List prices = json["prices"] as List;
+    List<PriceUnit> units = prices.map((priceUnitJson) => PriceUnit.fromJson(priceUnitJson)).toList();
+    return Price(units);
   }
 }
 
