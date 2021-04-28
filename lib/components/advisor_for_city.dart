@@ -2,8 +2,10 @@ import 'package:chumaki/components/city/small_city_avatar.dart';
 import 'package:chumaki/components/money_unit.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/resource.dart';
 import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 import 'package:chumaki/extensions/list.dart';
@@ -18,8 +20,10 @@ class AdvisorForCity extends StatefulWidget {
 }
 
 class _AdvisorForCityState extends State<AdvisorForCity> {
+
   @override
   Widget build(BuildContext context) {
+    final company = InheritedCompany.of(context).company;
     return Column(
         children: widget.city.wagons.map((wagon) {
           return Container(
@@ -30,7 +34,7 @@ class _AdvisorForCityState extends State<AdvisorForCity> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TitleText("Total price of: ${wagon.name}"),
-                ...calculateTopForWagon(wagon).divideBy(3).map((rowResult) {
+                ...calculateTopForWagon(wagon, company).divideBy(3).map((rowResult) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: rowResult.map((result) {
@@ -49,7 +53,7 @@ class _AdvisorForCityState extends State<AdvisorForCity> {
         }).toList());
   }
 
-  List<Tuple2<City, double>> calculateTopForWagon(wagon) {
+  List<Tuple2<City, double>> calculateTopForWagon(Wagon wagon, Company company) {
     var result = City.allCities.map((city) {
       return Tuple2(city, priceForFullWagonInCity(wagon, city));
     }).toList();

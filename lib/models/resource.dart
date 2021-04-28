@@ -322,3 +322,50 @@ List<List<Resource>> groupResourcesByCategory(List<Resource> resources) {
   });
   return result;
 }
+
+String resourceTypeToString(RESOURCES type) {
+  switch (type) {
+    case RESOURCES.BREAD: return "bread";
+    case RESOURCES.CANNON: return "cannon";
+    case RESOURCES.CHARCOAL: return "charcoal";
+    case RESOURCES.FIREARM: return "firearm";
+    case RESOURCES.FISH: return "fish";
+    case RESOURCES.FUR: return "fur";
+    case RESOURCES.GRAINS: return "grains";
+    case RESOURCES.HORSE: return "horse";
+    case RESOURCES.IRONORE: return "ironore";
+    case RESOURCES.METALPARTS: return "metalparts";
+    case RESOURCES.PLANKS: return "planks";
+    case RESOURCES.POWDER: return "powder";
+    case RESOURCES.SALT: return "salt";
+    case RESOURCES.SILK: return "silk";
+    case RESOURCES.STONE: return "stone";
+    case RESOURCES.WOOD: return "wood";
+    case RESOURCES.WOOL: return "wool";
+    case RESOURCES.GORILKA: return "gorilka";
+  }
+}
+
+RESOURCES resourceTypeFromString(String type) {
+  switch (type) {
+    case "bread": return RESOURCES.BREAD;
+    case "cannon": return RESOURCES.CANNON;
+    case "charcoal": return RESOURCES.CHARCOAL;
+    case "firearm": return RESOURCES.FIREARM;
+    case "fish": return RESOURCES.FISH;
+    case "fur": return RESOURCES.FUR;
+    case "grains": return RESOURCES.GRAINS;
+    case "horse": return RESOURCES.HORSE;
+    case "ironore": return RESOURCES.IRONORE;
+    case "metalparts": return RESOURCES.METALPARTS;
+    case "planks": return RESOURCES.PLANKS;
+    case "powder": return RESOURCES.POWDER;
+    case "salt": return RESOURCES.SALT;
+    case "silk": return RESOURCES.SILK;
+    case "stone": return RESOURCES.STONE;
+    case "wood": return RESOURCES.WOOD;
+    case "wool": return RESOURCES.WOOL;
+    case "gorilka": return RESOURCES.GORILKA;
+    default: throw "Resource type string $type is not recognized.";
+  }
+}

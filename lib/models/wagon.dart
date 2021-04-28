@@ -34,4 +34,12 @@ class Wagon {
   void dispose() {
     changes.close();
   }
+
+  Map<String, dynamic> toJson() {
+    throw UnimplementedError();
+  }
+
+  static Wagon fromJson(Map<String, dynamic> json) {
+    throw UnimplementedError();
+  }
 }

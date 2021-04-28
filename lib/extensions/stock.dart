@@ -66,7 +66,17 @@ class Stock {
     }
   }
 
+  Map<String, dynamic> toJson() {
+    throw UnimplementedError();
+  }
+
+  static Stock fromJson(Map<String, dynamic> json) {
+    throw UnimplementedError();
+  }
+
   void dispose() {
     changes.close();
   }
+  
+  
 }
