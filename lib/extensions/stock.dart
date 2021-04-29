@@ -68,7 +68,7 @@ class Stock {
 
   Map<String, dynamic> toJson() {
     return {
-      "stock": stock.map((e) => e.toJson()).toList();
+      "stock": stock.map((e) => e.toJson()).toList(),
     };
   }
 

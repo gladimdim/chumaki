@@ -45,5 +45,6 @@ class Wagon {
 
   static Wagon fromJson(Map<String, dynamic> json) {
     var stock = Stock.fromJson(json["stock"]);
+    return Wagon(name: json["name"], stock: stock, totalWeightCapacity: json["totalWeightCapacity"]);
   }
 }

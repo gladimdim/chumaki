@@ -42,10 +42,6 @@ class Resource {
 
   Map<String, dynamic> toJson() {
     return {
-      "localizedKey": localizedKey,
-      "weightPerPoint": weightPerPoint,
-      "color": color.toString(),
-      "category": resourceCategoryToString(category),
       "type": resourceTypeToString(type),
       "amount": amount
     };
