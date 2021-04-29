@@ -238,11 +238,14 @@ class _MainViewState extends State<MainView> {
         Positioned(
           top: 10,
           left: 0,
-          child: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.arrow_back_ios),
+          child: Opacity(
+            opacity: 0.5,
+            child: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back_ios),
+            ),
           ),
         ),
       ],
