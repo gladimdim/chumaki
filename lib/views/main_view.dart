@@ -3,6 +3,8 @@ import 'package:chumaki/components/selected_city_view.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/city.dart';
 
+
+import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
 
 import 'package:chumaki/models/image_on_canvas.dart';
@@ -23,10 +25,50 @@ class MainView extends StatefulWidget {
   _MainViewState createState() => _MainViewState();
 }
 
-class _MainViewState extends State<MainView> {
+class _MainViewState extends State<MainView>
+    with TickerProviderStateMixin {
+  TransformationController _transformationController =
+      TransformationController();
+  late AnimationController _animationController;
+  late AnimationController _scaleAnimationController;
+  late Animation<Matrix4> _mapAnimation;
+  var start = Matrix4.identity()..translate(5340.0, 4195);
+  var end = Matrix4.identity()..translate(Sich().point.x, Sich().point.y);
   double animationValue = 0;
   bool showCoordinates = false;
   City? selected;
+
+  @override
+  void initState() {
+    _animationController =
+        AnimationController(duration: Duration(seconds: 5), vsync: this);
+    _scaleAnimationController = AnimationController(
+        lowerBound: 0.1,
+        upperBound: 2.5,
+        vsync: this,
+        duration: Duration(seconds: 5));
+    _mapAnimation =
+        Matrix4Tween(begin: start, end: end).animate(_animationController);
+    _mapAnimation.addListener(() {
+      setState(() {
+        print(_mapAnimation.value);
+        var newMatrix = Matrix4.inverted(_mapAnimation.value);
+        // newMatrix.scale(_scaleAnimationController.value, _scaleAnimationController.value, 1.0);
+        _transformationController.value = newMatrix;
+        // _transformationController.value.scale(2.0, 2.0);
+      });
+    });
+    _transformationController.addListener(() {
+      print(_transformationController.value.getMaxScaleOnAxis());
+    });
+    _animationController.addStatusListener(print);
+    _animationController.forward();
+    _scaleAnimationController.forward();
+    _scaleAnimationController.addListener(() {
+      print("Scale value: ${_scaleAnimationController.value}");
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +76,10 @@ class _MainViewState extends State<MainView> {
     return Stack(
       children: [
         InteractiveViewer(
-          minScale: 0.2,
+          transformationController: _transformationController,
+          minScale: 0.1,
           constrained: false,
-          maxScale: 3,
+          maxScale: 3.0,
           child: Stack(
             children: [
               Image.asset(
@@ -250,6 +293,13 @@ class _MainViewState extends State<MainView> {
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    _transformationController.dispose();
+    super.dispose();
   }
 }
 
