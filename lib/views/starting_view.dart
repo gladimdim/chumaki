@@ -1,4 +1,5 @@
 import 'package:chumaki/app_preferences.dart';
+import 'package:chumaki/components/bordered_container.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/views/main_view.dart';
@@ -26,25 +27,41 @@ class _StartingViewState extends State<StartingView> {
         children: [
           TextButton(
               onPressed: () => _loadGamePressed(context, Company()),
-              child: TitleText("New Game")),
+              child: BorderedContainer(
+                  child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: TitleText("New Game"),
+              ))),
           FutureBuilder(
             future: _appPreferencesInit(),
             builder: (context, snapshot) {
               var savedGame = AppPreferences.instance.readGameSave();
-              Company company;
               if (savedGame == null) {
-                return TextButton(onPressed: null, child: TitleText("No saved game"));
+                return TextButton(
+                    onPressed: null,
+                    child: BorderedContainer(
+                        child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: TitleText("No saved game"),
+                    )));
               } else {
                 return TextButton(
-                    onPressed: () =>
-                        _loadGamePressed(context, Company.fromJson(savedGame)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TitleText("Load Game"),
-                        IconButton(onPressed: _removeSave, icon: Icon(Icons.delete)),
-                      ],
-                    ));
+                  onPressed: () =>
+                      _loadGamePressed(context, Company.fromJson(savedGame)),
+                  child: BorderedContainer(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TitleText("Load Game"),
+                          IconButton(
+                              onPressed: _removeSave, icon: Icon(Icons.delete)),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
               }
             },
           ),
@@ -66,8 +83,8 @@ class _StartingViewState extends State<StartingView> {
     });
   }
 
-  _loadGamePressed(BuildContext context, Company company) {
-    Navigator.push(
+  _loadGamePressed(BuildContext context, Company company) async {
+    await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => Material(
@@ -80,5 +97,8 @@ class _StartingViewState extends State<StartingView> {
         ),
       ),
     );
+    setState(() {
+      _appPreferencesInitter = AsyncMemoizer();
+    });
   }
 }
