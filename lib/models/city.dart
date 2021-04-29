@@ -145,12 +145,14 @@ class City {
 
   static City fromJson(Map<String, dynamic> input) {
     var pointJson = input["point"];
+    List wagonJson = input["wagons"];
     return City(
       point: Point(pointJson["x"], pointJson["y"]),
       name: input["name"],
       stock: Stock.fromJson(input["stock"]),
       prices: Price.fromJson(input["prices"]),
       localizedKeyName: input["localizedKeyName"],
+      wagons: wagonJson.map((e) => Wagon.fromJson(e)).toList(),
     );
   }
 }

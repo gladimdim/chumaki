@@ -1,6 +1,7 @@
 import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:chumaki/views/main_view.dart';
+import 'package:chumaki/views/starting_view.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:async/async.dart';
@@ -27,22 +28,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Дике Поле: Чумаки',
       home: Scaffold(
-        body: FutureBuilder(
-          future: _appPreferencesInit(),
-          builder: (context, snapshot) {
-            var savedGame = AppPreferences.instance.readGameSave();
-            Company company;
-            if (savedGame == null) {
-              company = Company();
-            } else {
-              company = Company.fromJson(savedGame);
-            }
-            return InheritedCompany(
-              company: company,
-              child: MainView(company: company),
-            );
-          },
-        ),
+        body: StartingView(),
       ),
     );
   }
