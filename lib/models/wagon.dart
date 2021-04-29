@@ -36,10 +36,14 @@ class Wagon {
   }
 
   Map<String, dynamic> toJson() {
-    throw UnimplementedError();
+    return {
+      "stock": stock.toJson(),
+      "name": name,
+      "totalWeightCapacity": totalWeightCapacity,
+    };
   }
 
   static Wagon fromJson(Map<String, dynamic> json) {
-    throw UnimplementedError();
+    var stock = Stock.fromJson(json["stock"]);
   }
 }

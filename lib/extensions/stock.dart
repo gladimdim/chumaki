@@ -67,11 +67,14 @@ class Stock {
   }
 
   Map<String, dynamic> toJson() {
-    throw UnimplementedError();
+    return {
+      "stock": stock.map((e) => e.toJson()).toList();
+    };
   }
 
   static Stock fromJson(Map<String, dynamic> json) {
-    throw UnimplementedError();
+    List resourcesJson = json["stock"] as List;
+    return Stock(resourcesJson.map((e) => Resource.fromJson(e)).toList());
   }
 
   void dispose() {
