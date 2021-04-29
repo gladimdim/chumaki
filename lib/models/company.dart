@@ -12,8 +12,14 @@ enum COMPANY_EVENTS { TASK_STARTED, TASK_ENDED, MONEY_ADDED, MONEY_REMOVED }
 class Company {
   final List<CityRoute> cityRoutes = CityRoute.allRoutes;
   double _money = 500;
+  late List<City> allCities;
 
-  Company() {
+  Company({cities}) {
+    if (cities == null) {
+      this.allCities =  City.allCities;
+    } else {
+      this.allCities = City.allCities;
+    }
     changes = _innerChanges.stream;
     changes.listen((event) {
       switch (event) {
@@ -90,6 +96,7 @@ class Company {
   Map<String, dynamic> toJson() {
     return {
       "money": _money,
+      "allCities": allCities.map((city) => city.toJson()).toList(),
     };
   }
 

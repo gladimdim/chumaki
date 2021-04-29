@@ -4,6 +4,7 @@ import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 import 'title_text.dart';
 import 'package:chumaki/extensions/list.dart';
@@ -28,6 +29,8 @@ class _PriceComparisonState extends State<PriceComparison> {
 
   @override
   Widget build(BuildContext context) {
+
+    final company = InheritedCompany.of(context).company;
     var currentSell =
     widget.currentCity.prices.sellPriceForResource(selectedResource.cloneWithAmount(1));
     return SingleChildScrollView(
@@ -51,7 +54,7 @@ class _PriceComparisonState extends State<PriceComparison> {
                   );
                 }).toList()),
           ),
-          ...City.allCities
+          ...company.allCities
               .where((city) => city != widget.currentCity)
               .toList()
               .divideBy(2)

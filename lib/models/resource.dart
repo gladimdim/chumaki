@@ -1,6 +1,6 @@
+import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:flutter/material.dart';
 
-enum RESOURCE_CATEGORY { MILITARY, CLOTH, RESOURCES, LUXURY, FOOD }
 enum RESOURCES {
   BREAD,
   CANNON,
@@ -38,6 +38,19 @@ class Resource {
 
   String get imagePath {
     return "images/resources/${this.localizedKey}/${this.localizedKey}.png";
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "type": resourceTypeToString(type),
+      "amount": amount
+    };
+  }
+
+  static Resource fromJson(Map<String, dynamic> input) {
+    var type = resourceTypeFromString(input["type"]);
+    var resource = Resource.fromType(type)..amount = input["amount"];
+    return resource;
   }
 
   static Resource fromType(RESOURCES type) {
@@ -161,7 +174,7 @@ class Fish extends Resource {
 
 class Bread extends Resource {
   Bread(int amount)
-      : super("resources.bread", amount,
+      : super("bread", amount,
             weightPerPoint: 0.1,
             type: RESOURCES.BREAD,
             color: Colors.amber,
@@ -281,10 +294,10 @@ class Stone extends Resource {
 class Gorilka extends Resource {
   Gorilka(int amount)
       : super("gorilka", amount,
-      type: RESOURCES.GORILKA,
-      weightPerPoint: 5,
-      color: Colors.black45,
-      category: RESOURCE_CATEGORY.FOOD);
+            type: RESOURCES.GORILKA,
+            weightPerPoint: 5,
+            color: Colors.black45,
+            category: RESOURCE_CATEGORY.FOOD);
 }
 
 String resourceCategoryToLocalizedKey(RESOURCE_CATEGORY category) {
@@ -321,4 +334,88 @@ List<List<Resource>> groupResourcesByCategory(List<Resource> resources) {
     }
   });
   return result;
+}
+
+String resourceTypeToString(RESOURCES type) {
+  switch (type) {
+    case RESOURCES.BREAD:
+      return "bread";
+    case RESOURCES.CANNON:
+      return "cannon";
+    case RESOURCES.CHARCOAL:
+      return "charcoal";
+    case RESOURCES.FIREARM:
+      return "firearm";
+    case RESOURCES.FISH:
+      return "fish";
+    case RESOURCES.FUR:
+      return "fur";
+    case RESOURCES.GRAINS:
+      return "grains";
+    case RESOURCES.HORSE:
+      return "horse";
+    case RESOURCES.IRONORE:
+      return "ironore";
+    case RESOURCES.METALPARTS:
+      return "metalparts";
+    case RESOURCES.PLANKS:
+      return "planks";
+    case RESOURCES.POWDER:
+      return "powder";
+    case RESOURCES.SALT:
+      return "salt";
+    case RESOURCES.SILK:
+      return "silk";
+    case RESOURCES.STONE:
+      return "stone";
+    case RESOURCES.WOOD:
+      return "wood";
+    case RESOURCES.WOOL:
+      return "wool";
+    case RESOURCES.GORILKA:
+      return "gorilka";
+  }
+}
+
+RESOURCES resourceTypeFromString(String type) {
+  switch (type) {
+    case "bread":
+      return RESOURCES.BREAD;
+    case "cannon":
+      return RESOURCES.CANNON;
+    case "charcoal":
+      return RESOURCES.CHARCOAL;
+    case "firearm":
+      return RESOURCES.FIREARM;
+    case "fish":
+      return RESOURCES.FISH;
+    case "fur":
+      return RESOURCES.FUR;
+    case "grains":
+      return RESOURCES.GRAINS;
+    case "horse":
+      return RESOURCES.HORSE;
+    case "ironore":
+      return RESOURCES.IRONORE;
+    case "metalparts":
+      return RESOURCES.METALPARTS;
+    case "planks":
+      return RESOURCES.PLANKS;
+    case "powder":
+      return RESOURCES.POWDER;
+    case "salt":
+      return RESOURCES.SALT;
+    case "silk":
+      return RESOURCES.SILK;
+    case "stone":
+      return RESOURCES.STONE;
+    case "wood":
+      return RESOURCES.WOOD;
+    case "wool":
+      return RESOURCES.WOOL;
+    case "gorilka":
+      return RESOURCES.GORILKA;
+    default:
+      throw "Resource type string $type is not recognized.";
+  }
 }

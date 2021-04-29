@@ -22,15 +22,15 @@ class City {
   final Stock stock;
   final String localizedKeyName;
 
+  final double size;
+  late List<Wagon> wagons;
+
+  final Price prices;
+  BehaviorSubject changes = BehaviorSubject();
+
   String get avatarImagePath {
     return "images/cities/avatars/$localizedKeyName.png";
   }
-
-  final double size;
-  late List<Wagon> wagons;
-  BehaviorSubject changes = BehaviorSubject();
-
-  final Price prices;
 
   City(
       {required this.point,
@@ -67,7 +67,10 @@ class City {
     kyiv,
   ];
 
-  bool sellResource({required Resource resource, required Wagon toWagon, required Company company}) {
+  bool sellResource(
+      {required Resource resource,
+      required Wagon toWagon,
+      required Company company}) {
     var price =
         prices.sellPriceForResource(resource, withAmount: resource.amount);
     var hasMoney = company.hasMoney(price);
@@ -83,7 +86,10 @@ class City {
     return true;
   }
 
-  bool buyResource({required Resource resource, required Wagon fromWagon, required Company company}) {
+  bool buyResource(
+      {required Resource resource,
+      required Wagon fromWagon,
+      required Company company}) {
     var price =
         prices.buyPriceForResource(resource, withAmount: resource.amount);
 
@@ -123,5 +129,28 @@ class City {
 
   bool canSellResource(Resource res) {
     return stock.hasEnough(res);
+  }
+
+  Map<String, Object> toJson() {
+    return {
+      "name": name,
+      "stock": stock.toJson(),
+      "point": {"x": point.x, "y": point.y},
+      "localizedKeyName": localizedKeyName,
+      "size": size,
+      "wagons": wagons.map((wagon) => wagon.toJson()).toList(),
+      "prices": prices.toJson(),
+    };
+  }
+
+  static City fromJson(Map<String, dynamic> input) {
+    var pointJson = input["point"];
+    return City(
+      point: Point(pointJson["x"], pointJson["y"]),
+      name: input["name"],
+      stock: Stock.fromJson(input["stock"]),
+      prices: Price.fromJson(input["prices"]),
+      localizedKeyName: input["localizedKeyName"],
+    );
   }
 }

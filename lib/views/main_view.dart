@@ -1,10 +1,8 @@
-import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/selected_city_view.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/city.dart';
 
-import 'package:async/async.dart';
 import 'package:chumaki/models/company.dart';
 
 import 'package:chumaki/models/image_on_canvas.dart';
@@ -20,22 +18,19 @@ class MainView extends StatefulWidget {
   final Company company;
 
   MainView({required this.company});
+
   @override
   _MainViewState createState() => _MainViewState();
 }
 
 class _MainViewState extends State<MainView> {
-  final AsyncMemoizer _appPreferencesInitter = AsyncMemoizer();
   double animationValue = 0;
   bool showCoordinates = false;
   City? selected;
 
-  _appPreferencesInit() {
-    return _appPreferencesInitter.runOnce(() => AppPreferences.instance.init());
-  }
-
   @override
   Widget build(BuildContext context) {
+    final company = InheritedCompany.of(context).company;
     return InteractiveViewer(
       minScale: 0.2,
       constrained: false,
@@ -117,7 +112,7 @@ class _MainViewState extends State<MainView> {
           // ...Company.instance.tasks.map((routeTask) {
           //   return AnimatedRouteTask(routeTask);
           // }).toList(),
-          ...City.allCities.map((city) {
+          ...company.allCities.map((city) {
             return Positioned(
               top: city.point.y,
               left: city.point.x,
@@ -162,7 +157,8 @@ class _MainViewState extends State<MainView> {
                         Align(
                           alignment: Alignment.bottomCenter,
                           child: Text(
-                            ChumakiLocalizations.getForKey(city.localizedKeyName),
+                            ChumakiLocalizations.getForKey(
+                                city.localizedKeyName),
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 8 * city.size,

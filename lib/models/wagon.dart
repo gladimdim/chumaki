@@ -34,4 +34,17 @@ class Wagon {
   void dispose() {
     changes.close();
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "stock": stock.toJson(),
+      "name": name,
+      "totalWeightCapacity": totalWeightCapacity,
+    };
+  }
+
+  static Wagon fromJson(Map<String, dynamic> json) {
+    var stock = Stock.fromJson(json["stock"]);
+    return Wagon(name: json["name"], stock: stock, totalWeightCapacity: json["totalWeightCapacity"]);
+  }
 }

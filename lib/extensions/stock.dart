@@ -66,7 +66,20 @@ class Stock {
     }
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      "stock": stock.map((e) => e.toJson()).toList(),
+    };
+  }
+
+  static Stock fromJson(Map<String, dynamic> json) {
+    List resourcesJson = json["stock"] as List;
+    return Stock(resourcesJson.map((e) => Resource.fromJson(e)).toList());
+  }
+
   void dispose() {
     changes.close();
   }
+  
+  
 }
