@@ -13,7 +13,7 @@ void main() {
     test("Can serialize/deserialize City object", () {
       var city = City(point: Point(15, 13), name: "Testing", stock: Stock([Bread(15), Stone(30)]), prices: Price([PriceUnit(RESOURCES.BREAD, 10), PriceUnit(RESOURCES.STONE, 3)]), localizedKeyName: "testing");
       var newCity = City.fromJson(city.toJson());
-      expect(newCity.name, equals(city.name + "124"), reason: "City name restored");
+      expect(newCity.name, equals(city.name), reason: "City name restored");
     });
   });
 }
