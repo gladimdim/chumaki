@@ -135,7 +135,7 @@ class City {
     return {
       "name": name,
       "stock": stock.toJson(),
-      "point": {"x": point.x, "y": point.y },
+      "point": {"x": point.x, "y": point.y},
       "localizedKeyName": localizedKeyName,
       "size": size,
       "wagons": wagons.map((wagon) => wagon.toJson()).toList(),
@@ -144,6 +144,13 @@ class City {
   }
 
   static City fromJson(Map<String, dynamic> input) {
-    throw UnimplementedError();
+    var pointJson = input["point"];
+    return City(
+      point: Point(pointJson["x"], pointJson["y"]),
+      name: input["name"],
+      stock: Stock.fromJson(input["stock"]),
+      prices: Price.fromJson(input["prices"]),
+      localizedKeyName: input["localizedKeyName"],
+    );
   }
 }
