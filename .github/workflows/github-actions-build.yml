@@ -1,5 +1,4 @@
 name: Flutter build
-  - uses: subosito/flutter-action@v1.5.0
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -22,7 +21,7 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: '12.x'
-      - uses: subosito/flutter-action@v1
+      - uses: subosito/flutter-action@v1.5.0
         with:
           flutter-version: '2.0.5'
       - run: flutter pub get
