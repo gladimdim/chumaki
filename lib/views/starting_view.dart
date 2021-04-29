@@ -12,7 +12,7 @@ class StartingView extends StatefulWidget {
 }
 
 class _StartingViewState extends State<StartingView> {
-  final AsyncMemoizer _appPreferencesInitter = AsyncMemoizer();
+  AsyncMemoizer _appPreferencesInitter = AsyncMemoizer();
 
   _appPreferencesInit() {
     return _appPreferencesInitter.runOnce(() => AppPreferences.instance.init());
@@ -38,7 +38,13 @@ class _StartingViewState extends State<StartingView> {
                 return TextButton(
                     onPressed: () =>
                         _loadGamePressed(context, Company.fromJson(savedGame)),
-                    child: TitleText("Load Game"));
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TitleText("Load Game"),
+                        IconButton(onPressed: _removeSave, icon: Icon(Icons.delete)),
+                      ],
+                    ));
               }
             },
           ),
@@ -51,6 +57,13 @@ class _StartingViewState extends State<StartingView> {
         ],
       ),
     );
+  }
+
+  _removeSave() async {
+    await AppPreferences.instance.removeSavedGame();
+    setState(() {
+      _appPreferencesInitter = AsyncMemoizer();
+    });
   }
 
   _loadGamePressed(BuildContext context, Company company) {
