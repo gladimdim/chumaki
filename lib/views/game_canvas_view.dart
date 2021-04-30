@@ -34,22 +34,26 @@ class _GameCanvasViewState extends State<GameCanvasView>
       TransformationController();
   late AnimationController _animationController;
   late Animation<Matrix4> _mapAnimation;
+  final Duration animationDuration = Duration(seconds: 8);
   double animationValue = 0;
   bool showCoordinates = false;
   City? selected;
 
   @override
   void initState() {
+    // pan animation
     var centerPoint = calculateCenterPoint();
     var start = Matrix4.identity()..translate(CANVAS_WIDTH, CANVAS_HEIGHT);
     var end = Matrix4.identity()..translate(centerPoint.x, centerPoint.y);
     _animationController =
-        AnimationController(duration: Duration(seconds: 5), vsync: this);
+        AnimationController(duration: animationDuration, vsync: this);
     _mapAnimation =
         Matrix4Tween(begin: start, end: end).animate(_animationController);
     _mapAnimation.addListener(() {
       setState(() {
-        _transformationController.value = Matrix4.inverted(_mapAnimation.value);
+        final value = Matrix4.inverted(_mapAnimation.value);
+        // value.scale(_scaleAnimationController.value, _scaleAnimationController.value);
+        _transformationController.value = value;
       });
     });
     _animationController.forward();

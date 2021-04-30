@@ -2,7 +2,7 @@ import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/company.dart';
-import 'package:chumaki/views/main_view.dart';
+import 'package:chumaki/views/game_canvas_view.dart';
 import 'package:flutter/material.dart';
 import 'package:async/async.dart';
 import 'package:chumaki/views/inherited_company.dart';
