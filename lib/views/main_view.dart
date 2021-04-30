@@ -49,8 +49,7 @@ class _GameCanvasViewState extends State<GameCanvasView>
         Matrix4Tween(begin: start, end: end).animate(_animationController);
     _mapAnimation.addListener(() {
       setState(() {
-        var newMatrix = Matrix4.inverted(_mapAnimation.value);
-        _transformationController.value = newMatrix;
+        _transformationController.value = Matrix4.inverted(_mapAnimation.value);
       });
     });
     _animationController.forward();
