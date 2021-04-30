@@ -1,14 +1,16 @@
+import 'dart:math';
+
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/selected_city_view.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/city.dart';
-
 
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
 
 import 'package:chumaki/models/image_on_canvas.dart';
 import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/utils/points.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/models/route.dart';
@@ -16,57 +18,42 @@ import 'dart:ui' as ui;
 
 const CITY_SIZE = 50;
 
-class MainView extends StatefulWidget {
+class GameCanvasView extends StatefulWidget {
   final Company company;
+  final Size screenSize;
 
-  MainView({required this.company});
+  GameCanvasView({required this.company, required this.screenSize});
 
   @override
-  _MainViewState createState() => _MainViewState();
+  _GameCanvasViewState createState() => _GameCanvasViewState();
 }
 
-class _MainViewState extends State<MainView>
+class _GameCanvasViewState extends State<GameCanvasView>
     with TickerProviderStateMixin {
   TransformationController _transformationController =
       TransformationController();
   late AnimationController _animationController;
-  late AnimationController _scaleAnimationController;
   late Animation<Matrix4> _mapAnimation;
-  var start = Matrix4.identity()..translate(5340.0, 4195);
-  var end = Matrix4.identity()..translate(Sich().point.x, Sich().point.y);
   double animationValue = 0;
   bool showCoordinates = false;
   City? selected;
 
   @override
   void initState() {
+    var centerPoint = calculateCenterPoint();
+    var start = Matrix4.identity()..translate(CANVAS_WIDTH, CANVAS_HEIGHT);
+    var end = Matrix4.identity()..translate(centerPoint.x, centerPoint.y);
     _animationController =
         AnimationController(duration: Duration(seconds: 5), vsync: this);
-    _scaleAnimationController = AnimationController(
-        lowerBound: 0.1,
-        upperBound: 2.5,
-        vsync: this,
-        duration: Duration(seconds: 5));
     _mapAnimation =
         Matrix4Tween(begin: start, end: end).animate(_animationController);
     _mapAnimation.addListener(() {
       setState(() {
-        print(_mapAnimation.value);
         var newMatrix = Matrix4.inverted(_mapAnimation.value);
-        // newMatrix.scale(_scaleAnimationController.value, _scaleAnimationController.value, 1.0);
         _transformationController.value = newMatrix;
-        // _transformationController.value.scale(2.0, 2.0);
       });
     });
-    _transformationController.addListener(() {
-      print(_transformationController.value.getMaxScaleOnAxis());
-    });
-    _animationController.addStatusListener(print);
     _animationController.forward();
-    _scaleAnimationController.forward();
-    _scaleAnimationController.addListener(() {
-      print("Scale value: ${_scaleAnimationController.value}");
-    });
     super.initState();
   }
 
@@ -84,8 +71,8 @@ class _MainViewState extends State<MainView>
             children: [
               Image.asset(
                 "images/boplan_map_huge.jpg",
-                width: 5340,
-                height: 4195,
+                width: CANVAS_WIDTH,
+                height: CANVAS_HEIGHT,
               ),
               if (showCoordinates)
                 ...List.generate(53, (index) {
@@ -94,7 +81,7 @@ class _MainViewState extends State<MainView>
                     left: index * 100,
                     child: Container(
                       width: 5,
-                      height: 4195,
+                      height: CANVAS_HEIGHT,
                       color: Colors.black,
                       child: Text(
                         (index * 100).toString(),
@@ -110,7 +97,7 @@ class _MainViewState extends State<MainView>
                     left: 0,
                     child: Container(
                       height: 15,
-                      width: 5430,
+                      width: CANVAS_WIDTH,
                       color: Colors.black,
                       child: Text(
                         (index * 100).toString(),
@@ -292,6 +279,18 @@ class _MainViewState extends State<MainView>
           ),
         ),
       ],
+    );
+  }
+
+  Point<double> calculateCenterPoint() {
+    final width = widget.screenSize.width;
+    final height = widget.screenSize.height;
+    final sichPoint = Sich().point;
+    final middleX = width / 2;
+    final middleY = height / 2;
+    return Point<double>(
+      sichPoint.x - middleX + Sich().size * CITY_SIZE / 2,
+      sichPoint.y - middleY + Sich().size * CITY_SIZE / 2,
     );
   }
 

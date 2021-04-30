@@ -90,8 +90,9 @@ class _StartingViewState extends State<StartingView> {
         builder: (context) => Material(
           child: InheritedCompany(
             company: company,
-            child: MainView(
+            child: GameCanvasView(
               company: company,
+              screenSize: MediaQuery.of(context).size,
             ),
           ),
         ),
