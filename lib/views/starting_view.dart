@@ -1,5 +1,6 @@
 import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/views/main_view.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _StartingViewState extends State<StartingView> {
         Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
                 color: Colors.white.withAlpha(200),
@@ -38,7 +39,7 @@ class _StartingViewState extends State<StartingView> {
                     onPressed: () => _loadGamePressed(context, Company()),
                     child: Padding(
                       padding: const EdgeInsets.all(24.0),
-                      child: TitleText("New Game"),
+                      child: TitleText(ChumakiLocalizations.labelNewGame),
                     )),
               ),
               FutureBuilder(
@@ -52,7 +53,7 @@ class _StartingViewState extends State<StartingView> {
                           onPressed: null,
                           child: Padding(
                             padding: const EdgeInsets.all(24.0),
-                            child: TitleText("No saved game"),
+                            child: TitleText(ChumakiLocalizations.labelNoSave),
                           )),
                     );
                   } else {
@@ -66,7 +67,7 @@ class _StartingViewState extends State<StartingView> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              TitleText("Load Game"),
+                              TitleText(ChumakiLocalizations.labelLoadSave),
                               IconButton(
                                   onPressed: _removeSave,
                                   icon: Icon(Icons.delete)),
@@ -82,7 +83,7 @@ class _StartingViewState extends State<StartingView> {
                 color: Colors.white.withAlpha(200),
                 child: Padding(
                   padding: const EdgeInsets.all(24.0),
-                  child: TitleText("Other Games"),
+                  child: TitleText(ChumakiLocalizations.labelOtherGames),
                 ),
               ),
 
