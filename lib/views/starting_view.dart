@@ -6,6 +6,7 @@ import 'package:chumaki/views/main_view.dart';
 import 'package:flutter/material.dart';
 import 'package:async/async.dart';
 import 'package:chumaki/views/inherited_company.dart';
+import 'package:chumaki/components/ui/locale_selection.dart';
 
 class StartingView extends StatefulWidget {
   @override
@@ -53,7 +54,9 @@ class _StartingViewState extends State<StartingView> {
                           onPressed: null,
                           child: Padding(
                             padding: const EdgeInsets.all(24.0),
-                            child: TitleText(ChumakiLocalizations.labelNoSave),
+                            child: Text(
+                              ChumakiLocalizations.labelNoSave,
+                            ),
                           )),
                     );
                   } else {
@@ -81,12 +84,22 @@ class _StartingViewState extends State<StartingView> {
               ),
               Container(
                 color: Colors.white.withAlpha(200),
+                child: LocaleSelection(
+                  locale: ChumakiLocalizations.locale,
+                  onLocaleChanged: (Locale locale) {
+                    setState(() {
+                      ChumakiLocalizations.locale = locale;
+                    });
+                  },
+                ),
+              ),
+              Container(
+                color: Colors.white.withAlpha(200),
                 child: Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: TitleText(ChumakiLocalizations.labelOtherGames),
                 ),
               ),
-
             ],
           ),
         ),
@@ -94,7 +107,6 @@ class _StartingViewState extends State<StartingView> {
           left: 0,
           bottom: 0,
           right: 0,
-
           child: Image.asset(
             "images/ui/persons_on_a_map.png",
             height: 150,
