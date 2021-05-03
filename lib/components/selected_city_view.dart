@@ -1,13 +1,11 @@
 import 'package:chumaki/components/advisor_for_city.dart';
+import 'package:chumaki/components/city/city_local_market.dart';
 import 'package:chumaki/components/price_comparison.dart';
 import 'package:chumaki/components/route_task_row_progress.dart';
-import 'package:chumaki/components/stock_resource_category_group.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/selectable_button.dart';
-import 'package:chumaki/components/wagons_in_city.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/city.dart';
-import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/task.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
@@ -60,37 +58,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
           if (showAdvisor) AdvisorForCity(city: widget.city),
           if (showWorldMarket) PriceComparison(currentCity: widget.city),
           if (showLocalMarket) ...[
-            WagonsInCity(city: widget.city),
-            Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(width: 1, color: Colors.black),
-                ),
-              ),
-              child: StreamBuilder(
-                  stream: widget.city.changes.stream,
-                  builder: (context, data) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TitleText(ChumakiLocalizations.labelContains),
-                        if (!widget.city.stock.isEmpty)
-                          Column(
-                            children: groupResourcesByCategory(
-                                    widget.city.stock.iterator.toList())
-                                .map<Widget>((resources) {
-                              return Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: StockResourceCategoryGroup(
-                                    resources: resources, forCity: widget.city),
-                              );
-                            }).toList(),
-                          ),
-                        if (widget.city.stock.isEmpty) Text("Нічого"),
-                      ],
-                    );
-                  }),
-            ),
+            CityLocalMarket(city: widget.city),
             TitleText("Incoming companies: "),
             ...company.cityRoutes
                 .where((route) =>

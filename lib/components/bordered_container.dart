@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BorderedContainer extends StatelessWidget {
-  Color? color;
+  final Color? color;
   final Widget child;
 
   BorderedContainer({required this.child, this.color});
