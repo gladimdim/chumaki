@@ -5,25 +5,22 @@ import 'package:flutter/material.dart';
 
 class WagonListItem extends StatelessWidget {
   final City city;
+  final Wagon wagon;
 
-  WagonListItem({required this.city});
+  WagonListItem({required this.city, required this.wagon});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: city.wagons.map((wagon) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Image.asset(Wagon.imagePath, width: 64),
-            Text("Company ${wagon.name}"),
-            StreamBuilder(
-              stream: wagon.changes.stream,
-              builder: (context, _) => WeightShow(wagon),
-            ),
-          ],
-        );
-      }).toList(),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Image.asset(Wagon.imagePath, width: 64),
+        Text("Company ${wagon.name}"),
+        StreamBuilder(
+          stream: wagon.changes.stream,
+          builder: (context, _) => WeightShow(wagon),
+        ),
+      ],
     );
   }
 }

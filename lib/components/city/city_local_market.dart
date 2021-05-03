@@ -1,9 +1,8 @@
-import 'package:chumaki/components/stock_resource_category_group.dart';
-import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/bordered_container.dart';
+import 'package:chumaki/components/city/city_stock_view.dart';
+import 'package:chumaki/components/wagons/wagon_details.dart';
 import 'package:chumaki/components/wagons/wagon_list_item.dart';
-import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/city.dart';
-import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 
@@ -18,42 +17,55 @@ class CityLocalMarket extends StatefulWidget {
 
 class _CityLocalMarketState extends State<CityLocalMarket> {
   Wagon? selectedWagon;
+
   @override
   Widget build(BuildContext context) {
+    final selWagon = selectedWagon;
     return Column(
       children: [
-        WagonListItem(city: widget.city),
-        Container(
+        Column(
+          children: widget.city.wagons.map((wagon) {
+            var child = WagonListItem(
+              wagon: wagon,
+              city: widget.city,
+            );
+
+            return GestureDetector(
+              onTap: () => onWagonSelected(wagon),
+              child: selectedWagon == wagon
+                  ? BorderedContainer(
+                      child: child,
+                      color: Colors.blueGrey,
+                    )
+                  : child,
+            );
+          }).toList(),
+        ),
+        if (selWagon != null) WagonDetails(wagon: selWagon, city: widget.city),
+        // WagonListItem(city: widget.city),
+        if (selWagon == null) Container(
           decoration: BoxDecoration(
             border: Border(
               top: BorderSide(width: 1, color: Colors.black),
             ),
           ),
-          child: StreamBuilder(
-              stream: widget.city.changes.stream,
-              builder: (context, data) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TitleText(ChumakiLocalizations.labelContains),
-                    if (!widget.city.stock.isEmpty)
-                      Column(
-                        children: groupResourcesByCategory(
-                            widget.city.stock.iterator.toList())
-                            .map<Widget>((resources) {
-                          return Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: StockResourceCategoryGroup(
-                                resources: resources, forCity: widget.city),
-                          );
-                        }).toList(),
-                      ),
-                    if (widget.city.stock.isEmpty) Text("Нічого"),
-                  ],
-                );
-              }),
+          child: CityStockView(
+            city: widget.city,
+          ),
         ),
-      ]
+      ],
+    );
+  }
+
+  void onWagonSelected(Wagon wagon) {
+    setState(
+      () {
+        if (selectedWagon == wagon) {
+          selectedWagon = null;
+        } else {
+          selectedWagon = wagon;
+        }
+      },
     );
   }
 }
