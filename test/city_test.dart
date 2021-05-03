@@ -4,7 +4,7 @@ import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/price/price_unit.dart';
-import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:test/test.dart';
 

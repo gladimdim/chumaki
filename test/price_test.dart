@@ -1,6 +1,6 @@
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/price/price_unit.dart';
-import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/models/resources/resource.dart';
 import 'package:test/test.dart';
 
 void main() {

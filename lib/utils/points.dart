@@ -1,0 +1,3 @@
+const CANVAS_WIDTH = 5340.0;
+
+const CANVAS_HEIGHT = 4195.0;

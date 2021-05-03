@@ -5,7 +5,7 @@ import 'package:chumaki/models/route.dart';
 import 'package:chumaki/models/task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/models/resources/resource.dart';
 
 enum COMPANY_EVENTS { TASK_STARTED, TASK_ENDED, MONEY_ADDED, MONEY_REMOVED }
 

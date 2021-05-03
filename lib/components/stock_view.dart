@@ -1,6 +1,6 @@
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
-import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/models/resources/resource.dart';
 import 'package:flutter/material.dart';
 import 'resource_image_view.dart';
 

@@ -1,4 +1,4 @@
-import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/models/resources/resource.dart';
 
 class PriceUnit {
   final RESOURCES resourceType;
@@ -48,6 +48,10 @@ class PriceUnit {
         return PriceUnit(resType, 0.8);
       case RESOURCES.GORILKA:
         return PriceUnit(resType, 0.5);
+      case RESOURCES.WAX:
+        return PriceUnit(resType, 0.3);
+      case RESOURCES.HONEY:
+        return PriceUnit(resType, 0.4);
     }
   }
 
@@ -58,7 +62,8 @@ class PriceUnit {
     };
   }
 
-  static PriceUnit fromJson(Map<String,dynamic> input) {
-    return PriceUnit(resourceTypeFromString(input["resourceType"]), input["price"]);
+  static PriceUnit fromJson(Map<String, dynamic> input) {
+    return PriceUnit(
+        resourceTypeFromString(input["resourceType"]), input["price"]);
   }
 }

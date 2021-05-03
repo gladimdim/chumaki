@@ -1,4 +1,4 @@
-import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/models/resources/resource.dart';
 import 'package:flutter/material.dart';
 
 class MoneyUnit extends StatelessWidget {

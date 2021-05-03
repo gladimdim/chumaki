@@ -1,6 +1,6 @@
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/progress_duration.dart';
-import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:uuid/uuid.dart';
 

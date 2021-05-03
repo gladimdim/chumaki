@@ -1,5 +1,4 @@
-import 'package:chumaki/models/resource.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/resources/resource.dart';
 import 'package:test/test.dart';
 
 void main() {

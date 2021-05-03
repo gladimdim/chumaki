@@ -4,15 +4,14 @@ import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/price/price_unit.dart';
-import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/models/resources/resource.dart';
 
 class Kyiv extends City {
   Kyiv()
       : super(
           point: Point(2700, 2830),
           name: "Київ",
-
-    localizedKeyName: 'kyiv',
+          localizedKeyName: 'kyiv',
           size: 4,
           prices: Price(generatePriceUnits()),
           stock: Stock([
@@ -33,9 +32,10 @@ class Kyiv extends City {
             Silk(200),
             Salt(100),
             Wool(200),
+            Honey(300),
+            Wax(300),
           ]),
         );
-
 
   static List<PriceUnit> generatePriceUnits() {
     return RESOURCES.values.map<PriceUnit>((resType) {
@@ -95,7 +95,14 @@ class Kyiv extends City {
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.2);
         case RESOURCES.GORILKA:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1.3);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.3);
+        case RESOURCES.HONEY:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.4);
+        case RESOURCES.WAX:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.4);
       }
     }).toList();
   }

@@ -4,7 +4,7 @@ import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/price/price_unit.dart';
-import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/models/resources/resource.dart';
 
 class Kaniv extends City {
   Kaniv()
@@ -92,6 +92,10 @@ class Kaniv extends City {
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.2);
         case RESOURCES.GORILKA:
+          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+        case RESOURCES.HONEY:
+          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+        case RESOURCES.WAX:
           return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
       }
     }).toList();

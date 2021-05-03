@@ -10,7 +10,7 @@ import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/price.dart';
-import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/route.dart';
 import 'package:chumaki/models/task.dart';
 import 'package:chumaki/models/wagon.dart';
