@@ -11,7 +11,7 @@ class ResourceImageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: ChumakiLocalizations.getForKey(resource.localizedKey),
+      message: ChumakiLocalizations.getForKey(resource.fullLocalizedKey),
       child: Stack(
         children: [
           Image.asset(resource.imagePath, width: size),

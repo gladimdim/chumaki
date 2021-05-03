@@ -41,6 +41,10 @@ class Resource {
   String get imagePath {
     return "images/resources/${this.localizedKey}/${this.localizedKey}.png";
   }
+  
+  String get fullLocalizedKey {
+    return "resources.$localizedKey";
+  }
 
   Map<String, dynamic> toJson() {
     return {"type": resourceTypeToString(type), "amount": amount};
