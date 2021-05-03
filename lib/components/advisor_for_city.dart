@@ -33,7 +33,7 @@ class _AdvisorForCityState extends State<AdvisorForCity> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TitleText("Total price of: ${wagon.name}"),
+                TitleText("Total price of: ${wagon.localizedNameKey}"),
                 ...calculateTopForWagon(wagon, company).divideBy(3).map((rowResult) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

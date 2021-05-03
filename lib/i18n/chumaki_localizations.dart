@@ -1,3 +1,4 @@
+import 'package:chumaki/i18n/company_localizations.dart';
 import 'package:chumaki/i18n/resource_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -37,6 +38,7 @@ class ChumakiLocalizations {
   static Locale locale = Locale(getDefaultOrUrlLanguage());
 
   static ResourceLocalizations resourceLocalizations = ResourceLocalizations();
+  static CompanyLocalizations companyLocalizations = CompanyLocalizations();
 
   static String getForKey(String key) {
     final split = key.split('.');
@@ -44,6 +46,9 @@ class ChumakiLocalizations {
       switch (split[0]) {
         case 'resources':
           return resourceLocalizations[split[1]];
+
+        case 'company':
+          return companyLocalizations[split[1]];
         default:
           return key;
       }
@@ -83,6 +88,9 @@ class ChumakiLocalizations {
       "labelNoSave": "No saved games",
       "labelLoadSave": "Load Saved Game",
       "labelWorldMarket": "World Market",
+      "labelCompany": "Company",
+      "labelSend": "Send",
+      "labelCompanyContains": "Company has",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -113,6 +121,9 @@ class ChumakiLocalizations {
       "labelNoSave": "Немає збережених ігор",
       "labelLoadSave": "Завантажити",
       "labelWorldMarket": "Світовий ринок",
+      "labelCompany": "Ватага",
+      "labelSend": "Відправити",
+      "labelCompanyContains": "Валка має",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -142,6 +153,9 @@ class ChumakiLocalizations {
       "labelNoSave": "Нету сохраненых игр",
       "labelLoadSave": "Загрузить",
       "labelWorldMarket": "Мировой рынок",
+      "labelCompany": "Ватага",
+      "labelSend": "Отправить",
+      "labelCompanyContains": "Ватага имеет",
     },
   };
 
@@ -255,5 +269,17 @@ class ChumakiLocalizations {
 
   static String get labelWorldMarket {
     return _localizedValues[locale.languageCode]!["labelWorldMarket"]!;
+  }
+
+  static String get labelCompany {
+    return _localizedValues[locale.languageCode]!["labelCompany"]!;
+  }
+
+  static String get labelSend {
+    return _localizedValues[locale.languageCode]!["labelSend"]!;
+  }
+
+  static String get labelCompanyContains {
+    return _localizedValues[locale.languageCode]!["labelCompanyContains"]!;
   }
 }
