@@ -1,3 +1,4 @@
+import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -31,11 +32,7 @@ class ResourceCategoryGroup extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              decoration: BoxDecoration(
-                border:
-                    Border(bottom: BorderSide(width: 3, color: Colors.black)),
-              ),
+            BorderedBottom(
               child: Center(
                 child: TitleText(
                   ChumakiLocalizations.getForKey(

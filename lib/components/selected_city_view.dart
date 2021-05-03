@@ -3,6 +3,7 @@ import 'package:chumaki/components/city/city_local_market.dart';
 import 'package:chumaki/components/price_comparison.dart';
 import 'package:chumaki/components/route_task_row_progress.dart';
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/selectable_button.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/city.dart';
@@ -35,24 +36,26 @@ class _SelectedCityViewState extends State<SelectedCityView> {
         children: [
           StreamBuilder(
             stream: widget.city.changes.stream,
-            builder: (context, data) => Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SelectableButton(
-                  selected: showLocalMarket,
-                  onPressed: localMarketSelected,
-                  child: TitleText(
-                      ChumakiLocalizations.labelMarket),
-                ),
-                SelectableButton(
-                    selected: showAdvisor,
-                    onPressed: advisorSelected,
-                    child: TitleText(ChumakiLocalizations.labelPub)),
-                SelectableButton(
-                    selected: showWorldMarket,
-                    onPressed: worldMarketSelected,
-                    child: TitleText(ChumakiLocalizations.labelWorldMarket)),
-              ],
+            builder: (context, data) => BorderedBottom(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SelectableButton(
+                    selected: showLocalMarket,
+                    onPressed: localMarketSelected,
+                    child: TitleText(
+                        ChumakiLocalizations.labelMarket),
+                  ),
+                  SelectableButton(
+                      selected: showAdvisor,
+                      onPressed: advisorSelected,
+                      child: TitleText(ChumakiLocalizations.labelPub)),
+                  SelectableButton(
+                      selected: showWorldMarket,
+                      onPressed: worldMarketSelected,
+                      child: TitleText(ChumakiLocalizations.labelWorldMarket)),
+                ],
+              ),
             ),
           ),
           if (showAdvisor) AdvisorForCity(city: widget.city),

@@ -1,4 +1,5 @@
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/bordered_top.dart';
 import 'package:chumaki/components/wagons/wagon_dispatcher.dart';
 import 'package:chumaki/components/wagons/wagon_resource_exchanger.dart';
@@ -19,14 +20,26 @@ class WagonDetails extends StatelessWidget {
       stream: wagon.changes,
       builder: (context, snap) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          BorderedTop(
-              child: TitleText(
-            ChumakiLocalizations.getForKey(wagon.fullLocalizedName),
-          )),
+          BorderedBottom(
+            child: BorderedTop(
+              child: Center(
+                child: Text(
+                  ChumakiLocalizations.getForKey(wagon.fullLocalizedName),
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ),
+            ),
+          ),
+          VerticalDivider(),
           TitleText(ChumakiLocalizations.labelSend),
           WagonDispatcher(wagon: wagon, city: city),
-          TitleText("Валка містить"),
+          BorderedTop(
+            child: BorderedBottom(
+              child: Center(child: TitleText(ChumakiLocalizations.labelCompanyContains)),
+            ),
+          ),
           WagonResourceExchanger(wagon, city),
         ],
       ),

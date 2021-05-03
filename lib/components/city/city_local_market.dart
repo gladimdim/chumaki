@@ -1,5 +1,6 @@
 import 'package:chumaki/components/bordered_container.dart';
 import 'package:chumaki/components/city/city_stock_view.dart';
+import 'package:chumaki/components/ui/bordered_top.dart';
 import 'package:chumaki/components/wagons/wagon_details.dart';
 import 'package:chumaki/components/wagons/wagon_list_item.dart';
 import 'package:chumaki/models/city.dart';
@@ -43,16 +44,12 @@ class _CityLocalMarketState extends State<CityLocalMarket> {
         ),
         if (selWagon != null) WagonDetails(wagon: selWagon, city: widget.city),
         // WagonListItem(city: widget.city),
-        if (selWagon == null) Container(
-          decoration: BoxDecoration(
-            border: Border(
-              top: BorderSide(width: 1, color: Colors.black),
+        if (selWagon == null)
+          BorderedTop(
+            child: CityStockView(
+              city: widget.city,
             ),
           ),
-          child: CityStockView(
-            city: widget.city,
-          ),
-        ),
       ],
     );
   }

@@ -90,6 +90,7 @@ class ChumakiLocalizations {
       "labelWorldMarket": "World Market",
       "labelCompany": "Company",
       "labelSend": "Send",
+      "labelCompanyContains": "Company has",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -122,6 +123,7 @@ class ChumakiLocalizations {
       "labelWorldMarket": "Світовий ринок",
       "labelCompany": "Ватага",
       "labelSend": "Відправити",
+      "labelCompanyContains": "Валка має",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -153,6 +155,7 @@ class ChumakiLocalizations {
       "labelWorldMarket": "Мировой рынок",
       "labelCompany": "Ватага",
       "labelSend": "Отправить",
+      "labelCompanyContains": "Ватага имеет",
     },
   };
 
@@ -274,5 +277,9 @@ class ChumakiLocalizations {
 
   static String get labelSend {
     return _localizedValues[locale.languageCode]!["labelSend"]!;
+  }
+
+  static String get labelCompanyContains {
+    return _localizedValues[locale.languageCode]!["labelCompanyContains"]!;
   }
 }
