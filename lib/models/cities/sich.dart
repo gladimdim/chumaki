@@ -31,19 +31,19 @@ class Sich extends City {
           ),
           wagons: [
             Wagon(
-                name: "Татарина",
+                localizedNameKey: "company.tartar",
                 stock: Stock([
                   Charcoal(20),
                   // IronOre(10),
                 ])),
             Wagon(
-                name: "Остапа",
+                localizedNameKey: "company.ostapa",
                 stock: Stock([
                   Powder(20),
                   MetalParts(10),
                 ])),
             Wagon(
-              name: "Дмитра",
+              localizedNameKey: "company.gladkyi",
               stock: Stock(
                 [
                   Grains(50),

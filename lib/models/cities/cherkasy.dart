@@ -29,13 +29,13 @@ class Cherkasy extends City {
             Gorilka(500),
           ]),
           wagons: [
-            Wagon(name: "Вальків", stock: Stock([Bread(10), Wood(30)])),
-            Wagon(name: "Харченка", stock: Stock([Firearm(5), Stone(15)])),
+            Wagon(localizedNameKey: "company.valko", stock: Stock([Bread(10), Wood(30)])),
+            Wagon(localizedNameKey: "company.kharchenko", stock: Stock([Firearm(5), Stone(15)])),
             Wagon(
-                name: "Підлісного",
+                localizedNameKey: "company.pidlisnyi",
                 stock: Stock([Fur(30), Charcoal(25), Fish(15)])),
             Wagon(
-                name: "Мітрась",
+                localizedNameKey: "compamy.mitras",
                 stock: Stock([Horse(5), Powder(25), IronOre(20)])),
           ],
         );

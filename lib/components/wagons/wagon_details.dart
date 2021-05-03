@@ -17,6 +17,7 @@ class WagonDetails extends StatelessWidget {
       builder: (context, snap) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          TitleText(wagon.localizedNameKey),
           TitleText("Відправити"),
           WagonDispatcher(wagon: wagon, city: city),
           TitleText("Валка містить"),

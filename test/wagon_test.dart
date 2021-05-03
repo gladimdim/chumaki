@@ -7,9 +7,9 @@ void main() {
   group("JSON Wagon object", () {
     var stock = Stock([Wool(30), Stone(55), Firearm(10)]);
     test("Can serialize/deserialize Wagon object", () {
-      var wagon = Wagon(name: "Dmytro", stock: stock, totalWeightCapacity: 200);
+      var wagon = Wagon(localizedNameKey: "Dmytro", stock: stock, totalWeightCapacity: 200);
       var newWagon = Wagon.fromJson(wagon.toJson());
-      expect(newWagon.name, equals(wagon.name), reason: "Name was restored.");
+      expect(newWagon.localizedNameKey, equals(wagon.localizedNameKey), reason: "Name was restored.");
       expect(newWagon.stock.stock.length, equals(3), reason: "3 items in stock restored");
       expect(newWagon.totalWeightCapacity, wagon.totalWeightCapacity, reason: "Weight capacity restored.");
     });
