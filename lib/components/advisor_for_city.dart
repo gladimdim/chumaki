@@ -3,7 +3,7 @@ import 'package:chumaki/components/money_unit.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/company.dart';
-import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';

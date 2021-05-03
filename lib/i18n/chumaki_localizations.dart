@@ -82,6 +82,7 @@ class ChumakiLocalizations {
       "labelNewGame": "New Game",
       "labelNoSave": "No saved games",
       "labelLoadSave": "Load Saved Game",
+      "labelWorldMarket": "World Market",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -109,9 +110,9 @@ class ChumakiLocalizations {
       "labelMarket": "Ринок",
       "labelPub": "Шинок",
       "labelNewGame": "Нова Гра",
-
       "labelNoSave": "Немає збережених ігор",
       "labelLoadSave": "Завантажити",
+      "labelWorldMarket": "Світовий ринок",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -138,10 +139,9 @@ class ChumakiLocalizations {
       "labelMarket": "Рынок",
       "labelPub": "Шинок",
       "labelNewGame": "Новая игра",
-
       "labelNoSave": "Нету сохраненых игр",
       "labelLoadSave": "Загрузить",
-
+      "labelWorldMarket": "Мировой рынок",
     },
   };
 
@@ -249,8 +249,11 @@ class ChumakiLocalizations {
     return _localizedValues[locale.languageCode]!["labelNoSave"]!;
   }
 
-
   static String get labelLoadSave {
     return _localizedValues[locale.languageCode]!["labelLoadSave"]!;
+  }
+
+  static String get labelWorldMarket {
+    return _localizedValues[locale.languageCode]!["labelWorldMarket"]!;
   }
 }

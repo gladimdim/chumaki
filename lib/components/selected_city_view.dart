@@ -7,7 +7,7 @@ import 'package:chumaki/components/ui/selectable_button.dart';
 import 'package:chumaki/components/wagons_in_city.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/city.dart';
-import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/task.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +53,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                 SelectableButton(
                     selected: showWorldMarket,
                     onPressed: worldMarketSelected,
-                    child: TitleText("World Market")),
+                    child: TitleText(ChumakiLocalizations.labelWorldMarket)),
               ],
             ),
           ),

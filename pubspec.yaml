@@ -51,5 +51,7 @@ flutter:
     - images/resources/salt/
     - images/resources/wool/
     - images/resources/gorilka/
+    - images/resources/honey/
+    - images/resources/wax/
     - images/cities/
     - images/cities/avatars/

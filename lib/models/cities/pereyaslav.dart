@@ -4,7 +4,7 @@ import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/price/price_unit.dart';
-import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/models/resources/resource.dart';
 
 class Pereyaslav extends City {
   Pereyaslav()
@@ -27,6 +27,8 @@ class Pereyaslav extends City {
             Firearm(40),
             Salt(150),
             Wool(150),
+            Honey(500),
+            Wax(500),
           ]),
         );
 
@@ -91,6 +93,10 @@ class Pereyaslav extends City {
               .adjustToModifier(1.5);
         case RESOURCES.GORILKA:
           return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+        case RESOURCES.HONEY:
+          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1.1);
+        case RESOURCES.WAX:
+          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1.1);
       }
     }).toList();
   }

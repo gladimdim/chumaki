@@ -3,7 +3,7 @@ import 'package:chumaki/components/resource_amount_selector.dart';
 import 'package:chumaki/components/resource_category_group.dart';
 import 'package:chumaki/components/wagon_stock_bar.dart';
 import 'package:chumaki/models/city.dart';
-import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 

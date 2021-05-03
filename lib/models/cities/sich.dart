@@ -4,7 +4,7 @@ import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/price/price_unit.dart';
-import 'package:chumaki/models/resource.dart';
+import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 
 class Sich extends City {
@@ -25,6 +25,8 @@ class Sich extends City {
               Wool(100),
               Silk(300),
               Gorilka(450),
+              Wax(3000),
+              Honey(1500),
             ],
           ),
           wagons: [
@@ -111,6 +113,10 @@ class Sich extends City {
               .adjustToModifier(1.3);
         case RESOURCES.GORILKA:
           return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+        case RESOURCES.HONEY:
+          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(0.9);
+        case RESOURCES.WAX:
+          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(0.9);
       }
     }).toList();
   }

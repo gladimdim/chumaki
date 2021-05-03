@@ -20,6 +20,8 @@ enum RESOURCES {
   WOOD,
   WOOL,
   GORILKA,
+  WAX,
+  HONEY,
 }
 
 class Resource {
@@ -41,10 +43,7 @@ class Resource {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      "type": resourceTypeToString(type),
-      "amount": amount
-    };
+    return {"type": resourceTypeToString(type), "amount": amount};
   }
 
   static Resource fromJson(Map<String, dynamic> input) {
@@ -91,6 +90,10 @@ class Resource {
         return Wool(0);
       case RESOURCES.GORILKA:
         return Gorilka(0);
+      case RESOURCES.HONEY:
+        return Honey(0);
+      case RESOURCES.WAX:
+        return Wax(0);
     }
   }
 
@@ -295,8 +298,26 @@ class Gorilka extends Resource {
   Gorilka(int amount)
       : super("gorilka", amount,
             type: RESOURCES.GORILKA,
-            weightPerPoint: 5,
-            color: Colors.black45,
+            weightPerPoint: 0.3,
+            color: Colors.grey,
+            category: RESOURCE_CATEGORY.FOOD);
+}
+
+class Wax extends Resource {
+  Wax(int amount)
+      : super("wax", amount,
+            type: RESOURCES.WAX,
+            weightPerPoint: 0.3,
+            color: Colors.brown[400]!,
+            category: RESOURCE_CATEGORY.RESOURCES);
+}
+
+class Honey extends Resource {
+  Honey(int amount)
+      : super("honey", amount,
+            type: RESOURCES.HONEY,
+            weightPerPoint: 0.8,
+            color: Colors.brown[800]!,
             category: RESOURCE_CATEGORY.FOOD);
 }
 
@@ -374,6 +395,10 @@ String resourceTypeToString(RESOURCES type) {
       return "wool";
     case RESOURCES.GORILKA:
       return "gorilka";
+    case RESOURCES.HONEY:
+      return "honey";
+    case RESOURCES.WAX:
+      return "wax";
   }
 }
 
@@ -415,6 +440,10 @@ RESOURCES resourceTypeFromString(String type) {
       return RESOURCES.WOOL;
     case "gorilka":
       return RESOURCES.GORILKA;
+    case "wax":
+      return RESOURCES.WAX;
+    case "honey":
+      return RESOURCES.HONEY;
     default:
       throw "Resource type string $type is not recognized.";
   }

@@ -26,6 +26,8 @@ class ResourceLocalizations extends InternalLocalizations {
       "ironore": "Iron Ore",
       "gorilka": "Gorilka",
       "silk": "Silk",
+      "wax": "Wax",
+      "honey": "Honey",
     },
     "uk": {
       "resources": "Ресурси",
@@ -51,6 +53,8 @@ class ResourceLocalizations extends InternalLocalizations {
       "ironore": "Руда",
       "gorilka": "Горілка",
       "silk": "Шовк",
+      "wax": "Віск",
+      "honey": "Мед",
     },
     "ru": {
       "resources": "Ресурсы",
@@ -78,6 +82,8 @@ class ResourceLocalizations extends InternalLocalizations {
       "ironore": "Руда",
       "gorilka": "Горилка",
       "silk": "Шелк",
+      "honey": "Мёд",
+      "wax": "Воск",
     }
   };
 }

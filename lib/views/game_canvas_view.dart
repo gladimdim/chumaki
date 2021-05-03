@@ -34,7 +34,7 @@ class _GameCanvasViewState extends State<GameCanvasView>
       TransformationController();
   late AnimationController _animationController;
   late Animation<Matrix4> _mapAnimation;
-  final Duration animationDuration = Duration(seconds: 8);
+  final Duration animationDuration = Duration(seconds: 2);
   double animationValue = 0;
   bool showCoordinates = false;
   City? selected;
@@ -52,7 +52,6 @@ class _GameCanvasViewState extends State<GameCanvasView>
     _mapAnimation.addListener(() {
       setState(() {
         final value = Matrix4.inverted(_mapAnimation.value);
-        // value.scale(_scaleAnimationController.value, _scaleAnimationController.value);
         _transformationController.value = value;
       });
     });
