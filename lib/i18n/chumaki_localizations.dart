@@ -89,6 +89,7 @@ class ChumakiLocalizations {
       "labelLoadSave": "Load Saved Game",
       "labelWorldMarket": "World Market",
       "labelCompany": "Company",
+      "labelSend": "Send",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -120,6 +121,7 @@ class ChumakiLocalizations {
       "labelLoadSave": "Завантажити",
       "labelWorldMarket": "Світовий ринок",
       "labelCompany": "Ватага",
+      "labelSend": "Відправити",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -150,6 +152,7 @@ class ChumakiLocalizations {
       "labelLoadSave": "Загрузить",
       "labelWorldMarket": "Мировой рынок",
       "labelCompany": "Ватага",
+      "labelSend": "Отправить",
     },
   };
 
@@ -267,5 +270,9 @@ class ChumakiLocalizations {
 
   static String get labelCompany {
     return _localizedValues[locale.languageCode]!["labelCompany"]!;
+  }
+
+  static String get labelSend {
+    return _localizedValues[locale.languageCode]!["labelSend"]!;
   }
 }
