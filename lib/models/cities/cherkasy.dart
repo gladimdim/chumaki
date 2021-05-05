@@ -106,6 +106,9 @@ class Cherkasy extends City {
         case RESOURCES.HONEY:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.05);
+        case RESOURCES.TOBACCO:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.05);
 
       }
     }).toList();

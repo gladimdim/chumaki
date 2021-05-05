@@ -91,11 +91,17 @@ class Chigirin extends City {
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.2);
         case RESOURCES.GORILKA:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1);
         case RESOURCES.HONEY:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1.1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.1);
         case RESOURCES.WAX:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1.1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.1);
+        case RESOURCES.TOBACCO:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.1);
       }
     }).toList();
   }

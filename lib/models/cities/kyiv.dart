@@ -34,6 +34,7 @@ class Kyiv extends City {
             Wool(200),
             Honey(300),
             Wax(300),
+            Tobacco(100),
           ]),
         );
 
@@ -103,6 +104,9 @@ class Kyiv extends City {
         case RESOURCES.WAX:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.4);
+        case RESOURCES.TOBACCO:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.5);
       }
     }).toList();
   }
