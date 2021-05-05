@@ -22,6 +22,7 @@ enum RESOURCES {
   GORILKA,
   WAX,
   HONEY,
+  TOBACCO,
 }
 
 class Resource {
@@ -98,6 +99,8 @@ class Resource {
         return Honey(0);
       case RESOURCES.WAX:
         return Wax(0);
+      case RESOURCES.TOBACCO:
+        return Tobacco(0);
     }
   }
 
@@ -325,6 +328,15 @@ class Honey extends Resource {
             category: RESOURCE_CATEGORY.FOOD);
 }
 
+class Tobacco extends Resource {
+  Tobacco(int amount)
+      : super("tobacco", amount,
+      type: RESOURCES.TOBACCO,
+      weightPerPoint: 0.2,
+      color: Colors.yellow[600]!,
+      category: RESOURCE_CATEGORY.LUXURY);
+}
+
 String resourceCategoryToLocalizedKey(RESOURCE_CATEGORY category) {
   switch (category) {
     case RESOURCE_CATEGORY.RESOURCES:
@@ -403,6 +415,8 @@ String resourceTypeToString(RESOURCES type) {
       return "honey";
     case RESOURCES.WAX:
       return "wax";
+    case RESOURCES.TOBACCO:
+      return "tobacco";
   }
 }
 
@@ -448,6 +462,8 @@ RESOURCES resourceTypeFromString(String type) {
       return RESOURCES.WAX;
     case "honey":
       return RESOURCES.HONEY;
+    case "tobacco":
+      return RESOURCES.TOBACCO;
     default:
       throw "Resource type string $type is not recognized.";
   }

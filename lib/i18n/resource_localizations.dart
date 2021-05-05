@@ -28,6 +28,9 @@ class ResourceLocalizations extends InternalLocalizations {
       "silk": "Silk",
       "wax": "Wax",
       "honey": "Honey",
+      "salt": "Salt",
+      "tobacco": "Tobacco",
+      "wool": "Wool",
     },
     "uk": {
       "resources": "Ресурси",
@@ -55,6 +58,9 @@ class ResourceLocalizations extends InternalLocalizations {
       "silk": "Шовк",
       "wax": "Віск",
       "honey": "Мед",
+      "salt": "Сіль",
+      "tobacco": "Тютюн",
+      "wool": "Шерсть",
     },
     "ru": {
       "resources": "Ресурсы",
@@ -84,6 +90,9 @@ class ResourceLocalizations extends InternalLocalizations {
       "silk": "Шелк",
       "honey": "Мёд",
       "wax": "Воск",
+      "salt": "Соль",
+      "tobacco": "Табак",
+      "wool": "Шерсть",
     }
   };
 }

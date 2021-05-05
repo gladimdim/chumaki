@@ -31,6 +31,7 @@ class Kaniv extends City {
             Salt(200),
             Silk(50),
             Wool(100),
+            Tobacco(100),
           ]),
         );
 
@@ -97,6 +98,9 @@ class Kaniv extends City {
           return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
         case RESOURCES.WAX:
           return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+        case RESOURCES.TOBACCO:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.05);
       }
     }).toList();
   }
