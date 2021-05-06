@@ -1,5 +1,6 @@
 import 'package:chumaki/components/money_unit.dart';
 import 'package:chumaki/components/resource_image_view.dart';
+import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
@@ -64,23 +65,29 @@ class CityWagonResourceExchange extends StatelessWidget {
               SizedBox(
                 width: 80,
                 height: 50,
-                child: Stack(children: [
-                  Align(
-                    alignment: Alignment.center,
-                    child: ResourceImageView(
-                      resource.cloneWithAmount(amountTradeValue),
-                      size: 64,
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: ResourceImageView(
+                        resource.cloneWithAmount(amountTradeValue),
+                        size: 64,
+                      ),
                     ),
-                  ),
-                  Align(
+                    Align(
                       alignment: Alignment.bottomLeft,
-                      child: Text(
-                          wagonRes == null ? "0" : wagonRes.amount.toString())),
-                  Align(
+                      child: OutlinedText(
+                        wagonRes == null ? "0" : wagonRes.amount.toString(),
+                      ),
+                    ),
+                    Align(
                       alignment: Alignment.bottomRight,
-                      child: Text(
-                          cityRes == null ? "0" : cityRes.amount.toString())),
-                ]),
+                      child: OutlinedText(
+                        cityRes == null ? "0" : cityRes.amount.toString(),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               IconButton(
                 onPressed: enableBuyButton()

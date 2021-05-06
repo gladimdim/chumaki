@@ -1,3 +1,4 @@
+import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ class ResourceImageView extends StatelessWidget {
   final Resource resource;
   final bool showAmount;
   final double size;
+
   ResourceImageView(this.resource, {this.showAmount = false, this.size = 55.0});
 
   @override
@@ -15,16 +17,14 @@ class ResourceImageView extends StatelessWidget {
       child: Stack(
         children: [
           Image.asset(resource.imagePath, width: size),
-          if (showAmount) Positioned(
-            bottom: 0,
-            right: 0,
-            child: Text(
-              resource.amount.toString(),
-              style: TextStyle(
-                fontSize: 14,
+          if (showAmount)
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: OutlinedText(
+                resource.amount.toString()
               ),
             ),
-          ),
         ],
       ),
     );
