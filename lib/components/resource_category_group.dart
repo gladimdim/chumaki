@@ -51,7 +51,7 @@ class _ResourceCategoryGroupState extends State<ResourceCategoryGroup> {
                               widget.resources.first.category)),
                     ),
                     Row(children: [
-                      StockWagonStatus(wagon: widget.wagon),
+                      StockWagonStatus(wagon: widget.wagon, category: widget.resources.first.category),
                       IconButton(
                         icon: isExpanded
                             ? Icon(Icons.arrow_upward)

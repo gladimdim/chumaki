@@ -1,4 +1,5 @@
 import 'package:chumaki/models/resources/resource.dart';
+import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:rxdart/rxdart.dart';
 
 class Stock {
@@ -13,6 +14,10 @@ class Stock {
 
   Iterable<Resource> get iterator {
     return stock;
+  }
+
+  List<Resource> resourceForCategory(RESOURCE_CATEGORY category) {
+    return stock.where((res) => res.category == category).toList();
   }
 
   void addResource(Resource resource) {

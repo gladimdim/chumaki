@@ -65,23 +65,29 @@ class CityWagonResourceExchange extends StatelessWidget {
               SizedBox(
                 width: 80,
                 height: 50,
-                child: Stack(children: [
-                  Align(
-                    alignment: Alignment.center,
-                    child: ResourceImageView(
-                      resource.cloneWithAmount(amountTradeValue),
-                      size: 64,
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: ResourceImageView(
+                        resource.cloneWithAmount(amountTradeValue),
+                        size: 64,
+                      ),
                     ),
-                  ),
-                  Align(
+                    Align(
                       alignment: Alignment.bottomLeft,
                       child: OutlinedText(
-                          wagonRes == null ? "0" : wagonRes.amount.toString())),
-                  Align(
+                        wagonRes == null ? "0" : wagonRes.amount.toString(),
+                      ),
+                    ),
+                    Align(
                       alignment: Alignment.bottomRight,
                       child: OutlinedText(
-                          cityRes == null ? "0" : cityRes.amount.toString())),
-                ]),
+                        cityRes == null ? "0" : cityRes.amount.toString(),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               IconButton(
                 onPressed: enableBuyButton()
