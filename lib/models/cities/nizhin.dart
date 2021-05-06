@@ -95,6 +95,9 @@ class Nizhin extends City {
           return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1.2);
         case RESOURCES.WAX:
           return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1.2);
+        case RESOURCES.TOBACCO:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.4);
       }
     }).toList();
   }

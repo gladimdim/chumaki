@@ -118,6 +118,9 @@ class Sich extends City {
           return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(0.9);
         case RESOURCES.WAX:
           return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(0.9);
+        case RESOURCES.TOBACCO:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(0.85);
       }
     }).toList();
   }
