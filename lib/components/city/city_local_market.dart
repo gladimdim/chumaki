@@ -42,7 +42,7 @@ class _CityLocalMarketState extends State<CityLocalMarket> {
             );
           }).toList(),
         ),
-        if (selWagon != null) WagonDetails(wagon: selWagon, city: widget.city),
+        if (selWagon != null && widget.city.wagons.contains(selWagon)) WagonDetails(wagon: selWagon, city: widget.city),
         // WagonListItem(city: widget.city),
         if (selWagon == null)
           BorderedTop(

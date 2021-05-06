@@ -27,6 +27,7 @@ class Sich extends City {
               Gorilka(450),
               Wax(3000),
               Honey(1500),
+              Tobacco(500),
             ],
           ),
           wagons: [
