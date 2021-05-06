@@ -1,5 +1,6 @@
 import 'package:chumaki/components/money_unit.dart';
 import 'package:chumaki/components/resource_image_view.dart';
+import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
@@ -74,11 +75,11 @@ class CityWagonResourceExchange extends StatelessWidget {
                   ),
                   Align(
                       alignment: Alignment.bottomLeft,
-                      child: Text(
+                      child: OutlinedText(
                           wagonRes == null ? "0" : wagonRes.amount.toString())),
                   Align(
                       alignment: Alignment.bottomRight,
-                      child: Text(
+                      child: OutlinedText(
                           cityRes == null ? "0" : cityRes.amount.toString())),
                 ]),
               ),
