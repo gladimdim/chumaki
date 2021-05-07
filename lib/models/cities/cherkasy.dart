@@ -5,7 +5,6 @@ import 'package:chumaki/models/city.dart';
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
-import 'package:chumaki/models/wagon.dart';
 
 class Cherkasy extends City {
   Cherkasy()
@@ -29,14 +28,14 @@ class Cherkasy extends City {
             Gorilka(500),
           ]),
           wagons: [
-            Wagon(localizedNameKey: "company.valko", stock: Stock([Bread(10), Wood(30)])),
-            Wagon(localizedNameKey: "company.kharchenko", stock: Stock([Firearm(5), Stone(15)])),
-            Wagon(
-                localizedNameKey: "company.pidlisnyi",
-                stock: Stock([Fur(30), Charcoal(25), Fish(15)])),
-            Wagon(
-                localizedNameKey: "compamy.mitras",
-                stock: Stock([Horse(5), Powder(25), IronOre(20)])),
+            // Wagon(localizedNameKey: "company.valko", stock: Stock([Bread(10), Wood(30)])),
+            // Wagon(localizedNameKey: "company.kharchenko", stock: Stock([Firearm(5), Stone(15)])),
+            // Wagon(
+            //     localizedNameKey: "company.pidlisnyi",
+            //     stock: Stock([Fur(30), Charcoal(25), Fish(15)])),
+            // Wagon(
+            //     localizedNameKey: "company.mitras",
+            //     stock: Stock([Horse(5), Powder(25), IronOre(20)])),
           ],
         );
 
@@ -109,6 +108,9 @@ class Cherkasy extends City {
         case RESOURCES.TOBACCO:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.05);
+        case RESOURCES.AMBER:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.3);
 
       }
     }).toList();

@@ -54,6 +54,8 @@ class PriceUnit {
         return PriceUnit(resType, 0.4);
       case RESOURCES.TOBACCO:
         return PriceUnit(resType, 1.5);
+      case RESOURCES.AMBER:
+        return PriceUnit(resType, 10);
     }
   }
 

@@ -23,6 +23,7 @@ enum RESOURCES {
   WAX,
   HONEY,
   TOBACCO,
+  AMBER,
 }
 
 class Resource {
@@ -42,7 +43,7 @@ class Resource {
   String get imagePath {
     return "images/resources/${this.localizedKey}/${this.localizedKey}.png";
   }
-  
+
   String get fullLocalizedKey {
     return "resources.$localizedKey";
   }
@@ -101,6 +102,8 @@ class Resource {
         return Wax(0);
       case RESOURCES.TOBACCO:
         return Tobacco(0);
+      case RESOURCES.AMBER:
+        return Amber(0);
     }
   }
 
@@ -328,13 +331,22 @@ class Honey extends Resource {
             category: RESOURCE_CATEGORY.FOOD);
 }
 
+class Amber extends Resource {
+  Amber(int amount)
+      : super("amber", amount,
+            type: RESOURCES.AMBER,
+            weightPerPoint: 1.5,
+            color: Colors.brown[200]!,
+            category: RESOURCE_CATEGORY.LUXURY);
+}
+
 class Tobacco extends Resource {
   Tobacco(int amount)
       : super("tobacco", amount,
-      type: RESOURCES.TOBACCO,
-      weightPerPoint: 0.2,
-      color: Colors.yellow[600]!,
-      category: RESOURCE_CATEGORY.LUXURY);
+            type: RESOURCES.TOBACCO,
+            weightPerPoint: 0.2,
+            color: Colors.yellow[600]!,
+            category: RESOURCE_CATEGORY.LUXURY);
 }
 
 String resourceCategoryToLocalizedKey(RESOURCE_CATEGORY category) {
@@ -417,6 +429,8 @@ String resourceTypeToString(RESOURCES type) {
       return "wax";
     case RESOURCES.TOBACCO:
       return "tobacco";
+    case RESOURCES.AMBER:
+      return "amber";
   }
 }
 
@@ -464,6 +478,8 @@ RESOURCES resourceTypeFromString(String type) {
       return RESOURCES.HONEY;
     case "tobacco":
       return RESOURCES.TOBACCO;
+    case "amber":
+      return RESOURCES.AMBER;
     default:
       throw "Resource type string $type is not recognized.";
   }

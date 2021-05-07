@@ -100,6 +100,9 @@ class Pereyaslav extends City {
         case RESOURCES.TOBACCO:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.2);
+        case RESOURCES.AMBER:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.18);
       }
     }).toList();
   }
