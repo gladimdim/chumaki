@@ -102,6 +102,9 @@ class Chigirin extends City {
         case RESOURCES.TOBACCO:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.1);
+        case RESOURCES.AMBER:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.22);
       }
     }).toList();
   }

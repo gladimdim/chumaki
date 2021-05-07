@@ -101,6 +101,9 @@ class Kaniv extends City {
         case RESOURCES.TOBACCO:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.05);
+        case RESOURCES.AMBER:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.22);
       }
     }).toList();
   }

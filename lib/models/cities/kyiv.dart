@@ -22,7 +22,6 @@ class Kyiv extends City {
             Firearm(700),
             Powder(1000),
             Grains(3000),
-            Horse(200),
             Planks(500),
             IronOre(300),
             Cannon(100),
@@ -35,6 +34,7 @@ class Kyiv extends City {
             Honey(300),
             Wax(300),
             Tobacco(100),
+            Amber(300),
           ]),
         );
 
@@ -58,7 +58,7 @@ class Kyiv extends City {
               .adjustToModifier(1.2);
         case RESOURCES.HORSE:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1.7);
+              .adjustToModifier(1.4);
         case RESOURCES.CANNON:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.3);
@@ -107,6 +107,9 @@ class Kyiv extends City {
         case RESOURCES.TOBACCO:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);
+        case RESOURCES.AMBER:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.15);
       }
     }).toList();
   }

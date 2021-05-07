@@ -31,18 +31,18 @@ class Sich extends City {
             ],
           ),
           wagons: [
-            Wagon(
-                localizedNameKey: "company.tartar",
-                stock: Stock([
-                  Charcoal(20),
-                  // IronOre(10),
-                ])),
-            Wagon(
-                localizedNameKey: "company.ostapa",
-                stock: Stock([
-                  Powder(20),
-                  MetalParts(10),
-                ])),
+            // Wagon(
+            //     localizedNameKey: "company.tartar",
+            //     stock: Stock([
+            //       Charcoal(20),
+            //       // IronOre(10),
+            //     ])),
+            // Wagon(
+            //     localizedNameKey: "company.ostapa",
+            //     stock: Stock([
+            //       Powder(20),
+            //       MetalParts(10),
+            //     ])),
             Wagon(
               localizedNameKey: "company.gladkyi",
               stock: Stock(
@@ -75,7 +75,7 @@ class Sich extends City {
               .adjustToModifier(2);
         case RESOURCES.HORSE:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.6);
+              .adjustToModifier(0.75);
         case RESOURCES.CANNON:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);
@@ -121,6 +121,9 @@ class Sich extends City {
         case RESOURCES.TOBACCO:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(0.85);
+        case RESOURCES.AMBER:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.5);
       }
     }).toList();
   }

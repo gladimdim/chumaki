@@ -27,6 +27,7 @@ class Nizhin extends City {
               Cannon(10),
               Salt(200),
               Wool(100),
+              Amber(300),
             ],
           ),
         );
@@ -98,6 +99,9 @@ class Nizhin extends City {
         case RESOURCES.TOBACCO:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.4);
+        case RESOURCES.AMBER:
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.05);
       }
     }).toList();
   }
