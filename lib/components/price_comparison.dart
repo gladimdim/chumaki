@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'title_text.dart';
 import 'package:chumaki/extensions/list.dart';
 
+import 'package:chumaki/extensions/list.dart';
 class PriceComparison extends StatefulWidget {
   final City currentCity;
 
@@ -37,22 +38,25 @@ class _PriceComparisonState extends State<PriceComparison> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-                children: widget.currentCity.stock.iterator.map((resource) {
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedResource = resource;
-                      });
-                    },
-                    child: ResourceImageView(
-                      resource.cloneWithAmount(1),
-                      showAmount: selectedResource.sameType(resource),
-                    ),
-                  );
-                }).toList()),
+          Column(
+                children: RESOURCES.values.divideBy(7)
+                    .map<Widget>((List<RESOURCES> resources) {
+                  return Row(
+                      children: resources.map((type) {
+                        final resource = Resource.fromType(type);
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedResource = resource;
+                            });
+                          },
+                          child: ResourceImageView(
+                            resource.cloneWithAmount(1),
+                            showAmount: selectedResource.sameType(resource),
+                          ),
+                        );
+                      }).toList());
+                },).toList(),
           ),
           ...company.allCities
               .where((city) => city != widget.currentCity)

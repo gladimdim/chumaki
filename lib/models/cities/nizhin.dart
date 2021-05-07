@@ -52,7 +52,7 @@ class Nizhin extends City {
               .adjustToModifier(1.2);
         case RESOURCES.HORSE:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1.3);
+              .adjustToModifier(1.1);
         case RESOURCES.CANNON:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.2);

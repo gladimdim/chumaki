@@ -75,7 +75,7 @@ class Sich extends City {
               .adjustToModifier(2);
         case RESOURCES.HORSE:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.75);
+              .adjustToModifier(0.8);
         case RESOURCES.CANNON:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);

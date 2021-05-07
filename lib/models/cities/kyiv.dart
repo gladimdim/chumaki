@@ -58,7 +58,7 @@ class Kyiv extends City {
               .adjustToModifier(1.2);
         case RESOURCES.HORSE:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1.4);
+              .adjustToModifier(1.15);
         case RESOURCES.CANNON:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.3);

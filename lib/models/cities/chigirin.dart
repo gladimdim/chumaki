@@ -53,7 +53,7 @@ class Chigirin extends City {
               .adjustToModifier(1.8);
         case RESOURCES.HORSE:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.7);
+              .adjustToModifier(0.8);
         case RESOURCES.CANNON:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);
