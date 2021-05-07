@@ -18,6 +18,13 @@ class CityLocalMarket extends StatefulWidget {
 
 class _CityLocalMarketState extends State<CityLocalMarket> {
   Wagon? selectedWagon;
+  @override
+  void didUpdateWidget(CityLocalMarket old) {
+    super.didUpdateWidget(old);
+    if (old.city != widget.city || !widget.city.wagons.contains(selectedWagon)) {
+      selectedWagon = null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +49,7 @@ class _CityLocalMarketState extends State<CityLocalMarket> {
             );
           }).toList(),
         ),
-        if (selWagon != null && widget.city.wagons.contains(selWagon)) WagonDetails(wagon: selWagon, city: widget.city),
+        if (selWagon != null) WagonDetails(wagon: selWagon, city: widget.city),
         // WagonListItem(city: widget.city),
         if (selWagon == null)
           BorderedTop(
@@ -53,6 +60,8 @@ class _CityLocalMarketState extends State<CityLocalMarket> {
       ],
     );
   }
+
+
 
   void onWagonSelected(Wagon wagon) {
     setState(
