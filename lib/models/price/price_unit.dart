@@ -56,6 +56,8 @@ class PriceUnit {
         return PriceUnit(resType, 1.5);
       case RESOURCES.AMBER:
         return PriceUnit(resType, 10);
+      case RESOURCES.CLOTH:
+        return PriceUnit(resType, 1);
     }
   }
 
