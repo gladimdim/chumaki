@@ -1,6 +1,8 @@
 import 'package:chumaki/components/city/small_city_avatar.dart';
 import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/task.dart';
 import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/utils/time.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +17,15 @@ class WagonDispatcher extends StatelessWidget {
     return Column(
       children: city.connectsTo().map(
         (toCity) {
+          var fakeRoute = RouteTask(city, toCity, wagon: wagon);
           return TextButton(
-            child: SmallCityAvatar(toCity),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SmallCityAvatar(toCity),
+                Text(readableDuration(fakeRoute.duration!)),
+              ],
+            ),
             onPressed: () => dispatch(toCity, context),
           );
         },
