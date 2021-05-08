@@ -27,7 +27,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
       borderColor: Colors.blueGrey,
       width: CITY_DETAILS_VIEW_WIDTH,
       height:
-          110 * ((resources.length > 1) ? resources.length.toDouble() : 2) / 2,
+          130 * ((resources.length > 1) ? resources.length.toDouble() : 2) / 2,
       borderWidth: 3,
       titleAlignment: GROUP_TITLE_ALIGNMENT.CENTER,
       child: SingleChildScrollView(
