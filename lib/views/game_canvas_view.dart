@@ -250,6 +250,14 @@ class _GameCanvasViewState extends State<GameCanvasView>
                 ),
               ),
               if (selected != null)
+                SizedBox(
+                  width: CANVAS_WIDTH,
+                  height: CANVAS_HEIGHT,
+                  child: GestureDetector(
+                    onTap: dismissSelectedCity,
+                  ),
+                ),
+              if (selected != null)
                 Positioned(
                   left: selected!.point.x - 150,
                   top: selected!.point.y + 64,
@@ -294,6 +302,12 @@ class _GameCanvasViewState extends State<GameCanvasView>
       sichPoint.x - middleX + Sich().size * CITY_SIZE / 2,
       sichPoint.y - middleY + Sich().size * CITY_SIZE / 2,
     );
+  }
+
+  dismissSelectedCity() {
+    setState(() {
+      selected = null;
+    });
   }
 
   @override
