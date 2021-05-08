@@ -21,5 +21,6 @@ class CityRoute {
     CityRoute(City.kyiv, City.nizhin, Point<double>(-50, 50)),
     CityRoute(City.kyiv, City.pereyaslav, Point<double>(300, 0)),
     CityRoute(City.kaniv, City.pereyaslav, Point<double>(100, -50)),
+    CityRoute(City.ochakiv, City.sich, Point<double>(450, -230)),
   ];
 }
