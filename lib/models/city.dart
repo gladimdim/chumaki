@@ -6,6 +6,7 @@ import 'package:chumaki/models/cities/chigirin.dart';
 import 'package:chumaki/models/cities/kaniv.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
+import 'package:chumaki/models/cities/ochakiv.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
@@ -56,6 +57,7 @@ class City {
   static City chigirin = Chigirin();
   static City pereyaslav = Pereyaslav();
   static City kyiv = Kyiv();
+  static City ochakiv = Ochakiv();
 
   static List<City> allCities = [
     nizhin,
@@ -65,6 +67,7 @@ class City {
     chigirin,
     pereyaslav,
     kyiv,
+    ochakiv,
   ];
 
   bool sellResource(
