@@ -24,6 +24,7 @@ enum RESOURCES {
   HONEY,
   TOBACCO,
   AMBER,
+  CLOTH,
 }
 
 class Resource {
@@ -104,6 +105,8 @@ class Resource {
         return Tobacco(0);
       case RESOURCES.AMBER:
         return Amber(0);
+      case RESOURCES.CLOTH:
+        return Cloth(0);
     }
   }
 
@@ -192,6 +195,15 @@ class Bread extends Resource {
             type: RESOURCES.BREAD,
             color: Colors.amber,
             category: RESOURCE_CATEGORY.FOOD);
+}
+
+class Cloth extends Resource {
+  Cloth(int amount)
+      : super("cloth", amount,
+      weightPerPoint: 0.3,
+      type: RESOURCES.CLOTH,
+      color: Colors.grey[600]!,
+      category: RESOURCE_CATEGORY.CLOTH);
 }
 
 class Fur extends Resource {
@@ -431,6 +443,8 @@ String resourceTypeToString(RESOURCES type) {
       return "tobacco";
     case RESOURCES.AMBER:
       return "amber";
+    case RESOURCES.CLOTH:
+      return "cloth";
   }
 }
 
@@ -480,6 +494,8 @@ RESOURCES resourceTypeFromString(String type) {
       return RESOURCES.TOBACCO;
     case "amber":
       return RESOURCES.AMBER;
+    case "cloth":
+      return RESOURCES.CLOTH;
     default:
       throw "Resource type string $type is not recognized.";
   }

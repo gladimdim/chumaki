@@ -32,6 +32,7 @@ class ResourceLocalizations extends InternalLocalizations {
       "tobacco": "Tobacco",
       "wool": "Wool",
       "amber": "Amber",
+      "cloth": "Cloth",
     },
     "uk": {
       "resources": "Ресурси",
@@ -62,7 +63,8 @@ class ResourceLocalizations extends InternalLocalizations {
       "salt": "Сіль",
       "tobacco": "Тютюн",
       "wool": "Шерсть",
-      "amber": "Бурштин"
+      "amber": "Бурштин",
+      "cloth": "Сукно",
     },
     "ru": {
       "resources": "Ресурсы",
@@ -96,6 +98,7 @@ class ResourceLocalizations extends InternalLocalizations {
       "tobacco": "Табак",
       "wool": "Шерсть",
       "amber": "Янтарь",
+      "cloth": "Сукно",
     }
   };
 }

@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'title_text.dart';
 import 'package:chumaki/extensions/list.dart';
 
-import 'package:chumaki/extensions/list.dart';
 class PriceComparison extends StatefulWidget {
   final City currentCity;
 
