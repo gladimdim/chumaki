@@ -14,6 +14,7 @@ class Chigirin extends City {
           name: "Чигирин",
           localizedKeyName: 'chigirin',
           prices: Price(Chigirin.generatePriceUnits()),
+          unlocked: true,
           stock: Stock([
             Bread(2000),
             Stone(300),

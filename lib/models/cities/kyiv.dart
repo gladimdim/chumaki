@@ -14,6 +14,7 @@ class Kyiv extends City {
           localizedKeyName: 'kyiv',
           size: 4,
           prices: Price(generatePriceUnits()),
+          unlocked: false,
           stock: Stock([
             Wood(1000),
             Horse(200),

@@ -13,6 +13,7 @@ class Nizhin extends City {
           name: "Ніжин",
           size: 3,
           localizedKeyName: 'nizhin',
+          unlocked: false,
           prices: Price(generatePriceUnits()),
           stock: Stock(
             [

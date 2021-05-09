@@ -13,6 +13,7 @@ class Ochakiv extends City {
           name: "Очаків",
           localizedKeyName: 'ochakiv',
           size: 4,
+          unlocked: false,
           prices: Price(Ochakiv.generatePriceUnits()),
           stock: Stock(
             [
