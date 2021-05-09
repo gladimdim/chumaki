@@ -22,7 +22,7 @@ class City {
   final String name;
   final Stock stock;
   final String localizedKeyName;
-  bool unlocked;
+  late bool _unlocked;
   final double size;
   late List<Wagon> wagons;
 
@@ -39,7 +39,7 @@ class City {
       required this.stock,
       required this.prices,
       required this.localizedKeyName,
-      this.unlocked = false,
+      unlocked = false,
       this.size = 1,
       List<Wagon>? wagons}) {
     if (wagons == null) {
@@ -47,6 +47,8 @@ class City {
     } else {
       this.wagons = wagons;
     }
+
+    _unlocked = unlocked;
 
     stock.changes.listen(changes.add);
   }
@@ -70,6 +72,14 @@ class City {
     kyiv,
     ochakiv,
   ];
+
+  bool isUnlocked() {
+    return _unlocked;
+  }
+
+  void unlock() {
+    _unlocked = true;
+  }
 
   bool sellResource(
       {required Resource resource,
@@ -144,6 +154,7 @@ class City {
       "size": size,
       "wagons": wagons.map((wagon) => wagon.toJson()).toList(),
       "prices": prices.toJson(),
+      "unlocked": _unlocked,
     };
   }
 
@@ -157,6 +168,7 @@ class City {
       prices: Price.fromJson(input["prices"]),
       localizedKeyName: input["localizedKeyName"],
       wagons: wagonJson.map((e) => Wagon.fromJson(e)).toList(),
+      unlocked: input["unlocked"],
     );
   }
 }

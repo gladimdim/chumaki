@@ -15,6 +15,7 @@ void main() {
         point: Point(15, 13),
         name: "Testing",
         stock: Stock([Bread(15), Stone(30)]),
+        unlocked: true,
         prices: Price(
             [PriceUnit(RESOURCES.BREAD, 10), PriceUnit(RESOURCES.STONE, 3)]),
         localizedKeyName: "testing",
@@ -26,6 +27,7 @@ void main() {
       expect(newCity.prices.sellPriceForResource(Bread(1)), equals(10), reason: "10 is for 1 bread restored");
       expect(newCity.prices.sellPriceForResource(Stone(1)), equals(3), reason: "3 is for 1 stone restored");
       expect(newCity.wagons.first.localizedNameKey, equals("First"), reason: "Wagon is really from previous save.");
+      expect(newCity.isUnlocked(), isTrue, reason: "City is unlocked");
     });
   });
 }

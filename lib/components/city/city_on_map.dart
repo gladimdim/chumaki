@@ -12,7 +12,7 @@ class CityOnMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Opacity(
-      opacity: city.unlocked ? 1 : 0.6,
+      opacity: city.isUnlocked() ? 1 : 0.6,
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
