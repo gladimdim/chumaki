@@ -22,6 +22,7 @@ class CanUnlockCitiesView extends StatelessWidget {
           child: TitleText("Buy routes to these cities: "),
         ),
         ...city.unlocksCities
+        .map((fakeCity) => company.refToCityByName(fakeCity))
             .where((unlockCity) => !unlockCity.isUnlocked())
             .map((unlockCity) {
           return Row(

@@ -60,45 +60,48 @@ class City {
   static City fromName(String name) {
     switch (name) {
       case "nizhin":
-        return City.nizhin;
+        return Nizhin();
       case "kaniv":
-        return City.kaniv;
+        return Kaniv();
       case "sich":
-        return City.sich;
+        return Sich();
       case "cherkasy":
-        return City.cherkasy;
+        return Cherkasy();
       case "chigirin":
-        return City.chigirin;
+        return Chigirin();
       case "pereyaslav":
-        return City.pereyaslav;
+        return Pereyaslav();
       case "kyiv":
-        return City.kyiv;
+        return Kyiv();
       case "ochakiv":
-        return City.ochakiv;
+        return Ochakiv();
       default:
         throw "City with key $name is not recognized";
     }
   }
+  //
+  // static City nizhin = Nizhin();
+  // static City kaniv = Kaniv();
+  // static City sich = Sich();
+  // static City cherkasy = Cherkasy();
+  // static City chigirin = Chigirin();
+  // static City pereyaslav = Pereyaslav();
+  // static City kyiv = Kyiv();
+  // static City ochakiv = Ochakiv();
 
-  static City nizhin = Nizhin();
-  static City kaniv = Kaniv();
-  static City sich = Sich();
-  static City cherkasy = Cherkasy();
-  static City chigirin = Chigirin();
-  static City pereyaslav = Pereyaslav();
-  static City kyiv = Kyiv();
-  static City ochakiv = Ochakiv();
-
-  static List<City> allCities = [
-    nizhin,
-    kaniv,
-    sich,
-    cherkasy,
-    chigirin,
-    pereyaslav,
-    kyiv,
-    ochakiv,
-  ];
+  static List<City> generateNewCities() {
+    return [
+      Nizhin(),
+      Kaniv(),
+      Sich(),
+      Cherkasy(),
+      Sich(),
+      Chigirin(),
+      Pereyaslav(),
+      Kyiv(),
+      Ochakiv(),
+    ];
+  }
 
   bool isUnlocked() {
     return _unlocked;
@@ -106,6 +109,7 @@ class City {
 
   void unlock() {
     _unlocked = true;
+    changes.add(this);
   }
 
   bool sellResource(
@@ -143,17 +147,17 @@ class City {
   }
 
   bool equalsTo(City another) {
-    return another.name == name;
+    return another.localizedKeyName == localizedKeyName;
   }
 
-  List<City> connectsTo() {
-    return routes.map((route) {
-      return route.to.equalsTo(this) ? route.from : route.to;
+  List<City> connectsTo({required Company inCompany}) {
+    return getRoutesInCompany(inCompany).map((route) {
+      return route.to.equalsTo(this) ? inCompany.refToCityByName(route.from) : inCompany.refToCityByName(route.to);
     }).toList();
   }
 
-  List<CityRoute> get routes {
-    return CityRoute.allRoutes.where((route) {
+  List<CityRoute> getRoutesInCompany(Company company) {
+    return company.cityRoutes.where((route) {
       return route.to.equalsTo(this) || route.from.equalsTo(this);
     }).toList();
   }

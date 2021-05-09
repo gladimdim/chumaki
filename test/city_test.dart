@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
+import 'package:chumaki/models/cities/cherkasy.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/price/price_unit.dart';
@@ -16,7 +17,7 @@ void main() {
         name: "Testing",
         stock: Stock([Bread(15), Stone(30)]),
         unlocked: true,
-        unlocksCities: [City.cherkasy],
+        unlocksCities: [Cherkasy()],
         prices: Price(
             [PriceUnit(RESOURCES.BREAD, 10), PriceUnit(RESOURCES.STONE, 3)]),
         localizedKeyName: "testing",
@@ -40,8 +41,8 @@ void main() {
       expect(newCity.unlocksCities, isNotEmpty,
           reason: "Unlocks city list is present");
       expect(newCity.unlocksCities[0].localizedKeyName,
-          City.cherkasy.localizedKeyName,
-          reason: "Unlocks Cherkassy");
+          Cherkasy().localizedKeyName,
+          reason: "Unlocks Cherkasy");
     });
   });
 }

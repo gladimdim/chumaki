@@ -35,7 +35,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
       builder: (context, data) => Column(
         children: [
           StreamBuilder(
-            stream: widget.city.changes.stream,
+            stream: company.refToCityByName(widget.city).changes.stream,
             builder: (context, data) => BorderedBottom(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

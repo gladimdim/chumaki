@@ -1,5 +1,15 @@
+import 'dart:math';
+
 import 'package:chumaki/app_preferences.dart';
+import 'package:chumaki/models/cities/cherkasy.dart';
+import 'package:chumaki/models/cities/chigirin.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/cities/kaniv.dart';
+import 'package:chumaki/models/cities/kyiv.dart';
+import 'package:chumaki/models/cities/nizhin.dart';
+import 'package:chumaki/models/cities/ochakiv.dart';
+import 'package:chumaki/models/cities/pereyaslav.dart';
+import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/route.dart';
 import 'package:chumaki/models/task.dart';
@@ -16,13 +26,24 @@ enum COMPANY_EVENTS {
 }
 
 class Company {
-  final List<CityRoute> cityRoutes = CityRoute.allRoutes;
+  final List<CityRoute> cityRoutes = [
+    CityRoute(Cherkasy(), Chigirin(), Point<double>(50.0, 50.0)),
+    CityRoute(Pereyaslav(), Nizhin(), Point<double>(0.0, 0.0)),
+    CityRoute(Cherkasy(), Kaniv(), Point<double>(10.0, 10.0)),
+    CityRoute(Sich(), Chigirin(), Point<double>(-675.0, 0.0)),
+    CityRoute(Pereyaslav(), Chigirin(), Point<double>(-150.0, 155.0)),
+    CityRoute(Kyiv(), Nizhin(), Point<double>(-50, 50)),
+    CityRoute(Kyiv(), Pereyaslav(), Point<double>(300, 0)),
+    CityRoute(Kaniv(), Pereyaslav(), Point<double>(100, -50)),
+    CityRoute(Ochakiv(), Sich(), Point<double>(450, -230)),
+  ];
+
   double _money = 500;
   late List<City> allCities;
 
   Company({cities}) {
     if (cities == null) {
-      this.allCities = City.allCities;
+      this.allCities = City.generateNewCities();
     } else {
       this.allCities = cities;
     }
@@ -129,15 +150,27 @@ class Company {
   }
 
   void unlockCity(City cityToUnlock) {
-    var price = cityToUnlock.unlockPriceMoney;
+    final realCity = refToCityByName(cityToUnlock);
+    var price = realCity.unlockPriceMoney;
     if (hasEnoughMoney(price)) {
       removeMoney(price.amount);
-      cityToUnlock.unlock();
+      realCity.unlock();
       _innerChanges.add(COMPANY_EVENTS.CITY_UNLOCKED);
     }
   }
 
   bool hasEnoughMoney(Money unlockPriceMoney) {
     return _money >= unlockPriceMoney.amount;
+  }
+
+  City refToCityByName(City city) {
+    return allCities.firstWhere((c) => c.equalsTo(city));
+  }
+
+  bool canUnlockMoreCities(City city) {
+    return city.unlocksCities.where((unlockCity) {
+      var realCity = refToCityByName(unlockCity);
+      return !realCity.isUnlocked();
+    }).isNotEmpty;
   }
 }

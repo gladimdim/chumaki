@@ -14,8 +14,9 @@ class WagonDispatcher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final company = InheritedCompany.of(context).company;
     return Column(
-      children: city.connectsTo().map(
+      children: city.connectsTo(inCompany: company).map(
         (toCity) {
           var fakeRoute = RouteTask(city, toCity, wagon: wagon);
           return StreamBuilder(

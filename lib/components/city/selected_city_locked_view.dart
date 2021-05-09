@@ -3,6 +3,7 @@ import 'package:chumaki/components/city/small_city_avatar.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 
 class SelectedCityLockedView extends StatelessWidget {
@@ -12,6 +13,7 @@ class SelectedCityLockedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final company = InheritedCompany.of(context).company;
     return Column(
       children: [
         BorderedBottom(
@@ -19,8 +21,9 @@ class SelectedCityLockedView extends StatelessWidget {
         ),
         TitleText("You can unlock it at:"),
         Column(
-          children: City.allCities.where((cityThatCanUnlock) {
-            return cityThatCanUnlock.unlocksCities.contains(city);
+          children: company.allCities.where((cityThatCanUnlock) {
+            var realCity = company.refToCityByName(city);
+            return cityThatCanUnlock.unlocksCities.contains(realCity);
           }).map((cityThatUnlocks) {
             return SmallCityAvatar(cityThatUnlocks);
           }).toList(),

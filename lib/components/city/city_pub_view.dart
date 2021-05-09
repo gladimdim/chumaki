@@ -28,10 +28,11 @@ class _CityPubViewState extends State<CityPubView> {
     final company = InheritedCompany.of(context).company;
     return Column(
       children: [
-        if (canUnlockMoreCities()) Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CanUnlockCitiesView(widget.city),
-        ),
+        if (canUnlockMoreCities(company))
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CanUnlockCitiesView(widget.city),
+          ),
         ...widget.city.wagons.map((wagon) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -83,7 +84,7 @@ class _CityPubViewState extends State<CityPubView> {
     });
   }
 
-  bool canUnlockMoreCities() {
-    return widget.city.unlocksCities.where((unlockCity) => !unlockCity.isUnlocked()).isNotEmpty;
+  bool canUnlockMoreCities(Company company) {
+    return company.canUnlockMoreCities(widget.city);
   }
 }

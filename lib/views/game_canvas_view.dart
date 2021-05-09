@@ -13,7 +13,6 @@ import 'package:chumaki/models/image_on_canvas.dart';
 import 'package:chumaki/utils/points.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
-import 'package:chumaki/models/route.dart';
 import 'dart:ui' as ui;
 
 const CITY_SIZE = 50;
@@ -108,11 +107,11 @@ class _GameCanvasViewState extends State<GameCanvasView>
                     ),
                   );
                 }).toList(),
-              ...CityRoute.allRoutes.map((route) {
+              ...company.cityRoutes.map((route) {
                 var first = route.from;
                 bool highlight = false;
                 if (selected != null) {
-                  highlight = selected!.routes.contains(route);
+                  highlight = selected!.getRoutesInCompany(company).contains(route);
                 }
                 return Positioned(
                   left: first.point.x + CITY_SIZE,

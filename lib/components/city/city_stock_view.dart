@@ -3,6 +3,7 @@ import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource.dart';
+import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 
 class CityStockView extends StatelessWidget {
@@ -12,8 +13,9 @@ class CityStockView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final company = InheritedCompany.of(context).company;
     return StreamBuilder(
-      stream: city.changes.stream,
+      stream: company.refToCityByName(city).changes.stream,
       builder: (context, data) {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
