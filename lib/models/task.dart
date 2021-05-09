@@ -9,7 +9,7 @@ import 'package:uuid/uuid.dart';
 class RouteTask extends ProgressDuration {
   final City from;
   final City to;
-  static Duration durationPerPoint = Duration(milliseconds: 25);
+  static Duration durationPerPoint = Duration(milliseconds: 10);
   DateTime? endTaskDate;
   final String id = Uuid().v4().toString();
   Wagon wagon;

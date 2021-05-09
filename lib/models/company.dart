@@ -38,7 +38,7 @@ class Company {
     CityRoute(Ochakiv(), Sich(), Point<double>(450, -230)),
   ];
 
-  double _money = 500;
+  double _money = 1500;
   late List<City> allCities;
 
   Company({cities}) {
