@@ -11,8 +11,8 @@ class Pereyaslav extends City {
       : super(
           point: Point(2360, 2450),
           name: "Переяслав",
-
-    localizedKeyName: 'pereyaslav',
+          unlocked: true,
+          localizedKeyName: 'pereyaslav',
           size: 2,
           prices: Price(generatePriceUnits()),
           stock: Stock([
@@ -31,8 +31,6 @@ class Pereyaslav extends City {
             Wax(500),
           ]),
         );
-
-
 
   static List<PriceUnit> generatePriceUnits() {
     return RESOURCES.values.map<PriceUnit>((resType) {
@@ -92,11 +90,14 @@ class Pereyaslav extends City {
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);
         case RESOURCES.GORILKA:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1);
         case RESOURCES.HONEY:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1.1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.1);
         case RESOURCES.WAX:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1.1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.1);
         case RESOURCES.TOBACCO:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.2);

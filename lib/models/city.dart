@@ -22,7 +22,7 @@ class City {
   final String name;
   final Stock stock;
   final String localizedKeyName;
-
+  bool unlocked;
   final double size;
   late List<Wagon> wagons;
 
@@ -39,6 +39,7 @@ class City {
       required this.stock,
       required this.prices,
       required this.localizedKeyName,
+      this.unlocked = false,
       this.size = 1,
       List<Wagon>? wagons}) {
     if (wagons == null) {

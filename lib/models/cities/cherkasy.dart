@@ -13,6 +13,7 @@ class Cherkasy extends City {
           name: "Черкаси",
           localizedKeyName: 'cherkasy',
           size: 2,
+          unlocked: true,
           prices: Price(Cherkasy.generatePriceUnits()),
           stock: Stock([
             Bread(200),
@@ -114,7 +115,6 @@ class Cherkasy extends City {
         case RESOURCES.CLOTH:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);
-
       }
     }).toList();
   }

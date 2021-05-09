@@ -14,6 +14,7 @@ class Sich extends City {
           name: "Січ",
           localizedKeyName: 'sich',
           size: 4,
+          unlocked: true,
           prices: Price(Sich.generatePriceUnits()),
           stock: Stock(
             [
