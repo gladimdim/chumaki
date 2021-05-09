@@ -15,8 +15,9 @@ void main() {
     test("Can save/load list of cities", () {
       var company = Company(cities: [Chigirin(), Pereyaslav()]);
       var newCompany = Company.fromJson(company.toJson());
-      expect(newCompany.allCities[0].name, equals(company.allCities[0].name), reason: "City Nizhin was restored");
-      expect(newCompany.allCities.length, equals(company.allCities.length,), reason: "Amount of cities is restored");
+      expect(newCompany.allCities[0].localizedKeyName, equals(Chigirin().localizedKeyName), reason: "City Nizhin was restored");
+      expect(newCompany.allCities[1].localizedKeyName, equals(Pereyaslav().localizedKeyName), reason: "City Nizhin was restored");
+      expect(newCompany.allCities.length, equals(2), reason: "Amount of cities is restored");
     });
   });
 }

@@ -137,7 +137,9 @@ class Company {
 
   static Company fromJson(Map<String, dynamic> inputJson) {
     double money = inputJson["money"] as double;
-    var company = Company().._money = money;
+    List citiesJson = inputJson["allCities"];
+    List<City> allCities = citiesJson.map((cityJson) => City.fromJson(cityJson)).toList();
+    var company = Company(cities: allCities).._money = money;
     return company;
   }
 
