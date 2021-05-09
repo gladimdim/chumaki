@@ -35,6 +35,9 @@ class Chigirin extends City {
           ]),
         );
 
+
+  Money unlockPriceMoney = Money(0);
+
   static List<PriceUnit> generatePriceUnits() {
     return RESOURCES.values.map<PriceUnit>((resType) {
       switch (resType) {

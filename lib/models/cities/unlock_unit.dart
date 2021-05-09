@@ -1,5 +1,4 @@
 import 'package:chumaki/models/cities/city.dart';
-import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class UnlockUnit {

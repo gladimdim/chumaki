@@ -34,6 +34,8 @@ class Nizhin extends City {
           ),
         );
 
+  Money unlockPriceMoney = Money(200);
+
   static List<PriceUnit> generatePriceUnits() {
     return RESOURCES.values.map<PriceUnit>((resType) {
       switch (resType) {

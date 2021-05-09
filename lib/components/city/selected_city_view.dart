@@ -16,7 +16,7 @@ const CITY_DETAILS_VIEW_WIDTH = 400.0;
 class SelectedCityView extends StatefulWidget {
   final City city;
 
-  SelectedCityView({required this.city});
+  SelectedCityView(this.city);
 
   @override
   _SelectedCityViewState createState() => _SelectedCityViewState();

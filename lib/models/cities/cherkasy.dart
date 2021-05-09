@@ -2,8 +2,6 @@ import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
-import 'package:chumaki/models/cities/pereyaslav.dart';
-import 'package:chumaki/models/cities/unlock_unit.dart';
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';

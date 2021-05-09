@@ -41,6 +41,9 @@ class Kyiv extends City {
           ]),
         );
 
+
+  Money unlockPriceMoney = Money(500);
+
   static List<PriceUnit> generatePriceUnits() {
     return RESOURCES.values.map<PriceUnit>((resType) {
       switch (resType) {

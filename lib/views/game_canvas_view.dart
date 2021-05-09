@@ -1,8 +1,9 @@
 import 'dart:math';
 
 import 'package:chumaki/components/city/city_on_map.dart';
+import 'package:chumaki/components/city/selected_city_locked_view.dart';
 import 'package:chumaki/components/route_paint.dart';
-import 'package:chumaki/components/selected_city_view.dart';
+import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/models/cities/city.dart';
 
 import 'package:chumaki/models/cities/sich.dart';
@@ -207,7 +208,9 @@ class _GameCanvasViewState extends State<GameCanvasView>
                         border: Border.all(color: Colors.black, width: 3),
                         color: Colors.grey[400],
                       ),
-                      child: SelectedCityView(city: selected!),
+                      child: selected!.isUnlocked()
+                          ? SelectedCityView(selected!)
+                          : SelectedCityLockedView(selected!),
                     ),
                   ),
                 ),
