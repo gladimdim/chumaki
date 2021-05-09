@@ -11,16 +11,16 @@ import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 import 'package:chumaki/extensions/list.dart';
 
-class AdvisorForCity extends StatefulWidget {
+class CityPubView extends StatefulWidget {
   final City city;
 
-  AdvisorForCity({required this.city});
+  CityPubView({required this.city});
 
   @override
-  _AdvisorForCityState createState() => _AdvisorForCityState();
+  _CityPubViewState createState() => _CityPubViewState();
 }
 
-class _AdvisorForCityState extends State<AdvisorForCity> {
+class _CityPubViewState extends State<CityPubView> {
 
   @override
   Widget build(BuildContext context) {

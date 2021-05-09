@@ -1,4 +1,4 @@
-import 'package:chumaki/components/advisor_for_city.dart';
+import 'package:chumaki/components/city/city_pub_view.dart';
 import 'package:chumaki/components/city/city_local_market.dart';
 import 'package:chumaki/components/price_comparison.dart';
 import 'package:chumaki/components/route_task_row_progress.dart';
@@ -58,7 +58,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
               ),
             ),
           ),
-          if (showAdvisor) AdvisorForCity(city: widget.city),
+          if (showAdvisor) CityPubView(city: widget.city),
           if (showWorldMarket) PriceComparison(currentCity: widget.city),
           if (showLocalMarket) ...[
             CityLocalMarket(city: widget.city),
