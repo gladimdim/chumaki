@@ -95,7 +95,6 @@ class City {
       Kaniv(),
       Sich(),
       Cherkasy(),
-      Sich(),
       Chigirin(),
       Pereyaslav(),
       Kyiv(),
@@ -204,6 +203,7 @@ class City {
       unlocked: input["unlocked"],
       unlocksCities:
           unlockCities.map((cityName) => City.fromName(cityName)).toList(),
+      size: input["size"],
     );
   }
 }

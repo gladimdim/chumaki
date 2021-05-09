@@ -175,4 +175,8 @@ class Company {
       return !realCity.isUnlocked();
     }).isNotEmpty;
   }
+
+  List<City> citiesToRealCities(List<City> cities) {
+    return cities.map((e) => refToCityByName(e)).toList();
+  }
 }

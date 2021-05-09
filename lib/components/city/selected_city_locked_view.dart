@@ -23,7 +23,9 @@ class SelectedCityLockedView extends StatelessWidget {
         Column(
           children: company.allCities.where((cityThatCanUnlock) {
             var realCity = company.refToCityByName(city);
-            return cityThatCanUnlock.unlocksCities.contains(realCity);
+            return company
+                .citiesToRealCities(cityThatCanUnlock.unlocksCities)
+                .contains(realCity);
           }).map((cityThatUnlocks) {
             return SmallCityAvatar(cityThatUnlocks);
           }).toList(),

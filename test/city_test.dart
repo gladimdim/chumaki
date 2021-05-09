@@ -16,6 +16,7 @@ void main() {
         point: Point(15, 13),
         name: "Testing",
         stock: Stock([Bread(15), Stone(30)]),
+        size: 3,
         unlocked: true,
         unlocksCities: [Cherkasy()],
         prices: Price(
@@ -43,6 +44,7 @@ void main() {
       expect(newCity.unlocksCities[0].localizedKeyName,
           Cherkasy().localizedKeyName,
           reason: "Unlocks Cherkasy");
+      expect(newCity.size, equals(3), reason: "City size restored");
     });
   });
 }
