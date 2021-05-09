@@ -86,14 +86,14 @@ class _PriceComparisonState extends State<PriceComparison> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text("Price:"),
-                              MoneyUnit(Money(buyPrice)),
+                              MoneyUnitView(Money(buyPrice)),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text("Profit:"),
-                              MoneyUnit(Money(saldo)),
+                              MoneyUnitView(Money(saldo)),
                             ],
                           ),
                         ],

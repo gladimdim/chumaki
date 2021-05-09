@@ -16,6 +16,7 @@ class Kyiv extends City {
           prices: Price(generatePriceUnits()),
           unlocked: false,
           unlocksCities: [City.nizhin],
+          unlockPriceMoney: Money(500),
           stock: Stock([
             Wood(1000),
             Horse(200),

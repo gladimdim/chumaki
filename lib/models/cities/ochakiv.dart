@@ -16,6 +16,7 @@ class Ochakiv extends City {
           unlocked: false,
           unlocksCities: [],
           prices: Price(Ochakiv.generatePriceUnits()),
+          unlockPriceMoney: Money(50),
           stock: Stock(
             [
               Powder(1000),
@@ -26,9 +27,6 @@ class Ochakiv extends City {
             ],
           ),
         );
-
-
-  Money unlockPriceMoney = Money(100);
 
   static List<PriceUnit> generatePriceUnits() {
     return RESOURCES.values.map<PriceUnit>((resType) {

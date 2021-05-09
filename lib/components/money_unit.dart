@@ -1,9 +1,9 @@
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:flutter/material.dart';
 
-class MoneyUnit extends StatelessWidget {
+class MoneyUnitView extends StatelessWidget {
   final Money money;
-  MoneyUnit(this.money);
+  MoneyUnitView(this.money);
 
   @override
   Widget build(BuildContext context) {

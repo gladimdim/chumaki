@@ -50,7 +50,7 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                   child: StreamBuilder(
                       stream: company.changes,
                       builder: (context, snap) {
-                        return MoneyUnit(company.getMoney());
+                        return MoneyUnitView(company.getMoney());
                       }),
                 ),
               ),

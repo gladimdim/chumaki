@@ -33,7 +33,7 @@ class City {
     return "images/cities/avatars/$localizedKeyName.png";
   }
 
-  Money unlockPriceMoney = Money(0);
+  late Money unlockPriceMoney;
 
   City(
       {required this.point,
@@ -44,6 +44,7 @@ class City {
       unlocked = false,
       this.size = 1,
       required this.unlocksCities,
+      this.unlockPriceMoney = const Money(0),
       List<Wagon>? wagons}) {
     if (wagons == null) {
       this.wagons = List.empty(growable: true);

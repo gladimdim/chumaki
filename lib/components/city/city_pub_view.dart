@@ -1,3 +1,4 @@
+import 'package:chumaki/components/city/can_unlock_cities_view.dart';
 import 'package:chumaki/components/city/small_city_avatar.dart';
 import 'package:chumaki/components/money_unit.dart';
 import 'package:chumaki/components/title_text.dart';
@@ -21,12 +22,13 @@ class CityPubView extends StatefulWidget {
 }
 
 class _CityPubViewState extends State<CityPubView> {
-
   @override
   Widget build(BuildContext context) {
     final company = InheritedCompany.of(context).company;
     return Column(
-        children: widget.city.wagons.map((wagon) {
+      children: [
+        if (canUnlockMoreCities()) CanUnlockCitiesView(widget.city),
+        ...widget.city.wagons.map((wagon) {
           return Container(
             decoration: BoxDecoration(
               border: Border.all(width: 2, color: Colors.blueGrey),
@@ -34,15 +36,18 @@ class _CityPubViewState extends State<CityPubView> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TitleText("${ChumakiLocalizations.labelTotalPrice}: ${wagon.fullLocalizedName}"),
-                ...calculateTopForWagon(wagon, company).divideBy(3).map((rowResult) {
+                TitleText(
+                    "${ChumakiLocalizations.labelTotalPrice}: ${wagon.fullLocalizedName}"),
+                ...calculateTopForWagon(wagon, company)
+                    .divideBy(3)
+                    .map((rowResult) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: rowResult.map((result) {
                       return Column(
                         children: [
                           SmallCityAvatar(result.item1),
-                          MoneyUnit(Money(result.item2)),
+                          MoneyUnitView(Money(result.item2)),
                         ],
                       );
                     }).toList(),
@@ -51,10 +56,13 @@ class _CityPubViewState extends State<CityPubView> {
               ],
             ),
           );
-        }).toList());
+        }).toList()
+      ],
+    );
   }
 
-  List<Tuple2<City, double>> calculateTopForWagon(Wagon wagon, Company company) {
+  List<Tuple2<City, double>> calculateTopForWagon(
+      Wagon wagon, Company company) {
     var result = City.allCities.map((city) {
       return Tuple2(city, priceForFullWagonInCity(wagon, city));
     }).toList();
@@ -69,5 +77,9 @@ class _CityPubViewState extends State<CityPubView> {
       var price = city.prices.buyPriceForResource(resource);
       return previousValue + price;
     });
+  }
+
+  bool canUnlockMoreCities() {
+    return widget.city.unlocksCities.where((unlockCity) => !unlockCity.isUnlocked()).isNotEmpty;
   }
 }

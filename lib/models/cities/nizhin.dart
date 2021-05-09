@@ -15,6 +15,7 @@ class Nizhin extends City {
           localizedKeyName: 'nizhin',
           unlocked: false,
           unlocksCities: [],
+          unlockPriceMoney: Money(200),
           prices: Price(generatePriceUnits()),
           stock: Stock(
             [

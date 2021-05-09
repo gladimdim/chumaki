@@ -40,7 +40,7 @@ class CityWagonResourceExchange extends StatelessWidget {
           flex: 1,
           child: Column(
             children: [
-              MoneyUnit(Money(sellPrice)),
+              MoneyUnitView(Money(sellPrice)),
               Text("(${sellPricePerUnit}x$amountTradeValue)"),
             ],
           ),
@@ -106,7 +106,7 @@ class CityWagonResourceExchange extends StatelessWidget {
           flex: 1,
           child: Column(
             children: [
-              MoneyUnit(Money(buyPrice)),
+              MoneyUnitView(Money(buyPrice)),
               Text("(${buyPricePerUnit}x$amountTradeValue)"),
             ],
           ),
