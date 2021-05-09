@@ -9,8 +9,10 @@ import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/cities/ochakiv.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/sich.dart';
+import 'package:chumaki/models/cities/unlock_unit.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/price.dart';
+import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/route.dart';
 import 'package:chumaki/models/task.dart';
@@ -25,13 +27,15 @@ class City {
   late bool _unlocked;
   final double size;
   late List<Wagon> wagons;
-
+  final List<City> unlocksCities;
   final Price prices;
   BehaviorSubject changes = BehaviorSubject();
 
   String get avatarImagePath {
     return "images/cities/avatars/$localizedKeyName.png";
   }
+
+  Money unlockPriceMoney = Money(0);
 
   City(
       {required this.point,
@@ -41,6 +45,7 @@ class City {
       required this.localizedKeyName,
       unlocked = false,
       this.size = 1,
+      required this.unlocksCities,
       List<Wagon>? wagons}) {
     if (wagons == null) {
       this.wagons = List.empty(growable: true);
@@ -51,6 +56,29 @@ class City {
     _unlocked = unlocked;
 
     stock.changes.listen(changes.add);
+  }
+
+  static City fromName(String name) {
+    switch (name) {
+      case "nizhin":
+        return City.nizhin;
+      case "kaniv":
+        return City.kaniv;
+      case "sich":
+        return City.sich;
+      case "cherkasy":
+        return City.cherkasy;
+      case "chigirin":
+        return City.chigirin;
+      case "pereyaslav":
+        return City.pereyaslav;
+      case "kyiv":
+        return City.kyiv;
+      case "ochakiv":
+        return City.ochakiv;
+      default:
+        throw "City with key $name is not recognized";
+    }
   }
 
   static City nizhin = Nizhin();
@@ -155,12 +183,14 @@ class City {
       "wagons": wagons.map((wagon) => wagon.toJson()).toList(),
       "prices": prices.toJson(),
       "unlocked": _unlocked,
+      "unlockCities": unlocksCities.map((e) => e.localizedKeyName).toList(),
     };
   }
 
   static City fromJson(Map<String, dynamic> input) {
     var pointJson = input["point"];
     List wagonJson = input["wagons"];
+    List unlockCities = input["unlockCities"];
     return City(
       point: Point(pointJson["x"], pointJson["y"]),
       name: input["name"],
@@ -169,6 +199,8 @@ class City {
       localizedKeyName: input["localizedKeyName"],
       wagons: wagonJson.map((e) => Wagon.fromJson(e)).toList(),
       unlocked: input["unlocked"],
+      unlocksCities:
+          unlockCities.map((cityName) => City.fromName(cityName)).toList(),
     );
   }
 }

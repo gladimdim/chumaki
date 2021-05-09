@@ -1,5 +1,5 @@
 import 'package:chumaki/app_preferences.dart';
-import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/route.dart';
 import 'package:chumaki/models/task.dart';

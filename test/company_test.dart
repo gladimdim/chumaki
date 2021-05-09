@@ -1,4 +1,4 @@
-import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:test/test.dart';
 

@@ -1,7 +1,7 @@
 import 'package:chumaki/components/stock_resource_category_group.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
-import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:flutter/material.dart';
 

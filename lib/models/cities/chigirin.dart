@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
-import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -15,6 +15,7 @@ class Chigirin extends City {
           localizedKeyName: 'chigirin',
           prices: Price(Chigirin.generatePriceUnits()),
           unlocked: true,
+          unlocksCities: [],
           stock: Stock([
             Bread(2000),
             Stone(300),

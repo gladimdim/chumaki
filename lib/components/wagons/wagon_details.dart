@@ -4,7 +4,7 @@ import 'package:chumaki/components/ui/bordered_top.dart';
 import 'package:chumaki/components/wagons/wagon_dispatcher.dart';
 import 'package:chumaki/components/wagons/wagon_resource_exchanger.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
-import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 

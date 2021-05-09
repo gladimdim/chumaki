@@ -3,7 +3,7 @@ import 'package:chumaki/components/city/city_stock_view.dart';
 import 'package:chumaki/components/ui/bordered_top.dart';
 import 'package:chumaki/components/wagons/wagon_details.dart';
 import 'package:chumaki/components/wagons/wagon_list_item.dart';
-import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 

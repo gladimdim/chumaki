@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
-import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -15,6 +15,7 @@ class Sich extends City {
           localizedKeyName: 'sich',
           size: 4,
           unlocked: true,
+          unlocksCities: [City.ochakiv],
           prices: Price(Sich.generatePriceUnits()),
           stock: Stock(
             [
