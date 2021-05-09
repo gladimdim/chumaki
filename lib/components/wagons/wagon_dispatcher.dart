@@ -18,15 +18,18 @@ class WagonDispatcher extends StatelessWidget {
       children: city.connectsTo().map(
         (toCity) {
           var fakeRoute = RouteTask(city, toCity, wagon: wagon);
-          return TextButton(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SmallCityAvatar(toCity),
-                Text(readableDuration(fakeRoute.duration!)),
-              ],
+          return StreamBuilder(
+            stream: toCity.changes,
+            builder: (context, snapshot) => TextButton(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SmallCityAvatar(toCity),
+                  Text(readableDuration(fakeRoute.duration!)),
+                ],
+              ),
+              onPressed: toCity.isUnlocked() ? () => dispatch(toCity, context) : null,
             ),
-            onPressed: () => dispatch(toCity, context),
           );
         },
       ).toList(),

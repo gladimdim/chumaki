@@ -2,6 +2,7 @@ import 'package:chumaki/components/city/can_unlock_cities_view.dart';
 import 'package:chumaki/components/city/small_city_avatar.dart';
 import 'package:chumaki/components/money_unit.dart';
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
@@ -27,17 +28,20 @@ class _CityPubViewState extends State<CityPubView> {
     final company = InheritedCompany.of(context).company;
     return Column(
       children: [
-        if (canUnlockMoreCities()) CanUnlockCitiesView(widget.city),
+        if (canUnlockMoreCities()) Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CanUnlockCitiesView(widget.city),
+        ),
         ...widget.city.wagons.map((wagon) {
-          return Container(
-            decoration: BoxDecoration(
-              border: Border.all(width: 2, color: Colors.blueGrey),
-            ),
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TitleText(
-                    "${ChumakiLocalizations.labelTotalPrice}: ${wagon.fullLocalizedName}"),
+                BorderedBottom(
+                  child: TitleText(
+                      "${ChumakiLocalizations.labelTotalPrice}: ${wagon.fullLocalizedName}"),
+                ),
                 ...calculateTopForWagon(wagon, company)
                     .divideBy(3)
                     .map((rowResult) {
@@ -63,7 +67,7 @@ class _CityPubViewState extends State<CityPubView> {
 
   List<Tuple2<City, double>> calculateTopForWagon(
       Wagon wagon, Company company) {
-    var result = City.allCities.map((city) {
+    var result = company.allCities.map((city) {
       return Tuple2(city, priceForFullWagonInCity(wagon, city));
     }).toList();
     result.sort((a, b) {

@@ -7,7 +7,13 @@ import 'package:chumaki/models/wagon.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
-enum COMPANY_EVENTS { TASK_STARTED, TASK_ENDED, MONEY_ADDED, MONEY_REMOVED }
+enum COMPANY_EVENTS {
+  TASK_STARTED,
+  TASK_ENDED,
+  MONEY_ADDED,
+  MONEY_REMOVED,
+  CITY_UNLOCKED
+}
 
 class Company {
   final List<CityRoute> cityRoutes = CityRoute.allRoutes;
@@ -16,15 +22,22 @@ class Company {
 
   Company({cities}) {
     if (cities == null) {
-      this.allCities =  City.allCities;
-    } else {
       this.allCities = City.allCities;
+    } else {
+      this.allCities = cities;
     }
     changes = _innerChanges.stream;
     changes.listen((event) {
       switch (event) {
-        case COMPANY_EVENTS.TASK_STARTED: save(); break;
-        case COMPANY_EVENTS.TASK_ENDED: save(); break;
+        case COMPANY_EVENTS.TASK_STARTED:
+          save();
+          break;
+        case COMPANY_EVENTS.TASK_ENDED:
+          save();
+          break;
+        case COMPANY_EVENTS.CITY_UNLOCKED:
+          save();
+          break;
       }
     });
   }
@@ -66,7 +79,8 @@ class Company {
     });
   }
 
-  void startTask({required City from, required City to, required Wagon withWagon}) {
+  void startTask(
+      {required City from, required City to, required Wagon withWagon}) {
     var newTask = RouteTask(from, to, wagon: withWagon);
     // notify from City that the trade company with the given wagon departed
     from.routeTaskStarted(newTask);
@@ -106,12 +120,24 @@ class Company {
     return company;
   }
 
-
   void dispose() {
     _innerChanges.close();
   }
 
   bool hasMoney(double price) {
     return price <= _money;
+  }
+
+  void unlockCity(City cityToUnlock) {
+    var price = cityToUnlock.unlockPriceMoney;
+    if (hasEnoughMoney(price)) {
+      removeMoney(price.amount);
+      cityToUnlock.unlock();
+      _innerChanges.add(COMPANY_EVENTS.CITY_UNLOCKED);
+    }
+  }
+
+  bool hasEnoughMoney(Money unlockPriceMoney) {
+    return _money >= unlockPriceMoney.amount;
   }
 }
