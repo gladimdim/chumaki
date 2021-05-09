@@ -281,7 +281,8 @@ class _GameCanvasViewState extends State<GameCanvasView>
           child: Opacity(
             opacity: 0.5,
             child: IconButton(
-              onPressed: () {
+              onPressed: () async {
+                await company.save();
                 Navigator.pop(context);
               },
               icon: Icon(Icons.arrow_back_ios),
