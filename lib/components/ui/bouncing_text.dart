@@ -59,4 +59,10 @@ class _BouncingTextState extends State<BouncingText>
       child: widget.getChild(),
     );
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 }
