@@ -38,15 +38,17 @@ class Company {
     CityRoute(Ochakiv(), Sich(), Point<double>(450, -230)),
   ];
 
-  double _money = 1500;
+  late double _money;
   late List<City> allCities;
 
-  Company({cities}) {
+  Company({cities, double? money}) {
     if (cities == null) {
       this.allCities = City.generateNewCities();
     } else {
       this.allCities = cities;
     }
+
+    _money = money ?? 1500;
     changes = _innerChanges.stream;
     changes.listen((event) {
       switch (event) {

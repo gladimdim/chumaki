@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 void main() {
   group("JSON Company object", () {
     test("Can serialize/deserialize Company object", () {
-      var company = Company()..addMoney(42);
+      var company = Company(money: 500)..addMoney(42);
 
       var newCompany = Company.fromJson(company.toJson());
       expect(newCompany.getMoney().amount, equals(542), reason: "500 + 42 == 542.");
