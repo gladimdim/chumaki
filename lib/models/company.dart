@@ -1,5 +1,15 @@
+import 'dart:math';
+
 import 'package:chumaki/app_preferences.dart';
-import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/cities/cherkasy.dart';
+import 'package:chumaki/models/cities/chigirin.dart';
+import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/cities/kaniv.dart';
+import 'package:chumaki/models/cities/kyiv.dart';
+import 'package:chumaki/models/cities/nizhin.dart';
+import 'package:chumaki/models/cities/ochakiv.dart';
+import 'package:chumaki/models/cities/pereyaslav.dart';
+import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/route.dart';
 import 'package:chumaki/models/task.dart';
@@ -7,24 +17,50 @@ import 'package:chumaki/models/wagon.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
-enum COMPANY_EVENTS { TASK_STARTED, TASK_ENDED, MONEY_ADDED, MONEY_REMOVED }
+enum COMPANY_EVENTS {
+  TASK_STARTED,
+  TASK_ENDED,
+  MONEY_ADDED,
+  MONEY_REMOVED,
+  CITY_UNLOCKED
+}
 
 class Company {
-  final List<CityRoute> cityRoutes = CityRoute.allRoutes;
-  double _money = 500;
+  final List<CityRoute> cityRoutes = [
+    CityRoute(Cherkasy(), Chigirin(), Point<double>(50.0, 50.0)),
+    CityRoute(Pereyaslav(), Nizhin(), Point<double>(0.0, 0.0)),
+    CityRoute(Cherkasy(), Kaniv(), Point<double>(10.0, 10.0)),
+    CityRoute(Sich(), Chigirin(), Point<double>(-675.0, 0.0)),
+    CityRoute(Pereyaslav(), Chigirin(), Point<double>(-150.0, 155.0)),
+    CityRoute(Kyiv(), Nizhin(), Point<double>(-50, 50)),
+    CityRoute(Kyiv(), Pereyaslav(), Point<double>(300, 0)),
+    CityRoute(Kaniv(), Pereyaslav(), Point<double>(100, -50)),
+    CityRoute(Ochakiv(), Sich(), Point<double>(450, -230)),
+  ];
+
+  late double _money;
   late List<City> allCities;
 
-  Company({cities}) {
+  Company({cities, double? money}) {
     if (cities == null) {
-      this.allCities =  City.allCities;
+      this.allCities = City.generateNewCities();
     } else {
-      this.allCities = City.allCities;
+      this.allCities = cities;
     }
+
+    _money = money ?? 1500;
     changes = _innerChanges.stream;
     changes.listen((event) {
       switch (event) {
-        case COMPANY_EVENTS.TASK_STARTED: save(); break;
-        case COMPANY_EVENTS.TASK_ENDED: save(); break;
+        case COMPANY_EVENTS.TASK_STARTED:
+          save();
+          break;
+        case COMPANY_EVENTS.TASK_ENDED:
+          save();
+          break;
+        case COMPANY_EVENTS.CITY_UNLOCKED:
+          save();
+          break;
       }
     });
   }
@@ -66,7 +102,8 @@ class Company {
     });
   }
 
-  void startTask({required City from, required City to, required Wagon withWagon}) {
+  void startTask(
+      {required City from, required City to, required Wagon withWagon}) {
     var newTask = RouteTask(from, to, wagon: withWagon);
     // notify from City that the trade company with the given wagon departed
     from.routeTaskStarted(newTask);
@@ -102,10 +139,11 @@ class Company {
 
   static Company fromJson(Map<String, dynamic> inputJson) {
     double money = inputJson["money"] as double;
-    var company = Company().._money = money;
+    List citiesJson = inputJson["allCities"];
+    List<City> allCities = citiesJson.map((cityJson) => City.fromJson(cityJson)).toList();
+    var company = Company(cities: allCities).._money = money;
     return company;
   }
-
 
   void dispose() {
     _innerChanges.close();
@@ -113,5 +151,34 @@ class Company {
 
   bool hasMoney(double price) {
     return price <= _money;
+  }
+
+  void unlockCity(City cityToUnlock) {
+    final realCity = refToCityByName(cityToUnlock);
+    var price = realCity.unlockPriceMoney;
+    if (hasEnoughMoney(price)) {
+      removeMoney(price.amount);
+      realCity.unlock();
+      _innerChanges.add(COMPANY_EVENTS.CITY_UNLOCKED);
+    }
+  }
+
+  bool hasEnoughMoney(Money unlockPriceMoney) {
+    return _money >= unlockPriceMoney.amount;
+  }
+
+  City refToCityByName(City city) {
+    return allCities.firstWhere((c) => c.equalsTo(city));
+  }
+
+  bool canUnlockMoreCities(City city) {
+    return city.unlocksCities.where((unlockCity) {
+      var realCity = refToCityByName(unlockCity);
+      return !realCity.isUnlocked();
+    }).isNotEmpty;
+  }
+
+  List<City> citiesToRealCities(List<City> cities) {
+    return cities.map((e) => refToCityByName(e)).toList();
   }
 }

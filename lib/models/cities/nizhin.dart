@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
-import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -13,6 +13,9 @@ class Nizhin extends City {
           name: "Ніжин",
           size: 3,
           localizedKeyName: 'nizhin',
+          unlocked: false,
+          unlocksCities: [],
+          unlockPriceMoney: Money(200),
           prices: Price(generatePriceUnits()),
           stock: Stock(
             [
@@ -31,6 +34,8 @@ class Nizhin extends City {
             ],
           ),
         );
+
+  Money unlockPriceMoney = Money(200);
 
   static List<PriceUnit> generatePriceUnits() {
     return RESOURCES.values.map<PriceUnit>((resType) {

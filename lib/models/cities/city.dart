@@ -22,10 +22,10 @@ class City {
   final String name;
   final Stock stock;
   final String localizedKeyName;
-
+  late bool _unlocked;
   final double size;
   late List<Wagon> wagons;
-
+  final List<City> unlocksCities;
   final Price prices;
   BehaviorSubject changes = BehaviorSubject();
 
@@ -33,13 +33,18 @@ class City {
     return "images/cities/avatars/$localizedKeyName.png";
   }
 
+  late Money unlockPriceMoney;
+
   City(
       {required this.point,
       required this.name,
       required this.stock,
       required this.prices,
       required this.localizedKeyName,
+      unlocked = false,
       this.size = 1,
+      required this.unlocksCities,
+      this.unlockPriceMoney = const Money(0),
       List<Wagon>? wagons}) {
     if (wagons == null) {
       this.wagons = List.empty(growable: true);
@@ -47,28 +52,64 @@ class City {
       this.wagons = wagons;
     }
 
+    _unlocked = unlocked;
+
     stock.changes.listen(changes.add);
   }
 
-  static City nizhin = Nizhin();
-  static City kaniv = Kaniv();
-  static City sich = Sich();
-  static City cherkasy = Cherkasy();
-  static City chigirin = Chigirin();
-  static City pereyaslav = Pereyaslav();
-  static City kyiv = Kyiv();
-  static City ochakiv = Ochakiv();
+  static City fromName(String name) {
+    switch (name) {
+      case "nizhin":
+        return Nizhin();
+      case "kaniv":
+        return Kaniv();
+      case "sich":
+        return Sich();
+      case "cherkasy":
+        return Cherkasy();
+      case "chigirin":
+        return Chigirin();
+      case "pereyaslav":
+        return Pereyaslav();
+      case "kyiv":
+        return Kyiv();
+      case "ochakiv":
+        return Ochakiv();
+      default:
+        throw "City with key $name is not recognized";
+    }
+  }
+  //
+  // static City nizhin = Nizhin();
+  // static City kaniv = Kaniv();
+  // static City sich = Sich();
+  // static City cherkasy = Cherkasy();
+  // static City chigirin = Chigirin();
+  // static City pereyaslav = Pereyaslav();
+  // static City kyiv = Kyiv();
+  // static City ochakiv = Ochakiv();
 
-  static List<City> allCities = [
-    nizhin,
-    kaniv,
-    sich,
-    cherkasy,
-    chigirin,
-    pereyaslav,
-    kyiv,
-    ochakiv,
-  ];
+  static List<City> generateNewCities() {
+    return [
+      Nizhin(),
+      Kaniv(),
+      Sich(),
+      Cherkasy(),
+      Chigirin(),
+      Pereyaslav(),
+      Kyiv(),
+      Ochakiv(),
+    ];
+  }
+
+  bool isUnlocked() {
+    return _unlocked;
+  }
+
+  void unlock() {
+    _unlocked = true;
+    changes.add(this);
+  }
 
   bool sellResource(
       {required Resource resource,
@@ -105,17 +146,17 @@ class City {
   }
 
   bool equalsTo(City another) {
-    return another.name == name;
+    return another.localizedKeyName == localizedKeyName;
   }
 
-  List<City> connectsTo() {
-    return routes.map((route) {
-      return route.to.equalsTo(this) ? route.from : route.to;
+  List<City> connectsTo({required Company inCompany}) {
+    return getRoutesInCompany(inCompany).map((route) {
+      return route.to.equalsTo(this) ? inCompany.refToCityByName(route.from) : inCompany.refToCityByName(route.to);
     }).toList();
   }
 
-  List<CityRoute> get routes {
-    return CityRoute.allRoutes.where((route) {
+  List<CityRoute> getRoutesInCompany(Company company) {
+    return company.cityRoutes.where((route) {
       return route.to.equalsTo(this) || route.from.equalsTo(this);
     }).toList();
   }
@@ -143,12 +184,15 @@ class City {
       "size": size,
       "wagons": wagons.map((wagon) => wagon.toJson()).toList(),
       "prices": prices.toJson(),
+      "unlocked": _unlocked,
+      "unlockCities": unlocksCities.map((e) => e.localizedKeyName).toList(),
     };
   }
 
   static City fromJson(Map<String, dynamic> input) {
     var pointJson = input["point"];
     List wagonJson = input["wagons"];
+    List unlockCities = input["unlockCities"];
     return City(
       point: Point(pointJson["x"], pointJson["y"]),
       name: input["name"],
@@ -156,6 +200,10 @@ class City {
       prices: Price.fromJson(input["prices"]),
       localizedKeyName: input["localizedKeyName"],
       wagons: wagonJson.map((e) => Wagon.fromJson(e)).toList(),
+      unlocked: input["unlocked"],
+      unlocksCities:
+          unlockCities.map((cityName) => City.fromName(cityName)).toList(),
+      size: input["size"],
     );
   }
 }

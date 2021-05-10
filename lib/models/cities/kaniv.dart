@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
-import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -14,6 +14,8 @@ class Kaniv extends City {
           localizedKeyName: 'kaniv',
           size: 2,
           prices: Price(generatePriceUnits()),
+          unlocked: true,
+          unlocksCities: [],
           stock: Stock([
             Bread(2000),
             Stone(300),
@@ -93,11 +95,14 @@ class Kaniv extends City {
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.2);
         case RESOURCES.GORILKA:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1);
         case RESOURCES.HONEY:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1);
         case RESOURCES.WAX:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1);
         case RESOURCES.TOBACCO:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.05);

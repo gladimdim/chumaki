@@ -2,7 +2,7 @@ import 'package:chumaki/components/group_control.dart';
 import 'package:chumaki/components/money_unit.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
-import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
@@ -86,14 +86,14 @@ class _PriceComparisonState extends State<PriceComparison> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text("Price:"),
-                              MoneyUnit(Money(buyPrice)),
+                              MoneyUnitView(Money(buyPrice)),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text("Profit:"),
-                              MoneyUnit(Money(saldo)),
+                              MoneyUnitView(Money(saldo)),
                             ],
                           ),
                         ],

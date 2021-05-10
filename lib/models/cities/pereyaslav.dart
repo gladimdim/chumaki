@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
-import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -11,9 +12,10 @@ class Pereyaslav extends City {
       : super(
           point: Point(2360, 2450),
           name: "Переяслав",
-
-    localizedKeyName: 'pereyaslav',
+          unlocked: true,
+          localizedKeyName: 'pereyaslav',
           size: 2,
+          unlocksCities: [Kyiv()],
           prices: Price(generatePriceUnits()),
           stock: Stock([
             Bread(1000),
@@ -31,8 +33,6 @@ class Pereyaslav extends City {
             Wax(500),
           ]),
         );
-
-
 
   static List<PriceUnit> generatePriceUnits() {
     return RESOURCES.values.map<PriceUnit>((resType) {
@@ -92,11 +92,14 @@ class Pereyaslav extends City {
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);
         case RESOURCES.GORILKA:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1);
         case RESOURCES.HONEY:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1.1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.1);
         case RESOURCES.WAX:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1.1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1.1);
         case RESOURCES.TOBACCO:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.2);

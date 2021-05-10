@@ -1,7 +1,7 @@
 import 'package:chumaki/components/money_unit.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
-import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:chumaki/views/inherited_company.dart';
@@ -40,7 +40,7 @@ class CityWagonResourceExchange extends StatelessWidget {
           flex: 1,
           child: Column(
             children: [
-              MoneyUnit(Money(sellPrice)),
+              MoneyUnitView(Money(sellPrice)),
               Text("(${sellPricePerUnit}x$amountTradeValue)"),
             ],
           ),
@@ -106,7 +106,7 @@ class CityWagonResourceExchange extends StatelessWidget {
           flex: 1,
           child: Column(
             children: [
-              MoneyUnit(Money(buyPrice)),
+              MoneyUnitView(Money(buyPrice)),
               Text("(${buyPricePerUnit}x$amountTradeValue)"),
             ],
           ),

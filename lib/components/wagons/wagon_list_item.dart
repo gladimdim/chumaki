@@ -1,5 +1,5 @@
 import 'package:chumaki/components/weight_show.dart';
-import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 

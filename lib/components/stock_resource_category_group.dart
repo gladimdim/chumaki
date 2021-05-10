@@ -1,9 +1,9 @@
 import 'package:chumaki/components/group_control.dart';
 import 'package:chumaki/components/resource_image_view.dart';
-import 'package:chumaki/components/selected_city_view.dart';
+import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
-import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/components/money_unit.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +60,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text("${ChumakiLocalizations.labelBuy}:"),
-                                MoneyUnit(Money(forCity.prices
+                                MoneyUnitView(Money(forCity.prices
                                     .sellPriceForResource(
                                         resource.cloneWithAmount(1)))),
                               ],
@@ -70,7 +70,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
                               children: [
                                 Text(
                                     "${ChumakiLocalizations.labelSell}:"),
-                                MoneyUnit(Money(forCity.prices
+                                MoneyUnitView(Money(forCity.prices
                                     .buyPriceForResource(resource,
                                         withAmount: 1))),
                               ],

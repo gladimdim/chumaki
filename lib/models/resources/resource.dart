@@ -280,9 +280,9 @@ class Wool extends Resource {
 
 class Money {
   final String localizedKey = "money";
-  double amount;
+  final double amount;
 
-  Money(this.amount);
+  const Money(this.amount);
 
   String get imagePath {
     return "images/resources/${this.localizedKey}/${this.localizedKey}.png";

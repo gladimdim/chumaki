@@ -1,4 +1,4 @@
-import 'package:chumaki/components/advisor_for_city.dart';
+import 'package:chumaki/components/city/city_pub_view.dart';
 import 'package:chumaki/components/city/city_local_market.dart';
 import 'package:chumaki/components/price_comparison.dart';
 import 'package:chumaki/components/route_task_row_progress.dart';
@@ -6,7 +6,7 @@ import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/selectable_button.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
-import 'package:chumaki/models/city.dart';
+import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/task.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ const CITY_DETAILS_VIEW_WIDTH = 400.0;
 class SelectedCityView extends StatefulWidget {
   final City city;
 
-  SelectedCityView({required this.city});
+  SelectedCityView(this.city);
 
   @override
   _SelectedCityViewState createState() => _SelectedCityViewState();
@@ -35,7 +35,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
       builder: (context, data) => Column(
         children: [
           StreamBuilder(
-            stream: widget.city.changes.stream,
+            stream: company.refToCityByName(widget.city).changes.stream,
             builder: (context, data) => BorderedBottom(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -58,7 +58,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
               ),
             ),
           ),
-          if (showAdvisor) AdvisorForCity(city: widget.city),
+          if (showAdvisor) CityPubView(city: widget.city),
           if (showWorldMarket) PriceComparison(currentCity: widget.city),
           if (showLocalMarket) ...[
             CityLocalMarket(city: widget.city),
