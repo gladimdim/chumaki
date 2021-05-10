@@ -1,16 +1,20 @@
-import 'package:chumaki/models/resources/resource.dart';
+import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:flutter/material.dart';
 
-class MoneyUnitView extends StatefulWidget {
-  final Money money;
+class BouncingText extends StatefulWidget {
+  final String text;
 
-  MoneyUnitView(this.money);
+  const BouncingText(this.text);
+
+  Widget getChild() {
+    return Text(text);
+  }
 
   @override
-  _MoneyUnitViewState createState() => _MoneyUnitViewState();
+  _BouncingTextState createState() => _BouncingTextState();
 }
 
-class _MoneyUnitViewState extends State<MoneyUnitView>
+class _BouncingTextState extends State<BouncingText>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
@@ -35,9 +39,9 @@ class _MoneyUnitViewState extends State<MoneyUnitView>
   }
 
   @override
-  void didUpdateWidget(MoneyUnitView old) {
-    super.didUpdateWidget(old);
-    if (old.money.amount != widget.money.amount) {
+  void didUpdateWidget(BouncingText oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.text != widget.text) {
       _controller.forward();
     }
   }
@@ -52,22 +56,7 @@ class _MoneyUnitViewState extends State<MoneyUnitView>
           child: child,
         );
       },
-      child: Row(
-        children: [
-          Image.asset(widget.money.imagePath, width: 32),
-          Text(
-            widget.money.amount.toStringAsFixed(1),
-            style: style(widget.money.amount),
-          )
-        ],
-      ),
+      child: widget.getChild(),
     );
-  }
-
-  TextStyle style(double value) {
-    return TextStyle(
-        color: value > 0 ? Colors.green[800] : Colors.red[800],
-        fontWeight: FontWeight.bold,
-        fontSize: 18);
   }
 }
