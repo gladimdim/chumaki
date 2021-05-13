@@ -1,6 +1,7 @@
+import 'package:chumaki/components/city/buy_new_wagon_view.dart';
 import 'package:chumaki/components/city/can_unlock_cities_view.dart';
 import 'package:chumaki/components/city/small_city_avatar.dart';
-import 'package:chumaki/components/money_unit.dart';
+import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
@@ -28,6 +29,7 @@ class _CityPubViewState extends State<CityPubView> {
     final company = InheritedCompany.of(context).company;
     return Column(
       children: [
+        BuyNewWagonView(widget.city),
         if (canUnlockMoreCities(company))
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -52,7 +54,8 @@ class _CityPubViewState extends State<CityPubView> {
                       return Column(
                         children: [
                           SmallCityAvatar(result.item1),
-                          MoneyUnitView(Money(result.item2)),
+                          MoneyUnitView(Money(result.item2),
+                              isEnough: result.item2 > 0),
                         ],
                       );
                     }).toList(),

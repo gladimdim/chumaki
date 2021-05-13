@@ -181,4 +181,11 @@ class Company {
   List<City> citiesToRealCities(List<City> cities) {
     return cities.map((e) => refToCityByName(e)).toList();
   }
+
+  void buyWagon(Wagon wagon, {required City forCity, required Money price} ) {
+     if (getMoney().amount >= price.amount) {
+       removeMoney(price.amount);
+       forCity.addWagon(wagon);
+     }
+  }
 }

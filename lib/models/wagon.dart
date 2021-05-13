@@ -1,7 +1,9 @@
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
+import 'package:chumaki/i18n/company_localizations.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:chumaki/extensions/list.dart';
 
 class Wagon {
   late Stock stock;
@@ -36,6 +38,14 @@ class Wagon {
     });
   }
 
+  static Wagon generateRandomWagon() {
+    return Wagon(
+      stock: Stock([]),
+      localizedNameKey: Wagon.getRandomLocalizedNameKey(),
+      totalWeightCapacity: 100.0,
+    );
+  }
+
   void dispose() {
     changes.close();
   }
@@ -51,5 +61,9 @@ class Wagon {
   static Wagon fromJson(Map<String, dynamic> json) {
     var stock = Stock.fromJson(json["stock"]);
     return Wagon(localizedNameKey: json["name"], stock: stock, totalWeightCapacity: json["totalWeightCapacity"]);
+  }
+
+  static String getRandomLocalizedNameKey() {
+    return "company.${CompanyLocalizations().localizedMap["en"]!.keys.toList().takeRandom()}";
   }
 }

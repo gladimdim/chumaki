@@ -1,5 +1,5 @@
 import 'package:chumaki/components/city/small_city_avatar.dart';
-import 'package:chumaki/components/money_unit.dart';
+import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
