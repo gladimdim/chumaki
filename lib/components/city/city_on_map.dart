@@ -12,7 +12,6 @@ class CityOnMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final company = InheritedCompany.of(context).company;
     return StreamBuilder(
       stream: city.changes,
       builder: (context, snapshot) => Opacity(

@@ -1,5 +1,5 @@
 import 'package:chumaki/components/group_control.dart';
-import 'package:chumaki/components/money_unit.dart';
+import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
@@ -93,7 +93,7 @@ class _PriceComparisonState extends State<PriceComparison> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text("Profit:"),
-                              MoneyUnitView(Money(saldo)),
+                              MoneyUnitView(Money(saldo), isEnough: saldo > 0),
                             ],
                           ),
                         ],

@@ -206,4 +206,9 @@ class City {
       size: input["size"],
     );
   }
+
+  void addWagon(Wagon wagon) {
+    wagons.add(wagon);
+    changes.add(this);
+  }
 }

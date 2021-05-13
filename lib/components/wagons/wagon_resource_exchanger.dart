@@ -1,4 +1,4 @@
-import 'package:chumaki/components/money_unit.dart';
+import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/resource_amount_selector.dart';
 import 'package:chumaki/components/resource_category_group.dart';
 import 'package:chumaki/components/wagons/wagon_stock_bar.dart';
