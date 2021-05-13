@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/wagons/stock_wagon_status.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
@@ -21,8 +23,19 @@ class ExpandablePanel extends StatefulWidget {
   _ExpandablePanelState createState() => _ExpandablePanelState();
 }
 
-class _ExpandablePanelState extends State<ExpandablePanel> with SingleTickerProviderStateMixin {
+class _ExpandablePanelState extends State<ExpandablePanel>
+    with SingleTickerProviderStateMixin {
   bool isExpanded = false;
+  late final AnimationController _rotateController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 800),
+      lowerBound: 0.0,
+      upperBound: 1.0);
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +52,18 @@ class _ExpandablePanelState extends State<ExpandablePanel> with SingleTickerProv
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   widget.title,
-                  IconButton(
-                    icon: isExpanded
-                        ? Icon(Icons.arrow_upward)
-                        : Icon(Icons.arrow_downward),
-                    onPressed: toggleExpanded,
+                  AnimatedBuilder(
+                    animation: _rotateController,
+                    builder: (context, child) {
+                      return Transform.rotate(
+                        angle: pi * _rotateController.value,
+                        child: child,
+                      );
+                    },
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_downward),
+                      onPressed: toggleExpanded,
+                    ),
                   ),
                 ],
               ),
@@ -53,9 +73,12 @@ class _ExpandablePanelState extends State<ExpandablePanel> with SingleTickerProv
               firstChild: Container(height: 0.0),
               secondChild: widget.content,
               firstCurve: const Interval(0.0, 0.6, curve: Curves.fastOutSlowIn),
-              secondCurve: const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn),
+              secondCurve:
+                  const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn),
               sizeCurve: Curves.fastOutSlowIn,
-              crossFadeState: isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+              crossFadeState: isExpanded
+                  ? CrossFadeState.showSecond
+                  : CrossFadeState.showFirst,
               duration: Duration(milliseconds: 800),
             ),
           ],
@@ -66,6 +89,11 @@ class _ExpandablePanelState extends State<ExpandablePanel> with SingleTickerProv
 
   void toggleExpanded() {
     setState(() {
+      if (isExpanded) {
+        _rotateController.reverse();
+      } else {
+        _rotateController.forward();
+      }
       isExpanded = !isExpanded;
     });
   }
