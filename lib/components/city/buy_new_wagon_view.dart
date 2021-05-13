@@ -29,9 +29,9 @@ class _BuyNewWagonViewState extends State<BuyNewWagonView> {
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Expanded(flex: 2, child: WagonListItem(wagon: wagon, city: widget.city, showWeight: false)),
+          Expanded(flex: 1, child: WagonListItem(wagon: wagon, city: widget.city, showWeight: false)),
           Expanded(
-            flex: 2,
+            flex: 1, 
             child: TextButton(
               onPressed: company.hasEnoughMoney(wagonPrice) ? () {
                 company.buyWagon(wagon, forCity: widget.city, price: wagonPrice);
