@@ -19,7 +19,7 @@ class CanUnlockCitiesView extends StatelessWidget {
     return Column(
       children: [
         BorderedBottom(
-          child: TitleText("Buy routes to these cities: "),
+          child: TitleText(ChumakiLocalizations.labelUnlockCity),
         ),
         ...city.unlocksCities
         .map((fakeCity) => company.refToCityByName(fakeCity))
