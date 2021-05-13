@@ -29,15 +29,22 @@ class _BuyNewWagonViewState extends State<BuyNewWagonView> {
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Expanded(flex: 3, child: WagonListItem(wagon: wagon, city: widget.city)),
+          Expanded(flex: 2, child: WagonListItem(wagon: wagon, city: widget.city, showWeight: false)),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: TextButton(
               onPressed: company.hasEnoughMoney(wagonPrice) ? () {
                 company.buyWagon(wagon, forCity: widget.city, price: wagonPrice);
               } : null,
               child: BorderedBottom(
-                child: MoneyUnitView(wagonPrice, isEnough: company.hasEnoughMoney(wagonPrice)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    MoneyUnitView(wagonPrice, isEnough: company.hasEnoughMoney(wagonPrice)),
+                    Text("/"),
+                    MoneyUnitView(company.getMoney(), isEnough: company.hasEnoughMoney(wagonPrice)),
+                  ],
+                ),
               ),
             ),
           ),

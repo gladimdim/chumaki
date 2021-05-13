@@ -13,7 +13,7 @@ class Wagon {
   BehaviorSubject changes = BehaviorSubject();
 
   String get fullLocalizedName {
-    return "${ChumakiLocalizations.labelCompany} ${ChumakiLocalizations.getForKey(localizedNameKey)}";
+    return "${ChumakiLocalizations.getForKey(localizedNameKey)}";
   }
 
   Wagon({required this.localizedNameKey, Stock? stock, this.totalWeightCapacity = 100.0}) {
