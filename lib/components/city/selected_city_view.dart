@@ -45,82 +45,86 @@ class _SelectedCityViewState extends State<SelectedCityView> {
     var company = InheritedCompany.of(context).company;
     return StreamBuilder(
       stream: company.changes,
-      builder: (context, data) => ConstrainedBox(
-        constraints: BoxConstraints(
-            maxWidth: selectedButton == null ? 180 : CITY_DETAILS_VIEW_WIDTH),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            BorderedBottom(
-              child: BorderedContainerWithSide(
-                borderDirection: AxisDirection.right,
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                      maxWidth: CITY_DETAILS_VIEW_WIDTH / 4,
-                      minHeight: 200,
-                      maxHeight: 800),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: actions.map((action) {
-                        return Expanded(
-                          flex: 1,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CityMenuItemView(
-                              menuItem: action,
-                              onPress: () => handleMenuItemPress(action),
+      builder: (context, data) => AnimatedSize(
+        alignment: Alignment.centerLeft,
+        duration: Duration(milliseconds: 300),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+              maxWidth: selectedButton == null ? 180 : CITY_DETAILS_VIEW_WIDTH),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BorderedBottom(
+                child: BorderedContainerWithSide(
+                  borderDirection: AxisDirection.right,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                        maxWidth: CITY_DETAILS_VIEW_WIDTH / 4,
+                        minHeight: 200,
+                        maxHeight: 800),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: actions.map((action) {
+                          return Expanded(
+                            flex: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CityMenuItemView(
+                                menuItem: action,
+                                onPress: () => handleMenuItemPress(action),
+                              ),
                             ),
-                          ),
-                        );
-                      }).toList()),
+                          );
+                        }).toList()),
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: AnimatedCrossFade(
-                firstChild: Container(height: 0.0),
-                secondChild: getContent(),
-                firstCurve:
-                    const Interval(0.0, 0.6, curve: Curves.fastOutSlowIn),
-                secondCurve:
-                    const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn),
-                sizeCurve: Curves.fastOutSlowIn,
-                crossFadeState: selectedButton != null
-                    ? CrossFadeState.showSecond
-                    : CrossFadeState.showFirst,
-                duration: Duration(milliseconds: 800),
+              Expanded(
+                flex: 1,
+                child: AnimatedCrossFade(
+                  firstChild: Container(height: 0.0),
+                  secondChild: getContent(),
+                  firstCurve:
+                      const Interval(0.0, 0.6, curve: Curves.fastOutSlowIn),
+                  secondCurve:
+                      const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn),
+                  sizeCurve: Curves.fastOutSlowIn,
+                  crossFadeState: selectedButton != null
+                      ? CrossFadeState.showSecond
+                      : CrossFadeState.showFirst,
+                  duration: Duration(milliseconds: 800),
+                ),
               ),
-            ),
-            // ...[
-            // TitleText("Incoming companies: "),
-            // ...company.cityRoutes
-            //     .where((route) =>
-            //         route.to.equalsTo(widget.city) ||
-            //         route.from.equalsTo(widget.city))
-            //     .fold<List<RouteTask>>([], (previousValue, route) {
-            //       previousValue.addAll(route.routeTasks);
-            //       return previousValue;
-            //     })
-            //     .where((routeTask) => routeTask.to.equalsTo(widget.city))
-            //     .map<Widget>((routeTask) =>
-            //         RouteTaskRowProgress(routeTask, widget.city)),
-            // TitleText("Outgoing companies: "),
-            // ...company.cityRoutes
-            //     .where((route) =>
-            //         route.to.equalsTo(widget.city) ||
-            //         route.from.equalsTo(widget.city))
-            //     .fold<List<RouteTask>>([], (previousValue, route) {
-            //       previousValue.addAll(route.routeTasks);
-            //       return previousValue;
-            //     })
-            //     .where((routeTask) => routeTask.from.equalsTo(widget.city))
-            //     .map<Widget>((routeTask) =>
-            //         RouteTaskRowProgress(routeTask, widget.city)),
-            // ],
-          ],
+              // ...[
+              // TitleText("Incoming companies: "),
+              // ...company.cityRoutes
+              //     .where((route) =>
+              //         route.to.equalsTo(widget.city) ||
+              //         route.from.equalsTo(widget.city))
+              //     .fold<List<RouteTask>>([], (previousValue, route) {
+              //       previousValue.addAll(route.routeTasks);
+              //       return previousValue;
+              //     })
+              //     .where((routeTask) => routeTask.to.equalsTo(widget.city))
+              //     .map<Widget>((routeTask) =>
+              //         RouteTaskRowProgress(routeTask, widget.city)),
+              // TitleText("Outgoing companies: "),
+              // ...company.cityRoutes
+              //     .where((route) =>
+              //         route.to.equalsTo(widget.city) ||
+              //         route.from.equalsTo(widget.city))
+              //     .fold<List<RouteTask>>([], (previousValue, route) {
+              //       previousValue.addAll(route.routeTasks);
+              //       return previousValue;
+              //     })
+              //     .where((routeTask) => routeTask.from.equalsTo(widget.city))
+              //     .map<Widget>((routeTask) =>
+              //         RouteTaskRowProgress(routeTask, widget.city)),
+              // ],
+            ],
+          ),
         ),
       ),
     );
