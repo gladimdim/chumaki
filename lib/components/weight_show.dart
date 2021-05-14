@@ -1,3 +1,4 @@
+import 'package:chumaki/components/ui/bouncing_normal_text.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 
@@ -8,15 +9,8 @@ class WeightShow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return BouncingNormalText(
       "${wagon.currentWeight} / ${wagon.totalWeightCapacity}",
-      style: getStyle()
     );
-  }
-
-  TextStyle getStyle() {
-    return wagon.currentWeight > wagon.totalWeightCapacity
-        ? TextStyle(color: Colors.red,)
-        : TextStyle(color: Colors.black, fontWeight: FontWeight.bold);
   }
 }
