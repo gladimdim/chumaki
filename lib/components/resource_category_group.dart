@@ -1,4 +1,3 @@
-import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';
 import 'package:chumaki/components/wagons/stock_wagon_status.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';

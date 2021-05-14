@@ -1,5 +1,4 @@
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
-import 'package:chumaki/components/ui/bouncing_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:flutter/material.dart';
