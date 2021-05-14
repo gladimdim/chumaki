@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class MoneyUnitView extends StatefulWidget {
   final Money money;
-
-  MoneyUnitView(this.money);
+  final bool isEnough;
+  MoneyUnitView(this.money, {this.isEnough = true});
 
   @override
   _MoneyUnitViewState createState() => _MoneyUnitViewState();
@@ -57,17 +57,15 @@ class _MoneyUnitViewState extends State<MoneyUnitView>
           Image.asset(widget.money.imagePath, width: 32),
           Text(
             widget.money.amount.toStringAsFixed(1),
-            style: style(widget.money.amount),
+            style: style(widget.money.amount, context),
           )
         ],
       ),
     );
   }
 
-  TextStyle style(double value) {
-    return TextStyle(
-        color: value > 0 ? Colors.green[800] : Colors.red[800],
-        fontWeight: FontWeight.bold,
-        fontSize: 18);
+  TextStyle style(double value, BuildContext context) {
+    final colorTheme = Theme.of(context).colorScheme;
+    return TextStyle(color: widget.isEnough  ? Colors.green[800] : colorTheme.onSurface.withOpacity(0.38), fontWeight: FontWeight.bold, fontSize: 18);
   }
 }

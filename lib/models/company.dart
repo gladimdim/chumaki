@@ -22,7 +22,8 @@ enum COMPANY_EVENTS {
   TASK_ENDED,
   MONEY_ADDED,
   MONEY_REMOVED,
-  CITY_UNLOCKED
+  CITY_UNLOCKED,
+  WAGON_BOUGHT,
 }
 
 class Company {
@@ -61,6 +62,8 @@ class Company {
         case COMPANY_EVENTS.CITY_UNLOCKED:
           save();
           break;
+        case COMPANY_EVENTS.WAGON_BOUGHT:
+          save();
       }
     });
   }
@@ -180,5 +183,13 @@ class Company {
 
   List<City> citiesToRealCities(List<City> cities) {
     return cities.map((e) => refToCityByName(e)).toList();
+  }
+
+  void buyWagon(Wagon wagon, {required City forCity, required Money price} ) {
+     if (getMoney().amount >= price.amount) {
+       removeMoney(price.amount);
+       forCity.addWagon(wagon);
+       _innerChanges.add(COMPANY_EVENTS.WAGON_BOUGHT);
+     }
   }
 }

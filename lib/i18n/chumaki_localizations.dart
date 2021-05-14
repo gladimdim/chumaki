@@ -93,6 +93,8 @@ class ChumakiLocalizations {
       "labelSend": "Send",
       "labelCompanyContains": "Company has",
       "labelTotalPrice": "Total price of",
+      "labelUnlockCity": "Buy access to town",
+      "labelBuyNewWagon": "Buy new wagon",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -128,6 +130,8 @@ class ChumakiLocalizations {
       "labelSend": "Відправити",
       "labelCompanyContains": "Валка має",
       "labelTotalPrice": "Загальна вартість",
+      "labelUnlockCity": "Купити доступ до міста",
+      "labelBuyNewWagon": "Купити нову валку",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -162,6 +166,8 @@ class ChumakiLocalizations {
       "labelSend": "Отправить",
       "labelCompanyContains": "Ватага имеет",
       "labelTotalPrice": "Полная стоимость",
+      "labelUnlockCity": "Купить доступ к городу",
+      "labelBuyNewWagon": "Купить новую валку",
     },
   };
 
@@ -291,5 +297,13 @@ class ChumakiLocalizations {
 
   static String get labelTotalPrice {
     return _localizedValues[locale.languageCode]!["labelTotalPrice"]!;
+  }
+
+  static String get labelUnlockCity {
+    return _localizedValues[locale.languageCode]!["labelUnlockCity"]!;
+  }
+
+  static String get labelBuyNewWagon {
+    return _localizedValues[locale.languageCode]!["labelBuyNewWagon"]!;
   }
 }
