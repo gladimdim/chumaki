@@ -80,8 +80,19 @@ class _SelectedCityViewState extends State<SelectedCityView> {
             ),
             Expanded(
               flex: 1,
-              child: AnimatedSize(
-                  duration: Duration(milliseconds: 300), child: getContent()),
+              child: AnimatedCrossFade(
+                firstChild: Container(height: 0.0),
+                secondChild: getContent(),
+                firstCurve:
+                    const Interval(0.0, 0.6, curve: Curves.fastOutSlowIn),
+                secondCurve:
+                    const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn),
+                sizeCurve: Curves.fastOutSlowIn,
+                crossFadeState: selectedButton != null
+                    ? CrossFadeState.showSecond
+                    : CrossFadeState.showFirst,
+                duration: Duration(milliseconds: 800),
+              ),
             ),
             // ...[
             // TitleText("Incoming companies: "),
@@ -116,7 +127,9 @@ class _SelectedCityViewState extends State<SelectedCityView> {
   }
 
   handleMenuItemPress(CityMenuItem action) {
-    actions.forEach((element) {element.isSelected = false;});
+    actions.forEach((element) {
+      element.isSelected = false;
+    });
 
     if (selectedButton == action) {
       selectedButton = null;
