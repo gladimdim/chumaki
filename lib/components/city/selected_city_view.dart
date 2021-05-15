@@ -55,25 +55,23 @@ class _SelectedCityViewState extends State<SelectedCityView> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BorderedBottom(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                      maxWidth: CITY_DETAILS_VIEW_WIDTH / 4,
-                      minHeight: 200,
-                      maxHeight: 800),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: actions.map((action) {
-                        return Expanded(
-                          flex: 1,
-                          child: CityMenuItemView(
-                            menuItem: action,
-                            onPress: () => handleMenuItemPress(action),
-                          ),
-                        );
-                      }).toList()),
-                ),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                    maxWidth: CITY_DETAILS_VIEW_WIDTH / 4,
+                    minHeight: 200,
+                    maxHeight: 800),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: actions.map((action) {
+                      return Expanded(
+                        flex: 1,
+                        child: CityMenuItemView(
+                          menuItem: action,
+                          onPress: () => handleMenuItemPress(action),
+                        ),
+                      );
+                    }).toList()),
               ),
               Expanded(
                 flex: 1,
