@@ -21,7 +21,7 @@ class _ExpandablePanelState extends State<ExpandablePanel>
   bool isExpanded = false;
   late final AnimationController _rotateController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 800),
+      duration: Duration(milliseconds: 600),
       lowerBound: 0.0,
       upperBound: 1.0);
 
