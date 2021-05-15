@@ -29,11 +29,11 @@ class _SelectedCityViewState extends State<SelectedCityView> {
         label: ChumakiLocalizations.labelCompanies,
         content: CityPubView(city: widget.city)),
     CityMenuItem(
-        imagePath: "images/resources/money/money.png",
+        imagePath: "images/icons/market/market.png",
         label: ChumakiLocalizations.labelMarket,
         content: CityLocalMarket(city: widget.city)),
     CityMenuItem(
-        imagePath: "images/resources/money/money.png",
+        imagePath: "images/icons/market/market2.png",
         label: ChumakiLocalizations.labelWorldMarket,
         content: PriceComparison(currentCity: widget.city))
   ];

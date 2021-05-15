@@ -27,7 +27,7 @@ class CityMenuItemView extends StatelessWidget {
               menuItem.imagePath,
               width: 128,
             ),
-            TitleText(menuItem.label),
+            DefaultTextStyle(style: TextStyle(), child: TitleText(menuItem.label), textAlign: TextAlign.center,),
           ],
         ),
       ),
