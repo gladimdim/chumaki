@@ -58,7 +58,7 @@ class _ExpandablePanelState extends State<ExpandablePanel>
                           );
                         },
                         child: IconButton(
-                          icon: Icon(Icons.arrow_downward),
+                          icon: Icon(Icons.arrow_downward, color: Colors.black,),
                           onPressed: toggleExpanded,
                         ),
                       ),

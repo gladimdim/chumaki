@@ -21,10 +21,10 @@ class CityOnMap extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Colors.yellow,
-                Colors.yellow,
                 Colors.blue,
                 Colors.blue,
+                Colors.yellow,
+                Colors.yellow,
               ],
               stops: [0, 0.49, 0.51, 1],
             ),
