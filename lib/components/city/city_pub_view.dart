@@ -28,23 +28,27 @@ class _CityPubViewState extends State<CityPubView> {
   @override
   Widget build(BuildContext context) {
     final company = InheritedCompany.of(context).company;
-    return Column(
-      children: [
-        BuyNewWagonView(widget.city),
-        if (canUnlockMoreCities(company))
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CanUnlockCitiesView(widget.city),
-          ),
-        ...widget.city.wagons.map((wagon) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ExpandablePanel(
-              title: TitleText(
-                  "${ChumakiLocalizations.labelTotalPrice}: ${wagon.fullLocalizedName}"),
-              content: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: calculateTopForWagon(wagon, company)
+    return StreamBuilder(
+      stream: company.changes.where((event) =>
+          event == COMPANY_EVENTS.MONEY_REMOVED ||
+          event == COMPANY_EVENTS.MONEY_ADDED),
+      builder: (context, snapshot) => Column(
+        children: [
+          BuyNewWagonView(widget.city),
+          if (canUnlockMoreCities(company))
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CanUnlockCitiesView(widget.city),
+            ),
+          ...widget.city.wagons.map((wagon) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ExpandablePanel(
+                title: TitleText(
+                    "${ChumakiLocalizations.labelTotalPrice}: ${wagon.fullLocalizedName}"),
+                content: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: calculateTopForWagon(wagon, company)
                       .divideBy(3)
                       .map((rowResult) {
                     return Row(
@@ -60,11 +64,12 @@ class _CityPubViewState extends State<CityPubView> {
                       }).toList(),
                     );
                   }).toList(),
+                ),
               ),
-            ),
-          );
-        }).toList()
-      ],
+            );
+          }).toList()
+        ],
+      ),
     );
   }
 

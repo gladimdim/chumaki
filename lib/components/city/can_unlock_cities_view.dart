@@ -22,7 +22,7 @@ class CanUnlockCitiesView extends StatelessWidget {
           child: TitleText(ChumakiLocalizations.labelUnlockCity),
         ),
         ...city.unlocksCities
-        .map((fakeCity) => company.refToCityByName(fakeCity))
+            .map((fakeCity) => company.refToCityByName(fakeCity))
             .where((unlockCity) => !unlockCity.isUnlocked())
             .map((unlockCity) {
           return Row(
@@ -42,7 +42,12 @@ class CanUnlockCitiesView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        MoneyUnitView(unlockCity.unlockPriceMoney, isEnough: company.hasEnoughMoney(unlockCity.unlockPriceMoney)),
+                        StreamBuilder(
+                            stream: company.changes.where((event) => event == COMPANY_EVENTS.MONEY_REMOVED || event == COMPANY_EVENTS.MONEY_ADDED),
+                            builder: (context, snapshot) => MoneyUnitView(
+                                unlockCity.unlockPriceMoney,
+                                isEnough: company.hasEnoughMoney(
+                                    unlockCity.unlockPriceMoney))),
                         TitleText(
                           ChumakiLocalizations.labelBuy,
                         ),
