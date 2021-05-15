@@ -46,18 +46,21 @@ class _ExpandablePanelState extends State<ExpandablePanel>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    widget.title,
-                    AnimatedBuilder(
-                      animation: _rotateController,
-                      builder: (context, child) {
-                        return Transform.rotate(
-                          angle: pi * _rotateController.value,
-                          child: child,
-                        );
-                      },
-                      child: IconButton(
-                        icon: Icon(Icons.arrow_downward),
-                        onPressed: toggleExpanded,
+                    Expanded(flex: 5, child: widget.title),
+                    Expanded(
+                      flex: 1,
+                      child: AnimatedBuilder(
+                        animation: _rotateController,
+                        builder: (context, child) {
+                          return Transform.rotate(
+                            angle: pi * _rotateController.value,
+                            child: child,
+                          );
+                        },
+                        child: IconButton(
+                          icon: Icon(Icons.arrow_downward),
+                          onPressed: toggleExpanded,
+                        ),
                       ),
                     ),
                   ],
