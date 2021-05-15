@@ -198,19 +198,16 @@ class _GameCanvasViewState extends State<GameCanvasView>
                 ),
               if (selected != null)
                 Positioned(
-                  left: selected!.point.x - 150,
-                  top: selected!.point.y + 64,
-                  child: SizedBox(
-                    width: CITY_DETAILS_VIEW_WIDTH,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 3),
-                        color: Colors.grey[400],
-                      ),
-                      child: selected!.isUnlocked()
-                          ? SelectedCityView(selected!)
-                          : SelectedCityLockedView(selected!),
+                  left: selected!.point.x,
+                  top: selected!.point.y,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 3),
+                      color: Colors.grey[400],
                     ),
+                    child: selected!.isUnlocked()
+                        ? SelectedCityView(selected!)
+                        : SelectedCityLockedView(selected!),
                   ),
                 ),
             ],

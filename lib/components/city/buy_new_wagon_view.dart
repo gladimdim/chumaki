@@ -23,32 +23,36 @@ class _BuyNewWagonViewState extends State<BuyNewWagonView> {
   Widget build(BuildContext context) {
     final wagon = Wagon.generateRandomWagon();
     final company = InheritedCompany.of(context).company;
-    return Column(children: [
-      BorderedBottom(child: TitleText(ChumakiLocalizations.labelBuyNewWagon)),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(flex: 2, child: WagonListItem(wagon: wagon, city: widget.city, showWeight: false)),
-          Expanded(
-            flex: 2,
-            child: TextButton(
-              onPressed: company.hasEnoughMoney(wagonPrice) ? () {
-                company.buyWagon(wagon, forCity: widget.city, price: wagonPrice);
-              } : null,
-              child: BorderedBottom(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    MoneyUnitView(wagonPrice, isEnough: company.hasEnoughMoney(wagonPrice)),
-                    Text("/"),
-                    MoneyUnitView(company.getMoney(), isEnough: company.hasEnoughMoney(wagonPrice)),
-                  ],
+    return StreamBuilder(
+      stream: company.changes,
+
+      builder: (context, snapshot) => Column(children: [
+        BorderedBottom(child: TitleText(ChumakiLocalizations.labelBuyNewWagon)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Expanded(flex: 1, child: WagonListItem(wagon: wagon, city: widget.city, showWeight: false)),
+            Expanded(
+              flex: 1,
+              child: TextButton(
+                onPressed: company.hasEnoughMoney(wagonPrice) ? () {
+                  company.buyWagon(wagon, forCity: widget.city, price: wagonPrice);
+                } : null,
+                child: BorderedBottom(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      MoneyUnitView(wagonPrice, isEnough: company.hasEnoughMoney(wagonPrice)),
+                      Text("/"),
+                      MoneyUnitView(company.getMoney(), isEnough: company.hasEnoughMoney(wagonPrice)),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    ]);
+          ],
+        ),
+      ]),
+    );
   }
 }

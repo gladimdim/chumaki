@@ -38,7 +38,7 @@ class _PriceComparisonState extends State<PriceComparison> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Column(
-                children: RESOURCES.values.divideBy(7)
+                children: RESOURCES.values.divideBy(9)
                     .map<Widget>((List<RESOURCES> resources) {
                   return Row(
                       children: resources.map((type) {

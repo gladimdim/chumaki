@@ -15,7 +15,7 @@ class OutlinedText extends StatelessWidget {
             foreground: Paint()
               ..style = PaintingStyle.stroke
               ..strokeWidth = 2
-              ..color = Colors.white,
+              ..color = Colors.green,
           ),
         ),
         Text(
