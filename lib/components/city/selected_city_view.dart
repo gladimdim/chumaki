@@ -47,7 +47,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
       stream: company.changes,
       builder: (context, data) => AnimatedSize(
         alignment: Alignment.topLeft,
-        duration: Duration(milliseconds: 800),
+        duration: Duration(milliseconds: 400),
         child: ConstrainedBox(
           constraints: BoxConstraints(
               maxWidth: selectedButton == null ? 176 : CITY_DETAILS_VIEW_WIDTH),
