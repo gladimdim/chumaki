@@ -42,7 +42,7 @@ class CanUnlockCitiesView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        MoneyUnitView(unlockCity.unlockPriceMoney),
+                        MoneyUnitView(unlockCity.unlockPriceMoney, isEnough: company.hasEnoughMoney(unlockCity.unlockPriceMoney)),
                         TitleText(
                           ChumakiLocalizations.labelBuy,
                         ),

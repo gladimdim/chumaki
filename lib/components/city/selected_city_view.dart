@@ -46,11 +46,11 @@ class _SelectedCityViewState extends State<SelectedCityView> {
     return StreamBuilder(
       stream: company.changes,
       builder: (context, data) => AnimatedSize(
-        alignment: Alignment.centerLeft,
-        duration: Duration(milliseconds: 300),
+        alignment: Alignment.topLeft,
+        duration: Duration(milliseconds: 800),
         child: ConstrainedBox(
           constraints: BoxConstraints(
-              maxWidth: selectedButton == null ? 180 : CITY_DETAILS_VIEW_WIDTH),
+              maxWidth: selectedButton == null ? 176 : CITY_DETAILS_VIEW_WIDTH),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,

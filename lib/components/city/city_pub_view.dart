@@ -4,6 +4,7 @@ import 'package:chumaki/components/city/small_city_avatar.dart';
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
+import 'package:chumaki/components/ui/expandable_panel.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
@@ -38,30 +39,28 @@ class _CityPubViewState extends State<CityPubView> {
         ...widget.city.wagons.map((wagon) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                BorderedBottom(
-                  child: TitleText(
-                      "${ChumakiLocalizations.labelTotalPrice}: ${wagon.fullLocalizedName}"),
-                ),
-                ...calculateTopForWagon(wagon, company)
-                    .divideBy(3)
-                    .map((rowResult) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: rowResult.map((result) {
-                      return Column(
-                        children: [
-                          SmallCityAvatar(result.item1),
-                          MoneyUnitView(Money(result.item2),
-                              isEnough: result.item2 > 0),
-                        ],
-                      );
-                    }).toList(),
-                  );
-                }).toList(),
-              ],
+            child: ExpandablePanel(
+              title: TitleText(
+                  "${ChumakiLocalizations.labelTotalPrice}: ${wagon.fullLocalizedName}"),
+              content: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: calculateTopForWagon(wagon, company)
+                      .divideBy(3)
+                      .map((rowResult) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: rowResult.map((result) {
+                        return Column(
+                          children: [
+                            SmallCityAvatar(result.item1),
+                            MoneyUnitView(Money(result.item2),
+                                isEnough: result.item2 > 0),
+                          ],
+                        );
+                      }).toList(),
+                    );
+                  }).toList(),
+              ),
             ),
           );
         }).toList()
