@@ -56,29 +56,23 @@ class _SelectedCityViewState extends State<SelectedCityView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BorderedBottom(
-                child: BorderedContainerWithSide(
-                  borderDirection: AxisDirection.right,
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                        maxWidth: CITY_DETAILS_VIEW_WIDTH / 4,
-                        minHeight: 200,
-                        maxHeight: 800),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: actions.map((action) {
-                          return Expanded(
-                            flex: 1,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: CityMenuItemView(
-                                menuItem: action,
-                                onPress: () => handleMenuItemPress(action),
-                              ),
-                            ),
-                          );
-                        }).toList()),
-                  ),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                      maxWidth: CITY_DETAILS_VIEW_WIDTH / 4,
+                      minHeight: 200,
+                      maxHeight: 800),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: actions.map((action) {
+                        return Expanded(
+                          flex: 1,
+                          child: CityMenuItemView(
+                            menuItem: action,
+                            onPress: () => handleMenuItemPress(action),
+                          ),
+                        );
+                      }).toList()),
                 ),
               ),
               Expanded(

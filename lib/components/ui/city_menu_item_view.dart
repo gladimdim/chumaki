@@ -14,23 +14,34 @@ class CityMenuItemView extends StatelessWidget {
   });
 
   Widget build(BuildContext context) {
-    return NeumorphicButton(
-      style: NeumorphicStyle(
-        shape: NeumorphicShape.flat,
-        boxShape: menuItem.isSelected ? NeumorphicBoxShape.rect() : NeumorphicBoxShape.roundRect(BorderRadius.circular(40)),
-        color: light,
+    return Container(
+      decoration: new BoxDecoration(
+        border: getBorder(),
+        borderRadius: getRadius(),
+        color: !menuItem.isSelected ? Colors.grey[300] : null,
       ),
-      onPressed: onPress,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            menuItem.imagePath,
-            width: 128,
-          ),
-          TitleText(menuItem.label),
-        ],
+      child: TextButton(
+        onPressed: onPress,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              menuItem.imagePath,
+              width: 128,
+            ),
+            TitleText(menuItem.label),
+          ],
+        ),
       ),
     );
+  }
+
+  Border getBorder() {
+    final border = BorderSide(color: Colors.black, width: 3);
+    return menuItem.isSelected ? Border( left: border,) :  Border(top: border, bottom: border, left: border, right: border);
+  }
+
+  BorderRadius? getRadius() {
+    return menuItem.isSelected ? null : BorderRadius.only(bottomRight: Radius.circular(20), topRight: Radius.circular(20));
   }
 }
