@@ -60,7 +60,7 @@ class _AnimatedRouteTaskState extends State<AnimatedRouteTask>
               child: child,
             );
           },
-          child: Image.asset("images/wagon/cart_64.png"),
+          child: Image.asset("images/wagon/wheel.png"),
         ),
       ),
     );

@@ -12,7 +12,7 @@ class Ochakiv extends City {
           point: Point(2400, 700),
           name: "Очаків",
           localizedKeyName: 'ochakiv',
-          size: 4,
+          size: 2,
           unlocked: false,
           unlocksCities: [],
           prices: Price(Ochakiv.generatePriceUnits()),

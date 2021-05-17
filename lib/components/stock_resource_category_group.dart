@@ -1,6 +1,5 @@
 import 'package:chumaki/components/group_control.dart';
 import 'package:chumaki/components/resource_image_view.dart';
-import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';

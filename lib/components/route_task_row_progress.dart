@@ -41,7 +41,7 @@ class RouteTaskRowProgress extends StatelessWidget {
                     left: calculateRelativePositionForProgress(),
                     child: Transform.rotate(
                       angle: 2 * pi * task.leftProgress(),
-                      child: Image.asset("images/wagon/cart_64.png", width: 32),
+                      child: Image.asset("images/wagon/wheel.png", width: 32),
                     ),
                   ),
                   Positioned(
