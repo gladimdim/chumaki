@@ -2,27 +2,32 @@ import 'package:flutter/material.dart';
 
 class OutlinedText extends StatelessWidget {
   final String text;
-  const OutlinedText(this.text);
 
+  final Color? fontColor;
+  final Color? outlineColor;
+  final double size;
+  const OutlinedText(this.text, [this.fontColor, this.outlineColor, this.size = 16]);
   @override
   Widget build(BuildContext context) {
+    var outColor = outlineColor == null ? Theme.of(context).primaryColor : outlineColor;
+    var fColor = outlineColor == null ? Theme.of(context).backgroundColor : fontColor;
     return Stack(
       children: [
         Text(
           text,
           style: TextStyle(
-            fontSize: 16,
+            fontSize: size,
             foreground: Paint()
               ..style = PaintingStyle.stroke
               ..strokeWidth = 2
-              ..color = Colors.green,
+              ..color = outColor!,
           ),
         ),
         Text(
           text,
           style: TextStyle(
-            fontSize: 16,
-            color: Colors.white,
+            fontSize: size,
+            color: fColor!,
           ),
         ),
       ],

@@ -1,4 +1,4 @@
-import 'package:chumaki/components/city/small_city_avatar.dart';
+import 'package:chumaki/components/city/city_avatar.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/task.dart';
 import 'package:chumaki/models/wagon.dart';
