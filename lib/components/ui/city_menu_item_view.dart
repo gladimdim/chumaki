@@ -1,6 +1,5 @@
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/city_menu_item.dart';
-import 'package:chumaki/theme.dart';
 import 'package:flutter/material.dart';
 
 class CityMenuItemView extends StatelessWidget {

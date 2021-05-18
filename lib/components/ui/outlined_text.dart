@@ -11,7 +11,7 @@ class OutlinedText extends StatelessWidget {
         Text(
           text,
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 16,
             foreground: Paint()
               ..style = PaintingStyle.stroke
               ..strokeWidth = 2
@@ -21,7 +21,8 @@ class OutlinedText extends StatelessWidget {
         Text(
           text,
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 16,
+            color: Colors.white,
           ),
         ),
       ],

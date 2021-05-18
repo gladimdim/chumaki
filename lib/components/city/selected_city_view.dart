@@ -1,15 +1,14 @@
-import 'package:chumaki/components/city/city_pub_view.dart';
+import 'package:chumaki/components/city/can_unlock_cities_view.dart';
+import 'package:chumaki/components/city/city_wagons_view.dart';
 import 'package:chumaki/components/city/city_local_market.dart';
-import 'package:chumaki/components/price_comparison.dart';
-import 'package:chumaki/components/ui/bordered_bottom.dart';
-import 'package:chumaki/components/ui/bordered_container_with_side.dart';
+import 'package:chumaki/components/city/city_stock_view.dart';
+import 'package:chumaki/components/global_market_view.dart';
 import 'package:chumaki/components/ui/city_menu_item.dart';
 import 'package:chumaki/components/ui/city_menu_item_view.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
-import 'package:tuple/tuple.dart';
 
 const CITY_DETAILS_VIEW_WIDTH = 700.0;
 
@@ -25,17 +24,21 @@ class SelectedCityView extends StatefulWidget {
 class _SelectedCityViewState extends State<SelectedCityView> {
   late List<CityMenuItem> actions = [
     CityMenuItem(
-        imagePath: "images/wagon/cart.png",
+        imagePath: "images/wagon/wheel.png",
         label: ChumakiLocalizations.labelCompanies,
-        content: CityPubView(city: widget.city)),
+        content: CityWagonsView(city: widget.city)),
     CityMenuItem(
         imagePath: "images/icons/market/market.png",
         label: ChumakiLocalizations.labelMarket,
-        content: CityLocalMarket(city: widget.city)),
+        content: CityStockView(city: widget.city)),
     CityMenuItem(
         imagePath: "images/icons/market/market2.png",
         label: ChumakiLocalizations.labelWorldMarket,
-        content: PriceComparison(currentCity: widget.city))
+        content: GlobalMarketView(currentCity: widget.city)),
+    CityMenuItem(
+        imagePath: "images/cities/church.png",
+        label: ChumakiLocalizations.labelMenuBuyNewRoutes,
+        content: CanUnlockCitiesView(widget.city)),
   ];
 
   CityMenuItem? selectedButton;
@@ -55,25 +58,23 @@ class _SelectedCityViewState extends State<SelectedCityView> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BorderedBottom(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                      maxWidth: CITY_DETAILS_VIEW_WIDTH / 4,
-                      minHeight: 200,
-                      maxHeight: 800),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: actions.map((action) {
-                        return Expanded(
-                          flex: 1,
-                          child: CityMenuItemView(
-                            menuItem: action,
-                            onPress: () => handleMenuItemPress(action),
-                          ),
-                        );
-                      }).toList()),
-                ),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                    maxWidth: CITY_DETAILS_VIEW_WIDTH / 4,
+                    minHeight: 200,
+                    maxHeight: 800),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: actions.map((action) {
+                      return Expanded(
+                        flex: 1,
+                        child: CityMenuItemView(
+                          menuItem: action,
+                          onPress: () => handleMenuItemPress(action),
+                        ),
+                      );
+                    }).toList()),
               ),
               Expanded(
                 flex: 1,

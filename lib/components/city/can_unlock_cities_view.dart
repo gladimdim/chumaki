@@ -16,46 +16,61 @@ class CanUnlockCitiesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final company = InheritedCompany.of(context).company;
-    return Column(
-      children: [
-        BorderedBottom(
-          child: TitleText(ChumakiLocalizations.labelUnlockCity),
-        ),
-        ...city.unlocksCities
+    final citiesToUnlock = city.unlocksCities
         .map((fakeCity) => company.refToCityByName(fakeCity))
-            .where((unlockCity) => !unlockCity.isUnlocked())
-            .map((unlockCity) {
-          return Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: SmallCityAvatar(unlockCity),
-              ),
-              Expanded(
-                flex: 1,
-                child: BorderedBottom(
-                  child: TextButton(
-                    onPressed:
-                        company.hasEnoughMoney(unlockCity.unlockPriceMoney)
-                            ? () => buyCityRoute(unlockCity, company)
-                            : null,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        MoneyUnitView(unlockCity.unlockPriceMoney, isEnough: company.hasEnoughMoney(unlockCity.unlockPriceMoney)),
-                        TitleText(
-                          ChumakiLocalizations.labelBuy,
-                        ),
-                      ],
+        .where((unlockCity) => !unlockCity.isUnlocked());
+    return StreamBuilder(
+      stream: company.changes,
+      builder: (context, snapshot) => Column(
+        children: [
+          BorderedBottom(
+            child: TitleText(ChumakiLocalizations.labelUnlockCity),
+          ),
+          if (citiesToUnlock.isEmpty) buildEmptyView(),
+          if (citiesToUnlock.isNotEmpty) ...citiesToUnlock.map((unlockCity) {
+            return Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: SmallCityAvatar(unlockCity),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: BorderedBottom(
+                    child: TextButton(
+                      onPressed:
+                          company.hasEnoughMoney(unlockCity.unlockPriceMoney)
+                              ? () => buyCityRoute(unlockCity, company)
+                              : null,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          StreamBuilder(
+                              stream: company.changes.where((event) =>
+                                  event == COMPANY_EVENTS.MONEY_REMOVED ||
+                                  event == COMPANY_EVENTS.MONEY_ADDED),
+                              builder: (context, snapshot) => MoneyUnitView(
+                                  unlockCity.unlockPriceMoney,
+                                  isEnough: company.hasEnoughMoney(
+                                      unlockCity.unlockPriceMoney))),
+                          TitleText(
+                            ChumakiLocalizations.labelBuy,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          );
-        }).toList()
-      ],
+              ],
+            );
+          }).toList()
+        ],
+      ),
     );
+  }
+
+  Widget buildEmptyView() {
+    return Center(child: TitleText(ChumakiLocalizations.textAllRoutesBought));
   }
 
   void buyCityRoute(City cityToUnlock, Company company) {

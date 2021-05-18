@@ -20,7 +20,7 @@ class CityStockView extends StatelessWidget {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TitleText(ChumakiLocalizations.labelContains),
+            TitleText("${ChumakiLocalizations.getForKey(city.localizedKeyName)} ${ChumakiLocalizations.labelContains}"),
             if (!city.stock.isEmpty)
               Column(
                 children: groupResourcesByCategory(city.stock.iterator.toList())

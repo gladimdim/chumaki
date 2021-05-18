@@ -96,6 +96,11 @@ class ChumakiLocalizations {
       "labelUnlockCity": "Buy access to town",
       "labelBuyNewWagon": "Buy new wagon",
       "labelCompanies": "Companies",
+      "labelMenuBuyNewRoutes": "Unlock Routes",
+      "textAllRoutesBought":
+          "All possible routes known in this town are already bought",
+      "labelWagonPricesInCities": "Prices for all wagons in different cities",
+      "labelGlobalPrices": "Global Prices",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -134,6 +139,11 @@ class ChumakiLocalizations {
       "labelUnlockCity": "Купити доступ до міста",
       "labelBuyNewWagon": "Купити нову валку",
       "labelCompanies": "Ватаги",
+      "labelMenuBuyNewRoutes": "Купити маршрути",
+      "textAllRoutesBought":
+          "Всі можливі маршрути, які знають в цьому місті, уже куплено.",
+      "labelWagonPricesInCities": "Ціни за всі валки в різних містах",
+      "labelGlobalPrices": "Світові ціни",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -171,6 +181,11 @@ class ChumakiLocalizations {
       "labelUnlockCity": "Купить доступ к городу",
       "labelBuyNewWagon": "Купить новую валку",
       "labelCompanies": "Ватаги",
+      "labelMenuBuyNewRoutes": "Купить маршруты",
+      "textAllRoutesBought":
+          "Все возможные маршруты, которые знают в этом городе уже куплены",
+      "labelWagonPricesInCities": "Цены за все валки в разных городах",
+      "labelGlobalPrices": "Глобальные цены",
     },
   };
 
@@ -312,5 +327,21 @@ class ChumakiLocalizations {
 
   static String get labelCompanies {
     return _localizedValues[locale.languageCode]!["labelCompanies"]!;
+  }
+
+  static String get labelMenuBuyNewRoutes {
+    return _localizedValues[locale.languageCode]!["labelMenuBuyNewRoutes"]!;
+  }
+
+  static String get textAllRoutesBought {
+    return _localizedValues[locale.languageCode]!["textAllRoutesBought"]!;
+  }
+
+  static String get labelWagonPricesInCities {
+    return _localizedValues[locale.languageCode]!["labelWagonPricesInCities"]!;
+  }
+
+  static String get labelGlobalPrices {
+    return _localizedValues[locale.languageCode]!["labelGlobalPrices"]!;
   }
 }

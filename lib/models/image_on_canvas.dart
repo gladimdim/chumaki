@@ -26,5 +26,5 @@ class ImageOnCanvas {
 }
 
 class WagonImage extends ImageOnCanvas {
-  WagonImage() : super("images/wagon/cart_64.png");
+  WagonImage() : super("images/wagon/wheel.png");
 }

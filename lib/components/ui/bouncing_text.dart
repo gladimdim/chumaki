@@ -1,4 +1,3 @@
-import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:flutter/material.dart';
 
 class BouncingText extends StatefulWidget {
