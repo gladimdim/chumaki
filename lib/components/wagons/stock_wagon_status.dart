@@ -17,7 +17,7 @@ class StockWagonStatus extends StatelessWidget {
           return ResourceImageView(
             resource,
             showAmount: true,
-            size: 32,
+            size: 50,
           );
         },
       ).toList(),
