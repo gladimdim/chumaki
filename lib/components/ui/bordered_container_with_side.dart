@@ -1,28 +1,34 @@
 import 'package:flutter/material.dart';
 
-class BorderedContainerWithSide extends StatelessWidget {
+class BorderedContainerWithSides extends StatelessWidget {
   final double width;
   final Color color;
   final Widget child;
-  final AxisDirection borderDirection;
+  late List<AxisDirection> borderDirections;
 
-  const BorderedContainerWithSide({
+  BorderedContainerWithSides({
     this.width = 3.0,
     this.color = Colors.black,
     required this.child,
-    this.borderDirection = AxisDirection.up,
-  });
+    List<AxisDirection>? borderDirections,
+  }) {
+    if (borderDirections == null) {
+      this.borderDirections = [AxisDirection.up];
+    } else {
+      this.borderDirections = borderDirections;
+    }
+  }
 
   Map<AxisDirection, BorderSide> get _sidesForDirection {
     return {
       AxisDirection.up:
-          borderDirection == AxisDirection.up ? _side : BorderSide.none,
+          borderDirections.contains(AxisDirection.up) ? _side : BorderSide.none,
       AxisDirection.down:
-          borderDirection == AxisDirection.down ? _side : BorderSide.none,
+          borderDirections.contains(AxisDirection.down) ? _side : BorderSide.none,
       AxisDirection.left:
-          borderDirection == AxisDirection.left ? _side : BorderSide.none,
+          borderDirections.contains(AxisDirection.left) ? _side : BorderSide.none,
       AxisDirection.right:
-          borderDirection == AxisDirection.right ? _side : BorderSide.none,
+          borderDirections.contains(AxisDirection.right) ? _side : BorderSide.none,
     };
   }
 

@@ -1,11 +1,15 @@
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/resource_image_view.dart';
+import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
+import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/image_on_canvas.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
+import 'package:chumaki/components/ui/action_money_button.dart';
 
 class CityWagonResourceExchange extends StatelessWidget {
   final Resource resource;
@@ -36,80 +40,83 @@ class CityWagonResourceExchange extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Expanded(
-          flex: 1,
-          child: Column(
-            children: [
-              MoneyUnitView(Money(sellPrice)),
-              Text("(${sellPricePerUnit}x$amountTradeValue)"),
-            ],
-          ),
-        ),
-        Expanded(
-          flex: 2,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                onPressed: enableSellButton(context)
-                    ? () {
-                        var res = resource.cloneWithAmount(amountTradeValue);
-                        if (wagon.canFitNewResource(res)) {
-                          city.sellResource(
-                              resource: res, toWagon: wagon, company: company);
-                        }
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ActionMoneyButton(
+              onPress: enableSellButton(context)
+                  ? () {
+                      var res = resource.cloneWithAmount(amountTradeValue);
+                      if (wagon.canFitNewResource(res)) {
+                        city.sellResource(
+                            resource: res, toWagon: wagon, company: company);
                       }
-                    : null,
-                icon: Icon(Icons.arrow_back_outlined, size: 32),
-              ),
-              SizedBox(
-                width: 80,
-                height: 50,
-                child: Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: ResourceImageView(
+                    }
+                  : null,
+              action: TitleText(ChumakiLocalizations.labelBuy),
+              image: Column(
+                children: [
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      ResourceImageView(
                         resource.cloneWithAmount(amountTradeValue),
-                        size: 64,
+                        size: 92,
                       ),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomLeft,
-                      child: BouncingOutlinedText(
+                      BouncingOutlinedText(
                         wagonRes == null ? "0" : wagonRes.amount.toString(),
+                        size: 32,
                       ),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: BouncingOutlinedText(
-                        cityRes == null ? "0" : cityRes.amount.toString(),
-                      ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                ],
               ),
-              IconButton(
-                onPressed: enableBuyButton()
-                    ? () {
-                        var res = resource.cloneWithAmount(amountTradeValue);
-                        city.buyResource(
-                            resource: res, fromWagon: wagon, company: company);
-                      }
-                    : null,
-                icon: Icon(Icons.arrow_forward_outlined, size: 32),
+              money: Column(
+                children: [
+                  MoneyUnitView(Money(sellPrice)),
+                  Text("(${sellPricePerUnit}x$amountTradeValue)"),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        Expanded(
-          flex: 1,
-          child: Column(
-            children: [
-              MoneyUnitView(Money(buyPrice)),
-              Text("(${buyPricePerUnit}x$amountTradeValue)"),
-            ],
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ActionMoneyButton(
+              onPress: enableBuyButton()
+                  ? () {
+                var res = resource.cloneWithAmount(amountTradeValue);
+                city.buyResource(
+                    resource: res, fromWagon: wagon, company: company);
+              }
+                  : null,
+              action: TitleText(ChumakiLocalizations.labelSell),
+              image: Column(
+                children: [
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      ResourceImageView(
+                        resource.cloneWithAmount(amountTradeValue),
+                        size: 92,
+                      ),
+                      BouncingOutlinedText(
+                        cityRes == null ? "0" : cityRes.amount.toString(),
+                        size: 32,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              money: Column(
+                children: [
+                  MoneyUnitView(Money(buyPrice)),
+                  Text("(${buyPricePerUnit}x$amountTradeValue)"),
+                ],
+              ),
+            ),
+          ],
         ),
       ],
     );

@@ -48,8 +48,17 @@ class CityAvatarStacked extends StatelessWidget {
           ),
           Align(
               alignment: Alignment.topCenter,
-              child: OutlinedText(
-                  ChumakiLocalizations.getForKey(city.localizedKeyName), Colors.black, Colors.blue, 24))
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white.withAlpha(130),
+                ),
+                child: OutlinedText(
+                    ChumakiLocalizations.getForKey(city.localizedKeyName),
+                    fontColor: Colors.black,
+                    outlineColor: Colors.blue,
+                    size: 24),
+              ))
         ],
       ),
     );

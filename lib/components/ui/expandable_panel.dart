@@ -19,6 +19,7 @@ class ExpandablePanel extends StatefulWidget {
 class _ExpandablePanelState extends State<ExpandablePanel>
     with SingleTickerProviderStateMixin {
   bool isExpanded = false;
+  final Duration defaultDuration = Duration(milliseconds: 400);
   late final AnimationController _rotateController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 600),
@@ -35,7 +36,7 @@ class _ExpandablePanelState extends State<ExpandablePanel>
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: AnimatedSize(
-        duration: Duration(milliseconds: 800),
+        duration: defaultDuration,
         curve: Curves.easeInOut,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -78,7 +79,7 @@ class _ExpandablePanelState extends State<ExpandablePanel>
               crossFadeState: isExpanded
                   ? CrossFadeState.showSecond
                   : CrossFadeState.showFirst,
-              duration: Duration(milliseconds: 800),
+              duration: defaultDuration,
             ),
           ],
         ),

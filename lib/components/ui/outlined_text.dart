@@ -5,8 +5,8 @@ class OutlinedText extends StatelessWidget {
 
   final Color? fontColor;
   final Color? outlineColor;
-  final double size;
-  const OutlinedText(this.text, [this.fontColor, this.outlineColor, this.size = 16]);
+  final double? size;
+  const OutlinedText(this.text, {this.fontColor, this.outlineColor, this.size = 16});
   @override
   Widget build(BuildContext context) {
     var outColor = outlineColor == null ? Theme.of(context).primaryColor : outlineColor;

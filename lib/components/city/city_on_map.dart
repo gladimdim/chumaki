@@ -42,13 +42,18 @@ class CityOnMap extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: Text(
-                  ChumakiLocalizations.getForKey(city.localizedKeyName),
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 8 * city.size,
-                      backgroundColor: Colors.white,
-                      fontWeight: FontWeight.bold),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white.withAlpha(180),
+                  ),
+                  child: Text(
+                    ChumakiLocalizations.getForKey(city.localizedKeyName),
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 8 * city.size,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
               if (city.size > 1)
