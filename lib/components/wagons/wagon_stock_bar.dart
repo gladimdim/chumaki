@@ -1,3 +1,4 @@
+import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,7 @@ import 'package:flutter/material.dart';
 class WagonStockBar extends StatelessWidget {
   final Wagon wagon;
 
-  final int _maxWidth = 390;
+  final double _maxWidth = CITY_DETAILS_VIEW_WIDTH - CITY_DETAILS_VIEW_WIDTH / 4 - 2;
 
   WagonStockBar({required this.wagon});
 

@@ -8,4 +8,5 @@ final mainTheme = ThemeData(
   buttonTheme: ButtonThemeData(
     buttonColor: light,
   ),
+  backgroundColor: Colors.yellow,
 );

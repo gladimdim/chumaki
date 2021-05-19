@@ -4,7 +4,18 @@ import 'package:flutter/material.dart';
 
 class BouncingOutlinedText extends BouncingText {
   final String text;
-  const BouncingOutlinedText(this.text) : super(text);
+  final double? size;
+  final Color? fontColor;
+  final Color? outlineColor;
 
-  Widget getChild() => OutlinedText(text);
+  const BouncingOutlinedText(this.text,
+      {this.size, this.fontColor, this.outlineColor})
+      : super(text);
+
+  Widget getChild() => OutlinedText(
+        text,
+        size: size,
+        fontColor: fontColor,
+        outlineColor: outlineColor,
+      );
 }

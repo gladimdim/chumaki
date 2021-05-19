@@ -53,6 +53,7 @@ class _MoneyUnitViewState extends State<MoneyUnitView>
         );
       },
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(widget.money.imagePath, width: 32),
           Text(

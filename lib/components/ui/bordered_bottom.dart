@@ -11,9 +11,9 @@ class BorderedBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BorderedContainerWithSide(
+    return BorderedContainerWithSides(
       child: child,
-      borderDirection: AxisDirection.down,
+      borderDirections:[AxisDirection.down],
     );
   }
 }
