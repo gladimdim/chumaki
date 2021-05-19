@@ -11,18 +11,21 @@ import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/components/ui/action_money_button.dart';
 
+enum EXCHANGE_MOD { BUY, SELL }
+
 class CityWagonResourceExchange extends StatelessWidget {
   final Resource resource;
   final City city;
   final Wagon wagon;
   final int amountTradeValue;
+  final EXCHANGE_MOD mode;
 
-  CityWagonResourceExchange({
-    required this.city,
-    required this.wagon,
-    required this.resource,
-    required this.amountTradeValue,
-  });
+  CityWagonResourceExchange(
+      {required this.city,
+      required this.wagon,
+      required this.resource,
+      required this.amountTradeValue,
+      required this.mode});
 
   @override
   Widget build(BuildContext context) {
@@ -42,36 +45,40 @@ class CityWagonResourceExchange extends StatelessWidget {
       children: [
         getTradeUnit(
           company: company,
-          pricePerUnit: sellPricePerUnit,
-          price: sellPrice,
-          tradeResource: cityRes,
-          actionText: ChumakiLocalizations.labelBuy,
-          onPress: enableBuyButton(context)
-              ? () {
-                  var res = resource.cloneWithAmount(amountTradeValue);
-                  if (wagon.canFitNewResource(res)) {
-                    city.sellResource(
-                        resource: res, toWagon: wagon, company: company);
-                  }
-                }
-              : null,
-        ),
-        getTradeUnit(
-          company: company,
-          pricePerUnit: buyPricePerUnit,
-          price: buyPrice,
-          tradeResource: wagonRes,
-          actionText: ChumakiLocalizations.labelSell,
-          onPress: enableSellButton()
-              ? () {
-                  var res = resource.cloneWithAmount(amountTradeValue);
-                  city.buyResource(
-                      resource: res, fromWagon: wagon, company: company);
-                }
-              : null,
+          pricePerUnit: isBuyMode() ? buyPricePerUnit : sellPricePerUnit,
+          price: isBuyMode() ? buyPrice : sellPrice,
+          tradeResource: isBuyMode() ? cityRes : wagonRes,
+          actionText: isBuyMode()
+              ? ChumakiLocalizations.labelBuy
+              : ChumakiLocalizations.labelSell,
+          onPress: onPressHandler(company),
         ),
       ],
     );
+  }
+
+  bool isBuyMode() {
+    return mode == EXCHANGE_MOD.BUY;
+  }
+
+  VoidCallback? onPressHandler(Company company) {
+    return isBuyMode()
+        ? (enableBuyButton(company)
+            ? () {
+                var res = resource.cloneWithAmount(amountTradeValue);
+                if (wagon.canFitNewResource(res)) {
+                  city.sellResource(
+                      resource: res, toWagon: wagon, company: company);
+                }
+              }
+            : null)
+        : (enableSellButton()
+            ? () {
+                var res = resource.cloneWithAmount(amountTradeValue);
+                city.buyResource(
+                    resource: res, fromWagon: wagon, company: company);
+              }
+            : null);
   }
 
   Widget getTradeUnit({
@@ -105,7 +112,7 @@ class CityWagonResourceExchange extends StatelessWidget {
                         : tradeResource.amount.toString(),
                     size: 32,
                     fontColor:
-                        tradeResource == null ? Colors.grey : Colors.yellow,
+                        getFontColor(company),
                   ),
                 ],
               ),
@@ -114,8 +121,9 @@ class CityWagonResourceExchange extends StatelessWidget {
           money: Column(
             children: [
               MoneyUnitView(Money(price),
-                  isEnough:
-                      tradeResource == null ? false : tradeResource.amount > 0),
+                  isEnough: isBuyMode()
+                      ? enableBuyButton(company)
+                      : enableSellButton()),
               Text("(${pricePerUnit}x$amountTradeValue)"),
             ],
           ),
@@ -124,13 +132,21 @@ class CityWagonResourceExchange extends StatelessWidget {
     );
   }
 
-  bool enableBuyButton(BuildContext context) {
-    var company = InheritedCompany.of(context).company;
+  Color getFontColor(Company company) {
+    if (isBuyMode()) {
+      return enableBuyButton(company) ? Colors.yellow : Colors.grey;
+    } else {
+      return enableSellButton() ? Colors.yellow : Colors.grey;
+    }
+  }
 
+  bool enableBuyButton(Company company) {
     var resToSell = resource.cloneWithAmount(amountTradeValue);
     var money = city.prices.sellPriceForResource(resToSell);
     var hasWagonEnoughMoney = company.hasMoney(money);
-    return hasWagonEnoughMoney && city.canSellResource(resToSell) && wagon.canFitNewResource(resToSell);
+    return hasWagonEnoughMoney &&
+        city.canSellResource(resToSell) &&
+        wagon.canFitNewResource(resToSell);
   }
 
   bool enableSellButton() {
