@@ -38,13 +38,6 @@ class ResourceCategoryGroup extends StatelessWidget {
       ),
       content: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Image.asset(Wagon.imagePath, width: 64),
-              Image.asset("images/cities/church.png", width: 64)
-            ],
-          ),
           ...resources.divideBy(2).map((List<Resource> resources) {
             return Row(
               children: resources.map((resource) {

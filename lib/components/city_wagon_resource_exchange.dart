@@ -4,6 +4,7 @@ import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:chumaki/views/inherited_company.dart';
@@ -39,100 +40,100 @@ class CityWagonResourceExchange extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            ActionMoneyButton(
-              onPress: enableSellButton(context)
-                  ? () {
-                      var res = resource.cloneWithAmount(amountTradeValue);
-                      if (wagon.canFitNewResource(res)) {
-                        city.sellResource(
-                            resource: res, toWagon: wagon, company: company);
-                      }
-                    }
-                  : null,
-              action: TitleText(ChumakiLocalizations.labelBuy),
-              image: Column(
-                children: [
-                  TitleText(ChumakiLocalizations.getForKey(resource.fullLocalizedKey)),
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      ResourceImageView(
-                        resource.cloneWithAmount(amountTradeValue),
-                        size: 92,
-                      ),
-                      BouncingOutlinedText(
-                        cityRes == null ? "0" : cityRes.amount.toString(),
-                        size: 32,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              money: Column(
-                children: [
-                  MoneyUnitView(Money(sellPrice)),
-                  Text("(${sellPricePerUnit}x$amountTradeValue)"),
-                ],
-              ),
-            ),
-          ],
+        getTradeUnit(
+          company: company,
+          pricePerUnit: sellPricePerUnit,
+          price: sellPrice,
+          tradeResource: cityRes,
+          actionText: ChumakiLocalizations.labelBuy,
+          onPress: enableBuyButton(context)
+              ? () {
+                  var res = resource.cloneWithAmount(amountTradeValue);
+                  if (wagon.canFitNewResource(res)) {
+                    city.sellResource(
+                        resource: res, toWagon: wagon, company: company);
+                  }
+                }
+              : null,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            ActionMoneyButton(
-              onPress: enableBuyButton()
-                  ? () {
-                var res = resource.cloneWithAmount(amountTradeValue);
-                city.buyResource(
-                    resource: res, fromWagon: wagon, company: company);
-              }
-                  : null,
-              action: TitleText(ChumakiLocalizations.labelSell),
-              image: Column(
-                children: [
-                  TitleText(ChumakiLocalizations.getForKey(resource.fullLocalizedKey)),
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      ResourceImageView(
-                        resource.cloneWithAmount(amountTradeValue),
-                        size: 92,
-                      ),
-                      BouncingOutlinedText(
-                        wagonRes == null ? "0" : wagonRes.amount.toString(),
-                        size: 32,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              money: Column(
-                children: [
-                  MoneyUnitView(Money(buyPrice), isEnough: wagonRes == null ? false : wagonRes.amount > 0),
-                  Text("(${buyPricePerUnit}x$amountTradeValue)"),
-                ],
-              ),
-            ),
-          ],
+        getTradeUnit(
+          company: company,
+          pricePerUnit: buyPricePerUnit,
+          price: buyPrice,
+          tradeResource: wagonRes,
+          actionText: ChumakiLocalizations.labelSell,
+          onPress: enableSellButton()
+              ? () {
+                  var res = resource.cloneWithAmount(amountTradeValue);
+                  city.buyResource(
+                      resource: res, fromWagon: wagon, company: company);
+                }
+              : null,
         ),
       ],
     );
   }
 
-  bool enableSellButton(BuildContext context) {
+  Widget getTradeUnit({
+    required Company company,
+    Resource? tradeResource,
+    required double pricePerUnit,
+    required double price,
+    VoidCallback? onPress,
+    required String actionText,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        ActionMoneyButton(
+          onPress: onPress,
+          action: TitleText(actionText),
+          image: Column(
+            children: [
+              TitleText(
+                  ChumakiLocalizations.getForKey(resource.fullLocalizedKey)),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  ResourceImageView(
+                    resource.cloneWithAmount(amountTradeValue),
+                    size: 92,
+                  ),
+                  BouncingOutlinedText(
+                    tradeResource == null
+                        ? "0"
+                        : tradeResource.amount.toString(),
+                    size: 32,
+                    fontColor:
+                        tradeResource == null ? Colors.grey : Colors.yellow,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          money: Column(
+            children: [
+              MoneyUnitView(Money(price),
+                  isEnough:
+                      tradeResource == null ? false : tradeResource.amount > 0),
+              Text("(${pricePerUnit}x$amountTradeValue)"),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  bool enableBuyButton(BuildContext context) {
     var company = InheritedCompany.of(context).company;
 
     var resToSell = resource.cloneWithAmount(amountTradeValue);
     var money = city.prices.sellPriceForResource(resToSell);
     var hasWagonEnoughMoney = company.hasMoney(money);
-    return hasWagonEnoughMoney && city.canSellResource(resToSell);
+    return hasWagonEnoughMoney && city.canSellResource(resToSell) && wagon.canFitNewResource(resToSell);
   }
 
-  bool enableBuyButton() {
+  bool enableSellButton() {
     var resToBuy = resource.cloneWithAmount(amountTradeValue);
     return wagon.stock.hasEnough(resToBuy);
   }
