@@ -7,6 +7,7 @@ import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/components/city_wagon_resource_exchange.dart';
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/extensions/list.dart';
 
 class ResourceCategoryGroup extends StatelessWidget {
   final List<Resource> resources;
@@ -35,29 +36,30 @@ class ResourceCategoryGroup extends StatelessWidget {
           ],
         ),
       ),
-      content: Padding(
-        padding: const EdgeInsets.only(top: 14.0, left: 2, right: 2),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Image.asset(Wagon.imagePath, width: 64),
-                Image.asset("images/cities/church.png", width: 64)
-              ],
-            ),
-            ...resources.map((resource) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                child: CityWagonResourceExchange(
-                    wagon: wagon,
-                    city: city,
-                    resource: resource,
-                    amountTradeValue: amountTradeValue),
-              );
-            }).toList(),
-          ],
-        ),
+      content: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Image.asset(Wagon.imagePath, width: 64),
+              Image.asset("images/cities/church.png", width: 64)
+            ],
+          ),
+          ...resources.divideBy(2).map((List<Resource> resources) {
+            return Row(
+              children: resources.map((resource) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                  child: CityWagonResourceExchange(
+                      wagon: wagon,
+                      city: city,
+                      resource: resource,
+                      amountTradeValue: amountTradeValue),
+                );
+              }).toList(),
+            );
+          }).toList(),
+        ],
       ),
     );
   }
