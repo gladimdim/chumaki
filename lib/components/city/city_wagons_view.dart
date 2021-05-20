@@ -22,13 +22,7 @@ class _CityWagonsViewState extends State<CityWagonsView> {
       stream: company.changes.where((event) =>
           event == COMPANY_EVENTS.MONEY_REMOVED ||
           event == COMPANY_EVENTS.MONEY_ADDED),
-      builder: (context, snapshot) => Column(
-        children: [
-          BuyNewWagonView(widget.city),
-          CityWagonTradeList(city: widget.city),
-
-        ],
-      ),
+      builder: (context, snapshot) => BuyNewWagonView(widget.city),
     );
   }
 }
