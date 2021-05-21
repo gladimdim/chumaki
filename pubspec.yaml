@@ -20,6 +20,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   shared_preferences: ^2.0.5
+  google_fonts: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -29,6 +30,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - google_fonts/
     - images/
     - images/ui/
     - images/wagon/

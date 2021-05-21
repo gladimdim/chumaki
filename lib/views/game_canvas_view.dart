@@ -111,7 +111,8 @@ class _GameCanvasViewState extends State<GameCanvasView>
                 var first = route.from;
                 bool highlight = false;
                 if (selected != null) {
-                  highlight = selected!.getRoutesInCompany(company).contains(route);
+                  highlight =
+                      selected!.getRoutesInCompany(company).contains(route);
                 }
                 return Positioned(
                   left: first.point.x + CITY_SIZE,
@@ -203,10 +204,16 @@ class _GameCanvasViewState extends State<GameCanvasView>
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.black, width: 3),
-                      color: Colors.grey[400],
+                      color: Theme.of(context).backgroundColor,
+                      borderRadius: getRadius(),
                     ),
                     child: selected!.isUnlocked()
-                        ? SelectedCityView(selected!)
+                        ? ClipRRect(
+                            borderRadius: getRadius(),
+                            child: SelectedCityView(
+                              selected!,
+                            ),
+                          )
                         : SelectedCityLockedView(selected!),
                   ),
                 ),
@@ -241,6 +248,11 @@ class _GameCanvasViewState extends State<GameCanvasView>
       sichPoint.x - middleX + Sich().size * CITY_SIZE / 2,
       sichPoint.y - middleY + Sich().size * CITY_SIZE / 2,
     );
+  }
+
+  BorderRadius getRadius() {
+    return BorderRadius.only(
+        bottomRight: Radius.circular(20), topRight: Radius.circular(20));
   }
 
   dismissSelectedCity() {

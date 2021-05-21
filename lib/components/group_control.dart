@@ -41,7 +41,7 @@ class GroupedControl extends StatelessWidget {
           Align(
             alignment: titleAlignmentToAlign,
             child: Container(
-              color: Colors.grey[400],
+              color: Theme.of(context).backgroundColor,
               child: Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                 child: title,

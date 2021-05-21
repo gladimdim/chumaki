@@ -14,32 +14,34 @@ class CityMenuItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: new BoxDecoration(
-        border: getBorder(),
+        border: getBorder(context),
         borderRadius: getRadius(),
-        color: !menuItem.isSelected ? Colors.grey[300] : null,
       ),
-      child: TextButton(
-        onPressed: onPress,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              menuItem.imagePath,
-              width: 128,
-            ),
-            DefaultTextStyle(style: TextStyle(), child: TitleText(menuItem.label), textAlign: TextAlign.center,),
-          ],
+      child: ClipRRect(
+        borderRadius: getRadius(),
+        child: TextButton(
+          onPressed: onPress,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                menuItem.imagePath,
+                width: 128,
+              ),
+              DefaultTextStyle(style: TextStyle(), child: TitleText(menuItem.label), textAlign: TextAlign.center,),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Border getBorder() {
-    final border = BorderSide(color: Colors.black, width: 3);
-    return menuItem.isSelected ? Border( left: border,) :  Border(top: border, bottom: border, left: border, right: border);
+  Border getBorder(BuildContext context) {
+    final border = BorderSide(color: menuItem.isSelected ? Colors.transparent : Theme.of(context).primaryColor, width: 3);
+    return Border(top: border, bottom: border, left: border, right: border);
   }
 
-  BorderRadius? getRadius() {
-    return menuItem.isSelected ? null : BorderRadius.only(bottomRight: Radius.circular(20), topRight: Radius.circular(20));
+  BorderRadius getRadius() {
+    return BorderRadius.only(bottomRight: Radius.circular(20), topRight: Radius.circular(20));
   }
 }
