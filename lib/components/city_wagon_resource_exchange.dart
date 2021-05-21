@@ -9,7 +9,7 @@ import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
-import 'package:chumaki/components/ui/action_money_button.dart';
+import 'package:chumaki/components/ui/action_button.dart';
 
 enum EXCHANGE_MOD { BUY, SELL }
 
@@ -92,7 +92,7 @@ class CityWagonResourceExchange extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        ActionMoneyButton(
+        ActionButton(
           onPress: onPress,
           action: TitleText(actionText),
           image: Column(
@@ -118,7 +118,7 @@ class CityWagonResourceExchange extends StatelessWidget {
               ),
             ],
           ),
-          money: Column(
+          subTitle: Column(
             children: [
               MoneyUnitView(Money(price),
                   isEnough: isBuyMode()

@@ -1,7 +1,7 @@
 import 'package:chumaki/components/city/city_avatar.dart';
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/title_text.dart';
-import 'package:chumaki/components/ui/action_money_button.dart';
+import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
@@ -38,7 +38,7 @@ class CanUnlockCitiesView extends StatelessWidget {
                 return Row(
                   children: unlockCities
                       .map(
-                        (unlockCity) => ActionMoneyButton(
+                        (unlockCity) => ActionButton(
                           onPress: company
                                   .hasEnoughMoney(unlockCity.unlockPriceMoney)
                               ? () => buyCityRoute(unlockCity, company)
@@ -48,7 +48,7 @@ class CanUnlockCitiesView extends StatelessWidget {
                             width: 128,
                           ),
                           action: TitleText(ChumakiLocalizations.labelBuy),
-                          money: StreamBuilder(
+                          subTitle: StreamBuilder(
                               stream: company.changes.where((event) =>
                                   event == COMPANY_EVENTS.MONEY_REMOVED ||
                                   event == COMPANY_EVENTS.MONEY_ADDED),

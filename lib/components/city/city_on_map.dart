@@ -47,12 +47,15 @@ class CityOnMap extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white.withAlpha(180),
                   ),
-                  child: Text(
-                    ChumakiLocalizations.getForKey(city.localizedKeyName),
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 8 * city.size,
-                        fontWeight: FontWeight.bold),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      ChumakiLocalizations.getForKey(city.localizedKeyName),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 8 * city.size,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
               ),
