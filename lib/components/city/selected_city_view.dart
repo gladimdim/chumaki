@@ -5,6 +5,7 @@ import 'package:chumaki/components/city/city_stock_view.dart';
 import 'package:chumaki/components/global_market_view.dart';
 import 'package:chumaki/components/ui/city_menu_item.dart';
 import 'package:chumaki/components/ui/city_menu_item_view.dart';
+import 'package:chumaki/components/wagons/wagon_details.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/views/inherited_company.dart';
@@ -22,32 +23,74 @@ class SelectedCityView extends StatefulWidget {
 }
 
 class _SelectedCityViewState extends State<SelectedCityView> {
-  late List<CityMenuItem> actions = [
-    CityMenuItem(
-        imagePath: "images/wagon/wheel.png",
-        label: ChumakiLocalizations.labelCompanies,
-        content: CityWagonsView(city: widget.city)),
-    CityMenuItem(
-        imagePath: "images/icons/market/market.png",
-        label: ChumakiLocalizations.labelMarket,
-        content: CityStockView(city: widget.city)),
-    CityMenuItem(
-        imagePath: "images/icons/market/market2.png",
-        label: ChumakiLocalizations.labelWorldMarket,
-        content: GlobalMarketView(currentCity: widget.city)),
-    CityMenuItem(
-        imagePath: "images/cities/church.png",
-        label: ChumakiLocalizations.labelMenuBuyNewRoutes,
-        content: CanUnlockCitiesView(widget.city)),
-  ];
+  late List<CityMenuItem> actions;
+  Widget? detailsContent;
+
+  @override
+  void initState() {
+    super.initState();
+    actions = getStandardButtons();
+    actions.addAll(getWagonButtons());
+    widget.city.changes.listen((event) => updateActions());
+  }
+
+  void updateActions() {
+    final newActions = getStandardButtons()..addAll(getWagonButtons());
+    setState(() {
+      if (newActions.length != actions.length) {
+        selectedButton = null;
+      }
+      actions = newActions;
+    });
+  }
+
+  List<CityMenuItem> getStandardButtons() => [
+        CityMenuItem(
+            imagePath: "images/wagon/wheel.png",
+            label: ChumakiLocalizations.labelCompanies,
+            content: CityWagonsView(city: widget.city)),
+        CityMenuItem(
+            imagePath: "images/icons/market/market.png",
+            label: ChumakiLocalizations.labelMarket,
+            content: CityStockView(city: widget.city)),
+        CityMenuItem(
+            imagePath: "images/icons/market/market2.png",
+            label: ChumakiLocalizations.labelWorldMarket,
+            content: GlobalMarketView(currentCity: widget.city)),
+        CityMenuItem(
+            imagePath: "images/cities/church.png",
+            label: ChumakiLocalizations.labelMenuBuyNewRoutes,
+            content: CanUnlockCitiesView(widget.city)),
+      ];
+
+  List<CityMenuItem> getWagonButtons() {
+    return widget.city.wagons
+        .map(
+          (wagon) => CityMenuItem(
+              imagePath: "images/wagon/wagon.png",
+              label: "${wagon.fullLocalizedName}",
+              content: WagonDetails(
+                wagon: wagon,
+                city: widget.city,
+              )),
+        )
+        .toList();
+  }
 
   CityMenuItem? selectedButton;
 
   @override
+  void didUpdateWidget(SelectedCityView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.city.wagons.length != widget.city.wagons.length) {
+      updateActions();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var company = InheritedCompany.of(context).company;
     return StreamBuilder(
-      stream: company.changes,
+      stream: widget.city.changes,
       builder: (context, data) => AnimatedSize(
         alignment: Alignment.topLeft,
         duration: Duration(milliseconds: 400),
@@ -60,19 +103,16 @@ class _SelectedCityViewState extends State<SelectedCityView> {
             children: [
               ConstrainedBox(
                 constraints: BoxConstraints(
-                    maxWidth: CITY_DETAILS_VIEW_WIDTH / 4,
-                    minHeight: 200,
-                    maxHeight: 800),
+                  maxWidth: CITY_DETAILS_VIEW_WIDTH / 4,
+                  minHeight: 150,
+                ),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: actions.map((action) {
-                      return Expanded(
-                        flex: 1,
-                        child: CityMenuItemView(
-                          menuItem: action,
-                          onPress: () => handleMenuItemPress(action),
-                        ),
+                      return CityMenuItemView(
+                        menuItem: action,
+                        onPress: () => handleMenuItemPress(action),
                       );
                     }).toList()),
               ),
