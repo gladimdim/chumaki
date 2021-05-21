@@ -6,31 +6,28 @@ import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:flutter/material.dart';
 
-class ActionMoneyButton extends StatelessWidget {
+class ActionButton extends StatelessWidget {
   final VoidCallback? onPress;
   final Widget image;
-  final Widget money;
+  final Widget subTitle;
   final Widget action;
 
-  const ActionMoneyButton(
-      {this.onPress, required this.image, required this.money, required this.action});
+  const ActionButton(
+      {this.onPress, required this.image, required this.subTitle, required this.action});
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPress,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: 128),
-        child: BorderedAll(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              image,
-              money,
-              action,
-            ],
-          ),
+      child: BorderedAll(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            image,
+            subTitle,
+            action,
+          ],
         ),
       ),
     );
