@@ -6,7 +6,6 @@ import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/components/city_wagon_resource_exchange.dart';
-import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/extensions/list.dart';
 
 class ResourceCategoryGroup extends StatelessWidget {

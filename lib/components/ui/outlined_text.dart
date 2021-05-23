@@ -6,11 +6,16 @@ class OutlinedText extends StatelessWidget {
   final Color? fontColor;
   final Color? outlineColor;
   final double? size;
-  const OutlinedText(this.text, {this.fontColor, this.outlineColor, this.size = 16});
+
+  const OutlinedText(this.text,
+      {this.fontColor, this.outlineColor, this.size = 16});
+
   @override
   Widget build(BuildContext context) {
-    var outColor = outlineColor == null ? Theme.of(context).primaryColor : outlineColor;
-    var fColor = fontColor == null ? Theme.of(context).backgroundColor : fontColor;
+    var outColor =
+        outlineColor == null ? Theme.of(context).primaryColor : outlineColor;
+    var fColor =
+        fontColor == null ? Theme.of(context).backgroundColor : fontColor;
     return Stack(
       children: [
         Text(
@@ -19,7 +24,7 @@ class OutlinedText extends StatelessWidget {
             fontSize: size,
             foreground: Paint()
               ..style = PaintingStyle.stroke
-              ..strokeWidth = 2
+              ..strokeWidth = 3
               ..color = outColor!,
           ),
         ),

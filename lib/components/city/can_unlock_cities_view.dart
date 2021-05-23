@@ -9,8 +9,6 @@ import 'package:chumaki/models/company.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/extensions/list.dart';
-import 'package:chumaki/extensions/list.dart';
-import 'package:chumaki/extensions/list.dart';
 
 class CanUnlockCitiesView extends StatelessWidget {
   final City city;

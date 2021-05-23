@@ -34,48 +34,39 @@ class _StartingViewState extends State<StartingView> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Container(
-                color: Colors.white.withAlpha(200),
-                child: TextButton(
-                    onPressed: () => _loadGamePressed(context, Company()),
-                    child: Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: TitleText(ChumakiLocalizations.labelNewGame),
-                    )),
-              ),
+              TextButton(
+                  onPressed: () => _loadGamePressed(context, Company()),
+                  child: Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: TitleText(ChumakiLocalizations.labelNewGame),
+                  )),
               FutureBuilder(
                 future: _appPreferencesInit(),
                 builder: (context, snapshot) {
                   var savedGame = AppPreferences.instance.readGameSave();
                   if (savedGame == null) {
-                    return Container(
-                      color: Colors.white.withAlpha(200),
-                      child: TextButton(
-                          onPressed: null,
-                          child: Padding(
-                            padding: const EdgeInsets.all(24.0),
-                            child: Text(
-                              ChumakiLocalizations.labelNoSave,
-                            ),
-                          )),
-                    );
-                  } else {
-                    return Container(
-                      color: Colors.white.withAlpha(200),
-                      child: TextButton(
-                        onPressed: () => _loadGamePressed(
-                            context, Company.fromJson(savedGame)),
+                    return TextButton(
+                        onPressed: null,
                         child: Padding(
                           padding: const EdgeInsets.all(24.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TitleText(ChumakiLocalizations.labelLoadSave),
-                              IconButton(
-                                  onPressed: _removeSave,
-                                  icon: Icon(Icons.delete)),
-                            ],
+                          child: Text(
+                            ChumakiLocalizations.labelNoSave,
                           ),
+                        ));
+                  } else {
+                    return TextButton(
+                      onPressed: () => _loadGamePressed(
+                          context, Company.fromJson(savedGame)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(24.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TitleText(ChumakiLocalizations.labelLoadSave),
+                            IconButton(
+                                onPressed: _removeSave,
+                                icon: Icon(Icons.delete)),
+                          ],
                         ),
                       ),
                     );
@@ -83,7 +74,7 @@ class _StartingViewState extends State<StartingView> {
                 },
               ),
               Container(
-                color: Colors.white.withAlpha(200),
+                color: Theme.of(context).backgroundColor.withAlpha(200),
                 child: LocaleSelection(
                   locale: ChumakiLocalizations.locale,
                   onLocaleChanged: (Locale locale) {
@@ -94,7 +85,7 @@ class _StartingViewState extends State<StartingView> {
                 ),
               ),
               Container(
-                color: Colors.white.withAlpha(200),
+                color: Theme.of(context).backgroundColor.withAlpha(200),
                 child: Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: TitleText(ChumakiLocalizations.labelOtherGames),

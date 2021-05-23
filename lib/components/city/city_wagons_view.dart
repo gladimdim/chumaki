@@ -1,5 +1,4 @@
 import 'package:chumaki/components/city/buy_new_wagon_view.dart';
-import 'package:chumaki/components/city/city_wagon_trade_list.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/views/inherited_company.dart';

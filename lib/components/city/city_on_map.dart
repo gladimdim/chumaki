@@ -48,7 +48,7 @@ class CityOnMap extends StatelessWidget {
                     color: Colors.white.withAlpha(180),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: Text(
                       ChumakiLocalizations.getForKey(city.localizedKeyName),
                       style: TextStyle(

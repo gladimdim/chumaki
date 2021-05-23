@@ -1,6 +1,5 @@
 import 'package:chumaki/components/city/can_unlock_cities_view.dart';
 import 'package:chumaki/components/city/city_wagons_view.dart';
-import 'package:chumaki/components/city/city_local_market.dart';
 import 'package:chumaki/components/city/city_stock_view.dart';
 import 'package:chumaki/components/global_market_view.dart';
 import 'package:chumaki/components/ui/city_menu_item.dart';
@@ -8,7 +7,6 @@ import 'package:chumaki/components/ui/city_menu_item_view.dart';
 import 'package:chumaki/components/wagons/wagon_details.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
-import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 
 const CITY_DETAILS_VIEW_WIDTH = 780.0;

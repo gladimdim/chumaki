@@ -1,5 +1,6 @@
 import 'package:chumaki/components/city/city_stock_view.dart';
 import 'package:chumaki/components/city/city_avatar.dart';
+import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/models/cities/city.dart';
@@ -14,24 +15,29 @@ class SelectedCityLockedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final company = InheritedCompany.of(context).company;
-    return Column(
-      children: [
-        BorderedBottom(
-          child: TitleText("This city is locked"),
-        ),
-        TitleText("You can unlock it at:"),
-        Column(
-          children: company.allCities.where((cityThatCanUnlock) {
-            var realCity = company.refToCityByName(city);
-            return company
-                .citiesToRealCities(cityThatCanUnlock.unlocksCities)
-                .contains(realCity);
-          }).map((cityThatUnlocks) {
-            return SmallCityAvatar(cityThatUnlocks);
-          }).toList(),
-        ),
-        CityStockView(city: city),
-      ],
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: CITY_DETAILS_VIEW_WIDTH,
+      ),
+      child: Column(
+        children: [
+          BorderedBottom(
+            child: TitleText("This city is locked"),
+          ),
+          TitleText("You can unlock it at:"),
+          Column(
+            children: company.allCities.where((cityThatCanUnlock) {
+              var realCity = company.refToCityByName(city);
+              return company
+                  .citiesToRealCities(cityThatCanUnlock.unlocksCities)
+                  .contains(realCity);
+            }).map((cityThatUnlocks) {
+              return SmallCityAvatar(cityThatUnlocks);
+            }).toList(),
+          ),
+          CityStockView(city: city),
+        ],
+      ),
     );
   }
 }
