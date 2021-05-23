@@ -1,8 +1,6 @@
 import 'package:chumaki/components/bordered_container.dart';
-import 'package:chumaki/components/city/city_stock_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
-import 'package:chumaki/components/ui/bordered_top.dart';
 import 'package:chumaki/components/wagons/wagon_details.dart';
 import 'package:chumaki/components/wagons/wagon_list_item.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';

@@ -1,9 +1,4 @@
-import 'package:chumaki/components/money_unit_view.dart';
-import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
-import 'package:chumaki/components/ui/bordered_bottom.dart';
-import 'package:chumaki/i18n/chumaki_localizations.dart';
-import 'package:chumaki/models/resources/resource.dart';
 import 'package:flutter/material.dart';
 
 class ActionButton extends StatelessWidget {
@@ -13,7 +8,10 @@ class ActionButton extends StatelessWidget {
   final Widget action;
 
   const ActionButton(
-      {this.onPress, required this.image, required this.subTitle, required this.action});
+      {this.onPress,
+      required this.image,
+      required this.subTitle,
+      required this.action});
 
   @override
   Widget build(BuildContext context) {

@@ -203,7 +203,7 @@ class _GameCanvasViewState extends State<GameCanvasView>
                   top: selected!.point.y,
                   child: Container(
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 3),
+                      border: Border.all(color: Theme.of(context).primaryColor, width: 3),
                       color: Theme.of(context).backgroundColor,
                       borderRadius: getRadius(),
                     ),

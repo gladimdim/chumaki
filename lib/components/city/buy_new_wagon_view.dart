@@ -1,8 +1,5 @@
 import 'package:chumaki/components/money_unit_view.dart';
-import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/action_button.dart';
-import 'package:chumaki/components/ui/bordered_bottom.dart';
-import 'package:chumaki/components/wagons/wagon_list_item.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource.dart';
