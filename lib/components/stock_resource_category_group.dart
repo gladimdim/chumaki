@@ -22,12 +22,16 @@ class StockResourceCategoryGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpandablePanel(
-      title: TitleText(ChumakiLocalizations.getForKey(
-          resourceCategoryToLocalizedKey(resources.first.category))),
+      title: Row(
+        children: [
+          Image.asset(categoryToImagePath(resources.first.category), width: 72),
+          TitleText(ChumakiLocalizations.getForKey(
+              resourceCategoryToLocalizedKey(resources.first.category))),
+        ],
+      ),
       content: SingleChildScrollView(
         child: Column(
-          children:
-              resources.divideBy(2).toList().map((List<Resource> reses) {
+          children: resources.divideBy(2).toList().map((List<Resource> reses) {
             return Padding(
               padding: const EdgeInsets.only(top: 2.0),
               child: Row(
@@ -60,8 +64,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                  "${ChumakiLocalizations.labelSell}:"),
+                              Text("${ChumakiLocalizations.labelSell}:"),
                               MoneyUnitView(Money(forCity.prices
                                   .buyPriceForResource(resource,
                                       withAmount: 1))),

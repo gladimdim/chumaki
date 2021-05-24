@@ -203,7 +203,7 @@ class Cloth extends Resource {
       weightPerPoint: 0.3,
       type: RESOURCES.CLOTH,
       color: Colors.grey[600]!,
-      category: RESOURCE_CATEGORY.CLOTH);
+      category: RESOURCE_CATEGORY.CLOTHS);
 }
 
 class Fur extends Resource {
@@ -212,7 +212,7 @@ class Fur extends Resource {
             type: RESOURCES.FUR,
             weightPerPoint: 0.3,
             color: Colors.black54,
-            category: RESOURCE_CATEGORY.CLOTH);
+            category: RESOURCE_CATEGORY.CLOTHS);
 }
 
 class Grains extends Resource {
@@ -275,7 +275,7 @@ class Wool extends Resource {
             type: RESOURCES.WOOL,
             weightPerPoint: 0.2,
             color: Colors.green,
-            category: RESOURCE_CATEGORY.CLOTH);
+            category: RESOURCE_CATEGORY.CLOTHS);
 }
 
 class Money {
@@ -365,7 +365,7 @@ String resourceCategoryToLocalizedKey(RESOURCE_CATEGORY category) {
   switch (category) {
     case RESOURCE_CATEGORY.RESOURCES:
       return "resources.resources";
-    case RESOURCE_CATEGORY.CLOTH:
+    case RESOURCE_CATEGORY.CLOTHS:
       return "resources.cloths";
     case RESOURCE_CATEGORY.MILITARY:
       return "resources.military";
@@ -374,6 +374,11 @@ String resourceCategoryToLocalizedKey(RESOURCE_CATEGORY category) {
     case RESOURCE_CATEGORY.LUXURY:
       return "resources.luxury";
   }
+}
+
+String categoryToImagePath(RESOURCE_CATEGORY category) {
+  final catName = category.toString().split(".")[1].toLowerCase();
+  return "images/icons/$catName/$catName.png";
 }
 
 List<List<Resource>> groupResourcesByCategory(List<Resource> resources) {

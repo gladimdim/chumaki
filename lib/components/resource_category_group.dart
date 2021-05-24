@@ -27,11 +27,16 @@ class ResourceCategoryGroup extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              ChumakiLocalizations.getForKey(
-                resourceCategoryToLocalizedKey(resources.first.category),
-              ),
-              style: Theme.of(context).textTheme.headline3,
+            Row(
+              children: [
+                Image.asset(categoryToImagePath(resources.first.category), width: 92),
+                Text(
+                  ChumakiLocalizations.getForKey(
+                    resourceCategoryToLocalizedKey(resources.first.category),
+                  ),
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+              ],
             ),
             StockWagonStatus(wagon: wagon, category: resources.first.category),
           ],
