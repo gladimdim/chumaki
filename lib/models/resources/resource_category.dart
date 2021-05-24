@@ -1,10 +1,10 @@
-enum RESOURCE_CATEGORY { MILITARY, CLOTH, RESOURCES, LUXURY, FOOD }
+enum RESOURCE_CATEGORY { MILITARY, CLOTHS, RESOURCES, LUXURY, FOOD }
 
 String resourceCategoryToString(RESOURCE_CATEGORY cat) {
   switch (cat) {
     case RESOURCE_CATEGORY.MILITARY:
       return "military";
-    case RESOURCE_CATEGORY.CLOTH:
+    case RESOURCE_CATEGORY.CLOTHS:
       return "cloth";
     case RESOURCE_CATEGORY.RESOURCES:
       return "resources";
