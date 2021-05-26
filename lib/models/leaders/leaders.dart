@@ -4,14 +4,26 @@ import 'package:chumaki/models/resources/resource.dart';
 
 class Leader {
   final String localizedKeyName;
-  final Set<AffectUnit> affects;
+  late Set<AffectUnit> _affects;
   double level;
   double experience;
   final double _levelDelta = 1000;
-  final double _levelIncreaseAffect = 0.15;
   final levelUpBasePrice = 1000;
-  Leader(this.localizedKeyName, {required this.affects, this.level = 0, this.experience = 0});
+  Leader(this.localizedKeyName, {Set<AffectUnit>? affects, this.level = 0, this.experience = 0}) {
+    if (affects == null) {
+      _affects = Set();
+    } else {
+      _affects = affects;
+    }
+  }
 
+  Set<AffectUnit> get affects {
+    return Set.from(_affects);
+  }
+
+  void addAffect(AffectUnit affect) {
+    _affects.add(affect);
+  }
 
   bool levelUp() {
     if (level <= 3 && experience < (level + 1) * _levelDelta) {
@@ -28,7 +40,7 @@ class Leader {
 
   AffectUnit? affectFor({required Resource resource}) {
     try {
-      return affects.firstWhere((affect) =>
+      return _affects.firstWhere((affect) =>
       affect.affectsResource == resource.type);
     } on StateError catch (_) {
       return null;
