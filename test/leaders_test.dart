@@ -19,7 +19,7 @@ void main() {
     });
   });
 
-  group("Affects logics", () {
+  group("Price affects logics", () {
     final leader = Leader("test", affects: Set.from([
       AffectUnit(
           affectsResource: RESOURCES.WOOD, sellValue: 1.1, buyValue: 0.9)
@@ -42,6 +42,14 @@ void main() {
 
     test("Does not affect price for the not affected resource.", () {
       expect(leader.affectSellValueForResource(resource: Fish(10), priceUnit: PriceUnit(RESOURCES.FISH, 10)), equals(100.0), reason: "Price is not modified");
+    });
+
+    test("Can tell new sell price for the affected resource", () {
+      expect(leader.affectBuyValueForResource(resource: Wood(10), priceUnit: PriceUnit(RESOURCES.WOOD, 10)), equals(90.0), reason: "Price is increased by 1.1");
+    });
+
+    test("Does not affect price for the not affected resource.", () {
+      expect(leader.affectBuyValueForResource(resource: Fish(10), priceUnit: PriceUnit(RESOURCES.FISH, 10)), equals(100.0), reason: "Price is not modified");
     });
   });
 }
