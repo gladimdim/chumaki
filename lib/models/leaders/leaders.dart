@@ -41,25 +41,26 @@ class Leader {
 
   double affectSellValueForResource({required Resource resource, required PriceUnit priceUnit} ) {
     final affect = affectFor(resource: resource);
-    if (affect == null) {
-      return priceUnit.price * resource.amount;
-    } else {
-      final priceWithoutLevel = priceUnit.price * affect.sellValue * resource.amount;
-      return adjustToLevel(priceWithoutLevel);
-    }
-  }
+    final value = affect?.sellValue;
+    return affectValueForResource(resource: resource, priceUnit: priceUnit, value: value);
 
-  double adjustToLevel(double value) {
-    return _levelIncreaseAffect * level * value + value;
   }
-
-  double affectBuyValueForResource(Resource resource) {
+  double affectBuyValueForResource({required Resource resource, required PriceUnit priceUnit}) {
     final affect = affectFor(resource: resource);
-    if (affect == null) {
-      return 1;
+    final value = affect?.buyValue;
+    return affectValueForResource(resource: resource, priceUnit: priceUnit, value: value);
+  }
+
+  double affectValueForResource({required Resource resource, required PriceUnit priceUnit, double? value}) {
+    if (value == null) {
+      return priceUnit.price * resource.amount.toDouble();
     } else {
-      return affect.buyValue + affect.sellValue * level / 100;
+      return _adjustedPriceToAffect(priceUnit.price, resource.amount.toDouble(), value);
     }
+  }
+
+  double _adjustedPriceToAffect(double value, double amount, double price) {
+    return (price * amount * value).roundToDouble();
   }
 }
 

@@ -30,7 +30,6 @@ void main() {
     });
 
     test("Can return affect for the given resource", () {
-
       final affect = leader.affectFor(resource: Wood(3));
       expect(affect, isA<AffectUnit>(), reason: "Got an affect unit for Wood.");
       expect(affect!.sellValue, equals(1.1), reason: "Sell value was returned");
@@ -38,14 +37,11 @@ void main() {
     });
 
     test("Can tell new sell price for the affected resource", () {
-      expect(leader.affectSellValueForResource(resource: Wood(10), priceUnit: PriceUnit(RESOURCES.WOOD, 10)), equals(110), reason: "Price is increased by 1.1");
-      leader.level =2 ;
-      expect(leader.affectSellValueForResource(resource: Wood(10), priceUnit: PriceUnit(RESOURCES.WOOD, 10)), equals(110), reason: "Price is increased by 1.1");
+      expect(leader.affectSellValueForResource(resource: Wood(10), priceUnit: PriceUnit(RESOURCES.WOOD, 10)), equals(110.0), reason: "Price is increased by 1.1");
     });
 
     test("Does not affect price for the not affected resource.", () {
-      expect(leader.affectSellValueForResource(resource: Fish(10), priceUnit: PriceUnit(RESOURCES.FISH, 10)), equals(100), reason: "Price is not modified");
-
+      expect(leader.affectSellValueForResource(resource: Fish(10), priceUnit: PriceUnit(RESOURCES.FISH, 10)), equals(100.0), reason: "Price is not modified");
     });
   });
 }
