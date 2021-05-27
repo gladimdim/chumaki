@@ -1,13 +1,14 @@
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/bordered_top.dart';
+import 'package:chumaki/components/wagons/leader_view.dart';
 import 'package:chumaki/components/wagons/wagon_dispatcher.dart';
 import 'package:chumaki/components/wagons/wagon_resource_exchanger.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
-
+import 'package:chumaki/components/wagons/buy_leader_view.dart';
 class WagonDetails extends StatelessWidget {
   final Wagon wagon;
   final City city;
@@ -33,6 +34,9 @@ class WagonDetails extends StatelessWidget {
             ),
           ),
           VerticalDivider(),
+          TitleText(ChumakiLocalizations.labelLeader),
+          if (wagon.leader == null) BuyLeaderView(wagon: wagon, ),
+          if (wagon.leader != null) LeaderView(wagon.leader!),
           TitleText(ChumakiLocalizations.labelSend),
           WagonDispatcher(wagon: wagon, city: city),
           BorderedTop(
@@ -45,4 +49,5 @@ class WagonDetails extends StatelessWidget {
       ),
     );
   }
+
 }

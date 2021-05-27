@@ -1,4 +1,3 @@
-import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
@@ -9,6 +8,8 @@ class Leader {
   double experience;
   final double _levelDelta = 1000;
   final levelUpBasePrice = 1000;
+
+  static Money defaultAcquirePrice = Money(1000);
 
   Leader(this.localizedKeyName,
       {Set<AffectUnit>? affects, this.level = 0, this.experience = 0}) {

@@ -1,5 +1,4 @@
 import 'package:chumaki/models/leaders/leaders.dart';
-import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:test/test.dart';
 
