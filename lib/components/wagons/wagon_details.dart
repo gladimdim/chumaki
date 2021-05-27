@@ -1,4 +1,5 @@
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/bordered_top.dart';
 import 'package:chumaki/components/wagons/leader_view.dart';
@@ -36,7 +37,7 @@ class WagonDetails extends StatelessWidget {
           VerticalDivider(),
           TitleText(ChumakiLocalizations.labelLeader),
           if (wagon.leader == null) BuyLeaderView(wagon: wagon, ),
-          if (wagon.leader != null) LeaderView(wagon.leader!),
+          if (wagon.leader != null) BorderedAll(child: LeaderView(wagon.leader!)),
           TitleText(ChumakiLocalizations.labelSend),
           WagonDispatcher(wagon: wagon, city: city),
           BorderedTop(

@@ -103,6 +103,8 @@ class ChumakiLocalizations {
       "labelGlobalPrices": "Global Prices",
       "labelHire": "Hire",
       "labelLeader": "Leader",
+      "labelLevel": "Level",
+      "labelExperience": "Experience",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -148,6 +150,8 @@ class ChumakiLocalizations {
       "labelGlobalPrices": "Світові ціни",
       "labelHire": "Найняти",
       "labelLeader": "Отаман",
+      "labelLevel": "Рівень",
+      "labelExperience": "Досвід",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -192,6 +196,8 @@ class ChumakiLocalizations {
       "labelGlobalPrices": "Глобальные цены",
       "labelHire": "Нанять",
       "labelLeader": "Атаман",
+      "labelLevel": "Уровень",
+      "labelExperience": "Опыт",
     },
   };
 
@@ -349,11 +355,21 @@ class ChumakiLocalizations {
 
   static String get labelGlobalPrices {
     return _localizedValues[locale.languageCode]!["labelGlobalPrices"]!;
-  }  static String get labelLeader {
+  }
+
+  static String get labelLeader {
     return _localizedValues[locale.languageCode]!["labelLeader"]!;
   }
 
   static String get labelHire {
     return _localizedValues[locale.languageCode]!["labelHire"]!;
+  }
+
+  static String get labelExperience {
+    return _localizedValues[locale.languageCode]!["labelExperience"]!;
+  }
+
+  static String get labelLevel {
+    return _localizedValues[locale.languageCode]!["labelLevel"]!;
   }
 }

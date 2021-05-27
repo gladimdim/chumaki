@@ -47,8 +47,9 @@ class Wagon {
     );
   }
 
-
   void setLeader(Leader newLeader) {
+    // TODO: REMOVE
+    newLeader.experience = 500.0;
     leader = newLeader;
     changes.add(this);
   }
