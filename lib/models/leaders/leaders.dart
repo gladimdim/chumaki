@@ -1,10 +1,11 @@
-import 'package:chumaki/i18n/company_localizations.dart';
+import 'package:chumaki/i18n/chumaki_localizations.dart';
+import 'package:chumaki/i18n/leaders_localizations.dart';
 import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/extensions/list.dart';
 
 class Leader {
-  final String localizedKeyName;
+  final String localizedNameKey;
   late Set<AffectUnit> _affects;
   double level;
   double experience;
@@ -13,7 +14,7 @@ class Leader {
   late String imagePath;
   static Money defaultAcquirePrice = Money(1000);
 
-  Leader(this.localizedKeyName,
+  Leader(this.localizedNameKey,
       {Set<AffectUnit>? affects, this.level = 0, this.experience = 0, String? imagePath}) {
     if (affects == null) {
       _affects = Set();
@@ -99,9 +100,13 @@ class Leader {
     return (price * amount * value).roundToDouble();
   }
 
+  String get fullLocalizedName {
+    return "${ChumakiLocalizations.getForKey(localizedNameKey)}";
+  }
+
   Map<String, dynamic> toJson() {
     return {
-      "localizedKeyName": localizedKeyName,
+      "localizedKeyName": localizedNameKey,
       "affects": _affects.map((e) => e.toJson()).toList(),
       "level": level,
       "experience": experience,
@@ -121,10 +126,17 @@ class Leader {
   }
   
   static List<Leader> allLeaders() {
-    return [
-      Leader("Dmytro", imagePath: )
-    ]
+    List keyNames = LeadersLocalizations().localizedMap["en"]!.keys.take(11).toList();
+    List<Leader> leaders = List.empty(growable: true);
+    for (var i = 0; i < 11; i++) {
+      leaders.add(Leader("leaders.${keyNames[i]}", imagePath: imagePathForId(i)));
+    }
+    return leaders;
   }
+}
+
+String imagePathForId(int id) {
+  return "images/leaders/leader$id.png";
 }
 
 class AffectUnit {

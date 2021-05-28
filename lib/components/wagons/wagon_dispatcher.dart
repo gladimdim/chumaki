@@ -24,6 +24,7 @@ class WagonDispatcher extends StatelessWidget {
           .divideBy(4)
           .map((List<City> toCities) {
         return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: toCities.map((toCity) {
             var fakeRoute = RouteTask(city, toCity, wagon: wagon);
             return StreamBuilder(

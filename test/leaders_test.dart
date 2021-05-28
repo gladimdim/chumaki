@@ -7,7 +7,7 @@ void main() {
   group("Initializers", () {
     test("Can initialize", () {
       final leader = Leader("test", affects: Set());
-      expect(leader.localizedKeyName, equals("test"));
+      expect(leader.localizedNameKey, equals("test"));
     });
 
     test("Can initialize with a list of affects", () {
@@ -71,7 +71,7 @@ void main() {
         level: 2, experience: 2300);
     final newLeader = Leader.fromJson(leader.toJson());
     test("Can convert to and back from json", () {
-        expect(newLeader.localizedKeyName, equals("test"), reason: "Localized key name was restored");
+        expect(newLeader.localizedNameKey, equals("test"), reason: "Localized key name was restored");
         expect(newLeader.affects.length, equals(leader.affects.length), reason: "Affects set was restored");
         expect(newLeader.affects.length, equals(2), reason: "Affects set was restored");
         expect(newLeader.affectFor(resource: Amber(1)), isNotNull, reason: "Amber affect restored");

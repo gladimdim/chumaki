@@ -47,7 +47,7 @@ class Sich extends City {
             //       MetalParts(10),
             //     ])),
             Wagon(
-              localizedNameKey: "company.gladkyi",
+              localizedNameKey: "leaders.gladkyi",
               stock: Stock(
                 [
                   Grains(50),

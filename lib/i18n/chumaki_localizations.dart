@@ -1,4 +1,4 @@
-import 'package:chumaki/i18n/company_localizations.dart';
+import 'package:chumaki/i18n/leaders_localizations.dart';
 import 'package:chumaki/i18n/resource_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +38,7 @@ class ChumakiLocalizations {
   static Locale locale = Locale(getDefaultOrUrlLanguage());
 
   static ResourceLocalizations resourceLocalizations = ResourceLocalizations();
-  static CompanyLocalizations companyLocalizations = CompanyLocalizations();
+  static LeadersLocalizations leadersLocalizations = LeadersLocalizations();
 
   static String getForKey(String key) {
     final split = key.split('.');
@@ -47,8 +47,8 @@ class ChumakiLocalizations {
         case 'resources':
           return resourceLocalizations[split[1]];
 
-        case 'company':
-          return companyLocalizations[split[1]];
+        case 'leaders':
+          return leadersLocalizations[split[1]];
         default:
           return key;
       }

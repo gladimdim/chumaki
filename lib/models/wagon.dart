@@ -1,6 +1,6 @@
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
-import 'package:chumaki/i18n/company_localizations.dart';
+import 'package:chumaki/i18n/leaders_localizations.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/extensions/list.dart';
@@ -75,6 +75,6 @@ class Wagon {
   }
 
   static String getRandomLocalizedNameKey() {
-    return "company.${CompanyLocalizations().localizedMap["en"]!.keys.toList().takeRandom()}";
+    return "leaders.${LeadersLocalizations().localizedMap["en"]!.keys.toList().takeRandom()}";
   }
 }
