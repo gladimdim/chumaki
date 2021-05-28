@@ -1,4 +1,4 @@
-import 'package:chumaki/i18n/company_localizations.dart';
+import 'package:chumaki/i18n/leaders_localizations.dart';
 import 'package:chumaki/i18n/resource_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +38,7 @@ class ChumakiLocalizations {
   static Locale locale = Locale(getDefaultOrUrlLanguage());
 
   static ResourceLocalizations resourceLocalizations = ResourceLocalizations();
-  static CompanyLocalizations companyLocalizations = CompanyLocalizations();
+  static LeadersLocalizations leadersLocalizations = LeadersLocalizations();
 
   static String getForKey(String key) {
     final split = key.split('.');
@@ -47,8 +47,8 @@ class ChumakiLocalizations {
         case 'resources':
           return resourceLocalizations[split[1]];
 
-        case 'company':
-          return companyLocalizations[split[1]];
+        case 'leaders':
+          return leadersLocalizations[split[1]];
         default:
           return key;
       }
@@ -101,6 +101,10 @@ class ChumakiLocalizations {
           "All possible routes known in this town are already bought",
       "labelWagonPricesInCities": "Prices for all wagons in different cities",
       "labelGlobalPrices": "Global Prices",
+      "labelHire": "Hire",
+      "labelLeader": "Leader",
+      "labelLevel": "Level",
+      "labelExperience": "Experience",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -144,6 +148,10 @@ class ChumakiLocalizations {
           "Всі можливі маршрути, які знають в цьому місті, уже куплено.",
       "labelWagonPricesInCities": "Ціни за всі валки в різних містах",
       "labelGlobalPrices": "Світові ціни",
+      "labelHire": "Найняти",
+      "labelLeader": "Отаман",
+      "labelLevel": "Рівень",
+      "labelExperience": "Досвід",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -186,6 +194,10 @@ class ChumakiLocalizations {
           "Все возможные маршруты, которые знают в этом городе уже куплены",
       "labelWagonPricesInCities": "Цены за все валки в разных городах",
       "labelGlobalPrices": "Глобальные цены",
+      "labelHire": "Нанять",
+      "labelLeader": "Атаман",
+      "labelLevel": "Уровень",
+      "labelExperience": "Опыт",
     },
   };
 
@@ -343,5 +355,21 @@ class ChumakiLocalizations {
 
   static String get labelGlobalPrices {
     return _localizedValues[locale.languageCode]!["labelGlobalPrices"]!;
+  }
+
+  static String get labelLeader {
+    return _localizedValues[locale.languageCode]!["labelLeader"]!;
+  }
+
+  static String get labelHire {
+    return _localizedValues[locale.languageCode]!["labelHire"]!;
+  }
+
+  static String get labelExperience {
+    return _localizedValues[locale.languageCode]!["labelExperience"]!;
+  }
+
+  static String get labelLevel {
+    return _localizedValues[locale.languageCode]!["labelLevel"]!;
   }
 }

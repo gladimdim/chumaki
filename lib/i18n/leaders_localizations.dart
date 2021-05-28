@@ -1,6 +1,6 @@
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 
-class CompanyLocalizations extends InternalLocalizations {
+class LeadersLocalizations extends InternalLocalizations {
   Map<String, Map<String, String>> localizedMap = {
     "en": {
       "pidlisnyi": "Pidlisnyi",
@@ -8,7 +8,7 @@ class CompanyLocalizations extends InternalLocalizations {
       "kharchenko": "Kcharchenko",
       "mitras": "Mitras",
       "tartar": "Tartar",
-      "ostapa": "Ostap",
+      "ostap": "Ostap",
       "gladkyi": "Gladkyi",
       "smilij": "Smilij",
       "bublik": "Bublik",
@@ -36,7 +36,7 @@ class CompanyLocalizations extends InternalLocalizations {
       "kharchenko": "Харченко",
       "mitras": "Мітрась",
       "tartar": "Татарин",
-      "ostapa": "Остап",
+      "ostap": "Остап",
       "gladkyi": "Гладкий",
       "smilij": "Смілий",
       "bublik": "Бублик",
@@ -64,7 +64,7 @@ class CompanyLocalizations extends InternalLocalizations {
       "kharchenko": "Харченко",
       "mitras": "Митрась",
       "tartar": "Татарин",
-      "ostapa": "Остап",
+      "ostap": "Остап",
       "gladkyi": "Гладкий",
       "smilij": "Смилый",
       "bublik": "Бублик",

@@ -17,6 +17,8 @@ import 'package:chumaki/models/wagon.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
+import 'leaders/leaders.dart';
+
 enum COMPANY_EVENTS {
   TASK_STARTED,
   TASK_ENDED,
@@ -24,6 +26,7 @@ enum COMPANY_EVENTS {
   MONEY_REMOVED,
   CITY_UNLOCKED,
   WAGON_BOUGHT,
+  LEADER_HIRED,
 }
 
 class Company {
@@ -54,15 +57,10 @@ class Company {
     changes.listen((event) {
       switch (event) {
         case COMPANY_EVENTS.TASK_STARTED:
-          save();
-          break;
         case COMPANY_EVENTS.TASK_ENDED:
-          save();
-          break;
         case COMPANY_EVENTS.CITY_UNLOCKED:
-          save();
-          break;
         case COMPANY_EVENTS.WAGON_BOUGHT:
+        case COMPANY_EVENTS.LEADER_HIRED:
           save();
       }
     });
@@ -143,7 +141,8 @@ class Company {
   static Company fromJson(Map<String, dynamic> inputJson) {
     double money = inputJson["money"] as double;
     List citiesJson = inputJson["allCities"];
-    List<City> allCities = citiesJson.map((cityJson) => City.fromJson(cityJson)).toList();
+    List<City> allCities =
+        citiesJson.map((cityJson) => City.fromJson(cityJson)).toList();
     var company = Company(cities: allCities).._money = money;
     return company;
   }
@@ -185,11 +184,17 @@ class Company {
     return cities.map((e) => refToCityByName(e)).toList();
   }
 
-  void buyWagon(Wagon wagon, {required City forCity, required Money price} ) {
-     if (getMoney().amount >= price.amount) {
-       removeMoney(price.amount);
-       forCity.addWagon(wagon);
-       _innerChanges.add(COMPANY_EVENTS.WAGON_BOUGHT);
-     }
+  void buyWagon(Wagon wagon, {required City forCity, required Money price}) {
+    if (getMoney().amount >= price.amount) {
+      removeMoney(price.amount);
+      forCity.addWagon(wagon);
+      _innerChanges.add(COMPANY_EVENTS.WAGON_BOUGHT);
+    }
+  }
+
+  void hireLeader({required Leader leader, required Wagon forWagon}) {
+    forWagon.setLeader(leader);
+    removeMoney(Leader.defaultAcquirePrice.amount);
+    _innerChanges.add(COMPANY_EVENTS.LEADER_HIRED);
   }
 }
