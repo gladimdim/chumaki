@@ -16,23 +16,6 @@ class RouteTask extends ProgressDuration {
 
   Set<Resource> stock = Set();
 
-  void addToStock(Resource resource) {
-    var inStock = resourceInStock(resource);
-    if (inStock == null) {
-      stock.add(resource);
-    } else {
-      inStock.amount += resource.amount;
-    }
-  }
-
-  Resource? resourceInStock(Resource res) {
-    try {
-      return stock.firstWhere((inStock) => inStock.sameType(res));
-    } catch (e) {
-      return null;
-    }
-  }
-
   RouteTask(
     this.from,
     this.to, {
