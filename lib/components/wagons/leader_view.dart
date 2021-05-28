@@ -16,7 +16,7 @@ class LeaderView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         ClipOval(
-          child: Image.asset("images/leaders/leader1.png", width: 64),
+          child: Image.asset(leader.imagePath, width: 64),
         ),
         Column(
           children: [

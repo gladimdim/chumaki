@@ -18,7 +18,7 @@ class BuyLeaderView extends StatelessWidget {
         company.hireLeader(leader: _leader, forWagon: wagon);
       },
       image: ClipOval(
-        child: Image.asset("images/leaders/leader1.png"),
+        child: Image.asset(_leader.imagePath),
       ),
       subTitle: MoneyUnitView(Leader.defaultAcquirePrice),
       action: Text(ChumakiLocalizations.labelHire),

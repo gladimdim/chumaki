@@ -1,5 +1,7 @@
+import 'package:chumaki/i18n/company_localizations.dart';
 import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
+import 'package:chumaki/extensions/list.dart';
 
 class Leader {
   final String localizedKeyName;
@@ -8,16 +10,27 @@ class Leader {
   double experience;
   final double _levelDelta = 1000;
   final levelUpBasePrice = 1000;
-
+  late String imagePath;
   static Money defaultAcquirePrice = Money(1000);
 
   Leader(this.localizedKeyName,
-      {Set<AffectUnit>? affects, this.level = 0, this.experience = 0}) {
+      {Set<AffectUnit>? affects, this.level = 0, this.experience = 0, String? imagePath}) {
     if (affects == null) {
       _affects = Set();
     } else {
       _affects = affects;
     }
+
+    if (imagePath == null) {
+      this.imagePath = getRandomImage();
+    } else {
+      this.imagePath = imagePath;
+    }
+  }
+
+  static String getRandomImage() {
+    final numbers = List.generate(11, (index) => index);
+    return "images/leaders/leader${numbers.takeRandom()}.png";
   }
 
   Set<AffectUnit> get affects {
@@ -92,6 +105,7 @@ class Leader {
       "affects": _affects.map((e) => e.toJson()).toList(),
       "level": level,
       "experience": experience,
+      "imagePath": imagePath,
     };
   }
 
@@ -102,7 +116,14 @@ class Leader {
       affects: afs.map((affectJson) => AffectUnit.fromJson(affectJson)).toSet(),
       level: input["level"],
       experience: input["experience"],
+      imagePath: input["imagePath"],
     );
+  }
+  
+  static List<Leader> allLeaders() {
+    return [
+      Leader("Dmytro", imagePath: )
+    ]
   }
 }
 
