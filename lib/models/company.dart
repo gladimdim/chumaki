@@ -44,6 +44,7 @@ class Company {
 
   late double _money;
   late List<City> allCities;
+  List<RouteTask> activeRouteTasks = List.empty(growable: true);
 
   Company({cities, double? money}) {
     if (cities == null) {
@@ -90,10 +91,7 @@ class Company {
   CityRoute getRouteForTask(RouteTask routeTask) {
     var from = routeTask.from;
     var to = routeTask.to;
-    return cityRoutes.firstWhere((route) {
-      return (route.to.equalsTo(to) && route.from.equalsTo(from)) ||
-          (route.to.equalsTo(from) && route.from.equalsTo(to));
-    });
+    return getRouteFromTo(from: from, to: to);
   }
 
   CityRoute getRouteFromTo({required City from, required City to}) {
@@ -113,9 +111,11 @@ class Company {
     // add new task to the city route (curves on the map)
     cityRoute.routeTasks.add(newTask);
     newTask.start();
+    activeRouteTasks.add(newTask);
     // listen to the finish event in order to add wagon to the "to" city
     newTask.changes.listen((event) {
       if (event == PROGRESS_DURACTION_EVENTS.FINISHED) {
+        activeRouteTasks.remove(newTask);
         // wagon arrived, remove it from the road
         cityRoute.routeTasks.remove(newTask);
         // notify the 'to' city that the new wagon arrived
