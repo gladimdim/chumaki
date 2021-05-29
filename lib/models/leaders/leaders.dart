@@ -125,7 +125,9 @@ class Leader {
   }
 
   void addExperience(int amount) {
-    experience += amount;
+    if (level < 3) {
+      experience += amount;
+    }
   }
 }
 

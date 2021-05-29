@@ -40,6 +40,23 @@ void main() {
       expect(affect.buyValue, equals(0.9), reason: "Sell value was returned");
     });
 
+    test("Can add experience", () {
+      final leader = Leader("test",
+          experience: 950,
+          affects: Set.from([
+            AffectUnit(
+                affectsResource: RESOURCES.WOOD, sellValue: 1.1, buyValue: 0.9)
+          ]));
+      leader.addExperience(51);
+      expect(leader.level, equals(1), reason: "Level is now 1");
+      leader.addExperience(1000);
+      expect(leader.level, equals(2), reason: "Level is now 2");
+      leader.addExperience(1000);
+      expect(leader.level, equals(3), reason: "Level is now 3");
+      leader.addExperience(1000);
+      expect(leader.level, equals(3), reason: "Level is still 3 (max)");
+    });
+
     test("Can tell new sell price for the affected resource", () {
       expect(
           leader.affectSellValueForResource(
@@ -104,6 +121,10 @@ void main() {
               resource: Fish(3), priceUnit: PriceUnit(RESOURCES.FISH, 2)),
           equals(18),
           reason: "Fish sell value affect restored");
+      expect(newLeader.experience, leader.experience,
+          reason: "Experience was restored");
+      expect(newLeader.level, equals(2),
+          reason: "Level 2 as per restored experience");
     });
   });
 }
