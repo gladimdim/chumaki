@@ -7,7 +7,7 @@ import 'package:chumaki/extensions/list.dart';
 class Leader {
   final String localizedNameKey;
   late Set<AffectUnit> _affects;
-  double level;
+  int get level => experience ~/ _levelDelta;
   double experience;
   final double _levelDelta = 1000;
   final levelUpBasePrice = 1000;
@@ -15,7 +15,7 @@ class Leader {
   static Money defaultAcquirePrice = Money(1000);
 
   Leader(this.localizedNameKey,
-      {Set<AffectUnit>? affects, this.level = 0, this.experience = 0, String? imagePath}) {
+      {Set<AffectUnit>? affects, this.experience = 0, String? imagePath}) {
     if (affects == null) {
       _affects = Set();
     } else {
@@ -42,17 +42,8 @@ class Leader {
     _affects.add(affect);
   }
 
-  bool levelUp() {
-    if (level <= 3 && experience < (level + 1) * _levelDelta) {
-      return false;
-    } else {
-      level++;
-      return true;
-    }
-  }
-
   double get nextLevelPrice {
-    return (level + 1) * levelUpBasePrice;
+    return (level + 1).toDouble() * levelUpBasePrice;
   }
 
   AffectUnit? affectFor({required Resource resource}) {
@@ -119,7 +110,6 @@ class Leader {
     return Leader(
       input["localizedKeyName"],
       affects: afs.map((affectJson) => AffectUnit.fromJson(affectJson)).toSet(),
-      level: input["level"],
       experience: input["experience"],
       imagePath: input["imagePath"],
     );
@@ -132,6 +122,10 @@ class Leader {
       leaders.add(Leader("leaders.${keyNames[i]}", imagePath: imagePathForId(i)));
     }
     return leaders;
+  }
+
+  void addExperience(int amount) {
+    experience += amount;
   }
 }
 

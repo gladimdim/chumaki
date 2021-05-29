@@ -11,19 +11,21 @@ void main() {
     });
 
     test("Can initialize with a list of affects", () {
-      final leader = Leader("test", affects: Set.from([
-        AffectUnit(
-            affectsResource: RESOURCES.WOOD, sellValue: 1.1, buyValue: 0.9)
-      ]));
+      final leader = Leader("test",
+          affects: Set.from([
+            AffectUnit(
+                affectsResource: RESOURCES.WOOD, sellValue: 1.1, buyValue: 0.9)
+          ]));
       expect(leader.affects, isNotEmpty);
     });
   });
 
   group("Price affects logics", () {
-    final leader = Leader("test", affects: Set.from([
-      AffectUnit(
-          affectsResource: RESOURCES.WOOD, sellValue: 1.1, buyValue: 0.9)
-    ]));
+    final leader = Leader("test",
+        affects: Set.from([
+          AffectUnit(
+              affectsResource: RESOURCES.WOOD, sellValue: 1.1, buyValue: 0.9)
+        ]));
     test("Can tell if the resource prices are affected.", () {
       expect(leader.doesAffectResource(Wood(10)), isTrue,
           reason: "Wood is affected.");
@@ -39,44 +41,69 @@ void main() {
     });
 
     test("Can tell new sell price for the affected resource", () {
-      expect(leader.affectSellValueForResource(
-          resource: Wood(10), priceUnit: PriceUnit(RESOURCES.WOOD, 10)),
-          equals(110.0), reason: "Price is increased by 1.1");
+      expect(
+          leader.affectSellValueForResource(
+              resource: Wood(10), priceUnit: PriceUnit(RESOURCES.WOOD, 10)),
+          equals(110.0),
+          reason: "Price is increased by 1.1");
     });
 
     test("Does not affect price for the not affected resource.", () {
-      expect(leader.affectSellValueForResource(
-          resource: Fish(10), priceUnit: PriceUnit(RESOURCES.FISH, 10)),
-          equals(100.0), reason: "Price is not modified");
+      expect(
+          leader.affectSellValueForResource(
+              resource: Fish(10), priceUnit: PriceUnit(RESOURCES.FISH, 10)),
+          equals(100.0),
+          reason: "Price is not modified");
     });
 
     test("Can tell new sell price for the affected resource", () {
-      expect(leader.affectBuyValueForResource(
-          resource: Wood(10), priceUnit: PriceUnit(RESOURCES.WOOD, 10)),
-          equals(90.0), reason: "Sell Price is decreased by 0.9");
+      expect(
+          leader.affectBuyValueForResource(
+              resource: Wood(10), priceUnit: PriceUnit(RESOURCES.WOOD, 10)),
+          equals(90.0),
+          reason: "Sell Price is decreased by 0.9");
     });
 
     test("Does not affect price for the not affected resource.", () {
-      expect(leader.affectBuyValueForResource(
-          resource: Fish(10), priceUnit: PriceUnit(RESOURCES.FISH, 10)),
-          equals(100.0), reason: "Price is not modified");
+      expect(
+          leader.affectBuyValueForResource(
+              resource: Fish(10), priceUnit: PriceUnit(RESOURCES.FISH, 10)),
+          equals(100.0),
+          reason: "Price is not modified");
     });
   });
 
   group("JSON Converters", () {
-    final leader = Leader("test", affects: Set.from([
-      AffectUnit(affectsResource: RESOURCES.AMBER, sellValue: 5, buyValue: 1),
-      AffectUnit(affectsResource: RESOURCES.FISH, sellValue: 3, buyValue: 2)
-    ],),
-        level: 2, experience: 2300);
+    final leader = Leader("test",
+        affects: Set.from(
+          [
+            AffectUnit(
+                affectsResource: RESOURCES.AMBER, sellValue: 5, buyValue: 1),
+            AffectUnit(
+                affectsResource: RESOURCES.FISH, sellValue: 3, buyValue: 2)
+          ],
+        ),
+        experience: 2300);
     final newLeader = Leader.fromJson(leader.toJson());
     test("Can convert to and back from json", () {
-        expect(newLeader.localizedNameKey, equals("test"), reason: "Localized key name was restored");
-        expect(newLeader.affects.length, equals(leader.affects.length), reason: "Affects set was restored");
-        expect(newLeader.affects.length, equals(2), reason: "Affects set was restored");
-        expect(newLeader.affectFor(resource: Amber(1)), isNotNull, reason: "Amber affect restored");
-        expect(newLeader.affectSellValueForResource(resource: Amber(2), priceUnit: PriceUnit(RESOURCES.AMBER, 5)), equals(50), reason: "Amber sell value affect restored");
-        expect(newLeader.affectSellValueForResource(resource: Fish(3), priceUnit: PriceUnit(RESOURCES.FISH, 2)), equals(18), reason: "Fish sell value affect restored");
+      expect(newLeader.localizedNameKey, equals("test"),
+          reason: "Localized key name was restored");
+      expect(newLeader.affects.length, equals(leader.affects.length),
+          reason: "Affects set was restored");
+      expect(newLeader.affects.length, equals(2),
+          reason: "Affects set was restored");
+      expect(newLeader.affectFor(resource: Amber(1)), isNotNull,
+          reason: "Amber affect restored");
+      expect(
+          newLeader.affectSellValueForResource(
+              resource: Amber(2), priceUnit: PriceUnit(RESOURCES.AMBER, 5)),
+          equals(50),
+          reason: "Amber sell value affect restored");
+      expect(
+          newLeader.affectSellValueForResource(
+              resource: Fish(3), priceUnit: PriceUnit(RESOURCES.FISH, 2)),
+          equals(18),
+          reason: "Fish sell value affect restored");
     });
   });
 }

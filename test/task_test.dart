@@ -1,4 +1,3 @@
-import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/progress_duration.dart';

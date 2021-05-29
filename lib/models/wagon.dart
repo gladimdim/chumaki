@@ -5,6 +5,7 @@ import 'package:chumaki/models/resources/resource.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/extensions/list.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
+
 class Wagon {
   late Stock stock;
   static final String imagePath = "images/wagon/cart.png";
@@ -17,7 +18,11 @@ class Wagon {
     return "${ChumakiLocalizations.getForKey(localizedNameKey)}";
   }
 
-  Wagon({required this.localizedNameKey, Stock? stock, this.totalWeightCapacity = 100.0, this.leader}) {
+  Wagon(
+      {required this.localizedNameKey,
+      Stock? stock,
+      this.totalWeightCapacity = 100.0,
+      this.leader}) {
     if (stock == null) {
       this.stock = Stock(List.empty(growable: true));
     } else {
@@ -30,7 +35,7 @@ class Wagon {
   }
 
   bool canFitNewResource(Resource res) {
-      return totalWeightCapacity > currentWeight + res.totalWeight;
+    return totalWeightCapacity > currentWeight + res.totalWeight;
   }
 
   double get currentWeight {
@@ -49,7 +54,7 @@ class Wagon {
 
   void setLeader(Leader newLeader) {
     // TODO: REMOVE
-    newLeader.experience = 500.0;
+    newLeader.experience = 980.0;
     leader = newLeader;
     changes.add(this);
   }
@@ -71,10 +76,26 @@ class Wagon {
     var stock = Stock.fromJson(json["stock"]);
     var leaderJson = json["leader"];
     Leader? leader = leaderJson == null ? null : Leader.fromJson(leaderJson);
-    return Wagon(localizedNameKey: json["name"], stock: stock, totalWeightCapacity: json["totalWeightCapacity"], leader: leader);
+    return Wagon(
+        localizedNameKey: json["name"],
+        stock: stock,
+        totalWeightCapacity: json["totalWeightCapacity"],
+        leader: leader);
   }
 
   static String getRandomLocalizedNameKey() {
     return "leaders.${LeadersLocalizations().localizedMap["en"]!.keys.toList().takeRandom()}";
+  }
+
+  bool sellResource(Resource resource) {
+    final sold = stock.removeResource(resource);
+    if (sold) {
+      addExperienceToLeader(resource.amount);
+    }
+    return sold;
+  }
+
+  void addExperienceToLeader(int soldAmount) {
+    leader?.addExperience(soldAmount);
   }
 }
