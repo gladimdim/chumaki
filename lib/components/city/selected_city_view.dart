@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:chumaki/components/city/can_unlock_cities_view.dart';
 import 'package:chumaki/components/city/city_wagons_view.dart';
 import 'package:chumaki/components/city/city_stock_view.dart';
@@ -23,13 +25,15 @@ class SelectedCityView extends StatefulWidget {
 class _SelectedCityViewState extends State<SelectedCityView> {
   late List<CityMenuItem> actions;
   Widget? detailsContent;
+  late StreamSubscription _cityChangesListener;
 
   @override
   void initState() {
     super.initState();
     actions = getStandardButtons();
     actions.addAll(getWagonButtons());
-    widget.city.changes.listen((event) => updateActions());
+    _cityChangesListener =
+        widget.city.changes.listen((event) => updateActions());
   }
 
   void updateActions() {
@@ -185,5 +189,11 @@ class _SelectedCityViewState extends State<SelectedCityView> {
             width: 0,
             height: 0,
           );
+  }
+
+  @override
+  void dispose() {
+    _cityChangesListener.pause();
+    super.dispose();
   }
 }
