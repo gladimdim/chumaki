@@ -6,9 +6,9 @@ import 'package:chumaki/models/wagon.dart';
 import 'package:uuid/uuid.dart';
 
 class RouteTask extends ProgressDuration {
-  final City from;
-  final City to;
-  static Duration durationPerPoint = Duration(milliseconds: 10);
+  City from;
+  City to;
+  static Duration durationPerPoint = Duration(milliseconds: 100);
   final String id = Uuid().v4().toString();
   Wagon wagon;
 

@@ -115,16 +115,40 @@ class Company {
     // listen to the finish event in order to add wagon to the "to" city
     newTask.changes.listen((event) {
       if (event == PROGRESS_DURACTION_EVENTS.FINISHED) {
-        activeRouteTasks.remove(newTask);
-        // wagon arrived, remove it from the road
-        cityRoute.routeTasks.remove(newTask);
-        // notify the 'to' city that the new wagon arrived
-        newTask.to.routeTaskArrived(newTask);
-        // notify all listeners of your company that some task ended.
-        _innerChanges.add(COMPANY_EVENTS.TASK_ENDED);
+        processTaskDone(newTask);
       }
     });
     _innerChanges.add(COMPANY_EVENTS.TASK_STARTED);
+  }
+
+  void reconnectRestoredTask(RouteTask restoredTask) {
+    // replace to/from to the references to real cities
+    // instead of another city instances restored from JSON
+    restoredTask.to = refToCityByName(restoredTask.to);
+    restoredTask.from = refToCityByName(restoredTask.from);
+    if (restoredTask.isFinished) {
+      processTaskDone(restoredTask);
+    } else {
+      var cityRoute = getRouteForTask(restoredTask);
+      // add new task to the city route (curves on the map)
+      cityRoute.routeTasks.add(restoredTask);
+      restoredTask.changes.listen((event) {
+        if (event == PROGRESS_DURACTION_EVENTS.FINISHED) {
+          processTaskDone(restoredTask);
+        }
+      });
+    }
+  }
+
+  void processTaskDone(RouteTask task) {
+    final cityRoute = getRouteForTask(task);
+    activeRouteTasks.remove(task);
+    // wagon arrived, remove it from the road
+    cityRoute.routeTasks.remove(task);
+    // notify the 'to' city that the new wagon arrived
+    task.to.routeTaskArrived(task);
+    // notify all listeners of your company that some task ended.
+    _innerChanges.add(COMPANY_EVENTS.TASK_ENDED);
   }
 
   Future save() async {
@@ -135,6 +159,8 @@ class Company {
     return {
       "money": _money,
       "allCities": allCities.map((city) => city.toJson()).toList(),
+      "activeRouteTasks":
+          activeRouteTasks.map((routeTask) => routeTask.toJson()).toList(),
     };
   }
 
@@ -143,7 +169,20 @@ class Company {
     List citiesJson = inputJson["allCities"];
     List<City> allCities =
         citiesJson.map((cityJson) => City.fromJson(cityJson)).toList();
+    List activeRouteTasksJson = inputJson["activeRouteTasks"];
+    List<RouteTask> activeRouteTasks = activeRouteTasksJson
+        .map((routeJson) => RouteTask.fromJson(routeJson))
+        .toList();
     var company = Company(cities: allCities).._money = money;
+
+    // we need to reconnect to streams from restored tasks
+    // in order to get the event when task is finished
+    // if the task was already finished before the game relaoded
+    // we just process the task like it was done.
+    company.activeRouteTasks = activeRouteTasks;
+    company.activeRouteTasks.forEach((task) {
+      company.reconnectRestoredTask(task);
+    });
     return company;
   }
 
