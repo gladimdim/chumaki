@@ -25,13 +25,15 @@ class SelectedCityView extends StatefulWidget {
 class _SelectedCityViewState extends State<SelectedCityView> {
   late List<CityMenuItem> actions;
   Widget? detailsContent;
+  late StreamSubscription _cityChangesListener;
 
   @override
   void initState() {
     super.initState();
     actions = getStandardButtons();
     actions.addAll(getWagonButtons());
-    widget.city.changes.listen((event) => updateActions());
+    _cityChangesListener =
+        widget.city.changes.listen((event) => updateActions());
   }
 
   void updateActions() {
@@ -187,5 +189,11 @@ class _SelectedCityViewState extends State<SelectedCityView> {
             width: 0,
             height: 0,
           );
+  }
+
+  @override
+  void dispose() {
+    _cityChangesListener.pause();
+    super.dispose();
   }
 }
