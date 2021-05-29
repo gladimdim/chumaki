@@ -123,7 +123,7 @@ class Company {
 
   void reconnectRestoredTask(RouteTask restoredTask) {
     // replace to/from to the references to real cities
-    // instead of another city instances restored from JSON
+    // instead of city instances restored from JSON
     restoredTask.to = refToCityByName(restoredTask.to);
     restoredTask.from = refToCityByName(restoredTask.from);
     if (restoredTask.isFinished) {
