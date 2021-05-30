@@ -137,7 +137,7 @@ class City {
     var price =
         prices.buyPriceForResource(resource, withAmount: resource.amount);
 
-    final canSell = fromWagon.stock.removeResource(resource);
+    final canSell = fromWagon.sellResource(resource);
     if (canSell) {
       stock.addResource(resource);
       company.addMoney(price);
