@@ -13,7 +13,7 @@ void main() {
     test("Can initialize with a list of affects", () {
       final leader = Leader("test",
           affects: Set.from([
-            AffectUnit(
+            PerkUnit(
                 affectsResource: RESOURCES.WOOD, sellValue: 1.1, buyValue: 0.9)
           ]));
       expect(leader.affects, isNotEmpty);
@@ -23,7 +23,7 @@ void main() {
   group("Price affects logics", () {
     final leader = Leader("test",
         affects: Set.from([
-          AffectUnit(
+          PerkUnit(
               affectsResource: RESOURCES.WOOD, sellValue: 1.1, buyValue: 0.9)
         ]));
     test("Can tell if the resource prices are affected.", () {
@@ -35,7 +35,7 @@ void main() {
 
     test("Can return affect for the given resource", () {
       final affect = leader.affectFor(resource: Wood(3));
-      expect(affect, isA<AffectUnit>(), reason: "Got an affect unit for Wood.");
+      expect(affect, isA<PerkUnit>(), reason: "Got an affect unit for Wood.");
       expect(affect!.sellValue, equals(1.1), reason: "Sell value was returned");
       expect(affect.buyValue, equals(0.9), reason: "Sell value was returned");
     });
@@ -44,7 +44,7 @@ void main() {
       final leader = Leader("test",
           experience: 950,
           affects: Set.from([
-            AffectUnit(
+            PerkUnit(
                 affectsResource: RESOURCES.WOOD, sellValue: 1.1, buyValue: 0.9)
           ]));
       leader.addExperience(51);
@@ -94,9 +94,9 @@ void main() {
     final leader = Leader("test",
         affects: Set.from(
           [
-            AffectUnit(
+            PerkUnit(
                 affectsResource: RESOURCES.AMBER, sellValue: 5, buyValue: 1),
-            AffectUnit(
+            PerkUnit(
                 affectsResource: RESOURCES.FISH, sellValue: 3, buyValue: 2)
           ],
         ),

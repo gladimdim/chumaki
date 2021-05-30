@@ -6,7 +6,8 @@ import 'package:chumaki/extensions/list.dart';
 
 class Leader {
   final String localizedNameKey;
-  late Set<AffectUnit> _affects;
+  late Set<PerkUnit> _perks;
+
   int get level => experience ~/ _levelDelta;
   double experience;
   final double _levelDelta = 1000;
@@ -15,11 +16,11 @@ class Leader {
   static Money defaultAcquirePrice = Money(1000);
 
   Leader(this.localizedNameKey,
-      {Set<AffectUnit>? affects, this.experience = 0, String? imagePath}) {
+      {Set<PerkUnit>? affects, this.experience = 0, String? imagePath}) {
     if (affects == null) {
-      _affects = Set();
+      _perks = Set();
     } else {
-      _affects = affects;
+      _perks = affects;
     }
 
     if (imagePath == null) {
@@ -34,21 +35,21 @@ class Leader {
     return "images/leaders/leader${numbers.takeRandom()}.png";
   }
 
-  Set<AffectUnit> get affects {
-    return Set.from(_affects);
+  Set<PerkUnit> get affects {
+    return Set.from(_perks);
   }
 
-  void addAffect(AffectUnit affect) {
-    _affects.add(affect);
+  void addAffect(PerkUnit affect) {
+    _perks.add(affect);
   }
 
   double get nextLevelPrice {
     return (level + 1).toDouble() * levelUpBasePrice;
   }
 
-  AffectUnit? affectFor({required Resource resource}) {
+  PerkUnit? affectFor({required Resource resource}) {
     try {
-      return _affects
+      return _perks
           .firstWhere((affect) => affect.affectsResource == resource.type);
     } on StateError catch (_) {
       return null;
@@ -98,7 +99,7 @@ class Leader {
   Map<String, dynamic> toJson() {
     return {
       "localizedKeyName": localizedNameKey,
-      "affects": _affects.map((e) => e.toJson()).toList(),
+      "affects": _perks.map((e) => e.toJson()).toList(),
       "level": level,
       "experience": experience,
       "imagePath": imagePath,
@@ -109,17 +110,19 @@ class Leader {
     final afs = input["affects"] as List;
     return Leader(
       input["localizedKeyName"],
-      affects: afs.map((affectJson) => AffectUnit.fromJson(affectJson)).toSet(),
+      affects: afs.map((affectJson) => PerkUnit.fromJson(affectJson)).toSet(),
       experience: input["experience"],
       imagePath: input["imagePath"],
     );
   }
-  
+
   static List<Leader> allLeaders() {
-    List keyNames = LeadersLocalizations().localizedMap["en"]!.keys.take(11).toList();
+    List keyNames =
+        LeadersLocalizations().localizedMap["en"]!.keys.take(11).toList();
     List<Leader> leaders = List.empty(growable: true);
     for (var i = 0; i < 11; i++) {
-      leaders.add(Leader("leaders.${keyNames[i]}", imagePath: imagePathForId(i)));
+      leaders
+          .add(Leader("leaders.${keyNames[i]}", imagePath: imagePathForId(i)));
     }
     return leaders;
   }
@@ -135,12 +138,12 @@ String imagePathForId(int id) {
   return "images/leaders/leader$id.png";
 }
 
-class AffectUnit {
+class PerkUnit {
   final RESOURCES affectsResource;
   final double sellValue;
   final double buyValue;
 
-  AffectUnit(
+  PerkUnit(
       {required this.affectsResource,
       required this.sellValue,
       required this.buyValue});
@@ -153,8 +156,8 @@ class AffectUnit {
     };
   }
 
-  static AffectUnit fromJson(Map<String, dynamic> input) {
-    return AffectUnit(
+  static PerkUnit fromJson(Map<String, dynamic> input) {
+    return PerkUnit(
         affectsResource: resourceTypeFromString(input["affectsResource"]),
         sellValue: input["sellValue"],
         buyValue: input["buyValue"]);
