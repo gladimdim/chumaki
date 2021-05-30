@@ -105,6 +105,7 @@ class ChumakiLocalizations {
       "labelLeader": "Leader",
       "labelLevel": "Level",
       "labelExperience": "Experience",
+      "labelPerks": "Perks",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -152,6 +153,7 @@ class ChumakiLocalizations {
       "labelLeader": "Отаман",
       "labelLevel": "Рівень",
       "labelExperience": "Досвід",
+      "labelPerks": "Перки",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -198,6 +200,7 @@ class ChumakiLocalizations {
       "labelLeader": "Атаман",
       "labelLevel": "Уровень",
       "labelExperience": "Опыт",
+      "labelPerks": "Перки",
     },
   };
 
@@ -371,5 +374,9 @@ class ChumakiLocalizations {
 
   static String get labelLevel {
     return _localizedValues[locale.languageCode]!["labelLevel"]!;
+  }
+
+  static String get labelPerks {
+    return _localizedValues[locale.languageCode]!["labelPerks"]!;
   }
 }

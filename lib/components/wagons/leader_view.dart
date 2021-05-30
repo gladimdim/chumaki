@@ -30,9 +30,22 @@ class LeaderView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 TitleText(ChumakiLocalizations.labelLevel),
-                BouncingText(
+                BouncingOutlinedText(
                   leader.level.toString(),
+                  size: 24,
+                  fontColor: Theme.of(context).primaryColor,
+                  outlineColor: Theme.of(context).backgroundColor,
                 ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TitleText(ChumakiLocalizations.labelPerks),
+                BouncingOutlinedText(leader.availablePerks.toString(), size: 24),
               ],
             ),
           ),
