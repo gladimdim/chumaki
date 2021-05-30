@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CityMenuItem {
-  final String label;
+  final Widget label;
   final String imagePath;
   final Widget content;
   bool isSelected = false;

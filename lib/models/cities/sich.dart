@@ -47,7 +47,6 @@ class Sich extends City {
             //       MetalParts(10),
             //     ])),
             Wagon(
-              localizedNameKey: "leaders.gladkyi",
               stock: Stock(
                 [
                   Grains(50),
@@ -116,11 +115,14 @@ class Sich extends City {
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.3);
         case RESOURCES.GORILKA:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(1);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(1);
         case RESOURCES.HONEY:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(0.9);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(0.9);
         case RESOURCES.WAX:
-          return PriceUnit.defaultPriceUnitForResourceType(resType).adjustToModifier(0.9);
+          return PriceUnit.defaultPriceUnitForResourceType(resType)
+              .adjustToModifier(0.9);
         case RESOURCES.TOBACCO:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(0.85);

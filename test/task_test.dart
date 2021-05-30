@@ -11,18 +11,14 @@ void main() {
     RouteTask task = RouteTask(
       Nizhin(),
       Kyiv(),
-      wagon: Wagon(
-        localizedNameKey: "dima",
-      ),
+      wagon: Wagon(),
     );
     RouteTask newTask = RouteTask.fromJson(task.toJson());
     setUp(() {
       task = RouteTask(
         Nizhin(),
         Kyiv(),
-        wagon: Wagon(
-          localizedNameKey: "dima",
-        ),
+        wagon: Wagon(),
       );
       newTask = RouteTask.fromJson(task.toJson());
     });
@@ -33,7 +29,7 @@ void main() {
       expect(newTask.from.equalsTo(task.from), isTrue,
           reason: "From City was restored");
       expect(
-          newTask.wagon.localizedNameKey, equals(task.wagon.localizedNameKey),
+          newTask.wagon, isNotNull,
           reason: "Wagon was restored");
       expect(newTask.finishAt, equals(task.finishAt),
           reason: "Finish at is restored");
