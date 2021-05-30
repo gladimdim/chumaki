@@ -8,12 +8,12 @@ class Leader {
   final String localizedNameKey;
   late Set<PerkUnit> _perks;
 
-  int get level => experience ~/ _levelDelta;
+  int get level => experience ~/ levelDelta;
   double experience;
-  final double _levelDelta = 1000;
-  final levelUpBasePrice = 1000;
+  final double levelDelta = 1000;
+  static final levelUpBasePrice = 1000;
   late String imagePath;
-  static Money defaultAcquirePrice = Money(1000);
+  static Money defaultAcquirePrice = Money(levelUpBasePrice.toDouble());
 
   Leader(this.localizedNameKey,
       {Set<PerkUnit>? affects, this.experience = 0, String? imagePath}) {
@@ -33,6 +33,10 @@ class Leader {
   static String getRandomImage() {
     final numbers = List.generate(11, (index) => index);
     return "images/leaders/leader${numbers.takeRandom()}.png";
+  }
+
+  int get availablePerks {
+    return level - _perks.length;
   }
 
   Set<PerkUnit> get affects {
