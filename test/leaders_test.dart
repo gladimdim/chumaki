@@ -16,7 +16,7 @@ void main() {
             PerkUnit(
                 affectsResource: RESOURCES.WOOD, sellValue: 1.1, buyValue: 0.9)
           ]));
-      expect(leader.affects, isNotEmpty);
+      expect(leader.perks, isNotEmpty);
     });
   });
 
@@ -34,7 +34,7 @@ void main() {
     });
 
     test("Can return affect for the given resource", () {
-      final affect = leader.affectFor(resource: Wood(3));
+      final affect = leader.perkFor(resource: Wood(3));
       expect(affect, isA<PerkUnit>(), reason: "Got an affect unit for Wood.");
       expect(affect!.sellValue, equals(1.1), reason: "Sell value was returned");
       expect(affect.buyValue, equals(0.9), reason: "Sell value was returned");
@@ -105,11 +105,11 @@ void main() {
     test("Can convert to and back from json", () {
       expect(newLeader.localizedNameKey, equals("test"),
           reason: "Localized key name was restored");
-      expect(newLeader.affects.length, equals(leader.affects.length),
+      expect(newLeader.perks.length, equals(leader.perks.length),
           reason: "Affects set was restored");
-      expect(newLeader.affects.length, equals(2),
+      expect(newLeader.perks.length, equals(2),
           reason: "Affects set was restored");
-      expect(newLeader.affectFor(resource: Amber(1)), isNotNull,
+      expect(newLeader.perkFor(resource: Amber(1)), isNotNull,
           reason: "Amber affect restored");
       expect(
           newLeader.affectSellValueForResource(

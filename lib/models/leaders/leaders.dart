@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/i18n/leaders_localizations.dart';
 import 'package:chumaki/models/price/price_unit.dart';
@@ -36,37 +38,37 @@ class Leader {
   }
 
   int get availablePerks {
-    return level - _perks.length;
+    return max(0, level - _perks.length);
   }
 
-  Set<PerkUnit> get affects {
+  Set<PerkUnit> get perks {
     return Set.from(_perks);
   }
 
-  void addAffect(PerkUnit affect) {
-    _perks.add(affect);
+  void addPerk(PerkUnit perk) {
+    _perks.add(perk);
   }
 
   double get nextLevelPrice {
     return (level + 1).toDouble() * levelUpBasePrice;
   }
 
-  PerkUnit? affectFor({required Resource resource}) {
+  PerkUnit? perkFor({required Resource resource}) {
     try {
       return _perks
-          .firstWhere((affect) => affect.affectsResource == resource.type);
+          .firstWhere((perk) => perk.affectsResource == resource.type);
     } on StateError catch (_) {
       return null;
     }
   }
 
   bool doesAffectResource(Resource resource) {
-    return affectFor(resource: resource) != null;
+    return perkFor(resource: resource) != null;
   }
 
   double affectSellValueForResource(
       {required Resource resource, required PriceUnit priceUnit}) {
-    final affect = affectFor(resource: resource);
+    final affect = perkFor(resource: resource);
     final value = affect?.sellValue;
     return affectValueForResource(
         resource: resource, priceUnit: priceUnit, value: value);
@@ -74,7 +76,7 @@ class Leader {
 
   double affectBuyValueForResource(
       {required Resource resource, required PriceUnit priceUnit}) {
-    final affect = affectFor(resource: resource);
+    final affect = perkFor(resource: resource);
     final value = affect?.buyValue;
     return affectValueForResource(
         resource: resource, priceUnit: priceUnit, value: value);
@@ -132,8 +134,15 @@ class Leader {
   }
 
   void addExperience(int amount) {
+    // TODO: REMOVE
+    var oldLevel = level;
     if (level < 3) {
       experience += amount;
+    }
+    var newLevel = level;
+    if (newLevel != oldLevel) {
+      _perks.add(PerkUnit(
+          affectsResource: RESOURCES.GORILKA, sellValue: 1.1, buyValue: 0.9));
     }
   }
 }

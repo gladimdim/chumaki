@@ -2,6 +2,7 @@ import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
 import 'package:chumaki/components/ui/bouncing_text.dart';
+import 'package:chumaki/components/ui/perk_unit_view.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
 import 'package:flutter/material.dart';
@@ -40,17 +41,28 @@ class LeaderView extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                TitleText(ChumakiLocalizations.labelPerks),
-                BouncingOutlinedText(leader.availablePerks.toString(), size: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TitleText("${ChumakiLocalizations.labelAvailablePerks}: "),
+                    BouncingOutlinedText(leader.availablePerks.toString(),
+                        size: 24),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                    children: leader.perks
+                        .map((perk) => PerkUnitView(perk))
+                        .toList()),
               ],
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
