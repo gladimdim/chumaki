@@ -4,6 +4,7 @@ import 'package:chumaki/components/city/can_unlock_cities_view.dart';
 import 'package:chumaki/components/city/city_wagons_view.dart';
 import 'package:chumaki/components/city/city_stock_view.dart';
 import 'package:chumaki/components/global_market_view.dart';
+import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/city_menu_item.dart';
 import 'package:chumaki/components/ui/city_menu_item_view.dart';
 import 'package:chumaki/components/wagons/wagon_details.dart';
@@ -49,19 +50,19 @@ class _SelectedCityViewState extends State<SelectedCityView> {
   List<CityMenuItem> getStandardButtons() => [
         CityMenuItem(
             imagePath: "images/wagon/wheel.png",
-            label: ChumakiLocalizations.labelCompanies,
+            label: TitleText(ChumakiLocalizations.labelCompanies),
             content: CityWagonsView(city: widget.city)),
         CityMenuItem(
             imagePath: "images/icons/market/market.png",
-            label: ChumakiLocalizations.labelMarket,
+            label: TitleText(ChumakiLocalizations.labelMarket),
             content: CityStockView(city: widget.city)),
         CityMenuItem(
             imagePath: "images/icons/market/market2.png",
-            label: ChumakiLocalizations.labelWorldMarket,
+            label: TitleText(ChumakiLocalizations.labelWorldMarket),
             content: GlobalMarketView(currentCity: widget.city)),
         CityMenuItem(
             imagePath: "images/cities/church.png",
-            label: ChumakiLocalizations.labelMenuBuyNewRoutes,
+            label: TitleText(ChumakiLocalizations.labelMenuBuyNewRoutes),
             content: CanUnlockCitiesView(widget.city)),
       ];
 
@@ -70,7 +71,10 @@ class _SelectedCityViewState extends State<SelectedCityView> {
         .map(
           (wagon) => CityMenuItem(
               imagePath: "images/wagon/wagon.png",
-              label: "${wagon.fullLocalizedName}",
+              label: StreamBuilder(
+                  stream: wagon.changes,
+                  builder: (context, snap) =>
+                      TitleText(ChumakiLocalizations.getForKey(wagon.fullLocalizedName))),
               content: WagonDetails(
                 wagon: wagon,
                 city: widget.city,

@@ -35,7 +35,7 @@ void main() {
       company.startTask(
           from: Chigirin(),
           to: Pereyaslav(),
-          withWagon: Wagon(localizedNameKey: "dima"));
+          withWagon: Wagon());
       var newCompany = Company.fromJson(company.toJson());
       expect(newCompany.activeRouteTasks.length, equals(1),
           reason: "One task restored.");
@@ -47,14 +47,14 @@ void main() {
         company.startTask(
             from: Chigirin(),
             to: Pereyaslav(),
-            withWagon: Wagon(localizedNameKey: "dima"));
+            withWagon: Wagon());
         var newCompany = Company.fromJson(company.toJson());
         async.elapse(Duration(minutes: 5));
         expect(newCompany.activeRouteTasks, isEmpty,
             reason: "Task was moved directly to target city.");
         expect(
-            newCompany.allCities[1].wagons[0].localizedNameKey, equals("dima"),
-            reason: "Wagon Dima was restored directly to city");
+            newCompany.allCities[1].wagons[0], isNotNull,
+            reason: "Wagon was restored directly to city");
       });
     });
 
@@ -65,7 +65,7 @@ void main() {
         company.startTask(
             from: Sich(),
             to: Chigirin(),
-            withWagon: Wagon(localizedNameKey: "dima"));
+            withWagon: Wagon());
         var newCompany = Company.fromJson(company.toJson());
         async.elapse(Duration(seconds: 2));
         expect(newCompany.activeRouteTasks, isNotEmpty,
@@ -80,8 +80,8 @@ void main() {
         expect(newCompany.activeRouteTasks, isEmpty,
             reason: "Task was moved to target city after the task was done.");
         expect(
-            newCompany.allCities[1].wagons[0].localizedNameKey, equals("dima"),
-            reason: "Wagon Dima attached to target city as the task was done.");
+            newCompany.allCities[1].wagons[0], isNotNull,
+            reason: "Wagon attached to target city as the task was done.");
       });
     });
   });
@@ -95,15 +95,15 @@ void main() {
 
     test("Can buy new wagon for city", () {
       final company = Company(cities: [Chigirin(), Pereyaslav()], money: 300);
-      company.buyWagon(Wagon(localizedNameKey: "dima"),
+      company.buyWagon(Wagon(),
           forCity: company.allCities[0], price: Money(200));
       expect(company.getMoney().amount, equals(100),
           reason: "300 - 200 == 100");
-      expect(company.allCities[0].wagons.first.localizedNameKey, equals("dima"),
+      expect(company.allCities[0].wagons.first, isNotNull,
           reason: "Wagon moved to city #1");
       expect(company.allCities[0].wagons.isNotEmpty, isTrue,
           reason: "Wagon moved to city #1");
-      company.buyWagon(Wagon(localizedNameKey: "dima"),
+      company.buyWagon(Wagon(),
           forCity: company.allCities[0], price: Money(200));
       expect(company.getMoney().amount, equals(100),
           reason: "Could not buy second wagon as not enough money");

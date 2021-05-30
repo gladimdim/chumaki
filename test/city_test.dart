@@ -23,8 +23,8 @@ void main() {
             [PriceUnit(RESOURCES.BREAD, 10), PriceUnit(RESOURCES.STONE, 3)]),
         localizedKeyName: "testing",
         wagons: [
-          Wagon(localizedNameKey: "First"),
-          Wagon(localizedNameKey: "Second"),
+          Wagon(),
+          Wagon(),
         ],
       );
       var newCity = City.fromJson(city.toJson());
@@ -36,7 +36,7 @@ void main() {
           reason: "10 is for 1 bread restored");
       expect(newCity.prices.sellPriceForResource(Stone(1)), equals(3),
           reason: "3 is for 1 stone restored");
-      expect(newCity.wagons.first.localizedNameKey, equals("First"),
+      expect(newCity.wagons.first, isNotNull,
           reason: "Wagon is really from previous save.");
       expect(newCity.isUnlocked(), isTrue, reason: "City is unlocked");
       expect(newCity.unlocksCities, isNotEmpty,

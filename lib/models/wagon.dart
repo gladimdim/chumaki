@@ -9,17 +9,16 @@ import 'package:chumaki/models/leaders/leaders.dart';
 class Wagon {
   late Stock stock;
   static final String imagePath = "images/wagon/cart.png";
-  final String localizedNameKey;
   double totalWeightCapacity;
   BehaviorSubject changes = BehaviorSubject();
   Leader? leader;
 
   String get fullLocalizedName {
-    return "${ChumakiLocalizations.getForKey(localizedNameKey)}";
+    return leader != null ? leader!.localizedNameKey : ChumakiLocalizations.labelCompany;
   }
 
   Wagon(
-      {required this.localizedNameKey,
+      {
       Stock? stock,
       this.totalWeightCapacity = 100.0,
       this.leader}) {
@@ -47,7 +46,6 @@ class Wagon {
   static Wagon generateRandomWagon() {
     return Wagon(
       stock: Stock([]),
-      localizedNameKey: Wagon.getRandomLocalizedNameKey(),
       totalWeightCapacity: 100.0,
     );
   }
@@ -66,7 +64,6 @@ class Wagon {
   Map<String, dynamic> toJson() {
     return {
       "stock": stock.toJson(),
-      "name": localizedNameKey,
       "totalWeightCapacity": totalWeightCapacity,
       "leader": leader?.toJson(),
     };
@@ -77,7 +74,6 @@ class Wagon {
     var leaderJson = json["leader"];
     Leader? leader = leaderJson == null ? null : Leader.fromJson(leaderJson);
     return Wagon(
-        localizedNameKey: json["name"],
         stock: stock,
         totalWeightCapacity: json["totalWeightCapacity"],
         leader: leader);
