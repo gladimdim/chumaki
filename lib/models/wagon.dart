@@ -53,8 +53,6 @@ class Wagon {
   void setLeader(Leader newLeader) {
     // TODO: REMOVE
     newLeader.experience = 980.0;
-    newLeader.addPerk(PerkUnit(affectsResource: RESOURCES.GORILKA, sellValue: 1.1, buyValue: 0.9));
-    newLeader.addPerk(PerkUnit(affectsResource: RESOURCES.CANNON, sellValue: 1.1, buyValue: 0.9));
     leader = newLeader;
     changes.add(this);
   }

@@ -134,15 +134,8 @@ class Leader {
   }
 
   void addExperience(int amount) {
-    // TODO: REMOVE
-    var oldLevel = level;
     if (level < 3) {
       experience += amount;
-    }
-    var newLevel = level;
-    if (newLevel != oldLevel) {
-      _perks.add(PerkUnit(
-          affectsResource: RESOURCES.GORILKA, sellValue: 1.1, buyValue: 0.9));
     }
   }
 }

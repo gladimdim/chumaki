@@ -1,3 +1,4 @@
+import 'package:chumaki/components/leader/add_new_perk_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
@@ -53,11 +54,13 @@ class LeaderView extends StatelessWidget {
                         size: 24),
                   ],
                 ),
-                Row(
+                if (leader.availablePerks == 0) Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                     children: leader.perks
                         .map((perk) => PerkUnitView(perk))
                         .toList()),
+                if (leader.availablePerks > 0)
+                  AddNewPerkView(leader,),
               ],
             ),
           ),
