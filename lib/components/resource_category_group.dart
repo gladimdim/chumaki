@@ -24,6 +24,7 @@ class ResourceCategoryGroup extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return ExpandablePanel(
+      isUnlocked: _isCategoryUnlocked(),
       title: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -104,5 +105,15 @@ class ResourceCategoryGroup extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  bool _isCategoryUnlocked() {
+    final cat = resources.first.category;
+    final leader = wagon.leader;
+    if (leader == null) {
+      return DEFAULT_CATEGORIES.contains(cat);
+    } else {
+      return leader.hasPerkForCategory(cat) || DEFAULT_CATEGORIES.contains(cat);
+    }
   }
 }

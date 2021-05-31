@@ -32,3 +32,5 @@ String categoryToImagePath(RESOURCE_CATEGORY category) {
   final catName = category.toString().split(".")[1].toLowerCase();
   return "images/icons/$catName/$catName.png";
 }
+
+List<RESOURCE_CATEGORY> DEFAULT_CATEGORIES = [RESOURCE_CATEGORY.FOOD, RESOURCE_CATEGORY.RESOURCES];

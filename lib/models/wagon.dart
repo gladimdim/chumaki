@@ -2,6 +2,7 @@ import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/i18n/leaders_localizations.dart';
 import 'package:chumaki/models/resources/resource.dart';
+import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/extensions/list.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
@@ -14,14 +15,12 @@ class Wagon {
   Leader? leader;
 
   String get fullLocalizedName {
-    return leader != null ? leader!.localizedNameKey : ChumakiLocalizations.labelCompany;
+    return leader != null
+        ? leader!.localizedNameKey
+        : ChumakiLocalizations.labelCompany;
   }
 
-  Wagon(
-      {
-      Stock? stock,
-      this.totalWeightCapacity = 100.0,
-      this.leader}) {
+  Wagon({Stock? stock, this.totalWeightCapacity = 100.0, this.leader}) {
     if (stock == null) {
       this.stock = Stock(List.empty(growable: true));
     } else {
@@ -93,5 +92,13 @@ class Wagon {
 
   void addExperienceToLeader(int soldAmount) {
     leader?.addExperience(soldAmount);
+  }
+
+  bool categoryUnlocked(RESOURCE_CATEGORY cat) {
+    if (leader == null) {
+      return DEFAULT_CATEGORIES.contains(cat);
+    } else {
+      return DEFAULT_CATEGORIES.contains(cat) || leader!.hasPerkForCategory(cat);
+    }
   }
 }
