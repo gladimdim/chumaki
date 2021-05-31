@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/i18n/leaders_localizations.dart';
-import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/extensions/list.dart';
+import 'package:chumaki/models/resources/resource_category.dart';
 
 class Leader {
   final String localizedNameKey;
@@ -53,49 +53,16 @@ class Leader {
     return (level + 1).toDouble() * levelUpBasePrice;
   }
 
-  PerkUnit? perkFor({required Resource resource}) {
+  PerkUnit? perkFor({required RESOURCE_CATEGORY cat}) {
     try {
-      return _perks
-          .firstWhere((perk) => perk.affectsResource == resource.type);
+      return _perks.firstWhere((perk) => perk.affectsResourceCategory == cat);
     } on StateError catch (_) {
       return null;
     }
   }
 
-  bool doesAffectResource(Resource resource) {
-    return perkFor(resource: resource) != null;
-  }
-
-  double affectSellValueForResource(
-      {required Resource resource, required PriceUnit priceUnit}) {
-    final affect = perkFor(resource: resource);
-    final value = affect?.sellValue;
-    return affectValueForResource(
-        resource: resource, priceUnit: priceUnit, value: value);
-  }
-
-  double affectBuyValueForResource(
-      {required Resource resource, required PriceUnit priceUnit}) {
-    final affect = perkFor(resource: resource);
-    final value = affect?.buyValue;
-    return affectValueForResource(
-        resource: resource, priceUnit: priceUnit, value: value);
-  }
-
-  double affectValueForResource(
-      {required Resource resource,
-      required PriceUnit priceUnit,
-      double? value}) {
-    if (value == null) {
-      return priceUnit.price * resource.amount.toDouble();
-    } else {
-      return _adjustedPriceToAffect(
-          value, resource.amount.toDouble(), priceUnit.price);
-    }
-  }
-
-  double _adjustedPriceToAffect(double value, double amount, double price) {
-    return (price * amount * value).roundToDouble();
+  bool hasPerkForCategory(RESOURCE_CATEGORY cat) {
+    return perkFor(cat: cat) != null;
   }
 
   String get fullLocalizedName {
@@ -145,27 +112,23 @@ String imagePathForId(int id) {
 }
 
 class PerkUnit {
-  final RESOURCES affectsResource;
-  final double sellValue;
-  final double buyValue;
+  final RESOURCE_CATEGORY affectsResourceCategory;
 
-  PerkUnit(
-      {required this.affectsResource,
-      required this.sellValue,
-      required this.buyValue});
+  PerkUnit({
+    required this.affectsResourceCategory,
+  });
 
   Map<String, dynamic> toJson() {
     return {
-      "sellValue": sellValue,
-      "buyValue": buyValue,
-      "affectsResource": resourceTypeToString(affectsResource),
+      "affectsResourceCategory":
+          resourceCategoryToString(affectsResourceCategory),
     };
   }
 
   static PerkUnit fromJson(Map<String, dynamic> input) {
     return PerkUnit(
-        affectsResource: resourceTypeFromString(input["affectsResource"]),
-        sellValue: input["sellValue"],
-        buyValue: input["buyValue"]);
+        affectsResourceCategory:
+            resourceCategoryFromString(input["affectsResourceCategory"]),
+    );
   }
 }

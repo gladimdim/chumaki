@@ -2,7 +2,6 @@ import 'package:chumaki/components/leader/add_new_perk_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
-import 'package:chumaki/components/ui/bouncing_text.dart';
 import 'package:chumaki/components/ui/perk_unit_view.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/leaders/leaders.dart';

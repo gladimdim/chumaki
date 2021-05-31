@@ -1,6 +1,6 @@
-import 'package:chumaki/components/resource_image_view.dart';
+import 'package:chumaki/components/ui/resource_category_view.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
-import 'package:chumaki/models/resources/resource.dart';
+import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:flutter/material.dart';
 
 class AddNewPerkView extends StatefulWidget {
@@ -13,24 +13,20 @@ class AddNewPerkView extends StatefulWidget {
 }
 
 class _AddNewPerkViewState extends State<AddNewPerkView> {
-  RESOURCES? _selected;
+  RESOURCE_CATEGORY? _selected;
 
   @override
   Widget build(BuildContext context) {
     var resources = availableResources();
     return Row(
       children: [
-        DropdownButton<RESOURCES>(
+        DropdownButton<RESOURCE_CATEGORY>(
           onChanged: _updateSelectedResource,
           value: _selected,
           items: resources
               .map(
-                (resource) => DropdownMenuItem(
-                    child: ResourceImageView(
-                      Resource.fromType(resource),
-                      size: 32,
-                    ),
-                    value: resource),
+                (category) => DropdownMenuItem(
+                    child: ResourceCategoryView(category: category, width: 32,), value: category),
               )
               .toList(),
         ),
@@ -41,14 +37,13 @@ class _AddNewPerkViewState extends State<AddNewPerkView> {
     );
   }
 
-  List<RESOURCES> availableResources() {
-    return RESOURCES.values
-        .where((resource) =>
-            !widget.leader.doesAffectResource(Resource.fromType(resource)))
+  List<RESOURCE_CATEGORY> availableResources() {
+    return RESOURCE_CATEGORY.values
+        .where((category) => !widget.leader.hasPerkForCategory(category))
         .toList();
   }
 
-  void _updateSelectedResource(RESOURCES? selected) {
+  void _updateSelectedResource(RESOURCE_CATEGORY? selected) {
     setState(() {
       _selected = selected;
     });
@@ -56,8 +51,9 @@ class _AddNewPerkViewState extends State<AddNewPerkView> {
 
   void _addPerk() {
     if (_selected != null) {
-      widget.leader.addPerk(
-          PerkUnit(affectsResource: _selected!, sellValue: 1.1, buyValue: 0.9));
+      widget.leader.addPerk(PerkUnit(
+        affectsResourceCategory: _selected!,
+      ));
     }
   }
 }
