@@ -41,10 +41,24 @@ class LeaderView extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+          if (leader.availablePerks == 0)
+            Expanded(
+              flex: 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  TitleText(
+                      ChumakiLocalizations.labelListOfPerks),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: leader.perks
+                          .map((perk) => PerkUnitView(perk))
+                          .toList()),
+                ],
+              ),
+            ),
+          if (leader.availablePerks > 0)
+            Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -54,16 +68,11 @@ class LeaderView extends StatelessWidget {
                         size: 24),
                   ],
                 ),
-                if (leader.availablePerks == 0) Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                    children: leader.perks
-                        .map((perk) => PerkUnitView(perk))
-                        .toList()),
-                if (leader.availablePerks > 0)
-                  AddNewPerkView(leader,),
+                AddNewPerkView(
+                  leader,
+                ),
               ],
             ),
-          ),
           Expanded(
             flex: 2,
             child: Column(

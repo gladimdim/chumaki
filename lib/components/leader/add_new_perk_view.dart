@@ -49,7 +49,9 @@ class _AddNewPerkViewState extends State<AddNewPerkView> {
   }
 
   void _updateSelectedResource(RESOURCES? selected) {
-    _selected = selected;
+    setState(() {
+      _selected = selected;
+    });
   }
 
   void _addPerk() {

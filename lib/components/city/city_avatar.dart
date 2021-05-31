@@ -18,7 +18,10 @@ class CityAvatar extends StatelessWidget {
           city.avatarImagePath,
           width: width,
         ),
-        TitleText(ChumakiLocalizations.getForKey(city.localizedKeyName)),
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: TitleText(ChumakiLocalizations.getForKey(city.localizedKeyName)),
+        ),
       ],
     );
   }
