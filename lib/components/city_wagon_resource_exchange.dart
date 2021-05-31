@@ -92,40 +92,43 @@ class CityWagonResourceExchange extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        ActionButton(
-          onPress: onPress,
-          action: TitleText(actionText),
-          image: Column(
-            children: [
-              TitleText(
-                  ChumakiLocalizations.getForKey(resource.fullLocalizedKey)),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  ResourceImageView(
-                    resource.cloneWithAmount(amountTradeValue),
-                    size: 92,
-                  ),
-                  BouncingOutlinedText(
-                    tradeResource == null
-                        ? "0"
-                        : tradeResource.amount.toString(),
-                    size: 32,
-                    fontColor:
-                        getFontColor(company),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          subTitle: Column(
-            children: [
-              MoneyUnitView(Money(price),
-                  isEnough: isBuyMode()
-                      ? enableBuyButton(company)
-                      : enableSellButton()),
-              Text("(${pricePerUnit}x$amountTradeValue)"),
-            ],
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: ActionButton(
+            onPress: onPress,
+            action: TitleText(actionText),
+            image: Column(
+              children: [
+                TitleText(
+                    ChumakiLocalizations.getForKey(resource.fullLocalizedKey)),
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    ResourceImageView(
+                      resource.cloneWithAmount(amountTradeValue),
+                      size: 92,
+                    ),
+                    BouncingOutlinedText(
+                      tradeResource == null
+                          ? "0"
+                          : tradeResource.amount.toString(),
+                      size: 32,
+                      fontColor:
+                          getFontColor(company),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            subTitle: Column(
+              children: [
+                MoneyUnitView(Money(price),
+                    isEnough: isBuyMode()
+                        ? enableBuyButton(company)
+                        : enableSellButton()),
+                Text("(${pricePerUnit}x$amountTradeValue)"),
+              ],
+            ),
           ),
         ),
       ],
