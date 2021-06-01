@@ -3,21 +3,26 @@ import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/i18n/leaders_localizations.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/resources/resource_category.dart';
+import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/extensions/list.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
 
 class Wagon {
   late Stock stock;
-  static final String imagePath = "images/wagon/cart.png";
+  static final String imagePath = "images/wagon/wagon.png";
   double totalWeightCapacity;
   BehaviorSubject changes = BehaviorSubject();
   Leader? leader;
 
   String get fullLocalizedName {
-    return leader != null
+    return hasLeader()
         ? leader!.localizedNameKey
         : ChumakiLocalizations.labelCompany;
+  }
+
+  String getImagePath() {
+    return hasLeader() ? leader!.imagePath : imagePath;
   }
 
   Wagon({Stock? stock, this.totalWeightCapacity = 100.0, this.leader}) {
@@ -28,8 +33,13 @@ class Wagon {
     }
 
     this.stock.changes.listen((value) {
+      print("Stock edit");
       changes.add(value);
     });
+  }
+
+  bool hasLeader() {
+    return leader != null;
   }
 
   bool canFitNewResource(Resource res) {
@@ -50,8 +60,6 @@ class Wagon {
   }
 
   void setLeader(Leader newLeader) {
-    // TODO: REMOVE
-    newLeader.experience = 980.0;
     leader = newLeader;
     changes.add(this);
   }

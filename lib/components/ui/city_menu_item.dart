@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class CityMenuItem {
   final Widget label;
-  final String imagePath;
+  final Widget image;
   final Widget content;
   bool isSelected = false;
-  CityMenuItem({required this.label, required this.imagePath, required this.content});
+  CityMenuItem({required this.label, required this.image, required this.content});
 }

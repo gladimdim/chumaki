@@ -5,6 +5,7 @@ import 'package:chumaki/i18n/leaders_localizations.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/extensions/list.dart';
 import 'package:chumaki/models/resources/resource_category.dart';
+import 'package:rxdart/rxdart.dart';
 
 class Leader {
   final String localizedNameKey;
@@ -15,6 +16,9 @@ class Leader {
   final double levelDelta = 1000;
   static final levelUpBasePrice = 1000;
   late String imagePath;
+  final BehaviorSubject _innerChanges = BehaviorSubject();
+  late ValueStream changes;
+  final int maxLevel = 3;
   static Money defaultAcquirePrice = Money(levelUpBasePrice.toDouble());
 
   Leader(this.localizedNameKey,
@@ -30,6 +34,8 @@ class Leader {
     } else {
       this.imagePath = imagePath;
     }
+
+    changes = _innerChanges.stream;
   }
 
   static String getRandomImage() {
@@ -45,8 +51,13 @@ class Leader {
     return Set.from(_perks);
   }
 
+  bool hasReachedMaxLevel() {
+    return level >= maxLevel;
+  }
+
   void addPerk(PerkUnit perk) {
     _perks.add(perk);
+    _innerChanges.add(this);
   }
 
   double get nextLevelPrice {
@@ -95,7 +106,7 @@ class Leader {
     List<Leader> leaders = List.empty(growable: true);
     for (var i = 0; i < 11; i++) {
       leaders
-          .add(Leader("leaders.${keyNames[i]}", imagePath: imagePathForId(i)));
+          .add(Leader("leaders.${keyNames[i]}", imagePath: imagePathForId(i), experience: 2995));
     }
     return leaders;
   }
@@ -104,6 +115,7 @@ class Leader {
     if (level < 3) {
       experience += amount;
     }
+    _innerChanges.add(this);
   }
 }
 

@@ -16,12 +16,26 @@ class _AddNewPerkViewState extends State<AddNewPerkView> {
   RESOURCE_CATEGORY? _selected;
 
   @override
+  void initState() {
+    super.initState();
+    _selected = availableCategories().first;
+  }
+  @override
+  void didUpdateWidget(AddNewPerkView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    var allCats = availableCategories();
+    if (!availableCategories().contains(_selected)) {
+      _selected = allCats.first;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var resources = availableResources();
+    var resources = availableCategories();
     return Row(
       children: [
         DropdownButton<RESOURCE_CATEGORY>(
-          onChanged: _updateSelectedResource,
+          onChanged: _updateSelectedCategory,
           value: _selected,
           items: resources
               .map(
@@ -37,13 +51,13 @@ class _AddNewPerkViewState extends State<AddNewPerkView> {
     );
   }
 
-  List<RESOURCE_CATEGORY> availableResources() {
+  List<RESOURCE_CATEGORY> availableCategories() {
     return RESOURCE_CATEGORY.values
-        .where((category) => !widget.leader.hasPerkForCategory(category))
+        .where((category) => !widget.leader.hasPerkForCategory(category) && !DEFAULT_CATEGORIES.contains(category))
         .toList();
   }
 
-  void _updateSelectedResource(RESOURCE_CATEGORY? selected) {
+  void _updateSelectedCategory(RESOURCE_CATEGORY? selected) {
     setState(() {
       _selected = selected;
     });

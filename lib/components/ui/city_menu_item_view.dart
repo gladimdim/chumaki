@@ -23,10 +23,7 @@ class CityMenuItemView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                menuItem.imagePath,
-                width: 128,
-              ),
+              menuItem.image,
               menuItem.label,
             ],
           ),
