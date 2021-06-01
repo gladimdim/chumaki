@@ -15,9 +15,9 @@ class ActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: onPress,
-      child: BorderedAll(
+    return BorderedAll(
+      child: TextButton(
+        onPressed: onPress,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,

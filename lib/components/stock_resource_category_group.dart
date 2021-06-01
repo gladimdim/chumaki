@@ -6,6 +6,7 @@ import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/components/money_unit_view.dart';
+import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:flutter/material.dart';
 
 import 'package:chumaki/extensions/list.dart';

@@ -2,26 +2,29 @@ import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/i18n/leaders_localizations.dart';
 import 'package:chumaki/models/resources/resource.dart';
+import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/extensions/list.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
 
 class Wagon {
   late Stock stock;
-  static final String imagePath = "images/wagon/cart.png";
+  static final String imagePath = "images/wagon/wagon.png";
   double totalWeightCapacity;
   BehaviorSubject changes = BehaviorSubject();
   Leader? leader;
 
   String get fullLocalizedName {
-    return leader != null ? leader!.localizedNameKey : ChumakiLocalizations.labelCompany;
+    return hasLeader()
+        ? leader!.localizedNameKey
+        : ChumakiLocalizations.labelCompany;
   }
 
-  Wagon(
-      {
-      Stock? stock,
-      this.totalWeightCapacity = 100.0,
-      this.leader}) {
+  String getImagePath() {
+    return hasLeader() ? leader!.imagePath : imagePath;
+  }
+
+  Wagon({Stock? stock, this.totalWeightCapacity = 100.0, this.leader}) {
     if (stock == null) {
       this.stock = Stock(List.empty(growable: true));
     } else {
@@ -29,8 +32,21 @@ class Wagon {
     }
 
     this.stock.changes.listen((value) {
+      print("Stock edit");
       changes.add(value);
     });
+
+    subscribeLeaderChanges();
+  }
+
+  void subscribeLeaderChanges() {
+    leader?.changes.where((event) => event == LEADER_CHANGES.CATEGORY_UNLOCKED).listen((event) {
+      changes.add(this);
+    });
+  }
+
+  bool hasLeader() {
+    return leader != null;
   }
 
   bool canFitNewResource(Resource res) {
@@ -51,9 +67,8 @@ class Wagon {
   }
 
   void setLeader(Leader newLeader) {
-    // TODO: REMOVE
-    newLeader.experience = 980.0;
     leader = newLeader;
+    subscribeLeaderChanges();
     changes.add(this);
   }
 
@@ -93,5 +108,13 @@ class Wagon {
 
   void addExperienceToLeader(int soldAmount) {
     leader?.addExperience(soldAmount);
+  }
+
+  bool categoryUnlocked(RESOURCE_CATEGORY cat) {
+    if (leader == null) {
+      return DEFAULT_CATEGORIES.contains(cat);
+    } else {
+      return DEFAULT_CATEGORIES.contains(cat) || leader!.hasPerkForCategory(cat);
+    }
   }
 }

@@ -1,6 +1,5 @@
 import 'package:chumaki/models/leaders/leaders.dart';
-import 'package:chumaki/models/price/price_unit.dart';
-import 'package:chumaki/models/resources/resource.dart';
+import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -14,9 +13,9 @@ void main() {
       final leader = Leader("test",
           affects: Set.from([
             PerkUnit(
-                affectsResource: RESOURCES.WOOD, sellValue: 1.1, buyValue: 0.9)
+                affectsResourceCategory: RESOURCE_CATEGORY.MILITARY,)
           ]));
-      expect(leader.affects, isNotEmpty);
+      expect(leader.perks, isNotEmpty);
     });
   });
 
@@ -24,20 +23,18 @@ void main() {
     final leader = Leader("test",
         affects: Set.from([
           PerkUnit(
-              affectsResource: RESOURCES.WOOD, sellValue: 1.1, buyValue: 0.9)
+              affectsResourceCategory: RESOURCE_CATEGORY.MILITARY, )
         ]));
     test("Can tell if the resource prices are affected.", () {
-      expect(leader.doesAffectResource(Wood(10)), isTrue,
-          reason: "Wood is affected.");
-      expect(leader.doesAffectResource(Amber(10)), isFalse,
-          reason: "Amber is not affected");
+      expect(leader.hasPerkForCategory(RESOURCE_CATEGORY.MILITARY), isTrue,
+          reason: "Military is affected.");
+      expect(leader.hasPerkForCategory(RESOURCE_CATEGORY.LUXURY), isFalse,
+          reason: "Luxury is not affected");
     });
 
     test("Can return affect for the given resource", () {
-      final affect = leader.affectFor(resource: Wood(3));
-      expect(affect, isA<PerkUnit>(), reason: "Got an affect unit for Wood.");
-      expect(affect!.sellValue, equals(1.1), reason: "Sell value was returned");
-      expect(affect.buyValue, equals(0.9), reason: "Sell value was returned");
+      final affect = leader.perkFor(cat: RESOURCE_CATEGORY.MILITARY);
+      expect(affect, isA<PerkUnit>(), reason: "Got a unit for Military.");
     });
 
     test("Can add experience", () {
@@ -45,7 +42,7 @@ void main() {
           experience: 950,
           affects: Set.from([
             PerkUnit(
-                affectsResource: RESOURCES.WOOD, sellValue: 1.1, buyValue: 0.9)
+                affectsResourceCategory: RESOURCE_CATEGORY.MILITARY,)
           ]));
       leader.addExperience(51);
       expect(leader.level, equals(1), reason: "Level is now 1");
@@ -56,38 +53,6 @@ void main() {
       leader.addExperience(1000);
       expect(leader.level, equals(3), reason: "Level is still 3 (max)");
     });
-
-    test("Can tell new sell price for the affected resource", () {
-      expect(
-          leader.affectSellValueForResource(
-              resource: Wood(10), priceUnit: PriceUnit(RESOURCES.WOOD, 10)),
-          equals(110.0),
-          reason: "Price is increased by 1.1");
-    });
-
-    test("Does not affect price for the not affected resource.", () {
-      expect(
-          leader.affectSellValueForResource(
-              resource: Fish(10), priceUnit: PriceUnit(RESOURCES.FISH, 10)),
-          equals(100.0),
-          reason: "Price is not modified");
-    });
-
-    test("Can tell new sell price for the affected resource", () {
-      expect(
-          leader.affectBuyValueForResource(
-              resource: Wood(10), priceUnit: PriceUnit(RESOURCES.WOOD, 10)),
-          equals(90.0),
-          reason: "Sell Price is decreased by 0.9");
-    });
-
-    test("Does not affect price for the not affected resource.", () {
-      expect(
-          leader.affectBuyValueForResource(
-              resource: Fish(10), priceUnit: PriceUnit(RESOURCES.FISH, 10)),
-          equals(100.0),
-          reason: "Price is not modified");
-    });
   });
 
   group("JSON Converters", () {
@@ -95,9 +60,9 @@ void main() {
         affects: Set.from(
           [
             PerkUnit(
-                affectsResource: RESOURCES.AMBER, sellValue: 5, buyValue: 1),
+                affectsResourceCategory: RESOURCE_CATEGORY.MILITARY,),
             PerkUnit(
-                affectsResource: RESOURCES.FISH, sellValue: 3, buyValue: 2)
+                affectsResourceCategory: RESOURCE_CATEGORY.LUXURY,)
           ],
         ),
         experience: 2300);
@@ -105,22 +70,13 @@ void main() {
     test("Can convert to and back from json", () {
       expect(newLeader.localizedNameKey, equals("test"),
           reason: "Localized key name was restored");
-      expect(newLeader.affects.length, equals(leader.affects.length),
+      expect(newLeader.perks.length, equals(leader.perks.length),
           reason: "Affects set was restored");
-      expect(newLeader.affects.length, equals(2),
+      expect(newLeader.perks.length, equals(2),
           reason: "Affects set was restored");
-      expect(newLeader.affectFor(resource: Amber(1)), isNotNull,
-          reason: "Amber affect restored");
-      expect(
-          newLeader.affectSellValueForResource(
-              resource: Amber(2), priceUnit: PriceUnit(RESOURCES.AMBER, 5)),
-          equals(50),
-          reason: "Amber sell value affect restored");
-      expect(
-          newLeader.affectSellValueForResource(
-              resource: Fish(3), priceUnit: PriceUnit(RESOURCES.FISH, 2)),
-          equals(18),
-          reason: "Fish sell value affect restored");
+      expect(newLeader.perkFor(cat: RESOURCE_CATEGORY.MILITARY), isNotNull,
+          reason: "Military affect restored");
+
       expect(newLeader.experience, leader.experience,
           reason: "Experience was restored");
       expect(newLeader.level, equals(2),

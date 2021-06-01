@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 class ExpandablePanel extends StatefulWidget {
   final Widget title;
   final Widget content;
+  final bool isUnlocked;
 
   ExpandablePanel({
     required this.title,
     required this.content,
+    this.isUnlocked = true,
   });
 
   @override
@@ -43,7 +45,7 @@ class _ExpandablePanelState extends State<ExpandablePanel>
           children: [
             BorderedBottom(
               child: TextButton(
-                onPressed: toggleExpanded,
+                onPressed: widget.isUnlocked ? toggleExpanded : null,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -59,8 +61,8 @@ class _ExpandablePanelState extends State<ExpandablePanel>
                           );
                         },
                         child: IconButton(
-                          icon: Icon(Icons.arrow_downward, color: Colors.black,),
-                          onPressed: toggleExpanded,
+                          icon: Icon(widget.isUnlocked ? Icons.arrow_downward : Icons.lock, color: Colors.black,),
+                          onPressed: widget.isUnlocked ? toggleExpanded : null,
                         ),
                       ),
                     ),

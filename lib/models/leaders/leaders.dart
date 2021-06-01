@@ -1,19 +1,27 @@
+import 'dart:math';
+
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/i18n/leaders_localizations.dart';
-import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/extensions/list.dart';
+import 'package:chumaki/models/resources/resource_category.dart';
+import 'package:rxdart/rxdart.dart';
+
+enum LEADER_CHANGES { LEVEL_UP, CATEGORY_UNLOCKED, EXPERIENCE_GAINED }
 
 class Leader {
   final String localizedNameKey;
   late Set<PerkUnit> _perks;
 
-  int get level => experience ~/ _levelDelta;
+  int get level => experience ~/ levelDelta;
   double experience;
-  final double _levelDelta = 1000;
-  final levelUpBasePrice = 1000;
+  final double levelDelta = 1000;
+  static final levelUpBasePrice = 1000;
   late String imagePath;
-  static Money defaultAcquirePrice = Money(1000);
+  final BehaviorSubject<LEADER_CHANGES> _innerChanges = BehaviorSubject<LEADER_CHANGES>();
+  late ValueStream<LEADER_CHANGES> changes;
+  final int maxLevel = 3;
+  static Money defaultAcquirePrice = Money(levelUpBasePrice.toDouble());
 
   Leader(this.localizedNameKey,
       {Set<PerkUnit>? affects, this.experience = 0, String? imagePath}) {
@@ -28,6 +36,8 @@ class Leader {
     } else {
       this.imagePath = imagePath;
     }
+
+    changes = _innerChanges.stream;
   }
 
   static String getRandomImage() {
@@ -35,61 +45,37 @@ class Leader {
     return "images/leaders/leader${numbers.takeRandom()}.png";
   }
 
-  Set<PerkUnit> get affects {
+  int get availablePerks {
+    return max(0, level - _perks.length);
+  }
+
+  Set<PerkUnit> get perks {
     return Set.from(_perks);
   }
 
-  void addAffect(PerkUnit affect) {
-    _perks.add(affect);
+  bool hasReachedMaxLevel() {
+    return level >= maxLevel;
+  }
+
+  void addPerk(PerkUnit perk) {
+    _perks.add(perk);
+    _innerChanges.add(LEADER_CHANGES.CATEGORY_UNLOCKED);
   }
 
   double get nextLevelPrice {
     return (level + 1).toDouble() * levelUpBasePrice;
   }
 
-  PerkUnit? affectFor({required Resource resource}) {
+  PerkUnit? perkFor({required RESOURCE_CATEGORY cat}) {
     try {
-      return _perks
-          .firstWhere((affect) => affect.affectsResource == resource.type);
+      return _perks.firstWhere((perk) => perk.affectsResourceCategory == cat);
     } on StateError catch (_) {
       return null;
     }
   }
 
-  bool doesAffectResource(Resource resource) {
-    return affectFor(resource: resource) != null;
-  }
-
-  double affectSellValueForResource(
-      {required Resource resource, required PriceUnit priceUnit}) {
-    final affect = affectFor(resource: resource);
-    final value = affect?.sellValue;
-    return affectValueForResource(
-        resource: resource, priceUnit: priceUnit, value: value);
-  }
-
-  double affectBuyValueForResource(
-      {required Resource resource, required PriceUnit priceUnit}) {
-    final affect = affectFor(resource: resource);
-    final value = affect?.buyValue;
-    return affectValueForResource(
-        resource: resource, priceUnit: priceUnit, value: value);
-  }
-
-  double affectValueForResource(
-      {required Resource resource,
-      required PriceUnit priceUnit,
-      double? value}) {
-    if (value == null) {
-      return priceUnit.price * resource.amount.toDouble();
-    } else {
-      return _adjustedPriceToAffect(
-          value, resource.amount.toDouble(), priceUnit.price);
-    }
-  }
-
-  double _adjustedPriceToAffect(double value, double amount, double price) {
-    return (price * amount * value).roundToDouble();
+  bool hasPerkForCategory(RESOURCE_CATEGORY cat) {
+    return perkFor(cat: cat) != null;
   }
 
   String get fullLocalizedName {
@@ -122,7 +108,7 @@ class Leader {
     List<Leader> leaders = List.empty(growable: true);
     for (var i = 0; i < 11; i++) {
       leaders
-          .add(Leader("leaders.${keyNames[i]}", imagePath: imagePathForId(i)));
+          .add(Leader("leaders.${keyNames[i]}", imagePath: imagePathForId(i), experience: 2995));
     }
     return leaders;
   }
@@ -131,6 +117,7 @@ class Leader {
     if (level < 3) {
       experience += amount;
     }
+    _innerChanges.add(LEADER_CHANGES.EXPERIENCE_GAINED);
   }
 }
 
@@ -139,27 +126,27 @@ String imagePathForId(int id) {
 }
 
 class PerkUnit {
-  final RESOURCES affectsResource;
-  final double sellValue;
-  final double buyValue;
+  final RESOURCE_CATEGORY affectsResourceCategory;
 
-  PerkUnit(
-      {required this.affectsResource,
-      required this.sellValue,
-      required this.buyValue});
+  PerkUnit({
+    required this.affectsResourceCategory,
+  });
 
   Map<String, dynamic> toJson() {
     return {
-      "sellValue": sellValue,
-      "buyValue": buyValue,
-      "affectsResource": resourceTypeToString(affectsResource),
+      "affectsResourceCategory":
+          resourceCategoryToString(affectsResourceCategory),
     };
+  }
+
+  String toImagePath() {
+    return categoryToImagePath(affectsResourceCategory);
   }
 
   static PerkUnit fromJson(Map<String, dynamic> input) {
     return PerkUnit(
-        affectsResource: resourceTypeFromString(input["affectsResource"]),
-        sellValue: input["sellValue"],
-        buyValue: input["buyValue"]);
+        affectsResourceCategory:
+            resourceCategoryFromString(input["affectsResourceCategory"]),
+    );
   }
 }

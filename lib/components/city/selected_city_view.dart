@@ -10,6 +10,7 @@ import 'package:chumaki/components/ui/city_menu_item_view.dart';
 import 'package:chumaki/components/wagons/wagon_details.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:flutter/material.dart';
 
 const CITY_DETAILS_VIEW_WIDTH = 780.0;
@@ -49,19 +50,31 @@ class _SelectedCityViewState extends State<SelectedCityView> {
 
   List<CityMenuItem> getStandardButtons() => [
         CityMenuItem(
-            imagePath: "images/wagon/wheel.png",
+            image: Image.asset(
+              "images/wagon/wheel.png",
+              width: 128,
+            ),
             label: TitleText(ChumakiLocalizations.labelCompanies),
             content: CityWagonsView(city: widget.city)),
         CityMenuItem(
-            imagePath: "images/icons/market/market.png",
+            image: Image.asset(
+              "images/icons/market/market.png",
+              width: 128,
+            ),
             label: TitleText(ChumakiLocalizations.labelMarket),
             content: CityStockView(city: widget.city)),
         CityMenuItem(
-            imagePath: "images/icons/market/market2.png",
+            image: Image.asset(
+              "images/icons/market/market2.png",
+              width: 128,
+            ),
             label: TitleText(ChumakiLocalizations.labelWorldMarket),
             content: GlobalMarketView(currentCity: widget.city)),
         CityMenuItem(
-            imagePath: "images/cities/church.png",
+            image: Image.asset(
+              "images/cities/church.png",
+              width: 128,
+            ),
             label: TitleText(ChumakiLocalizations.labelMenuBuyNewRoutes),
             content: CanUnlockCitiesView(widget.city)),
       ];
@@ -70,11 +83,43 @@ class _SelectedCityViewState extends State<SelectedCityView> {
     return widget.city.wagons
         .map(
           (wagon) => CityMenuItem(
-              imagePath: "images/wagon/wagon.png",
+              image: StreamBuilder(
+                stream: wagon.changes,
+                builder: (context, _) => Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: ClipOval(
+                        child: Image.asset(wagon.getImagePath(), width: 128),
+                      ),
+                    ),
+                    wagon.leader == null
+                        ? Container()
+                        : StreamBuilder(
+                      stream: wagon.leader!.changes,
+                          builder: (context, _) => Positioned(
+                              right: 0,
+                              bottom: 0,
+                              child: Row(
+                                children: wagon.leader!.perks
+                                    .map(
+                                      (perk) => Image.asset(
+                                        categoryToImagePath(
+                                            perk.affectsResourceCategory),
+                                        width: 32,
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            ),
+                        ),
+                  ],
+                ),
+              ),
               label: StreamBuilder(
                   stream: wagon.changes,
-                  builder: (context, snap) =>
-                      TitleText(ChumakiLocalizations.getForKey(wagon.fullLocalizedName))),
+                  builder: (context, snap) => TitleText(
+                      ChumakiLocalizations.getForKey(wagon.fullLocalizedName))),
               content: WagonDetails(
                 wagon: wagon,
                 city: widget.city,

@@ -3,6 +3,7 @@ import 'package:chumaki/components/wagons/stock_wagon_status.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource.dart';
+import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/components/city_wagon_resource_exchange.dart';
@@ -23,6 +24,7 @@ class ResourceCategoryGroup extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return ExpandablePanel(
+      isUnlocked: _isCategoryUnlocked(),
       title: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,5 +105,15 @@ class ResourceCategoryGroup extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  bool _isCategoryUnlocked() {
+    final cat = resources.first.category;
+    final leader = wagon.leader;
+    if (leader == null) {
+      return DEFAULT_CATEGORIES.contains(cat);
+    } else {
+      return leader.hasPerkForCategory(cat) || DEFAULT_CATEGORIES.contains(cat);
+    }
   }
 }

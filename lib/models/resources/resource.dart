@@ -376,11 +376,6 @@ String resourceCategoryToLocalizedKey(RESOURCE_CATEGORY category) {
   }
 }
 
-String categoryToImagePath(RESOURCE_CATEGORY category) {
-  final catName = category.toString().split(".")[1].toLowerCase();
-  return "images/icons/$catName/$catName.png";
-}
-
 List<List<Resource>> groupResourcesByCategory(List<Resource> resources) {
   List<List<Resource>> result = resources.fold([], (result, current) {
     if (result.isEmpty) {

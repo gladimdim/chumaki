@@ -57,16 +57,7 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
             ],
           ),
         ),
-        ...groupResourcesByCategory(RESOURCES.values
-                .where((resType) {
-                  var fakeResource = Resource.fromType(resType);
-                  return widget.wagon.stock.hasResource(fakeResource) ||
-                      widget.city.stock.hasResource(fakeResource);
-                })
-                .map<Resource>(Resource.fromType)
-                .toList()
-                .toList())
-            .map(
+        ...sortedResourcesByCategories().map(
           (List<Resource> groupedResources) {
             return ResourceCategoryGroup(
               city: widget.city,
@@ -78,6 +69,29 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
         ).toList(),
       ],
     );
+  }
+
+  List<List<Resource>> sortedResourcesByCategories() {
+    var list = groupResourcesByCategory(RESOURCES.values
+        .where((resType) {
+          var fakeResource = Resource.fromType(resType);
+          return widget.wagon.stock.hasResource(fakeResource) ||
+              widget.city.stock.hasResource(fakeResource);
+        })
+        .map<Resource>(Resource.fromType)
+        .toList()
+        .toList());
+
+    var allUnlocked = list
+        .where((List<Resource> res) =>
+            widget.wagon.categoryUnlocked(res.first.category))
+        .toList();
+    var allLocked = list
+        .where((List<Resource> res) =>
+            !widget.wagon.categoryUnlocked(res.first.category))
+        .toList();
+
+    return [...allUnlocked, ...allLocked];
   }
 
   void onAmountChanged(int newValue) {
