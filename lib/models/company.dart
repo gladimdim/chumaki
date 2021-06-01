@@ -7,6 +7,7 @@ import 'package:chumaki/models/cities/chigirin.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/kaniv.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
+import 'package:chumaki/models/cities/lviv.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/cities/ochakiv.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
@@ -43,6 +44,7 @@ class Company {
     CityRoute(Ochakiv(), Sich(), Point<double>(450, -230)),
     CityRoute(Chernigiv(), Nizhin(), Point<double>(-100, 250)),
     CityRoute(Chernigiv(), Kyiv(), Point<double>(-280, 0)),
+    CityRoute(Lviv(), Kyiv(), Point<double>(0, 0)),
   ];
 
   late double _money;
@@ -56,7 +58,7 @@ class Company {
       this.allCities = cities;
     }
 
-    _money = money ?? 1500;
+    _money = money ?? 3000;
     changes = _innerChanges.stream;
     changes.listen((event) {
       switch (event) {
