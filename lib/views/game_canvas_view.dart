@@ -199,8 +199,8 @@ class _GameCanvasViewState extends State<GameCanvasView>
                 ),
               if (selected != null)
                 Positioned(
-                  left: selected!.point.x,
-                  top: selected!.point.y,
+                  left: getShiftedSelectedCity().x,
+                  top: getShiftedSelectedCity().y,
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border.all(color: Theme.of(context).primaryColor, width: 3),
@@ -236,6 +236,13 @@ class _GameCanvasViewState extends State<GameCanvasView>
         ),
       ],
     );
+  }
+
+  Point<double> getShiftedSelectedCity() {
+    var point = selected!.point;
+    var x = min<double>(point.x, CANVAS_WIDTH - CITY_DETAILS_VIEW_WIDTH);
+    var y = min<double>(point.y, CANVAS_HEIGHT - CITY_DETAILS_VIEW_WIDTH * 2);
+    return Point<double>(x, y);
   }
 
   Point<double> calculateCenterPoint() {

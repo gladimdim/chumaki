@@ -31,29 +31,32 @@ class CanUnlockCitiesView extends StatelessWidget {
           ),
           if (citiesToUnlock.isEmpty) buildEmptyView(),
           if (citiesToUnlock.isNotEmpty)
-            ...citiesToUnlock.toList().divideBy(2).map(
+            ...citiesToUnlock.toList().divideBy(4).map(
               (unlockCities) {
                 return Row(
                   children: unlockCities
                       .map(
-                        (unlockCity) => ActionButton(
-                          onPress: company
-                                  .hasEnoughMoney(unlockCity.unlockPriceMoney)
-                              ? () => buyCityRoute(unlockCity, company)
-                              : null,
-                          image: CityAvatarStacked(
-                            city: unlockCity,
-                            width: 128,
+                        (unlockCity) => Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ActionButton(
+                            onPress: company
+                                    .hasEnoughMoney(unlockCity.unlockPriceMoney)
+                                ? () => buyCityRoute(unlockCity, company)
+                                : null,
+                            image: CityAvatarStacked(
+                              city: unlockCity,
+                              width: 128,
+                            ),
+                            action: TitleText(ChumakiLocalizations.labelBuy),
+                            subTitle: StreamBuilder(
+                                stream: company.changes.where((event) =>
+                                    event == COMPANY_EVENTS.MONEY_REMOVED ||
+                                    event == COMPANY_EVENTS.MONEY_ADDED),
+                                builder: (context, snapshot) => MoneyUnitView(
+                                    unlockCity.unlockPriceMoney,
+                                    isEnough: company.hasEnoughMoney(
+                                        unlockCity.unlockPriceMoney))),
                           ),
-                          action: TitleText(ChumakiLocalizations.labelBuy),
-                          subTitle: StreamBuilder(
-                              stream: company.changes.where((event) =>
-                                  event == COMPANY_EVENTS.MONEY_REMOVED ||
-                                  event == COMPANY_EVENTS.MONEY_ADDED),
-                              builder: (context, snapshot) => MoneyUnitView(
-                                  unlockCity.unlockPriceMoney,
-                                  isEnough: company.hasEnoughMoney(
-                                      unlockCity.unlockPriceMoney))),
                         ),
                       )
                       .toList(),
