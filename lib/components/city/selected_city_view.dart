@@ -10,6 +10,7 @@ import 'package:chumaki/components/ui/city_menu_item_view.dart';
 import 'package:chumaki/components/wagons/wagon_details.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:flutter/material.dart';
 
 const CITY_DETAILS_VIEW_WIDTH = 780.0;
@@ -84,9 +85,35 @@ class _SelectedCityViewState extends State<SelectedCityView> {
           (wagon) => CityMenuItem(
               image: StreamBuilder(
                 stream: wagon.changes,
-                builder: (context, _) => ClipOval(
-                  child: Image.asset(wagon.getImagePath(),
-                      width: 128, height: 128),
+                builder: (context, _) => Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: ClipOval(
+                        child: Image.asset(wagon.getImagePath(), width: 128),
+                      ),
+                    ),
+                    wagon.leader == null
+                        ? Container()
+                        : StreamBuilder(
+                      stream: wagon.leader!.changes,
+                          builder: (context, _) => Positioned(
+                              right: 0,
+                              bottom: 0,
+                              child: Row(
+                                children: wagon.leader!.perks
+                                    .map(
+                                      (perk) => Image.asset(
+                                        categoryToImagePath(
+                                            perk.affectsResourceCategory),
+                                        width: 32,
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            ),
+                        ),
+                  ],
                 ),
               ),
               label: StreamBuilder(

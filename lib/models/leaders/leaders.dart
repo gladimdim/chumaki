@@ -137,6 +137,10 @@ class PerkUnit {
     };
   }
 
+  String toImagePath() {
+    return categoryToImagePath(affectsResourceCategory);
+  }
+
   static PerkUnit fromJson(Map<String, dynamic> input) {
     return PerkUnit(
         affectsResourceCategory:
