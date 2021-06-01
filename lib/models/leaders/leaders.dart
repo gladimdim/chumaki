@@ -7,6 +7,8 @@ import 'package:chumaki/extensions/list.dart';
 import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:rxdart/rxdart.dart';
 
+enum LEADER_CHANGES { LEVEL_UP, CATEGORY_UNLOCKED, EXPERIENCE_GAINED }
+
 class Leader {
   final String localizedNameKey;
   late Set<PerkUnit> _perks;
@@ -16,8 +18,8 @@ class Leader {
   final double levelDelta = 1000;
   static final levelUpBasePrice = 1000;
   late String imagePath;
-  final BehaviorSubject _innerChanges = BehaviorSubject();
-  late ValueStream changes;
+  final BehaviorSubject<LEADER_CHANGES> _innerChanges = BehaviorSubject<LEADER_CHANGES>();
+  late ValueStream<LEADER_CHANGES> changes;
   final int maxLevel = 3;
   static Money defaultAcquirePrice = Money(levelUpBasePrice.toDouble());
 
@@ -57,7 +59,7 @@ class Leader {
 
   void addPerk(PerkUnit perk) {
     _perks.add(perk);
-    _innerChanges.add(this);
+    _innerChanges.add(LEADER_CHANGES.CATEGORY_UNLOCKED);
   }
 
   double get nextLevelPrice {
@@ -115,7 +117,7 @@ class Leader {
     if (level < 3) {
       experience += amount;
     }
-    _innerChanges.add(this);
+    _innerChanges.add(LEADER_CHANGES.EXPERIENCE_GAINED);
   }
 }
 

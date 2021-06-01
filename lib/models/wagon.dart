@@ -3,7 +3,6 @@ import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/i18n/leaders_localizations.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/resources/resource_category.dart';
-import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/extensions/list.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
@@ -36,6 +35,14 @@ class Wagon {
       print("Stock edit");
       changes.add(value);
     });
+
+    subscribeLeaderChanges();
+  }
+
+  void subscribeLeaderChanges() {
+    leader?.changes.where((event) => event == LEADER_CHANGES.CATEGORY_UNLOCKED).listen((event) {
+      changes.add(this);
+    });
   }
 
   bool hasLeader() {
@@ -61,6 +68,7 @@ class Wagon {
 
   void setLeader(Leader newLeader) {
     leader = newLeader;
+    subscribeLeaderChanges();
     changes.add(this);
   }
 
