@@ -79,6 +79,7 @@ class ChumakiLocalizations {
       "cherkasy": "Cherkasy",
       "chigirin": "Chigirin",
       "ochakiv": "Ochakiv",
+      "chernigiv": "Chernihiv",
       "labelSell": "Sell",
       "labelBuy": "Buy",
       "labelContains": "Contains",
@@ -107,6 +108,8 @@ class ChumakiLocalizations {
       "labelExperience": "Experience",
       "labelAvailablePerks": "Available Perks",
       "labelListOfPerks": "Perks",
+      "labelUnlockAt": "Buy route at",
+      "labelCityIsLocked": "City is locked",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -128,6 +131,7 @@ class ChumakiLocalizations {
       "cherkasy": "Черкаси",
       "chigirin": "Чигирин",
       "ochakiv": "Очаків",
+      "chernigiv": "Чернігів",
       "labelSell": "Продати",
       "labelBuy": "Купити",
       "labelContains": "Містить",
@@ -156,6 +160,8 @@ class ChumakiLocalizations {
       "labelExperience": "Досвід",
       "labelAvailablePerks": "Доступно перків",
       "labelListOfPerks": "Перки",
+      "labelUnlockAt": "Купити маршрут в",
+      "labelCityIsLocked": "Доступ до міста закритий",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -176,6 +182,7 @@ class ChumakiLocalizations {
       "cherkasy": "Черкассы",
       "chigirin": "Чигирин",
       "ochakiv": "Очаков",
+      "chernigiv": "Чернигов",
       "labelSell": "Продажа",
       "labelBuy": "Покупка",
       "labelContains": "Имеет",
@@ -204,6 +211,8 @@ class ChumakiLocalizations {
       "labelExperience": "Опыт",
       "labelAvailablePerks": "Доступных перков",
       "labelListOfPerks": "Перки",
+      "labelUnlockAt": "Купить маршрут в",
+      "labelCityIsLocked": "Доступ в город закрыт",
     },
   };
 
@@ -385,5 +394,13 @@ class ChumakiLocalizations {
 
   static String get labelListOfPerks {
     return _localizedValues[locale.languageCode]!["labelListOfPerks"]!;
+  }
+
+  static String get labelUnlockAt {
+    return _localizedValues[locale.languageCode]!["labelUnlockAt"]!;
+  }
+
+  static String get labelCityIsLocked {
+    return _localizedValues[locale.languageCode]!["labelCityIsLocked"]!;
   }
 }
