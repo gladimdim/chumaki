@@ -76,6 +76,8 @@ class City {
         return Kyiv();
       case "ochakiv":
         return Ochakiv();
+      case "chernigiv":
+        return Chernigiv();
       default:
         throw "City with key $name is not recognized";
     }
