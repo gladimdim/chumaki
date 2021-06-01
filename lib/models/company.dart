@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/models/cities/cherkasy.dart';
+import 'package:chumaki/models/cities/chernigiv.dart';
 import 'package:chumaki/models/cities/chigirin.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/kaniv.dart';
@@ -36,10 +37,12 @@ class Company {
     CityRoute(Cherkasy(), Kaniv(), Point<double>(10.0, 10.0)),
     CityRoute(Sich(), Chigirin(), Point<double>(-675.0, 0.0)),
     CityRoute(Pereyaslav(), Chigirin(), Point<double>(-150.0, 155.0)),
-    CityRoute(Kyiv(), Nizhin(), Point<double>(-50, 50)),
+    CityRoute(Kyiv(), Nizhin(), Point<double>(150, -300)),
     CityRoute(Kyiv(), Pereyaslav(), Point<double>(300, 0)),
     CityRoute(Kaniv(), Pereyaslav(), Point<double>(100, -50)),
     CityRoute(Ochakiv(), Sich(), Point<double>(450, -230)),
+    CityRoute(Chernigiv(), Nizhin(), Point<double>(-100, 250)),
+    CityRoute(Chernigiv(), Kyiv(), Point<double>(-280, 0)),
   ];
 
   late double _money;
