@@ -27,7 +27,6 @@ class Lviv extends City {
         Amber(800),
         Cannon(300),
         Firearm(500),
-        Amber(500),
         Silk(500),
       ],
     ),

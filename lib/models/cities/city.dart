@@ -9,6 +9,7 @@ import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/lviv.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/cities/ochakiv.dart';
+import 'package:chumaki/models/cities/ostrog.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
@@ -81,6 +82,8 @@ class City {
         return Chernigiv();
       case "lviv":
         return Lviv();
+      case "ostrog":
+        return Ostrog();
       default:
         throw "City with key $name is not recognized";
     }
@@ -107,6 +110,7 @@ class City {
       Ochakiv(),
       Chernigiv(),
       Lviv(),
+      Ostrog(),
     ];
   }
 

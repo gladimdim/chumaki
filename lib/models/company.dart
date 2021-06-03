@@ -10,6 +10,7 @@ import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/lviv.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/cities/ochakiv.dart';
+import 'package:chumaki/models/cities/ostrog.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/progress_duration.dart';
@@ -44,7 +45,9 @@ class Company {
     CityRoute(Ochakiv(), Sich(), Point<double>(450, -230)),
     CityRoute(Chernigiv(), Nizhin(), Point<double>(-100, 250)),
     CityRoute(Chernigiv(), Kyiv(), Point<double>(-280, 0)),
-    CityRoute(Lviv(), Kyiv(), Point<double>(0, 0)),
+    CityRoute(Ostrog(), Kyiv(), Point<double>(0, 0)),
+    CityRoute(Ostrog(), Lviv(), Point<double>(0, 0)),
+
   ];
 
   late double _money;
