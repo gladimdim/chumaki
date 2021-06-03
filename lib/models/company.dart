@@ -13,6 +13,7 @@ import 'package:chumaki/models/cities/ochakiv.dart';
 import 'package:chumaki/models/cities/ostrog.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/sich.dart';
+import 'package:chumaki/models/cities/temryuk.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/route.dart';
@@ -49,6 +50,7 @@ class Company {
     CityRoute(Zhytomir(), Ostrog(), Point<double>(-300, 200)),
     CityRoute(Kyiv(), Zhytomir(), Point<double>(-500, 200)),
     CityRoute(Ostrog(), Lviv(), Point<double>(-300, 500)),
+    CityRoute(Temryuk(), Ochakiv(), Point<double>(-300, -300)),
 
   ];
 
