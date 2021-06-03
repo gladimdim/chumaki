@@ -4,6 +4,7 @@ import 'package:chumaki/components/city/city_on_map.dart';
 import 'package:chumaki/components/city/selected_city_locked_view.dart';
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/city/selected_city_view.dart';
+import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/models/cities/city.dart';
 
 import 'package:chumaki/models/cities/sich.dart';
@@ -84,10 +85,6 @@ class _GameCanvasViewState extends State<GameCanvasView>
                       width: 5,
                       height: CANVAS_HEIGHT,
                       color: Colors.black,
-                      child: Text(
-                        (index * 100).toString(),
-                        style: TextStyle(fontSize: 18, color: Colors.red),
-                      ),
                     ),
                   );
                 }).toList(),
@@ -100,13 +97,10 @@ class _GameCanvasViewState extends State<GameCanvasView>
                       height: 15,
                       width: CANVAS_WIDTH,
                       color: Colors.black,
-                      child: Text(
-                        (index * 100).toString(),
-                        style: TextStyle(fontSize: 18, color: Colors.red),
-                      ),
                     ),
                   );
                 }).toList(),
+              if (showCoordinates) ..._renderCoordinateLabels(),
               ...company.cityRoutes.map((route) {
                 var first = route.from;
                 bool highlight = false;
@@ -203,7 +197,8 @@ class _GameCanvasViewState extends State<GameCanvasView>
                   top: getShiftedSelectedCity().y,
                   child: Container(
                     decoration: BoxDecoration(
-                      border: Border.all(color: Theme.of(context).primaryColor, width: 3),
+                      border: Border.all(
+                          color: Theme.of(context).primaryColor, width: 3),
                       color: Theme.of(context).backgroundColor,
                       borderRadius: getRadius(),
                     ),
@@ -236,6 +231,21 @@ class _GameCanvasViewState extends State<GameCanvasView>
         ),
       ],
     );
+  }
+
+  List<Widget> _renderCoordinateLabels() {
+    List<Widget> children = List.empty(growable: true);
+    for (var i = 0; i < 53; i++)
+      for (var j = 0; j < 42; j++)
+        children.add(Positioned(
+          top: j * 100 + 20,
+          left: i * 100 + 5,
+          child: OutlinedText(
+            "${j * 100}, ${j * 100}",
+          ),
+        ));
+
+    return children;
   }
 
   Point<double> getShiftedSelectedCity() {

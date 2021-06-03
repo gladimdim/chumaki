@@ -12,6 +12,7 @@ import 'package:chumaki/models/cities/ochakiv.dart';
 import 'package:chumaki/models/cities/ostrog.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/sich.dart';
+import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -111,6 +112,7 @@ class City {
       Chernigiv(),
       Lviv(),
       Ostrog(),
+      Zhytomir(),
     ];
   }
 
