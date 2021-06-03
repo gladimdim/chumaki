@@ -241,7 +241,7 @@ class _GameCanvasViewState extends State<GameCanvasView>
           top: j * 100 + 20,
           left: i * 100 + 5,
           child: OutlinedText(
-            "${j * 100}, ${j * 100}",
+            "${i * 100}, ${j * 100}",
           ),
         ));
 
