@@ -1,6 +1,9 @@
+import 'package:chumaki/components/city/city_avatar.dart';
 import 'package:chumaki/components/group_control.dart';
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/resource_image_view.dart';
+import 'package:chumaki/components/ui/bordered_all.dart';
+import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';
 import 'package:chumaki/components/wagons/wagons_global_price_list.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
@@ -51,7 +54,8 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                       return Row(
                           children: resources.map((type) {
                         final resource = Resource.fromType(type);
-                        final contains = widget.currentCity.stock.hasResource(resource);
+                        final contains =
+                            widget.currentCity.stock.hasResource(resource);
                         return GestureDetector(
                           onTap: () {
                             setState(() {
@@ -81,37 +85,44 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                       var buyPrice = city.prices
                           .buyPriceForResource(selectedResource, withAmount: 1);
                       var saldo = buyPrice - currentSell;
-                      return Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: GroupedControl(
-                          borderColor: Colors.blueGrey,
-                          height: 80,
-                          titleHeight: 25,
-                          titleAlignment: GROUP_TITLE_ALIGNMENT.CENTER,
-                          width: 180,
-                          title: TitleText(ChumakiLocalizations.getForKey(
-                              city.localizedKeyName)),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              top: 22.0,
-                              left: 8.0,
-                            ),
+                      return Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: BorderedAll(
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text("Price:"),
-                                    MoneyUnitView(Money(buyPrice)),
-                                  ],
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: BorderedBottom(
+                                    child: TitleText(ChumakiLocalizations.getForKey(
+                                        city.localizedKeyName)),
+                                  ),
                                 ),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Text("Profit:"),
-                                    MoneyUnitView(Money(saldo),
-                                        isEnough: saldo > 0),
+                                    SmallCityAvatar(city, showName: false,),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Text("Price:"),
+                                            MoneyUnitView(Money(buyPrice)),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Text("Profit:"),
+                                            MoneyUnitView(Money(saldo),
+                                                isEnough: saldo > 0),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ],
                                 ),
                               ],
