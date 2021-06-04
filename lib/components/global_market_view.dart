@@ -51,7 +51,7 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                       return Row(
                           children: resources.map((type) {
                         final resource = Resource.fromType(type);
-                        final contains = widget.currentCigty.stock.hasResource(resource);
+                        final contains = widget.currentCity.stock.hasResource(resource);
                         return GestureDetector(
                           onTap: () {
                             setState(() {
