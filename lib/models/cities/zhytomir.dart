@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
+import 'package:chumaki/models/cities/berdychiv.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/ostrog.dart';
 import 'package:chumaki/models/price.dart';
@@ -16,7 +17,7 @@ class Zhytomir extends City {
     size: 2,
     unlocked: false,
     unlockPriceMoney: Money(200.0),
-    unlocksCities: [Ostrog()],
+    unlocksCities: [Ostrog(), Berdychiv()],
     prices: Price(Zhytomir.generatePriceUnits()),
     stock: Stock(
       [

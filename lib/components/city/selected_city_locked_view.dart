@@ -27,7 +27,7 @@ class SelectedCityLockedView extends StatelessWidget {
           ),
           Text(ChumakiLocalizations.labelUnlockAt, style: Theme.of(context).textTheme.headline5,),
           BorderedAll(
-            child: Column(
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: company.allCities.where((cityThatCanUnlock) {
                 var realCity = company.refToCityByName(city);
