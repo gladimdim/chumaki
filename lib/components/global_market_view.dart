@@ -51,15 +51,19 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                       return Row(
                           children: resources.map((type) {
                         final resource = Resource.fromType(type);
+                        final contains = widget.currentCigty.stock.hasResource(resource);
                         return GestureDetector(
                           onTap: () {
                             setState(() {
                               selectedResource = resource;
                             });
                           },
-                          child: ResourceImageView(
-                            resource.cloneWithAmount(1),
-                            showAmount: selectedResource.sameType(resource),
+                          child: Opacity(
+                            opacity: contains ? 1 : 0.4,
+                            child: ResourceImageView(
+                              resource.cloneWithAmount(1),
+                              showAmount: selectedResource.sameType(resource),
+                            ),
                           ),
                         );
                       }).toList());
