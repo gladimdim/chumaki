@@ -7,20 +7,22 @@ import 'package:flutter/material.dart';
 class CityAvatar extends StatelessWidget {
   final City city;
   final double width;
+  final bool showName;
 
-  CityAvatar({required this.city, this.width = 32.0});
+  CityAvatar({required this.city, this.width = 32.0, this.showName = true});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset(
-          city.avatarImagePath,
-          width: width,
-        ),
-        Padding(
+          Image.asset(
+            city.avatarImagePath,
+            width: width,
+          ),
+        if (showName) Padding(
           padding: const EdgeInsets.all(4.0),
-          child: TitleText(ChumakiLocalizations.getForKey(city.localizedKeyName)),
+          child:
+              TitleText(ChumakiLocalizations.getForKey(city.localizedKeyName)),
         ),
       ],
     );
@@ -29,8 +31,10 @@ class CityAvatar extends StatelessWidget {
 
 class SmallCityAvatar extends CityAvatar {
   final City city;
+  final bool showName;
 
-  SmallCityAvatar(this.city) : super(city: city, width: 32);
+  SmallCityAvatar(this.city, {this.showName = true})
+      : super(city: city, showName: showName, width: 32);
 }
 
 class CityAvatarStacked extends StatelessWidget {
