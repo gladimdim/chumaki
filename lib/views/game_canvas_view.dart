@@ -49,10 +49,7 @@ class GameCanvasViewState extends State<GameCanvasView>
   void initState() {
     _animationController =
         AnimationController(duration: animationDuration, vsync: this);
-    navigateFromPointToCity(
-        fromPoint: Point(CANVAS_WIDTH, CANVAS_HEIGHT),
-        to: Sich(),
-        withDuration: animationDuration);
+    navigateFromToCity(to: Sich(), withDuration: animationDuration);
     _transformationController.addListener(() {
       // print("new value: ${_transformationController.value}");
     });
@@ -268,20 +265,22 @@ class GameCanvasViewState extends State<GameCanvasView>
   }
 
   void navigateFromToCity(
-      {required City from,
+      {City? from,
       required City to,
       Duration withDuration = const Duration(milliseconds: 750)}) {
     dismissSelectedCity();
-    final startPoint = calculateCenterPointForCity(from);
+
+    Matrix4 matrixStart = Matrix4.inverted(_transformationController.value);
+    if (from == null) {
+      final startPoint = Point(CANVAS_WIDTH, CANVAS_HEIGHT);
+
+      matrixStart = Matrix4.identity()..translate(startPoint.x, startPoint.y);
+    }
+
     final endPoint = calculateCenterPointForCity(to);
-    final currentMatrix = _transformationController.value;
-    final currentScale = currentMatrix.getMaxScaleOnAxis();
-    print("current scale: $currentScale");
-    var start = Matrix4.identity()..translate(startPoint.x, startPoint.y);
     var end = Matrix4.identity()..translate(endPoint.x, endPoint.y);
-    _mapAnimation =
-        Matrix4Tween(begin: Matrix4.inverted(_transformationController.value), end: end).animate(_animationController);
-    print("navigating from $start to $end");
+    _mapAnimation = Matrix4Tween(begin: matrixStart, end: end)
+        .animate(_animationController);
     _animationController.duration = withDuration;
     _mapAnimation.addListener(mapAnimationListener);
     _mapAnimation.addStatusListener((status) {
@@ -297,14 +296,7 @@ class GameCanvasViewState extends State<GameCanvasView>
       {required Point<double> fromPoint,
       required City to,
       required Duration withDuration}) {
-    final fakeCity = City(
-        point: fromPoint,
-        name: "",
-        stock: Stock([]),
-        prices: Price([]),
-        localizedKeyName: "",
-        unlocksCities: []);
-    navigateFromToCity(from: fakeCity, to: to, withDuration: withDuration);
+    navigateFromToCity(to: to, withDuration: withDuration);
   }
 
   void mapAnimationListener() {
