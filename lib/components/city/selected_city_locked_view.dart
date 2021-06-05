@@ -1,10 +1,12 @@
 import 'package:chumaki/components/city/city_stock_view.dart';
 import 'package:chumaki/components/city/city_avatar.dart';
 import 'package:chumaki/components/city/selected_city_view.dart';
+import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/views/game_canvas_view.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 
@@ -23,9 +25,15 @@ class SelectedCityLockedView extends StatelessWidget {
       child: Column(
         children: [
           BorderedBottom(
-            child: Text(ChumakiLocalizations.labelCityIsLocked, style: Theme.of(context).textTheme.headline3,),
+            child: Text(
+              ChumakiLocalizations.labelCityIsLocked,
+              style: Theme.of(context).textTheme.headline3,
+            ),
           ),
-          Text(ChumakiLocalizations.labelUnlockAt, style: Theme.of(context).textTheme.headline5,),
+          Text(
+            ChumakiLocalizations.labelUnlockAt,
+            style: Theme.of(context).textTheme.headline5,
+          ),
           BorderedAll(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +43,12 @@ class SelectedCityLockedView extends StatelessWidget {
                     .citiesToRealCities(cityThatCanUnlock.unlocksCities)
                     .contains(realCity);
               }).map((cityThatUnlocks) {
-                return CityAvatarStacked(city: cityThatUnlocks);
+                return ActionButton(
+                  image: CityAvatarStacked(city: cityThatUnlocks),
+                  subTitle: Container(),
+                  action: Text("Action"),
+                  onPress: () => _navigateViewerToCity(cityThatUnlocks, context),
+                );
               }).toList(),
             ),
           ),
@@ -46,5 +59,13 @@ class SelectedCityLockedView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _navigateViewerToCity(City cityThatUnlocks, BuildContext context) {
+    final viewer = globalViewerKey.currentState;
+    if (viewer == null) {
+      return;
+    }
+    viewer.navigateFromToCity(from: city, to: cityThatUnlocks);
   }
 }

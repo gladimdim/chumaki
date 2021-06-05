@@ -5,12 +5,14 @@ import 'package:chumaki/components/city/selected_city_locked_view.dart';
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
+import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
 
 import 'package:chumaki/models/image_on_canvas.dart';
+import 'package:chumaki/models/price.dart';
 import 'package:chumaki/utils/points.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
@@ -18,17 +20,21 @@ import 'dart:ui' as ui;
 
 const CITY_SIZE = 50;
 
+final globalViewerKey =
+    GlobalKey<GameCanvasViewState>(debugLabel: "interactiveViewer");
+
 class GameCanvasView extends StatefulWidget {
   final Company company;
   final Size screenSize;
 
-  GameCanvasView({required this.company, required this.screenSize});
+  GameCanvasView({required this.company, required this.screenSize})
+      : super(key: globalViewerKey);
 
   @override
-  _GameCanvasViewState createState() => _GameCanvasViewState();
+  GameCanvasViewState createState() => GameCanvasViewState();
 }
 
-class _GameCanvasViewState extends State<GameCanvasView>
+class GameCanvasViewState extends State<GameCanvasView>
     with TickerProviderStateMixin {
   TransformationController _transformationController =
       TransformationController();
@@ -41,21 +47,15 @@ class _GameCanvasViewState extends State<GameCanvasView>
 
   @override
   void initState() {
-    // pan animation
-    var centerPoint = calculateCenterPoint();
-    var start = Matrix4.identity()..translate(CANVAS_WIDTH, CANVAS_HEIGHT);
-    var end = Matrix4.identity()..translate(centerPoint.x, centerPoint.y);
     _animationController =
         AnimationController(duration: animationDuration, vsync: this);
-    _mapAnimation =
-        Matrix4Tween(begin: start, end: end).animate(_animationController);
-    _mapAnimation.addListener(() {
-      setState(() {
-        final value = Matrix4.inverted(_mapAnimation.value);
-        _transformationController.value = value;
-      });
+    navigateFromPointToCity(
+        fromPoint: Point(CANVAS_WIDTH, CANVAS_HEIGHT),
+        to: Sich(),
+        withDuration: animationDuration);
+    _transformationController.addListener(() {
+      // print("new value: ${_transformationController.value}");
     });
-    _animationController.forward();
     super.initState();
   }
 
@@ -255,16 +255,63 @@ class _GameCanvasViewState extends State<GameCanvasView>
     return Point<double>(x, y);
   }
 
-  Point<double> calculateCenterPoint() {
+  Point<double> calculateCenterPointForCity(City city) {
     final width = widget.screenSize.width;
     final height = widget.screenSize.height;
-    final sichPoint = Sich().point;
+    final sichPoint = city.point;
     final middleX = width / 2;
     final middleY = height / 2;
     return Point<double>(
       sichPoint.x - middleX + Sich().size * CITY_SIZE / 2,
       sichPoint.y - middleY + Sich().size * CITY_SIZE / 2,
     );
+  }
+
+  void navigateFromToCity(
+      {required City from,
+      required City to,
+      Duration withDuration = const Duration(milliseconds: 750)}) {
+    dismissSelectedCity();
+    final startPoint = calculateCenterPointForCity(from);
+    final endPoint = calculateCenterPointForCity(to);
+    final currentMatrix = _transformationController.value;
+    final currentScale = currentMatrix.getMaxScaleOnAxis();
+    print("current scale: $currentScale");
+    var start = Matrix4.identity()..translate(startPoint.x, startPoint.y);
+    var end = Matrix4.identity()..translate(endPoint.x, endPoint.y);
+    _mapAnimation =
+        Matrix4Tween(begin: Matrix4.inverted(_transformationController.value), end: end).animate(_animationController);
+    print("navigating from $start to $end");
+    _animationController.duration = withDuration;
+    _mapAnimation.addListener(mapAnimationListener);
+    _mapAnimation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _mapAnimation.removeListener(mapAnimationListener);
+      }
+    });
+    _animationController.reset();
+    _animationController.forward();
+  }
+
+  void navigateFromPointToCity(
+      {required Point<double> fromPoint,
+      required City to,
+      required Duration withDuration}) {
+    final fakeCity = City(
+        point: fromPoint,
+        name: "",
+        stock: Stock([]),
+        prices: Price([]),
+        localizedKeyName: "",
+        unlocksCities: []);
+    navigateFromToCity(from: fakeCity, to: to, withDuration: withDuration);
+  }
+
+  void mapAnimationListener() {
+    setState(() {
+      final value = Matrix4.inverted(_mapAnimation.value);
+      _transformationController.value = value;
+    });
   }
 
   BorderRadius getRadius() {
