@@ -47,7 +47,7 @@ class SelectedCityLockedView extends StatelessWidget {
                   image: CityAvatarStacked(city: cityThatUnlocks),
                   subTitle: Container(),
                   action: Text(ChumakiLocalizations.labelGoTo),
-                  onPress: () => _navigateViewerToCity(cityThatUnlocks, context),
+                  onPress: () => _navigateViewerToCity(cityThatUnlocks),
                 );
               }).toList(),
             ),
@@ -61,7 +61,7 @@ class SelectedCityLockedView extends StatelessWidget {
     );
   }
 
-  _navigateViewerToCity(City cityThatUnlocks, BuildContext context) {
+  _navigateViewerToCity(City cityThatUnlocks) {
     final viewer = globalViewerKey.currentState;
     if (viewer == null) {
       return;
