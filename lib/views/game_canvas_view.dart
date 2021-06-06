@@ -50,9 +50,6 @@ class GameCanvasViewState extends State<GameCanvasView>
     _animationController =
         AnimationController(duration: animationDuration, vsync: this);
     navigateFromToCity(to: Sich(), withDuration: animationDuration);
-    _transformationController.addListener(() {
-      // print("new value: ${_transformationController.value}");
-    });
     super.initState();
   }
 
@@ -290,13 +287,6 @@ class GameCanvasViewState extends State<GameCanvasView>
     });
     _animationController.reset();
     _animationController.forward();
-  }
-
-  void navigateFromPointToCity(
-      {required Point<double> fromPoint,
-      required City to,
-      required Duration withDuration}) {
-    navigateFromToCity(to: to, withDuration: withDuration);
   }
 
   void mapAnimationListener() {

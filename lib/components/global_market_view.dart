@@ -77,7 +77,7 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                 ...company.allCities
                     .where((city) => city != widget.currentCity)
                     .toList()
-                    .divideBy(2)
+                    .divideBy(3)
                     .map((List<City> cityRow) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -88,40 +88,66 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                       return Expanded(
                         flex: 1,
                         child: Padding(
-                          padding: const EdgeInsets.all(4.0),
+                          padding: const EdgeInsets.all(1.0),
                           child: BorderedAll(
                             child: Column(
                               children: [
                                 Align(
                                   alignment: Alignment.centerRight,
                                   child: BorderedBottom(
-                                    child: TitleText(ChumakiLocalizations.getForKey(
-                                        city.localizedKeyName)),
+                                    child: TitleText(
+                                        ChumakiLocalizations.getForKey(
+                                            city.localizedKeyName)),
                                   ),
                                 ),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    SmallCityAvatar(city, showName: false,),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Text("Price:"),
-                                            MoneyUnitView(Money(buyPrice)),
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Text("Profit:"),
-                                            MoneyUnitView(Money(saldo),
-                                                isEnough: saldo > 0),
-                                          ],
-                                        ),
-                                      ],
+                                    SmallCityAvatar(
+                                      city,
+                                      showName: false,
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    ChumakiLocalizations
+                                                        .labelPrice,
+                                                    textAlign: TextAlign.end,
+                                                  )),
+                                              Expanded(
+                                                  flex: 1,
+                                                  child: MoneyUnitView(
+                                                      Money(buyPrice))),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                  flex: 3,
+                                                  child: Text(
+                                                    ChumakiLocalizations
+                                                        .labelProfit,
+                                                    textAlign: TextAlign.end,
+                                                  )),
+                                              Expanded(
+                                                flex: 3,
+                                                child: MoneyUnitView(
+                                                    Money(saldo),
+                                                    isEnough: saldo > 0),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),

@@ -46,7 +46,7 @@ class SelectedCityLockedView extends StatelessWidget {
                 return ActionButton(
                   image: CityAvatarStacked(city: cityThatUnlocks),
                   subTitle: Container(),
-                  action: Text("Action"),
+                  action: Text(ChumakiLocalizations.labelGoTo),
                   onPress: () => _navigateViewerToCity(cityThatUnlocks, context),
                 );
               }).toList(),
