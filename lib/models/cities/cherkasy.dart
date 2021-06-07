@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/cities/korsun.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/price.dart';
@@ -17,7 +18,7 @@ class Cherkasy extends City {
           size: 2,
           unlocked: true,
           prices: Price(Cherkasy.generatePriceUnits()),
-          unlocksCities: [Pereyaslav(), Kyiv()],
+          unlocksCities: [Pereyaslav(), Kyiv(), Korsun()],
           stock: Stock([
             Bread(200),
             Stone(300),
@@ -67,9 +68,6 @@ class Cherkasy extends City {
         case RESOURCES.CANNON:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);
-        case RESOURCES.BREAD:
-          return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.8);
         case RESOURCES.CHARCOAL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.05);

@@ -52,7 +52,7 @@ class Kyiv extends City {
       switch (resType) {
         case RESOURCES.BREAD:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1);
+              .adjustToModifier(1.2);
         case RESOURCES.WOOD:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(0.7);
@@ -71,9 +71,6 @@ class Kyiv extends City {
         case RESOURCES.CANNON:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.3);
-        case RESOURCES.BREAD:
-          return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.7);
         case RESOURCES.CHARCOAL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(0.7);
@@ -100,7 +97,7 @@ class Kyiv extends City {
               .adjustToModifier(1.1);
         case RESOURCES.SILK:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(2.1);
+              .adjustToModifier(2.3);
         case RESOURCES.WOOL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.2);

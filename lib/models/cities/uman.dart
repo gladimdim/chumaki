@@ -6,31 +6,27 @@ import 'package:chumaki/models/price.dart';
 import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
-class Lviv extends City {
-  Lviv()
+class Uman extends City {
+  Uman()
       : super(
-    point: Point(4800, 2400),
-    name: "Львів",
-    localizedKeyName: 'lviv',
-    size: 6,
+    point: Point(3050, 1750),
+    name: "Умань",
     unlocked: false,
-    unlockPriceMoney: Money(1250.0),
+    localizedKeyName: 'uman',
+    size: 2,
     unlocksCities: [],
-    prices: Price(Lviv.generatePriceUnits()),
-    stock: Stock(
-      [
-        Wood(2500),
-        Planks(2500),
-        Fur(500),
-        Wool(500),
-        Wax(1000),
-        Amber(800),
-        Cannon(300),
-        Firearm(500),
-        Silk(500),
-      ],
-    ),
-    wagons: [],
+    prices: Price(generatePriceUnits()),
+    unlockPriceMoney: Money(300),
+    stock: Stock([
+      Bread(1300),
+      Stone(1000),
+      Cannon(5),
+      Grains(1000),
+      Fur(100),
+      Wool(800),
+      Gorilka(600),
+      Horse(100),
+    ]),
   );
 
   static List<PriceUnit> generatePriceUnits() {
@@ -38,70 +34,70 @@ class Lviv extends City {
       switch (resType) {
         case RESOURCES.BREAD:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1.2);
+              .adjustToModifier(0.8);
         case RESOURCES.WOOD:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.7);
+              .adjustToModifier(1.3);
         case RESOURCES.STONE:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.6);
+              .adjustToModifier(0.8);
         case RESOURCES.PLANKS:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.8);
+              .adjustToModifier(1.3);
         case RESOURCES.FIREARM:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.9);
+              .adjustToModifier(1.2);
         case RESOURCES.HORSE:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1.5);
+              .adjustToModifier(1.1);
         case RESOURCES.CANNON:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1);
+              .adjustToModifier(1.5);
         case RESOURCES.CHARCOAL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.8);
+              .adjustToModifier(1.3);
         case RESOURCES.FISH:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1.9);
+              .adjustToModifier(1.3);
         case RESOURCES.FUR:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1.4);
+              .adjustToModifier(1.1);
         case RESOURCES.GRAINS:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1.6);
+              .adjustToModifier(0.7);
         case RESOURCES.IRONORE:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1);
+              .adjustToModifier(1.4);
         case RESOURCES.METALPARTS:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1);
+              .adjustToModifier(1.3);
         case RESOURCES.POWDER:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.7);
+              .adjustToModifier(1.1);
         case RESOURCES.SALT:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(2.2);
+              .adjustToModifier(1.5);
         case RESOURCES.SILK:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(2.3);
+              .adjustToModifier(2.2);
         case RESOURCES.WOOL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1);
+              .adjustToModifier(1.0);
         case RESOURCES.GORILKA:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1.5);
+              .adjustToModifier(0.8);
         case RESOURCES.HONEY:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.8);
+              .adjustToModifier(1.2);
         case RESOURCES.WAX:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.9);
+              .adjustToModifier(1.2);
         case RESOURCES.TOBACCO:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1.9);
+              .adjustToModifier(1.3);
         case RESOURCES.AMBER:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.9);
+              .adjustToModifier(1.2);
         case RESOURCES.CLOTH:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.3);

@@ -14,6 +14,7 @@ class Berdychiv extends City {
     name: "Бердичів",
     unlocked: false,
     localizedKeyName: 'berdychiv',
+    unlockPriceMoney: Money(250),
     size: 2,
     unlocksCities: [Vinnitsa()],
     prices: Price(generatePriceUnits()),
@@ -31,7 +32,7 @@ class Berdychiv extends City {
       switch (resType) {
         case RESOURCES.BREAD:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.7);
+              .adjustToModifier(0.8);
         case RESOURCES.WOOD:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.3);
@@ -50,9 +51,6 @@ class Berdychiv extends City {
         case RESOURCES.CANNON:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.4);
-        case RESOURCES.BREAD:
-          return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1.0);
         case RESOURCES.CHARCOAL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);
@@ -79,7 +77,7 @@ class Berdychiv extends City {
               .adjustToModifier(1.5);
         case RESOURCES.SILK:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(2.3);
+              .adjustToModifier(2.0);
         case RESOURCES.WOOL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.0);

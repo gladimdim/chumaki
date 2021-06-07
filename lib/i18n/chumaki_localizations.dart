@@ -87,6 +87,8 @@ class ChumakiLocalizations {
       "bilatserkva": "Bila Tserkva",
       "vinnitsa": "Vinnitsa",
       "berdychiv": "Berdychiv",
+      "uman": "Uman",
+      "korsun": "Korsun",
       "labelSell": "Sell",
       "labelBuy": "Buy",
       "labelContains": "Contains",
@@ -149,6 +151,8 @@ class ChumakiLocalizations {
       "bilatserkva": "Біла Церква",
       "vinnitsa": "Вінниця",
       "berdychiv": "Бердичів",
+      "uman": "Умань",
+      "korsun": "Корсунь",
       "labelSell": "Продати",
       "labelBuy": "Купити",
       "labelContains": "Містить",
@@ -210,6 +214,8 @@ class ChumakiLocalizations {
       "bilatserkva": "Белая Церковь",
       "vinnitsa": "Винница",
       "berdychiv": "Бердычев",
+      "uman": "Умань",
+      "korsun": "Корсунь",
       "labelSell": "Продажа",
       "labelBuy": "Покупка",
       "labelContains": "Имеет",
@@ -436,7 +442,9 @@ class ChumakiLocalizations {
 
   static String get labelGoTo {
     return _localizedValues[locale.languageCode]!["labelGoTo"]!;
-  }  static String get labelProfit {
+  }
+
+  static String get labelProfit {
     return _localizedValues[locale.languageCode]!["labelProfit"]!;
   }
 
