@@ -5,14 +5,12 @@ import 'package:chumaki/components/city/selected_city_locked_view.dart';
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
-import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
 
 import 'package:chumaki/models/image_on_canvas.dart';
-import 'package:chumaki/models/price.dart';
 import 'package:chumaki/utils/points.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';

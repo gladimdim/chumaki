@@ -1,3 +1,20 @@
+import 'package:chumaki/models/cities/berdychiv.dart';
+import 'package:chumaki/models/cities/bila_tserkva.dart';
+import 'package:chumaki/models/cities/chernigiv.dart';
+import 'package:chumaki/models/cities/chigirin.dart';
+import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/cities/kaniv.dart';
+import 'package:chumaki/models/cities/korsun.dart';
+import 'package:chumaki/models/cities/kyiv.dart';
+import 'package:chumaki/models/cities/lviv.dart';
+import 'package:chumaki/models/cities/nizhin.dart';
+import 'package:chumaki/models/cities/ochakiv.dart';
+import 'package:chumaki/models/cities/ostrog.dart';
+import 'package:chumaki/models/cities/pereyaslav.dart';
+import 'package:chumaki/models/cities/sich.dart';
+import 'package:chumaki/models/cities/uman.dart';
+import 'package:chumaki/models/cities/vinnitsa.dart';
+import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:flutter/material.dart';
 
@@ -33,12 +50,14 @@ class Resource {
   final Color color;
   final RESOURCE_CATEGORY category;
   final RESOURCES type;
+  late final List<City> productionCenters;
   int amount;
 
   Resource(this.localizedKey, this.amount,
       {this.weightPerPoint = 1,
       required this.type,
       this.color = Colors.white,
+      required this.productionCenters,
       required this.category});
 
   String get imagePath {
@@ -139,13 +158,24 @@ class Resource {
       color: color,
       weightPerPoint: weightPerPoint,
       category: category,
+      productionCenters: List.from(productionCenters),
     );
   }
+
+  static List<Resource> allResources() {
+    return RESOURCES.values.map((resType) => Resource.fromType(resType)).toList();
+  }
+
+  static List<City> productionCenter({required Resource forResource}) {
+    return allResources().firstWhere((resource) => resource.sameType(forResource)).productionCenters;
+  }
+
 }
 
 class Wood extends Resource {
   Wood(int amount)
       : super("wood", amount,
+            productionCenters: [Chernigiv()],
             type: RESOURCES.WOOD,
             weightPerPoint: 0.5,
             color: Colors.brown[300]!,
@@ -155,6 +185,7 @@ class Wood extends Resource {
 class Cannon extends Resource {
   Cannon(int amount)
       : super("cannon", amount,
+            productionCenters: [Lviv()],
             type: RESOURCES.CANNON,
             weightPerPoint: 4,
             color: Colors.grey,
@@ -164,6 +195,7 @@ class Cannon extends Resource {
 class Charcoal extends Resource {
   Charcoal(int amount)
       : super("charcoal", amount,
+            productionCenters: [Chernigiv()],
             type: RESOURCES.CHARCOAL,
             weightPerPoint: 0.2,
             color: Colors.black,
@@ -173,6 +205,7 @@ class Charcoal extends Resource {
 class Firearm extends Resource {
   Firearm(int amount)
       : super("firearm", amount,
+            productionCenters: [Lviv()],
             weightPerPoint: 0.8,
             type: RESOURCES.FIREARM,
             color: Colors.black26,
@@ -182,6 +215,7 @@ class Firearm extends Resource {
 class Fish extends Resource {
   Fish(int amount)
       : super("fish", amount,
+            productionCenters: [Sich()],
             type: RESOURCES.FISH,
             weightPerPoint: 0.1,
             color: Colors.blueGrey,
@@ -191,6 +225,7 @@ class Fish extends Resource {
 class Bread extends Resource {
   Bread(int amount)
       : super("bread", amount,
+            productionCenters: [Vinnitsa()],
             weightPerPoint: 0.1,
             type: RESOURCES.BREAD,
             color: Colors.amber,
@@ -200,15 +235,17 @@ class Bread extends Resource {
 class Cloth extends Resource {
   Cloth(int amount)
       : super("cloth", amount,
-      weightPerPoint: 0.3,
-      type: RESOURCES.CLOTH,
-      color: Colors.grey[600]!,
-      category: RESOURCE_CATEGORY.CLOTHS);
+            productionCenters: [Nizhin()],
+            weightPerPoint: 0.3,
+            type: RESOURCES.CLOTH,
+            color: Colors.grey[600]!,
+            category: RESOURCE_CATEGORY.CLOTHS);
 }
 
 class Fur extends Resource {
   Fur(int amount)
       : super("fur", amount,
+            productionCenters: [Chigirin()],
             type: RESOURCES.FUR,
             weightPerPoint: 0.3,
             color: Colors.black54,
@@ -218,6 +255,7 @@ class Fur extends Resource {
 class Grains extends Resource {
   Grains(int amount)
       : super("grains", amount,
+            productionCenters: [BilaTserkva()],
             type: RESOURCES.GRAINS,
             weightPerPoint: 1,
             color: Colors.yellow,
@@ -227,6 +265,7 @@ class Grains extends Resource {
 class Horse extends Resource {
   Horse(int amount)
       : super("horse", amount,
+            productionCenters: [Pereyaslav()],
             type: RESOURCES.HORSE,
             weightPerPoint: 5,
             color: Colors.deepOrangeAccent,
@@ -236,6 +275,7 @@ class Horse extends Resource {
 class IronOre extends Resource {
   IronOre(int amount)
       : super("ironore", amount,
+            productionCenters: [Berdychiv()],
             type: RESOURCES.IRONORE,
             weightPerPoint: 1.5,
             color: Colors.orange,
@@ -245,6 +285,7 @@ class IronOre extends Resource {
 class MetalParts extends Resource {
   MetalParts(int amount)
       : super("metalparts", amount,
+            productionCenters: [Zhytomir()],
             type: RESOURCES.METALPARTS,
             weightPerPoint: 2,
             color: Colors.lightBlueAccent,
@@ -254,6 +295,7 @@ class MetalParts extends Resource {
 class Silk extends Resource {
   Silk(int amount)
       : super("silk", amount,
+            productionCenters: [Ochakiv()],
             type: RESOURCES.SILK,
             weightPerPoint: 0.3,
             color: Colors.yellow,
@@ -263,6 +305,7 @@ class Silk extends Resource {
 class Salt extends Resource {
   Salt(int amount)
       : super("salt", amount,
+            productionCenters: [Ochakiv()],
             type: RESOURCES.SALT,
             weightPerPoint: 0.2,
             color: Colors.white,
@@ -272,6 +315,7 @@ class Salt extends Resource {
 class Wool extends Resource {
   Wool(int amount)
       : super("wool", amount,
+            productionCenters: [Korsun()],
             type: RESOURCES.WOOL,
             weightPerPoint: 0.2,
             color: Colors.green,
@@ -292,6 +336,7 @@ class Money {
 class Planks extends Resource {
   Planks(int amount)
       : super("planks", amount,
+            productionCenters: [Nizhin()],
             weightPerPoint: 1,
             type: RESOURCES.PLANKS,
             color: Colors.brown[700]!,
@@ -301,6 +346,7 @@ class Planks extends Resource {
 class Powder extends Resource {
   Powder(int amount)
       : super("powder", amount,
+            productionCenters: [Sich()],
             type: RESOURCES.POWDER,
             weightPerPoint: 0.8,
             color: Colors.brown[500]!,
@@ -310,6 +356,7 @@ class Powder extends Resource {
 class Stone extends Resource {
   Stone(int amount)
       : super("stone", amount,
+            productionCenters: [Uman()],
             type: RESOURCES.STONE,
             weightPerPoint: 5,
             color: Colors.black45,
@@ -319,6 +366,7 @@ class Stone extends Resource {
 class Gorilka extends Resource {
   Gorilka(int amount)
       : super("gorilka", amount,
+            productionCenters: [Ostrog()],
             type: RESOURCES.GORILKA,
             weightPerPoint: 0.3,
             color: Colors.grey,
@@ -328,6 +376,7 @@ class Gorilka extends Resource {
 class Wax extends Resource {
   Wax(int amount)
       : super("wax", amount,
+            productionCenters: [Kyiv()],
             type: RESOURCES.WAX,
             weightPerPoint: 0.3,
             color: Colors.brown[400]!,
@@ -337,6 +386,7 @@ class Wax extends Resource {
 class Honey extends Resource {
   Honey(int amount)
       : super("honey", amount,
+            productionCenters: [Kaniv()],
             type: RESOURCES.HONEY,
             weightPerPoint: 0.8,
             color: Colors.brown[800]!,
@@ -346,6 +396,7 @@ class Honey extends Resource {
 class Amber extends Resource {
   Amber(int amount)
       : super("amber", amount,
+            productionCenters: [Zhytomir()],
             type: RESOURCES.AMBER,
             weightPerPoint: 1.5,
             color: Colors.brown[200]!,
@@ -355,6 +406,7 @@ class Amber extends Resource {
 class Tobacco extends Resource {
   Tobacco(int amount)
       : super("tobacco", amount,
+      productionCenters: [Ochakiv()],
             type: RESOURCES.TOBACCO,
             weightPerPoint: 0.2,
             color: Colors.yellow[600]!,

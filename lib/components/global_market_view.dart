@@ -1,9 +1,7 @@
 import 'package:chumaki/components/city/city_avatar.dart';
-import 'package:chumaki/components/group_control.dart';
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/ui/action_button.dart';
-import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';
 import 'package:chumaki/components/wagons/wagons_global_price_list.dart';

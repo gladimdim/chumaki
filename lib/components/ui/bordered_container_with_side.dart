@@ -4,7 +4,7 @@ class BorderedContainerWithSides extends StatelessWidget {
   final double width;
   final Color color;
   final Widget child;
-  late List<AxisDirection> borderDirections;
+  late final List<AxisDirection> borderDirections;
 
   BorderedContainerWithSides({
     this.width = 3.0,
