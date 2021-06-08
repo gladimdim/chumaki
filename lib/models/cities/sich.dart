@@ -81,9 +81,6 @@ class Sich extends City {
         case RESOURCES.CANNON:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);
-        case RESOURCES.BREAD:
-          return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.8);
         case RESOURCES.CHARCOAL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.1);
@@ -110,7 +107,7 @@ class Sich extends City {
               .adjustToModifier(1);
         case RESOURCES.SILK:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(2);
+              .adjustToModifier(1.5);
         case RESOURCES.WOOL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.3);

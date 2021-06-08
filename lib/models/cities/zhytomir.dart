@@ -60,9 +60,6 @@ class Zhytomir extends City {
         case RESOURCES.CANNON:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);
-        case RESOURCES.BREAD:
-          return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1);
         case RESOURCES.CHARCOAL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(0.9);

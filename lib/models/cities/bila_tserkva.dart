@@ -57,9 +57,6 @@ class BilaTserkva extends City {
         case RESOURCES.CANNON:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);
-        case RESOURCES.BREAD:
-          return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.8);
         case RESOURCES.CHARCOAL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.2);
@@ -86,7 +83,7 @@ class BilaTserkva extends City {
               .adjustToModifier(1.5);
         case RESOURCES.SILK:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(2.4);
+              .adjustToModifier(2.0);
         case RESOURCES.WOOL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);

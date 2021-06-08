@@ -34,7 +34,7 @@ class Ochakiv extends City {
       switch (resType) {
         case RESOURCES.BREAD:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1.1);
+              .adjustToModifier(1.3);
         case RESOURCES.WOOD:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.7);

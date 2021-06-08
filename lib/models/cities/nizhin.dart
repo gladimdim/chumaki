@@ -42,7 +42,7 @@ class Nizhin extends City {
       switch (resType) {
         case RESOURCES.BREAD:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1);
+              .adjustToModifier(0.8);
         case RESOURCES.WOOD:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(0.7);
@@ -61,9 +61,6 @@ class Nizhin extends City {
         case RESOURCES.CANNON:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.2);
-        case RESOURCES.BREAD:
-          return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.7);
         case RESOURCES.CHARCOAL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(0.9);
@@ -90,7 +87,7 @@ class Nizhin extends City {
               .adjustToModifier(1.3);
         case RESOURCES.SILK:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(2.3);
+              .adjustToModifier(2.0);
         case RESOURCES.WOOL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);

@@ -29,7 +29,6 @@ class Kaniv extends City {
             Cannon(3),
             Charcoal(200),
             MetalParts(100),
-            Horse(400),
             Salt(200),
             Silk(50),
             Wool(100),
@@ -57,13 +56,10 @@ class Kaniv extends City {
               .adjustToModifier(1.7);
         case RESOURCES.HORSE:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.8);
+              .adjustToModifier(1.0);
         case RESOURCES.CANNON:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.5);
-        case RESOURCES.BREAD:
-          return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(1);
         case RESOURCES.CHARCOAL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.2);

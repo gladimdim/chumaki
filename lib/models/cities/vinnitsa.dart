@@ -13,6 +13,7 @@ class Vinnitsa extends City {
     name: "Вінниця",
     unlocked: false,
     localizedKeyName: 'vinnitsa',
+    unlockPriceMoney: Money(150),
     size: 2,
     unlocksCities: [],
     prices: Price(generatePriceUnits()),
@@ -31,7 +32,7 @@ class Vinnitsa extends City {
       switch (resType) {
         case RESOURCES.BREAD:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(0.7);
+              .adjustToModifier(0.9);
         case RESOURCES.WOOD:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.1);
@@ -79,7 +80,7 @@ class Vinnitsa extends City {
               .adjustToModifier(1.4);
         case RESOURCES.SILK:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
-              .adjustToModifier(2.4);
+              .adjustToModifier(2.0);
         case RESOURCES.WOOL:
           return PriceUnit.defaultPriceUnitForResourceType(resType)
               .adjustToModifier(1.2);
