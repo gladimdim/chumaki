@@ -5,10 +5,9 @@ import 'package:test/test.dart';
 void main() {
   group("JSON PriceUnit object", () {
     test("Can serialize/deserialize PriceUnit object", () {
-      var pu = PriceUnit(RESOURCES.STONE, 22);
-      PriceUnit newPu = PriceUnit.fromJson(pu.toJson());
-      expect(newPu.price, equals(pu.price), reason: "Price restored");
-      expect(newPu.resourceType, equals(pu.resourceType), reason: "Resource restored");
+      var pu = PriceUnit(Stone(1), 22);
+      expect(pu.buyPriceForResource(), equals(22), reason: "Price is correct");
+      expect(pu.sellPriceForResource(), equals(22 * 0.85), reason: "Price is correct");
     });
   });
 }

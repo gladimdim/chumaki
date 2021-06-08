@@ -7,6 +7,7 @@ import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/models/resources/resource_category.dart';
+import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 
 import 'package:chumaki/extensions/list.dart';
@@ -22,6 +23,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final company = InheritedCompany.of(context).company;
     return ExpandablePanel(
       title: Row(
         children: [
@@ -57,18 +59,17 @@ class StockResourceCategoryGroup extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text("${ChumakiLocalizations.labelBuy}:"),
-                              MoneyUnitView(Money(forCity.prices
-                                  .sellPriceForResource(
-                                      resource.cloneWithAmount(1)))),
+                              MoneyUnitView(Money(forCity.buyPriceForResource(
+                                  resource.cloneWithAmount(1), company.allCities))),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text("${ChumakiLocalizations.labelSell}:"),
-                              MoneyUnitView(Money(forCity.prices
-                                  .buyPriceForResource(resource,
-                                      withAmount: 1))),
+                              MoneyUnitView(Money(forCity.sellPriceForResource(
+                                  resource, company.allCities,
+                                  withAmount: 1))),
                             ],
                           ),
                         ],

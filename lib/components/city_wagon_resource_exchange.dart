@@ -33,13 +33,13 @@ class CityWagonResourceExchange extends StatelessWidget {
     var wagonRes = wagon.stock.resourceInStock(resource);
     var cityRes = city.stock.resourceInStock(resource);
     var sellPricePerUnit =
-        city.prices.sellPriceForResource(resource, withAmount: 1);
+        city.buyPriceForResource(resource, company.allCities, withAmount: 1);
     var buyPricePerUnit =
-        city.prices.buyPriceForResource(resource, withAmount: 1);
-    var sellPrice = city.prices
-        .sellPriceForResource(resource, withAmount: amountTradeValue);
-    var buyPrice =
-        city.prices.buyPriceForResource(resource, withAmount: amountTradeValue);
+        city.sellPriceForResource(resource, company.allCities, withAmount: 1);
+    var buyPrice = city
+        .buyPriceForResource(resource, company.allCities, withAmount: amountTradeValue);
+    var sellPrice =
+        city.sellPriceForResource(resource, company.allCities, withAmount: amountTradeValue);
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -145,7 +145,7 @@ class CityWagonResourceExchange extends StatelessWidget {
 
   bool enableBuyButton(Company company) {
     var resToSell = resource.cloneWithAmount(amountTradeValue);
-    var money = city.prices.sellPriceForResource(resToSell);
+    var money = city.buyPriceForResource(resToSell, company.allCities);
     var hasWagonEnoughMoney = company.hasMoney(money);
     return hasWagonEnoughMoney &&
         city.canSellResource(resToSell) &&

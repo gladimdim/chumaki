@@ -20,7 +20,7 @@ import 'package:chumaki/models/cities/uman.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/company.dart';
-import 'package:chumaki/models/price.dart';
+import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/route.dart';
 import 'package:chumaki/models/task.dart';
@@ -36,7 +36,7 @@ class City {
   final double size;
   late List<Wagon> wagons;
   final List<City> unlocksCities;
-  final Price prices;
+  late final List<Resource> produces;
   BehaviorSubject changes = BehaviorSubject();
 
   String get avatarImagePath {
@@ -49,19 +49,18 @@ class City {
       {required this.point,
       required this.name,
       required this.stock,
-      required this.prices,
       required this.localizedKeyName,
       unlocked = false,
       this.size = 1,
       required this.unlocksCities,
       this.unlockPriceMoney = const Money(0),
+      required this.produces,
       List<Wagon>? wagons}) {
     if (wagons == null) {
       this.wagons = List.empty(growable: true);
     } else {
       this.wagons = wagons;
     }
-
     _unlocked = unlocked;
 
     stock.changes.listen(changes.add);
@@ -109,6 +108,7 @@ class City {
         throw "City with key $name is not recognized";
     }
   }
+
   //
   // static City nizhin = Nizhin();
   // static City kaniv = Kaniv();
@@ -155,8 +155,8 @@ class City {
       {required Resource resource,
       required Wagon toWagon,
       required Company company}) {
-    var price =
-        prices.sellPriceForResource(resource, withAmount: resource.amount);
+    var price = buyPriceForResource(resource, company.allCities,
+        withAmount: resource.amount);
     var hasMoney = company.hasMoney(price);
     if (!hasMoney) {
       return false;
@@ -174,8 +174,8 @@ class City {
       {required Resource resource,
       required Wagon fromWagon,
       required Company company}) {
-    var price =
-        prices.buyPriceForResource(resource, withAmount: resource.amount);
+    var price = sellPriceForResource(resource, company.allCities,
+        withAmount: resource.amount);
 
     final canSell = fromWagon.sellResource(resource);
     if (canSell) {
@@ -191,7 +191,9 @@ class City {
 
   List<City> connectsTo({required Company inCompany}) {
     return getRoutesInCompany(inCompany).map((route) {
-      return route.to.equalsTo(this) ? inCompany.refToCityByName(route.from) : inCompany.refToCityByName(route.to);
+      return route.to.equalsTo(this)
+          ? inCompany.refToCityByName(route.from)
+          : inCompany.refToCityByName(route.to);
     }).toList();
   }
 
@@ -223,8 +225,8 @@ class City {
       "localizedKeyName": localizedKeyName,
       "size": size,
       "wagons": wagons.map((wagon) => wagon.toJson()).toList(),
-      "prices": prices.toJson(),
       "unlocked": _unlocked,
+      "produces": produces.map((resource) => resource.toJson()).toList(),
       "unlockCities": unlocksCities.map((e) => e.localizedKeyName).toList(),
     };
   }
@@ -233,13 +235,14 @@ class City {
     var pointJson = input["point"];
     List wagonJson = input["wagons"];
     List unlockCities = input["unlockCities"];
+    List producesJson = input["produces"];
     return City(
       point: Point(pointJson["x"], pointJson["y"]),
       name: input["name"],
       stock: Stock.fromJson(input["stock"]),
-      prices: Price.fromJson(input["prices"]),
       localizedKeyName: input["localizedKeyName"],
       wagons: wagonJson.map((e) => Wagon.fromJson(e)).toList(),
+      produces: producesJson.map((e) => Resource.fromJson(e)).toList(),
       unlocked: input["unlocked"],
       unlocksCities:
           unlockCities.map((cityName) => City.fromName(cityName)).toList(),
@@ -250,5 +253,43 @@ class City {
   void addWagon(Wagon wagon) {
     wagons.add(wagon);
     changes.add(this);
+  }
+
+  double distanceTo({required City toCity}) {
+    return sqrt(
+        pow(point.x - toCity.point.x, 2) + pow(point.y - toCity.point.y, 2));
+  }
+
+  double sellPriceForResource(Resource resource, List<City> cities,
+      {int withAmount = 1}) {
+    double distance = max(
+        1, findClosetResourceCenter(resource, cities).distanceTo(toCity: this));
+    final priceUnit = PriceUnit.defaultPriceUnitForResourceType(resource.type);
+    return double.parse((priceUnit.sellPriceForResource(withAmount: withAmount) *
+        distance *
+        (distance == 1 ? 1 : 0.001)).toStringAsFixed(1));
+  }
+
+  double buyPriceForResource(Resource resource, List<City> cities,
+      {int withAmount = 1}) {
+    double distance = max(
+        1, findClosetResourceCenter(resource, cities).distanceTo(toCity: this));
+    final priceUnit = PriceUnit.defaultPriceUnitForResourceType(resource.type);
+
+    return double.parse((priceUnit.buyPriceForResource(withAmount: withAmount) *
+        distance *
+        (distance == 1 ? 1 : 0.001)).toStringAsFixed(1));
+  }
+
+  City findClosetResourceCenter(Resource resource, List<City> cities) {
+    List<City> centers = cities.where((city) {
+      return city.produces.where((res) => res.sameType(resource)).isNotEmpty;
+    }).toList();
+    City closest = centers.fold(centers.first, (previousValue, aCity) {
+      double previousDistance = previousValue.distanceTo(toCity: this);
+      double newDistance = aCity.distanceTo(toCity: this);
+      return previousDistance < newDistance ? previousValue : aCity;
+    });
+    return closest;
   }
 }

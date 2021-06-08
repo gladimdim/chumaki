@@ -55,7 +55,7 @@ class WagonsGlobalPriceList extends StatelessWidget {
   List<Tuple2<City, double>> calculateTopForWagon(
       Wagon wagon, Company company) {
     var result = company.allCities.map((city) {
-      return Tuple2(city, priceForFullWagonInCity(wagon, city));
+      return Tuple2(city, priceForFullWagonInCity(wagon, city, company));
     }).toList();
     result.sort((a, b) {
       return (a.item2 - b.item2) > 0 ? -1 : 1;
@@ -63,9 +63,9 @@ class WagonsGlobalPriceList extends StatelessWidget {
     return result;
   }
 
-  double priceForFullWagonInCity(Wagon wagon, City city) {
+  double priceForFullWagonInCity(Wagon wagon, City city, Company company) {
     return wagon.stock.iterator.fold(0, (previousValue, resource) {
-      var price = city.prices.buyPriceForResource(resource);
+      var price = city.sellPriceForResource(resource, company.allCities);
       return previousValue + price;
     });
   }
