@@ -58,7 +58,7 @@ class SelectedCityLockedView extends StatelessWidget {
             child: BorderedAll(
               child: Column(
                 children: [
-                  Text(ChumakiLocalizations.labelProductionCenter),
+                  Text(ChumakiLocalizations.labelProductionCenter, style: Theme.of(context).textTheme.headline3),
                   Row(
                     children: city.produces.map((e) => ResourceImageView(e, size: 64,)).toList(),
                   )

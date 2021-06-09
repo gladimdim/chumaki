@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 
 class CityOnMap extends StatelessWidget {
   final City city;
-
-  const CityOnMap(this.city);
+  final MAP_MODE mapMode;
+  const CityOnMap(this.city, {required this.mapMode});
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +39,7 @@ class CityOnMap extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
-                  child: Image.asset(city.avatarImagePath,
-                      width: CITY_SIZE.toDouble() * city.size),
+                  child: _avatarForMode(),
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
@@ -78,23 +77,30 @@ class CityOnMap extends StatelessWidget {
                       ],
                     ),
                   ),
-                if (city.size > 1)
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Column(
-                      children: city.produces
-                          .map((resource) => ResourceImageView(
-                                resource,
-                                size: 32,
-                              ))
-                          .toList(),
-                    ),
-                  ),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  Widget _avatarForMode() {
+    if (mapMode == MAP_MODE.CITY) {
+      return Image.asset(city.avatarImagePath,
+          width: CITY_SIZE.toDouble() * city.size);
+    } else {
+      final base = 80;
+      final count = city.produces.length;
+      final changePerResource = 16;
+      final koef = (base - changePerResource * count).toDouble() * city.size * 0.5;
+      // final sizeAdjust =
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: city.produces.map((e) => ResourceImageView(e, size: koef))
+            .toList(),
+
+      );
+    }
   }
 }
