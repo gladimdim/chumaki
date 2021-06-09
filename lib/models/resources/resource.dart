@@ -62,51 +62,51 @@ class Resource {
   static Resource fromType(RESOURCES type) {
     switch (type) {
       case RESOURCES.BREAD:
-        return Bread(0);
+        return Bread(1);
       case RESOURCES.CANNON:
-        return Cannon(0);
+        return Cannon(1);
       case RESOURCES.CHARCOAL:
-        return Charcoal(0);
+        return Charcoal(1);
       case RESOURCES.FIREARM:
-        return Firearm(0);
+        return Firearm(1);
       case RESOURCES.FISH:
-        return Fish(0);
+        return Fish(1);
       case RESOURCES.FUR:
-        return Fur(0);
+        return Fur(1);
       case RESOURCES.GRAINS:
-        return Grains(0);
+        return Grains(1);
       case RESOURCES.HORSE:
-        return Horse(0);
+        return Horse(1);
       case RESOURCES.IRONORE:
-        return IronOre(0);
+        return IronOre(1);
       case RESOURCES.METALPARTS:
-        return MetalParts(0);
+        return MetalParts(1);
       case RESOURCES.PLANKS:
-        return Planks(0);
+        return Planks(1);
       case RESOURCES.POWDER:
-        return Powder(0);
+        return Powder(1);
       case RESOURCES.STONE:
-        return Stone(0);
+        return Stone(1);
       case RESOURCES.WOOD:
-        return Wood(0);
+        return Wood(1);
       case RESOURCES.SALT:
-        return Salt(0);
+        return Salt(1);
       case RESOURCES.SILK:
-        return Silk(0);
+        return Silk(1);
       case RESOURCES.WOOL:
-        return Wool(0);
+        return Wool(1);
       case RESOURCES.GORILKA:
-        return Gorilka(0);
+        return Gorilka(1);
       case RESOURCES.HONEY:
-        return Honey(0);
+        return Honey(1);
       case RESOURCES.WAX:
-        return Wax(0);
+        return Wax(1);
       case RESOURCES.TOBACCO:
-        return Tobacco(0);
+        return Tobacco(1);
       case RESOURCES.AMBER:
-        return Amber(0);
+        return Amber(1);
       case RESOURCES.CLOTH:
-        return Cloth(0);
+        return Cloth(1);
     }
   }
 

@@ -261,27 +261,38 @@ class City {
   }
 
   double sellPriceForResource(Resource resource, List<City> cities,
-      {int withAmount = 1}) {
-    double distance = max(
-        1, findClosetResourceCenter(resource, cities).distanceTo(toCity: this));
+      {int? withAmount}) {
+    withAmount = withAmount ?? resource.amount;
+    double distance = max(1,
+        findClosestResourceCenter(resource, cities).distanceTo(toCity: this));
     final priceUnit = PriceUnit.defaultPriceUnitForResourceType(resource.type);
-    return double.parse((priceUnit.sellPriceForResource(withAmount: withAmount) *
-        distance *
-        (distance == 1 ? 1 : 0.001)).toStringAsFixed(1));
+    return double.parse(
+        (priceUnit.sellPriceForResource(withAmount: withAmount) *
+                distance *
+                (distance == 1 ? 1 : 0.001))
+            .toStringAsFixed(1));
   }
 
   double buyPriceForResource(Resource resource, List<City> cities,
-      {int withAmount = 1}) {
-    double distance = max(
-        1, findClosetResourceCenter(resource, cities).distanceTo(toCity: this));
+      {int? withAmount}) {
+    withAmount = withAmount ?? resource.amount;
+    double distance;
+    // in case we cannot find production center just use distance 1
+    try {
+      distance = max(1,
+          findClosestResourceCenter(resource, cities).distanceTo(toCity: this));
+    } catch (e) {
+      distance = 1;
+    }
     final priceUnit = PriceUnit.defaultPriceUnitForResourceType(resource.type);
 
     return double.parse((priceUnit.buyPriceForResource(withAmount: withAmount) *
-        distance *
-        (distance == 1 ? 1 : 0.001)).toStringAsFixed(1));
+            distance *
+            (distance == 1 ? 1 : 0.001))
+        .toStringAsFixed(1));
   }
 
-  City findClosetResourceCenter(Resource resource, List<City> cities) {
+  City findClosestResourceCenter(Resource resource, List<City> cities) {
     List<City> centers = cities.where((city) {
       return city.produces.where((res) => res.sameType(resource)).isNotEmpty;
     }).toList();

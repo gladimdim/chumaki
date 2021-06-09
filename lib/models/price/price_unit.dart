@@ -3,7 +3,7 @@ import 'package:chumaki/models/resources/resource.dart';
 class PriceUnit {
   final Resource resource;
   final double price;
-  final double _buyPriceAdjust = 0.85;
+  final double _sellPriceAdjust = 0.85;
 
   PriceUnit(this.resource, this.price);
 
@@ -23,7 +23,7 @@ class PriceUnit {
       withAmount = resource.amount;
     }
     return double.parse(
-        (price * withAmount * _buyPriceAdjust).toStringAsFixed(1));
+        (price * withAmount * _sellPriceAdjust).toStringAsFixed(1));
   }
 
   static PriceUnit defaultPriceUnitForResourceType(RESOURCES resType) {
