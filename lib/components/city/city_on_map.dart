@@ -1,3 +1,4 @@
+import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/wagon.dart';
@@ -31,52 +32,66 @@ class CityOnMap extends StatelessWidget {
             border: Border.all(color: Colors.black, width: 3),
             borderRadius: BorderRadius.circular(10),
           ),
-          width: CITY_SIZE * city.size,
-          height: CITY_SIZE * city.size,
-          child: Stack(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: Image.asset(city.avatarImagePath,
-                    width: CITY_SIZE.toDouble() * city.size),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white.withAlpha(180),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Text(
-                      ChumakiLocalizations.getForKey(city.localizedKeyName),
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 8 * city.size,
-                          fontWeight: FontWeight.bold),
+          child: SizedBox(
+            width: CITY_SIZE * city.size,
+            height: CITY_SIZE * city.size,
+            child: Stack(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: Image.asset(city.avatarImagePath,
+                      width: CITY_SIZE.toDouble() * city.size),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white.withAlpha(180),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text(
+                        ChumakiLocalizations.getForKey(city.localizedKeyName),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 8 * city.size,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              if (city.size > 1)
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Wrap(
-                    children: [
-                      Image.asset(
-                        Wagon.imagePath,
-                        width: 15 * city.size,
-                      ),
-                      Text(
-                        city.wagons.length.toString(),
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                    ],
+                if (city.size > 1)
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Wrap(
+                      children: [
+                        Image.asset(
+                          Wagon.imagePath,
+                          width: 15 * city.size,
+                        ),
+                        Text(
+                          city.wagons.length.toString(),
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-            ],
+                if (city.size > 1)
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Column(
+                      children: city.produces
+                          .map((resource) => ResourceImageView(
+                                resource,
+                                size: 32,
+                              ))
+                          .toList(),
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       ),
