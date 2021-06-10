@@ -19,6 +19,7 @@ void main() {
       final waxPrice = city.buyPriceForResource(Wax(1), cities);
       expect(waxPrice, equals(0.3), reason: "Original price as Kyiv produces Wax");
       expect(city.buyPriceForResource(Cloth(1), cities), equals(0.8), reason: "Cloth is produced in Nizhin so the price was adjusted Price(1) * DistanceCorrection(0.8)");
+      expect(city.sellPriceForResource(Cloth(1), cities), equals(0.6), reason: "Sell price is adjsuted by some coefficient.");
     });
 
     test("Can tell the prices with adjustment to amount", () {
@@ -26,7 +27,7 @@ void main() {
       final waxPrice = city.buyPriceForResource(Wax(10), cities);
       expect(waxPrice, equals(3), reason: "Original price as Kyiv produces Wax multiplied by amount 10");
       expect(city.buyPriceForResource(Cloth(10), cities), equals(7.6), reason: "Cloth is produced in Nizhin so the price was adjusted Price(1) * DistanceCorrection(0.8) * Amount(10)");
-
+      expect(city.sellPriceForResource(Cloth(10), cities), equals(6.5), reason: "Cloth is produced in Nizhin so the price was adjusted Price(1) * DistanceCorrection(0.8) * Amount(10)");
     });
   });
   group("JSON City object", () {
