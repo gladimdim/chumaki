@@ -1,6 +1,7 @@
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
+import 'package:chumaki/components/ui/bordered_container_with_side.dart';
 import 'package:chumaki/components/ui/bordered_top.dart';
 import 'package:chumaki/components/leader/leader_view.dart';
 import 'package:chumaki/components/wagons/wagon_dispatcher.dart';
@@ -41,7 +42,8 @@ class WagonDetails extends StatelessWidget {
             style: Theme.of(context).textTheme.headline4,
           ),
           if (wagon.leader == null)
-            BorderedAll(
+            BorderedContainerWithSides(
+              borderDirections: [AxisDirection.up, AxisDirection.down],
                 child: BuyLeaderView(
               wagon: wagon,
             )),
