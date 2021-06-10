@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/cities/gaivoron.dart';
+import 'package:chumaki/models/cities/ladyzhin.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Uman extends City {
@@ -12,7 +14,7 @@ class Uman extends City {
           unlocked: false,
           localizedKeyName: 'uman',
           size: 2,
-          unlocksCities: [],
+          unlocksCities: [Gaivoron()],
           produces: [Gorilka(1)],
           unlockPriceMoney: Money(300),
           stock: Stock([

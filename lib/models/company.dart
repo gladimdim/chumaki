@@ -7,15 +7,18 @@ import 'package:chumaki/models/cities/cherkasy.dart';
 import 'package:chumaki/models/cities/chernigiv.dart';
 import 'package:chumaki/models/cities/chigirin.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/cities/gaivoron.dart';
 import 'package:chumaki/models/cities/kaniv.dart';
 import 'package:chumaki/models/cities/korsun.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
+import 'package:chumaki/models/cities/ladyzhin.dart';
 import 'package:chumaki/models/cities/lviv.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/cities/ochakiv.dart';
 import 'package:chumaki/models/cities/ostrog.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/sich.dart';
+import 'package:chumaki/models/cities/stavise.dart';
 import 'package:chumaki/models/cities/temryuk.dart';
 import 'package:chumaki/models/cities/uman.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
@@ -63,6 +66,12 @@ class Company {
     CityRoute(Berdychiv(), Vinnitsa(), Point<double>(100, 200)),
     CityRoute(Cherkasy(), Korsun(), Point<double>(-40, 50)),
     CityRoute(Korsun(), Uman(), Point<double>(100, 200)),
+    CityRoute(BilaTserkva(), Stavise(), Point<double>(-150, 200)),
+    CityRoute(Stavise(), Vinnitsa(), Point<double>(-150, 200)),
+    CityRoute(Stavise(), Uman(), Point<double>(50, 100)),
+    CityRoute(Uman(), Gaivoron(), Point<double>(-50, 50)),
+    CityRoute(Vinnitsa(), Ladyzhin(), Point<double>(150, 100)),
+    CityRoute(Ladyzhin(), Gaivoron(), Point<double>(150, 100)),
   ];
 
   late double _money;
