@@ -4,6 +4,7 @@ import 'package:chumaki/components/city/can_unlock_cities_view.dart';
 import 'package:chumaki/components/city/city_wagons_view.dart';
 import 'package:chumaki/components/city/city_stock_view.dart';
 import 'package:chumaki/components/global_market_view.dart';
+import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/city_menu_item.dart';
 import 'package:chumaki/components/ui/city_menu_item_view.dart';
@@ -61,7 +62,13 @@ class _SelectedCityViewState extends State<SelectedCityView> {
               "images/icons/market/market.png",
               width: 128,
             ),
-            label: TitleText(ChumakiLocalizations.labelMarket),
+            label: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TitleText(ChumakiLocalizations.labelMarket),
+                ...widget.city.produces.map((resource)=> ResourceImageView(resource, size: 32,)).toList(),
+              ],
+            ),
             content: CityStockView(city: widget.city)),
         CityMenuItem(
             image: Image.asset(

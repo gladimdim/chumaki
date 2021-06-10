@@ -1,6 +1,7 @@
 import 'package:chumaki/components/city/city_stock_view.dart';
 import 'package:chumaki/components/city/city_avatar.dart';
 import 'package:chumaki/components/city/selected_city_view.dart';
+import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
@@ -50,6 +51,19 @@ class SelectedCityLockedView extends StatelessWidget {
                   onPress: () => _navigateViewerToCity(cityThatUnlocks),
                 );
               }).toList(),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BorderedAll(
+              child: Column(
+                children: [
+                  Text(ChumakiLocalizations.labelProductionCenter, style: Theme.of(context).textTheme.headline3),
+                  Row(
+                    children: city.produces.map((e) => ResourceImageView(e, size: 64,)).toList(),
+                  )
+                ],
+              ),
             ),
           ),
           Padding(

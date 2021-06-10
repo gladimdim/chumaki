@@ -2,17 +2,17 @@ import 'dart:math';
 
 import 'package:chumaki/components/city/city_on_map.dart';
 import 'package:chumaki/components/city/selected_city_locked_view.dart';
+import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
-import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
 
 import 'package:chumaki/models/image_on_canvas.dart';
-import 'package:chumaki/models/price.dart';
+import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/utils/points.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +44,7 @@ class GameCanvasViewState extends State<GameCanvasView>
   double animationValue = 0;
   bool showCoordinates = false;
   City? selected;
+  MAP_MODE mapMode = MAP_MODE.CITY;
 
   @override
   void initState() {
@@ -149,7 +150,7 @@ class GameCanvasViewState extends State<GameCanvasView>
                         }
                       });
                     },
-                    child: CityOnMap(city),
+                    child: CityOnMap(city, mapMode: mapMode,),
                   ),
                 );
               }).toList(),
@@ -213,13 +214,24 @@ class GameCanvasViewState extends State<GameCanvasView>
           top: 10,
           left: 0,
           child: Opacity(
-            opacity: 0.5,
+            opacity: 0.7,
             child: IconButton(
               onPressed: () async {
                 await company.save();
                 Navigator.pop(context);
               },
               icon: Icon(Icons.arrow_back_ios),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 45,
+          left: 0,
+          child: Opacity(
+            opacity: 0.7,
+            child: IconButton(
+              onPressed: _toggleMapMode,
+              icon: mapMode == MAP_MODE.CITY ? Image.asset("images/resources/wood/wood.png", width: 44) : Image.asset("images/cities/church.png", width: 44,),
             ),
           ),
         ),
@@ -307,6 +319,16 @@ class GameCanvasViewState extends State<GameCanvasView>
     });
   }
 
+  void _toggleMapMode() {
+    setState(() {
+      if (mapMode == MAP_MODE.CITY) {
+        mapMode = MAP_MODE.RESOURCE;
+      } else {
+        mapMode = MAP_MODE.CITY;
+      }
+    });
+  }
+
   @override
   void dispose() {
     _animationController.dispose();
@@ -332,3 +354,5 @@ class Clipper extends CustomClipper<Path> {
     return path;
   }
 }
+
+enum MAP_MODE { CITY, RESOURCE }

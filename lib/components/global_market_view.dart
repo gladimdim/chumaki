@@ -1,9 +1,7 @@
 import 'package:chumaki/components/city/city_avatar.dart';
-import 'package:chumaki/components/group_control.dart';
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/ui/action_button.dart';
-import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';
 import 'package:chumaki/components/wagons/wagons_global_price_list.dart';
@@ -38,8 +36,8 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
   @override
   Widget build(BuildContext context) {
     final company = InheritedCompany.of(context).company;
-    var currentResourceSellPrice = widget.currentCity.prices
-        .sellPriceForResource(selectedResource.cloneWithAmount(1));
+    var currentResourceSellPrice = widget.currentCity
+        .buyPriceForResource(selectedResource.cloneWithAmount(1), company.allCities);
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -77,14 +75,15 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                     },
                   ).toList(),
                 ),
-               ...allCitiesSortedByProfit(company, currentResourceSellPrice)
+                ...allCitiesSortedByProfit(company, currentResourceSellPrice)
                     .divideBy(3)
                     .map((List<City> cityRow) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: cityRow.map<Widget>((city) {
-                      var buyPrice = city.prices
-                          .buyPriceForResource(selectedResource, withAmount: 1);
+                      var buyPrice = city.sellPriceForResource(
+                          selectedResource, company.allCities,
+                          withAmount: 1);
                       var saldo = buyPrice - currentResourceSellPrice;
                       return Expanded(
                         flex: 1,
@@ -181,16 +180,18 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
   }
 
   List<City> allCitiesSortedByProfit(Company company, double currentSellPrice) {
-    List<City> cities = company.allCities
-        .where((city) => city != widget.currentCity)
-        .toList();
+    List<City> cities =
+        company.allCities.where((city) => city != widget.currentCity).toList();
 
-    cities.sort((cityA, cityB,) {
-      var buyPriceA = cityA.prices
-          .buyPriceForResource(selectedResource, withAmount: 1);
+    cities.sort((
+      cityA,
+      cityB,
+    ) {
+      var buyPriceA =
+          cityA.sellPriceForResource(selectedResource, company.allCities, withAmount: 1);
       var saldoA = buyPriceA - currentSellPrice;
-      var buyPriceB = cityB.prices
-          .buyPriceForResource(selectedResource, withAmount: 1);
+      var buyPriceB =
+          cityB.sellPriceForResource(selectedResource, company.allCities, withAmount: 1);
       var saldoB = buyPriceB - currentSellPrice;
 
       if (saldoA > saldoB) {
