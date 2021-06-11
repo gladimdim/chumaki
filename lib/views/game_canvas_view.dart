@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:chumaki/components/city/city_on_map.dart';
 import 'package:chumaki/components/city/selected_city_locked_view.dart';
-import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/city/selected_city_view.dart';
+import 'package:chumaki/components/ui/3d_button.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/models/cities/city.dart';
 
@@ -12,7 +12,6 @@ import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
 
 import 'package:chumaki/models/image_on_canvas.dart';
-import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/utils/points.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
@@ -150,7 +149,10 @@ class GameCanvasViewState extends State<GameCanvasView>
                         }
                       });
                     },
-                    child: CityOnMap(city, mapMode: mapMode,),
+                    child: CityOnMap(
+                      city,
+                      mapMode: mapMode,
+                    ),
                   ),
                 );
               }).toList(),
@@ -213,28 +215,42 @@ class GameCanvasViewState extends State<GameCanvasView>
         Positioned(
           top: 10,
           left: 0,
-          child: Opacity(
-            opacity: 0.7,
-            child: IconButton(
-              onPressed: () async {
-                await company.save();
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back_ios),
-            ),
+          child: IconButton(
+            onPressed: () async {
+              await company.save();
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back_ios),
           ),
         ),
-        Positioned(
-          top: 45,
-          left: 0,
-          child: Opacity(
-            opacity: 0.7,
-            child: IconButton(
-              onPressed: _toggleMapMode,
-              icon: mapMode == MAP_MODE.CITY ? Image.asset("images/resources/wood/wood.png", width: 44) : Image.asset("images/cities/church.png", width: 44,),
+        // if (selected == null)
+        //   Positioned(
+        //     right: 10,
+        //     top: 55,
+        //     child: Container(
+        //         color: Colors.orange[800],
+        //         child: MoneyUnitView(company.getMoney())),
+        //   ),
+        if (selected == null)
+          Positioned(
+            top: 55,
+            left: 10,
+            child: SizedBox(
+              width: 64,
+              height: 64,
+              child: DDDButton(
+                color: Colors.orange[800]!,
+                shadowColor: Colors.orange[200]!,
+                onPressed: _toggleMapMode,
+                child: mapMode == MAP_MODE.CITY
+                    ? Image.asset("images/resources/wood/wood.png", width: 44)
+                    : Image.asset(
+                        "images/cities/church.png",
+                        width: 44,
+                      ),
+              ),
             ),
           ),
-        ),
       ],
     );
   }
