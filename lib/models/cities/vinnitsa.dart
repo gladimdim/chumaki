@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/cities/ladyzhin.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Vinnitsa extends City {
@@ -13,7 +14,7 @@ class Vinnitsa extends City {
           localizedKeyName: 'vinnitsa',
           unlockPriceMoney: Money(150),
           size: 2,
-          unlocksCities: [],
+          unlocksCities: [Ladyzhin()],
           produces: [Firearm(1), Stone(1)],
           stock: Stock([
             Bread(1000),

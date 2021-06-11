@@ -13,7 +13,14 @@ class BorderedAll extends StatelessWidget {
   Widget build(BuildContext context) {
     return BorderedContainerWithSides(
       child: child,
-      borderDirections: [AxisDirection.down, AxisDirection.up, AxisDirection.left, AxisDirection.right],
+      width: width,
+      color: color,
+      borderDirections: [
+        AxisDirection.down,
+        AxisDirection.up,
+        AxisDirection.left,
+        AxisDirection.right
+      ],
     );
   }
 }

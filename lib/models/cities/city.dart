@@ -6,15 +6,18 @@ import 'package:chumaki/models/cities/bila_tserkva.dart';
 import 'package:chumaki/models/cities/cherkasy.dart';
 import 'package:chumaki/models/cities/chernigiv.dart';
 import 'package:chumaki/models/cities/chigirin.dart';
+import 'package:chumaki/models/cities/gaivoron.dart';
 import 'package:chumaki/models/cities/kaniv.dart';
 import 'package:chumaki/models/cities/korsun.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
+import 'package:chumaki/models/cities/ladyzhin.dart';
 import 'package:chumaki/models/cities/lviv.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/cities/ochakiv.dart';
 import 'package:chumaki/models/cities/ostrog.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/sich.dart';
+import 'package:chumaki/models/cities/stavise.dart';
 import 'package:chumaki/models/cities/temryuk.dart';
 import 'package:chumaki/models/cities/uman.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
@@ -104,6 +107,12 @@ class City {
         return Uman();
       case "korsun":
         return Korsun();
+      case "gaivoron":
+        return Gaivoron();
+      case "ladyzhin":
+        return Ladyzhin();
+      case "stavise":
+        return Stavise();
       default:
         throw "City with key $name is not recognized";
     }
@@ -139,6 +148,9 @@ class City {
       Berdychiv(),
       Uman(),
       Korsun(),
+      Stavise(),
+      Ladyzhin(),
+      Gaivoron(),
     ];
   }
 

@@ -25,7 +25,7 @@ class CityStockView extends StatelessWidget {
                 children: groupResourcesByCategory(city.stock.iterator.toList())
                     .map<Widget>((resources) {
                   return Padding(
-                    padding: const EdgeInsets.all(4.0),
+                    padding: const EdgeInsets.all(2.0),
                     child: StockResourceCategoryGroup(
                         resources: resources, forCity: city),
                   );
