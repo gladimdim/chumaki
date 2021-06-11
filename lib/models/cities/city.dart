@@ -107,6 +107,12 @@ class City {
         return Uman();
       case "korsun":
         return Korsun();
+      case "gaivoron":
+        return Gaivoron();
+      case "ladyzhin":
+        return Ladyzhin();
+      case "stavise":
+        return Stavise();
       default:
         throw "City with key $name is not recognized";
     }
