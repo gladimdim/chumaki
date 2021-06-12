@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 import 'dart:math';
 
@@ -26,7 +27,7 @@ import 'package:chumaki/models/cities/vinnitsa.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/route.dart';
-import 'package:chumaki/models/task.dart';
+import 'package:chumaki/models/route_task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -135,11 +136,19 @@ class Company {
   }
 
   void startTask(
-      {required City from, required City to, required Wagon withWagon}) {
-    var newTask = RouteTask(from, to, wagon: withWagon);
-    // notify from City that the trade company with the given wagon departed
-    from.routeTaskStarted(newTask);
+      {required City from, required City to, required Wagon withWagon}) async {
+    final completeRoute = Queue.from(fullRoute(from: from, to: to));
+    for (var nextStop in completeRoute) {
+      var newTask = RouteTask(from, nextStop, wagon: withWagon);
+      // notify from City that the trade company with the given wagon departed
+      from.routeTaskStarted(newTask);
+      await _startIntermediateTask(newTask);
+      from = nextStop;
+    }
+  }
 
+  Future _startIntermediateTask(RouteTask newTask) async {
+    final completer = Completer();
     var cityRoute = getRouteForTask(newTask);
     // add new task to the city route (curves on the map)
     cityRoute.routeTasks.add(newTask);
@@ -149,9 +158,11 @@ class Company {
     newTask.changes.listen((event) {
       if (event == PROGRESS_DURACTION_EVENTS.FINISHED) {
         processTaskDone(newTask);
+        completer.complete();
       }
     });
     _innerChanges.add(COMPANY_EVENTS.TASK_STARTED);
+    return completer.future;
   }
 
   void reconnectRestoredTask(RouteTask restoredTask) {
@@ -279,7 +290,7 @@ class Company {
 
   List<City> fullRoute({required City from, required City to}) {
     List<City>? result =
-        _innerFullRoute(from: from, to: to, ignore: [Kyiv()], route: [Kyiv()]);
+        _innerFullRoute(from: from, to: to, ignore: [Kyiv()], route: []);
     if (result == null) {
       throw "Route not found";
     } else {
