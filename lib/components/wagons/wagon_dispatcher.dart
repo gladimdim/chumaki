@@ -53,7 +53,7 @@ class WagonDispatcher extends StatelessWidget {
         ),
         ...allOtherCities.divideBy(4).map((List<City> cities) {
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4.0),
+            padding: const EdgeInsets.symmetric(vertical: 2.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: cities.map((toCity) {
