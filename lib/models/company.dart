@@ -268,4 +268,15 @@ class Company {
     removeMoney(Leader.defaultAcquirePrice.amount);
     _innerChanges.add(COMPANY_EVENTS.LEADER_HIRED);
   }
+
+  bool hasDirectConnection({required City from, required City to}) {
+    return from.connectsTo(inCompany: this).where((element) => element.equalsTo(to)).isNotEmpty;
+  }
+
+  List<City> fullRoute({required City from, required City to}) {
+    if (hasDirectConnection(from: from, to: to)) {
+      return [to];
+    }
+    throw UnimplementedError();
+  }
 }
