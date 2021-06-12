@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:math';
 
 import 'package:chumaki/app_preferences.dart';
@@ -270,13 +271,58 @@ class Company {
   }
 
   bool hasDirectConnection({required City from, required City to}) {
-    return from.connectsTo(inCompany: this).where((element) => element.equalsTo(to)).isNotEmpty;
+    return from
+        .connectsTo(inCompany: this)
+        .where((element) => element.equalsTo(to))
+        .isNotEmpty;
   }
 
   List<City> fullRoute({required City from, required City to}) {
+    List<City>? result =
+        _innerFullRoute(from: from, to: to, ignore: [Kyiv()], route: [Kyiv()]);
+    if (result == null) {
+      throw "Route not found";
+    } else {
+      return result;
+    }
+  }
+
+  List<City>? _innerFullRoute(
+      {required City from,
+      required City to,
+      required List<City> ignore,
+      required List<City> route}) {
     if (hasDirectConnection(from: from, to: to)) {
       return [to];
     }
-    throw UnimplementedError();
+
+    Queue<City> neighbours = Queue.from(from.connectsTo(inCompany: this));
+    List<City>? bestMatch;
+    while (neighbours.isNotEmpty) {
+      final candidate = neighbours.removeFirst();
+      if (ignore.where((element) => element.equalsTo(candidate)).isNotEmpty) {
+        continue;
+      }
+      if (hasDirectConnection(from: candidate, to: to)) {
+        final List<City> newRoute = List.from(route)..addAll([candidate, to]);
+        return newRoute;
+      } else {
+        final match = _innerFullRoute(
+            from: candidate,
+            to: to,
+            ignore: [...ignore, candidate],
+            route: [...route, candidate]);
+        if (bestMatch == null) {
+          bestMatch = match;
+        } else {
+          if (match != null &&
+              match.isNotEmpty &&
+              match.length < bestMatch.length) {
+            bestMatch = match;
+          }
+        }
+      }
+    }
+    return bestMatch;
   }
 }
