@@ -12,6 +12,7 @@ import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
 
 import 'package:chumaki/models/image_on_canvas.dart';
+import 'package:chumaki/theme.dart';
 import 'package:chumaki/utils/points.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +57,7 @@ class GameCanvasViewState extends State<GameCanvasView>
   @override
   Widget build(BuildContext context) {
     final company = InheritedCompany.of(context).company;
+    final themeData = Theme.of(context);
     return Stack(
       children: [
         InteractiveViewer(
@@ -233,14 +235,14 @@ class GameCanvasViewState extends State<GameCanvasView>
         //   ),
         if (selected == null)
           Positioned(
-            top: 55,
+            bottom: 5,
             left: 10,
             child: SizedBox(
-              width: 64,
-              height: 64,
+              width: 55,
+              height: 55,
               child: DDDButton(
-                color: Colors.orange[800]!,
-                shadowColor: Colors.orange[200]!,
+                color: mediumGrey,
+                shadowColor: themeData.backgroundColor,
                 onPressed: _toggleMapMode,
                 child: mapMode == MAP_MODE.CITY
                     ? Image.asset("images/resources/wood/wood.png", width: 44)

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class DDDButton extends StatefulWidget {
   final Widget child;
   final Color color;
+  final Color releaseColor;
   final Color shadowColor;
   final VoidCallback onPressed;
 
@@ -11,7 +12,7 @@ class DDDButton extends StatefulWidget {
       required this.child,
       this.color = Colors.grey,
       this.shadowColor = Colors.red,
-      required this.onPressed})
+      required this.onPressed, this.releaseColor = Colors.green})
       : super(key: key);
 
   @override
@@ -27,14 +28,9 @@ class _DDDButtonState extends State<DDDButton>
   void initState() {
     _controller = AnimationController(
         vsync: this,
-        duration: Duration(milliseconds: 300),
+        duration: Duration(milliseconds: 200),
         lowerBound: 0,
         upperBound: 4);
-    // _controller.addStatusListener((status) {
-    //   if (status == AnimationStatus.completed) {
-    //     widget.onPressed();
-    //   }
-    // });
     _controller.addListener(animationListener);
     super.initState();
   }
