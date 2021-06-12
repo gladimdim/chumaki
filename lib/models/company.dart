@@ -290,7 +290,7 @@ class Company {
 
   List<City> fullRoute({required City from, required City to}) {
     List<City>? result =
-        _innerFullRoute(from: from, to: to, ignore: [Kyiv()], route: []);
+        _innerFullRoute(from: from, to: to, ignore: [from], route: []);
     if (result == null) {
       throw "Route not found";
     } else {
@@ -303,11 +303,11 @@ class Company {
       required City to,
       required List<City> ignore,
       required List<City> route}) {
-    if (hasDirectConnection(from: from, to: to)) {
+    if (hasDirectConnection(from: from, to: to) && to.isUnlocked()) {
       return [to];
     }
 
-    Queue<City> neighbours = Queue.from(from.connectsTo(inCompany: this));
+    Queue<City> neighbours = Queue.from(from.connectsTo(inCompany: this).where((element) => element.isUnlocked()));
     List<City>? bestMatch;
     while (neighbours.isNotEmpty) {
       final candidate = neighbours.removeFirst();

@@ -59,7 +59,7 @@ class WagonDispatcher extends StatelessWidget {
               children: cities.map((toCity) {
                 var fakeRoute = RouteTask(city, toCity, wagon: wagon);
                 return SizedBox(
-                  height: 96,
+                  height: 110,
                   child: StreamBuilder(
                     stream: toCity.changes,
                     builder: (context, snapshot) => ActionButton(
