@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:chumaki/models/cities/city.dart';
-import 'package:chumaki/models/route_task.dart';
+import 'package:chumaki/models/tasks/route_task.dart';
 
 class CityRoute {
   final City from;

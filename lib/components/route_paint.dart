@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:chumaki/models/route.dart';
+import 'package:chumaki/models/tasks/route.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 class RoutePainter extends CustomPainter {

@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/gaivoron.dart';
-import 'package:chumaki/models/cities/ladyzhin.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Uman extends City {
