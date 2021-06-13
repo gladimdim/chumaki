@@ -2,7 +2,7 @@ import 'package:chumaki/components/city/city_avatar.dart';
 import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
-import 'package:chumaki/models/route_task.dart';
+import 'package:chumaki/models/routes/route_task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:chumaki/utils/time.dart';
 import 'package:chumaki/views/inherited_company.dart';
