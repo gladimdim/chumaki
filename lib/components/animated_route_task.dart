@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:chumaki/models/route_task.dart';
+import 'package:chumaki/models/routes/route_task.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedRouteTask extends StatefulWidget {

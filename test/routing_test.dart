@@ -8,7 +8,7 @@ import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/resources/resource.dart';
-import 'package:chumaki/models/route.dart';
+import 'package:chumaki/models/routes/route.dart';
 import 'package:test/test.dart';
 
 void main() {
