@@ -51,22 +51,27 @@ class WagonDispatcher extends StatelessWidget {
           "Other Cities",
           style: Theme.of(context).textTheme.headline4,
         ),
-        ...allOtherCities.divideBy(4).map((List<City> cities) {
+        ...allOtherCities.divideBy(3).map((List<City> cities) {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 2.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: cities.map((toCity) {
                 var fakeRoute = RouteTask(city, toCity, wagon: wagon);
-                return SizedBox(
-                  height: 110,
-                  child: StreamBuilder(
-                    stream: toCity.changes,
-                    builder: (context, snapshot) => ActionButton(
-                      action: Text(readableDuration(fakeRoute.duration!)),
-                      subTitle: Text(ChumakiLocalizations.labelSend),
-                      onPress: () => dispatch(toCity, context),
-                      image: SmallCityAvatar(toCity),
+                return Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                    child: SizedBox(
+                      height: 110,
+                      child: StreamBuilder(
+                        stream: toCity.changes,
+                        builder: (context, snapshot) => ActionButton(
+                          subTitle: Text(readableDuration(fakeRoute.duration!)),
+                          action: Text(ChumakiLocalizations.labelSend, style: Theme.of(context).textTheme.headline6,),
+                          onPress: () => dispatch(toCity, context),
+                          image: SmallCityAvatar(toCity),
+                        ),
+                      ),
                     ),
                   ),
                 );
