@@ -25,8 +25,8 @@ import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
-import 'package:chumaki/models/routes/route.dart';
-import 'package:chumaki/models/routes/route_task.dart';
+import 'package:chumaki/models/route.dart';
+import 'package:chumaki/models/route_task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:rxdart/rxdart.dart';
 

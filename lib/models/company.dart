@@ -26,9 +26,8 @@ import 'package:chumaki/models/cities/uman.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/progress_duration.dart';
-import 'package:chumaki/models/routes/path_route.dart';
-import 'package:chumaki/models/routes/route.dart';
-import 'package:chumaki/models/routes/route_task.dart';
+import 'package:chumaki/models/route.dart';
+import 'package:chumaki/models/route_task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -138,9 +137,8 @@ class Company {
 
   void startTask(
       {required City from, required City to, required Wagon withWagon}) async {
-    final Queue<City> allStops = Queue.from(fullRoute(from: from, to: to));
-    final pathRoute = PathRoute(routeStops: allStops);
-    for (var nextStop in allStops) {
+    final completeRoute = Queue.from(fullRoute(from: from, to: to));
+    for (var nextStop in completeRoute) {
       var newTask = RouteTask(from, nextStop, wagon: withWagon);
       // notify from City that the trade company with the given wagon departed
       from.routeTaskStarted(newTask);

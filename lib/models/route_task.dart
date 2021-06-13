@@ -3,11 +3,13 @@ import 'dart:math';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/wagon.dart';
+import 'package:uuid/uuid.dart';
 
 class RouteTask extends ProgressDuration {
   City from;
   City to;
   static Duration durationPerPoint = Duration(milliseconds: 10);
+  final String id = Uuid().v4().toString();
   Wagon wagon;
 
   RouteTask(
@@ -22,6 +24,7 @@ class RouteTask extends ProgressDuration {
     var map = super.toJson();
     map["from"] = from.toJson();
     map["to"] = to.toJson();
+    map["id"] = id;
     map["wagon"] = wagon.toJson();
     return map;
   }

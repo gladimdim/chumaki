@@ -1,7 +1,7 @@
 import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/progress_duration.dart';
-import 'package:chumaki/models/routes/route_task.dart';
+import 'package:chumaki/models/route_task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:test/test.dart';
