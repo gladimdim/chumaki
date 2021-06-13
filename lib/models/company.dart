@@ -288,9 +288,14 @@ class Company {
         .isNotEmpty;
   }
 
-  List<City> fullRoute({required City from, required City to}) {
-    List<City>? result =
-        _innerFullRoute(from: from, to: to, ignore: [from], route: []);
+  List<City> fullRoute(
+      {required City from, required City to, bool allowLocked = false}) {
+    List<City>? result = _innerFullRoute(
+        from: from,
+        to: to,
+        ignore: [from],
+        route: [],
+        allowLocked: allowLocked);
     if (result == null) {
       throw "Route not found";
     } else {
@@ -298,16 +303,21 @@ class Company {
     }
   }
 
-  List<City>? _innerFullRoute(
-      {required City from,
-      required City to,
-      required List<City> ignore,
-      required List<City> route}) {
-    if (hasDirectConnection(from: from, to: to) && to.isUnlocked()) {
+  List<City>? _innerFullRoute({
+    required City from,
+    required City to,
+    required List<City> ignore,
+    required List<City> route,
+    required bool allowLocked,
+  }) {
+    if (hasDirectConnection(from: from, to: to) &&
+        (allowLocked || to.isUnlocked())) {
       return [to];
     }
 
-    Queue<City> neighbours = Queue.from(from.connectsTo(inCompany: this).where((element) => element.isUnlocked()));
+    Queue<City> neighbours = Queue.from(from
+        .connectsTo(inCompany: this)
+        .where((element) => (allowLocked || element.isUnlocked())));
     List<City>? bestMatch;
     while (neighbours.isNotEmpty) {
       final candidate = neighbours.removeFirst();
@@ -319,10 +329,12 @@ class Company {
         return newRoute;
       } else {
         final match = _innerFullRoute(
-            from: candidate,
-            to: to,
-            ignore: [...ignore, candidate],
-            route: [...route, candidate]);
+          from: candidate,
+          to: to,
+          ignore: [...ignore, candidate],
+          route: [...route, candidate],
+          allowLocked: allowLocked,
+        );
         if (bestMatch == null) {
           bestMatch = match;
         } else {

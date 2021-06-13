@@ -2,6 +2,7 @@ import 'package:chumaki/components/city/city_avatar.dart';
 import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/tasks/path_route.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:chumaki/utils/time.dart';
@@ -21,6 +22,7 @@ class WagonDispatcher extends StatelessWidget {
     final nearby = city.connectsTo(inCompany: company);
     final allOtherCities = company.allCities
         .where((element) =>
+            !element.equalsTo(city) &&
             element.isUnlocked() &&
             nearby.intersection<City, City>(
                 [element], (a, b) => a.equalsTo(b)).isEmpty)
@@ -31,11 +33,12 @@ class WagonDispatcher extends StatelessWidget {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: toCities.map((toCity) {
-              var fakeRoute = RouteTask(city, toCity, wagon: wagon);
+              var pathRoute = PathRoute(stops: company.fullRoute(from: city, to: toCity, allowLocked: true), allRoutes: company.cityRoutes, from: city);
+
               return StreamBuilder(
                 stream: toCity.changes,
                 builder: (context, snapshot) => ActionButton(
-                  action: Text(readableDuration(fakeRoute.duration!)),
+                  action: Text(readableDuration(pathRoute.totalDuration())),
                   subTitle: Text(ChumakiLocalizations.labelSend),
                   onPress: toCity.isUnlocked()
                       ? () => dispatch(toCity, context)
