@@ -30,8 +30,8 @@ void main() {
           reason: "Amount of cities is restored");
     });
 
-    test("Can restore active route tasks", () {
-      var company = Company(cities: [Chigirin(), Pereyaslav()]);
+    test("Can restore active route tasks", () async {
+      var company = Company();
       company.startTask(
           from: Chigirin(),
           to: Pereyaslav(),
@@ -43,7 +43,7 @@ void main() {
 
     test("Can restore active route tasks that are done directly to city", () {
       FakeAsync().run((async) {
-        var company = Company(cities: [Chigirin(), Pereyaslav()]);
+        var company = Company();
         company.startTask(
             from: Chigirin(),
             to: Pereyaslav(),
@@ -53,7 +53,7 @@ void main() {
         expect(newCompany.activeRouteTasks, isEmpty,
             reason: "Task was moved directly to target city.");
         expect(
-            newCompany.allCities[1].wagons[0], isNotNull,
+            newCompany.refToCityByName(Pereyaslav()).wagons[0], isNotNull,
             reason: "Wagon was restored directly to city");
       });
     });
@@ -61,16 +61,18 @@ void main() {
     test("Can restore active route tasks that are not yet done to City Route",
         () {
       FakeAsync().run((async) {
-        var company = Company(cities: [Sich(), Chigirin()]);
+        var company = Company();
+        final sich = company.refToCityByName(Sich());
+        final chigirin = company.refToCityByName(Chigirin());
         company.startTask(
-            from: Sich(),
-            to: Chigirin(),
-            withWagon: Wagon());
+            from: sich,
+            to: chigirin,
+            withWagon: sich.wagons.first);
         var newCompany = Company.fromJson(company.toJson());
         async.elapse(Duration(seconds: 2));
         expect(newCompany.activeRouteTasks, isNotEmpty,
             reason: "Task is still in active state on active route tasks.");
-        expect(newCompany.allCities[1].wagons, isEmpty,
+        expect(newCompany.refToCityByName(Sich()).wagons, isEmpty,
             reason:
                 "Wagon Dima was restored to City Route thus not yet available in City.");
         var task = newCompany.activeRouteTasks.first;
@@ -80,7 +82,7 @@ void main() {
         expect(newCompany.activeRouteTasks, isEmpty,
             reason: "Task was moved to target city after the task was done.");
         expect(
-            newCompany.allCities[1].wagons[0], isNotNull,
+            newCompany.refToCityByName(Chigirin()).wagons.isNotEmpty, isTrue,
             reason: "Wagon attached to target city as the task was done.");
       });
     });

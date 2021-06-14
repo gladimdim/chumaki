@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:collection';
 import 'dart:math';
 
 import 'package:chumaki/app_preferences.dart';
@@ -24,8 +26,8 @@ import 'package:chumaki/models/cities/uman.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/progress_duration.dart';
-import 'package:chumaki/models/route.dart';
-import 'package:chumaki/models/task.dart';
+import 'package:chumaki/models/tasks/route.dart';
+import 'package:chumaki/models/tasks/route_task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -133,12 +135,22 @@ class Company {
     });
   }
 
-  void startTask(
-      {required City from, required City to, required Wagon withWagon}) {
-    var newTask = RouteTask(from, to, wagon: withWagon);
-    // notify from City that the trade company with the given wagon departed
-    from.routeTaskStarted(newTask);
+  Future startTask(
+      {required City from, required City to, required Wagon withWagon}) async {
+    var realFrom = refToCityByName(from);
+    var realTo = refToCityByName(to);
+    final completeRoute = Queue.from(fullRoute(from: realFrom, to: realTo));
+    for (var nextStop in completeRoute) {
+      var newTask = RouteTask(realFrom, nextStop, wagon: withWagon);
+      // notify from City that the trade company with the given wagon departed
+      realFrom.routeTaskStarted(newTask);
+      await _startIntermediateTask(newTask);
+      realFrom = nextStop;
+    }
+  }
 
+  Future _startIntermediateTask(RouteTask newTask) async {
+    final completer = Completer();
     var cityRoute = getRouteForTask(newTask);
     // add new task to the city route (curves on the map)
     cityRoute.routeTasks.add(newTask);
@@ -148,9 +160,11 @@ class Company {
     newTask.changes.listen((event) {
       if (event == PROGRESS_DURACTION_EVENTS.FINISHED) {
         processTaskDone(newTask);
+        completer.complete();
       }
     });
     _innerChanges.add(COMPANY_EVENTS.TASK_STARTED);
+    return completer.future;
   }
 
   void reconnectRestoredTask(RouteTask restoredTask) {
@@ -267,5 +281,73 @@ class Company {
     forWagon.setLeader(leader);
     removeMoney(Leader.defaultAcquirePrice.amount);
     _innerChanges.add(COMPANY_EVENTS.LEADER_HIRED);
+  }
+
+  bool hasDirectConnection({required City from, required City to}) {
+    return from
+        .connectsTo(inCompany: this)
+        .where((element) => element.equalsTo(to))
+        .isNotEmpty;
+  }
+
+  List<City> fullRoute(
+      {required City from, required City to, bool allowLocked = false}) {
+    List<City>? result = _innerFullRoute(
+        from: from,
+        to: to,
+        ignore: [from],
+        route: [],
+        allowLocked: allowLocked);
+    if (result == null) {
+      throw "Route not found";
+    } else {
+      return result;
+    }
+  }
+
+  List<City>? _innerFullRoute({
+    required City from,
+    required City to,
+    required List<City> ignore,
+    required List<City> route,
+    required bool allowLocked,
+  }) {
+    if (hasDirectConnection(from: from, to: to) &&
+        (allowLocked || to.isUnlocked())) {
+      return [to];
+    }
+
+    Queue<City> neighbours = Queue.from(from
+        .connectsTo(inCompany: this)
+        .where((element) => (allowLocked || element.isUnlocked())));
+    List<City>? bestMatch;
+    while (neighbours.isNotEmpty) {
+      final candidate = neighbours.removeFirst();
+      if (ignore.where((element) => element.equalsTo(candidate)).isNotEmpty) {
+        continue;
+      }
+      if (hasDirectConnection(from: candidate, to: to)) {
+        final List<City> newRoute = List.from(route)..addAll([candidate, to]);
+        return newRoute;
+      } else {
+        final match = _innerFullRoute(
+          from: candidate,
+          to: to,
+          ignore: [...ignore, candidate],
+          route: [...route, candidate],
+          allowLocked: allowLocked,
+        );
+        if (bestMatch == null) {
+          bestMatch = match;
+        } else {
+          if (match != null &&
+              match.isNotEmpty &&
+              match.length < bestMatch.length) {
+            bestMatch = match;
+          }
+        }
+      }
+    }
+    return bestMatch;
   }
 }

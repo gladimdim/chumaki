@@ -14,6 +14,7 @@ class CityAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
           Image.asset(
             city.avatarImagePath,

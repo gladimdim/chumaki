@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:chumaki/models/cities/city.dart';
-import 'package:chumaki/models/task.dart';
+import 'package:chumaki/models/tasks/route_task.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
