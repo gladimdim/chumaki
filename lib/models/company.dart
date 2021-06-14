@@ -135,15 +135,17 @@ class Company {
     });
   }
 
-  void startTask(
+  Future startTask(
       {required City from, required City to, required Wagon withWagon}) async {
-    final completeRoute = Queue.from(fullRoute(from: from, to: to));
+    var realFrom = refToCityByName(from);
+    var realTo = refToCityByName(to);
+    final completeRoute = Queue.from(fullRoute(from: realFrom, to: realTo));
     for (var nextStop in completeRoute) {
-      var newTask = RouteTask(from, nextStop, wagon: withWagon);
+      var newTask = RouteTask(realFrom, nextStop, wagon: withWagon);
       // notify from City that the trade company with the given wagon departed
-      from.routeTaskStarted(newTask);
+      realFrom.routeTaskStarted(newTask);
       await _startIntermediateTask(newTask);
-      from = nextStop;
+      realFrom = nextStop;
     }
   }
 
