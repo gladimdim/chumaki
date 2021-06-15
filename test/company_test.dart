@@ -1,4 +1,6 @@
 import 'package:chumaki/models/cities/chigirin.dart';
+import 'package:chumaki/models/cities/kyiv.dart';
+import 'package:chumaki/models/cities/lviv.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
@@ -32,10 +34,7 @@ void main() {
 
     test("Can restore active route tasks", () async {
       var company = Company();
-      company.startTask(
-          from: Chigirin(),
-          to: Pereyaslav(),
-          withWagon: Wagon());
+      company.startTask(from: Chigirin(), to: Pereyaslav(), withWagon: Wagon());
       var newCompany = Company.fromJson(company.toJson());
       expect(newCompany.activeRouteTasks.length, equals(1),
           reason: "One task restored.");
@@ -45,15 +44,12 @@ void main() {
       FakeAsync().run((async) {
         var company = Company();
         company.startTask(
-            from: Chigirin(),
-            to: Pereyaslav(),
-            withWagon: Wagon());
+            from: Chigirin(), to: Pereyaslav(), withWagon: Wagon());
         var newCompany = Company.fromJson(company.toJson());
         async.elapse(Duration(minutes: 5));
         expect(newCompany.activeRouteTasks, isEmpty,
             reason: "Task was moved directly to target city.");
-        expect(
-            newCompany.refToCityByName(Pereyaslav()).wagons[0], isNotNull,
+        expect(newCompany.refToCityByName(Pereyaslav()).wagons[0], isNotNull,
             reason: "Wagon was restored directly to city");
       });
     });
@@ -65,9 +61,7 @@ void main() {
         final sich = company.refToCityByName(Sich());
         final chigirin = company.refToCityByName(Chigirin());
         company.startTask(
-            from: sich,
-            to: chigirin,
-            withWagon: sich.wagons.first);
+            from: sich, to: chigirin, withWagon: sich.wagons.first);
         var newCompany = Company.fromJson(company.toJson());
         async.elapse(Duration(seconds: 2));
         expect(newCompany.activeRouteTasks, isNotEmpty,
@@ -77,13 +71,29 @@ void main() {
                 "Wagon Dima was restored to City Route thus not yet available in City.");
         var task = newCompany.activeRouteTasks.first;
         var cityRoute = newCompany.getRouteForTask(task);
-        expect(cityRoute.routeTasks[0], equals(task), reason: "Task was attached to City Route.");
+        expect(cityRoute.routeTasks[0], equals(task),
+            reason: "Task was attached to City Route.");
         async.elapse(Duration(minutes: 1));
         expect(newCompany.activeRouteTasks, isEmpty,
             reason: "Task was moved to target city after the task was done.");
-        expect(
-            newCompany.refToCityByName(Chigirin()).wagons.isNotEmpty, isTrue,
+        expect(newCompany.refToCityByName(Chigirin()).wagons.isNotEmpty, isTrue,
             reason: "Wagon attached to target city as the task was done.");
+      });
+    });
+
+    test("Can restore active route tasks with wagon on intermediate stop", () {
+      FakeAsync().run((async) {
+        var company = Company();
+        company.unlockCity(Kyiv());
+        final sich = company.refToCityByName(Sich());
+        final kyiv = company.refToCityByName(Kyiv());
+        company.startTask(from: sich, to: kyiv, withWagon: sich.wagons.first);
+        async.elapse(Duration(seconds: 12));
+        var newCompany = Company.fromJson(company.toJson());
+        async.elapse(Duration(seconds: 8));
+        expect(
+            newCompany.refToCityByName(Pereyaslav()).wagons.isNotEmpty, isTrue,
+            reason: "Wagon stopped at the intermediate stop.");
       });
     });
   });
