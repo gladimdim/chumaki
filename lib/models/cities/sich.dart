@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/ochakiv.dart';
+import 'package:chumaki/models/events/event.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 
@@ -16,6 +17,16 @@ class Sich extends City {
           unlocked: true,
           unlocksCities: [Ochakiv()],
           produces: [Powder(1), Fish(1)],
+          availableEvents: [
+            Event(
+              localizedTitleKey: 'Buy cannons',
+              iconPath: 'images/events/buy_cannons.png',
+              requirements: [Cannon(10), MetalParts(10)],
+              localizedTextKey:
+                  "The Cossacks are ready to raid the Black Sea ports. They asked you to provide them with 10 cannons and metal parts for maintenance.",
+              outcome: [Horse(100), Powder(100)],
+            )
+          ],
           stock: Stock(
             [
               Powder(1000),

@@ -135,8 +135,11 @@ class Company {
     });
   }
 
-  Future startTask(
-      {required City from, required City to, required Wagon withWagon}) async {
+  Future startTask({
+    required City from,
+    required City to,
+    required Wagon withWagon,
+  }) async {
     var realFrom = refToCityByName(from);
     var realTo = refToCityByName(to);
     final completeRoute = Queue.from(fullRoute(from: realFrom, to: realTo));
