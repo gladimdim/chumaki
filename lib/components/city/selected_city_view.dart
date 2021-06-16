@@ -26,65 +26,52 @@ class SelectedCityView extends StatefulWidget {
 }
 
 class _SelectedCityViewState extends State<SelectedCityView> {
-  late List<CityMenuItem> actions;
+  CityMenuItem? selectedItem;
   Widget? detailsContent;
-  late StreamSubscription _cityChangesListener;
 
-  @override
-  void initState() {
-    super.initState();
-    actions = getStandardButtons();
-    actions.addAll(getWagonButtons());
-    _cityChangesListener =
-        widget.city.changes.listen((event) => updateActions());
+  List<CityMenuItem> getStandardButtons() {
+    return [
+      CityMenuItem(
+          image: Image.asset(
+            "images/wagon/wheel.png",
+            width: 128,
+          ),
+          label: TitleText(ChumakiLocalizations.labelCompanies),
+          content: CityWagonsView(city: widget.city)),
+      CityMenuItem(
+          image: Image.asset(
+            "images/icons/market/market.png",
+            width: 128,
+          ),
+          label: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TitleText(ChumakiLocalizations.labelMarket),
+              ...widget.city.produces
+                  .map((resource) => ResourceImageView(
+                        resource,
+                        size: 32,
+                      ))
+                  .toList(),
+            ],
+          ),
+          content: CityStockView(city: widget.city)),
+      CityMenuItem(
+          image: Image.asset(
+            "images/icons/market/market2.png",
+            width: 128,
+          ),
+          label: TitleText(ChumakiLocalizations.labelWorldMarket),
+          content: GlobalMarketView(currentCity: widget.city)),
+      CityMenuItem(
+          image: Image.asset(
+            "images/cities/church.png",
+            width: 128,
+          ),
+          label: TitleText(ChumakiLocalizations.labelMenuBuyNewRoutes),
+          content: CanUnlockCitiesView(widget.city)),
+    ];
   }
-
-  void updateActions() {
-    final newActions = getStandardButtons()..addAll(getWagonButtons());
-    setState(() {
-      if (newActions.length != actions.length) {
-        selectedButton = null;
-      }
-      actions = newActions;
-    });
-  }
-
-  List<CityMenuItem> getStandardButtons() => [
-        CityMenuItem(
-            image: Image.asset(
-              "images/wagon/wheel.png",
-              width: 128,
-            ),
-            label: TitleText(ChumakiLocalizations.labelCompanies),
-            content: CityWagonsView(city: widget.city)),
-        CityMenuItem(
-            image: Image.asset(
-              "images/icons/market/market.png",
-              width: 128,
-            ),
-            label: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TitleText(ChumakiLocalizations.labelMarket),
-                ...widget.city.produces.map((resource)=> ResourceImageView(resource, size: 32,)).toList(),
-              ],
-            ),
-            content: CityStockView(city: widget.city)),
-        CityMenuItem(
-            image: Image.asset(
-              "images/icons/market/market2.png",
-              width: 128,
-            ),
-            label: TitleText(ChumakiLocalizations.labelWorldMarket),
-            content: GlobalMarketView(currentCity: widget.city)),
-        CityMenuItem(
-            image: Image.asset(
-              "images/cities/church.png",
-              width: 128,
-            ),
-            label: TitleText(ChumakiLocalizations.labelMenuBuyNewRoutes),
-            content: CanUnlockCitiesView(widget.city)),
-      ];
 
   List<CityMenuItem> getWagonButtons() {
     return widget.city.wagons
@@ -103,8 +90,8 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                     wagon.leader == null
                         ? Container()
                         : StreamBuilder(
-                      stream: wagon.leader!.changes,
-                          builder: (context, _) => Positioned(
+                            stream: wagon.leader!.changes,
+                            builder: (context, _) => Positioned(
                               right: 0,
                               bottom: 0,
                               child: Row(
@@ -119,7 +106,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                                     .toList(),
                               ),
                             ),
-                        ),
+                          ),
                   ],
                 ),
               ),
@@ -136,14 +123,6 @@ class _SelectedCityViewState extends State<SelectedCityView> {
   }
 
   CityMenuItem? selectedButton;
-
-  @override
-  void didUpdateWidget(SelectedCityView oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.city.wagons.length != widget.city.wagons.length) {
-      updateActions();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -167,8 +146,98 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: actions.map((action) {
+                    children: [
+                      CityMenuItem(
+                          image: Image.asset(
+                            "images/wagon/wheel.png",
+                            width: 128,
+                          ),
+                          label: TitleText(ChumakiLocalizations.labelCompanies),
+                          content: CityWagonsView(city: widget.city)),
+                      CityMenuItem(
+                          image: Image.asset(
+                            "images/icons/market/market.png",
+                            width: 128,
+                          ),
+                          label: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TitleText(ChumakiLocalizations.labelMarket),
+                              ...widget.city.produces
+                                  .map((resource) => ResourceImageView(
+                                        resource,
+                                        size: 32,
+                                      ))
+                                  .toList(),
+                            ],
+                          ),
+                          content: CityStockView(city: widget.city)),
+                      CityMenuItem(
+                          image: Image.asset(
+                            "images/icons/market/market2.png",
+                            width: 128,
+                          ),
+                          label:
+                              TitleText(ChumakiLocalizations.labelWorldMarket),
+                          content: GlobalMarketView(currentCity: widget.city)),
+                      CityMenuItem(
+                          image: Image.asset(
+                            "images/cities/church.png",
+                            width: 128,
+                          ),
+                          label: TitleText(
+                              ChumakiLocalizations.labelMenuBuyNewRoutes),
+                          content: CanUnlockCitiesView(widget.city)),
+                      ...widget.city.wagons.map(
+                        (wagon) => CityMenuItem(
+                            image: StreamBuilder(
+                              stream: wagon.changes,
+                              builder: (context, _) => Stack(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: ClipOval(
+                                      child: Image.asset(wagon.getImagePath(),
+                                          width: 128),
+                                    ),
+                                  ),
+                                  wagon.leader == null
+                                      ? Container()
+                                      : StreamBuilder(
+                                          stream: wagon.leader!.changes,
+                                          builder: (context, _) => Positioned(
+                                            right: 0,
+                                            bottom: 0,
+                                            child: Row(
+                                              children: wagon.leader!.perks
+                                                  .map(
+                                                    (perk) => Image.asset(
+                                                      categoryToImagePath(perk
+                                                          .affectsResourceCategory),
+                                                      width: 32,
+                                                    ),
+                                                  )
+                                                  .toList(),
+                                            ),
+                                          ),
+                                        ),
+                                ],
+                              ),
+                            ),
+                            label: StreamBuilder(
+                                stream: wagon.changes,
+                                builder: (context, snap) => TitleText(
+                                    ChumakiLocalizations.getForKey(
+                                        wagon.fullLocalizedName))),
+                            content: WagonDetails(
+                              wagon: wagon,
+                              city: widget.city,
+                            )),
+                      )
+                    ].map((action) {
+
                       return CityMenuItemView(
+                        isSelected: selectedButton == action,
                         menuItem: action,
                         onPress: () => handleMenuItemPress(action),
                       );
@@ -224,15 +293,10 @@ class _SelectedCityViewState extends State<SelectedCityView> {
   }
 
   handleMenuItemPress(CityMenuItem action) {
-    actions.forEach((element) {
-      element.isSelected = false;
-    });
-
     if (selectedButton == action) {
       selectedButton = null;
     } else {
       selectedButton = action;
-      action.isSelected = true;
     }
     setState(() {});
   }
@@ -245,11 +309,5 @@ class _SelectedCityViewState extends State<SelectedCityView> {
             width: 0,
             height: 0,
           );
-  }
-
-  @override
-  void dispose() {
-    _cityChangesListener.pause();
-    super.dispose();
   }
 }

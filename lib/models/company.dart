@@ -353,4 +353,10 @@ class Company {
     }
     return bestMatch;
   }
+
+  bool cityCanUnlockMore(City city) {
+    return city.unlocksCities
+        .map((fakeCity) => refToCityByName(fakeCity))
+        .where((unlockCity) => !unlockCity.isUnlocked()).isNotEmpty;
+  }
 }
