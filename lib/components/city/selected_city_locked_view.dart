@@ -1,5 +1,4 @@
 import 'package:chumaki/components/city/city_stock_view.dart';
-import 'package:chumaki/components/city/city_avatar.dart';
 import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/city/small_city_avatar.dart';
 import 'package:chumaki/components/resource_image_view.dart';

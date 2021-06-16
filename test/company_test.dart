@@ -1,6 +1,5 @@
 import 'package:chumaki/models/cities/chigirin.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
-import 'package:chumaki/models/cities/lviv.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';

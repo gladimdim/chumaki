@@ -1,4 +1,3 @@
-import 'package:chumaki/components/city/small_city_avatar.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';

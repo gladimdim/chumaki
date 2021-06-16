@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:chumaki/components/city/can_unlock_cities_view.dart';
 import 'package:chumaki/components/city/city_wagons_view.dart';
