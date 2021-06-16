@@ -31,6 +31,7 @@ import 'package:chumaki/models/tasks/route_task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:rxdart/rxdart.dart';
 
+enum CITY_EVENTS { WAGON_ARRIVED, WAGON_DISPATCHED, STOCK_CHANGED, UNLOCKED, WAGON_ADDED }
 class City {
   final Point<double> point;
   final String name;
@@ -43,7 +44,7 @@ class City {
   Event? activeEvent;
   final List<Event> availableEvents;
   late final List<Resource> produces;
-  BehaviorSubject changes = BehaviorSubject();
+  BehaviorSubject<CITY_EVENTS> changes = BehaviorSubject<CITY_EVENTS>();
 
   String get avatarImagePath {
     return "images/cities/avatars/$localizedKeyName.png";
@@ -72,7 +73,7 @@ class City {
     }
     _unlocked = unlocked;
 
-    stock.changes.listen(changes.add);
+    stock.changes.listen((_) => changes.add(CITY_EVENTS.STOCK_CHANGED));
   }
 
   static City fromName(String name) {
@@ -166,7 +167,7 @@ class City {
 
   void unlock() {
     _unlocked = true;
-    changes.add(this);
+    changes.add(CITY_EVENTS.UNLOCKED);
   }
 
   bool sellResource(
@@ -223,12 +224,15 @@ class City {
 
   void routeTaskArrived(RouteTask task) {
     wagons.add(task.wagon);
-    changes.add(this);
+    if (availableEvents.isNotEmpty && activeEvent == null) {
+      activeEvent = availableEvents.removeAt(0);
+    }
+    changes.add(CITY_EVENTS.WAGON_ARRIVED);
   }
 
   void routeTaskStarted(RouteTask task) {
     wagons.remove(task.wagon);
-    changes.add(this);
+    changes.add(CITY_EVENTS.WAGON_DISPATCHED);
   }
 
   bool canSellResource(Resource res) {
@@ -279,7 +283,7 @@ class City {
 
   void addWagon(Wagon wagon) {
     wagons.add(wagon);
-    changes.add(this);
+    changes.add(CITY_EVENTS.WAGON_ADDED);
   }
 
   double distanceTo({required City toCity}) {

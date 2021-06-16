@@ -1,3 +1,4 @@
+import 'dart:async';
 
 import 'package:chumaki/components/city/can_unlock_cities_view.dart';
 import 'package:chumaki/components/city/city_wagons_view.dart';
@@ -13,6 +14,7 @@ import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 
 const CITY_DETAILS_VIEW_WIDTH = 780.0;
 
@@ -30,6 +32,29 @@ class _SelectedCityViewState extends State<SelectedCityView> {
   Widget? detailsContent;
 
   CityMenuItem? selectedButton;
+
+  late StreamSubscription _cityListener;
+
+  void initState() {
+    super.initState();
+    _cityListener = widget.city.changes
+        .where((event) => event == CITY_EVENTS.WAGON_DISPATCHED)
+        .listen(_cityListenerCallback);
+  }
+
+  void _cityListenerCallback(CITY_EVENTS event) {
+    if (event == CITY_EVENTS.WAGON_DISPATCHED) {
+      setState(() {
+        selectedButton = null;
+      });
+    }
+  }
+
+  //
+  // @override
+  // void didUpdateWidget(SelectedCityView oldWidget) {
+  //   if (oldWidget.)
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -88,14 +113,15 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                           label:
                               TitleText(ChumakiLocalizations.labelWorldMarket),
                           content: GlobalMarketView(currentCity: widget.city)),
-                      if (company.cityCanUnlockMore(widget.city)) CityMenuItem(
-                          image: Image.asset(
-                            "images/cities/church.png",
-                            width: 128,
-                          ),
-                          label: TitleText(
-                              ChumakiLocalizations.labelMenuBuyNewRoutes),
-                          content: CanUnlockCitiesView(widget.city)),
+                      if (company.cityCanUnlockMore(widget.city))
+                        CityMenuItem(
+                            image: Image.asset(
+                              "images/cities/church.png",
+                              width: 128,
+                            ),
+                            label: TitleText(
+                                ChumakiLocalizations.labelMenuBuyNewRoutes),
+                            content: CanUnlockCitiesView(widget.city)),
                       ...widget.city.wagons.map(
                         (wagon) => CityMenuItem(
                             image: StreamBuilder(
@@ -141,9 +167,18 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                               wagon: wagon,
                               city: widget.city,
                             )),
-                      )
+                      ),
+                      if (widget.city.activeEvent != null)
+                        CityMenuItem(
+                          image: Image.asset(widget.city.activeEvent!.iconPath),
+                          content:
+                              Text(widget.city.activeEvent!.localizedTextKey),
+                          label: TitleText(
+                            ChumakiLocalizations.getForKey(
+                                widget.city.activeEvent!.localizedTitleKey),
+                          ),
+                        ),
                     ].map((action) {
-
                       return CityMenuItemView(
                         isSelected: selectedButton == action,
                         menuItem: action,
