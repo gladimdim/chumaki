@@ -11,6 +11,7 @@ import 'package:chumaki/components/wagons/wagon_details.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource_category.dart';
+import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 
 const CITY_DETAILS_VIEW_WIDTH = 780.0;
@@ -28,103 +29,11 @@ class _SelectedCityViewState extends State<SelectedCityView> {
   CityMenuItem? selectedItem;
   Widget? detailsContent;
 
-  List<CityMenuItem> getStandardButtons() {
-    return [
-      CityMenuItem(
-          image: Image.asset(
-            "images/wagon/wheel.png",
-            width: 128,
-          ),
-          label: TitleText(ChumakiLocalizations.labelCompanies),
-          content: CityWagonsView(city: widget.city)),
-      CityMenuItem(
-          image: Image.asset(
-            "images/icons/market/market.png",
-            width: 128,
-          ),
-          label: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TitleText(ChumakiLocalizations.labelMarket),
-              ...widget.city.produces
-                  .map((resource) => ResourceImageView(
-                        resource,
-                        size: 32,
-                      ))
-                  .toList(),
-            ],
-          ),
-          content: CityStockView(city: widget.city)),
-      CityMenuItem(
-          image: Image.asset(
-            "images/icons/market/market2.png",
-            width: 128,
-          ),
-          label: TitleText(ChumakiLocalizations.labelWorldMarket),
-          content: GlobalMarketView(currentCity: widget.city)),
-      CityMenuItem(
-          image: Image.asset(
-            "images/cities/church.png",
-            width: 128,
-          ),
-          label: TitleText(ChumakiLocalizations.labelMenuBuyNewRoutes),
-          content: CanUnlockCitiesView(widget.city)),
-    ];
-  }
-
-  List<CityMenuItem> getWagonButtons() {
-    return widget.city.wagons
-        .map(
-          (wagon) => CityMenuItem(
-              image: StreamBuilder(
-                stream: wagon.changes,
-                builder: (context, _) => Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: ClipOval(
-                        child: Image.asset(wagon.getImagePath(), width: 128),
-                      ),
-                    ),
-                    wagon.leader == null
-                        ? Container()
-                        : StreamBuilder(
-                            stream: wagon.leader!.changes,
-                            builder: (context, _) => Positioned(
-                              right: 0,
-                              bottom: 0,
-                              child: Row(
-                                children: wagon.leader!.perks
-                                    .map(
-                                      (perk) => Image.asset(
-                                        categoryToImagePath(
-                                            perk.affectsResourceCategory),
-                                        width: 32,
-                                      ),
-                                    )
-                                    .toList(),
-                              ),
-                            ),
-                          ),
-                  ],
-                ),
-              ),
-              label: StreamBuilder(
-                  stream: wagon.changes,
-                  builder: (context, snap) => TitleText(
-                      ChumakiLocalizations.getForKey(wagon.fullLocalizedName))),
-              content: WagonDetails(
-                wagon: wagon,
-                city: widget.city,
-              )),
-        )
-        .toList();
-  }
-
   CityMenuItem? selectedButton;
 
   @override
   Widget build(BuildContext context) {
+    final company = InheritedCompany.of(context).company;
     return StreamBuilder(
       stream: widget.city.changes,
       builder: (context, data) => AnimatedSize(
@@ -179,7 +88,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                           label:
                               TitleText(ChumakiLocalizations.labelWorldMarket),
                           content: GlobalMarketView(currentCity: widget.city)),
-                      CityMenuItem(
+                      if (company.cityCanUnlockMore(widget.city)) CityMenuItem(
                           image: Image.asset(
                             "images/cities/church.png",
                             width: 128,

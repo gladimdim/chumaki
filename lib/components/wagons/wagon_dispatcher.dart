@@ -68,7 +68,7 @@ class WagonDispatcher extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 2.0),
                     child: SizedBox(
-                      height: 110,
+                      height: 120,
                       child: StreamBuilder(
                         stream: toCity.changes,
                         builder: (context, snapshot) => ActionButton(
