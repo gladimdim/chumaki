@@ -235,7 +235,7 @@ class City {
     return stock.hasEnough(res);
   }
 
-  Map<String, Object> toJson() {
+  Map<String, Object?> toJson() {
     final event = activeEvent;
     final eventJson = event == null ? null : event.toJson();
     return {
@@ -248,7 +248,8 @@ class City {
       "unlocked": _unlocked,
       "produces": produces.map((resource) => resource.toJson()).toList(),
       "unlockCities": unlocksCities.map((e) => e.localizedKeyName).toList(),
-      "activeEvent": eventJson!,
+      "activeEvent": eventJson,
+      "availableEvents": availableEvents.map((e) => e.toJson()).toList(),
     };
   }
 

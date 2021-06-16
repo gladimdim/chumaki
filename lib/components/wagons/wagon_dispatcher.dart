@@ -1,5 +1,6 @@
 import 'package:chumaki/components/city/city_avatar.dart';
 import 'package:chumaki/components/city/small_city_avatar.dart';
+import 'package:chumaki/components/city/small_city_avatar_with_centers.dart';
 import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
@@ -34,7 +35,11 @@ class WagonDispatcher extends StatelessWidget {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: toCities.map((toCity) {
-              var pathRoute = PathRoute(stops: company.fullRoute(from: city, to: toCity, allowLocked: true), allRoutes: company.cityRoutes, from: city);
+              var pathRoute = PathRoute(
+                  stops: company.fullRoute(
+                      from: city, to: toCity, allowLocked: true),
+                  allRoutes: company.cityRoutes,
+                  from: city);
 
               return StreamBuilder(
                 stream: toCity.changes,
@@ -44,7 +49,7 @@ class WagonDispatcher extends StatelessWidget {
                   onPress: toCity.isUnlocked()
                       ? () => dispatch(toCity, context)
                       : null,
-                  image: SmallCityAvatar(toCity),
+                  image: SmallCityAvatarWithCenters(city: toCity),
                 ),
               );
             }).toList(),
@@ -70,9 +75,11 @@ class WagonDispatcher extends StatelessWidget {
                         stream: toCity.changes,
                         builder: (context, snapshot) => ActionButton(
                           subTitle: Text(readableDuration(fakeRoute.duration!)),
-                          action: Text(ChumakiLocalizations.labelSend,),
+                          action: Text(
+                            ChumakiLocalizations.labelSend,
+                          ),
                           onPress: () => dispatch(toCity, context),
-                          image: SmallCityAvatar(toCity),
+                          image: SmallCityAvatarWithCenters(city: toCity),
                         ),
                       ),
                     ),

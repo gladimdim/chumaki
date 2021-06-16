@@ -69,4 +69,10 @@ class _MoneyUnitViewState extends State<MoneyUnitView>
     final colorTheme = Theme.of(context).colorScheme;
     return TextStyle(color: widget.isEnough  ? Colors.green[800] : colorTheme.onSurface.withOpacity(0.38), fontWeight: FontWeight.bold, fontSize: 18);
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 }
