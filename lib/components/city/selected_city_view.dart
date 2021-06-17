@@ -37,16 +37,14 @@ class _SelectedCityViewState extends State<SelectedCityView> {
   void initState() {
     super.initState();
     _cityListener = widget.city.changes
-        .where((event) => event == CITY_EVENTS.WAGON_DISPATCHED)
-        .listen(_cityListenerCallback);
+        .where((event) => [CITY_EVENTS.WAGON_DISPATCHED, CITY_EVENTS.EVENT_DONE].contains(event))
+        .listen(_recalcMenuItems);
   }
 
-  void _cityListenerCallback(CITY_EVENTS event) {
-    if ([CITY_EVENTS.WAGON_DISPATCHED, CITY_EVENTS.EVENT_DONE].contains(event)) {
+  void _recalcMenuItems(CITY_EVENTS event) {
       setState(() {
         selectedButton = null;
       });
-    }
   }
 
   @override
