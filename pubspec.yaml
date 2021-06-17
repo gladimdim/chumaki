@@ -35,6 +35,7 @@ flutter:
     - images/
     - images/ui/
     - images/wagon/
+    - images/events/
     - images/resources/cannon/
     - images/resources/charcoal/
     - images/resources/firearm/

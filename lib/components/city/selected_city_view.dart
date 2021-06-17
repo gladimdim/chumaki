@@ -166,7 +166,10 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                       if (widget.city.activeEvent != null)
                         CityMenuItem(
                           image: Image.asset(widget.city.activeEvent!.iconPath),
-                          content: CityEventView(city: widget.city),
+                          content: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CityEventView(city: widget.city),
+                          ),
                           label: TitleText(
                             ChumakiLocalizations.getForKey(
                                 widget.city.activeEvent!.localizedTitleKey),

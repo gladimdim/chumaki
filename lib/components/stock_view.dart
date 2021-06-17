@@ -16,12 +16,13 @@ class StockView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TitleText(ChumakiLocalizations.labelContains),
+
           if (stock.isNotEmpty)
             Row(
                 children: stock.toList().map<Widget>((resource) {
               return ResourceImageView(
                 resource,
+                showAmount: true,
               );
             }).toList()),
           if (stock.isEmpty) Text(ChumakiLocalizations.labelNothing),

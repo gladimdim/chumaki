@@ -51,7 +51,7 @@ class ChumakiLocalizations {
 
         case 'leaders':
           return leadersLocalizations[split[1]];
-        case "event":
+        case "events":
           return eventLocalizations[split[1]];
         default:
           return key;
@@ -130,6 +130,7 @@ class ChumakiLocalizations {
       "labelPrice": "Price",
       "labelProfit": "Profit",
       "labelProductionCenter": "Production center of",
+      "labelRequirements": "Delivering request",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -198,6 +199,7 @@ class ChumakiLocalizations {
       "labelPrice": "Ціна",
       "labelProfit": "Прибуток",
       "labelProductionCenter": "Центр виробництва",
+      "labelRequirements": "Необхідно доставити",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -265,6 +267,7 @@ class ChumakiLocalizations {
       "labelPrice": "Цена",
       "labelProfit": "Выгода",
       "labelProductionCenter": "Центр производства",
+      "labelRequirements": "Необходимо доставить",
     },
   };
 
@@ -470,5 +473,9 @@ class ChumakiLocalizations {
 
   static String get labelProductionCenter {
     return _localizedValues[locale.languageCode]!["labelProductionCenter"]!;
+  }
+
+  static String get labelRequirements {
+    return _localizedValues[locale.languageCode]!["labelRequirements"]!;
   }
 }
