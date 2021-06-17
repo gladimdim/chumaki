@@ -19,11 +19,11 @@ class Sich extends City {
           produces: [Powder(1), Fish(1)],
           availableEvents: [
             Event(
-              localizedTitleKey: 'Buy cannons',
+              localizedTitleKey: 'events.buyCannonsTitle',
               iconPath: 'images/events/buy_cannons.png',
               requirements: [Cannon(10), MetalParts(10)],
               localizedTextKey:
-                  "The Cossacks are ready to raid the Black Sea ports. They asked you to provide them with 10 cannons and metal parts for maintenance.",
+                  "events.buyCannonsText",
               outcome: [Horse(100), Powder(100)],
             )
           ],

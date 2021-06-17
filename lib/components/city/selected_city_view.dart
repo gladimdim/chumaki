@@ -12,6 +12,7 @@ import 'package:chumaki/components/wagons/wagon_details.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource_category.dart';
+import 'package:chumaki/views/city_event_view.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
@@ -49,12 +50,6 @@ class _SelectedCityViewState extends State<SelectedCityView> {
       });
     }
   }
-
-  //
-  // @override
-  // void didUpdateWidget(SelectedCityView oldWidget) {
-  //   if (oldWidget.)
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -171,8 +166,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                       if (widget.city.activeEvent != null)
                         CityMenuItem(
                           image: Image.asset(widget.city.activeEvent!.iconPath),
-                          content:
-                              Text(widget.city.activeEvent!.localizedTextKey),
+                          content: CityEventView(city: widget.city),
                           label: TitleText(
                             ChumakiLocalizations.getForKey(
                                 widget.city.activeEvent!.localizedTitleKey),

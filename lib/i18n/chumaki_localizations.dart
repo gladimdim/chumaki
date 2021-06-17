@@ -1,3 +1,4 @@
+import 'package:chumaki/i18n/event_localizations.dart';
 import 'package:chumaki/i18n/leaders_localizations.dart';
 import 'package:chumaki/i18n/resource_localizations.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ class ChumakiLocalizations {
 
   static ResourceLocalizations resourceLocalizations = ResourceLocalizations();
   static LeadersLocalizations leadersLocalizations = LeadersLocalizations();
+  static EventLocalizations eventLocalizations = EventLocalizations();
 
   static String getForKey(String key) {
     final split = key.split('.');
@@ -49,6 +51,8 @@ class ChumakiLocalizations {
 
         case 'leaders':
           return leadersLocalizations[split[1]];
+        case "event":
+          return eventLocalizations[split[1]];
         default:
           return key;
       }
