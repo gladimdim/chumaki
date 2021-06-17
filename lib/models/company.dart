@@ -25,6 +25,7 @@ import 'package:chumaki/models/cities/temryuk.dart';
 import 'package:chumaki/models/cities/uman.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
+import 'package:chumaki/models/events/event.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/tasks/route.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
@@ -358,5 +359,10 @@ class Company {
     return city.unlocksCities
         .map((fakeCity) => refToCityByName(fakeCity))
         .where((unlockCity) => !unlockCity.isUnlocked()).isNotEmpty;
+  }
+
+  void finishEvent(Event event, {required City inCity}) {
+    addMoney(event.payment.amount);
+    inCity.activeEvent = null;
   }
 }
