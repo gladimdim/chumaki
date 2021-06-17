@@ -36,7 +36,8 @@ enum CITY_EVENTS {
   WAGON_DISPATCHED,
   STOCK_CHANGED,
   UNLOCKED,
-  WAGON_ADDED
+  WAGON_ADDED,
+  EVENT_DONE,
 }
 
 class City {
@@ -342,5 +343,10 @@ class City {
       return previousDistance < newDistance ? previousValue : aCity;
     });
     return closest;
+  }
+
+  void finishActiveEvent() {
+    activeEvent = null;
+    changes.add(CITY_EVENTS.EVENT_DONE);
   }
 }

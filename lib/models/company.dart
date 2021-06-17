@@ -43,6 +43,7 @@ enum COMPANY_EVENTS {
   CITY_UNLOCKED,
   WAGON_BOUGHT,
   LEADER_HIRED,
+  EVENT_DONE,
 }
 
 class Company {
@@ -363,6 +364,7 @@ class Company {
 
   void finishEvent(Event event, {required City inCity}) {
     addMoney(event.payment.amount);
-    inCity.activeEvent = null;
+    inCity.finishActiveEvent();
+    this._innerChanges.add(COMPANY_EVENTS.EVENT_DONE);
   }
 }

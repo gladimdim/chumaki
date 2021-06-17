@@ -42,7 +42,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
   }
 
   void _cityListenerCallback(CITY_EVENTS event) {
-    if (event == CITY_EVENTS.WAGON_DISPATCHED) {
+    if ([CITY_EVENTS.WAGON_DISPATCHED, CITY_EVENTS.EVENT_DONE].contains(event)) {
       setState(() {
         selectedButton = null;
       });
