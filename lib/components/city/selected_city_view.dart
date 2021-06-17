@@ -28,7 +28,6 @@ class SelectedCityView extends StatefulWidget {
 }
 
 class _SelectedCityViewState extends State<SelectedCityView> {
-  CityMenuItem? selectedItem;
   Widget? detailsContent;
 
   CityMenuItem? selectedButton;
@@ -75,6 +74,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       CityMenuItem(
+                        menuKey: "new_wheel",
                           image: Image.asset(
                             "images/wagon/wheel.png",
                             width: 128,
@@ -82,6 +82,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                           label: TitleText(ChumakiLocalizations.labelCompanies),
                           content: CityWagonsView(city: widget.city)),
                       CityMenuItem(
+                        menuKey: "market",
                           image: Image.asset(
                             "images/icons/market/market.png",
                             width: 128,
@@ -100,6 +101,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                           ),
                           content: CityStockView(city: widget.city)),
                       CityMenuItem(
+                        menuKey: "global_market",
                           image: Image.asset(
                             "images/icons/market/market2.png",
                             width: 128,
@@ -109,6 +111,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                           content: GlobalMarketView(currentCity: widget.city)),
                       if (company.cityCanUnlockMore(widget.city))
                         CityMenuItem(
+                          menuKey: "unlock",
                             image: Image.asset(
                               "images/cities/church.png",
                               width: 128,
@@ -118,6 +121,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                             content: CanUnlockCitiesView(widget.city)),
                       ...widget.city.wagons.map(
                         (wagon) => CityMenuItem(
+                          menuKey: wagon.fullLocalizedName,
                             image: StreamBuilder(
                               stream: wagon.changes,
                               builder: (context, _) => Stack(
@@ -164,6 +168,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                       ),
                       if (widget.city.activeEvent != null)
                         CityMenuItem(
+                          menuKey: "activeEvent",
                           image: Image.asset(widget.city.activeEvent!.iconPath),
                           content: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -176,7 +181,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                         ),
                     ].map((action) {
                       return CityMenuItemView(
-                        isSelected: selectedButton == action,
+                        isSelected: selectedButton != null && selectedButton!.menuKey == action.menuKey,
                         menuItem: action,
                         onPress: () => handleMenuItemPress(action),
                       );

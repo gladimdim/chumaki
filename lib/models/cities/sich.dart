@@ -21,7 +21,7 @@ class Sich extends City {
             Event(
               localizedTitleKey: 'events.giveFoodTitle',
               iconPath: 'images/resources/bread/bread_1.png',
-              requirements: [Grains(200), Bread(50)],
+              requirements: [Grains(10),],
               localizedTextKey: "events.giveFoodText",
               outcome: [
                 Horse(5),

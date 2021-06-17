@@ -40,4 +40,12 @@ class Event {
       payment: Money(payment),
     );
   }
+
+  void decreaseResource(Resource res) {
+    final resource = requirements.firstWhere((element) => element.sameType(res));
+    resource.amount = resource.amount - 1;
+    if (resource.amount <= 0) {
+      requirements.remove(resource);
+    }
+  }
 }
