@@ -31,7 +31,14 @@ import 'package:chumaki/models/tasks/route_task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:rxdart/rxdart.dart';
 
-enum CITY_EVENTS { WAGON_ARRIVED, WAGON_DISPATCHED, STOCK_CHANGED, UNLOCKED, WAGON_ADDED }
+enum CITY_EVENTS {
+  WAGON_ARRIVED,
+  WAGON_DISPATCHED,
+  STOCK_CHANGED,
+  UNLOCKED,
+  WAGON_ADDED
+}
+
 class City {
   final Point<double> point;
   final String name;

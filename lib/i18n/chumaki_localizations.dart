@@ -131,6 +131,7 @@ class ChumakiLocalizations {
       "labelProfit": "Profit",
       "labelProductionCenter": "Production center of",
       "labelRequirements": "Delivering request",
+      "labelPayment": "Payment",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -200,6 +201,7 @@ class ChumakiLocalizations {
       "labelProfit": "Прибуток",
       "labelProductionCenter": "Центр виробництва",
       "labelRequirements": "Необхідно доставити",
+      "labelPayment": "Винагорода",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -268,6 +270,7 @@ class ChumakiLocalizations {
       "labelProfit": "Выгода",
       "labelProductionCenter": "Центр производства",
       "labelRequirements": "Необходимо доставить",
+      "labelPayment": "Вознаграждение",
     },
   };
 
@@ -477,5 +480,9 @@ class ChumakiLocalizations {
 
   static String get labelRequirements {
     return _localizedValues[locale.languageCode]!["labelRequirements"]!;
+  }
+
+  static String get labelPayment {
+    return _localizedValues[locale.languageCode]!["labelPayment"]!;
   }
 }

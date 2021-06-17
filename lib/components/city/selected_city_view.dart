@@ -15,7 +15,6 @@ import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:chumaki/views/city_event_view.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
-import 'package:rxdart/rxdart.dart';
 
 const CITY_DETAILS_VIEW_WIDTH = 780.0;
 
@@ -33,7 +32,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
   Widget? detailsContent;
 
   CityMenuItem? selectedButton;
-
+  // ignore: unused_field
   late StreamSubscription _cityListener;
 
   void initState() {
