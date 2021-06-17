@@ -43,7 +43,7 @@ class CityEventView extends StatelessWidget {
                         );
                       } catch (e) {
                         print(
-                            "No wagons found to satisify need for res: ${req.localizedKey}");
+                            "No wagons found to satisfy need for res: ${req.localizedKey}");
                       }
 
                       bool canGive = false;
