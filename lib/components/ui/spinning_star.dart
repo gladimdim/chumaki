@@ -38,11 +38,12 @@ class _SpinningStarState extends State<SpinningStar>
         return Transform.rotate(
           angle: _rotationAnimation.value!,
           child: Transform.scale(
-            scale: 1 + (_controller.value * 0.2),
+            scale: 1 + (_controller.value * 1.2),
             child: Icon(
               Icons.star,
-              color: _colorAnimation.value,
-              size: 48,
+              // color: _colorAnimation.value,
+              color: Colors.red,
+              size: 60,
             ),
           ),
         );

@@ -40,6 +40,11 @@ class CityOnMap extends StatelessWidget {
             child: Stack(
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                if (city.activeEvent != null)
+                  Transform.translate(
+                      offset: Offset(
+                          CITY_SIZE.toDouble() * city.size / 2 - 30, -50),
+                      child: SpinningStar()),
                 Center(
                   child: _avatarForMode(),
                 ),
@@ -79,8 +84,6 @@ class CityOnMap extends StatelessWidget {
                       ],
                     ),
                   ),
-                if (city.activeEvent != null)
-                  Align(alignment: Alignment.bottomLeft, child: SpinningStar())
               ],
             ),
           ),
