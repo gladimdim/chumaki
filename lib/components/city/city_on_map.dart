@@ -1,4 +1,5 @@
 import 'package:chumaki/components/resource_image_view.dart';
+import 'package:chumaki/components/ui/spinning_star.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/wagon.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 class CityOnMap extends StatelessWidget {
   final City city;
   final MAP_MODE mapMode;
+
   const CityOnMap(this.city, {required this.mapMode});
 
   @override
@@ -77,6 +79,8 @@ class CityOnMap extends StatelessWidget {
                       ],
                     ),
                   ),
+                if (city.activeEvent != null)
+                  Align(alignment: Alignment.bottomLeft, child: SpinningStar())
               ],
             ),
           ),
@@ -93,13 +97,13 @@ class CityOnMap extends StatelessWidget {
       final base = 80;
       final count = city.produces.length;
       final changePerResource = 16;
-      final koef = (base - changePerResource * count).toDouble() * city.size * 0.5;
+      final koef =
+          (base - changePerResource * count).toDouble() * city.size * 0.5;
       // final sizeAdjust =
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: city.produces.map((e) => ResourceImageView(e, size: koef))
-            .toList(),
-
+        children:
+            city.produces.map((e) => ResourceImageView(e, size: koef)).toList(),
       );
     }
   }
