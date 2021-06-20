@@ -37,22 +37,21 @@ class _CityEventViewState extends State<CityEventView> {
           ChumakiLocalizations.getForKey(event.localizedTextKey),
           style: Theme.of(context).textTheme.headline5,
         ),
-        if (!done)
+        if (!event.isDone())
           BorderedBottom(
             child: Text(ChumakiLocalizations.labelRequirements,
                 style: Theme.of(context).textTheme.headline4),
           ),
-        if (!done)
+        if (!event.isDone())
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-
               children: event.requirements
                   .map(
                     (req) => StreamBuilder(
-                        stream: widget.city.changes
-                            .where((event) => event == CITY_EVENTS.STOCK_CHANGED),
+                        stream: widget.city.changes.where(
+                            (event) => event == CITY_EVENTS.STOCK_CHANGED),
                         builder: (context, _snapshot) {
                           Wagon? wagon;
 
@@ -74,8 +73,9 @@ class _CityEventViewState extends State<CityEventView> {
                           }
                           return EventRequirementView(
                             requirement: req,
-                            onDonate:
-                                canGive ? () => _onDonate(req, wagon!) : null,
+                            onDonate: canGive
+                                ? () => _onDonate(company, req, wagon!)
+                                : null,
                           );
                         }),
                   )
@@ -106,10 +106,9 @@ class _CityEventViewState extends State<CityEventView> {
     company.finishEvent(widget.city.activeEvent!, inCity: widget.city);
   }
 
-  void _onDonate(Resource res, Wagon wagon) {
+  void _onDonate(Company company, Resource res, Wagon wagon) {
     setState(() {
-      widget.city.activeEvent!.decreaseResource(res);
-      wagon.stock.removeResource(res.cloneWithAmount(1));
+      company.donateResource(res.cloneWithAmount(1), fromWagon: wagon, toCity: widget.city);
     });
   }
 }

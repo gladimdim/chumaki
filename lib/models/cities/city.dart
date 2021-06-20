@@ -232,10 +232,16 @@ class City {
 
   void routeTaskArrived(RouteTask task) {
     wagons.add(task.wagon);
+    queueEvent();
+
+    changes.add(CITY_EVENTS.WAGON_ARRIVED);
+  }
+
+  Event? queueEvent() {
     if (availableEvents.isNotEmpty && activeEvent == null) {
       activeEvent = availableEvents.removeAt(0);
     }
-    changes.add(CITY_EVENTS.WAGON_ARRIVED);
+    return activeEvent;
   }
 
   void routeTaskStarted(RouteTask task) {

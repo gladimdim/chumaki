@@ -359,12 +359,23 @@ class Company {
   bool cityCanUnlockMore(City city) {
     return city.unlocksCities
         .map((fakeCity) => refToCityByName(fakeCity))
-        .where((unlockCity) => !unlockCity.isUnlocked()).isNotEmpty;
+        .where((unlockCity) => !unlockCity.isUnlocked())
+        .isNotEmpty;
   }
 
   void finishEvent(Event event, {required City inCity}) {
+    if (!event.isDone()) {
+      return;
+    }
     addMoney(event.payment.amount);
     inCity.finishActiveEvent();
     this._innerChanges.add(COMPANY_EVENTS.EVENT_DONE);
+  }
+
+  void donateResource(Resource res,
+      {required Wagon fromWagon, required City toCity}) {
+    if (fromWagon.stock.removeResource(res)) {
+      toCity.activeEvent!.decreaseResource(res);
+    }
   }
 }

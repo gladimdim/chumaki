@@ -15,6 +15,10 @@ class Event {
       required this.localizedTitleKey,
       required this.localizedTextKey});
 
+  bool isDone() {
+    return requirements.isEmpty;
+  }
+
   Map<String, dynamic> toJson() {
     return {
       "requirements": requirements.map((res) => res.toJson()).toList(),
@@ -39,7 +43,7 @@ class Event {
 
   void decreaseResource(Resource res) {
     final resource = requirements.firstWhere((element) => element.sameType(res));
-    resource.amount = resource.amount - 1;
+    resource.amount = resource.amount - res.amount;
     if (resource.amount <= 0) {
       requirements.remove(resource);
     }
