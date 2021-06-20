@@ -13,7 +13,7 @@ class Vinnitsa extends City {
           unlocked: false,
           localizedKeyName: 'vinnitsa',
           unlockPriceMoney: Money(150),
-          size: 2,
+          size: 3,
           unlocksCities: [Ladyzhin()],
           produces: [Firearm(1), Stone(1)],
           stock: Stock([

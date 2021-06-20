@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class MoneyUnitView extends StatefulWidget {
   final Money money;
   final bool isEnough;
-  MoneyUnitView(this.money, {this.isEnough = true});
+  final double size;
+  MoneyUnitView(this.money, {this.isEnough = true, this.size = 32});
 
   @override
   _MoneyUnitViewState createState() => _MoneyUnitViewState();
@@ -55,7 +56,7 @@ class _MoneyUnitViewState extends State<MoneyUnitView>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(widget.money.imagePath, width: 32),
+          Image.asset(widget.money.imagePath, width: widget.size),
           Text(
             widget.money.amount.toStringAsFixed(1),
             style: style(widget.money.amount, context),

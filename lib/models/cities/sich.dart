@@ -20,13 +20,8 @@ class Sich extends City {
     availableEvents: [Event(
       localizedTitleKey: 'events.giveFoodTitle',
       iconPath: 'images/resources/bread/bread_1.png',
-      requirements: [Grains(10),],
+      requirements: [Grains(10), Bread(10)],
       localizedTextKey: "events.giveFoodText",
-      outcome: [
-        Horse(5),
-        Powder(50),
-        Fish(100),
-      ],
       payment: Money(100),
     ),
       Event(
@@ -34,7 +29,6 @@ class Sich extends City {
         iconPath: 'images/resources/cannon/cannon_3.png',
         requirements: [Cannon(3), Horse(10)],
         localizedTextKey: "events.buyCannonsText",
-        outcome: [Fish(300), Powder(100)],
         payment: Money(200),
       ),
     ],

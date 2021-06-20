@@ -1,5 +1,6 @@
-import 'package:chumaki/components/resource_image_view.dart';
+import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/ui/action_button.dart';
+import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
@@ -22,70 +23,81 @@ class _CityEventViewState extends State<CityEventView> {
   Widget build(BuildContext context) {
     final event = widget.city.activeEvent!;
     final done = event.requirements.isEmpty;
-  final company = InheritedCompany.of(context).company;
+    final company = InheritedCompany.of(context).company;
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          ChumakiLocalizations.getForKey(event.localizedTitleKey),
-          style: Theme.of(context).textTheme.headline3,
+        BorderedBottom(
+          child: Text(
+            ChumakiLocalizations.getForKey(event.localizedTitleKey),
+            style: Theme.of(context).textTheme.headline3,
+          ),
         ),
         Text(
           ChumakiLocalizations.getForKey(event.localizedTextKey),
           style: Theme.of(context).textTheme.headline5,
         ),
         if (!done)
-          Text(ChumakiLocalizations.labelRequirements,
-              style: Theme.of(context).textTheme.headline4),
+          BorderedBottom(
+            child: Text(ChumakiLocalizations.labelRequirements,
+                style: Theme.of(context).textTheme.headline4),
+          ),
         if (!done)
-          Row(
-            children: event.requirements
-                .map(
-                  (req) => StreamBuilder(
-                      stream: widget.city.changes
-                          .where((event) => event == CITY_EVENTS.STOCK_CHANGED),
-                      builder: (context, _snapshot) {
-                        Wagon? wagon;
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
 
-                        try {
-                          wagon = widget.city.wagons.firstWhere(
-                            (wagon) =>
-                                wagon.stock.hasEnough(req.cloneWithAmount(1)),
+              children: event.requirements
+                  .map(
+                    (req) => StreamBuilder(
+                        stream: widget.city.changes
+                            .where((event) => event == CITY_EVENTS.STOCK_CHANGED),
+                        builder: (context, _snapshot) {
+                          Wagon? wagon;
+
+                          try {
+                            wagon = widget.city.wagons.firstWhere(
+                              (wagon) =>
+                                  wagon.stock.hasEnough(req.cloneWithAmount(1)),
+                            );
+                          } catch (e) {
+                            print(
+                                "No wagons found to satisfy need for res: ${req.localizedKey}");
+                          }
+
+                          bool canGive = false;
+                          if (wagon == null) {
+                            canGive = false;
+                          } else {
+                            canGive = true;
+                          }
+                          return EventRequirementView(
+                            requirement: req,
+                            onDonate:
+                                canGive ? () => _onDonate(req, wagon!) : null,
                           );
-                        } catch (e) {
-                          print(
-                              "No wagons found to satisfy need for res: ${req.localizedKey}");
-                        }
-
-                        bool canGive = false;
-                        if (wagon == null) {
-                          canGive = false;
-                        } else {
-                          canGive = true;
-                        }
-                        return EventRequirementView(
-                          requirement: req,
-                          onDonate:
-                              canGive ? () => _onDonate(req, wagon!) : null,
-                        );
-                      }),
-                )
-                .toList(),
+                        }),
+                  )
+                  .toList(),
+            ),
           ),
-        Text(ChumakiLocalizations.labelPayment,
-            style: Theme.of(context).textTheme.headline4),
-        Row(
-          children: [
-            ...event.outcome.map(
-                (res) => ResourceImageView(res, showAmount: true, size: 64)),
-          ],
+        BorderedBottom(
+          child: Text(ChumakiLocalizations.labelPayment,
+              style: Theme.of(context).textTheme.headline4),
         ),
-        if (done)
-          ActionButton(
-            image: Image.asset(Money(0).imagePath, width: 64),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ActionButton(
+            image: MoneyUnitView(
+              event.payment,
+              size: 64,
+            ),
             subTitle: Container(),
-            action: Text("Finish"),
-            onPress: () => _getRevenueForEvent(company),
+            action: Text(ChumakiLocalizations.labelTakePayment),
+            onPress: done ? () => _getRevenueForEvent(company) : null,
           ),
+        ),
       ],
     );
   }
@@ -98,8 +110,6 @@ class _CityEventViewState extends State<CityEventView> {
     setState(() {
       widget.city.activeEvent!.decreaseResource(res);
       wagon.stock.removeResource(res.cloneWithAmount(1));
-
-      widget.city.stock.addResource(res.cloneWithAmount(1));
     });
   }
 }

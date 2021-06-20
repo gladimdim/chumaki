@@ -31,7 +31,6 @@ class _SelectedCityViewState extends State<SelectedCityView> {
   Widget? detailsContent;
 
   CityMenuItem? selectedButton;
-  // ignore: unused_field
   late StreamSubscription _cityListener;
 
   void initState() {
@@ -251,5 +250,10 @@ class _SelectedCityViewState extends State<SelectedCityView> {
             width: 0,
             height: 0,
           );
+  }
+
+  void dispose() {
+    _cityListener.cancel();
+    super.dispose();
   }
 }
