@@ -24,10 +24,6 @@ class _SpinningStarState extends State<SpinningStar>
     )..repeat(reverse: true);
     _rotationAnimation =
         Tween<double>(begin: 0, end: 2 * pi).animate(_controller);
-    _colorAnimation =
-        ColorTween(begin: Colors.blue[300]!, end: Colors.red[500]!).animate(
-      _controller,
-    );
   }
 
   @override
@@ -41,7 +37,6 @@ class _SpinningStarState extends State<SpinningStar>
             scale: 1 + (_controller.value * 1.2),
             child: Icon(
               Icons.star,
-              // color: _colorAnimation.value,
               color: Colors.red,
               size: 60,
             ),
