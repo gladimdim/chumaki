@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class MoneyUnitView extends StatefulWidget {
   final Money money;
   final bool isEnough;
-  MoneyUnitView(this.money, {this.isEnough = true});
+  final double size;
+  MoneyUnitView(this.money, {this.isEnough = true, this.size = 32});
 
   @override
   _MoneyUnitViewState createState() => _MoneyUnitViewState();
@@ -55,7 +56,7 @@ class _MoneyUnitViewState extends State<MoneyUnitView>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(widget.money.imagePath, width: 32),
+          Image.asset(widget.money.imagePath, width: widget.size),
           Text(
             widget.money.amount.toStringAsFixed(1),
             style: style(widget.money.amount, context),
@@ -68,5 +69,11 @@ class _MoneyUnitViewState extends State<MoneyUnitView>
   TextStyle style(double value, BuildContext context) {
     final colorTheme = Theme.of(context).colorScheme;
     return TextStyle(color: widget.isEnough  ? Colors.green[800] : colorTheme.onSurface.withOpacity(0.38), fontWeight: FontWeight.bold, fontSize: 18);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

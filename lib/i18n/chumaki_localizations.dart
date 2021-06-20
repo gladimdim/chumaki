@@ -1,3 +1,4 @@
+import 'package:chumaki/i18n/event_localizations.dart';
 import 'package:chumaki/i18n/leaders_localizations.dart';
 import 'package:chumaki/i18n/resource_localizations.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ class ChumakiLocalizations {
 
   static ResourceLocalizations resourceLocalizations = ResourceLocalizations();
   static LeadersLocalizations leadersLocalizations = LeadersLocalizations();
+  static EventLocalizations eventLocalizations = EventLocalizations();
 
   static String getForKey(String key) {
     final split = key.split('.');
@@ -49,6 +51,8 @@ class ChumakiLocalizations {
 
         case 'leaders':
           return leadersLocalizations[split[1]];
+        case "events":
+          return eventLocalizations[split[1]];
         default:
           return key;
       }
@@ -126,6 +130,10 @@ class ChumakiLocalizations {
       "labelPrice": "Price",
       "labelProfit": "Profit",
       "labelProductionCenter": "Production center of",
+      "labelRequirements": "Delivering request",
+      "labelPayment": "Payment",
+      "labelGive": "Give",
+      "labelTakePayment": "Receive",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -194,6 +202,10 @@ class ChumakiLocalizations {
       "labelPrice": "Ціна",
       "labelProfit": "Прибуток",
       "labelProductionCenter": "Центр виробництва",
+      "labelRequirements": "Необхідно доставити",
+      "labelPayment": "Винагорода",
+      "labelGive": "Віддати",
+      "labelTakePayment": "Отримати",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -261,6 +273,10 @@ class ChumakiLocalizations {
       "labelPrice": "Цена",
       "labelProfit": "Выгода",
       "labelProductionCenter": "Центр производства",
+      "labelRequirements": "Необходимо доставить",
+      "labelPayment": "Вознаграждение",
+      "labelGive": "Отдать",
+      "labelTakePayment": "Получить",
     },
   };
 
@@ -466,5 +482,19 @@ class ChumakiLocalizations {
 
   static String get labelProductionCenter {
     return _localizedValues[locale.languageCode]!["labelProductionCenter"]!;
+  }
+
+  static String get labelRequirements {
+    return _localizedValues[locale.languageCode]!["labelRequirements"]!;
+  }
+
+  static String get labelPayment {
+    return _localizedValues[locale.languageCode]!["labelPayment"]!;
+  }
+
+  static String get labelGive {
+    return _localizedValues[locale.languageCode]!["labelGive"]!;
+  }  static String get labelTakePayment {
+    return _localizedValues[locale.languageCode]!["labelTakePayment"]!;
   }
 }

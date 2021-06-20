@@ -1,4 +1,4 @@
-import 'package:chumaki/components/city/city_avatar.dart';
+import 'package:chumaki/components/city/small_city_avatar.dart';
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';

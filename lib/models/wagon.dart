@@ -32,7 +32,6 @@ class Wagon {
     }
 
     this.stock.changes.listen((value) {
-      print("Stock edit");
       changes.add(value);
     });
 

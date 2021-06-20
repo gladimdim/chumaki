@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:chumaki/components/city/city_on_map.dart';
 import 'package:chumaki/components/city/selected_city_locked_view.dart';
+import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/ui/3d_button.dart';
@@ -12,6 +13,7 @@ import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
 
 import 'package:chumaki/models/image_on_canvas.dart';
+import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/theme.dart';
 import 'package:chumaki/utils/points.dart';
 import 'package:chumaki/views/inherited_company.dart';
@@ -237,20 +239,42 @@ class GameCanvasViewState extends State<GameCanvasView>
           Positioned(
             bottom: 5,
             left: 10,
-            child: SizedBox(
-              width: 55,
-              height: 55,
-              child: DDDButton(
-                color: mediumGrey,
-                shadowColor: themeData.backgroundColor,
-                onPressed: _toggleMapMode,
-                child: mapMode == MAP_MODE.CITY
-                    ? Image.asset("images/resources/wood/wood.png", width: 44)
-                    : Image.asset(
-                        "images/cities/church.png",
-                        width: 44,
-                      ),
-              ),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 55,
+                  height: 55,
+                  child: DDDButton(
+                    color: mediumGrey,
+                    shadowColor: themeData.backgroundColor,
+                    onPressed: _toggleMapMode,
+                    child: mapMode == MAP_MODE.CITY
+                        ? Image.asset("images/resources/wood/wood.png",
+                            width: 44)
+                        : Image.asset(
+                            "images/cities/church.png",
+                            width: 44,
+                          ),
+                  ),
+                ),
+                SizedBox(
+                    width: 55,
+                    height: 55,
+                    child: Stack(
+                      children: [
+                        Container(
+                          color: themeData.backgroundColor,
+                        ),
+                        Center(
+                            child: Image.asset(Money(0).imagePath, width: 44)),
+                        StreamBuilder(
+                            stream: company.changes,
+                            builder: (context, _) => Center(
+                                child: Text(
+                                    company.getMoney().amount.toString()))),
+                      ],
+                    )),
+              ],
             ),
           ),
       ],

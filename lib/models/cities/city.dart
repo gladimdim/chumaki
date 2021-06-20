@@ -23,12 +23,22 @@ import 'package:chumaki/models/cities/uman.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/company.dart';
+import 'package:chumaki/models/events/event.dart';
 import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/tasks/route.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:rxdart/rxdart.dart';
+
+enum CITY_EVENTS {
+  WAGON_ARRIVED,
+  WAGON_DISPATCHED,
+  STOCK_CHANGED,
+  UNLOCKED,
+  WAGON_ADDED,
+  EVENT_DONE,
+}
 
 class City {
   final Point<double> point;
@@ -39,8 +49,10 @@ class City {
   final double size;
   late List<Wagon> wagons;
   final List<City> unlocksCities;
+  Event? activeEvent;
+  final List<Event> availableEvents;
   late final List<Resource> produces;
-  BehaviorSubject changes = BehaviorSubject();
+  BehaviorSubject<CITY_EVENTS> changes = BehaviorSubject<CITY_EVENTS>();
 
   String get avatarImagePath {
     return "images/cities/avatars/$localizedKeyName.png";
@@ -48,17 +60,20 @@ class City {
 
   late Money unlockPriceMoney;
 
-  City(
-      {required this.point,
-      required this.name,
-      required this.stock,
-      required this.localizedKeyName,
-      unlocked = false,
-      this.size = 1,
-      required this.unlocksCities,
-      this.unlockPriceMoney = const Money(0),
-      required this.produces,
-      List<Wagon>? wagons}) {
+  City({
+    required this.point,
+    required this.name,
+    required this.stock,
+    required this.localizedKeyName,
+    unlocked = false,
+    this.size = 1,
+    required this.unlocksCities,
+    this.unlockPriceMoney = const Money(0),
+    required this.produces,
+    List<Wagon>? wagons,
+    this.activeEvent,
+    this.availableEvents = const [],
+  }) {
     if (wagons == null) {
       this.wagons = List.empty(growable: true);
     } else {
@@ -66,7 +81,7 @@ class City {
     }
     _unlocked = unlocked;
 
-    stock.changes.listen(changes.add);
+    stock.changes.listen((_) => changes.add(CITY_EVENTS.STOCK_CHANGED));
   }
 
   static City fromName(String name) {
@@ -160,7 +175,7 @@ class City {
 
   void unlock() {
     _unlocked = true;
-    changes.add(this);
+    changes.add(CITY_EVENTS.UNLOCKED);
   }
 
   bool sellResource(
@@ -217,19 +232,30 @@ class City {
 
   void routeTaskArrived(RouteTask task) {
     wagons.add(task.wagon);
-    changes.add(this);
+    queueEvent();
+
+    changes.add(CITY_EVENTS.WAGON_ARRIVED);
+  }
+
+  Event? queueEvent() {
+    if (availableEvents.isNotEmpty && activeEvent == null) {
+      activeEvent = availableEvents.removeAt(0);
+    }
+    return activeEvent;
   }
 
   void routeTaskStarted(RouteTask task) {
     wagons.remove(task.wagon);
-    changes.add(this);
+    changes.add(CITY_EVENTS.WAGON_DISPATCHED);
   }
 
   bool canSellResource(Resource res) {
     return stock.hasEnough(res);
   }
 
-  Map<String, Object> toJson() {
+  Map<String, Object?> toJson() {
+    final event = activeEvent;
+    final eventJson = event == null ? null : event.toJson();
     return {
       "name": name,
       "stock": stock.toJson(),
@@ -240,6 +266,8 @@ class City {
       "unlocked": _unlocked,
       "produces": produces.map((resource) => resource.toJson()).toList(),
       "unlockCities": unlocksCities.map((e) => e.localizedKeyName).toList(),
+      "activeEvent": eventJson,
+      "availableEvents": availableEvents.map((e) => e.toJson()).toList(),
     };
   }
 
@@ -248,6 +276,8 @@ class City {
     List wagonJson = input["wagons"];
     List unlockCities = input["unlockCities"];
     List producesJson = input["produces"];
+    List availableEventsJson = input["availableEvents"];
+    final eventJson = input["activeEvent"];
     return City(
       point: Point(pointJson["x"], pointJson["y"]),
       name: input["name"],
@@ -259,12 +289,15 @@ class City {
       unlocksCities:
           unlockCities.map((cityName) => City.fromName(cityName)).toList(),
       size: input["size"],
+      activeEvent: eventJson == null ? null : Event.fromJson(eventJson),
+      availableEvents:
+          availableEventsJson.map((e) => Event.fromJson(e)).toList(),
     );
   }
 
   void addWagon(Wagon wagon) {
     wagons.add(wagon);
-    changes.add(this);
+    changes.add(CITY_EVENTS.WAGON_ADDED);
   }
 
   double distanceTo({required City toCity}) {
@@ -291,8 +324,10 @@ class City {
     double distance;
     // in case we cannot find production center just use distance 1
     try {
-      distance = max(1,
-          findClosestResourceCenter(resource, cities).distanceTo(toCity: this));
+      distance = max(
+        1,
+        findClosestResourceCenter(resource, cities).distanceTo(toCity: this),
+      );
     } catch (e) {
       distance = 1;
     }
@@ -314,5 +349,10 @@ class City {
       return previousDistance < newDistance ? previousValue : aCity;
     });
     return closest;
+  }
+
+  void finishActiveEvent() {
+    activeEvent = null;
+    changes.add(CITY_EVENTS.EVENT_DONE);
   }
 }

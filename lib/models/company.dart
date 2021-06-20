@@ -25,6 +25,7 @@ import 'package:chumaki/models/cities/temryuk.dart';
 import 'package:chumaki/models/cities/uman.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
+import 'package:chumaki/models/events/event.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/tasks/route.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
@@ -42,6 +43,7 @@ enum COMPANY_EVENTS {
   CITY_UNLOCKED,
   WAGON_BOUGHT,
   LEADER_HIRED,
+  EVENT_DONE,
 }
 
 class Company {
@@ -135,8 +137,11 @@ class Company {
     });
   }
 
-  Future startTask(
-      {required City from, required City to, required Wagon withWagon}) async {
+  Future startTask({
+    required City from,
+    required City to,
+    required Wagon withWagon,
+  }) async {
     var realFrom = refToCityByName(from);
     var realTo = refToCityByName(to);
     final completeRoute = Queue.from(fullRoute(from: realFrom, to: realTo));
@@ -349,5 +354,28 @@ class Company {
       }
     }
     return bestMatch;
+  }
+
+  bool cityCanUnlockMore(City city) {
+    return city.unlocksCities
+        .map((fakeCity) => refToCityByName(fakeCity))
+        .where((unlockCity) => !unlockCity.isUnlocked())
+        .isNotEmpty;
+  }
+
+  void finishEvent(Event event, {required City inCity}) {
+    if (!event.isDone()) {
+      return;
+    }
+    addMoney(event.payment.amount);
+    inCity.finishActiveEvent();
+    this._innerChanges.add(COMPANY_EVENTS.EVENT_DONE);
+  }
+
+  void donateResource(Resource res,
+      {required Wagon fromWagon, required City toCity}) {
+    if (fromWagon.stock.removeResource(res)) {
+      toCity.activeEvent!.decreaseResource(res);
+    }
   }
 }

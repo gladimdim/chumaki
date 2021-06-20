@@ -12,7 +12,7 @@ class Uman extends City {
           name: "Умань",
           unlocked: false,
           localizedKeyName: 'uman',
-          size: 2,
+          size: 3,
           unlocksCities: [Gaivoron()],
           produces: [Gorilka(1)],
           unlockPriceMoney: Money(300),
