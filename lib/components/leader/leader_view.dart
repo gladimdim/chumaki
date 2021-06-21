@@ -1,4 +1,5 @@
 import 'package:chumaki/components/leader/add_new_perk_view.dart';
+import 'package:chumaki/components/leader/leader_avatar.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
@@ -24,9 +25,7 @@ class LeaderView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipOval(
-              child: Image.asset(leader.imagePath, width: 64),
-            ),
+            LeaderAvatar(leader: leader),
             Expanded(
               flex: 1,
               child: Column(
@@ -76,41 +75,43 @@ class LeaderView extends StatelessWidget {
               ),
             Expanded(
               flex: 2,
-              child: leader.hasReachedMaxLevel() ? Container() : Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  TitleText(ChumakiLocalizations.labelExperience),
-                  SizedBox(
-                    width: _progressWidth,
-                    height: 30,
-                    child: BorderedAll(
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            left: 0,
-                            top: 0,
-                            child: Container(
-                              width: experience /
-                                  leader.levelDelta *
-                                  _progressWidth,
-                              height: 30,
-                              color: Colors.yellow,
+              child: leader.hasReachedMaxLevel()
+                  ? Container()
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        TitleText(ChumakiLocalizations.labelExperience),
+                        SizedBox(
+                          width: _progressWidth,
+                          height: 30,
+                          child: BorderedAll(
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  left: 0,
+                                  top: 0,
+                                  child: Container(
+                                    width: experience /
+                                        leader.levelDelta *
+                                        _progressWidth,
+                                    height: 30,
+                                    color: Colors.yellow,
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: BouncingOutlinedText(
+                                    "$experience/1000",
+                                    fontColor: Colors.yellow,
+                                    size: 18,
+                                  ),
+                                )
+                              ],
                             ),
                           ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: BouncingOutlinedText(
-                              "$experience/1000",
-                              fontColor: Colors.yellow,
-                              size: 18,
-                            ),
-                          )
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
             ),
           ],
         ),

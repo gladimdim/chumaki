@@ -1,9 +1,11 @@
+import 'package:chumaki/components/leader/leader_avatar.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/bordered_container_with_side.dart';
 import 'package:chumaki/components/ui/bordered_top.dart';
 import 'package:chumaki/components/leader/leader_view.dart';
+import 'package:chumaki/components/ui/expandable_panel.dart';
 import 'package:chumaki/components/wagons/wagon_dispatcher.dart';
 import 'package:chumaki/components/wagons/wagon_resource_exchanger.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
@@ -37,30 +39,42 @@ class WagonDetails extends StatelessWidget {
             ),
           ),
           VerticalDivider(),
-          Text(
-            ChumakiLocalizations.labelLeader,
-            style: Theme.of(context).textTheme.headline4,
+          ExpandablePanel(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  ChumakiLocalizations.labelLeader,
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+                if (wagon.leader != null) LeaderAvatar(leader: wagon.leader!),
+              ],
+            ),
+            content: wagon.leader == null
+                ? BorderedContainerWithSides(
+                    borderDirections: [AxisDirection.up, AxisDirection.down],
+                    child: BuyLeaderView(
+                      wagon: wagon,
+                    ))
+                : BorderedAll(child: LeaderView(wagon.leader!)),
           ),
-          if (wagon.leader == null)
-            BorderedContainerWithSides(
-              borderDirections: [AxisDirection.up, AxisDirection.down],
-                child: BuyLeaderView(
-              wagon: wagon,
-            )),
-          if (wagon.leader != null)
-            BorderedAll(child: LeaderView(wagon.leader!)),
-          Text(
-            ChumakiLocalizations.labelSend,
-            style: Theme.of(context).textTheme.headline4,
-          ),
-          WagonDispatcher(wagon: wagon, city: city),
-          BorderedTop(
-            child: BorderedBottom(
-              child: Center(
-                  child: TitleText(ChumakiLocalizations.labelCompanyContains)),
+          ExpandablePanel(
+            title: Text(
+              ChumakiLocalizations.labelSend,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            content: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: WagonDispatcher(wagon: wagon, city: city),
             ),
           ),
-          WagonResourceExchanger(wagon, city),
+          ExpandablePanel(
+            title: Text(
+              ChumakiLocalizations.labelTrade,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            content: WagonResourceExchanger(wagon, city),
+          ),
         ],
       ),
     );
