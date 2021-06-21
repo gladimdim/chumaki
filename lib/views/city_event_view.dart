@@ -29,12 +29,12 @@ class _CityEventViewState extends State<CityEventView> {
       children: [
         BorderedBottom(
           child: Text(
-            ChumakiLocalizations.getForKey(event.localizedTitleKey),
+            ChumakiLocalizations.getForKey(event.localizedKeyTitle),
             style: Theme.of(context).textTheme.headline3,
           ),
         ),
         Text(
-          ChumakiLocalizations.getForKey(event.localizedTextKey),
+          ChumakiLocalizations.getForKey(event.localizedKeyText),
           style: Theme.of(context).textTheme.headline5,
         ),
         if (!event.isDone())

@@ -15,6 +15,8 @@ class Kaniv extends City {
           unlocksCities: [],
           produces: [Horse(1), Fur(1)],
           stock: Stock([
+            Horse(500),
+            Fur(500),
             Bread(2000),
             Stone(300),
             Firearm(500),
