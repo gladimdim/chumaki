@@ -173,7 +173,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                           ),
                           label: TitleText(
                             ChumakiLocalizations.getForKey(
-                                widget.city.activeEvent!.localizedTitleKey),
+                                widget.city.activeEvent!.localizedKeyTitle),
                           ),
                         ),
                     ].map((action) {

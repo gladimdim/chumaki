@@ -21,8 +21,9 @@ class Vinnitsa extends City {
             Cannon(30),
             Grains(1000),
             MetalParts(100),
-            Firearm(100),
+            Firearm(300),
             Wool(150),
+            Stone(500),
           ]),
         );
 }

@@ -18,10 +18,12 @@ class Berdychiv extends City {
           produces: [IronOre(1)],
           stock: Stock([
             Bread(1000),
+            Grains(1000),
             MetalParts(300),
             Firearm(150),
             Wool(450),
             Fish(450),
+            IronOre(800),
           ]),
         );
 }

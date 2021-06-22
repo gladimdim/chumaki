@@ -22,6 +22,7 @@ class Zhytomir extends City {
           ],
           stock: Stock(
             [
+              Grains(1000),
               Wood(1500),
               Planks(1500),
               Fur(50),
@@ -29,7 +30,7 @@ class Zhytomir extends City {
               Wax(100),
               Amber(1800),
               Firearm(100),
-              Bread(500),
+              Bread(1000),
               Horse(50),
               MetalParts(300),
             ],

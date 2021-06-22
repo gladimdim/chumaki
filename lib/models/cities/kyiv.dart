@@ -19,6 +19,7 @@ class Kyiv extends City {
           unlockPriceMoney: Money(500),
           produces: [Wax(1)],
           stock: Stock([
+            Wax(1000),
             Wood(1000),
             Horse(200),
             Bread(20000),

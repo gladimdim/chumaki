@@ -17,6 +17,7 @@ class Nizhin extends City {
           produces: [Cloth(1)],
           stock: Stock(
             [
+              Wax(1000),
               Grains(2000),
               Wood(800),
               Horse(50),

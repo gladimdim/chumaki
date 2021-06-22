@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/events/event.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Chigirin extends City {
@@ -14,6 +15,14 @@ class Chigirin extends City {
           unlocked: true,
           produces: [Wool(1)],
           unlocksCities: [],
+          availableEvents: [
+            Event(
+              iconPath: "images/resources/cloth/cloth.png",
+              payment: Money(400),
+              requirements: [Cloth(40), Wool(40)],
+              localizedKey: "events.buyClothsForCossacks",
+            ),
+          ],
           stock: Stock([
             Bread(2000),
             Stone(300),
@@ -26,7 +35,7 @@ class Chigirin extends City {
             Cannon(50),
             MetalParts(200),
             Salt(300),
-            Wool(100),
+            Wool(1000),
             Gorilka(500),
             Wax(1000),
             Honey(800),

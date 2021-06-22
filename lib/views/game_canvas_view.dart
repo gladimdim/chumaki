@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:chumaki/components/city/city_on_map.dart';
 import 'package:chumaki/components/city/selected_city_locked_view.dart';
-import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/ui/3d_button.dart';
