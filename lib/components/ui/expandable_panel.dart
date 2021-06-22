@@ -99,4 +99,9 @@ class _ExpandablePanelState extends State<ExpandablePanel>
       isExpanded = !isExpanded;
     });
   }
+
+  void dispose() {
+    _rotateController.dispose();
+    super.dispose();
+  }
 }

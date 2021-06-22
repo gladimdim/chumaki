@@ -1,5 +1,5 @@
+import 'package:chumaki/components/city/AnimatedFlag.dart';
 import 'package:chumaki/components/resource_image_view.dart';
-import 'package:chumaki/components/ui/spinning_star.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/wagon.dart';
@@ -18,74 +18,57 @@ class CityOnMap extends StatelessWidget {
       stream: city.changes,
       builder: (context, snapshot) => Opacity(
         opacity: city.isUnlocked() ? 1 : 0.6,
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.blue,
-                Colors.blue,
-                Colors.yellow,
-                Colors.yellow,
-              ],
-              stops: [0, 0.49, 0.51, 1],
-            ),
-            border: Border.all(color: Colors.black, width: 3),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: SizedBox(
-            width: CITY_SIZE * city.size,
-            height: CITY_SIZE * city.size,
-            child: Stack(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (city.activeEvent != null)
-                  Transform.translate(
-                      offset: Offset(
-                          CITY_SIZE.toDouble() * city.size / 2 - 30, -50),
-                      child: SpinningStar()),
-                Center(
-                  child: _avatarForMode(),
+        child: SizedBox(
+          width: CITY_SIZE * city.size,
+          height: CITY_SIZE * city.size,
+          child: Stack(
+            children: [
+              Positioned.fill(child: AnimatedFlag(topColor: Colors.red, bottomColor: Colors.green, animate: city.activeEvent != null)),
+              // if (city.activeEvent != null)
+              //   Transform.translate(
+              //       offset:
+              //           Offset(CITY_SIZE.toDouble() * city.size / 2 - 30, -50),
+              //       child: SpinningStar()),
+              Center(
+                child: _avatarForMode(),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white.withAlpha(180),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text(
+                      ChumakiLocalizations.getForKey(city.localizedKeyName),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 8 * city.size,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
+              ),
+              if (city.size > 1)
                 Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white.withAlpha(180),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Text(
-                        ChumakiLocalizations.getForKey(city.localizedKeyName),
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 8 * city.size,
-                            fontWeight: FontWeight.bold),
+                  alignment: Alignment.topRight,
+                  child: Wrap(
+                    children: [
+                      Image.asset(
+                        Wagon.imagePath,
+                        width: 15 * city.size,
                       ),
-                    ),
+                      Text(
+                        city.wagons.length.toString(),
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
                 ),
-                if (city.size > 1)
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Wrap(
-                      children: [
-                        Image.asset(
-                          Wagon.imagePath,
-                          width: 15 * city.size,
-                        ),
-                        Text(
-                          city.wagons.length.toString(),
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
+            ],
           ),
         ),
       ),

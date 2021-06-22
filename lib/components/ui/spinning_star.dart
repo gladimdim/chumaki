@@ -12,7 +12,6 @@ class SpinningStar extends StatefulWidget {
 class _SpinningStarState extends State<SpinningStar>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
-  late final Animation<Color?> _colorAnimation;
   late final Animation<double?> _rotationAnimation;
 
   @override
