@@ -54,7 +54,7 @@ class WagonDispatcher extends StatelessWidget {
           );
         }).toList(),
         Text(
-          "Other Cities",
+          ChumakiLocalizations.labelOtherCities,
           style: Theme.of(context).textTheme.headline4,
         ),
         ...allOtherCities.divideBy(3).map((List<City> cities) {

@@ -135,6 +135,7 @@ class ChumakiLocalizations {
       "labelGive": "Give",
       "labelTakePayment": "Receive",
       "labelTrade": "Trade",
+      "labelOtherCities": "Other cities",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -208,6 +209,7 @@ class ChumakiLocalizations {
       "labelGive": "Віддати",
       "labelTakePayment": "Отримати",
       "labelTrade": "Торгівля",
+      "labelOtherCities": "Інші міста",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -280,6 +282,7 @@ class ChumakiLocalizations {
       "labelGive": "Отдать",
       "labelTakePayment": "Получить",
       "labelTrade": "Торговать",
+      "labelOtherCities": "Другие города",
     },
   };
 
@@ -502,7 +505,12 @@ class ChumakiLocalizations {
   static String get labelTakePayment {
     return _localizedValues[locale.languageCode]!["labelTakePayment"]!;
   }
+
   static String get labelTrade {
     return _localizedValues[locale.languageCode]!["labelTrade"]!;
+  }
+
+  static String get labelOtherCities {
+    return _localizedValues[locale.languageCode]!["labelOtherCities"]!;
   }
 }
