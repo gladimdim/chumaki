@@ -1,5 +1,4 @@
 import 'package:chumaki/components/leader/leader_avatar.dart';
-import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/bordered_container_with_side.dart';
@@ -59,9 +58,15 @@ class WagonDetails extends StatelessWidget {
                 : BorderedAll(child: LeaderView(wagon.leader!)),
           ),
           ExpandablePanel(
-            title: Text(
-              ChumakiLocalizations.labelSend,
-              style: Theme.of(context).textTheme.headline4,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  ChumakiLocalizations.labelSend,
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+                Image.asset("images/icons/paths/paths.png", width: 64),
+              ],
             ),
             content: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -69,9 +74,15 @@ class WagonDetails extends StatelessWidget {
             ),
           ),
           ExpandablePanel(
-            title: Text(
-              ChumakiLocalizations.labelTrade,
-              style: Theme.of(context).textTheme.headline4,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  ChumakiLocalizations.labelTrade,
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+                Image.asset("images/icons/money/money.png", width: 64),
+              ],
             ),
             content: WagonResourceExchanger(wagon, city),
           ),
