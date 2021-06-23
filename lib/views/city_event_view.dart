@@ -1,3 +1,4 @@
+import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
@@ -33,6 +34,7 @@ class _CityEventViewState extends State<CityEventView> {
             style: Theme.of(context).textTheme.headline3,
           ),
         ),
+        Image.asset(event.artPath, width: CITY_DETAILS_VIEW_WIDTH / 2, fit: BoxFit.fitWidth,),
         Text(
           ChumakiLocalizations.getForKey(event.localizedKeyText),
           style: Theme.of(context).textTheme.headline5,

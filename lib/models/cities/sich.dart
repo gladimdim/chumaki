@@ -23,18 +23,21 @@ class Sich extends City {
               iconPath: 'images/resources/bread/bread_1.png',
               requirements: [Grains(10), Bread(10)],
               payment: Money(200),
+              artPath: "images/events/vesterfeld/cossack_and_bum.png",
             ),
             Event(
               localizedKey: 'events.celebrateElections',
               iconPath: 'images/resources/gorilka/gorilka.png',
               requirements: [Gorilka(50), Tobacco(30)],
               payment: Money(200),
+              artPath: "images/events/vesterfeld/elite_cossacks.png",
             ),
             Event(
               localizedKey: 'events.buyCannons',
               iconPath: 'images/resources/cannon/cannon_3.png',
               requirements: [Cannon(3), Horse(10)],
               payment: Money(1200),
+              artPath: "images/events/vesterfeld/cannons_shooting.png",
             ),
           ],
           stock: Stock(
