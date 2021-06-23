@@ -46,7 +46,7 @@ class Event {
       iconPath: input["iconPath"],
       payment: Money(payment),
 
-      artPath: input["artParth"],
+      artPath: input["artPath"],
     );
   }
 
