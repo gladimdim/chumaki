@@ -21,6 +21,7 @@ class Chigirin extends City {
               payment: Money(400),
               requirements: [Cloth(40), Wool(40)],
               localizedKey: "events.buyClothsForCossacks",
+              artPath: "images/events/vesterfeld/cossack_and_sheep.png",
             ),
           ],
           stock: Stock([

@@ -4,6 +4,7 @@ class Event {
   final List<Resource> requirements;
   final String localizedKey;
   final String iconPath;
+  final String artPath;
   final Money payment;
 
   Event({
@@ -11,6 +12,7 @@ class Event {
     required this.payment,
     required this.requirements,
     required this.localizedKey,
+    required this.artPath,
   });
 
   bool isDone() {
@@ -31,6 +33,7 @@ class Event {
       "localizedKey": localizedKey,
       "iconPath": iconPath,
       "payment": payment.amount,
+      "artPath": artPath,
     };
   }
 
@@ -42,6 +45,8 @@ class Event {
       requirements: requirements.map((e) => Resource.fromJson(e)).toList(),
       iconPath: input["iconPath"],
       payment: Money(payment),
+
+      artPath: input["artParth"],
     );
   }
 
