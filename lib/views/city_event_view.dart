@@ -9,6 +9,7 @@ import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
+import 'package:chumaki/extensions/list.dart';
 
 class CityEventView extends StatefulWidget {
   final City city;
@@ -34,7 +35,11 @@ class _CityEventViewState extends State<CityEventView> {
             style: Theme.of(context).textTheme.headline3,
           ),
         ),
-        Image.asset(event.artPath, width: CITY_DETAILS_VIEW_WIDTH / 2, fit: BoxFit.fitWidth,),
+        Image.asset(
+          event.artPath,
+          width: CITY_DETAILS_VIEW_WIDTH / 2,
+          fit: BoxFit.fitWidth,
+        ),
         Text(
           ChumakiLocalizations.getForKey(event.localizedKeyText),
           style: Theme.of(context).textTheme.headline5,
@@ -46,44 +51,51 @@ class _CityEventViewState extends State<CityEventView> {
           ),
         if (!event.isDone())
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: event.requirements
-                  .map(
-                    (req) => StreamBuilder(
-                        stream: widget.city.changes.where(
-                            (event) => event == CITY_EVENTS.STOCK_CHANGED),
-                        builder: (context, _snapshot) {
-                          Wagon? wagon;
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                  children: event.requirements
+                      .divideBy(3)
+                      .map((List<Resource> reses) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: reses
+                      .map(
+                        (req) => Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: StreamBuilder(
+                              stream: widget.city.changes.where(
+                                  (event) => event == CITY_EVENTS.STOCK_CHANGED),
+                              builder: (context, _snapshot) {
+                                Wagon? wagon;
 
-                          try {
-                            wagon = widget.city.wagons.firstWhere(
-                              (wagon) =>
-                                  wagon.stock.hasEnough(req.cloneWithAmount(1)),
-                            );
-                          } catch (e) {
-                            print(
-                                "No wagons found to satisfy need for res: ${req.localizedKey}");
-                          }
+                                try {
+                                  wagon = widget.city.wagons.firstWhere(
+                                    (wagon) => wagon.stock
+                                        .hasEnough(req.cloneWithAmount(1)),
+                                  );
+                                } catch (e) {
+                                  print(
+                                      "No wagons found to satisfy need for res: ${req.localizedKey}");
+                                }
 
-                          bool canGive = false;
-                          if (wagon == null) {
-                            canGive = false;
-                          } else {
-                            canGive = true;
-                          }
-                          return EventRequirementView(
-                            requirement: req,
-                            onDonate: canGive
-                                ? () => _onDonate(company, req, wagon!)
-                                : null,
-                          );
-                        }),
-                  )
-                  .toList(),
-            ),
-          ),
+                                bool canGive = false;
+                                if (wagon == null) {
+                                  canGive = false;
+                                } else {
+                                  canGive = true;
+                                }
+                                return EventRequirementView(
+                                  requirement: req,
+                                  onDonate: canGive
+                                      ? () => _onDonate(company, req, wagon!)
+                                      : null,
+                                );
+                              }),
+                        ),
+                      )
+                      .toList(),
+                );
+              }).toList())),
         BorderedBottom(
           child: Text(ChumakiLocalizations.labelPayment,
               style: Theme.of(context).textTheme.headline4),
@@ -110,7 +122,8 @@ class _CityEventViewState extends State<CityEventView> {
 
   void _onDonate(Company company, Resource res, Wagon wagon) {
     setState(() {
-      company.donateResource(res.cloneWithAmount(1), fromWagon: wagon, toCity: widget.city);
+      company.donateResource(res.cloneWithAmount(1),
+          fromWagon: wagon, toCity: widget.city);
     });
   }
 }

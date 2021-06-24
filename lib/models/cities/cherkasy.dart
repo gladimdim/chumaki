@@ -5,6 +5,7 @@ import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/korsun.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
+import 'package:chumaki/models/events/event.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Cherkasy extends City {
@@ -17,6 +18,21 @@ class Cherkasy extends City {
           unlocked: true,
           produces: [],
           unlocksCities: [Pereyaslav(), Kyiv(), Korsun()],
+          availableEvents: [
+            Event(
+                iconPath: "images/icons/luxury/luxury.png",
+                payment: Money(550),
+                requirements: [
+                  Gorilka(100),
+                  Bread(50),
+                  Silk(50),
+                  Amber(20),
+                  Honey(20),
+                  Tobacco(10)
+                ],
+                localizedKey: "events.cossackStarshinaWedding",
+                artPath: "images/events/vesterfeld/elite_cossacks.png")
+          ],
           stock: Stock([
             Bread(200),
             Stone(300),
@@ -30,15 +46,6 @@ class Cherkasy extends City {
             Wool(300),
             Gorilka(500),
           ]),
-          wagons: [
-            // Wagon(localizedNameKey: "company.valko", stock: Stock([Bread(10), Wood(30)])),
-            // Wagon(localizedNameKey: "company.kharchenko", stock: Stock([Firearm(5), Stone(15)])),
-            // Wagon(
-            //     localizedNameKey: "company.pidlisnyi",
-            //     stock: Stock([Fur(30), Charcoal(25), Fish(15)])),
-            // Wagon(
-            //     localizedNameKey: "company.mitras",
-            //     stock: Stock([Horse(5), Powder(25), IronOre(20)])),
-          ],
+          wagons: [],
         );
 }
