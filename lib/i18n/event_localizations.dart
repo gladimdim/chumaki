@@ -17,6 +17,10 @@ class EventLocalizations extends InternalLocalizations {
       "buyClothsForCossacksTitle": "Cloths for newcomers",
       "buyClothsForCossacksText":
           "Chigirin regiment received new registered cossacks. Colonel asks you to buy cloths and wool to prepare them for war.",
+      // Cherkasy
+      "cossackStarshinaWeddingTitle": "Gentry Wedding",
+      "cossackStarshinaWeddingText":
+          "One of the top officers at Cherkasy's castle gentry has to conduct a wedding for his daughter. Bring them resources needed to have Wedding of the Century",
     },
     "uk": {
       // sich
@@ -33,7 +37,11 @@ class EventLocalizations extends InternalLocalizations {
       // Chigirin
       "buyClothsForCossacksTitle": "Одягнути новачків",
       "buyClothsForCossacksText":
-          "В Чигиринский полк записали нових реєстровців. Полковник просить надати йому сукно та тканини, щоб одягнути на війну."
+          "В Чигиринский полк записали нових реєстровців. Полковник просить надати йому сукно та тканини, щоб одягнути на війну.",
+      // Cherkasy
+      "cossackStarshinaWeddingTitle": "Шляхетське весілля",
+      "cossackStarshinaWeddingText":
+          "Один із знатних шляхтичів Черкаського замку має видати свою доньку заміж. Вони хочуть провести весілля століття, тому потребують дуже багато різних дорогих подарунків та страв.",
     },
     "ru": {
       // Sich
@@ -50,7 +58,11 @@ class EventLocalizations extends InternalLocalizations {
       // Chigirin
       "buyClothsForCossacksTitle": "Одеть новобранцев",
       "buyClothsForCossacksText":
-          "В Чигиринский полк записали новых реестровых козаков. Полковник попросил вас купить им одежду для служения."
+          "В Чигиринский полк записали новых реестровых козаков. Полковник попросил вас купить им одежду для служения.",
+      // Cherkasy
+      "cossackStarshinaWeddingTitle": "Шляхетская свадьба",
+      "cossackStarshinaWeddingText":
+          "Один из шляхтичей из Черкасского замка выдает свою дочку замуж. Они хотять отиграть свадьбу, чтобы запомнилась на столетие. Помогите им собрать дорогие подарки и явства.",
     }
   };
 }
