@@ -19,6 +19,7 @@ import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/cities/ochakiv.dart';
 import 'package:chumaki/models/cities/ostrog.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
+import 'package:chumaki/models/cities/pyryatin.dart';
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/cities/stavise.dart';
 import 'package:chumaki/models/cities/temryuk.dart';
@@ -76,6 +77,9 @@ class Company {
     CityRoute(Uman(), Gaivoron(), Point<double>(-50, 50)),
     CityRoute(Vinnitsa(), Ladyzhin(), Point<double>(150, 100)),
     CityRoute(Ladyzhin(), Gaivoron(), Point<double>(150, 100)),
+    CityRoute(Chigirin(), Pyryatin(), Point<double>(-150, -100)),
+    CityRoute(Pyryatin(), Nizhin(), Point<double>(0, 0)),
+    CityRoute(Pyryatin(), Pereyaslav(), Point<double>(150, -100)),
   ];
 
   late double _money;
