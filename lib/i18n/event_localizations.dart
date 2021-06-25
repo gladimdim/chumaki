@@ -7,7 +7,7 @@ class EventLocalizations extends InternalLocalizations {
       "buyCannonsTitle": "Raid Budzhaks",
       "buyCannonsText":
           "Cossacks are planning the raid on Budzhak tartars. They require some military stuff. Bring it to them to get a reward.",
-      "giveFoodTitle": "Frostie winter",
+      "giveFoodTitle": "Frosty winter",
       "giveFoodText":
           "The cold winter was followed by rainy spring. Cossacks were not able to gather a lot of food. Bring them required resources and they will thank you.",
       "celebrateElectionsTitle": "Celebration",

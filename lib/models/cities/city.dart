@@ -264,6 +264,7 @@ class City {
       "size": size,
       "wagons": wagons.map((wagon) => wagon.toJson()).toList(),
       "unlocked": _unlocked,
+      "unlockPriceMoney": unlockPriceMoney.amount,
       "produces": produces.map((resource) => resource.toJson()).toList(),
       "unlockCities": unlocksCities.map((e) => e.localizedKeyName).toList(),
       "activeEvent": eventJson,
@@ -285,6 +286,7 @@ class City {
       localizedKeyName: input["localizedKeyName"],
       wagons: wagonJson.map((e) => Wagon.fromJson(e)).toList(),
       produces: producesJson.map((e) => Resource.fromJson(e)).toList(),
+      unlockPriceMoney: Money(input["unlockPriceMoney"]),
       unlocked: input["unlocked"],
       unlocksCities:
           unlockCities.map((cityName) => City.fromName(cityName)).toList(),
