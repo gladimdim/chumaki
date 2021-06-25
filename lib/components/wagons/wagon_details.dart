@@ -46,7 +46,7 @@ class WagonDetails extends StatelessWidget {
                   ChumakiLocalizations.labelLeader,
                   style: Theme.of(context).textTheme.headline4,
                 ),
-                if (wagon.leader != null) LeaderAvatar(leader: wagon.leader!),
+                LeaderAvatar(leader: wagon.leader),
               ],
             ),
             content: wagon.leader == null
