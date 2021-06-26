@@ -1,3 +1,4 @@
+import 'package:chumaki/models/cities/cherkasy.dart';
 import 'package:chumaki/models/cities/chigirin.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
@@ -43,12 +44,12 @@ void main() {
       FakeAsync().run((async) {
         var company = Company();
         company.startTask(
-            from: Chigirin(), to: Pereyaslav(), withWagon: Wagon());
+            from: Chigirin(), to: Cherkasy(), withWagon: Wagon());
         var newCompany = Company.fromJson(company.toJson());
-        async.elapse(Duration(minutes: 5));
+        async.elapse(Duration(seconds: 15));
         expect(newCompany.activeRouteTasks, isEmpty,
             reason: "Task was moved directly to target city.");
-        expect(newCompany.refToCityByName(Pereyaslav()).wagons[0], isNotNull,
+        expect(newCompany.refToCityByName(Cherkasy()).wagons[0], isNotNull,
             reason: "Wagon was restored directly to city");
       });
     });
@@ -91,7 +92,7 @@ void main() {
         var newCompany = Company.fromJson(company.toJson());
         async.elapse(Duration(seconds: 8));
         expect(
-            newCompany.refToCityByName(Pereyaslav()).wagons.isNotEmpty, isTrue,
+            newCompany.refToCityByName(Cherkasy()).wagons.isNotEmpty, isTrue,
             reason: "Wagon stopped at the intermediate stop.");
       });
     });

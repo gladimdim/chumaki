@@ -10,6 +10,7 @@ import 'package:chumaki/models/cities/chernigiv.dart';
 import 'package:chumaki/models/cities/chigirin.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/gaivoron.dart';
+import 'package:chumaki/models/cities/govtva.dart';
 import 'package:chumaki/models/cities/kaniv.dart';
 import 'package:chumaki/models/cities/korsun.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
@@ -54,7 +55,8 @@ class Company {
     CityRoute(Pereyaslav(), Nizhin(), Point<double>(0.0, 0.0)),
     CityRoute(Cherkasy(), Kaniv(), Point<double>(10.0, 10.0)),
     CityRoute(Sich(), Chigirin(), Point<double>(-675.0, 0.0)),
-    CityRoute(Pereyaslav(), Chigirin(), Point<double>(-150.0, 155.0)),
+    CityRoute(Sich(), Govtva(), Point<double>(-50.0, 0.0)),
+    // CityRoute(Pereyaslav(), Chigirin(), Point<double>(-150.0, 155.0)),
     CityRoute(Kyiv(), Nizhin(), Point<double>(150, -300)),
     CityRoute(Kyiv(), Pereyaslav(), Point<double>(300, 0)),
     CityRoute(Kaniv(), Pereyaslav(), Point<double>(100, -50)),
@@ -66,7 +68,7 @@ class Company {
     CityRoute(Ostrog(), Lviv(), Point<double>(-300, 500)),
     CityRoute(Temryuk(), Ochakiv(), Point<double>(-300, -300)),
     CityRoute(Kaniv(), BilaTserkva(), Point<double>(-100, -100)),
-    CityRoute(Cherkasy(), BilaTserkva(), Point<double>(0, 0)),
+    // CityRoute(Cherkasy(), BilaTserkva(), Point<double>(0, 0)),
     CityRoute(Kyiv(), BilaTserkva(), Point<double>(200, 200)),
     CityRoute(Zhytomir(), Berdychiv(), Point<double>(-150, 50)),
     CityRoute(Berdychiv(), Vinnitsa(), Point<double>(100, 200)),
@@ -78,10 +80,10 @@ class Company {
     CityRoute(Uman(), Gaivoron(), Point<double>(-50, 50)),
     CityRoute(Vinnitsa(), Ladyzhin(), Point<double>(150, 100)),
     CityRoute(Ladyzhin(), Gaivoron(), Point<double>(150, 100)),
-    CityRoute(Chigirin(), Myrgorod(), Point<double>(-150, -100)),
     CityRoute(Pyryatin(), Nizhin(), Point<double>(0, 0)),
     CityRoute(Pyryatin(), Pereyaslav(), Point<double>(150, -100)),
     CityRoute(Myrgorod(), Pyryatin(), Point<double>(-150, -100)),
+    CityRoute(Govtva(), Myrgorod(), Point<double>(150, -100)),
   ];
 
   late double _money;

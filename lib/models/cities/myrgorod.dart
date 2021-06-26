@@ -8,7 +8,7 @@ import 'package:chumaki/models/resources/resource.dart';
 class Myrgorod extends City {
   Myrgorod()
       : super(
-    point: Point(1700, 2250),
+    point: Point(1650, 2200),
     name: "Миргород",
     localizedKeyName: 'myrgorod',
     size: 2,
