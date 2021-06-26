@@ -46,8 +46,8 @@ void main() {
         allowLocked: true,
       );
       expect(route.length, equals(2), reason: "We need two stops (two cities)");
-      expect(route2.length, equals(3),
-          reason: "We need three stops (three cities)");
+      expect(route2.length, equals(5),
+          reason: "We need five stops (five cities)");
       expect(route3.length, equals(4),
           reason: "We need four stops (four cities)");
     });

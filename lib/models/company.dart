@@ -68,7 +68,7 @@ class Company {
     CityRoute(Ostrog(), Lviv(), Point<double>(-300, 500)),
     CityRoute(Temryuk(), Ochakiv(), Point<double>(-300, -300)),
     CityRoute(Kaniv(), BilaTserkva(), Point<double>(-100, -100)),
-    CityRoute(Cherkasy(), BilaTserkva(), Point<double>(0, 0)),
+    // CityRoute(Cherkasy(), BilaTserkva(), Point<double>(0, 0)),
     CityRoute(Kyiv(), BilaTserkva(), Point<double>(200, 200)),
     CityRoute(Zhytomir(), Berdychiv(), Point<double>(-150, 50)),
     CityRoute(Berdychiv(), Vinnitsa(), Point<double>(100, 200)),
