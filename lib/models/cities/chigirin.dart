@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
-import 'package:chumaki/models/cities/pyryatin.dart';
+import 'package:chumaki/models/cities/myrgorod.dart';
 import 'package:chumaki/models/events/event.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
@@ -15,7 +15,7 @@ class Chigirin extends City {
           localizedKeyName: 'chigirin',
           unlocked: true,
           produces: [Wool(1)],
-          unlocksCities: [Pyryatin()],
+          unlocksCities: [Myrgorod()],
           availableEvents: [
             Event(
               iconPath: "images/resources/cloth/cloth.png",

@@ -12,6 +12,7 @@ import 'package:chumaki/models/cities/korsun.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/ladyzhin.dart';
 import 'package:chumaki/models/cities/lviv.dart';
+import 'package:chumaki/models/cities/myrgorod.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/cities/ochakiv.dart';
 import 'package:chumaki/models/cities/ostrog.dart';
@@ -131,6 +132,8 @@ class City {
         return Stavise();
       case "pyryatin":
         return Pyryatin();
+      case "myrgorod":
+        return Myrgorod();
       default:
         throw "City with key $name is not recognized";
     }
@@ -170,6 +173,7 @@ class City {
       Ladyzhin(),
       Gaivoron(),
       Pyryatin(),
+      Myrgorod(),
     ];
   }
 
