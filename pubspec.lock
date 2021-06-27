@@ -426,7 +426,7 @@ packages:
     source: hosted
     version: "2.1.0"
   soundpool_macos:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: soundpool_macos
       url: "https://pub.dartlang.org"

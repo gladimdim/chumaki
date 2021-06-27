@@ -2,11 +2,13 @@ import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/company.dart';
+import 'package:chumaki/sound/sound_manager.dart';
 import 'package:chumaki/views/game_canvas_view.dart';
 import 'package:flutter/material.dart';
 import 'package:async/async.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:chumaki/components/ui/locale_selection.dart';
+import 'package:soundpool/soundpool.dart';
 
 class StartingView extends StatefulWidget {
   @override
@@ -116,6 +118,7 @@ class _StartingViewState extends State<StartingView> {
   }
 
   _loadGamePressed(BuildContext context, Company company) async {
+    SoundManager.instance.attachToCompany(company);
     await Navigator.push(
       context,
       MaterialPageRoute(
