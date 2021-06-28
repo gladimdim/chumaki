@@ -12,6 +12,7 @@ import 'package:chumaki/components/wagons/wagon_details.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource_category.dart';
+import 'package:chumaki/sound/sound_manager.dart';
 import 'package:chumaki/views/city_event_view.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
@@ -96,6 +97,9 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                                   .toList(),
                             ],
                           ),
+                          playSoundOnOpen: () {
+                            SoundManager.instance.playLocalMarket();
+                          },
                           content: CityStockView(city: widget.city)),
                       CityMenuItem(
                         menuKey: "global_market",
@@ -103,6 +107,9 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                             "images/icons/market/market2.png",
                             width: 128,
                           ),
+                          playSoundOnOpen: () {
+                            SoundManager.instance.playGlobalMarket();
+                          },
                           label:
                               TitleText(ChumakiLocalizations.labelWorldMarket),
                           content: GlobalMarketView(currentCity: widget.city)),
@@ -234,6 +241,9 @@ class _SelectedCityViewState extends State<SelectedCityView> {
   }
 
   handleMenuItemPress(CityMenuItem action) {
+    if (action.playSoundOnOpen != null) {
+      action.playSoundOnOpen!();
+    }
     if (selectedButton == action) {
       selectedButton = null;
     } else {

@@ -5,5 +5,12 @@ class CityMenuItem {
   final Widget label;
   final Widget image;
   final Widget content;
-  CityMenuItem({required this.menuKey, required this.label, required this.image, required this.content});
+  final VoidCallback? playSoundOnOpen;
+
+  CityMenuItem(
+      {required this.menuKey,
+      required this.label,
+      required this.image,
+      required this.content,
+      this.playSoundOnOpen});
 }
