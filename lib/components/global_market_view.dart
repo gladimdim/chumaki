@@ -36,8 +36,8 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
   @override
   Widget build(BuildContext context) {
     final company = InheritedCompany.of(context).company;
-    var currentResourceSellPrice = widget.currentCity
-        .buyPriceForResource(selectedResource.cloneWithAmount(1), company.allCities);
+    var currentResourceSellPrice = widget.currentCity.buyPriceForResource(
+        selectedResource.cloneWithAmount(1), company.allCities);
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -92,7 +92,7 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                           child: ActionButton(
                             onPress: () => _navigateToCity(city),
                             image: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 SmallCityAvatar(
                                   city,
@@ -102,8 +102,10 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                                   alignment: Alignment.centerRight,
                                   child: BorderedBottom(
                                     child: TitleText(
-                                        ChumakiLocalizations.getForKey(
-                                            city.localizedKeyName)),
+                                      "${ChumakiLocalizations.getForKey(
+                                        city.localizedKeyName,
+                                      )} (${city.stock.resourceInStock(selectedResource)?.amount ?? "0"})",
+                                    ),
                                   ),
                                 ),
                               ],
@@ -187,11 +189,13 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
       cityA,
       cityB,
     ) {
-      var buyPriceA =
-          cityA.sellPriceForResource(selectedResource, company.allCities, withAmount: 1);
+      var buyPriceA = cityA.sellPriceForResource(
+          selectedResource, company.allCities,
+          withAmount: 1);
       var saldoA = buyPriceA - currentSellPrice;
-      var buyPriceB =
-          cityB.sellPriceForResource(selectedResource, company.allCities, withAmount: 1);
+      var buyPriceB = cityB.sellPriceForResource(
+          selectedResource, company.allCities,
+          withAmount: 1);
       var saldoB = buyPriceB - currentSellPrice;
 
       if (saldoA > saldoB) {
