@@ -153,13 +153,16 @@ class Company {
     var realFrom = refToCityByName(from);
     var realTo = refToCityByName(to);
     final completeRoute = Queue.from(fullRoute(from: realFrom, to: realTo));
+    _innerChanges.add(COMPANY_EVENTS.TASK_STARTED);
     for (var nextStop in completeRoute) {
       var newTask = RouteTask(realFrom, nextStop, wagon: withWagon);
       // notify from City that the trade company with the given wagon departed
       realFrom.routeTaskStarted(newTask);
+
       await _startIntermediateTask(newTask);
       realFrom = nextStop;
     }
+    _innerChanges.add(COMPANY_EVENTS.TASK_ENDED);
   }
 
   Future _startIntermediateTask(RouteTask newTask) async {
@@ -176,7 +179,6 @@ class Company {
         completer.complete();
       }
     });
-    _innerChanges.add(COMPANY_EVENTS.TASK_STARTED);
     return completer.future;
   }
 
@@ -206,8 +208,6 @@ class Company {
     cityRoute.routeTasks.remove(task);
     // notify the 'to' city that the new wagon arrived
     task.to.routeTaskArrived(task);
-    // notify all listeners of your company that some task ended.
-    _innerChanges.add(COMPANY_EVENTS.TASK_ENDED);
   }
 
   Future save() async {
