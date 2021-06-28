@@ -26,10 +26,25 @@ class StockResourceCategoryGroup extends StatelessWidget {
     final company = InheritedCompany.of(context).company;
     return ExpandablePanel(
       title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset(categoryToImagePath(resources.first.category), width: 72),
-          TitleText(ChumakiLocalizations.getForKey(
-              resourceCategoryToLocalizedKey(resources.first.category))),
+          Row(
+            children: [
+              Image.asset(categoryToImagePath(resources.first.category),
+                  width: 72),
+              TitleText(ChumakiLocalizations.getForKey(
+                  resourceCategoryToLocalizedKey(resources.first.category))),
+            ],
+          ),
+          Row(
+            children: resources
+                .where((res) => forCity.stock.hasResource(res))
+                .map((res) => ResourceImageView(
+                      res,
+                      showAmount: true,
+                    ))
+                .toList(),
+          )
         ],
       ),
       content: SingleChildScrollView(
@@ -60,7 +75,8 @@ class StockResourceCategoryGroup extends StatelessWidget {
                             children: [
                               Text("${ChumakiLocalizations.labelBuy}:"),
                               MoneyUnitView(Money(forCity.buyPriceForResource(
-                                  resource.cloneWithAmount(1), company.allCities))),
+                                  resource.cloneWithAmount(1),
+                                  company.allCities))),
                             ],
                           ),
                           Row(
