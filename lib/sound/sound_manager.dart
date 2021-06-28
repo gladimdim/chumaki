@@ -6,6 +6,11 @@ class SoundManager {
   // do not forget to modify this map in web sounds manager implementation
   Map<COMPANY_EVENTS, String> actionMapping = {
     COMPANY_EVENTS.CITY_UNLOCKED: "assets/sounds/cart_bought.mp3",
+    COMPANY_EVENTS.TASK_STARTED: "assets/sounds/marching_cossacks.mp3",
+    COMPANY_EVENTS.TASK_ENDED: "assets/sounds/done.mp3",
+    COMPANY_EVENTS.MONEY_ADDED: "assets/sounds/money.mp3",
+    COMPANY_EVENTS.WAGON_BOUGHT: "assets/sounds/cart_bought.mp3",
+    COMPANY_EVENTS.LEADER_HIRED: "assets/sounds/write_on_paper.mp3",
   };
 
   Soundpool pool = Soundpool.fromOptions(
