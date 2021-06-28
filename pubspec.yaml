@@ -22,6 +22,8 @@ dependencies:
   shared_preferences: ^2.0.5
   google_fonts: ^2.1.0
   fake_async: ^1.2.0
+  soundpool: ^2.1.0
+  soundpool_macos: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -74,3 +76,5 @@ flutter:
     - images/icons/unknown/
     - images/events/vesterfeld/
     - images/leaders/
+    # SOUNDS
+    - assets/sounds/
