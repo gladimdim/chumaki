@@ -236,7 +236,7 @@ class Company {
 
     // we need to reconnect to streams from restored tasks
     // in order to get the event when task is finished
-    // if the task was already finished before the game relaoded
+    // if the task was already finished before the game reloaded
     // we just process the task like it was done.
     company.activeRouteTasks = activeRouteTasks;
     company.activeRouteTasks.forEach((task) {

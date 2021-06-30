@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:chumaki/models/company.dart';
 import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
@@ -18,6 +20,7 @@ class SoundManager {
   Map<String, String> uiActionMapping = {
     "openLocalMarket": "assets/sounds/local_market.mp3",
     "openGlobalMarket": "assets/sounds/global_market.mp3",
+    "leaderLevelUp": "assets/sounds/fanfare.mp3",
   };
 
   Soundpool pool = Soundpool.fromOptions(
@@ -25,13 +28,13 @@ class SoundManager {
 
   static final SoundManager instance = SoundManager._internal();
 
+  SoundManager._internal() {}
+
   // contains ids of loaded sounds
   Map<String, int> sounds = {};
 
-  SoundManager._internal() {}
-
   Future initSounds() async {
-    if (sounds.isNotEmpty) {
+    if (sounds.isNotEmpty || Platform.isLinux ) {
       return;
     }
     await Future.forEach(
@@ -40,8 +43,7 @@ class SoundManager {
         String? path = companyActionMapping[element];
         if (path != null) {
           ByteData soundData = await rootBundle.load(path);
-          int soundId;
-          soundId = await pool.load(soundData);
+          int soundId = await pool.load(soundData);
           sounds[path] = soundId;
         }
       }),
@@ -69,7 +71,7 @@ class SoundManager {
     company.changes
         .where((event) => companyActionMapping[event] != null)
         .listen((event) {
-        playCompanySound(event);
+      playCompanySound(event);
     });
   }
 
@@ -89,8 +91,13 @@ class SoundManager {
 
   void playLocalMarket() {
     playUISound("openLocalMarket");
-  } void playGlobalMarket() {
+  }
+
+  void playGlobalMarket() {
     playUISound("openGlobalMarket");
   }
 
+  void playLeaderLevelUp() {
+    playUISound("leaderLevelUp");
+  }
 }

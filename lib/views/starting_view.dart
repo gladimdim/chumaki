@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:async/async.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:chumaki/components/ui/locale_selection.dart';
-import 'package:soundpool/soundpool.dart';
 
 class StartingView extends StatefulWidget {
   @override
@@ -133,6 +132,7 @@ class _StartingViewState extends State<StartingView> {
         ),
       ),
     );
+    company.dispose();
     setState(() {
       _appPreferencesInitter = AsyncMemoizer();
     });
