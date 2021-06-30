@@ -72,6 +72,7 @@ class Wagon {
   }
 
   void dispose() {
+    leader?.dispose();
     changes.close();
   }
 
