@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:chumaki/models/company.dart';
 import 'package:flutter/services.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:soundpool/soundpool.dart';
 
 class SoundManager {
@@ -16,9 +17,8 @@ class SoundManager {
     COMPANY_EVENTS.LEADER_HIRED: "assets/sounds/write_on_paper.mp3",
   };
 
-  Queue<int> _playlist = Queue();
+  Queue<String> _playlist = Queue();
   bool _isPlaying = false;
-  int? currentSoundId;
 
   Map<String, String> uiActionMapping = {
     "openLocalMarket": "assets/sounds/local_market.mp3",
@@ -34,43 +34,43 @@ class SoundManager {
   SoundManager._internal() {}
 
   // contains ids of loaded sounds
-  Map<String, int> sounds = {};
+  Map<String, String> sounds = {};
 
-  Future initSounds() async {
-    if (sounds.isNotEmpty || Platform.isLinux) {
-      return;
-    }
-    await Future.forEach(
-      companyActionMapping.keys,
-      ((element) async {
-        String? path = companyActionMapping[element];
-        if (path != null) {
-          ByteData soundData = await rootBundle.load(path);
-          int soundId = await pool.load(soundData);
-          sounds[path] = soundId;
-        }
-      }),
-    );
-    await Future.forEach(
-      uiActionMapping.keys,
-      ((element) async {
-        String? path = uiActionMapping[element];
-        if (path != null) {
-          ByteData soundData = await rootBundle.load(path);
-          int soundId;
-          soundId = await pool.load(soundData);
-          sounds[path] = soundId;
-        }
-      }),
-    );
-  }
+  // Future initSounds() async {
+  //   if (sounds.isNotEmpty || Platform.isLinux) {
+  //     return;
+  //   }
+  //   await Future.forEach(
+  //     companyActionMapping.keys,
+  //     ((element) async {
+  //       String? path = companyActionMapping[element];
+  //       if (path != null) {
+  //         ByteData soundData = await rootBundle.load(path);
+  //         int soundId = await pool.load(soundData);
+  //         sounds[path] = soundId;
+  //       }
+  //     }),
+  //   );
+  //   await Future.forEach(
+  //     uiActionMapping.keys,
+  //     ((element) async {
+  //       String? path = uiActionMapping[element];
+  //       if (path != null) {
+  //         ByteData soundData = await rootBundle.load(path);
+  //         int soundId;
+  //         soundId = await pool.load(soundData);
+  //         sounds[path] = soundId;
+  //       }
+  //     }),
+  //   );
+  // }
 
   playCompanySound(COMPANY_EVENTS action) {
-    queueSound(sounds[companyActionMapping[action]]);
+    queueSound(companyActionMapping[action]);
   }
 
   attachToCompany(Company company) async {
-    await initSounds();
+    // await initSounds();
     company.changes
         .where((event) => companyActionMapping[event] != null)
         .listen((event) {
@@ -79,16 +79,18 @@ class SoundManager {
   }
 
   playUISound(String name) async {
-    queueSound(sounds[uiActionMapping[name]]);
+    queueSound(uiActionMapping[name]);
   }
 
-  Future playSoundId(int id) async {
-    return await pool.play(id);
+  Future playSoundId(String id) async {
+    final player = AudioPlayer();
+    final duration = await player.setAsset(id);
+    return await player.play();
   }
 
-  void queueSound(int? id) async {
-    if (id != null) {
-      _playlist.add(id);
+  void queueSound(String? path) async {
+    if (path != null) {
+      _playlist.add(path);
     }
     if (!_isPlaying) {
       processQueue();

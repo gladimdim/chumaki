@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SoundManager.instance.initSounds();
+  // await SoundManager.instance.initSounds();
   runApp(MyApp());
 }
 
