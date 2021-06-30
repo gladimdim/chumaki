@@ -19,6 +19,7 @@ class SoundManager {
 
   Queue<String> _playlist = Queue();
   bool _isPlaying = false;
+  final AudioPlayer _player = AudioPlayer();
 
   Map<String, String> uiActionMapping = {
     "openLocalMarket": "assets/sounds/local_market.mp3",
@@ -83,9 +84,9 @@ class SoundManager {
   }
 
   Future playSoundId(String id) async {
-    final player = AudioPlayer();
-    final duration = await player.setAsset(id);
-    return await player.play();
+    final duration = await _player.setAsset(id);
+    await _player.play();
+    return await _player.stop();
   }
 
   void queueSound(String? path) async {
