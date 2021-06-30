@@ -123,6 +123,10 @@ class Leader {
     }
     _innerChanges.add(LEADER_CHANGES.EXPERIENCE_GAINED);
   }
+
+  void dispose() {
+    _innerChanges.close();
+  }
 }
 
 String imagePathForId(int id) {
