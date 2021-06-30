@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:chumaki/components/leader/add_new_perk_view.dart';
 import 'package:chumaki/components/leader/leader_avatar.dart';
 import 'package:chumaki/components/title_text.dart';
@@ -6,26 +8,42 @@ import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
 import 'package:chumaki/components/ui/perk_unit_view.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
+import 'package:chumaki/sound/sound_manager.dart';
 import 'package:flutter/material.dart';
 
-class LeaderView extends StatelessWidget {
+class LeaderView extends StatefulWidget {
   final Leader leader;
-  final double _progressWidth = 200;
 
   const LeaderView(this.leader);
 
   @override
+  State<LeaderView> createState() => _LeaderViewState();
+}
+
+class _LeaderViewState extends State<LeaderView> {
+  final double _progressWidth = 200;
+  late final StreamSubscription _leaderSub;
+
+  @override
+  void initState() {
+    super.initState();
+    _leaderSub = widget.leader.changes
+        .where((event) => event == LEADER_CHANGES.LEVEL_UP)
+        .listen(onLeaderLevelUp);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final experience = leader.experience % 1000;
+    final experience = widget.leader.experience % 1000;
     return StreamBuilder(
-      stream: leader.changes,
+      stream: widget.leader.changes,
       builder: (context, _) => SizedBox(
         height: 80,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            LeaderAvatar(leader: leader),
+            LeaderAvatar(leader: widget.leader),
             Expanded(
               flex: 1,
               child: Column(
@@ -33,7 +51,7 @@ class LeaderView extends StatelessWidget {
                 children: [
                   TitleText(ChumakiLocalizations.labelLevel),
                   BouncingOutlinedText(
-                    leader.level.toString(),
+                    widget.leader.level.toString(),
                     size: 24,
                     fontColor: Theme.of(context).primaryColor,
                     outlineColor: Theme.of(context).backgroundColor,
@@ -41,7 +59,7 @@ class LeaderView extends StatelessWidget {
                 ],
               ),
             ),
-            if (leader.availablePerks == 0)
+            if (widget.leader.availablePerks == 0)
               Expanded(
                 flex: 2,
                 child: Column(
@@ -50,13 +68,13 @@ class LeaderView extends StatelessWidget {
                     TitleText(ChumakiLocalizations.labelListOfPerks),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: leader.perks
+                        children: widget.leader.perks
                             .map((perk) => PerkUnitView(perk))
                             .toList()),
                   ],
                 ),
               ),
-            if (leader.availablePerks > 0)
+            if (widget.leader.availablePerks > 0)
               Column(
                 children: [
                   Row(
@@ -64,18 +82,19 @@ class LeaderView extends StatelessWidget {
                     children: [
                       TitleText(
                           "${ChumakiLocalizations.labelAvailablePerks}: "),
-                      BouncingOutlinedText(leader.availablePerks.toString(),
+                      BouncingOutlinedText(
+                          widget.leader.availablePerks.toString(),
                           size: 24),
                     ],
                   ),
                   AddNewPerkView(
-                    leader,
+                    widget.leader,
                   ),
                 ],
               ),
             Expanded(
               flex: 2,
-              child: leader.hasReachedMaxLevel()
+              child: widget.leader.hasReachedMaxLevel()
                   ? Container()
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -92,7 +111,7 @@ class LeaderView extends StatelessWidget {
                                   top: 0,
                                   child: Container(
                                     width: experience /
-                                        leader.levelDelta *
+                                        widget.leader.levelDelta *
                                         _progressWidth,
                                     height: 30,
                                     color: Colors.yellow,
@@ -117,5 +136,17 @@ class LeaderView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void onLeaderLevelUp(LEADER_CHANGES event) {
+    if (event == LEADER_CHANGES.LEVEL_UP) {
+      SoundManager.instance.playLeaderLevelUp();
+    }
+  }
+
+  @override
+  void dispose() {
+    _leaderSub.cancel();
+    super.dispose();
   }
 }

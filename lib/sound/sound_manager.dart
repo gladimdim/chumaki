@@ -20,6 +20,7 @@ class SoundManager {
   Map<String, String> uiActionMapping = {
     "openLocalMarket": "assets/sounds/local_market.mp3",
     "openGlobalMarket": "assets/sounds/global_market.mp3",
+    "leaderLevelUp": "assets/sounds/fanfare.mp3",
   };
 
   Soundpool pool = Soundpool.fromOptions(
@@ -94,5 +95,9 @@ class SoundManager {
 
   void playGlobalMarket() {
     playUISound("openGlobalMarket");
+  }
+
+  void playLeaderLevelUp() {
+    playUISound("leaderLevelUp");
   }
 }

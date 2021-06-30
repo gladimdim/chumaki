@@ -114,8 +114,12 @@ class Leader {
   }
 
   void addExperience(int amount) {
+    final oldLevel = level;
     if (level < 3) {
       experience += amount;
+    }
+    if (oldLevel != level) {
+      _innerChanges.add(LEADER_CHANGES.LEVEL_UP);
     }
     _innerChanges.add(LEADER_CHANGES.EXPERIENCE_GAINED);
   }
