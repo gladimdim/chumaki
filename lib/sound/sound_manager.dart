@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:io';
 
 import 'package:chumaki/models/company.dart';
@@ -15,6 +16,8 @@ class SoundManager {
     COMPANY_EVENTS.LEADER_HIRED: "assets/sounds/write_on_paper.mp3",
   };
 
+  Queue<int> _playlist = Queue();
+  bool _isPlaying = false;
   int? currentSoundId;
 
   Map<String, String> uiActionMapping = {
@@ -34,7 +37,7 @@ class SoundManager {
   Map<String, int> sounds = {};
 
   Future initSounds() async {
-    if (sounds.isNotEmpty || Platform.isLinux ) {
+    if (sounds.isNotEmpty || Platform.isLinux) {
       return;
     }
     await Future.forEach(
@@ -62,8 +65,8 @@ class SoundManager {
     );
   }
 
-  playCompanySound(COMPANY_EVENTS action) async {
-    await playSoundId(sounds[companyActionMapping[action]]);
+  playCompanySound(COMPANY_EVENTS action) {
+    queueSound(sounds[companyActionMapping[action]]);
   }
 
   attachToCompany(Company company) async {
@@ -76,16 +79,31 @@ class SoundManager {
   }
 
   playUISound(String name) async {
-    playSoundId(sounds[uiActionMapping[name]]);
+    queueSound(sounds[uiActionMapping[name]]);
   }
 
-  Future playSoundId(int? id) async {
-    if (currentSoundId != null) {
-      await pool.stop(currentSoundId!);
+  Future playSoundId(int id) async {
+    return await pool.play(id);
+  }
+
+  void queueSound(int? id) async {
+    if (id != null) {
+      _playlist.add(id);
     }
-    currentSoundId = id;
-    if (currentSoundId != null) {
-      await pool.play(currentSoundId!);
+    if (!_isPlaying) {
+      processQueue();
+    }
+  }
+
+  void processQueue() async {
+    if (_playlist.isEmpty) {
+      return;
+    } else {
+      final nextId = _playlist.removeFirst();
+      _isPlaying = true;
+      await playSoundId(nextId);
+      _isPlaying = false;
+      processQueue();
     }
   }
 
