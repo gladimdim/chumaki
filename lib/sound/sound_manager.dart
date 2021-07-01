@@ -1,7 +1,6 @@
 import 'dart:collection';
 
 import 'package:chumaki/models/company.dart';
-import 'package:soundpool/soundpool.dart';
 import 'package:just_audio/just_audio.dart';
 
 class SoundManager {
@@ -13,6 +12,7 @@ class SoundManager {
     COMPANY_EVENTS.MONEY_ADDED: "assets/sounds/money.mp3",
     COMPANY_EVENTS.WAGON_BOUGHT: "assets/sounds/cart_bought.mp3",
     COMPANY_EVENTS.LEADER_HIRED: "assets/sounds/write_on_paper.mp3",
+    COMPANY_EVENTS.EVENT_DONE: "assets/sounds/achievement.mp3",
   };
   Queue<String> _playlist = Queue();
   bool _isPlaying = false;
@@ -23,9 +23,6 @@ class SoundManager {
     "openGlobalMarket": "assets/sounds/global_market.mp3",
     "leaderLevelUp": "assets/sounds/fanfare.mp3",
   };
-
-  Soundpool pool = Soundpool.fromOptions(
-      options: SoundpoolOptions(streamType: StreamType.music));
 
   static final SoundManager instance = SoundManager._internal();
 
