@@ -22,8 +22,6 @@ dependencies:
   shared_preferences: ^2.0.5
   google_fonts: ^2.1.0
   fake_async: ^1.2.0
-  soundpool: ^2.1.0
-  soundpool_macos: ^2.1.0
   just_audio: ^0.8.0
 
 dev_dependencies:
