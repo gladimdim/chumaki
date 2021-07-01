@@ -5,6 +5,7 @@ import 'package:chumaki/components/leader/leader_avatar.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
+import 'package:chumaki/components/ui/dissappear.dart';
 import 'package:chumaki/components/ui/perk_unit_view.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
@@ -138,11 +139,22 @@ class _LeaderViewState extends State<LeaderView> {
             ),
             StreamBuilder<LEADER_CHANGES>(
               stream: widget.leader.changes.where((event) => event == LEADER_CHANGES.LEVEL_UP),
+              initialData: null,
               builder: (context, snapshot) {
-                return Align(
-                    alignment: Alignment.center,
-                    child: Text("GOGOGO",
-                        style: Theme.of(context).textTheme.headline4));
+                if (snapshot.hasData) {
+                  return Disappear(
+                    duration: Duration(seconds: 3),
+                    child: Align(
+                        alignment: Alignment.center,
+                        child: Text("LEVELLED UP",
+                            style: Theme
+                                .of(context)
+                                .textTheme
+                                .headline4)),
+                  );
+                 } else {
+                  return Container();
+                }
               }
             ),
           ],

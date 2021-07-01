@@ -15,8 +15,8 @@ class Leader {
 
   int get level => experience ~/ levelDelta;
   double experience;
-  final double levelDelta = 1000;
-  static final levelUpBasePrice = 1000;
+  final double levelDelta = 5;
+  static final levelUpBasePrice = 5;
   late String imagePath;
   final BehaviorSubject<LEADER_CHANGES> _innerChanges = BehaviorSubject<LEADER_CHANGES>();
   late ValueStream<LEADER_CHANGES> changes;
@@ -108,7 +108,7 @@ class Leader {
     List<Leader> leaders = List.empty(growable: true);
     for (var i = 0; i < 11; i++) {
       leaders
-          .add(Leader("leaders.${keyNames[i]}", imagePath: imagePathForId(i), experience: 999));
+          .add(Leader("leaders.${keyNames[i]}", imagePath: imagePathForId(i), experience: 0));
     }
     return leaders;
   }
