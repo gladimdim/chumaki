@@ -1,8 +1,6 @@
 import 'dart:collection';
-import 'dart:io';
 
 import 'package:chumaki/models/company.dart';
-import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -33,44 +31,11 @@ class SoundManager {
 
   SoundManager._internal() {}
 
-  // contains ids of loaded sounds
-  Map<String, int> sounds = {};
-
-  Future initSounds() async {
-    if (sounds.isNotEmpty || Platform.isLinux) {
-      return;
-    }
-    await Future.forEach(
-      companyActionMapping.keys,
-      ((element) async {
-        String? path = companyActionMapping[element];
-        if (path != null) {
-          ByteData soundData = await rootBundle.load(path);
-          int soundId = await pool.load(soundData);
-          sounds[path] = soundId;
-        }
-      }),
-    );
-    await Future.forEach(
-      uiActionMapping.keys,
-      ((element) async {
-        String? path = uiActionMapping[element];
-        if (path != null) {
-          ByteData soundData = await rootBundle.load(path);
-          int soundId;
-          soundId = await pool.load(soundData);
-          sounds[path] = soundId;
-        }
-      }),
-    );
-  }
-
   playCompanySound(COMPANY_EVENTS action) {
     queueSound(companyActionMapping[action]);
   }
 
   attachToCompany(Company company) async {
-    await initSounds();
     company.changes
         .where((event) => companyActionMapping[event] != null)
         .listen((event) {
