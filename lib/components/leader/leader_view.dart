@@ -144,9 +144,9 @@ class _LeaderViewState extends State<LeaderView> {
                 if (snapshot.hasData) {
                   return ScaleAnimated(
                     key: ValueKey(widget.leader.level),
-                    duration: Duration(seconds: 1),
+                    duration: Duration(milliseconds: 700),
                     child: Disappear(
-                      duration: Duration(seconds: 4),
+                      duration: Duration(seconds: 3),
                       key: ValueKey(widget.leader.level),
                       child: Align(
                         child: Text(ChumakiLocalizations.labelLeveledUp,
