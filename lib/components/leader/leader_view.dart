@@ -5,6 +5,7 @@ import 'package:chumaki/components/leader/leader_avatar.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
+import 'package:chumaki/components/ui/disappear.dart';
 import 'package:chumaki/components/ui/perk_unit_view.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
@@ -39,98 +40,122 @@ class _LeaderViewState extends State<LeaderView> {
       stream: widget.leader.changes,
       builder: (context, _) => SizedBox(
         height: 80,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: [
-            LeaderAvatar(leader: widget.leader),
-            Expanded(
-              flex: 1,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  TitleText(ChumakiLocalizations.labelLevel),
-                  BouncingOutlinedText(
-                    widget.leader.level.toString(),
-                    size: 24,
-                    fontColor: Theme.of(context).primaryColor,
-                    outlineColor: Theme.of(context).backgroundColor,
-                  ),
-                ],
-              ),
-            ),
-            if (widget.leader.availablePerks == 0)
-              Expanded(
-                flex: 2,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    TitleText(ChumakiLocalizations.labelListOfPerks),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: widget.leader.perks
-                            .map((perk) => PerkUnitView(perk))
-                            .toList()),
-                  ],
-                ),
-              ),
-            if (widget.leader.availablePerks > 0)
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                LeaderAvatar(leader: widget.leader),
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      TitleText(
-                          "${ChumakiLocalizations.labelAvailablePerks}: "),
+                      TitleText(ChumakiLocalizations.labelLevel),
                       BouncingOutlinedText(
-                          widget.leader.availablePerks.toString(),
-                          size: 24),
+                        widget.leader.level.toString(),
+                        size: 24,
+                        fontColor: Theme.of(context).primaryColor,
+                        outlineColor: Theme.of(context).backgroundColor,
+                      ),
                     ],
                   ),
-                  AddNewPerkView(
-                    widget.leader,
-                  ),
-                ],
-              ),
-            Expanded(
-              flex: 2,
-              child: widget.leader.hasReachedMaxLevel()
-                  ? Container()
-                  : Column(
+                ),
+                if (widget.leader.availablePerks == 0)
+                  Expanded(
+                    flex: 2,
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        TitleText(ChumakiLocalizations.labelExperience),
-                        SizedBox(
-                          width: _progressWidth,
-                          height: 30,
-                          child: BorderedAll(
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  left: 0,
-                                  top: 0,
-                                  child: Container(
-                                    width: experience /
-                                        widget.leader.levelDelta *
-                                        _progressWidth,
-                                    height: 30,
-                                    color: Colors.yellow,
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: BouncingOutlinedText(
-                                    "$experience/1000",
-                                    fontColor: Colors.yellow,
-                                    size: 18,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
+                        TitleText(ChumakiLocalizations.labelListOfPerks),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: widget.leader.perks
+                                .map((perk) => PerkUnitView(perk))
+                                .toList()),
                       ],
                     ),
+                  ),
+                if (widget.leader.availablePerks > 0)
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TitleText(
+                              "${ChumakiLocalizations.labelAvailablePerks}: "),
+                          BouncingOutlinedText(
+                              widget.leader.availablePerks.toString(),
+                              size: 24),
+                        ],
+                      ),
+                      AddNewPerkView(
+                        widget.leader,
+                      ),
+                    ],
+                  ),
+                Expanded(
+                  flex: 2,
+                  child: widget.leader.hasReachedMaxLevel()
+                      ? Container()
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            TitleText(ChumakiLocalizations.labelExperience),
+                            SizedBox(
+                              width: _progressWidth,
+                              height: 30,
+                              child: BorderedAll(
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      left: 0,
+                                      top: 0,
+                                      child: Container(
+                                        width: experience /
+                                            widget.leader.levelDelta *
+                                            _progressWidth,
+                                        height: 30,
+                                        color: Colors.yellow,
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: BouncingOutlinedText(
+                                        "$experience/1000",
+                                        fontColor: Colors.yellow,
+                                        size: 18,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                ),
+              ],
+            ),
+            StreamBuilder<LEADER_CHANGES>(
+              stream: widget.leader.changes.where((event) => event == LEADER_CHANGES.LEVEL_UP),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Disappear(
+                    duration: Duration(seconds: 4),
+                    key: ValueKey(widget.leader.level),
+                    child: Align(
+                      child: Text("Leveled up",
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .headline3),
+                    ),
+                  );
+                } else {
+                  return Container();
+                }
+              }
             ),
           ],
         ),
