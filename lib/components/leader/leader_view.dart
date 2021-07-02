@@ -145,7 +145,7 @@ class _LeaderViewState extends State<LeaderView> {
                     duration: Duration(seconds: 4),
                     key: ValueKey(widget.leader.level),
                     child: Align(
-                      child: Text("Leveled up",
+                      child: Text(ChumakiLocalizations.labelLeveledUp,
                           style: Theme
                               .of(context)
                               .textTheme
