@@ -108,14 +108,14 @@ class Leader {
     List<Leader> leaders = List.empty(growable: true);
     for (var i = 0; i < 11; i++) {
       leaders
-          .add(Leader("leaders.${keyNames[i]}", imagePath: imagePathForId(i), experience: 999));
+          .add(Leader("leaders.${keyNames[i]}", imagePath: imagePathForId(i), experience: 0));
     }
     return leaders;
   }
 
   void addExperience(int amount) {
     final oldLevel = level;
-    if (level < 3) {
+    if (level < maxLevel) {
       experience += amount;
     }
     if (oldLevel != level) {
