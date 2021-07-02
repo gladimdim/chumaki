@@ -115,7 +115,7 @@ class Leader {
 
   void addExperience(int amount) {
     final oldLevel = level;
-    if (level < 3) {
+    if (level < maxLevel) {
       experience += amount;
     }
     if (oldLevel != level) {
