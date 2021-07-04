@@ -46,7 +46,13 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
               title: TitleText(ChumakiLocalizations.labelWagonPricesInCities),
               content: WagonsGlobalPriceList(widget.currentCity)),
           ExpandablePanel(
-            title: TitleText(ChumakiLocalizations.labelGlobalPrices),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TitleText(ChumakiLocalizations.labelGlobalPrices),
+                Image.asset("images/icons/money/money_2d.png", width: 55),
+              ],
+            ),
             content: Column(
               children: [
                 Column(

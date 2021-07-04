@@ -73,6 +73,8 @@ flutter:
     - images/icons/paths/
     - images/icons/money/
     - images/icons/unknown/
+    - images/icons/flags/
+    - images/icons/wagon/
     - images/events/vesterfeld/
     - images/leaders/
     # SOUNDS
