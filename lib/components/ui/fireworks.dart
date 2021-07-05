@@ -63,7 +63,7 @@ class Sparkle extends StatefulWidget {
 class _SparkleState extends State<Sparkle> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final int directionX;
-
+  final double limitSparkle = 0.7;
   @override
   void initState() {
     super.initState();
@@ -95,19 +95,27 @@ class _SparkleState extends State<Sparkle> with SingleTickerProviderStateMixin {
     }
     return AnimatedBuilder(
       animation: _controller,
-      builder: (context, child) => _controller.isCompleted
-          ? Container()
-          : Positioned(
-              top: widget.posY - 50 * _controller.value,
-              left: widget.posX + directionX * 50 * _controller.value,
-              child: Container(
-                width: 10 + widget.size * _controller.value,
-                height: 10 + widget.size * _controller.value,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color:
-                      Color.lerp(Colors.red, Colors.yellow, _controller.value),
-                ),
+      builder: (context, child) =>
+          _controller.isCompleted ? Container() : buildActiveSparkle(),
+    );
+  }
+
+  Widget buildActiveSparkle() {
+    return Positioned(
+      top: widget.posY - 50 * _controller.value,
+      left: widget.posX + directionX * 50 * limitSparkle,
+      child: _controller.value > limitSparkle
+          ? CustomPaint(
+              painter: EmptyCircle(
+              borderColor: Colors.blue,
+              radius: 10 + widget.size * limitSparkle,
+            ))
+          : Container(
+              width: 10 + widget.size * _controller.value,
+              height: 10 + widget.size * _controller.value,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.lerp(Colors.red, Colors.yellow, _controller.value),
               ),
             ),
     );
@@ -117,6 +125,31 @@ class _SparkleState extends State<Sparkle> with SingleTickerProviderStateMixin {
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+}
+
+class EmptyCircle extends CustomPainter {
+  final double radius;
+  final Color borderColor;
+
+  EmptyCircle({
+    required this.radius,
+    required this.borderColor,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = borderColor
+      ..strokeWidth = 3
+      ..style = PaintingStyle.stroke;
+    canvas.drawCircle(Offset(0, 0), radius, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant EmptyCircle oldDelegate) {
+    return !(radius == oldDelegate.radius &&
+        borderColor == oldDelegate.borderColor);
   }
 }
 
