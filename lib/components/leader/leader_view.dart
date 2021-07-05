@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/leader/add_new_perk_view.dart';
 import 'package:chumaki/components/leader/leader_avatar.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
 import 'package:chumaki/components/ui/disappear.dart';
+import 'package:chumaki/components/ui/fireworks.dart';
 import 'package:chumaki/components/ui/perk_unit_view.dart';
 import 'package:chumaki/components/ui/scale_animated.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
@@ -139,29 +141,19 @@ class _LeaderViewState extends State<LeaderView> {
               ],
             ),
             StreamBuilder<LEADER_CHANGES>(
-              stream: widget.leader.changes.where((event) => event == LEADER_CHANGES.LEVEL_UP),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return ScaleAnimated(
-                    key: ValueKey(widget.leader.level),
-                    duration: Duration(milliseconds: 700),
-                    child: Disappear(
-                      duration: Duration(seconds: 3),
+                stream: widget.leader.changes
+                    .where((event) => event == LEADER_CHANGES.LEVEL_UP),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return FireWorks(
+                      duration: Duration(seconds: 2),
                       key: ValueKey(widget.leader.level),
-                      child: Align(
-                        child: Text(ChumakiLocalizations.labelLeveledUp,
-                            style: Theme
-                                .of(context)
-                                .textTheme
-                                .headline2),
-                      ),
-                    ),
-                  );
-                } else {
-                  return Container();
-                }
-              }
-            ),
+                      amountOfSparkles: 50,
+                    );
+                  } else {
+                    return Container();
+                  }
+                }),
           ],
         ),
       ),
