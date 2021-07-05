@@ -9,7 +9,7 @@ import 'package:chumaki/models/leaders/leaders.dart';
 
 class Wagon {
   late Stock stock;
-  static final String imagePath = "images/wagon/wagon.png";
+  static final String imagePath = "images/wagon/cart.png";
   double totalWeightCapacity;
   BehaviorSubject changes = BehaviorSubject();
   Leader? leader;

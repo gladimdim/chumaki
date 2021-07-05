@@ -74,7 +74,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                       CityMenuItem(
                         menuKey: "new_wheel",
                           image: Image.asset(
-                            "images/wagon/wheel.png",
+                            "images/icons/wagon/wagon_2d.png",
                             width: 128,
                           ),
                           label: TitleText(ChumakiLocalizations.labelCompanies),

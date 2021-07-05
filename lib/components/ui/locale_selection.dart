@@ -22,13 +22,21 @@ class _LocaleSelectionState extends State<LocaleSelection> {
           groupValue: widget.locale.languageCode,
           onChanged: _setNewLocale,
         ),
-        Text('🇺🇦'),
+        Image.asset(
+          "images/icons/flags/ukrainian_flag.png",
+          width: 64,
+          height: 32,
+        ),
         Radio(
           value: 'en',
           groupValue: widget.locale.languageCode,
           onChanged: _setNewLocale,
         ),
-        Text('🇺🇸'),
+        Image.asset(
+          "images/icons/flags/usa_flag.png",
+          width: 64,
+          height: 32,
+        ),
         Radio(
           value: 'ru',
           groupValue: widget.locale.languageCode,
