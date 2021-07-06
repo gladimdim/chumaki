@@ -68,7 +68,12 @@ class _MoneyUnitViewState extends State<MoneyUnitView>
 
   TextStyle style(double value, BuildContext context) {
     final colorTheme = Theme.of(context).colorScheme;
-    return TextStyle(color: widget.isEnough  ? Colors.green[800] : colorTheme.onSurface.withOpacity(0.38), fontWeight: FontWeight.bold, fontSize: 18);
+    return Theme.of(context).textTheme.headline5!.copyWith(
+          fontWeight: FontWeight.bold,
+          color: widget.isEnough
+              ? Colors.green[800]
+              : colorTheme.onSurface.withOpacity(0.38),
+        );
   }
 
   @override
