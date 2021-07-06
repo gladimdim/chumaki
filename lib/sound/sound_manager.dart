@@ -61,9 +61,10 @@ class SoundManager {
     if (track == null) {
       return;
     }
-    if (_playlist.length > 1) {
-      _playlist.removeFirst();
+    if (_playlist.isNotEmpty) {
+      return;
     }
+
     _playlist.add(track);
     if (!_isPlaying) {
       playQueuedSound();
