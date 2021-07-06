@@ -15,12 +15,12 @@ class Leader {
 
   int get level => experience ~/ levelDelta;
   double experience;
-  final double levelDelta = 5;
+  final double levelDelta = 1000;
   static final levelUpBasePrice = 1000;
   late String imagePath;
   final BehaviorSubject<LEADER_CHANGES> _innerChanges = BehaviorSubject<LEADER_CHANGES>();
   late ValueStream<LEADER_CHANGES> changes;
-  final int maxLevel = 30;
+  final int maxLevel = 3;
   static Money defaultAcquirePrice = Money(levelUpBasePrice.toDouble());
 
   Leader(this.localizedNameKey,
