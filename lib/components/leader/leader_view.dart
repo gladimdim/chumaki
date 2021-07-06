@@ -1,15 +1,11 @@
 import 'dart:async';
 
-import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/leader/add_new_perk_view.dart';
 import 'package:chumaki/components/leader/leader_avatar.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
-import 'package:chumaki/components/ui/disappear.dart';
-import 'package:chumaki/components/ui/fireworks.dart';
 import 'package:chumaki/components/ui/perk_unit_view.dart';
-import 'package:chumaki/components/ui/scale_animated.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
 import 'package:chumaki/sound/sound_manager.dart';
