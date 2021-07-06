@@ -12,6 +12,7 @@ import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
 import 'package:chumaki/sound/sound_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:page_flip_builder/page_flip_builder.dart';
 
 class LeaderView extends StatefulWidget {
   final Leader leader;
@@ -25,7 +26,7 @@ class LeaderView extends StatefulWidget {
 class _LeaderViewState extends State<LeaderView> {
   final double _progressWidth = 200;
   late final StreamSubscription _leaderSub;
-
+  final GlobalKey<PageFlipBuilderState> avatarFlipper = GlobalKey();
   @override
   void initState() {
     super.initState();
@@ -36,7 +37,7 @@ class _LeaderViewState extends State<LeaderView> {
 
   @override
   Widget build(BuildContext context) {
-    final experience = widget.leader.experience % 1000;
+    final experience = widget.leader.experience % widget.leader.levelDelta;
     return StreamBuilder(
       stream: widget.leader.changes,
       builder: (context, _) => SizedBox(
@@ -45,9 +46,18 @@ class _LeaderViewState extends State<LeaderView> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                LeaderAvatar(leader: widget.leader),
+                PageFlipBuilder(
+                  nonInteractiveAnimationDuration: Duration(seconds: 1),
+                  key: avatarFlipper,
+                  backBuilder: (BuildContext context) {
+                    return LeaderAvatar(leader: widget.leader);
+                  },
+                  frontBuilder: (BuildContext context) {
+                    return LeaderAvatar(leader: widget.leader);
+                  },
+                ),
                 Expanded(
                   flex: 1,
                   child: Column(
@@ -124,7 +134,7 @@ class _LeaderViewState extends State<LeaderView> {
                                     Align(
                                       alignment: Alignment.center,
                                       child: BouncingOutlinedText(
-                                        "$experience/1000",
+                                        "$experience/${widget.leader.levelDelta}",
                                         fontColor: Colors.yellow,
                                         size: 18,
                                       ),
@@ -139,29 +149,26 @@ class _LeaderViewState extends State<LeaderView> {
               ],
             ),
             StreamBuilder<LEADER_CHANGES>(
-              stream: widget.leader.changes.where((event) => event == LEADER_CHANGES.LEVEL_UP),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return ScaleAnimated(
-                    key: ValueKey(widget.leader.level),
-                    duration: Duration(milliseconds: 700),
-                    child: Disappear(
-                      duration: Duration(seconds: 3),
+                stream: widget.leader.changes
+                    .where((event) => event == LEADER_CHANGES.LEVEL_UP),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ScaleAnimated(
                       key: ValueKey(widget.leader.level),
-                      child: Align(
-                        child: Text(ChumakiLocalizations.labelLeveledUp,
-                            style: Theme
-                                .of(context)
-                                .textTheme
-                                .headline2),
+                      duration: Duration(milliseconds: 700),
+                      child: Disappear(
+                        duration: Duration(seconds: 3),
+                        key: ValueKey(widget.leader.level),
+                        child: Align(
+                          child: Text(ChumakiLocalizations.labelLeveledUp,
+                              style: Theme.of(context).textTheme.headline2),
+                        ),
                       ),
-                    ),
-                  );
-                } else {
-                  return Container();
-                }
-              }
-            ),
+                    );
+                  } else {
+                    return Container();
+                  }
+                }),
           ],
         ),
       ),
@@ -171,6 +178,7 @@ class _LeaderViewState extends State<LeaderView> {
   void onLeaderLevelUp(LEADER_CHANGES event) {
     if (event == LEADER_CHANGES.LEVEL_UP) {
       SoundManager.instance.playLeaderLevelUp();
+      avatarFlipper.currentState?.flip();
     }
   }
 
