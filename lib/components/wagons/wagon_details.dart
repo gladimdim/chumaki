@@ -37,7 +37,6 @@ class WagonDetails extends StatelessWidget {
               ),
             ),
           ),
-          VerticalDivider(),
           ExpandablePanel(
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

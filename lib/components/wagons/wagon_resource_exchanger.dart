@@ -41,18 +41,13 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
                 onSelectionChange: onAmountChanged,
                 value: amountTradeValue,
               ),
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: 120,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: StreamBuilder(
-                      stream: company.changes,
-                      builder: (context, snap) {
-                        return MoneyUnitView(company.getMoney());
-                      }),
-                ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: StreamBuilder(
+                    stream: company.changes,
+                    builder: (context, snap) {
+                      return MoneyUnitView(company.getMoney());
+                    }),
               ),
             ],
           ),
