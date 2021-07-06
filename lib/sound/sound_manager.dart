@@ -48,27 +48,28 @@ class SoundManager {
     if (_playlist.isEmpty) {
       return;
     }
-    final nextTrack = _playlist.removeFirst();
     _isPlaying = true;
-    await _player.setAsset(nextTrack);
-    await _player.play();
-    await _player.stop();
+    final nextTrack = _playlist.removeFirst();
+
+    final player = AudioPlayer();
+    await player.setAsset(nextTrack);
+    await player.play();
+    await player.stop();
+    await player.dispose();
     _isPlaying = false;
     playQueuedSound();
   }
 
-  void queueSound(String? track) {
+  void queueSound(String? track) async {
     if (track == null) {
       return;
     }
-    if (_playlist.isNotEmpty) {
-      return;
-    }
 
-    _playlist.add(track);
-    if (!_isPlaying) {
-      playQueuedSound();
-    }
+    final player = AudioPlayer();
+    await player.setAsset(track);
+    await player.play();
+    await player.stop();
+    await player.dispose();
   }
 
   void playLocalMarket() {
