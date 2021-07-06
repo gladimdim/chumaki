@@ -37,7 +37,7 @@ class _LeaderViewState extends State<LeaderView> {
 
   @override
   Widget build(BuildContext context) {
-    final experience = widget.leader.experience % 1000;
+    final experience = widget.leader.experience % widget.leader.levelDelta;
     return StreamBuilder(
       stream: widget.leader.changes,
       builder: (context, _) => SizedBox(
@@ -134,7 +134,7 @@ class _LeaderViewState extends State<LeaderView> {
                                     Align(
                                       alignment: Alignment.center,
                                       child: BouncingOutlinedText(
-                                        "$experience/1000",
+                                        "$experience/${widget.leader.levelDelta}",
                                         fontColor: Colors.yellow,
                                         size: 18,
                                       ),
