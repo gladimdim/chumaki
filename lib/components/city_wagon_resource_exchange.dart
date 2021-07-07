@@ -95,6 +95,7 @@ class CityWagonResourceExchange extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(4.0),
           child: ActionButton(
+            longPressSupport: true,
             onPress: onPress,
             action: TitleText(actionText),
             image: Column(
