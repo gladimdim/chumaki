@@ -73,7 +73,7 @@ class _ActionButtonState extends State<ActionButton> {
     if (!_hasSpeedUp && _execCount >= widget.speedUpAfter ) {
       _timer?.cancel();
       _hasSpeedUp = true;
-      _timer = Timer.periodic(widget.longPressTick * 0.5, _timerCallback);
+      _timer = Timer.periodic(widget.longPressTick * 0.2, _timerCallback);
     }
   }
 
