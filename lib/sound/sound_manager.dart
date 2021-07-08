@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -44,24 +45,8 @@ class SoundManager {
     queueSound(uiActionMapping[name]);
   }
 
-  Future playQueuedSound() async {
-    if (_playlist.isEmpty) {
-      return;
-    }
-    _isPlaying = true;
-    final nextTrack = _playlist.removeFirst();
-
-    final player = AudioPlayer();
-    await player.setAsset(nextTrack);
-    await player.play();
-    await player.stop();
-    await player.dispose();
-    _isPlaying = false;
-    playQueuedSound();
-  }
-
   void queueSound(String? track) async {
-    if (track == null) {
+    if (track == null || !AppPreferences.instance.getIsSoundEnabled()) {
       return;
     }
 
