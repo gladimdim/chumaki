@@ -287,8 +287,8 @@ class GameCanvasViewState extends State<GameCanvasView>
                         builder: (context, snapshot) {
                           return Image.asset(
                             AppPreferences.instance.getIsSoundEnabled()
-                                ? "images/resources/grains/grains.png"
-                                : "images/resources/cannon/cannon.png",
+                                ? "images/ui/bandura.png"
+                                : "images/ui/bandura_back.png",
                             width: 44,
                           );
                         }),
