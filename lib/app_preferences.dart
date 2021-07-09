@@ -1,15 +1,25 @@
 import 'dart:convert';
 
+import 'package:rxdart/streams.dart';
+import 'package:rxdart/subjects.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+enum APP_PREFERENCES_EVENTS { SOUND_CHANGE }
+
 class AppPreferences {
-  AppPreferences._internal();
+  AppPreferences._internal() {
+    changes = _innerChanges.stream;
+  }
 
   static final AppPreferences instance = AppPreferences._internal();
   late SharedPreferences _preferences;
   String _languageCode = 'languageCode';
   String _gameSaveKey = 'gameSaveKey';
   String _isSoundEnabled = "isSoundEnabled";
+
+  final BehaviorSubject<APP_PREFERENCES_EVENTS> _innerChanges =
+      BehaviorSubject();
+  late final ValueStream<APP_PREFERENCES_EVENTS> changes;
 
   Future<SharedPreferences> init() async {
     _preferences = await SharedPreferences.getInstance();
@@ -20,8 +30,15 @@ class AppPreferences {
     return _preferences.getBool(_isSoundEnabled) ?? true;
   }
 
-  Future setIsSoundEnabled(bool value) {
-    return _preferences.setBool(_isSoundEnabled, value);
+  Future setIsSoundEnabled(bool value) async {
+    final result = await _preferences.setBool(_isSoundEnabled, value);
+    _innerChanges.add(APP_PREFERENCES_EVENTS.SOUND_CHANGE);
+    return result;
+  }
+
+  Future toogleIsSoundEnabled() {
+    final current = this.getIsSoundEnabled();
+    return setIsSoundEnabled(!current);
   }
 
   String? getUILanguage() {
