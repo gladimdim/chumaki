@@ -24,6 +24,7 @@ dependencies:
   fake_async: ^1.2.0
   just_audio: ^0.8.0
   page_flip_builder: ^0.1.3
+  url_launcher: ^6.0.7
 
 dev_dependencies:
   flutter_test:
@@ -80,3 +81,5 @@ flutter:
     - images/leaders/
     # SOUNDS
     - assets/sounds/
+    # OTHER
+    - images/other/
