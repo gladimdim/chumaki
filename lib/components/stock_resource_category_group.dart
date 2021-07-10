@@ -1,4 +1,3 @@
-import 'package:chumaki/components/group_control.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';

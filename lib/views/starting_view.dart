@@ -1,6 +1,5 @@
 import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/components/title_text.dart';
-import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bordered_top.dart';
 import 'package:chumaki/components/ui/other_games/other_games_view.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
