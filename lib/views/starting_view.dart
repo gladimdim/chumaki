@@ -1,5 +1,8 @@
 import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/bordered_all.dart';
+import 'package:chumaki/components/ui/bordered_top.dart';
+import 'package:chumaki/components/ui/other_games/other_games_view.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/sound/sound_manager.dart';
@@ -74,22 +77,26 @@ class _StartingViewState extends State<StartingView> {
                   }
                 },
               ),
-              Container(
-                color: Theme.of(context).backgroundColor.withAlpha(200),
-                child: LocaleSelection(
-                  locale: ChumakiLocalizations.locale,
-                  onLocaleChanged: (Locale locale) {
-                    setState(() {
-                      ChumakiLocalizations.locale = locale;
-                    });
-                  },
+              BorderedTop(
+                child: Container(
+                  color: Theme.of(context).backgroundColor.withAlpha(200),
+                  child: LocaleSelection(
+                    locale: ChumakiLocalizations.locale,
+                    onLocaleChanged: (Locale locale) {
+                      setState(() {
+                        ChumakiLocalizations.locale = locale;
+                      });
+                    },
+                  ),
                 ),
               ),
-              Container(
-                color: Theme.of(context).backgroundColor.withAlpha(200),
-                child: Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: TitleText(ChumakiLocalizations.labelOtherGames),
+              BorderedTop(
+                child: Container(
+                  color: Theme.of(context).backgroundColor.withAlpha(200),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: OtherGamesView(),
+                  ),
                 ),
               ),
             ],
