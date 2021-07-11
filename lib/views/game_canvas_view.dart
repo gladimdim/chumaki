@@ -8,7 +8,6 @@ import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/ui/3d_button.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/models/cities/city.dart';
-import 'package:chumaki/models/cities/lviv.dart';
 
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
@@ -30,12 +29,15 @@ class GameCanvasView extends StatefulWidget {
   final Company? company;
   final Size screenSize;
   final Duration initialPanDuration;
+  final VoidCallback onBackPressed;
 
   GameCanvasView(
       {this.company,
+      Key? key,
       required this.screenSize,
+      required this.onBackPressed,
       required this.initialPanDuration})
-      : super(key: globalViewerKey);
+      : super(key: key);
 
   @override
   GameCanvasViewState createState() => GameCanvasViewState();
@@ -240,17 +242,19 @@ class GameCanvasViewState extends State<GameCanvasView>
             ],
           ),
         ),
-        Positioned(
-          top: 10,
-          left: 0,
-          child: IconButton(
-            onPressed: () async {
-              await company?.save();
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.arrow_back_ios),
+        if (widget.company != null)
+          Positioned(
+            top: 10,
+            left: 0,
+            child: IconButton(
+              onPressed: () async {
+                await company?.save();
+                company?.dispose();
+                widget.onBackPressed();
+              },
+              icon: Icon(Icons.arrow_back_ios),
+            ),
           ),
-        ),
         if (selected == null && company != null)
           Positioned(
             bottom: 5,

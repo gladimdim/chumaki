@@ -31,7 +31,9 @@ class RouteTask extends ProgressDuration {
 
   static RouteTask fromJson(Map<String, dynamic> input) {
     var progress = ProgressDuration.fromJson(input);
-    var task = RouteTask(City.fromJson(input["from"]), City.fromJson(input["to"]), wagon: Wagon.fromJson(input["wagon"]));
+    var task = RouteTask(
+        City.fromJson(input["from"]), City.fromJson(input["to"]),
+        wagon: Wagon.fromJson(input["wagon"]));
     task.changes = progress.changes;
     task.isFinished = progress.isFinished;
     task.finishAt = progress.finishAt;
