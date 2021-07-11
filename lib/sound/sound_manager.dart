@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:just_audio/just_audio.dart';
@@ -15,10 +13,7 @@ class SoundManager {
     COMPANY_EVENTS.LEADER_HIRED: "assets/sounds/write_on_paper.mp3",
     COMPANY_EVENTS.EVENT_DONE: "assets/sounds/achievement.mp3",
   };
-  Queue<String> _playlist = Queue();
-  bool _isPlaying = false;
 
-  final AudioPlayer _player = AudioPlayer();
   Map<String, String> uiActionMapping = {
     "openLocalMarket": "assets/sounds/local_market.mp3",
     "openGlobalMarket": "assets/sounds/global_market.mp3",
