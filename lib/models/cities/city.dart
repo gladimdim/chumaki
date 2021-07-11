@@ -138,6 +138,8 @@ class City {
         return Myrgorod();
       case "govtva":
         return Govtva();
+      case "kursk":
+        return Kursk();
       default:
         throw "City with key $name is not recognized";
     }
