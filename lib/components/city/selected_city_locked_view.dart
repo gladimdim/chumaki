@@ -45,7 +45,10 @@ class SelectedCityLockedView extends StatelessWidget {
                     .contains(realCity);
               }).map((cityThatUnlocks) {
                 return ActionButton(
-                  image: CityAvatarStacked(city: cityThatUnlocks, width: 128,),
+                  image: CityAvatarStacked(
+                    city: cityThatUnlocks,
+                    width: 128,
+                  ),
                   subTitle: Container(),
                   action: Text(ChumakiLocalizations.labelGoTo),
                   onPress: () => _navigateViewerToCity(cityThatUnlocks),
@@ -58,9 +61,15 @@ class SelectedCityLockedView extends StatelessWidget {
             child: BorderedAll(
               child: Column(
                 children: [
-                  Text(ChumakiLocalizations.labelProductionCenter, style: Theme.of(context).textTheme.headline3),
+                  Text(ChumakiLocalizations.labelProductionCenter,
+                      style: Theme.of(context).textTheme.headline3),
                   Row(
-                    children: city.produces.map((e) => ResourceImageView(e, size: 64,)).toList(),
+                    children: city.produces
+                        .map((e) => ResourceImageView(
+                              e,
+                              size: 64,
+                            ))
+                        .toList(),
                   )
                 ],
               ),
@@ -80,6 +89,6 @@ class SelectedCityLockedView extends StatelessWidget {
     if (viewer == null) {
       return;
     }
-    viewer.navigateFromToCity(from: city, to: cityThatUnlocks);
+    viewer.navigateFromToCity(to: cityThatUnlocks);
   }
 }

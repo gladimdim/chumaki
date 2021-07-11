@@ -8,6 +8,7 @@ import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/ui/3d_button.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/cities/lviv.dart';
 
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
@@ -16,7 +17,6 @@ import 'package:chumaki/models/image_on_canvas.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/theme.dart';
 import 'package:chumaki/utils/points.dart';
-import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
@@ -26,10 +26,14 @@ final globalViewerKey =
     GlobalKey<GameCanvasViewState>(debugLabel: "interactiveViewer");
 
 class GameCanvasView extends StatefulWidget {
-  final Company company;
+  final Company? company;
   final Size screenSize;
+  final Duration initialPanDuration;
 
-  GameCanvasView({required this.company, required this.screenSize})
+  GameCanvasView(
+      {this.company,
+      required this.screenSize,
+      required this.initialPanDuration})
       : super(key: globalViewerKey);
 
   @override
@@ -52,14 +56,22 @@ class GameCanvasViewState extends State<GameCanvasView>
   void initState() {
     _animationController =
         AnimationController(duration: animationDuration, vsync: this);
-    navigateFromToCity(to: Sich(), withDuration: animationDuration);
+    navigateFromToCity(to: Lviv(), withDuration: widget.initialPanDuration);
     super.initState();
   }
 
   @override
+  void didUpdateWidget(GameCanvasView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.company != widget.company) {
+      navigateFromToCity(to: Sich(), withDuration: animationDuration);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final company = InheritedCompany.of(context).company;
     final themeData = Theme.of(context);
+    final company = widget.company;
     return Stack(
       children: [
         InteractiveViewer(
@@ -99,67 +111,70 @@ class GameCanvasViewState extends State<GameCanvasView>
                   );
                 }).toList(),
               if (showCoordinates) ..._renderCoordinateLabels(),
-              ...company.cityRoutes.map((route) {
-                var first = route.from;
-                bool highlight = false;
-                if (selected != null) {
-                  highlight =
-                      selected!.getRoutesInCompany(company).contains(route);
-                }
-                return Positioned(
-                  left: first.point.x + CITY_SIZE,
-                  top: first.point.y + CITY_SIZE,
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: StreamBuilder(
-                      stream: Stream.periodic(Duration(milliseconds: 33)),
-                      builder: (context, snapshot) => FutureBuilder(
-                        future: ImageOnCanvas.wagonImage.asBytes(),
-                        builder: (context, snapshotImage) {
-                          if (snapshotImage.hasData) {
-                            var data = snapshotImage.data as ui.Image;
-                            return CustomPaint(
-                              painter: RoutePainter(
-                                color: highlight ? Colors.amber : Colors.brown,
-                                route: route,
-                                image: data,
-                              ),
-                            );
-                          } else {
-                            return Container();
-                          }
-                        },
+              if (company != null)
+                ...company.cityRoutes.map((route) {
+                  var first = route.from;
+                  bool highlight = false;
+                  if (selected != null) {
+                    highlight =
+                        selected!.getRoutesInCompany(company).contains(route);
+                  }
+                  return Positioned(
+                    left: first.point.x + CITY_SIZE,
+                    top: first.point.y + CITY_SIZE,
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: StreamBuilder(
+                        stream: Stream.periodic(Duration(milliseconds: 33)),
+                        builder: (context, snapshot) => FutureBuilder(
+                          future: ImageOnCanvas.wagonImage.asBytes(),
+                          builder: (context, snapshotImage) {
+                            if (snapshotImage.hasData) {
+                              var data = snapshotImage.data as ui.Image;
+                              return CustomPaint(
+                                painter: RoutePainter(
+                                  color:
+                                      highlight ? Colors.amber : Colors.brown,
+                                  route: route,
+                                  image: data,
+                                ),
+                              );
+                            } else {
+                              return Container();
+                            }
+                          },
+                        ),
                       ),
                     ),
-                  ),
-                );
-              }).toList(),
+                  );
+                }).toList(),
               // ...Company.instance.tasks.map((routeTask) {
               //   return AnimatedRouteTask(routeTask);
               // }).toList(),
-              ...company.allCities.map((city) {
-                return Positioned(
-                  top: city.point.y,
-                  left: city.point.x,
-                  child: GestureDetector(
-                    onTap: () {
-                      print("pressed city: ${city.name}");
-                      setState(() {
-                        if (selected == city) {
-                          selected = null;
-                        } else {
-                          selected = city;
-                        }
-                      });
-                    },
-                    child: CityOnMap(
-                      city,
-                      mapMode: mapMode,
+              if (company != null)
+                ...company.allCities.map((city) {
+                  return Positioned(
+                    top: city.point.y,
+                    left: city.point.x,
+                    child: GestureDetector(
+                      onTap: () {
+                        print("pressed city: ${city.name}");
+                        setState(() {
+                          if (selected == city) {
+                            selected = null;
+                          } else {
+                            selected = city;
+                          }
+                        });
+                      },
+                      child: CityOnMap(
+                        city,
+                        mapMode: mapMode,
+                      ),
                     ),
-                  ),
-                );
-              }).toList(),
+                  );
+                }).toList(),
               Positioned(
                 left: 200,
                 top: 800,
@@ -221,21 +236,13 @@ class GameCanvasViewState extends State<GameCanvasView>
           left: 0,
           child: IconButton(
             onPressed: () async {
-              await company.save();
+              await company?.save();
               Navigator.pop(context);
             },
             icon: Icon(Icons.arrow_back_ios),
           ),
         ),
-        // if (selected == null)
-        //   Positioned(
-        //     right: 10,
-        //     top: 55,
-        //     child: Container(
-        //         color: Colors.orange[800],
-        //         child: MoneyUnitView(company.getMoney())),
-        //   ),
-        if (selected == null)
+        if (selected == null && company != null)
           Positioned(
             bottom: 5,
             left: 10,
@@ -335,17 +342,11 @@ class GameCanvasViewState extends State<GameCanvasView>
   }
 
   void navigateFromToCity(
-      {City? from,
-      required City to,
+      {required City to,
       Duration withDuration = const Duration(milliseconds: 750)}) {
     dismissSelectedCity();
 
     Matrix4 matrixStart = Matrix4.inverted(_transformationController.value);
-    if (from == null) {
-      final startPoint = Point(CANVAS_WIDTH, CANVAS_HEIGHT);
-
-      matrixStart = Matrix4.identity()..translate(startPoint.x, startPoint.y);
-    }
 
     final endPoint = calculateCenterPointForCity(to);
     var end = Matrix4.identity()..translate(endPoint.x, endPoint.y);

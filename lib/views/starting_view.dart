@@ -27,10 +27,9 @@ class _StartingViewState extends State<StartingView> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.asset(
-          "images/ui/main_view_background.png",
-          width: MediaQuery.of(context).size.width,
-          fit: BoxFit.fill,
+        GameCanvasView(
+          initialPanDuration: Duration(seconds: 15),
+          screenSize: MediaQuery.of(context).size,
         ),
         Center(
           child: Column(
@@ -101,16 +100,6 @@ class _StartingViewState extends State<StartingView> {
             ],
           ),
         ),
-        Positioned(
-          left: 0,
-          bottom: 0,
-          right: 0,
-          child: Image.asset(
-            "images/ui/persons_on_a_map.png",
-            height: 150,
-            fit: BoxFit.fitWidth,
-          ),
-        ),
       ],
     );
   }
@@ -131,6 +120,7 @@ class _StartingViewState extends State<StartingView> {
           child: InheritedCompany(
             company: company,
             child: GameCanvasView(
+              initialPanDuration: Duration(seconds: 15),
               company: company,
               screenSize: MediaQuery.of(context).size,
             ),
