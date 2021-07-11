@@ -19,6 +19,7 @@ import 'package:chumaki/theme.dart';
 import 'package:chumaki/utils/points.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
+import 'package:chumaki/extensions/list.dart';
 
 const CITY_SIZE = 50;
 
@@ -56,7 +57,13 @@ class GameCanvasViewState extends State<GameCanvasView>
   void initState() {
     _animationController =
         AnimationController(duration: animationDuration, vsync: this);
-    navigateFromToCity(to: Lviv(), withDuration: widget.initialPanDuration);
+    if (widget.company == null) {
+      navigateFromToCity(
+          to: Company().allCities.takeRandom(),
+          withDuration: widget.initialPanDuration);
+    } else {
+      navigateFromToCity(to: Sich(), withDuration: animationDuration);
+    }
     super.initState();
   }
 
@@ -75,6 +82,8 @@ class GameCanvasViewState extends State<GameCanvasView>
     return Stack(
       children: [
         InteractiveViewer(
+          panEnabled: widget.company != null,
+          scaleEnabled: widget.company != null,
           transformationController: _transformationController,
           minScale: 0.1,
           constrained: false,
@@ -357,6 +366,12 @@ class GameCanvasViewState extends State<GameCanvasView>
     _mapAnimation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         _mapAnimation.removeListener(mapAnimationListener);
+        if (widget.company == null) {
+          final fakeCompany = Company();
+          navigateFromToCity(
+              to: fakeCompany.allCities.takeRandom(),
+              withDuration: widget.initialPanDuration);
+        }
       }
     });
     _animationController.reset();
