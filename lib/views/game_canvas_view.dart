@@ -367,19 +367,23 @@ class GameCanvasViewState extends State<GameCanvasView>
         .animate(_animationController);
     _animationController.duration = withDuration;
     _mapAnimation.addListener(mapAnimationListener);
-    _mapAnimation.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        _mapAnimation.removeListener(mapAnimationListener);
-        if (widget.company == null) {
-          final fakeCompany = Company();
-          navigateFromToCity(
-              to: fakeCompany.allCities.takeRandom(),
-              withDuration: widget.initialPanDuration);
-        }
-      }
-    });
+    _mapAnimation.addStatusListener(_onMapAnimationStatusChange);
     _animationController.reset();
     _animationController.forward();
+  }
+
+  void _onMapAnimationStatusChange(AnimationStatus status) {
+    if (status == AnimationStatus.completed) {
+      _mapAnimation.removeListener(mapAnimationListener);
+      _mapAnimation.removeStatusListener(_onMapAnimationStatusChange);
+      if (widget.company == null) {
+        final fakeCompany = Company();
+        print("Navigating to city");
+        navigateFromToCity(
+            to: fakeCompany.allCities.takeRandom(),
+            withDuration: widget.initialPanDuration);
+      }
+    }
   }
 
   void mapAnimationListener() {
