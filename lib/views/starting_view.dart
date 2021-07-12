@@ -135,24 +135,6 @@ class _StartingViewState extends State<StartingView> {
   }
 
   _loadGamePressed(BuildContext context, Company company) async {
-    SoundManager.instance.attachToCompany(company);
-    // await Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => Material(
-    //       child: InheritedCompany(
-    //         company: company,
-    //         child: GameCanvasView(
-    //           key: globalViewerKey,
-    //           initialPanDuration: Duration(seconds: 15),
-    //           company: company,
-    //           screenSize: MediaQuery.of(context).size,
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
-    // company.dispose();
     setState(() {
       _appPreferencesInitter = AsyncMemoizer();
       currentCompany = company;

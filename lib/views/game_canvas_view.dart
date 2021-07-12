@@ -57,23 +57,23 @@ class GameCanvasViewState extends State<GameCanvasView>
 
   @override
   void initState() {
+    super.initState();
     _animationController =
         AnimationController(duration: animationDuration, vsync: this);
     if (widget.company == null) {
-      navigateFromToCity(
+      navigateToCity(
           to: Company().allCities.takeRandom(),
           withDuration: widget.initialPanDuration);
     } else {
-      navigateFromToCity(to: Sich(), withDuration: animationDuration);
+      navigateToCity(to: Sich(), withDuration: animationDuration);
     }
-    super.initState();
   }
 
   @override
   void didUpdateWidget(GameCanvasView oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.company != widget.company) {
-      navigateFromToCity(to: Sich(), withDuration: animationDuration);
+      navigateToCity(to: Sich(), withDuration: animationDuration);
     }
   }
 
@@ -345,16 +345,16 @@ class GameCanvasViewState extends State<GameCanvasView>
   Point<double> calculateCenterPointForCity(City city) {
     final width = widget.screenSize.width;
     final height = widget.screenSize.height;
-    final sichPoint = city.point;
+    final cityPoint = city.point;
     final middleX = width / 2;
     final middleY = height / 2;
     return Point<double>(
-      sichPoint.x - middleX + Sich().size * CITY_SIZE / 2,
-      sichPoint.y - middleY + Sich().size * CITY_SIZE / 2,
+      cityPoint.x - middleX + city.size * CITY_SIZE / 2,
+      cityPoint.y - middleY + city.size * CITY_SIZE / 2,
     );
   }
 
-  void navigateFromToCity(
+  void navigateToCity(
       {required City to,
       Duration withDuration = const Duration(milliseconds: 750)}) {
     dismissSelectedCity();
@@ -379,7 +379,7 @@ class GameCanvasViewState extends State<GameCanvasView>
       if (widget.company == null) {
         final fakeCompany = Company();
         print("Navigating to city");
-        navigateFromToCity(
+        navigateToCity(
             to: fakeCompany.allCities.takeRandom(),
             withDuration: widget.initialPanDuration);
       }
