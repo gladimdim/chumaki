@@ -89,6 +89,6 @@ class SelectedCityLockedView extends StatelessWidget {
     if (viewer == null) {
       return;
     }
-    viewer.navigateFromToCity(to: cityThatUnlocks);
+    viewer.navigateToCity(to: cityThatUnlocks);
   }
 }

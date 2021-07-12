@@ -184,7 +184,7 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
       return;
     }
 
-    canvasState.navigateFromToCity(to: city);
+    canvasState.navigateToCity(to: city);
   }
 
   List<City> allCitiesSortedByProfit(Company company, double currentSellPrice) {
