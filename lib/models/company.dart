@@ -13,6 +13,7 @@ import 'package:chumaki/models/cities/gaivoron.dart';
 import 'package:chumaki/models/cities/govtva.dart';
 import 'package:chumaki/models/cities/kaniv.dart';
 import 'package:chumaki/models/cities/korsun.dart';
+import 'package:chumaki/models/cities/kursk.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/ladyzhin.dart';
 import 'package:chumaki/models/cities/lviv.dart';
@@ -84,6 +85,8 @@ class Company {
     CityRoute(Pyryatin(), Pereyaslav(), Point<double>(150, -100)),
     CityRoute(Myrgorod(), Pyryatin(), Point<double>(-150, -100)),
     CityRoute(Govtva(), Myrgorod(), Point<double>(150, -100)),
+    CityRoute(Nizhin(), Kursk(), Point<double>(200, -500)),
+    CityRoute(Sich(), Kursk(), Point<double>(250, -1900)),
   ];
 
   late double _money;
@@ -182,13 +185,14 @@ class Company {
     return completer.future;
   }
 
-  void reconnectRestoredTask(RouteTask restoredTask) {
+  bool reconnectRestoredTask(RouteTask restoredTask) {
     // replace to/from to the references to real cities
     // instead of city instances restored from JSON
     restoredTask.to = refToCityByName(restoredTask.to);
     restoredTask.from = refToCityByName(restoredTask.from);
     if (restoredTask.isFinished) {
-      processTaskDone(restoredTask);
+      // processTaskDone(restoredTask);
+      return false;
     } else {
       var cityRoute = getRouteForTask(restoredTask);
       // add new task to the city route (curves on the map)
@@ -199,6 +203,7 @@ class Company {
         }
       });
     }
+    return true;
   }
 
   void processTaskDone(RouteTask task) {
@@ -239,13 +244,25 @@ class Company {
     // if the task was already finished before the game reloaded
     // we just process the task like it was done.
     company.activeRouteTasks = activeRouteTasks;
+    List<RouteTask> toBeRemoved = List.empty(growable: true);
+    // we cannot remove task from activeRouteTasks if the restored task is finished
+    // as this raise Concurrent modification exception.
     company.activeRouteTasks.forEach((task) {
-      company.reconnectRestoredTask(task);
+      if (!company.reconnectRestoredTask(task)) {
+        toBeRemoved.add(task);
+      }
+    });
+    // if any restored tasks was finished, remove them in separate loop
+    toBeRemoved.forEach((task) {
+      company.processTaskDone(task);
     });
     return company;
   }
 
   void dispose() {
+    activeRouteTasks.forEach((task) {
+      task.dispose();
+    });
     _innerChanges.close();
   }
 

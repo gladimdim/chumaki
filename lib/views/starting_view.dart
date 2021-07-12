@@ -17,6 +17,7 @@ class StartingView extends StatefulWidget {
 }
 
 class _StartingViewState extends State<StartingView> {
+  Company? currentCompany;
   AsyncMemoizer _appPreferencesInitter = AsyncMemoizer();
 
   _appPreferencesInit() {
@@ -27,81 +28,103 @@ class _StartingViewState extends State<StartingView> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        GameCanvasView(
-          initialPanDuration: Duration(seconds: 15),
-          screenSize: MediaQuery.of(context).size,
-        ),
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextButton(
-                  onPressed: () => _loadGamePressed(context, Company()),
-                  child: Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: TitleText(ChumakiLocalizations.labelNewGame),
-                  )),
-              FutureBuilder(
-                future: _appPreferencesInit(),
-                builder: (context, snapshot) {
-                  var savedGame = AppPreferences.instance.readGameSave();
-                  if (savedGame == null) {
-                    return TextButton(
-                        onPressed: null,
+        if (currentCompany == null)
+          GameCanvasView(
+            company: currentCompany,
+            key: globalViewerKey,
+            initialPanDuration: Duration(seconds: 15),
+            screenSize: MediaQuery.of(context).size,
+            onBackPressed: onBackPressed,
+          ),
+        if (currentCompany != null)
+          InheritedCompany(
+            company: currentCompany!,
+            child: GameCanvasView(
+              onBackPressed: onBackPressed,
+              company: currentCompany,
+              key: globalViewerKey,
+              initialPanDuration: Duration(seconds: 15),
+              screenSize: MediaQuery.of(context).size,
+            ),
+          ),
+        if (currentCompany == null)
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextButton(
+                    onPressed: () => _loadGamePressed(context, Company()),
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: TitleText(ChumakiLocalizations.labelNewGame),
+                    )),
+                FutureBuilder(
+                  future: _appPreferencesInit(),
+                  builder: (context, snapshot) {
+                    var savedGame = AppPreferences.instance.readGameSave();
+                    if (savedGame == null) {
+                      return TextButton(
+                          onPressed: null,
+                          child: Padding(
+                            padding: const EdgeInsets.all(24.0),
+                            child: Text(
+                              ChumakiLocalizations.labelNoSave,
+                            ),
+                          ));
+                    } else {
+                      return TextButton(
+                        onPressed: () => _loadGamePressed(
+                            context, Company.fromJson(savedGame)),
                         child: Padding(
                           padding: const EdgeInsets.all(24.0),
-                          child: Text(
-                            ChumakiLocalizations.labelNoSave,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TitleText(ChumakiLocalizations.labelLoadSave),
+                              IconButton(
+                                  onPressed: _removeSave,
+                                  icon: Icon(Icons.delete)),
+                            ],
                           ),
-                        ));
-                  } else {
-                    return TextButton(
-                      onPressed: () => _loadGamePressed(
-                          context, Company.fromJson(savedGame)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TitleText(ChumakiLocalizations.labelLoadSave),
-                            IconButton(
-                                onPressed: _removeSave,
-                                icon: Icon(Icons.delete)),
-                          ],
                         ),
-                      ),
-                    );
-                  }
-                },
-              ),
-              BorderedTop(
-                child: Container(
-                  color: Theme.of(context).backgroundColor.withAlpha(200),
-                  child: LocaleSelection(
-                    locale: ChumakiLocalizations.locale,
-                    onLocaleChanged: (Locale locale) {
-                      setState(() {
-                        ChumakiLocalizations.locale = locale;
-                      });
-                    },
+                      );
+                    }
+                  },
+                ),
+                BorderedTop(
+                  child: Container(
+                    color: Theme.of(context).backgroundColor.withAlpha(200),
+                    child: LocaleSelection(
+                      locale: ChumakiLocalizations.locale,
+                      onLocaleChanged: (Locale locale) {
+                        setState(() {
+                          ChumakiLocalizations.locale = locale;
+                        });
+                      },
+                    ),
                   ),
                 ),
-              ),
-              BorderedTop(
-                child: Container(
-                  color: Theme.of(context).backgroundColor.withAlpha(200),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: OtherGamesView(),
+                BorderedTop(
+                  child: Container(
+                    color: Theme.of(context).backgroundColor.withAlpha(200),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: OtherGamesView(),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
       ],
     );
+  }
+
+  onBackPressed() {
+    setState(() {
+      currentCompany = null;
+    });
   }
 
   _removeSave() async {
@@ -113,24 +136,26 @@ class _StartingViewState extends State<StartingView> {
 
   _loadGamePressed(BuildContext context, Company company) async {
     SoundManager.instance.attachToCompany(company);
-    await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Material(
-          child: InheritedCompany(
-            company: company,
-            child: GameCanvasView(
-              initialPanDuration: Duration(seconds: 15),
-              company: company,
-              screenSize: MediaQuery.of(context).size,
-            ),
-          ),
-        ),
-      ),
-    );
-    company.dispose();
+    // await Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => Material(
+    //       child: InheritedCompany(
+    //         company: company,
+    //         child: GameCanvasView(
+    //           key: globalViewerKey,
+    //           initialPanDuration: Duration(seconds: 15),
+    //           company: company,
+    //           screenSize: MediaQuery.of(context).size,
+    //         ),
+    //       ),
+    //     ),
+    //   ),
+    // );
+    // company.dispose();
     setState(() {
       _appPreferencesInitter = AsyncMemoizer();
+      currentCompany = company;
     });
   }
 }

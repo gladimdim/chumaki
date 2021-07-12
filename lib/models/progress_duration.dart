@@ -70,7 +70,6 @@ class ProgressDuration {
     return finishAt != null && clock.now().compareTo(finishAt!) >= 0;
   }
 
-
   String formatDuration() {
     return readableDuration(leftDurationProgress());
   }
@@ -108,7 +107,7 @@ class ProgressDuration {
     return duration;
   }
 
-  void destroy() {
+  void dispose() {
     _timer.cancel();
     if (!_innerChanges.isClosed) {
       _innerChanges.close();
