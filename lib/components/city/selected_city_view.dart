@@ -37,14 +37,15 @@ class _SelectedCityViewState extends State<SelectedCityView> {
   void initState() {
     super.initState();
     _cityListener = widget.city.changes
-        .where((event) => [CITY_EVENTS.WAGON_DISPATCHED, CITY_EVENTS.EVENT_DONE].contains(event))
+        .where((event) => [CITY_EVENTS.WAGON_DISPATCHED, CITY_EVENTS.EVENT_DONE]
+            .contains(event))
         .listen(_recalcMenuItems);
   }
 
   void _recalcMenuItems(CITY_EVENTS event) {
-      setState(() {
-        selectedButton = null;
-      });
+    setState(() {
+      selectedButton = null;
+    });
   }
 
   @override
@@ -72,15 +73,16 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       CityMenuItem(
-                        menuKey: "new_wheel",
+                          menuKey: "new_wheel",
                           image: Image.asset(
                             "images/icons/wagon/wagon_2d.png",
                             width: 128,
                           ),
                           label: TitleText(ChumakiLocalizations.labelCompanies),
-                          content: CityWagonsView(city: widget.city)),
+                          contentBuilder: (context) =>
+                              CityWagonsView(city: widget.city)),
                       CityMenuItem(
-                        menuKey: "market",
+                          menuKey: "market",
                           image: Image.asset(
                             "images/icons/market/market.png",
                             width: 128,
@@ -100,9 +102,10 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                           playSoundOnOpen: () {
                             SoundManager.instance.playLocalMarket();
                           },
-                          content: CityStockView(city: widget.city)),
+                          contentBuilder: (context) =>
+                              CityStockView(city: widget.city)),
                       CityMenuItem(
-                        menuKey: "global_market",
+                          menuKey: "global_market",
                           image: Image.asset(
                             "images/icons/market/market2.png",
                             width: 128,
@@ -112,20 +115,22 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                           },
                           label:
                               TitleText(ChumakiLocalizations.labelWorldMarket),
-                          content: GlobalMarketView(currentCity: widget.city)),
+                          contentBuilder: (context) =>
+                              GlobalMarketView(currentCity: widget.city)),
                       if (company.cityCanUnlockMore(widget.city))
                         CityMenuItem(
-                          menuKey: "unlock",
+                            menuKey: "unlock",
                             image: Image.asset(
                               "images/cities/church.png",
                               width: 128,
                             ),
                             label: TitleText(
                                 ChumakiLocalizations.labelMenuBuyNewRoutes),
-                            content: CanUnlockCitiesView(widget.city)),
+                            contentBuilder: (context) =>
+                                CanUnlockCitiesView(widget.city)),
                       ...widget.city.wagons.map(
                         (wagon) => CityMenuItem(
-                          menuKey: wagon.fullLocalizedName,
+                            menuKey: wagon.fullLocalizedName,
                             image: StreamBuilder(
                               stream: wagon.changes,
                               builder: (context, _) => Stack(
@@ -165,16 +170,16 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                                 builder: (context, snap) => TitleText(
                                     ChumakiLocalizations.getForKey(
                                         wagon.fullLocalizedName))),
-                            content: WagonDetails(
-                              wagon: wagon,
-                              city: widget.city,
-                            )),
+                            contentBuilder: (context) => WagonDetails(
+                                  wagon: wagon,
+                                  city: widget.city,
+                                )),
                       ),
                       if (widget.city.activeEvent != null)
                         CityMenuItem(
                           menuKey: "activeEvent",
                           image: Image.asset(widget.city.activeEvent!.iconPath),
-                          content: Padding(
+                          contentBuilder: (context) => Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CityEventView(city: widget.city),
                           ),
@@ -185,7 +190,8 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                         ),
                     ].map((action) {
                       return CityMenuItemView(
-                        isSelected: selectedButton != null && selectedButton!.menuKey == action.menuKey,
+                        isSelected: selectedButton != null &&
+                            selectedButton!.menuKey == action.menuKey,
                         menuItem: action,
                         onPress: () => handleMenuItemPress(action),
                       );
@@ -195,7 +201,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                 flex: 1,
                 child: AnimatedCrossFade(
                   firstChild: Container(height: 0.0),
-                  secondChild: getContent(),
+                  secondChild: getContent(context),
                   firstCurve:
                       const Interval(0.0, 0.6, curve: Curves.fastOutSlowIn),
                   secondCurve:
@@ -207,32 +213,6 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                   duration: Duration(milliseconds: 800),
                 ),
               ),
-              // ...[
-              // TitleText("Incoming companies: "),
-              // ...company.cityRoutes
-              //     .where((route) =>
-              //         route.to.equalsTo(widget.city) ||
-              //         route.from.equalsTo(widget.city))
-              //     .fold<List<RouteTask>>([], (previousValue, route) {
-              //       previousValue.addAll(route.routeTasks);
-              //       return previousValue;
-              //     })
-              //     .where((routeTask) => routeTask.to.equalsTo(widget.city))
-              //     .map<Widget>((routeTask) =>
-              //         RouteTaskRowProgress(routeTask, widget.city)),
-              // TitleText("Outgoing companies: "),
-              // ...company.cityRoutes
-              //     .where((route) =>
-              //         route.to.equalsTo(widget.city) ||
-              //         route.from.equalsTo(widget.city))
-              //     .fold<List<RouteTask>>([], (previousValue, route) {
-              //       previousValue.addAll(route.routeTasks);
-              //       return previousValue;
-              //     })
-              //     .where((routeTask) => routeTask.from.equalsTo(widget.city))
-              //     .map<Widget>((routeTask) =>
-              //         RouteTaskRowProgress(routeTask, widget.city)),
-              // ],
             ],
           ),
         ),
@@ -252,10 +232,10 @@ class _SelectedCityViewState extends State<SelectedCityView> {
     setState(() {});
   }
 
-  Widget getContent() {
+  Widget getContent(BuildContext context) {
     var button = selectedButton;
     return button != null
-        ? button.content
+        ? button.contentBuilder(context)
         : Container(
             width: 0,
             height: 0,
