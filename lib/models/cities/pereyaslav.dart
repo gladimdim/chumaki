@@ -14,7 +14,7 @@ class Pereyaslav extends City {
           localizedKeyName: 'pereyaslav',
           size: 2,
           unlocksCities: [Kyiv()],
-          produces: [Horse(1), Honey(1)],
+          // manufacturings: [Horse(1), Honey(1)],
           stock: Stock([
             Bread(1000),
             Stone(1000),

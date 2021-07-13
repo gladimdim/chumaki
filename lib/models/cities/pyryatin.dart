@@ -15,7 +15,7 @@ class Pyryatin extends City {
           unlocked: false,
           unlocksCities: [Nizhin()],
           unlockPriceMoney: Money(100),
-          produces: [Wood(1)],
+          // manufacturings: [Wood(1)],
           stock: Stock(
             [
               Wood(1500),

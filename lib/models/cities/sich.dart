@@ -4,6 +4,7 @@ import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/ochakiv.dart';
 import 'package:chumaki/models/events/event.dart';
+import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 
@@ -16,12 +17,14 @@ class Sich extends City {
           size: 4,
           unlocked: true,
           unlocksCities: [Ochakiv()],
-          produces: [Powder(1), Fish(1)],
+          manufacturings: [PowderCellar(), River()],
           availableEvents: [
             Event(
               localizedKey: 'events.giveFood',
               iconPath: 'images/resources/bread/bread_1.png',
-              requirements: [Grains(3),],
+              requirements: [
+                Grains(3),
+              ],
               payment: Money(200),
               artPath: "images/events/vesterfeld/cossack_and_bum.png",
             ),

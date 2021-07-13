@@ -13,7 +13,8 @@ class Chernigiv extends City {
           size: 3,
           unlocked: false,
           unlockPriceMoney: Money(250.0),
-          produces: [Wood(1), Charcoal(1), Planks(1)],
+          // manufacturings: [Wood(1), Charcoal(1), Planks(1)],
+          manufacturings: [],
           unlocksCities: [],
           stock: Stock(
             [

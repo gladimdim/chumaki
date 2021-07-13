@@ -14,7 +14,7 @@ class Uman extends City {
           localizedKeyName: 'uman',
           size: 3,
           unlocksCities: [Gaivoron()],
-          produces: [Gorilka(1)],
+          // manufacturings: [Gorilka(1)],
           unlockPriceMoney: Money(300),
           stock: Stock([
             Bread(1300),

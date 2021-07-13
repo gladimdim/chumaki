@@ -13,7 +13,7 @@ class Kaniv extends City {
           size: 2,
           unlocked: true,
           unlocksCities: [],
-          produces: [Horse(1), Fur(1)],
+          // manufacturings: [Horse(1), Fur(1)],
           stock: Stock([
             Horse(500),
             Fur(500),

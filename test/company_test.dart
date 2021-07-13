@@ -4,6 +4,7 @@ import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
+import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:fake_async/fake_async.dart';
@@ -43,8 +44,7 @@ void main() {
     test("Can restore active route tasks that are done directly to city", () {
       FakeAsync().run((async) {
         var company = Company();
-        company.startTask(
-            from: Chigirin(), to: Cherkasy(), withWagon: Wagon());
+        company.startTask(from: Chigirin(), to: Cherkasy(), withWagon: Wagon());
         var newCompany = Company.fromJson(company.toJson());
         async.elapse(Duration(seconds: 15));
         expect(newCompany.activeRouteTasks, isEmpty,
@@ -91,8 +91,7 @@ void main() {
         async.elapse(Duration(seconds: 12));
         var newCompany = Company.fromJson(company.toJson());
         async.elapse(Duration(seconds: 8));
-        expect(
-            newCompany.refToCityByName(Cherkasy()).wagons.isNotEmpty, isTrue,
+        expect(newCompany.refToCityByName(Cherkasy()).wagons.isNotEmpty, isTrue,
             reason: "Wagon stopped at the intermediate stop.");
       });
     });
@@ -121,6 +120,17 @@ void main() {
           reason: "Could not buy second wagon as not enough money");
       expect(company.allCities[0].wagons.length, equals(1),
           reason: "Did not buy second wagon.");
+    });
+
+    test("Can build manufacturing", () {
+      final building = PowderCellar();
+      final sich = Sich();
+      final company = Company(cities: [
+        sich,
+      ], money: 3000);
+      final wasBuilt = sich.buildManufacturing(building, company);
+      expect(wasBuilt, isTrue, reason: "Enough money to build it");
+      expect(building.built, isTrue, reason: "Building is unlocked");
     });
   });
 }

@@ -14,7 +14,7 @@ class Kursk extends City {
           unlocked: false,
           unlocksCities: [],
           unlockPriceMoney: Money(500),
-          produces: [Fur(1)],
+          // manufacturings: [Fur(1)],
           stock: Stock(
             [
               Fur(1500),

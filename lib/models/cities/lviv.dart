@@ -14,7 +14,7 @@ class Lviv extends City {
           unlocked: false,
           unlockPriceMoney: Money(1250.0),
           unlocksCities: [],
-          produces: [Cannon(1), Firearm(1)],
+          // manufacturings: [Cannon(1), Firearm(1)],
           stock: Stock(
             [
               Wood(2500),

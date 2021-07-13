@@ -13,7 +13,7 @@ class Chigirin extends City {
           name: "Чигирин",
           localizedKeyName: 'chigirin',
           unlocked: true,
-          produces: [Wool(1)],
+          // manufacturings: [Wool(1)],
           unlocksCities: [],
           availableEvents: [
             Event(

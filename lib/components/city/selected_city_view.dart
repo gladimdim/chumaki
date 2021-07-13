@@ -92,9 +92,9 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               TitleText(ChumakiLocalizations.labelMarket),
-                              ...widget.city.produces
-                                  .map((resource) => ResourceImageView(
-                                        resource,
+                              ...widget.city.manufacturings
+                                  .map((mfg) => ResourceImageView(
+                                        mfg.produces,
                                         size: 32,
                                       ))
                                   .toList(),
@@ -129,7 +129,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                                 ChumakiLocalizations.labelMenuBuyNewRoutes),
                             contentBuilder: (context) =>
                                 CanUnlockCitiesView(widget.city)),
-                      if (widget.city.produces.isNotEmpty)
+                      if (widget.city.manufacturings.isNotEmpty)
                         CityMenuItem(
                           menuKey: "manufacturing",
                           image: Image.asset(

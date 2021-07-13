@@ -8,26 +8,26 @@ import 'package:chumaki/models/resources/resource.dart';
 class Govtva extends City {
   Govtva()
       : super(
-    point: Point(1600, 1900),
-    name: "Говтва",
-    localizedKeyName: 'govtva',
-    size: 2,
-    unlocked: true,
-    unlocksCities: [Myrgorod()],
-    produces: [],
-    stock: Stock(
-      [
-        Wood(50),
-        Horse(100),
-        Fur(150),
-        Wool(100),
-        Gorilka(150),
-        Wax(200),
-        Honey(400),
-        Tobacco(80),
-        Planks(50),
-      ],
-    ),
-    wagons: [],
-  );
+          point: Point(1600, 1900),
+          name: "Говтва",
+          localizedKeyName: 'govtva',
+          size: 2,
+          unlocked: true,
+          unlocksCities: [Myrgorod()],
+          manufacturings: [],
+          stock: Stock(
+            [
+              Wood(50),
+              Horse(100),
+              Fur(150),
+              Wool(100),
+              Gorilka(150),
+              Wax(200),
+              Honey(400),
+              Tobacco(80),
+              Planks(50),
+            ],
+          ),
+          wagons: [],
+        );
 }

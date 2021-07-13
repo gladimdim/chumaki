@@ -29,9 +29,9 @@ class SmallCityAvatarWithCenters extends StatelessWidget {
             children: [
               TitleText(ChumakiLocalizations.getForKey(city.localizedKeyName)),
               Row(
-                children: city.produces
-                    .map((res) => ResourceImageView(
-                          res,
+                children: city.manufacturings
+                    .map((mfg) => ResourceImageView(
+                          mfg.produces,
                           size: 32,
                         ))
                     .toList(),

@@ -1,7 +1,8 @@
 import 'package:chumaki/components/manufacturing/manufacturing_view.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/manufacturings/manufacturing.dart';
-import 'package:chumaki/models/resources/resource.dart';
+import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 
 class CityManufacturingView extends StatelessWidget {
@@ -10,19 +11,25 @@ class CityManufacturingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: city.produces
-          .map(
-            (resource) => ManufacturingView(
-              mfg: manufacturingForResource(resource),
-              onBuildPress: () => onBuildPress(resource),
-            ),
-          )
-          .toList(),
-    );
+    final company = InheritedCompany.of(context).company;
+    return StreamBuilder<CITY_EVENTS>(
+        stream: city.changes,
+        builder: (context, _) {
+          return Column(
+            children: city.manufacturings
+                .map(
+                  (mfg) => ManufacturingView(
+                    mfg: mfg,
+                    onBuildPress:
+                        mfg.built ? null : () => onBuildPress(mfg, company),
+                  ),
+                )
+                .toList(),
+          );
+        });
   }
 
-  onBuildPress(Resource resources) {
-    print("Should be built");
+  onBuildPress(Manufacturing mfg, Company company) {
+    city.buildManufacturing(mfg, company);
   }
 }

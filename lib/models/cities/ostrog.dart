@@ -15,7 +15,7 @@ class Ostrog extends City {
           unlocked: false,
           unlockPriceMoney: Money(200.0),
           unlocksCities: [Lviv()],
-          produces: [Gorilka(1), MetalParts(1)],
+          // manufacturings: [Gorilka(1), MetalParts(1)],
           stock: Stock(
             [
               Wood(1500),

@@ -15,7 +15,7 @@ class Vinnitsa extends City {
           unlockPriceMoney: Money(150),
           size: 3,
           unlocksCities: [Ladyzhin()],
-          produces: [Firearm(1), Stone(1)],
+          // manufacturings: [Firearm(1), Stone(1)],
           stock: Stock([
             Bread(1000),
             Cannon(30),

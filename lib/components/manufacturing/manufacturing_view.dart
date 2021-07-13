@@ -25,12 +25,13 @@ class ManufacturingView extends StatelessWidget {
                 bottom: 20,
                 left: 10,
                 child: ActionButton(
-                  image: Image.asset("images/icons/money/money_2d.png",
-                      width: 128),
-                  subTitle: MoneyUnitView(mfg.priceToBuild),
-                  action: Text("Build"),
-                  onPress: onBuildPress,
-                ),
+                    image: Image.asset("images/icons/money/money_2d.png",
+                        width: 128),
+                    subTitle: MoneyUnitView(mfg.priceToBuild),
+                    action: Text("Build"),
+                    onPress: () {
+                      onBuildPress!();
+                    }),
               ),
           ],
         ),

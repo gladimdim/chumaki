@@ -15,7 +15,7 @@ class Ochakiv extends City {
           unlocked: false,
           unlocksCities: [Temryuk()],
           unlockPriceMoney: Money(50),
-          produces: [Fish(1), Salt(1), Tobacco(1)],
+          // manufacturings: [Fish(1), Salt(1), Tobacco(1)],
           stock: Stock(
             [
               Powder(1000),

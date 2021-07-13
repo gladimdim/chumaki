@@ -15,7 +15,7 @@ class Zhytomir extends City {
           size: 2,
           unlocked: false,
           unlockPriceMoney: Money(200.0),
-          produces: [Bread(1), Grains(1), Amber(1)],
+          // manufacturings: [Bread(1), Grains(1), Amber(1)],
           unlocksCities: [
             Ostrog(),
             Berdychiv(),

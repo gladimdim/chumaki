@@ -15,7 +15,8 @@ class Berdychiv extends City {
           unlockPriceMoney: Money(250),
           size: 2,
           unlocksCities: [Vinnitsa()],
-          produces: [IronOre(1)],
+          // produces: [IronOre(1)],
+          manufacturings: [],
           stock: Stock([
             Bread(1000),
             Grains(1000),

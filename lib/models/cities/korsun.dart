@@ -15,7 +15,7 @@ class Korsun extends City {
           size: 2,
           unlocksCities: [Uman()],
           unlockPriceMoney: Money(150),
-          produces: [Gorilka(1)],
+          // manufacturings: [Gorilka(1)],
           stock: Stock([
             Bread(1300),
             Grains(1000),

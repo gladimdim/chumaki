@@ -17,7 +17,7 @@ class Kyiv extends City {
           unlocked: false,
           unlocksCities: [Nizhin(), Chernigiv(), Zhytomir()],
           unlockPriceMoney: Money(500),
-          produces: [Wax(1)],
+          // manufacturings: [Wax(1)],
           stock: Stock([
             Wax(1000),
             Wood(1000),

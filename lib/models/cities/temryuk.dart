@@ -13,7 +13,7 @@ class Temryuk extends City {
           size: 2,
           unlocked: false,
           unlocksCities: [],
-          produces: [Silk(1)],
+          // manufacturings: [Silk(1)],
           unlockPriceMoney: Money(50),
           stock: Stock(
             [
