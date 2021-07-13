@@ -52,184 +52,195 @@ class _SelectedCityViewState extends State<SelectedCityView> {
   @override
   Widget build(BuildContext context) {
     final company = InheritedCompany.of(context).company;
-    return StreamBuilder(
-      stream: widget.city.changes,
-      builder: (context, data) => AnimatedSize(
-        alignment: Alignment.topLeft,
-        duration: Duration(milliseconds: 400),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-              maxWidth: selectedButton == null ? 195 : CITY_DETAILS_VIEW_WIDTH),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: CITY_DETAILS_VIEW_WIDTH / 4,
-                  minHeight: 150,
-                ),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      CityMenuItem(
-                          menuKey: "new_wheel",
-                          image: Image.asset(
-                            "images/icons/wagon/wagon_2d.png",
-                            width: 128,
-                          ),
-                          label: TitleText(ChumakiLocalizations.labelCompanies),
-                          contentBuilder: (context) =>
-                              CityWagonsView(city: widget.city)),
-                      CityMenuItem(
-                          menuKey: "market",
-                          image: Image.asset(
-                            "images/icons/market/market.png",
-                            width: 128,
-                          ),
-                          label: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TitleText(ChumakiLocalizations.labelMarket),
-                              ...widget.city.manufacturings
-                                  .map((mfg) => ResourceImageView(
-                                        mfg.produces,
-                                        size: 32,
-                                      ))
-                                  .toList(),
-                            ],
-                          ),
-                          playSoundOnOpen: () {
-                            SoundManager.instance.playLocalMarket();
-                          },
-                          contentBuilder: (context) =>
-                              CityStockView(city: widget.city)),
-                      CityMenuItem(
-                          menuKey: "global_market",
-                          image: Image.asset(
-                            "images/icons/market/market2.png",
-                            width: 128,
-                          ),
-                          playSoundOnOpen: () {
-                            SoundManager.instance.playGlobalMarket();
-                          },
-                          label:
-                              TitleText(ChumakiLocalizations.labelWorldMarket),
-                          contentBuilder: (context) =>
-                              GlobalMarketView(currentCity: widget.city)),
-                      if (company.cityCanUnlockMore(widget.city))
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("images/ui/clear_papyrus.png"),
+          fit: BoxFit.fill,
+        ),
+      ),
+      child: StreamBuilder(
+        stream: widget.city.changes,
+        builder: (context, data) => AnimatedSize(
+          alignment: Alignment.topLeft,
+          duration: Duration(milliseconds: 400),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+                maxWidth:
+                    selectedButton == null ? 195 : CITY_DETAILS_VIEW_WIDTH),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: CITY_DETAILS_VIEW_WIDTH / 4,
+                    minHeight: 150,
+                  ),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
                         CityMenuItem(
-                            menuKey: "unlock",
+                            menuKey: "new_wheel",
                             image: Image.asset(
-                              "images/cities/church.png",
+                              "images/icons/wagon/wagon_2d.png",
                               width: 128,
                             ),
-                            label: TitleText(
-                                ChumakiLocalizations.labelMenuBuyNewRoutes),
+                            label:
+                                TitleText(ChumakiLocalizations.labelCompanies),
                             contentBuilder: (context) =>
-                                CanUnlockCitiesView(widget.city)),
-                      if (widget.city.manufacturings.isNotEmpty)
+                                CityWagonsView(city: widget.city)),
                         CityMenuItem(
-                          menuKey: "manufacturing",
-                          image: Image.asset(
-                            "images/icons/lock/lock.png",
-                            width: 128,
+                            menuKey: "market",
+                            image: Image.asset(
+                              "images/icons/market/market.png",
+                              width: 128,
+                            ),
+                            label: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TitleText(ChumakiLocalizations.labelMarket),
+                                ...widget.city.manufacturings
+                                    .map((mfg) => ResourceImageView(
+                                          mfg.produces,
+                                          size: 32,
+                                        ))
+                                    .toList(),
+                              ],
+                            ),
+                            playSoundOnOpen: () {
+                              SoundManager.instance.playLocalMarket();
+                            },
+                            contentBuilder: (context) =>
+                                CityStockView(city: widget.city)),
+                        CityMenuItem(
+                            menuKey: "global_market",
+                            image: Image.asset(
+                              "images/icons/market/market2.png",
+                              width: 128,
+                            ),
+                            playSoundOnOpen: () {
+                              SoundManager.instance.playGlobalMarket();
+                            },
+                            label: TitleText(
+                                ChumakiLocalizations.labelWorldMarket),
+                            contentBuilder: (context) =>
+                                GlobalMarketView(currentCity: widget.city)),
+                        if (company.cityCanUnlockMore(widget.city))
+                          CityMenuItem(
+                              menuKey: "unlock",
+                              image: Image.asset(
+                                "images/cities/church.png",
+                                width: 128,
+                              ),
+                              label: TitleText(
+                                  ChumakiLocalizations.labelMenuBuyNewRoutes),
+                              contentBuilder: (context) =>
+                                  CanUnlockCitiesView(widget.city)),
+                        if (widget.city.manufacturings.isNotEmpty)
+                          CityMenuItem(
+                            menuKey: "manufacturing",
+                            image: Image.asset(
+                              "images/icons/lock/lock.png",
+                              width: 128,
+                            ),
+                            playSoundOnOpen: () {
+                              SoundManager.instance.playGlobalMarket();
+                            },
+                            label: TitleText("Manufacturing"),
+                            contentBuilder: (context) => CityManufacturingView(
+                              city: widget.city,
+                            ),
                           ),
-                          playSoundOnOpen: () {
-                            SoundManager.instance.playGlobalMarket();
-                          },
-                          label: TitleText("Manufacturing"),
-                          contentBuilder: (context) => CityManufacturingView(
-                            city: widget.city,
-                          ),
-                        ),
-                      ...widget.city.wagons.map(
-                        (wagon) => CityMenuItem(
-                            menuKey: wagon.fullLocalizedName,
-                            image: StreamBuilder(
-                              stream: wagon.changes,
-                              builder: (context, _) => Stack(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: ClipOval(
-                                      child: Image.asset(wagon.getImagePath(),
-                                          width: 128),
+                        ...widget.city.wagons.map(
+                          (wagon) => CityMenuItem(
+                              menuKey: wagon.fullLocalizedName,
+                              image: StreamBuilder(
+                                stream: wagon.changes,
+                                builder: (context, _) => Stack(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: ClipOval(
+                                        child: Image.asset(wagon.getImagePath(),
+                                            width: 128),
+                                      ),
                                     ),
-                                  ),
-                                  wagon.leader == null
-                                      ? Container()
-                                      : StreamBuilder(
-                                          stream: wagon.leader!.changes,
-                                          builder: (context, _) => Positioned(
-                                            right: 0,
-                                            bottom: 0,
-                                            child: Row(
-                                              children: wagon.leader!.perks
-                                                  .map(
-                                                    (perk) => Image.asset(
-                                                      categoryToImagePath(perk
-                                                          .affectsResourceCategory),
-                                                      width: 32,
-                                                    ),
-                                                  )
-                                                  .toList(),
+                                    wagon.leader == null
+                                        ? Container()
+                                        : StreamBuilder(
+                                            stream: wagon.leader!.changes,
+                                            builder: (context, _) => Positioned(
+                                              right: 0,
+                                              bottom: 0,
+                                              child: Row(
+                                                children: wagon.leader!.perks
+                                                    .map(
+                                                      (perk) => Image.asset(
+                                                        categoryToImagePath(perk
+                                                            .affectsResourceCategory),
+                                                        width: 32,
+                                                      ),
+                                                    )
+                                                    .toList(),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            label: StreamBuilder(
-                                stream: wagon.changes,
-                                builder: (context, snap) => TitleText(
-                                    ChumakiLocalizations.getForKey(
-                                        wagon.fullLocalizedName))),
-                            contentBuilder: (context) => WagonDetails(
-                                  wagon: wagon,
-                                  city: widget.city,
-                                )),
-                      ),
-                      if (widget.city.activeEvent != null)
-                        CityMenuItem(
-                          menuKey: "activeEvent",
-                          image: Image.asset(widget.city.activeEvent!.iconPath),
-                          contentBuilder: (context) => Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CityEventView(city: widget.city),
-                          ),
-                          label: TitleText(
-                            ChumakiLocalizations.getForKey(
-                                widget.city.activeEvent!.localizedKeyTitle),
-                          ),
+                              label: StreamBuilder(
+                                  stream: wagon.changes,
+                                  builder: (context, snap) => TitleText(
+                                      ChumakiLocalizations.getForKey(
+                                          wagon.fullLocalizedName))),
+                              contentBuilder: (context) => WagonDetails(
+                                    wagon: wagon,
+                                    city: widget.city,
+                                  )),
                         ),
-                    ].map((action) {
-                      return CityMenuItemView(
-                        isSelected: selectedButton != null &&
-                            selectedButton!.menuKey == action.menuKey,
-                        menuItem: action,
-                        onPress: () => handleMenuItemPress(action),
-                      );
-                    }).toList()),
-              ),
-              Expanded(
-                flex: 1,
-                child: AnimatedCrossFade(
-                  firstChild: Container(height: 0.0),
-                  secondChild: getContent(context),
-                  firstCurve:
-                      const Interval(0.0, 0.6, curve: Curves.fastOutSlowIn),
-                  secondCurve:
-                      const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn),
-                  sizeCurve: Curves.fastOutSlowIn,
-                  crossFadeState: selectedButton != null
-                      ? CrossFadeState.showSecond
-                      : CrossFadeState.showFirst,
-                  duration: Duration(milliseconds: 800),
+                        if (widget.city.activeEvent != null)
+                          CityMenuItem(
+                            menuKey: "activeEvent",
+                            image:
+                                Image.asset(widget.city.activeEvent!.iconPath),
+                            contentBuilder: (context) => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CityEventView(city: widget.city),
+                            ),
+                            label: TitleText(
+                              ChumakiLocalizations.getForKey(
+                                  widget.city.activeEvent!.localizedKeyTitle),
+                            ),
+                          ),
+                      ].map((action) {
+                        return CityMenuItemView(
+                          isSelected: selectedButton != null &&
+                              selectedButton!.menuKey == action.menuKey,
+                          menuItem: action,
+                          onPress: () => handleMenuItemPress(action),
+                        );
+                      }).toList()),
                 ),
-              ),
-            ],
+                Expanded(
+                  flex: 1,
+                  child: AnimatedCrossFade(
+                    firstChild: Container(height: 0.0),
+                    secondChild: getContent(context),
+                    firstCurve:
+                        const Interval(0.0, 0.6, curve: Curves.fastOutSlowIn),
+                    secondCurve:
+                        const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn),
+                    sizeCurve: Curves.fastOutSlowIn,
+                    crossFadeState: selectedButton != null
+                        ? CrossFadeState.showSecond
+                        : CrossFadeState.showFirst,
+                    duration: Duration(milliseconds: 800),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

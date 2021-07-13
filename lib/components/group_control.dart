@@ -12,14 +12,15 @@ class GroupedControl extends StatelessWidget {
   final double borderWidth;
   final GROUP_TITLE_ALIGNMENT titleAlignment;
 
-  GroupedControl({required this.title,
-    required this.child,
-    required this.width,
-    required this.borderColor,
-    required this.height,
-    this.borderWidth = 1,
-    this.titleAlignment = GROUP_TITLE_ALIGNMENT.LEFT,
-    this.titleHeight = 25});
+  GroupedControl(
+      {required this.title,
+      required this.child,
+      required this.width,
+      required this.borderColor,
+      required this.height,
+      this.borderWidth = 1,
+      this.titleAlignment = GROUP_TITLE_ALIGNMENT.LEFT,
+      this.titleHeight = 25});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,8 @@ class GroupedControl extends StatelessWidget {
             width: width,
             height: height,
             child: CustomPaint(
-              painter: GroupBorder(titleHeight: titleHeight,
+              painter: GroupBorder(
+                  titleHeight: titleHeight,
                   color: borderColor,
                   borderWidth: borderWidth),
             ),
@@ -41,7 +43,7 @@ class GroupedControl extends StatelessWidget {
           Align(
             alignment: titleAlignmentToAlign,
             child: Container(
-              color: Theme.of(context).backgroundColor,
+              // color: Theme.of(context).backgroundColor,
               child: Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                 child: title,
@@ -77,7 +79,9 @@ class GroupBorder extends CustomPainter {
   final double borderWidth;
 
   GroupBorder(
-      {required this.titleHeight, required this.color, required this.borderWidth});
+      {required this.titleHeight,
+      required this.color,
+      required this.borderWidth});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -86,7 +90,7 @@ class GroupBorder extends CustomPainter {
       ..lineTo(size.width, titleHeight / 2)
       ..lineTo(size.width, size.height)
       ..lineTo(0, size.height)
-    ..close();
+      ..close();
     var paint = Paint()
       ..color = color
       ..strokeWidth = borderWidth

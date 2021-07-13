@@ -17,10 +17,16 @@ class CityMenuItemView extends StatelessWidget {
       decoration: new BoxDecoration(
         border: getBorder(context),
         borderRadius: getRadius(),
+        image: DecorationImage(
+          image: AssetImage(
+            "images/ui/clear_papyrus.png",
+          ),
+          fit: BoxFit.contain,
+        ),
       ),
       child: ClipRRect(
         borderRadius: getRadius(),
-        child: TextButton(
+        child: OutlinedButton(
           onPressed: onPress,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

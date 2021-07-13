@@ -15,6 +15,7 @@ class _LocaleSelectionState extends State<LocaleSelection> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Radio(

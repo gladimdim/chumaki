@@ -227,7 +227,7 @@ class GameCanvasViewState extends State<GameCanvasView>
                     decoration: BoxDecoration(
                       border: Border.all(
                           color: Theme.of(context).primaryColor, width: 3),
-                      color: Theme.of(context).backgroundColor,
+                      // color: Theme.of(context).backgroundColor,
                       borderRadius: getRadius(),
                     ),
                     child: selected!.isUnlocked()
