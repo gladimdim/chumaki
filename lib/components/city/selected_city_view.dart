@@ -4,6 +4,7 @@ import 'package:chumaki/components/city/can_unlock_cities_view.dart';
 import 'package:chumaki/components/city/city_wagons_view.dart';
 import 'package:chumaki/components/city/city_stock_view.dart';
 import 'package:chumaki/components/global_market_view.dart';
+import 'package:chumaki/components/manufacturing/city_manufacturing_view.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/city_menu_item.dart';
@@ -128,6 +129,21 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                                 ChumakiLocalizations.labelMenuBuyNewRoutes),
                             contentBuilder: (context) =>
                                 CanUnlockCitiesView(widget.city)),
+                      if (widget.city.produces.isNotEmpty)
+                        CityMenuItem(
+                          menuKey: "manufacturing",
+                          image: Image.asset(
+                            "images/icons/lock/lock.png",
+                            width: 128,
+                          ),
+                          playSoundOnOpen: () {
+                            SoundManager.instance.playGlobalMarket();
+                          },
+                          label: TitleText("Manufacturing"),
+                          contentBuilder: (context) => CityManufacturingView(
+                            city: widget.city,
+                          ),
+                        ),
                       ...widget.city.wagons.map(
                         (wagon) => CityMenuItem(
                             menuKey: wagon.fullLocalizedName,

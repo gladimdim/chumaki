@@ -79,6 +79,7 @@ flutter:
     - images/icons/wagon/
     - images/events/vesterfeld/
     - images/leaders/
+    - images/manufacturings/
     # SOUNDS
     - assets/sounds/
     # OTHER
