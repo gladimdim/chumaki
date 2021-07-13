@@ -5,6 +5,7 @@ import 'package:chumaki/models/cities/chernigiv.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
+import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Kyiv extends City {
@@ -17,7 +18,7 @@ class Kyiv extends City {
           unlocked: false,
           unlocksCities: [Nizhin(), Chernigiv(), Zhytomir()],
           unlockPriceMoney: Money(500),
-          // manufacturings: [Wax(1)],
+          manufacturings: [WaxMaker()],
           stock: Stock([
             Wax(1000),
             Wood(1000),

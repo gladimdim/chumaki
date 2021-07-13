@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
+import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Berdychiv extends City {
@@ -15,8 +16,7 @@ class Berdychiv extends City {
           unlockPriceMoney: Money(250),
           size: 2,
           unlocksCities: [Vinnitsa()],
-          // produces: [IronOre(1)],
-          manufacturings: [],
+          manufacturings: [IronMine()],
           stock: Stock([
             Bread(1000),
             Grains(1000),

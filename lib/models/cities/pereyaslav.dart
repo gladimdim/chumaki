@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
+import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Pereyaslav extends City {
@@ -14,7 +15,7 @@ class Pereyaslav extends City {
           localizedKeyName: 'pereyaslav',
           size: 2,
           unlocksCities: [Kyiv()],
-          // manufacturings: [Horse(1), Honey(1)],
+          manufacturings: [Stables(), HoneyMaker()],
           stock: Stock([
             Bread(1000),
             Stone(1000),

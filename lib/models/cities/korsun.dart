@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/uman.dart';
+import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Korsun extends City {
@@ -15,7 +16,7 @@ class Korsun extends City {
           size: 2,
           unlocksCities: [Uman()],
           unlockPriceMoney: Money(150),
-          // manufacturings: [Gorilka(1)],
+          manufacturings: [Distillery()],
           stock: Stock([
             Bread(1300),
             Grains(1000),

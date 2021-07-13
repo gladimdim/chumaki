@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/temryuk.dart';
+import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Ochakiv extends City {
@@ -15,7 +16,7 @@ class Ochakiv extends City {
           unlocked: false,
           unlocksCities: [Temryuk()],
           unlockPriceMoney: Money(50),
-          // manufacturings: [Fish(1), Salt(1), Tobacco(1)],
+          manufacturings: [River(), SaltMine(), TobaccoMaker()],
           stock: Stock(
             [
               Powder(1000),
