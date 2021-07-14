@@ -1,6 +1,7 @@
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/action_button.dart';
+import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class ManufacturingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TitleText(mfg.localizedKey),
+        TitleText(ChumakiLocalizations.getForKey(mfg.fullLocalizedKey)),
         Stack(
           children: [
             Image.asset(
@@ -29,7 +30,7 @@ class ManufacturingView extends StatelessWidget {
                     image: Image.asset("images/icons/money/money_2d.png",
                         width: 128),
                     subTitle: MoneyUnitView(mfg.priceToBuild),
-                    action: Text("Build"),
+                    action: Text(ChumakiLocalizations.labelBuild),
                     onPress: () {
                       onBuildPress!();
                     }),

@@ -1,5 +1,6 @@
 import 'package:chumaki/i18n/event_localizations.dart';
 import 'package:chumaki/i18n/leaders_localizations.dart';
+import 'package:chumaki/i18n/manufacturing_localizations.dart';
 import 'package:chumaki/i18n/resource_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -41,6 +42,8 @@ class ChumakiLocalizations {
   static ResourceLocalizations resourceLocalizations = ResourceLocalizations();
   static LeadersLocalizations leadersLocalizations = LeadersLocalizations();
   static EventLocalizations eventLocalizations = EventLocalizations();
+  static ManufacturingLocalizations manufacutringLocalizations =
+      ManufacturingLocalizations();
 
   static String getForKey(String key) {
     final split = key.split('.');
@@ -53,6 +56,8 @@ class ChumakiLocalizations {
           return leadersLocalizations[split[1]];
         case "events":
           return eventLocalizations[split[1]];
+        case "manufacturings":
+          return manufacutringLocalizations[split[1]];
         default:
           return key;
       }
@@ -142,6 +147,7 @@ class ChumakiLocalizations {
       "labelTrade": "Trade",
       "labelOtherCities": "Other cities",
       "labelLeveledUp": "New level",
+      "labelBuild": "Build",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -222,6 +228,7 @@ class ChumakiLocalizations {
       "labelTrade": "Торгівля",
       "labelOtherCities": "Інші міста",
       "labelLeveledUp": "Новий рівень",
+      "labelBuild": "Побудувати",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -301,6 +308,7 @@ class ChumakiLocalizations {
       "labelTrade": "Торговать",
       "labelOtherCities": "Другие города",
       "labelLeveledUp": "Новый уровень",
+      "labelBuild": "Построить",
     },
   };
 
@@ -534,5 +542,9 @@ class ChumakiLocalizations {
 
   static String get labelLeveledUp {
     return _localizedValues[locale.languageCode]!["labelLeveledUp"]!;
+  }
+
+  static String get labelBuild {
+    return _localizedValues[locale.languageCode]!["labelBuild"]!;
   }
 }
