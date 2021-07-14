@@ -148,6 +148,7 @@ class ChumakiLocalizations {
       "labelOtherCities": "Other cities",
       "labelLeveledUp": "New level",
       "labelBuild": "Build",
+      "labelUpgrade": "Ugrade",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -229,6 +230,7 @@ class ChumakiLocalizations {
       "labelOtherCities": "Інші міста",
       "labelLeveledUp": "Новий рівень",
       "labelBuild": "Побудувати",
+      "labelUpgrade": "Оновити",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -309,6 +311,7 @@ class ChumakiLocalizations {
       "labelOtherCities": "Другие города",
       "labelLeveledUp": "Новый уровень",
       "labelBuild": "Построить",
+      "labelUpgrade": "Обновить",
     },
   };
 
@@ -546,5 +549,9 @@ class ChumakiLocalizations {
 
   static String get labelBuild {
     return _localizedValues[locale.languageCode]!["labelBuild"]!;
+  }
+
+  static String get labelUpgrade {
+    return _localizedValues[locale.languageCode]!["labelUpgrade"]!;
   }
 }

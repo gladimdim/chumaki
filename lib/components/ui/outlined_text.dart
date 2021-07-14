@@ -14,8 +14,7 @@ class OutlinedText extends StatelessWidget {
   Widget build(BuildContext context) {
     var outColor =
         outlineColor == null ? Theme.of(context).primaryColor : outlineColor;
-    var fColor =
-        fontColor == null ? Theme.of(context).backgroundColor : fontColor;
+    var fColor = fontColor == null ? Colors.white : fontColor;
     return Stack(
       children: [
         Text(

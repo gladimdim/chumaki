@@ -6,13 +6,14 @@ class Manufacturing {
   bool built;
   final Money priceToBuild;
   int level;
+  final int maxLevel = 3;
 
   Manufacturing({
     required this.localizedKey,
     required this.produces,
     this.built = false,
     required this.priceToBuild,
-    this.level = 3,
+    this.level = 1,
   });
 
   String get imagePath =>
@@ -54,6 +55,16 @@ class Manufacturing {
           priceToBuild: Money(1000),
         ),
       ];
+
+  bool canUpgrade() {
+    return built && level < maxLevel;
+  }
+
+  void upgrade() {
+    if (canUpgrade()) {
+      level++;
+    }
+  }
 }
 
 class PowderCellar extends Manufacturing {

@@ -44,6 +44,7 @@ enum CITY_EVENTS {
   WAGON_ADDED,
   EVENT_DONE,
   MFG_BUILT,
+  MFG_UPGRADED
 }
 
 class City {
@@ -390,6 +391,17 @@ class City {
       mfg.built = true;
       company.removeMoney(mfg.priceToBuild.amount);
       changes.add(CITY_EVENTS.MFG_BUILT);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool upgradeManufacturing(Manufacturing mfg, Company company) {
+    if (company.hasEnoughMoney(mfg.priceToBuild)) {
+      mfg.upgrade();
+      company.removeMoney(mfg.priceToBuild.amount);
+      changes.add(CITY_EVENTS.MFG_UPGRADED);
       return true;
     } else {
       return false;

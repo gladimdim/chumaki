@@ -18,10 +18,16 @@ class CityManufacturingView extends StatelessWidget {
           return Column(
             children: city.manufacturings
                 .map(
-                  (mfg) => ManufacturingView(
-                    mfg: mfg,
-                    onBuildPress:
-                        mfg.built ? null : () => onBuildPress(mfg, company),
+                  (mfg) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ManufacturingView(
+                      mfg: mfg,
+                      onBuildPress:
+                          mfg.built ? null : () => onBuildPress(mfg, company),
+                      onUpgradePress: mfg.canUpgrade()
+                          ? () => onUpgradePress(mfg, company)
+                          : null,
+                    ),
                   ),
                 )
                 .toList(),
@@ -31,5 +37,9 @@ class CityManufacturingView extends StatelessWidget {
 
   onBuildPress(Manufacturing mfg, Company company) {
     city.buildManufacturing(mfg, company);
+  }
+
+  onUpgradePress(Manufacturing mfg, Company company) {
+    city.upgradeManufacturing(mfg, company);
   }
 }

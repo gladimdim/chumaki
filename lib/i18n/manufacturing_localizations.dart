@@ -8,6 +8,7 @@ class ManufacturingLocalizations extends InternalLocalizations {
       "tobacco_maker": "Tobacco Maker",
       "river": "River",
       "powder_cellar": "Powder Cellar",
+      "pasture": "Pasture",
     },
     "uk": {
       "liman": "Солеварня",
@@ -15,6 +16,7 @@ class ManufacturingLocalizations extends InternalLocalizations {
       "tobacco_maker": "Тютюн",
       "river": "Річка",
       "powder_cellar": "Пороховий льох",
+      "pasture": "Луг"
     },
     "ru": {
       "liman": "Солеварение",
@@ -22,6 +24,7 @@ class ManufacturingLocalizations extends InternalLocalizations {
       "tobacco_maker": "Табак",
       "river": "Речка",
       "powder_cellar": "Пороховой погреб",
+      "pasture": "Луг"
     }
   };
 }

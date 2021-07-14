@@ -16,7 +16,7 @@ class Nizhin extends City {
           unlocked: false,
           unlocksCities: [Kursk()],
           unlockPriceMoney: Money(200),
-          manufacturings: [Weaver()],
+          manufacturings: [Weavery()],
           stock: Stock(
             [
               Wax(1000),
