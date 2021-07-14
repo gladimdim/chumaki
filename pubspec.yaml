@@ -98,6 +98,9 @@ flutter:
     - images/manufacturings/smeltery/
     - images/manufacturings/cart_maker/
     - images/manufacturings/boat_maker/
+    - images/manufacturings/pasture/
+    - images/manufacturings/weaver/
+    - images/manufacturings/liman/
     # SOUNDS
     - assets/sounds/
     # OTHER

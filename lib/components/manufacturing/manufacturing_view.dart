@@ -19,6 +19,7 @@ class ManufacturingView extends StatelessWidget {
           children: [
             Image.asset(
               mfg.imagePath,
+              fit: BoxFit.fill,
             ),
             if (onBuildPress != null)
               Positioned(
