@@ -173,10 +173,10 @@ class Smith extends Manufacturing {
         );
 }
 
-class Weaver extends Manufacturing {
-  Weaver()
+class Weavery extends Manufacturing {
+  Weavery()
       : super(
-          localizedKey: "weaver",
+          localizedKey: "weavery",
           produces: Cloth(300),
           priceToBuild: Money(750),
         );
