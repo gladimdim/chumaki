@@ -58,12 +58,9 @@ class _StartingViewState extends State<StartingView> {
                   // mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: OutlinedButton(
-                          onPressed: () => _loadGamePressed(context, Company()),
-                          child: TitleText(ChumakiLocalizations.labelNewGame)),
-                    ),
+                    OutlinedButton(
+                        onPressed: () => _loadGamePressed(context, Company()),
+                        child: TitleText(ChumakiLocalizations.labelNewGame)),
                     FutureBuilder(
                       future: _appPreferencesInit(),
                       builder: (context, snapshot) {
@@ -75,21 +72,18 @@ class _StartingViewState extends State<StartingView> {
                                 ChumakiLocalizations.labelNoSave,
                               ));
                         } else {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: OutlinedButton(
-                              onPressed: () => _loadGamePressed(
-                                  context, Company.fromJson(savedGame)),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  TitleText(ChumakiLocalizations.labelLoadSave),
-                                  IconButton(
-                                      onPressed: _removeSave,
-                                      icon: Icon(Icons.delete)),
-                                ],
-                              ),
+                          return OutlinedButton(
+                            onPressed: () => _loadGamePressed(
+                                context, Company.fromJson(savedGame)),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TitleText(ChumakiLocalizations.labelLoadSave),
+                                IconButton(
+                                    onPressed: _removeSave,
+                                    icon: Icon(Icons.delete)),
+                              ],
                             ),
                           );
                         }
@@ -103,10 +97,7 @@ class _StartingViewState extends State<StartingView> {
                         });
                       },
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: OtherGamesView(),
-                    ),
+                    OtherGamesView(),
                   ],
                 ),
               ],
