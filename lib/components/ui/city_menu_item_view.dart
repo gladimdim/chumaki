@@ -19,9 +19,9 @@ class CityMenuItemView extends StatelessWidget {
         borderRadius: getRadius(),
         image: DecorationImage(
           image: AssetImage(
-            "images/ui/clear_papyrus.png",
+            isSelected ? "images/ui/papyrus_2.png" : "images/ui/papyrus_1.png",
           ),
-          fit: BoxFit.contain,
+          fit: BoxFit.fill,
         ),
       ),
       child: ClipRRect(

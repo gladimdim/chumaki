@@ -48,59 +48,69 @@ class _StartingViewState extends State<StartingView> {
             ),
           ),
         if (currentCompany == null)
-          Positioned.fill(
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Image.asset("images/ui/clear_papyrus.png"),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    OutlinedButton(
-                        onPressed: () => _loadGamePressed(context, Company()),
-                        child: TitleText(ChumakiLocalizations.labelNewGame)),
-                    FutureBuilder(
-                      future: _appPreferencesInit(),
-                      builder: (context, snapshot) {
-                        var savedGame = AppPreferences.instance.readGameSave();
-                        if (savedGame == null) {
-                          return OutlinedButton(
-                              onPressed: null,
-                              child: Text(
-                                ChumakiLocalizations.labelNoSave,
-                              ));
-                        } else {
-                          return OutlinedButton(
-                            onPressed: () => _loadGamePressed(
-                                context, Company.fromJson(savedGame)),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TitleText(ChumakiLocalizations.labelLoadSave),
-                                IconButton(
-                                    onPressed: _removeSave,
-                                    icon: Icon(Icons.delete)),
-                              ],
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                    LocaleSelection(
-                      locale: ChumakiLocalizations.locale,
-                      onLocaleChanged: (Locale locale) {
-                        setState(() {
-                          ChumakiLocalizations.locale = locale;
-                        });
-                      },
-                    ),
-                    OtherGamesView(),
-                  ],
-                ),
-              ],
+          Align(
+            alignment: Alignment.center,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: 800,
+                maxHeight: 400,
+              ),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    "images/ui/papyrus_1.png",
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      OutlinedButton(
+                          onPressed: () => _loadGamePressed(context, Company()),
+                          child: TitleText(ChumakiLocalizations.labelNewGame)),
+                      FutureBuilder(
+                        future: _appPreferencesInit(),
+                        builder: (context, snapshot) {
+                          var savedGame =
+                              AppPreferences.instance.readGameSave();
+                          if (savedGame == null) {
+                            return OutlinedButton(
+                                onPressed: null,
+                                child: Text(
+                                  ChumakiLocalizations.labelNoSave,
+                                ));
+                          } else {
+                            return OutlinedButton(
+                              onPressed: () => _loadGamePressed(
+                                  context, Company.fromJson(savedGame)),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  TitleText(ChumakiLocalizations.labelLoadSave),
+                                  IconButton(
+                                      onPressed: _removeSave,
+                                      icon: Icon(Icons.delete)),
+                                ],
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                      LocaleSelection(
+                        locale: ChumakiLocalizations.locale,
+                        onLocaleChanged: (Locale locale) {
+                          setState(() {
+                            ChumakiLocalizations.locale = locale;
+                          });
+                        },
+                      ),
+                      OtherGamesView(),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
       ],

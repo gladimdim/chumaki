@@ -55,7 +55,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("images/ui/clear_papyrus.png"),
+          image: AssetImage("images/ui/papyrus_3.png"),
           fit: BoxFit.fill,
         ),
       ),

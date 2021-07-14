@@ -182,10 +182,10 @@ class Weaver extends Manufacturing {
         );
 }
 
-class SaltMine extends Manufacturing {
-  SaltMine()
+class Liman extends Manufacturing {
+  Liman()
       : super(
-          localizedKey: "salt_mine",
+          localizedKey: "liman",
           produces: Salt(300),
           priceToBuild: Money(150),
         );
