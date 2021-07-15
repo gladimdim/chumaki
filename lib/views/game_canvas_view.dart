@@ -15,6 +15,7 @@ import 'package:chumaki/models/company.dart';
 
 import 'package:chumaki/models/image_on_canvas.dart';
 import 'package:chumaki/models/resources/resource.dart';
+import 'package:chumaki/sound/sound_manager.dart';
 import 'package:chumaki/theme.dart';
 import 'package:chumaki/utils/points.dart';
 import 'package:flutter/material.dart';
@@ -250,6 +251,7 @@ class GameCanvasViewState extends State<GameCanvasView>
             child: IconButton(
               onPressed: () async {
                 await company?.save();
+                SoundManager.instance.detachFromCompany();
                 company?.dispose();
                 widget.onBackPressed();
               },

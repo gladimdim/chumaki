@@ -133,6 +133,7 @@ class _StartingViewState extends State<StartingView> {
   _loadGamePressed(BuildContext context, Company company) async {
     setState(() {
       _appPreferencesInitter = AsyncMemoizer();
+      SoundManager.instance.attachToCompany(company);
       currentCompany = company;
     });
   }

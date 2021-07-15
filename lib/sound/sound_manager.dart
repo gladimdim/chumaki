@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:just_audio/just_audio.dart';
@@ -20,6 +22,8 @@ class SoundManager {
     "leaderLevelUp": "assets/sounds/fanfare.mp3",
   };
 
+  StreamSubscription? _sub;
+
   static final SoundManager instance = SoundManager._internal();
 
   SoundManager._internal() {}
@@ -28,12 +32,16 @@ class SoundManager {
     queueSound(companyActionMapping[action]);
   }
 
-  attachToCompany(Company company) async {
-    company.changes
+  attachToCompany(Company company) {
+    _sub = company.changes
         .where((event) => companyActionMapping[event] != null)
         .listen((event) {
       playCompanySound(event);
     });
+  }
+
+  detachFromCompany() {
+    _sub?.cancel();
   }
 
   playUISound(String name) async {
