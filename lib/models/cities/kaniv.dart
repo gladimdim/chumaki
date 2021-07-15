@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Kaniv extends City {
@@ -13,7 +14,7 @@ class Kaniv extends City {
           size: 2,
           unlocked: true,
           unlocksCities: [],
-          produces: [Horse(1), Fur(1)],
+          manufacturings: [Stables(), TrappersHouse()],
           stock: Stock([
             Horse(500),
             Fur(500),

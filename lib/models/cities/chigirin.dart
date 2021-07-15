@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/events/event.dart';
+import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Chigirin extends City {
@@ -13,7 +14,7 @@ class Chigirin extends City {
           name: "Чигирин",
           localizedKeyName: 'chigirin',
           unlocked: true,
-          produces: [Wool(1)],
+          manufacturings: [Pasture()],
           unlocksCities: [],
           availableEvents: [
             Event(

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final darkGrey = Colors.grey[800]!;
-final mediumGrey = Colors.grey[500]!;
-final background = Colors.grey[300]!;
-final lightGrey = Colors.grey[100]!;
+final darkGrey = Color(0XFF342011);
+final mediumGrey = Color(0xFF886637);
+final background = Color(0XFFD6B380);
+final lightGrey = Color(0xFFD6B380);
 final black = Colors.black;
 
 final mainTheme = ThemeData(
@@ -24,11 +24,12 @@ final mainTheme = ThemeData(
         );
       }),
       backgroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
+        (Set<MaterialState> states) {
           if (states.contains(MaterialState.hovered)) return mediumGrey;
           if (states.contains(MaterialState.focused) ||
               states.contains(MaterialState.pressed)) return lightGrey;
-          if (states.contains(MaterialState.disabled)) return mediumGrey.withOpacity(0.6);
+          if (states.contains(MaterialState.disabled))
+            return mediumGrey.withOpacity(0.6);
           return background;
         },
       ),

@@ -28,6 +28,7 @@ import 'package:chumaki/models/cities/vinnitsa.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/events/event.dart';
+import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/tasks/route.dart';
@@ -42,6 +43,8 @@ enum CITY_EVENTS {
   UNLOCKED,
   WAGON_ADDED,
   EVENT_DONE,
+  MFG_BUILT,
+  MFG_UPGRADED
 }
 
 class City {
@@ -55,7 +58,7 @@ class City {
   final List<City> unlocksCities;
   Event? activeEvent;
   final List<Event> availableEvents;
-  late final List<Resource> produces;
+  late final List<Manufacturing> manufacturings;
   BehaviorSubject<CITY_EVENTS> changes = BehaviorSubject<CITY_EVENTS>();
 
   String get avatarImagePath {
@@ -73,7 +76,7 @@ class City {
     this.size = 1,
     required this.unlocksCities,
     this.unlockPriceMoney = const Money(0),
-    required this.produces,
+    List<Manufacturing>? manufacturings,
     List<Wagon>? wagons,
     this.activeEvent,
     this.availableEvents = const [],
@@ -82,6 +85,12 @@ class City {
       this.wagons = List.empty(growable: true);
     } else {
       this.wagons = wagons;
+    }
+
+    if (manufacturings == null) {
+      this.manufacturings = List.empty();
+    } else {
+      this.manufacturings = manufacturings;
     }
     _unlocked = unlocked;
 
@@ -281,7 +290,7 @@ class City {
       "wagons": wagons.map((wagon) => wagon.toJson()).toList(),
       "unlocked": _unlocked,
       "unlockPriceMoney": unlockPriceMoney.amount,
-      "produces": produces.map((resource) => resource.toJson()).toList(),
+      "manufacturings": manufacturings.map((mfg) => mfg.toJson()).toList(),
       "unlockCities": unlocksCities.map((e) => e.localizedKeyName).toList(),
       "activeEvent": eventJson,
       "availableEvents": availableEvents.map((e) => e.toJson()).toList(),
@@ -292,7 +301,7 @@ class City {
     var pointJson = input["point"];
     List wagonJson = input["wagons"];
     List unlockCities = input["unlockCities"];
-    List producesJson = input["produces"];
+    List manufacturingsJson = input["manufacturings"];
     List availableEventsJson = input["availableEvents"];
     final eventJson = input["activeEvent"];
     return City(
@@ -301,7 +310,8 @@ class City {
       stock: Stock.fromJson(input["stock"]),
       localizedKeyName: input["localizedKeyName"],
       wagons: wagonJson.map((e) => Wagon.fromJson(e)).toList(),
-      produces: producesJson.map((e) => Resource.fromJson(e)).toList(),
+      manufacturings:
+          manufacturingsJson.map((e) => Manufacturing.fromJson(e)).toList(),
       unlockPriceMoney: Money(input["unlockPriceMoney"]),
       unlocked: input["unlocked"],
       unlocksCities:
@@ -359,7 +369,9 @@ class City {
 
   City findClosestResourceCenter(Resource resource, List<City> cities) {
     List<City> centers = cities.where((city) {
-      return city.produces.where((res) => res.sameType(resource)).isNotEmpty;
+      return city.manufacturings
+          .where((mfg) => mfg.produces.sameType(resource))
+          .isNotEmpty;
     }).toList();
     City closest = centers.fold(centers.first, (previousValue, aCity) {
       double previousDistance = previousValue.distanceTo(toCity: this);
@@ -372,5 +384,27 @@ class City {
   void finishActiveEvent() {
     activeEvent = null;
     changes.add(CITY_EVENTS.EVENT_DONE);
+  }
+
+  bool buildManufacturing(Manufacturing mfg, Company company) {
+    if (company.hasEnoughMoney(mfg.priceToBuild)) {
+      mfg.built = true;
+      company.removeMoney(mfg.priceToBuild.amount);
+      changes.add(CITY_EVENTS.MFG_BUILT);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool upgradeManufacturing(Manufacturing mfg, Company company) {
+    if (company.hasEnoughMoney(mfg.priceToBuild)) {
+      mfg.upgrade();
+      company.removeMoney(mfg.priceToBuild.amount);
+      changes.add(CITY_EVENTS.MFG_UPGRADED);
+      return true;
+    } else {
+      return false;
+    }
   }
 }

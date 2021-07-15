@@ -6,6 +6,7 @@ import 'package:chumaki/components/city/selected_city_locked_view.dart';
 import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/ui/3d_button.dart';
+import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/models/cities/city.dart';
 
@@ -226,7 +227,7 @@ class GameCanvasViewState extends State<GameCanvasView>
                     decoration: BoxDecoration(
                       border: Border.all(
                           color: Theme.of(context).primaryColor, width: 3),
-                      color: Theme.of(context).backgroundColor,
+                      // color: Theme.of(context).backgroundColor,
                       borderRadius: getRadius(),
                     ),
                     child: selected!.isUnlocked()
@@ -287,10 +288,16 @@ class GameCanvasViewState extends State<GameCanvasView>
                       ),
                       Center(child: Image.asset(Money(0).imagePath, width: 44)),
                       StreamBuilder(
-                          stream: company.changes,
-                          builder: (context, _) => Center(
-                              child:
-                                  Text(company.getMoney().amount.toString()))),
+                        stream: company.changes,
+                        builder: (context, _) => Center(
+                          child: BouncingOutlinedText(
+                            company.getMoney().amount.toInt().toString(),
+                            outlineColor: Colors.black,
+                            fontColor: Colors.yellow,
+                            size: 16,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

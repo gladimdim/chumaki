@@ -13,7 +13,7 @@ class BilaTserkva extends City {
           localizedKeyName: 'bilatserkva',
           size: 2,
           unlocksCities: [],
-          produces: [],
+          manufacturings: [],
           stock: Stock([
             Bread(1000),
             Stone(1000),

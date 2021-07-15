@@ -79,6 +79,28 @@ flutter:
     - images/icons/wagon/
     - images/events/vesterfeld/
     - images/leaders/
+    - images/manufacturings/
+    - images/manufacturings/cannon_foundry/
+    - images/manufacturings/forest/
+    - images/manufacturings/field/
+    - images/manufacturings/river/
+    - images/manufacturings/iron_mine/
+    - images/manufacturings/marketplace/
+    - images/manufacturings/trappers_house/
+    - images/manufacturings/mill/
+    - images/manufacturings/quarry/
+    - images/manufacturings/powder_cellar/
+    - images/manufacturings/shooting_range/
+    - images/manufacturings/smith/
+    - images/manufacturings/stables/
+    - images/manufacturings/sawmill/
+    - images/manufacturings/charcoal_maker/
+    - images/manufacturings/smeltery/
+    - images/manufacturings/cart_maker/
+    - images/manufacturings/boat_maker/
+    - images/manufacturings/pasture/
+    - images/manufacturings/weavery/
+    - images/manufacturings/liman/
     # SOUNDS
     - assets/sounds/
     # OTHER

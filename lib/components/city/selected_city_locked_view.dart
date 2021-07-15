@@ -19,67 +19,73 @@ class SelectedCityLockedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final company = InheritedCompany.of(context).company;
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        maxWidth: CITY_DETAILS_VIEW_WIDTH,
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("images/ui/papyrus_3.png"), fit: BoxFit.fill),
       ),
-      child: Column(
-        children: [
-          BorderedBottom(
-            child: Text(
-              ChumakiLocalizations.labelCityIsLocked,
-              style: Theme.of(context).textTheme.headline3,
-            ),
-          ),
-          Text(
-            ChumakiLocalizations.labelUnlockAt,
-            style: Theme.of(context).textTheme.headline5,
-          ),
-          BorderedAll(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: company.allCities.where((cityThatCanUnlock) {
-                var realCity = company.refToCityByName(city);
-                return company
-                    .citiesToRealCities(cityThatCanUnlock.unlocksCities)
-                    .contains(realCity);
-              }).map((cityThatUnlocks) {
-                return ActionButton(
-                  image: CityAvatarStacked(
-                    city: cityThatUnlocks,
-                    width: 128,
-                  ),
-                  subTitle: Container(),
-                  action: Text(ChumakiLocalizations.labelGoTo),
-                  onPress: () => _navigateViewerToCity(cityThatUnlocks),
-                );
-              }).toList(),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: BorderedAll(
-              child: Column(
-                children: [
-                  Text(ChumakiLocalizations.labelProductionCenter,
-                      style: Theme.of(context).textTheme.headline3),
-                  Row(
-                    children: city.produces
-                        .map((e) => ResourceImageView(
-                              e,
-                              size: 64,
-                            ))
-                        .toList(),
-                  )
-                ],
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: CITY_DETAILS_VIEW_WIDTH,
+        ),
+        child: Column(
+          children: [
+            BorderedBottom(
+              child: Text(
+                ChumakiLocalizations.labelCityIsLocked,
+                style: Theme.of(context).textTheme.headline3,
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: BorderedAll(child: CityStockView(city: city)),
-          ),
-        ],
+            Text(
+              ChumakiLocalizations.labelUnlockAt,
+              style: Theme.of(context).textTheme.headline5,
+            ),
+            BorderedAll(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: company.allCities.where((cityThatCanUnlock) {
+                  var realCity = company.refToCityByName(city);
+                  return company
+                      .citiesToRealCities(cityThatCanUnlock.unlocksCities)
+                      .contains(realCity);
+                }).map((cityThatUnlocks) {
+                  return ActionButton(
+                    image: CityAvatarStacked(
+                      city: cityThatUnlocks,
+                      width: 128,
+                    ),
+                    subTitle: Container(),
+                    action: Text(ChumakiLocalizations.labelGoTo),
+                    onPress: () => _navigateViewerToCity(cityThatUnlocks),
+                  );
+                }).toList(),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: BorderedAll(
+                child: Column(
+                  children: [
+                    Text(ChumakiLocalizations.labelProductionCenter,
+                        style: Theme.of(context).textTheme.headline3),
+                    Row(
+                      children: city.manufacturings
+                          .map((mfg) => ResourceImageView(
+                                mfg.produces,
+                                size: 64,
+                              ))
+                          .toList(),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: BorderedAll(child: CityStockView(city: city)),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -23,7 +23,11 @@ class CityOnMap extends StatelessWidget {
           height: CITY_SIZE * city.size,
           child: Stack(
             children: [
-              Positioned.fill(child: AnimatedFlag(topColor: Colors.red, bottomColor: Colors.green, animate: city.activeEvent != null)),
+              Positioned.fill(
+                  child: AnimatedFlag(
+                      topColor: Colors.red,
+                      bottomColor: Colors.green,
+                      animate: city.activeEvent != null)),
               // if (city.activeEvent != null)
               //   Transform.translate(
               //       offset:
@@ -81,15 +85,16 @@ class CityOnMap extends StatelessWidget {
           width: CITY_SIZE.toDouble() * city.size);
     } else {
       final base = 80;
-      final count = city.produces.length;
+      final count = city.manufacturings.length;
       final changePerResource = 16;
       final koef =
           (base - changePerResource * count).toDouble() * city.size * 0.5;
       // final sizeAdjust =
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children:
-            city.produces.map((e) => ResourceImageView(e, size: koef)).toList(),
+        children: city.manufacturings
+            .map((e) => ResourceImageView(e.produces, size: koef))
+            .toList(),
       );
     }
   }

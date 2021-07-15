@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
+import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Pyryatin extends City {
@@ -15,7 +16,7 @@ class Pyryatin extends City {
           unlocked: false,
           unlocksCities: [Nizhin()],
           unlockPriceMoney: Money(100),
-          produces: [Wood(1)],
+          manufacturings: [Forest()],
           stock: Stock(
             [
               Wood(1500),

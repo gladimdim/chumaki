@@ -16,10 +16,10 @@ enum RESOURCES {
   POWDER, // Sich
   SALT, // Ochakiv
   SILK, // Temryuk
-  STONE,  // Vnnitsa
+  STONE, // Vnnitsa
   WOOD, // Chernigiv
   WOOL, // Korsun , Chigirin
-  GORILKA,  // Korsun, Ostrog, Uman
+  GORILKA, // Korsun, Ostrog, Uman
   WAX, // Kyiv
   HONEY, // Pereyaslav
   TOBACCO, // Ochakiv
@@ -143,9 +143,10 @@ class Resource {
   }
 
   static List<Resource> allResources() {
-    return RESOURCES.values.map((resType) => Resource.fromType(resType)).toList();
+    return RESOURCES.values
+        .map((resType) => Resource.fromType(resType))
+        .toList();
   }
-
 }
 
 class Wood extends Resource {

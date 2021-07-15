@@ -4,6 +4,7 @@ import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/berdychiv.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/ostrog.dart';
+import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Zhytomir extends City {
@@ -15,7 +16,7 @@ class Zhytomir extends City {
           size: 2,
           unlocked: false,
           unlockPriceMoney: Money(200.0),
-          produces: [Bread(1), Grains(1), Amber(1)],
+          manufacturings: [Bakery(), Field(), AmberMine()],
           unlocksCities: [
             Ostrog(),
             Berdychiv(),

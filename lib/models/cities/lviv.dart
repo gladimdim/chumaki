@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Lviv extends City {
@@ -14,7 +15,7 @@ class Lviv extends City {
           unlocked: false,
           unlockPriceMoney: Money(1250.0),
           unlocksCities: [],
-          produces: [Cannon(1), Firearm(1)],
+          manufacturings: [CannonFoundry(), Smith()],
           stock: Stock(
             [
               Wood(2500),

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'lviv.dart';
 
@@ -15,7 +16,7 @@ class Ostrog extends City {
           unlocked: false,
           unlockPriceMoney: Money(200.0),
           unlocksCities: [Lviv()],
-          produces: [Gorilka(1), MetalParts(1)],
+          manufacturings: [Distillery(), Smeltery()],
           stock: Stock(
             [
               Wood(1500),

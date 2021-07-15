@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Chernigiv extends City {
@@ -13,7 +14,7 @@ class Chernigiv extends City {
           size: 3,
           unlocked: false,
           unlockPriceMoney: Money(250.0),
-          produces: [Wood(1), Charcoal(1), Planks(1)],
+          manufacturings: [Forest(), CharcoalMaker(), Sawmill()],
           unlocksCities: [],
           stock: Stock(
             [

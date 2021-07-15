@@ -16,7 +16,7 @@ class Cherkasy extends City {
           localizedKeyName: 'cherkasy',
           size: 2,
           unlocked: true,
-          produces: [],
+          manufacturings: [],
           unlocksCities: [Pereyaslav(), Kyiv(), Korsun()],
           availableEvents: [
             Event(
