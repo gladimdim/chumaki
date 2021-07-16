@@ -258,8 +258,18 @@ class City {
   void routeTaskArrived(RouteTask task) {
     wagons.add(task.wagon);
     queueEvent();
-
+    replenishStock();
     changes.add(CITY_EVENTS.WAGON_ARRIVED);
+  }
+
+  void replenishStock() {
+    manufacturings.where((mfg) => mfg.built).forEach((mfg) {
+      final currentResource = stock.resourceInStock(mfg.produces) ??
+          mfg.produces.cloneWithAmount(0);
+      if (currentResource.amount < mfg.produces.amount) {
+        stock.addResource(mfg.replenishResource());
+      }
+    });
   }
 
   Event? queueEvent() {
@@ -387,14 +397,19 @@ class City {
   }
 
   bool buildManufacturing(Manufacturing mfg, Company company) {
-    if (company.hasEnoughMoney(mfg.priceToBuild)) {
-      mfg.built = true;
-      company.removeMoney(mfg.priceToBuild.amount);
+    final realMfg = refToManufacturing(mfg);
+    if (company.hasEnoughMoney(realMfg.priceToBuild)) {
+      realMfg.built = true;
+      company.removeMoney(realMfg.priceToBuild.amount);
       changes.add(CITY_EVENTS.MFG_BUILT);
       return true;
     } else {
       return false;
     }
+  }
+
+  Manufacturing refToManufacturing(Manufacturing mfg) {
+    return manufacturings.firstWhere((element) => element.sameAs(mfg));
   }
 
   bool upgradeManufacturing(Manufacturing mfg, Company company) {
