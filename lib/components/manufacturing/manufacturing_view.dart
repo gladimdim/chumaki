@@ -30,7 +30,7 @@ class ManufacturingView extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline3,
               ),
               ResourceImageView(
-                mfg.produces,
+                mfg.replenishResource(),
                 showAmount: true,
               ),
             ],

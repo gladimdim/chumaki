@@ -5,13 +5,41 @@ import 'package:chumaki/models/cities/cherkasy.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
+import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
+import 'package:chumaki/models/company.dart';
+import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagon.dart';
 import 'package:test/test.dart';
 
 void main() {
+  group("Replenish stock", () {
+    test("Can replenish stock from mfg", () {
+
+      final city = Sich();
+      final company = Company();
+      city.stock.removeResource(Fish(1490));
+      city.buildManufacturing(River(), company);
+      city.replenishStock();
+
+      expect(city.stock.resourceInStock(Fish(1))!.amount, equals(110),
+          reason: "100 fish from River was added.");
+    });
+
+    test("Does not replenish stock from mfg if there is enough", () {
+
+      final city = Sich();
+      final company = Company();
+      city.stock.removeResource(Fish(1400));
+      city.buildManufacturing(River(), company);
+      city.replenishStock();
+
+      expect(city.stock.resourceInStock(Fish(1))!.amount, equals(100),
+          reason: "100 fish from River was added.");
+    });
+  });
   group("Price checks", () {
     final cities = [Kyiv(), Nizhin(), Zhytomir()];
     test("Can tell the prices with production centers", () {

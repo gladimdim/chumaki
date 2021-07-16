@@ -130,7 +130,7 @@ void main() {
       ], money: 3000);
       final wasBuilt = sich.buildManufacturing(building, company);
       expect(wasBuilt, isTrue, reason: "Enough money to build it");
-      expect(building.built, isTrue, reason: "Building is unlocked");
+      expect(sich.refToManufacturing(building).built, isTrue, reason: "Building is unlocked");
     });
   });
 }
