@@ -65,6 +65,11 @@ class Manufacturing {
       level++;
     }
   }
+
+  Resource replenishResource() {
+    return produces.cloneWithAmount(
+        produces.amount + (produces.amount * (level - 1) * 0.5).toInt());
+  }
 }
 
 class PowderCellar extends Manufacturing {

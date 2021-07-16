@@ -258,7 +258,7 @@ class City {
   void routeTaskArrived(RouteTask task) {
     wagons.add(task.wagon);
     queueEvent();
-
+    replenishStock();
     changes.add(CITY_EVENTS.WAGON_ARRIVED);
   }
 
@@ -267,6 +267,16 @@ class City {
       activeEvent = availableEvents.removeAt(0);
     }
     return activeEvent;
+  }
+
+  void replenishStock() {
+    manufacturings.where((mfg) => mfg.built).forEach((mfg) {
+      final currentResource = stock.resourceInStock(mfg.produces) ??
+          mfg.produces.cloneWithAmount(0);
+      if (currentResource.amount < mfg.produces.amount) {
+        stock.addResource(mfg.replenishResource());
+      }
+    });
   }
 
   void routeTaskStarted(RouteTask task) {
