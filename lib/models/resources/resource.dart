@@ -250,7 +250,7 @@ class IronOre extends Resource {
 
 class MetalParts extends Resource {
   MetalParts(int amount)
-      : super("metalParts", amount,
+      : super("metalparts", amount,
             type: RESOURCES.METALPARTS,
             weightPerPoint: 2,
             color: Colors.lightBlueAccent,
