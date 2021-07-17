@@ -101,6 +101,8 @@ flutter:
     - images/manufacturings/pasture/
     - images/manufacturings/weavery/
     - images/manufacturings/liman/
+    - images/manufacturings/tobacco_maker/
+    - images/manufacturings/honey_maker/
     # SOUNDS
     - assets/sounds/
     # OTHER
