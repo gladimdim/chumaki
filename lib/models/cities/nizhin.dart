@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/kursk.dart';
+import 'package:chumaki/models/cities/rylsk.dart';
 import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
@@ -14,7 +15,7 @@ class Nizhin extends City {
           size: 3,
           localizedKeyName: 'nizhin',
           unlocked: false,
-          unlocksCities: [Kursk()],
+          unlocksCities: [Rylsk()],
           unlockPriceMoney: Money(200),
           manufacturings: [Weavery()],
           stock: Stock(
