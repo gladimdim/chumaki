@@ -15,7 +15,7 @@ class ResourceLocalizations extends InternalLocalizations {
       "fur": "Fur",
       "horse": "Horse",
       "ore": "Ore",
-      "metalParts": "Metal",
+      "metalparts": "Metal",
       "money": "Money",
       "planks": "Planks",
       "powder": "Powder",
