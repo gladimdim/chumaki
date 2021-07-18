@@ -246,6 +246,11 @@ class SilkMarket extends Manufacturing {
           produces: Silk(100),
           priceToBuild: Money(1300),
         );
+
+  String get imagePath =>
+      "images/manufacturings/marketplace/marketplace_$level.png";
+
+  String get iconPath => "images/manufacturings/$localizedKey.png";
 }
 
 class Quarry extends Manufacturing {
