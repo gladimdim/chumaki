@@ -60,19 +60,19 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                     (List<RESOURCES> resources) {
                       return Row(
                           children: resources.map((type) {
-                        final resource = Resource.fromType(type);
-                        final contains =
-                            widget.currentCity.stock.hasResource(resource);
+                        final resource = widget.currentCity.stock
+                                .resourceInStock(Resource.fromType(type)) ??
+                            Resource.fromType(type).cloneWithAmount(0);
                         return GestureDetector(
                           onTap: () {
                             setState(() {
-                              selectedResource = resource;
+                              selectedResource = resource!;
                             });
                           },
                           child: Opacity(
-                            opacity: contains ? 1 : 0.4,
+                            opacity: resource.amount != 0 ? 1 : 0.4,
                             child: ResourceImageView(
-                              resource.cloneWithAmount(1),
+                              resource,
                               showAmount: selectedResource.sameType(resource),
                             ),
                           ),
