@@ -61,25 +61,26 @@ class SelectedCityLockedView extends StatelessWidget {
                 }).toList(),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: BorderedAll(
-                child: Column(
-                  children: [
-                    Text(ChumakiLocalizations.labelProductionCenter,
-                        style: Theme.of(context).textTheme.headline3),
-                    Row(
-                      children: city.manufacturings
-                          .map((mfg) => ResourceImageView(
-                                mfg.produces,
-                                size: 64,
-                              ))
-                          .toList(),
-                    )
-                  ],
+            if (city.manufacturings.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: BorderedAll(
+                  child: Column(
+                    children: [
+                      Text(ChumakiLocalizations.labelProductionCenter,
+                          style: Theme.of(context).textTheme.headline3),
+                      Row(
+                        children: city.manufacturings
+                            .map((mfg) => ResourceImageView(
+                                  mfg.produces,
+                                  size: 64,
+                                ))
+                            .toList(),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: BorderedAll(child: CityStockView(city: city)),
