@@ -142,13 +142,14 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                           CityMenuItem(
                             menuKey: "manufacturing",
                             image: Image.asset(
-                              "images/icons/lock/lock.png",
+                              "images/icons/manufacturing/manufacturing.png",
                               width: 128,
                             ),
                             playSoundOnOpen: () {
                               SoundManager.instance.playGlobalMarket();
                             },
-                            label: TitleText("Manufacturing"),
+                            label: TitleText(
+                                ChumakiLocalizations.labelManufacturing),
                             contentBuilder: (context) => CityManufacturingView(
                               city: widget.city,
                             ),
