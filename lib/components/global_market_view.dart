@@ -66,7 +66,7 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                         return GestureDetector(
                           onTap: () {
                             setState(() {
-                              selectedResource = resource!;
+                              selectedResource = resource;
                             });
                           },
                           child: Opacity(
