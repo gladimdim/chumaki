@@ -3,7 +3,6 @@ import 'dart:collection';
 import 'dart:math';
 
 import 'package:chumaki/app_preferences.dart';
-import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/berdychiv.dart';
 import 'package:chumaki/models/cities/bila_tserkva.dart';
 import 'package:chumaki/models/cities/cherkasy.dart';

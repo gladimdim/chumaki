@@ -6,10 +6,9 @@ class Logger {
   final Stock boughtStock = Stock([]);
 
   void cityStockListener(City city, StockEvent event) {
-    if (event.item1 != STOCK_EVENTS.REMOVE) {
+    if (event.item1 != STOCK_EVENTS.REMOVED) {
       return;
     }
-
     boughtStock.addResource(event.item2);
   }
 }

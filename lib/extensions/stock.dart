@@ -3,7 +3,7 @@ import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tuple/tuple.dart';
 
-enum STOCK_EVENTS { ADD, REMOVE }
+enum STOCK_EVENTS { ADDED, REMOVED }
 
 typedef StockEvent = Tuple2<STOCK_EVENTS, Resource>;
 
@@ -32,7 +32,7 @@ class Stock {
     } else {
       inStock.amount += resource.amount;
     }
-    changes.add(Tuple2(STOCK_EVENTS.ADD, resource.clone()));
+    changes.add(Tuple2(STOCK_EVENTS.ADDED, resource.clone()));
   }
 
   bool hasResource(Resource res) {
@@ -69,8 +69,7 @@ class Stock {
         if (currentRes.amount <= 0) {
           stock.remove(currentRes);
         }
-        changes.add(Tuple2(STOCK_EVENTS.REMOVE, res.clone()));
-
+        changes.add(Tuple2(STOCK_EVENTS.REMOVED, res.clone()));
         return true;
       }
     }
