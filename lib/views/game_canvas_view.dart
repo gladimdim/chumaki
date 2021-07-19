@@ -153,21 +153,28 @@ class GameCanvasViewState extends State<GameCanvasView>
                             builder: (context, snapshotImage) {
                               if (snapshotImage.hasData) {
                                 var data = snapshotImage.data as ui.Image;
-                                final customPaint = CustomPaint(
+
+                                return route.routeTasks.isEmpty
+                                    ? CustomPaint(
                                   painter: RoutePainter(
                                     color:
-                                        highlight ? Colors.amber : Colors.brown,
+                                    highlight ? Colors.amber : Colors.brown,
                                     route: route,
                                     image: data,
                                   ),
-                                );
-                                return route.routeTasks.isEmpty
-                                    ? customPaint
+                                )
                                     : StreamBuilder(
                                         stream: Stream.periodic(
                                             Duration(milliseconds: 33)),
                                         builder: (context, snapshot) {
-                                          return customPaint;
+                                          return CustomPaint(
+                                            painter: RoutePainter(
+                                              color:
+                                              highlight ? Colors.amber : Colors.brown,
+                                              route: route,
+                                              image: data,
+                                            ),
+                                          );
                                         });
                               } else {
                                 return Container();
