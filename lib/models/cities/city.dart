@@ -45,7 +45,7 @@ enum CITY_EVENTS {
   WAGON_ADDED,
   EVENT_DONE,
   MFG_BUILT,
-  MFG_UPGRADED
+  MFG_UPGRADED,
 }
 
 class City {

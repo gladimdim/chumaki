@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'dart:math';
 
 import 'package:chumaki/app_preferences.dart';
+import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/berdychiv.dart';
 import 'package:chumaki/models/cities/bila_tserkva.dart';
 import 'package:chumaki/models/cities/cherkasy.dart';
@@ -31,6 +32,7 @@ import 'package:chumaki/models/cities/uman.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/events/event.dart';
+import 'package:chumaki/models/logger/logger.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/tasks/route.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
@@ -93,14 +95,21 @@ class Company {
 
   late double _money;
   late List<City> allCities;
+  late final Logger logger;
   List<RouteTask> activeRouteTasks = List.empty(growable: true);
 
-  Company({cities, double? money}) {
+  Company({cities, double? money, logger}) {
     if (cities == null) {
       this.allCities = City.generateNewCities();
     } else {
       this.allCities = cities;
     }
+
+    allCities.forEach((city) {
+      city.stock.changes
+          .where((event) => event.item1 == STOCK_EVENTS.REMOVED)
+          .listen(cityStockChangeListener);
+    });
 
     _money = money ?? 3000;
     changes = _innerChanges.stream;
@@ -114,6 +123,11 @@ class Company {
           save();
       }
     });
+    if (logger == null) {
+      this.logger = Logger();
+    } else {
+      this.logger == logger;
+    }
   }
 
   final BehaviorSubject<COMPANY_EVENTS> _innerChanges = BehaviorSubject();
@@ -404,5 +418,9 @@ class Company {
     if (fromWagon.stock.removeResource(res)) {
       toCity.activeEvent!.decreaseResource(res);
     }
+  }
+
+  void cityStockChangeListener(StockEvent event) {
+    logger.logBuyStock(event.item2);
   }
 }
