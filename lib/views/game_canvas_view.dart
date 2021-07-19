@@ -21,6 +21,7 @@ import 'package:chumaki/utils/points.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import 'package:chumaki/extensions/list.dart';
+import 'package:rxdart/rxdart.dart';
 
 const CITY_SIZE = 50;
 
@@ -139,25 +140,48 @@ class GameCanvasViewState extends State<GameCanvasView>
                       width: 50,
                       height: 50,
                       child: StreamBuilder(
-                        stream: Stream.periodic(Duration(milliseconds: 33)),
-                        builder: (context, snapshot) => FutureBuilder(
-                          future: ImageOnCanvas.wagonImage.asBytes(),
-                          builder: (context, snapshotImage) {
-                            if (snapshotImage.hasData) {
-                              var data = snapshotImage.data as ui.Image;
-                              return CustomPaint(
-                                painter: RoutePainter(
-                                  color:
-                                      highlight ? Colors.amber : Colors.brown,
-                                  route: route,
-                                  image: data,
-                                ),
-                              );
-                            } else {
-                              return Container();
-                            }
-                          },
-                        ),
+                        stream: MergeStream([
+                          company.refToCityByName(route.from).changes,
+                          company.refToCityByName(route.to).changes
+                        ]).where((event) => [
+                              CITY_EVENTS.WAGON_ARRIVED,
+                              CITY_EVENTS.WAGON_DISPATCHED
+                            ].contains(event)),
+                        builder: (context, snapshot) {
+                          return FutureBuilder(
+                            future: ImageOnCanvas.wagonImage.asBytes(),
+                            builder: (context, snapshotImage) {
+                              if (snapshotImage.hasData) {
+                                var data = snapshotImage.data as ui.Image;
+
+                                return route.routeTasks.isEmpty
+                                    ? CustomPaint(
+                                  painter: RoutePainter(
+                                    color:
+                                    highlight ? Colors.amber : Colors.brown,
+                                    route: route,
+                                    image: data,
+                                  ),
+                                )
+                                    : StreamBuilder(
+                                        stream: Stream.periodic(
+                                            Duration(milliseconds: 33)),
+                                        builder: (context, snapshot) {
+                                          return CustomPaint(
+                                            painter: RoutePainter(
+                                              color:
+                                              highlight ? Colors.amber : Colors.brown,
+                                              route: route,
+                                              image: data,
+                                            ),
+                                          );
+                                        });
+                              } else {
+                                return Container();
+                              }
+                            },
+                          );
+                        },
                       ),
                     ),
                   );
