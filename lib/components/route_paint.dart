@@ -30,7 +30,6 @@ class RoutePainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     canvas.drawPath(path, paint);
-
     route.routeTasks.forEach((routeTask) {
       var start = routeTask.from;
       Offset offsetStart;
@@ -53,7 +52,7 @@ class RoutePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
+    return route.routeTasks.length != 0;
   }
 }
 
