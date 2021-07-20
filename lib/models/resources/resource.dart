@@ -142,6 +142,10 @@ class Resource {
     );
   }
 
+  Resource clone() {
+    return cloneWithAmount(amount);
+  }
+
   static List<Resource> allResources() {
     return RESOURCES.values
         .map((resType) => Resource.fromType(resType))
