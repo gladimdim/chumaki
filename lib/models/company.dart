@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'dart:math';
 
 import 'package:chumaki/app_preferences.dart';
+import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/berdychiv.dart';
 import 'package:chumaki/models/cities/bila_tserkva.dart';
 import 'package:chumaki/models/cities/cherkasy.dart';
@@ -113,6 +114,12 @@ class Company {
         case COMPANY_EVENTS.LEADER_HIRED:
           save();
       }
+    });
+
+    allCities.forEach((city) {
+      city.stock.changes.listen((event) {
+        cityStockListener(city, event);
+      });
     });
   }
 
@@ -404,5 +411,14 @@ class Company {
     if (fromWagon.stock.removeResource(res)) {
       toCity.activeEvent!.decreaseResource(res);
     }
+  }
+
+  void cityStockListener(City city, StockEvent event) {
+    if (event.item1 != STOCK_EVENTS.REMOVE) {
+      return;
+    }
+
+    print(
+        "City sold: ${event.item2.localizedKey} with amount: ${event.item2.amount}");
   }
 }
