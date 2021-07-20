@@ -105,6 +105,11 @@ class Company {
       this.allCities = cities;
     }
 
+    allCities.forEach((city) {
+      city.stock.changes
+          .listen((event) => this.logger.cityStockListener(city, event));
+    });
+
     _money = money ?? 3000;
     changes = _innerChanges.stream;
     changes.listen((event) {
