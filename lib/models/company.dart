@@ -105,11 +105,6 @@ class Company {
       this.allCities = cities;
     }
 
-    allCities.forEach((city) {
-      city.stock.changes
-          .listen((event) => this.logger.cityStockListener(city, event));
-    });
-
     _money = money ?? 3000;
     changes = _innerChanges.stream;
     changes.listen((event) {
@@ -124,7 +119,7 @@ class Company {
     });
 
     if (logger == null) {
-      this.logger = Logger();
+      this.logger = Logger(boughtStock: Stock([]));
     } else {
       this.logger = logger;
     }
@@ -243,6 +238,7 @@ class Company {
 
   Map<String, dynamic> toJson() {
     return {
+      "logger": logger.toJson(),
       "money": _money,
       "allCities": allCities.map((city) => city.toJson()).toList(),
       "activeRouteTasks":
@@ -253,13 +249,17 @@ class Company {
   static Company fromJson(Map<String, dynamic> inputJson) {
     double money = inputJson["money"] as double;
     List citiesJson = inputJson["allCities"];
+    Logger? logger;
+    if (inputJson["logger"] != null) {
+      logger = Logger.fromJson(inputJson["logger"]);
+    }
     List<City> allCities =
         citiesJson.map((cityJson) => City.fromJson(cityJson)).toList();
     List activeRouteTasksJson = inputJson["activeRouteTasks"];
     List<RouteTask> activeRouteTasks = activeRouteTasksJson
         .map((routeJson) => RouteTask.fromJson(routeJson))
         .toList();
-    var company = Company(cities: allCities).._money = money;
+    var company = Company(cities: allCities, logger: logger).._money = money;
 
     // we need to reconnect to streams from restored tasks
     // in order to get the event when task is finished
