@@ -426,4 +426,8 @@ class City {
       return false;
     }
   }
+
+  void dispose() {
+    changes.close();
+  }
 }

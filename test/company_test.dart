@@ -100,6 +100,8 @@ void main() {
       FakeAsync().run((async) {
         final company = Company();
         final sich = company.refToCityByName(Sich());
+        company.buyWagon(Wagon(), forCity: sich, price: Money(5));
+        company.buyWagon(Wagon(), forCity: sich, price: Money(5));
         final wagon = sich.wagons.first;
         sich
             .sellResource(resource: Fish(3), toWagon: wagon, company: company);
@@ -110,6 +112,7 @@ void main() {
             reason: "Logger stock should have fish");
         expect(aCompany.logger.boughtStock.resourceInStock(Fish(3))!.amount, equals(3),
             reason: "Logger stock should have fish");
+        expect(aCompany.logger.boughtWagons, equals(1), reason: "1 wagon was bought");
       });
     });
   });

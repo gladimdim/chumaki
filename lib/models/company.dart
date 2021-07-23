@@ -123,12 +123,7 @@ class Company {
     } else {
       this.logger = logger;
     }
-
-    allCities.forEach((city) {
-      city.stock.changes.listen((event) {
-        this.logger.cityStockListener(city, event);
-      });
-    });
+    this.logger.attachToCompany(this);
   }
 
   final BehaviorSubject<COMPANY_EVENTS> _innerChanges = BehaviorSubject();
@@ -284,6 +279,9 @@ class Company {
   void dispose() {
     activeRouteTasks.forEach((task) {
       task.dispose();
+    });
+    allCities.forEach((city) {
+      city.dispose();
     });
     _innerChanges.close();
   }
