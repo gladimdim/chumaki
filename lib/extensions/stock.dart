@@ -1,10 +1,15 @@
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:tuple/tuple.dart';
+
+enum STOCK_EVENTS { ADDED, REMOVED }
+
+typedef StockEvent = Tuple2<STOCK_EVENTS, Resource>;
 
 class Stock {
   final List<Resource> stock;
-  final BehaviorSubject changes = BehaviorSubject();
+  final BehaviorSubject<StockEvent> changes = BehaviorSubject();
 
   Stock(this.stock);
 
@@ -27,7 +32,7 @@ class Stock {
     } else {
       inStock.amount += resource.amount;
     }
-    changes.add(this);
+    changes.add(Tuple2(STOCK_EVENTS.ADDED, resource.clone()));
   }
 
   bool hasResource(Resource res) {
@@ -51,7 +56,6 @@ class Stock {
     }
   }
 
-
   bool removeResource(Resource res) {
     var existing = stock.where((element) => element.sameType(res));
     if (existing.isEmpty) {
@@ -65,7 +69,7 @@ class Stock {
         if (currentRes.amount <= 0) {
           stock.remove(currentRes);
         }
-        changes.add(this);
+        changes.add(Tuple2(STOCK_EVENTS.REMOVED, res.clone()));
         return true;
       }
     }
@@ -85,6 +89,4 @@ class Stock {
   void dispose() {
     changes.close();
   }
-  
-  
 }

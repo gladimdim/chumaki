@@ -31,6 +31,7 @@ import 'package:chumaki/models/cities/uman.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/events/event.dart';
+import 'package:chumaki/models/logger/logger.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/tasks/route.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
@@ -93,9 +94,10 @@ class Company {
 
   late double _money;
   late List<City> allCities;
+  late final Logger logger;
   List<RouteTask> activeRouteTasks = List.empty(growable: true);
 
-  Company({cities, double? money}) {
+  Company({cities, double? money, Logger? logger}) {
     if (cities == null) {
       this.allCities = City.generateNewCities();
     } else {
@@ -113,6 +115,18 @@ class Company {
         case COMPANY_EVENTS.LEADER_HIRED:
           save();
       }
+    });
+
+    if (logger == null) {
+      this.logger = Logger();
+    } else {
+      this.logger = logger;
+    }
+
+    allCities.forEach((city) {
+      city.stock.changes.listen((event) {
+        this.logger.cityStockListener(city, event);
+      });
     });
   }
 

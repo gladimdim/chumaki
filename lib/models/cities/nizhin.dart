@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
-import 'package:chumaki/models/cities/kursk.dart';
 import 'package:chumaki/models/cities/rylsk.dart';
 import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
