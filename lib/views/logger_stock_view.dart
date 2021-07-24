@@ -14,7 +14,7 @@ class LoggerStockView extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "You bought this much",
+          ChumakiLocalizations.labelLoggerBoughtStats,
           style: Theme.of(context).textTheme.headline4,
         ),
         Column(

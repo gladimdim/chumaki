@@ -1,4 +1,5 @@
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/logger/logger.dart';
 import 'package:chumaki/views/logger_stock_view.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class LoggerStatsView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(onPressed: onClose, icon: Icon(Icons.close)),
-              TitleText("Game Stats"),
+              TitleText(ChumakiLocalizations.labelGameStats),
               IconButton(onPressed: onClose, icon: Icon(Icons.close)),
             ],
           ),
