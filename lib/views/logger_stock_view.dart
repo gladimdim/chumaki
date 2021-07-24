@@ -19,31 +19,34 @@ class LoggerStockView extends StatelessWidget {
         ),
         Column(
           children: stock.stock.map((resource) {
-            return Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("images/ui/papyrus_1.png"),
-                    fit: BoxFit.fill),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Wrap(
-                    alignment: WrapAlignment.center,
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      ResourceImageView(resource),
-                      Text(
-                          ChumakiLocalizations.getForKey(
-                              resource.fullLocalizedKey),
-                          style: Theme.of(context).textTheme.headline5),
-                    ],
-                  ),
-                  OutlinedText(
-                    resource.amount.toString(),
-                    size: 32,
-                  ),
-                ],
+            return Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("images/ui/papyrus_1.png"),
+                      fit: BoxFit.fill),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Wrap(
+                      alignment: WrapAlignment.center,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        ResourceImageView(resource),
+                        Text(
+                            ChumakiLocalizations.getForKey(
+                                resource.fullLocalizedKey),
+                            style: Theme.of(context).textTheme.headline5),
+                      ],
+                    ),
+                    OutlinedText(
+                      resource.amount.toString(),
+                      size: 32,
+                    ),
+                  ],
+                ),
               ),
             );
           }).toList(),
