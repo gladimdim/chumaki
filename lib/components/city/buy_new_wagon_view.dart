@@ -2,6 +2,7 @@ import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,9 @@ class _BuyNewWagonViewState extends State<BuyNewWagonView> {
     final wagon = Wagon.generateRandomWagon();
     final company = InheritedCompany.of(context).company;
     return StreamBuilder(
-      stream: company.changes,
+      stream: company.changes.where((event) =>
+      event == COMPANY_EVENTS.MONEY_REMOVED ||
+          event == COMPANY_EVENTS.MONEY_ADDED),
       builder: (context, snapshot) => ActionButton(
         onPress: company.hasEnoughMoney(wagonPrice)
             ? () {

@@ -18,6 +18,7 @@ import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/sound/sound_manager.dart';
 import 'package:chumaki/theme.dart';
 import 'package:chumaki/utils/points.dart';
+import 'package:chumaki/views/logger_view.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import 'package:chumaki/extensions/list.dart';
@@ -156,21 +157,23 @@ class GameCanvasViewState extends State<GameCanvasView>
 
                                 return route.routeTasks.isEmpty
                                     ? CustomPaint(
-                                  painter: RoutePainter(
-                                    color:
-                                    highlight ? Colors.amber : Colors.brown,
-                                    route: route,
-                                    image: data,
-                                  ),
-                                )
+                                        painter: RoutePainter(
+                                          color: highlight
+                                              ? Colors.amber
+                                              : Colors.brown,
+                                          route: route,
+                                          image: data,
+                                        ),
+                                      )
                                     : StreamBuilder(
                                         stream: Stream.periodic(
                                             Duration(milliseconds: 33)),
                                         builder: (context, snapshot) {
                                           return CustomPaint(
                                             painter: RoutePainter(
-                                              color:
-                                              highlight ? Colors.amber : Colors.brown,
+                                              color: highlight
+                                                  ? Colors.amber
+                                                  : Colors.brown,
                                               route: route,
                                               image: data,
                                             ),
@@ -350,6 +353,7 @@ class GameCanvasViewState extends State<GameCanvasView>
               ],
             ),
           ),
+        if (selected == null && company != null) LoggerView(company: company),
       ],
     );
   }
