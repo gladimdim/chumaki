@@ -112,7 +112,7 @@ void main() {
             reason: "Logger stock should have fish");
         expect(aCompany.logger.boughtStock.resourceInStock(Fish(3))!.amount, equals(3),
             reason: "Logger stock should have fish");
-        expect(aCompany.logger.boughtWagons, equals(1), reason: "1 wagon was bought");
+        expect(aCompany.logger.boughtWagons, equals(2), reason: "2 wagons were bought");
       });
     });
   });
