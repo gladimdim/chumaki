@@ -9,10 +9,10 @@ import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/city_menu_item.dart';
 import 'package:chumaki/components/ui/city_menu_item_view.dart';
+import 'package:chumaki/components/wagons/wagon_avatar.dart';
 import 'package:chumaki/components/wagons/wagon_details.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
-import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:chumaki/sound/sound_manager.dart';
 import 'package:chumaki/views/city_event_view.dart';
 import 'package:chumaki/views/inherited_company.dart';
@@ -159,37 +159,8 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                               menuKey: wagon.fullLocalizedName,
                               image: StreamBuilder(
                                 stream: wagon.changes,
-                                builder: (context, _) => Stack(
-                                  children: [
-                                    Align(
-                                      alignment: Alignment.center,
-                                      child: ClipOval(
-                                        child: Image.asset(wagon.getImagePath(),
-                                            width: 128),
-                                      ),
-                                    ),
-                                    wagon.leader == null
-                                        ? Container()
-                                        : StreamBuilder(
-                                            stream: wagon.leader!.changes,
-                                            builder: (context, _) => Positioned(
-                                              right: 0,
-                                              bottom: 0,
-                                              child: Row(
-                                                children: wagon.leader!.perks
-                                                    .map(
-                                                      (perk) => Image.asset(
-                                                        categoryToImagePath(perk
-                                                            .affectsResourceCategory),
-                                                        width: 32,
-                                                      ),
-                                                    )
-                                                    .toList(),
-                                              ),
-                                            ),
-                                          ),
-                                  ],
-                                ),
+                                builder: (context, _) =>
+                                    WagonAvatar(wagon: wagon),
                               ),
                               label: StreamBuilder(
                                   stream: wagon.changes,

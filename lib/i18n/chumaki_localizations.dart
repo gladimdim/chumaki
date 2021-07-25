@@ -153,6 +153,7 @@ class ChumakiLocalizations {
       "labelManufacturing": "Manufacturing",
       "labelLoggerBoughtStats": "You bought this much",
       "labelGameStats": "Game Stats View",
+      "labelRecall": "Recall",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -239,6 +240,7 @@ class ChumakiLocalizations {
       "labelManufacturing": "Виробництво",
       "labelLoggerBoughtStats": "Ви купили ось стільки",
       "labelGameStats": "Статистика всієї гри",
+      "labelRecall": "Викликати",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -324,6 +326,7 @@ class ChumakiLocalizations {
       "labelManufacturing": "Производство",
       "labelLoggerBoughtStats": "Вы купили вот столько",
       "labelGameStats": "Статистика всей игры",
+      "labelRecall": "Вызвать",
     },
   };
 
@@ -577,5 +580,9 @@ class ChumakiLocalizations {
 
   static String get labelGameStats {
     return _localizedValues[locale.languageCode]!["labelGameStats"]!;
+  }
+
+  static String get labelRecall {
+    return _localizedValues[locale.languageCode]!["labelRecall"]!;
   }
 }
