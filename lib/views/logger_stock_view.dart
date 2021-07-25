@@ -15,7 +15,7 @@ class LoggerStockView extends StatelessWidget {
       children: [
         Text(
           ChumakiLocalizations.labelLoggerBoughtStats,
-          style: Theme.of(context).textTheme.headline4,
+          style: Theme.of(context).textTheme.headline6,
         ),
         Column(
           children: stock.stock.map((resource) {
