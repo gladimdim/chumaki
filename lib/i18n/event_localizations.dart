@@ -21,6 +21,8 @@ class EventLocalizations extends InternalLocalizations {
       "cossackStarshinaWeddingTitle": "Gentry Wedding",
       "cossackStarshinaWeddingText":
           "One of the top officers at Cherkasy's castle gentry has to conduct a wedding for his daughter. Bring them resources needed to have Wedding of the Century",
+      "kyivShootingTournamentTitle": "Quick Hand",
+      "kyivShootingTournamentText": "The 'Quick hand' tournament will take place soon in Kyiv. The best bow and firearm shooters will clash in the battle to figure out who is the best shooter in the world. The organizers need several firearms and a valuable price. If you bring them you will get nice payment in return.",
     },
     "uk": {
       // sich
@@ -42,6 +44,9 @@ class EventLocalizations extends InternalLocalizations {
       "cossackStarshinaWeddingTitle": "Шляхетське весілля",
       "cossackStarshinaWeddingText":
           "Один із знатних шляхтичів Черкаського замку має видати свою доньку заміж. Вони хочуть провести весілля століття, тому потребують дуже багато різних дорогих подарунків та страв.",
+      "kyivShootingTournamentTitle": "Швидка рука",
+      "kyivShootingTournamentText": "Турнір 'Швидка рука' уже запланований в Києві. Найкращі стрільці з лука та самопалів зустрінуться, щоб визначити, хто з них найшвидший в своїй справі. Організатори просять вас привезти їм декілька рушниць та цінний подарунок.",
+
     },
     "ru": {
       // Sich
@@ -63,6 +68,9 @@ class EventLocalizations extends InternalLocalizations {
       "cossackStarshinaWeddingTitle": "Шляхетская свадьба",
       "cossackStarshinaWeddingText":
           "Один из шляхтичей из Черкасского замка выдает свою дочку замуж. Они хотять отиграть свадьбу, чтобы запомнилась на столетие. Помогите им собрать дорогие подарки и явства.",
+      "kyivShootingTournamentTitle": "Быстрая рука",
+      "kyivShootingTournamentText": "Турнир 'Быстрая рука' запланирован в Киеве. Наилучшие стрелки из лука и самопала встретятся, чтобы выяснить, а кто же из них самый-самый лучший в мире? Организаторам необходимо привезти несколько запасных самопалов и ценный приз.",
+
     }
   };
 }

@@ -5,6 +5,7 @@ import 'package:chumaki/models/cities/chernigiv.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
+import 'package:chumaki/models/events/event.dart';
 import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
@@ -19,6 +20,14 @@ class Kyiv extends City {
           unlocksCities: [Nizhin(), Chernigiv(), Zhytomir()],
           unlockPriceMoney: Money(500),
           manufacturings: [WaxMaker()],
+          availableEvents: [
+            Event(
+                iconPath: "images/resources/firearm/firearm_64.png",
+                payment: Money(400),
+                requirements: [Firearm(10), Silk(30)],
+                localizedKey: "events.kyivShootingTournament",
+                artPath: "images/events/vesterfeld/archers.png"),
+          ],
           stock: Stock([
             Wax(1000),
             Wood(1000),
