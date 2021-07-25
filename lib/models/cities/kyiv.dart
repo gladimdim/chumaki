@@ -22,11 +22,17 @@ class Kyiv extends City {
           manufacturings: [WaxMaker()],
           availableEvents: [
             Event(
-                iconPath: "images/resources/firearm/firearm_64.png",
+                iconPath: "images/resources/firearm/firearm_3.png",
                 payment: Money(400),
                 requirements: [Firearm(10), Silk(30)],
                 localizedKey: "events.kyivShootingTournament",
                 artPath: "images/events/vesterfeld/archers.png"),
+            Event(
+                iconPath: "images/resources/planks/planks_2.png",
+                payment: Money(1500),
+                requirements: [Wood(300), Planks(200), Stone(100)],
+                localizedKey: "events.kyivFlood",
+                artPath: "images/events/vesterfeld/river_battle_2.png"),
           ],
           stock: Stock([
             Wax(1000),
