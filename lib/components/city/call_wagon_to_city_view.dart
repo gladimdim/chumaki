@@ -1,5 +1,4 @@
 import 'package:chumaki/components/city/city_avatar.dart';
-import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/components/wagons/wagon_avatar.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
@@ -22,7 +21,8 @@ class CallWagonToCityView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<COMPANY_EVENTS>(stream: company.changes.where((event) {
-      return event == COMPANY_EVENTS.TASK_ENDED || event == COMPANY_EVENTS.TASK_STARTED;
+      return event == COMPANY_EVENTS.TASK_ENDED ||
+          event == COMPANY_EVENTS.TASK_STARTED;
     }), builder: (context, snapshot) {
       return Column(
         children: allOtherWagons()
@@ -42,7 +42,8 @@ class CallWagonToCityView extends StatelessWidget {
                           children: [
                             WagonAvatar(wagon: wagon.item2),
                             Text(ChumakiLocalizations.getForKey(
-                                wagon.item2.fullLocalizedName))
+                              wagon.item2.fullLocalizedName,
+                            ))
                           ],
                         ),
                         CityAvatar(
@@ -53,7 +54,8 @@ class CallWagonToCityView extends StatelessWidget {
                     ),
                     subTitle: Container(),
                     action: Container(
-                      child: TitleText(ChumakiLocalizations.labelRecall),
+                      child: Text(ChumakiLocalizations.labelRecall,
+                          style: Theme.of(context).textTheme.headline3),
                     ),
                   ),
                 ))
