@@ -119,7 +119,7 @@ class Company {
     });
 
     if (logger == null) {
-      this.logger = Logger(boughtStock: Stock([]));
+      this.logger = Logger(boughtStock: Stock([]), soldStock: Stock([]));
     } else {
       this.logger = logger;
     }
@@ -328,6 +328,9 @@ class Company {
   }
 
   void hireLeader({required Leader leader, required Wagon forWagon}) {
+    if (!hasEnoughMoney(Leader.defaultAcquirePrice)) {
+      return;
+    }
     forWagon.setLeader(leader);
     removeMoney(Leader.defaultAcquirePrice.amount);
     _innerChanges.add(COMPANY_EVENTS.LEADER_HIRED);

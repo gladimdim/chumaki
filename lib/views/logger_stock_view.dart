@@ -13,10 +13,6 @@ class LoggerStockView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          ChumakiLocalizations.labelLoggerBoughtStats,
-          style: Theme.of(context).textTheme.headline6,
-        ),
         Column(
           children: stock.stock.map((resource) {
             return Padding(

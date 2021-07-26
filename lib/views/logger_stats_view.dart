@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 class LoggerStatsView extends StatelessWidget {
   final Logger logger;
   final VoidCallback onClose;
-  const LoggerStatsView({Key? key, required this.logger, required this.onClose}) : super(key: key);
+  const LoggerStatsView({Key? key, required this.logger, required this.onClose})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,16 @@ class LoggerStatsView extends StatelessWidget {
               IconButton(onPressed: onClose, icon: Icon(Icons.close)),
             ],
           ),
+          Text(
+            ChumakiLocalizations.labelLoggerBoughtStats,
+            style: Theme.of(context).textTheme.headline6,
+          ),
           LoggerStockView(stock: logger.boughtStock),
+          Text(
+            "You sold this much",
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          LoggerStockView(stock: logger.soldStock),
         ],
       ),
     );
