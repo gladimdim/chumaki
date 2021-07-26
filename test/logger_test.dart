@@ -7,7 +7,8 @@ import 'package:test/test.dart';
 void main() {
   group("(De)serialize Logger", () {
     test("Can recover bought stock", () {
-      final logger = Logger(boughtStock: Stock([]));
+      final logger = Logger(
+          boughtStock: Stock([]), soldStock: Stock([]), achievements: []);
       logger.addBoughtResource(Firearm(10));
       logger.addBoughtResource(Wax(3));
 

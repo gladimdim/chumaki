@@ -32,6 +32,7 @@ import 'package:chumaki/models/cities/uman.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/events/event.dart';
+import 'package:chumaki/models/logger/achievement.dart';
 import 'package:chumaki/models/logger/logger.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/tasks/route.dart';
@@ -119,7 +120,10 @@ class Company {
     });
 
     if (logger == null) {
-      this.logger = Logger(boughtStock: Stock([]), soldStock: Stock([]));
+      this.logger = Logger(
+          boughtStock: Stock([]),
+          soldStock: Stock([]),
+          achievements: (Achievement.defaultAchievements()));
     } else {
       this.logger = logger;
     }

@@ -1,16 +1,36 @@
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/company.dart';
+import 'package:chumaki/models/logger/achievement.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Logger {
-  Logger(
-      {required this.boughtStock,
-      this.boughtWagons = 0,
-      required this.soldStock});
+  Logger({
+    required this.boughtStock,
+    this.boughtWagons = 0,
+    required this.soldStock,
+    required this.achievements,
+  }) {
+    this.soldStock.changes.listen(_updateStockAchievements);
+
+    this.boughtStock.changes.listen(_updateStockAchievements);
+  }
 
   final Stock boughtStock;
   final Stock soldStock;
+  final List<Achievement> achievements;
   int boughtWagons;
+
+  void _updateStockAchievements(StockEvent event) {
+    if (event.item1 == STOCK_EVENTS.ADDED) {
+      _processSoldStock();
+    }
+  }
+
+  void _processSoldStock() {
+    achievements.forEach((Achievement achievement) {
+      achievement.processChange(this);
+    });
+  }
 
   void attachToCompany(Company company) {
     company.changes
@@ -47,6 +67,7 @@ class Logger {
   }
 
   Map<String, dynamic> toJson() {
+    // TODO: implement achievement tojson
     return {
       "boughtStock": boughtStock.toJson(),
       "ownedWagons": boughtWagons,
@@ -55,12 +76,14 @@ class Logger {
   }
 
   static Logger fromJson(Map<String, dynamic> inputJson) {
+    // TODO: Implement achievement from json
     return Logger(
       boughtStock: Stock.fromJson(
         inputJson["boughtStock"],
       ),
       boughtWagons: inputJson["ownedWagons"],
       soldStock: Stock.fromJson(inputJson["soldStock"]),
+      achievements: [],
     );
   }
 }

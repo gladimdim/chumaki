@@ -1,6 +1,7 @@
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/logger/logger.dart';
+import 'package:chumaki/views/achievements_progress_view.dart';
 import 'package:chumaki/views/logger_stock_view.dart';
 import 'package:flutter/material.dart';
 
@@ -38,6 +39,11 @@ class LoggerStatsView extends StatelessWidget {
             style: Theme.of(context).textTheme.headline6,
           ),
           LoggerStockView(stock: logger.soldStock),
+          Text(
+            "Achievements",
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          AchievementsProgressView(achievements: logger.achievements),
         ],
       ),
     );
