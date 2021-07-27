@@ -1,3 +1,4 @@
+import 'package:chumaki/i18n/achievements_localizations.dart';
 import 'package:chumaki/i18n/event_localizations.dart';
 import 'package:chumaki/i18n/leaders_localizations.dart';
 import 'package:chumaki/i18n/manufacturing_localizations.dart';
@@ -44,6 +45,8 @@ class ChumakiLocalizations {
   static EventLocalizations eventLocalizations = EventLocalizations();
   static ManufacturingLocalizations manufacutringLocalizations =
       ManufacturingLocalizations();
+  static AchievementsLocalizations achievementsLocalizations =
+      AchievementsLocalizations();
 
   static String getForKey(String key) {
     final split = key.split('.');
@@ -58,6 +61,8 @@ class ChumakiLocalizations {
           return eventLocalizations[split[1]];
         case "manufacturings":
           return manufacutringLocalizations[split[1]];
+        case "achievements":
+          return achievementsLocalizations[split[1]];
         default:
           return key;
       }
