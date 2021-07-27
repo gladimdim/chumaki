@@ -3,19 +3,22 @@ import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/logger/achievement.dart';
+import 'package:chumaki/models/logger/logger.dart';
+import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/theme.dart';
 import 'package:flutter/material.dart';
 
 class AchievementsProgressView extends StatelessWidget {
-  final List<Achievement> achievements;
-  const AchievementsProgressView({Key? key, required this.achievements})
+  final Logger logger;
+  const AchievementsProgressView({Key? key, required this.logger})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: achievements
-          .map((ach) => AchievementProgressView(achievement: ach))
+      children: logger.achievements
+          .map((ach) =>
+              AchievementProgressView(achievement: ach, logger: logger))
           .toList(),
     );
   }
@@ -23,7 +26,9 @@ class AchievementsProgressView extends StatelessWidget {
 
 class AchievementProgressView extends StatelessWidget {
   final Achievement achievement;
-  const AchievementProgressView({Key? key, required this.achievement})
+  final Logger logger;
+  const AchievementProgressView(
+      {Key? key, required this.achievement, required this.logger})
       : super(key: key);
 
   @override
@@ -59,21 +64,55 @@ class AchievementProgressView extends StatelessWidget {
                 children: [
                   Expanded(
                       flex: 1,
-                      child: Image.asset(achievement.iconPath, width: 128)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          child: Image.asset(
+                            achievement.iconPath,
+                            width: 128,
+                          ),
+                        ),
+                      )),
                   Expanded(
                     flex: 1,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         if (achievement.boughtResource != null) ...[
-                          TitleText("Required to buy: "),
-                          ResourceImageView(achievement.boughtResource!,
-                              showAmount: true),
+                          Row(
+                            children: [
+                              TitleText("Required to buy: "),
+                              ResourceImageView(
+                                achievement.boughtResource!,
+                                size: 32,
+                                showAmount: true,
+                              ),
+                            ],
+                          ),
+                          AchievementProgressBar(
+                              achievementTarget: achievement.boughtResource!,
+                              stockResource: logger.boughtStock.resourceInStock(
+                                      achievement.boughtResource!) ??
+                                  achievement.boughtResource!
+                                      .cloneWithAmount(0)),
                         ],
                         if (achievement.soldResource != null) ...[
-                          TitleText("Required to sell: "),
-                          ResourceImageView(achievement.soldResource!,
-                              showAmount: true),
+                          Row(
+                            children: [
+                              TitleText("Required to sell: "),
+                              ResourceImageView(
+                                achievement.soldResource!,
+                                size: 32,
+                                showAmount: true,
+                              ),
+                            ],
+                          ),
+                          AchievementProgressBar(
+                              achievementTarget: achievement.soldResource!,
+                              stockResource: logger.soldStock.resourceInStock(
+                                      achievement.soldResource!) ??
+                                  achievement.soldResource!.cloneWithAmount(0)),
                         ],
                       ],
                     ),
@@ -85,5 +124,34 @@ class AchievementProgressView extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class AchievementProgressBar extends StatelessWidget {
+  final Resource achievementTarget;
+  final Resource stockResource;
+  const AchievementProgressBar({
+    Key? key,
+    required this.achievementTarget,
+    required this.stockResource,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return LinearProgressIndicator(
+      value: _progressValue(),
+      color: mediumGrey,
+      semanticsLabel:
+          ChumakiLocalizations.getForKey(achievementTarget.fullLocalizedKey),
+    );
+  }
+
+  double _progressValue() {
+    final full = achievementTarget.amount;
+    final progress = stockResource.amount / full;
+    if (progress > 1) {
+      return 1;
+    }
+    return progress;
   }
 }

@@ -43,7 +43,7 @@ class LoggerStatsView extends StatelessWidget {
             "Achievements",
             style: Theme.of(context).textTheme.headline6,
           ),
-          AchievementsProgressView(achievements: logger.achievements),
+          AchievementsProgressView(logger: logger),
         ],
       ),
     );
