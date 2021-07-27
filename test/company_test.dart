@@ -95,6 +95,26 @@ void main() {
             reason: "Wagon stopped at the intermediate stop.");
       });
     });
+
+    test("Can restore logger object", () async {
+      FakeAsync().run((async) {
+        final company = Company();
+        final sich = company.refToCityByName(Sich());
+        company.buyWagon(Wagon(), forCity: sich, price: Money(5));
+        company.buyWagon(Wagon(), forCity: sich, price: Money(5));
+        final wagon = sich.wagons.first;
+        sich
+            .sellResource(resource: Fish(3), toWagon: wagon, company: company);
+        async.elapse(Duration(seconds: 1));
+        final aCompany = Company.fromJson(company.toJson());
+
+        expect(aCompany.logger.boughtStock.isEmpty, isFalse,
+            reason: "Logger stock should have fish");
+        expect(aCompany.logger.boughtStock.resourceInStock(Fish(3))!.amount, equals(3),
+            reason: "Logger stock should have fish");
+        expect(aCompany.logger.boughtWagons, equals(2), reason: "2 wagons were bought");
+      });
+    });
   });
 
   group("Logic tests", () {
@@ -130,7 +150,8 @@ void main() {
       ], money: 3000);
       final wasBuilt = sich.buildManufacturing(building, company);
       expect(wasBuilt, isTrue, reason: "Enough money to build it");
-      expect(sich.refToManufacturing(building).built, isTrue, reason: "Building is unlocked");
+      expect(sich.refToManufacturing(building).built, isTrue,
+          reason: "Building is unlocked");
     });
   });
 }

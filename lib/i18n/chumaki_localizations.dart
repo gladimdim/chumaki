@@ -1,3 +1,4 @@
+import 'package:chumaki/i18n/achievements_localizations.dart';
 import 'package:chumaki/i18n/event_localizations.dart';
 import 'package:chumaki/i18n/leaders_localizations.dart';
 import 'package:chumaki/i18n/manufacturing_localizations.dart';
@@ -44,6 +45,8 @@ class ChumakiLocalizations {
   static EventLocalizations eventLocalizations = EventLocalizations();
   static ManufacturingLocalizations manufacutringLocalizations =
       ManufacturingLocalizations();
+  static AchievementsLocalizations achievementsLocalizations =
+      AchievementsLocalizations();
 
   static String getForKey(String key) {
     final split = key.split('.');
@@ -58,6 +61,8 @@ class ChumakiLocalizations {
           return eventLocalizations[split[1]];
         case "manufacturings":
           return manufacutringLocalizations[split[1]];
+        case "achievements":
+          return achievementsLocalizations[split[1]];
         default:
           return key;
       }
@@ -152,8 +157,13 @@ class ChumakiLocalizations {
       "labelUpgrade": "Ugrade",
       "labelManufacturing": "Manufacturing",
       "labelLoggerBoughtStats": "You bought this much",
+      "labelLoggerSoldStats": "You sold this much",
       "labelGameStats": "Game Stats View",
       "labelRecall": "Recall",
+      "labelAchievements": "Achievements",
+      "labelRequiredToSell": "Required to sell",
+      "labelRequiredToBuy": "Required to buy",
+      "labelRequired": "Required",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -239,8 +249,13 @@ class ChumakiLocalizations {
       "labelUpgrade": "Оновити",
       "labelManufacturing": "Виробництво",
       "labelLoggerBoughtStats": "Ви купили ось стільки",
+      "labelLoggerSoldStats": "Ви продали ось стільки",
       "labelGameStats": "Статистика всієї гри",
       "labelRecall": "Викликати",
+      "labelAchievements": "Досягнення",
+      "labelRequiredToSell": "Необхідно продати",
+      "labelRequiredToBuy": "Необхідно купити",
+      "labelRequired": "Необхідно",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -325,8 +340,13 @@ class ChumakiLocalizations {
       "labelUpgrade": "Обновить",
       "labelManufacturing": "Производство",
       "labelLoggerBoughtStats": "Вы купили вот столько",
+      "labelLoggerSoldStats": "Вы продали вот столько",
       "labelGameStats": "Статистика всей игры",
       "labelRecall": "Вызвать",
+      "labelAchievements": "Достижения",
+      "labelRequiredToSell": "Необходимо продать",
+      "labelRequiredToBuy": "Необходимо купить",
+      "labelRequired": "Необходимо",
     },
   };
 
@@ -578,11 +598,31 @@ class ChumakiLocalizations {
     return _localizedValues[locale.languageCode]!["labelLoggerBoughtStats"]!;
   }
 
+  static String get labelLoggerSoldStats {
+    return _localizedValues[locale.languageCode]!["labelLoggerSoldStats"]!;
+  }
+
   static String get labelGameStats {
     return _localizedValues[locale.languageCode]!["labelGameStats"]!;
   }
 
   static String get labelRecall {
     return _localizedValues[locale.languageCode]!["labelRecall"]!;
+  }
+
+  static String get labelAchievements {
+    return _localizedValues[locale.languageCode]!["labelAchievements"]!;
+  }
+
+  static String get labelRequiredToBuy {
+    return _localizedValues[locale.languageCode]!["labelRequiredToBuy"]!;
+  }
+
+  static String get labelRequiredToSell {
+    return _localizedValues[locale.languageCode]!["labelRequiredToSell"]!;
+  }
+
+  static String get labelRequired {
+    return _localizedValues[locale.languageCode]!["labelRequired"]!;
   }
 }

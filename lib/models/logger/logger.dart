@@ -1,14 +1,89 @@
 import 'package:chumaki/extensions/stock.dart';
-import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/company.dart';
+import 'package:chumaki/models/logger/achievement.dart';
+import 'package:chumaki/models/resources/resource.dart';
 
 class Logger {
-  Logger();
-  final Stock boughtStock = Stock([]);
+  Logger({
+    required this.boughtStock,
+    this.boughtWagons = 0,
+    required this.soldStock,
+    required this.achievements,
+  }) {
+    this.soldStock.changes.listen(_updateStockAchievements);
 
-  void cityStockListener(City city, StockEvent event) {
-    if (event.item1 != STOCK_EVENTS.REMOVED) {
-      return;
+    this.boughtStock.changes.listen(_updateStockAchievements);
+  }
+
+  final Stock boughtStock;
+  final Stock soldStock;
+  final List<Achievement> achievements;
+  int boughtWagons;
+
+  void _updateStockAchievements(StockEvent event) {
+    if (event.item1 == STOCK_EVENTS.ADDED) {
+      _processSoldStock();
     }
-    boughtStock.addResource(event.item2);
+  }
+
+  void _processSoldStock() {
+    achievements.forEach((Achievement achievement) {
+      achievement.processChange(this);
+    });
+  }
+
+  void attachToCompany(Company company) {
+    company.changes
+        .where((event) => event == COMPANY_EVENTS.WAGON_BOUGHT)
+        .listen((_) => wagonListener());
+
+    company.allCities.forEach((city) {
+      city.stock.changes.listen(cityStockListener);
+    });
+  }
+
+  void cityStockListener(StockEvent event) {
+    switch (event.item1) {
+      case STOCK_EVENTS.ADDED:
+        addSoldStock(event.item2);
+        break;
+
+      case STOCK_EVENTS.REMOVED:
+        addBoughtResource(event.item2);
+        break;
+    }
+  }
+
+  void wagonListener() {
+    boughtWagons++;
+  }
+
+  void addBoughtResource(Resource resource) {
+    boughtStock.addResource(resource);
+  }
+
+  void addSoldStock(Resource resource) {
+    soldStock.addResource(resource);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "boughtStock": boughtStock.toJson(),
+      "ownedWagons": boughtWagons,
+      "soldStock": soldStock.toJson(),
+      "achievements": achievements.map((ach) => ach.toJson()).toList(),
+    };
+  }
+
+  static Logger fromJson(Map<String, dynamic> inputJson) {
+    final achJson = inputJson["achievements"] as List;
+    return Logger(
+      boughtStock: Stock.fromJson(
+        inputJson["boughtStock"],
+      ),
+      boughtWagons: inputJson["ownedWagons"],
+      soldStock: Stock.fromJson(inputJson["soldStock"]),
+      achievements: achJson.map((json) => Achievement.fromJson(json)).toList(),
+    );
   }
 }

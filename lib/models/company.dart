@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'dart:math';
 
 import 'package:chumaki/app_preferences.dart';
+import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/berdychiv.dart';
 import 'package:chumaki/models/cities/bila_tserkva.dart';
 import 'package:chumaki/models/cities/cherkasy.dart';
@@ -31,6 +32,7 @@ import 'package:chumaki/models/cities/uman.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/events/event.dart';
+import 'package:chumaki/models/logger/achievement.dart';
 import 'package:chumaki/models/logger/logger.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/tasks/route.dart';
@@ -118,16 +120,14 @@ class Company {
     });
 
     if (logger == null) {
-      this.logger = Logger();
+      this.logger = Logger(
+          boughtStock: Stock([]),
+          soldStock: Stock([]),
+          achievements: (Achievement.defaultAchievements()));
     } else {
       this.logger = logger;
     }
-
-    allCities.forEach((city) {
-      city.stock.changes.listen((event) {
-        this.logger.cityStockListener(city, event);
-      });
-    });
+    this.logger.attachToCompany(this);
   }
 
   final BehaviorSubject<COMPANY_EVENTS> _innerChanges = BehaviorSubject();
@@ -237,6 +237,7 @@ class Company {
 
   Map<String, dynamic> toJson() {
     return {
+      "logger": logger.toJson(),
       "money": _money,
       "allCities": allCities.map((city) => city.toJson()).toList(),
       "activeRouteTasks":
@@ -247,13 +248,17 @@ class Company {
   static Company fromJson(Map<String, dynamic> inputJson) {
     double money = inputJson["money"] as double;
     List citiesJson = inputJson["allCities"];
+    Logger? logger;
+    if (inputJson["logger"] != null) {
+      logger = Logger.fromJson(inputJson["logger"]);
+    }
     List<City> allCities =
         citiesJson.map((cityJson) => City.fromJson(cityJson)).toList();
     List activeRouteTasksJson = inputJson["activeRouteTasks"];
     List<RouteTask> activeRouteTasks = activeRouteTasksJson
         .map((routeJson) => RouteTask.fromJson(routeJson))
         .toList();
-    var company = Company(cities: allCities).._money = money;
+    var company = Company(cities: allCities, logger: logger).._money = money;
 
     // we need to reconnect to streams from restored tasks
     // in order to get the event when task is finished
@@ -278,6 +283,9 @@ class Company {
   void dispose() {
     activeRouteTasks.forEach((task) {
       task.dispose();
+    });
+    allCities.forEach((city) {
+      city.dispose();
     });
     _innerChanges.close();
   }
@@ -324,6 +332,9 @@ class Company {
   }
 
   void hireLeader({required Leader leader, required Wagon forWagon}) {
+    if (!hasEnoughMoney(Leader.defaultAcquirePrice)) {
+      return;
+    }
     forWagon.setLeader(leader);
     removeMoney(Leader.defaultAcquirePrice.amount);
     _innerChanges.add(COMPANY_EVENTS.LEADER_HIRED);
