@@ -1,6 +1,5 @@
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/resource_image_view.dart';
-import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/manufacturings/manufacturing.dart';
@@ -10,6 +9,7 @@ class ManufacturingView extends StatelessWidget {
   final Manufacturing mfg;
   final VoidCallback? onBuildPress;
   final VoidCallback? onUpgradePress;
+
   const ManufacturingView({
     Key? key,
     required this.mfg,
@@ -33,47 +33,45 @@ class ManufacturingView extends StatelessWidget {
                 mfg.replenishResource(),
                 showAmount: true,
               ),
-            ],
-          ),
-        ),
-        Stack(
-          children: [
-            Opacity(
-              opacity: mfg.built ? 1.0 : 0.7,
-              child: Image.asset(
-                mfg.imagePath,
-                fit: BoxFit.fill,
-              ),
-            ),
-            if (!mfg.built)
-              Positioned(
-                bottom: 20,
-                left: 10,
-                child: ActionButton(
-                  image: Image.asset("images/icons/money/money_2d.png",
-                      width: 128),
-                  subTitle: MoneyUnitView(mfg.priceToBuild),
-                  action: Text(ChumakiLocalizations.labelBuild),
-                  onPress: () {
+              if (!mfg.built)
+                TextButton(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text(ChumakiLocalizations.labelBuild),
+                        MoneyUnitView(mfg.priceToBuild),
+                      ],
+                    ),
+                  ),
+                  onPressed: () {
                     onBuildPress!();
                   },
                 ),
-              ),
-            if (mfg.canUpgrade())
-              Positioned(
-                bottom: 20,
-                left: 10,
-                child: ActionButton(
-                  image: Image.asset("images/icons/money/money_2d.png",
-                      width: 128),
-                  subTitle: MoneyUnitView(mfg.priceToBuild),
-                  action: Text(ChumakiLocalizations.labelUpgrade),
-                  onPress: () {
+              if (mfg.canUpgrade())
+                TextButton(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text(ChumakiLocalizations.labelUpgrade),
+                        MoneyUnitView(mfg.priceToBuild),
+                      ],
+                    ),
+                  ),
+                  onPressed: () {
                     onUpgradePress!();
                   },
                 ),
-              ),
-          ],
+            ],
+          ),
+        ),
+        Opacity(
+          opacity: mfg.built ? 1.0 : 0.7,
+          child: Image.asset(
+            mfg.imagePath,
+            fit: BoxFit.fill,
+          ),
         ),
       ],
     );
