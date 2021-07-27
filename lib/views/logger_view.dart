@@ -1,4 +1,3 @@
-import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/components/ui/3d_button.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:flutter/material.dart';
@@ -38,17 +37,10 @@ class _LoggerViewState extends State<LoggerView> {
                   color: mediumGrey,
                   shadowColor: themeData.backgroundColor,
                   onPressed: _toggleOpen,
-                  child: StreamBuilder<APP_PREFERENCES_EVENTS>(
-                      stream: AppPreferences.instance.changes.where((event) =>
-                          event == APP_PREFERENCES_EVENTS.SOUND_CHANGE),
-                      builder: (context, snapshot) {
-                        return Image.asset(
-                          AppPreferences.instance.getIsSoundEnabled()
-                              ? "images/icons/paths/paths.png"
-                              : "images/icons/lock/lock.png",
-                          width: 44,
-                        );
-                      }),
+                  child: Image.asset(
+                    "images/icons/paths/paths.png",
+                    width: 44,
+                  ),
                 ),
         ),
       ),

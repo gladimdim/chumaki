@@ -36,6 +36,7 @@ class AchievementProgressView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: BorderedAll(
+        color: achievement.achieved ? darkGrey : lightGrey,
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -76,45 +77,40 @@ class AchievementProgressView extends StatelessWidget {
                       )),
                   Expanded(
                     flex: 1,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (achievement.boughtResource != null) ...[
-                          Row(
-                            children: [
-                              TitleText("Required to buy: "),
-                              ResourceImageView(
-                                achievement.boughtResource!,
-                                size: 32,
-                                showAmount: true,
-                              ),
-                            ],
-                          ),
-                          AchievementProgressBar(
-                              achievementTarget: achievement.boughtResource!,
-                              stockResource: logger.boughtStock.resourceInStock(
-                                      achievement.boughtResource!) ??
-                                  achievement.boughtResource!
-                                      .cloneWithAmount(0)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (achievement.boughtResource != null) ...[
+                            TitleText(ChumakiLocalizations.labelRequiredToBuy),
+                            ResourceImageView(
+                              achievement.boughtResource!,
+                              size: 32,
+                              showAmount: true,
+                            ),
+                            AchievementProgressBar(
+                                achievementTarget: achievement.boughtResource!,
+                                stockResource: logger.boughtStock.resourceInStock(
+                                        achievement.boughtResource!) ??
+                                    achievement.boughtResource!
+                                        .cloneWithAmount(0)),
+                          ],
+                          if (achievement.soldResource != null) ...[
+                            TitleText(ChumakiLocalizations.labelRequiredToSell),
+                            ResourceImageView(
+                              achievement.soldResource!,
+                              size: 32,
+                              showAmount: true,
+                            ),
+                            AchievementProgressBar(
+                                achievementTarget: achievement.soldResource!,
+                                stockResource: logger.soldStock.resourceInStock(
+                                        achievement.soldResource!) ??
+                                    achievement.soldResource!.cloneWithAmount(0)),
+                          ],
                         ],
-                        if (achievement.soldResource != null) ...[
-                          Row(
-                            children: [
-                              TitleText("Required to sell: "),
-                              ResourceImageView(
-                                achievement.soldResource!,
-                                size: 32,
-                                showAmount: true,
-                              ),
-                            ],
-                          ),
-                          AchievementProgressBar(
-                              achievementTarget: achievement.soldResource!,
-                              stockResource: logger.soldStock.resourceInStock(
-                                      achievement.soldResource!) ??
-                                  achievement.soldResource!.cloneWithAmount(0)),
-                        ],
-                      ],
+                      ),
                     ),
                   ),
                 ],
@@ -138,12 +134,23 @@ class AchievementProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final value = _progressValue();
     return LinearProgressIndicator(
-      value: _progressValue(),
-      color: mediumGrey,
+      value: value,
+      color: _colorForValue(value),
       semanticsLabel:
           ChumakiLocalizations.getForKey(achievementTarget.fullLocalizedKey),
     );
+  }
+
+  Color _colorForValue(double value) {
+    if (value < 0.3) {
+      return mediumGrey;
+    }
+    if (value > 0.3 && value < 0.75) {
+      return Colors.yellow;
+    }
+    return darkGrey;
   }
 
   double _progressValue() {

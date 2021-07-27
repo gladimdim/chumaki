@@ -18,33 +18,35 @@ class LoggerStatsView extends StatelessWidget {
         image: DecorationImage(
             image: AssetImage("images/ui/papyrus_3.png"), fit: BoxFit.fill),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(onPressed: onClose, icon: Icon(Icons.close)),
-              TitleText(ChumakiLocalizations.labelGameStats),
-              IconButton(onPressed: onClose, icon: Icon(Icons.close)),
-            ],
-          ),
-          Text(
-            ChumakiLocalizations.labelLoggerBoughtStats,
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          LoggerStockView(stock: logger.boughtStock),
-          Text(
-            "You sold this much",
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          LoggerStockView(stock: logger.soldStock),
-          Text(
-            "Achievements",
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          AchievementsProgressView(logger: logger),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(onPressed: onClose, icon: Icon(Icons.close)),
+                TitleText(ChumakiLocalizations.labelGameStats),
+                IconButton(onPressed: onClose, icon: Icon(Icons.close)),
+              ],
+            ),
+            Text(
+              ChumakiLocalizations.labelLoggerBoughtStats,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            LoggerStockView(stock: logger.boughtStock),
+            Text(
+              ChumakiLocalizations.labelLoggerSoldStats,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            LoggerStockView(stock: logger.soldStock),
+            Text(
+              ChumakiLocalizations.labelAchievements,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            AchievementsProgressView(logger: logger),
+          ],
+        ),
       ),
     );
   }
