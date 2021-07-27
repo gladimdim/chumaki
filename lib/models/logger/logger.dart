@@ -67,23 +67,23 @@ class Logger {
   }
 
   Map<String, dynamic> toJson() {
-    // TODO: implement achievement tojson
     return {
       "boughtStock": boughtStock.toJson(),
       "ownedWagons": boughtWagons,
       "soldStock": soldStock.toJson(),
+      "achievements": achievements.map((ach) => ach.toJson()).toList(),
     };
   }
 
   static Logger fromJson(Map<String, dynamic> inputJson) {
-    // TODO: Implement achievement from json
+    final achJson = inputJson["achievements"] as List;
     return Logger(
       boughtStock: Stock.fromJson(
         inputJson["boughtStock"],
       ),
       boughtWagons: inputJson["ownedWagons"],
       soldStock: Stock.fromJson(inputJson["soldStock"]),
-      achievements: [],
+      achievements: achJson.map((json) => Achievement.fromJson(json)).toList(),
     );
   }
 }

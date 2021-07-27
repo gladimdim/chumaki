@@ -40,6 +40,28 @@ class Achievement {
     achieved = boughtSatisfies && soldSatisfies;
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      "localizedKey": localizedKey,
+      "boughtResource": boughtResource?.toJson() ?? null,
+      "soldResource": soldResource?.toJson() ?? null,
+      "iconPath": iconPath,
+      "achieved": achieved,
+    };
+  }
+
+  static Achievement fromJson(Map<String, dynamic> inputJson) {
+    final boughtJson = inputJson["boughtResource"];
+    final soldJson = inputJson["soldResource"];
+    return Achievement(
+      localizedKey: inputJson["localizedKey"],
+      iconPath: inputJson["iconPath"],
+      boughtResource: boughtJson == null ? null : Resource.fromJson(boughtJson),
+      soldResource: soldJson == null ? null : Resource.fromJson(soldJson),
+      achieved: inputJson["achieved"],
+    );
+  }
+
   static List<Achievement> defaultAchievements() {
     return [
       Achievement(
