@@ -2,6 +2,7 @@
 import 'package:chumaki/components/city/city_avatar.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 
@@ -34,7 +35,7 @@ class CityAvatarStacked extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.white.withAlpha(130),
+                  color: lightGrey.withAlpha(130),
                 ),
                 child: OutlinedText(
                     ChumakiLocalizations.getForKey(city.localizedKeyName),

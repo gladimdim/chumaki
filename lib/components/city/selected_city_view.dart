@@ -131,7 +131,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                           CityMenuItem(
                               menuKey: "unlock",
                               image: Image.asset(
-                                "images/cities/church.png",
+                                "images/icons/paths/paths.png",
                                 width: 128,
                               ),
                               label: TitleText(

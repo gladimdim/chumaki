@@ -33,6 +33,24 @@ class Kyiv extends City {
                 requirements: [Wood(300), Planks(200), Stone(100)],
                 localizedKey: "events.kyivFlood",
                 artPath: "images/events/vesterfeld/river_battle_2.png"),
+            Event(
+                iconPath: "images/events/vesterfeld/crazy_man.png",
+                payment: Money(1500),
+                requirements: [Bread(200), Grains(800), Gorilka(100),],
+                localizedKey: "events.kyivEaster",
+                artPath: "images/events/vesterfeld/crazy_man.png"),
+            Event(
+                iconPath: "images/resources/firearm/firearm_2.png",
+                payment: Money(3000),
+                requirements: [Firearm(100), Horse(100), Powder(500),],
+                localizedKey: "events.kyivPrivateCompany",
+                artPath: "images/events/vesterfeld/group_of_soldiers.png"),
+            Event(
+                iconPath: "images/manufacturings/church/church_3.png",
+                payment: Money(5000),
+                requirements: [Wood(1000), Planks(1200), Stone(500), MetalParts(300)],
+                localizedKey: "events.kyivNewChurch",
+                artPath: "images/events/vesterfeld/ancient_church.png"),
           ],
           stock: Stock([
             Wax(1000),

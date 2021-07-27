@@ -22,10 +22,20 @@ class EventLocalizations extends InternalLocalizations {
       "cossackStarshinaWeddingText":
           "One of the top officers at Cherkasy's castle gentry has to conduct a wedding for his daughter. Bring them resources needed to have Wedding of the Century",
       "kyivShootingTournamentTitle": "Quick Hand",
-      "kyivShootingTournamentText": "The 'Quick hand' tournament will take place soon in Kyiv. The best bow and firearm shooters will clash in the battle to figure out who is the best shooter in the world. The organizers need several firearms and a valuable price. If you bring them you will get nice payment in return.",
+      "kyivShootingTournamentText":
+          "The 'Quick hand' tournament will take place soon in Kyiv. The best bow and firearm shooters will clash in the battle to figure out who is the best shooter in the world. The organizers need several firearms and a valuable price. If you bring them you will get nice payment in return.",
       "kyivFloodTitle": "The Flood",
-      "kyivFloodText": "Dnipro was full of water and got out of shores. The water flooded Podyl. Thankfully there were no casualities but lots of buildings were destroyed. The town issued money to rebuild the district. They ask you to bring building materials.",
-
+      "kyivFloodText":
+          "Dnipro was full of water and got out of shores. The water flooded Podyl. Thankfully there were no casualities but lots of buildings were destroyed. The town issued money to rebuild the district. They ask you to bring building materials.",
+      "kyivEasterTitle": "Easter Donations",
+      "kyivEasterText":
+          "Kyiv Pechora Lavra Bishop asks you to bring food needed to donate to poor societies on the biggest holiday - Easter.",
+      "kyivPrivateCompanyTitle": "Army for the judge",
+      "kyivPrivateCompanyText":
+          "Orthodox judge would like to form his own armed company of cossacks. He would like to get more power and protect Kyiv from the expanding hands of the Jesuits.",
+      "kyivNewChurchTitle": "St. Andrew Church",
+      "kyivNewChurchText":
+          "To stop the expansion of the catholics local gentry decided to build a new church - St. Andrew. They asked all merchants to provide them building materials.",
     },
     "uk": {
       // sich
@@ -47,11 +57,22 @@ class EventLocalizations extends InternalLocalizations {
       "cossackStarshinaWeddingTitle": "Шляхетське весілля",
       "cossackStarshinaWeddingText":
           "Один із знатних шляхтичів Черкаського замку має видати свою доньку заміж. Вони хочуть провести весілля століття, тому потребують дуже багато різних дорогих подарунків та страв.",
+      // Kyiv
       "kyivShootingTournamentTitle": "Швидка рука",
-      "kyivShootingTournamentText": "Турнір 'Швидка рука' уже запланований в Києві. Найкращі стрільці з лука та самопалів зустрінуться, щоб визначити, хто з них найшвидший в своїй справі. Організатори просять вас привезти їм декілька рушниць та цінний подарунок.",
+      "kyivShootingTournamentText":
+          "Турнір 'Швидка рука' уже запланований в Києві. Найкращі стрільці з лука та самопалів зустрінуться, щоб визначити, хто з них найшвидший в своїй справі. Організатори просять вас привезти їм декілька рушниць та цінний подарунок.",
       "kyivFloodTitle": "Потоп",
-      "kyivFloodText": "Борисфен раптово вийшов з берегів і затопив Поділ. Обійшлося без жертв, але багато будівель змило. Муніципалітет виділив кошти на відбудову. Місто потребує будівельних матерілів.",
-
+      "kyivFloodText":
+          "Борисфен раптово вийшов з берегів і затопив Поділ. Обійшлося без жертв, але багато будівель змило. Муніципалітет виділив кошти на відбудову. Місто потребує будівельних матерілів.",
+      "kyivEasterTitle": "Великодні пожертви",
+      "kyivEasterText":
+          "Настоятель Києво Печерської лаври просить вас допомогти з пожертвами нижчим шарам населення. Зазвичай на Великодень в Лаврі роздають їжу для всіх нуждених.",
+      "kyivPrivateCompanyTitle": "Армія для судді",
+      "kyivPrivateCompanyText":
+          "Правосланий суддя хочу створити свій власний озброєнний загін козаків за для того, щоб збільшити свою вагу та мати противагу засиллю ієзуітів. Привезіть йому необхідні речі",
+      "kyivNewChurchTitle": "Андріївська Церква",
+      "kyivNewChurchText":
+          "Щоб зупинити експансію католиків місцева шляхта вирішила зібратися та збудувати нову православну церкву - Андріївську. Вони просять всіх торговців продавати їм будівельні матеріали.",
     },
     "ru": {
       // Sich
@@ -73,11 +94,23 @@ class EventLocalizations extends InternalLocalizations {
       "cossackStarshinaWeddingTitle": "Шляхетская свадьба",
       "cossackStarshinaWeddingText":
           "Один из шляхтичей из Черкасского замка выдает свою дочку замуж. Они хотять отиграть свадьбу, чтобы запомнилась на столетие. Помогите им собрать дорогие подарки и явства.",
+      // Kyiv
       "kyivShootingTournamentTitle": "Быстрая рука",
-      "kyivShootingTournamentText": "Турнир 'Быстрая рука' запланирован в Киеве. Наилучшие стрелки из лука и самопала встретятся, чтобы выяснить, а кто же из них самый-самый лучший в мире? Организаторам необходимо привезти несколько запасных самопалов и ценный приз.",
+      "kyivShootingTournamentText":
+          "Турнир 'Быстрая рука' запланирован в Киеве. Наилучшие стрелки из лука и самопала встретятся, чтобы выяснить, а кто же из них самый-самый лучший в мире? Организаторам необходимо привезти несколько запасных самопалов и ценный приз.",
       "kyivFloodTitle": "Потоп",
-      "kyivFloodText": "Борисфен неожидано вышел из берегов и затопил Подол. Обошлось без жертв, но многие дома снесло водой. Муниципалитет выделил деньги на восстановление. Им необходимы строительные материалы.",
+      "kyivFloodText":
+          "Борисфен неожидано вышел из берегов и затопил Подол. Обошлось без жертв, но многие дома снесло водой. Муниципалитет выделил деньги на восстановление. Им необходимы строительные материалы.",
+      "kyivEasterTitle": "Пасхальные пожертвования",
+      "kyivEasterText":
+          "Настоятель Киево-Печерской Лавры просит вас помочь собрать пожертвования для низших слоев населения. Обычно на Пасху в Лавре раздают еду всем нуждающимся.",
+      "kyivPrivateCompanyTitle": "Армия для судьи",
+      "kyivPrivateCompanyText":
+          "Православный судья намерен завести охрану своего поместья. Ему наеобходимо вооружить несколько десятков козаков, чтобы они имели большую силу в Киеве.",
 
+      "kyivNewChurchTitle": "Андреевскяа Церковь",
+      "kyivNewChurchText":
+          "Чтобы остановить экспансию католиков местная шляхта решила собраться и построить новую церковь - Андреевску. Они просят всех торговцев помочь и привозить им строительные материали.",
     }
   };
 }

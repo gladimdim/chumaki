@@ -3,6 +3,7 @@ import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/theme.dart';
 import 'package:chumaki/views/game_canvas_view.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +42,7 @@ class CityOnMap extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.white.withAlpha(180),
+                    color: lightGrey.withAlpha(180),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
