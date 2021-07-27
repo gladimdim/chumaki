@@ -1,4 +1,5 @@
 import 'package:chumaki/components/resource_image_view.dart';
+import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/logger/achievement.dart';
@@ -30,56 +31,56 @@ class AchievementProgressView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: BorderedAll(
-        child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("images/ui/papyrus_3.png"),
-                fit: BoxFit.fill,
-              ),
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("images/ui/papyrus_3.png"),
+              fit: BoxFit.fill,
             ),
-            child: Column(
-              children: [
-                Text(
-                  ChumakiLocalizations.getForKey(achievement.localizedKey),
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Image.asset(achievement.iconPath, width: 256),
-                    Column(
+          ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    ChumakiLocalizations.getForKey(achievement.localizedKey),
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                  Icon(
+                    achievement.achieved ? Icons.lock_open : Icons.lock_clock,
+                    color: achievement.achieved ? darkGrey : mediumGrey,
+                    size: 42,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                      flex: 1,
+                      child: Image.asset(achievement.iconPath, width: 128)),
+                  Expanded(
+                    flex: 1,
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         if (achievement.boughtResource != null) ...[
-                          Text("Required: "),
+                          TitleText("Required to buy: "),
                           ResourceImageView(achievement.boughtResource!,
                               showAmount: true),
                         ],
                         if (achievement.soldResource != null) ...[
-                          Text("Required: "),
+                          TitleText("Required to sell: "),
                           ResourceImageView(achievement.soldResource!,
                               showAmount: true),
                         ],
                       ],
                     ),
-                    Column(
-                      children: [
-                        Text("Achieved: "),
-                        Icon(
-                          achievement.achieved
-                              ? Icons.lock_open
-                              : Icons.lock_clock,
-                          color: achievement.achieved ? darkGrey : mediumGrey,
-                          size: 64,
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
