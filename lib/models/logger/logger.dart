@@ -2,6 +2,7 @@ import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/logger/achievement.dart';
 import 'package:chumaki/models/resources/resource.dart';
+import 'package:chumaki/sound/sound_manager.dart';
 
 class Logger {
   Logger({
@@ -28,7 +29,9 @@ class Logger {
 
   void _processSoldStock() {
     achievements.forEach((Achievement achievement) {
-      achievement.processChange(this);
+      if (achievement.processChange(this)) {
+        SoundManager.instance.playLeaderLevelUp();
+      }
     });
   }
 

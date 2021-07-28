@@ -38,14 +38,12 @@ class _StartingViewState extends State<StartingView> {
         if (currentCompany != null)
           InheritedCompany(
             company: currentCompany!,
-            child: SafeArea(
-              child: GameCanvasView(
-                onBackPressed: onBackPressed,
-                company: currentCompany,
-                key: globalViewerKey,
-                initialPanDuration: Duration(seconds: 15),
-                screenSize: MediaQuery.of(context).size,
-              ),
+            child: GameCanvasView(
+              onBackPressed: onBackPressed,
+              company: currentCompany,
+              key: globalViewerKey,
+              initialPanDuration: Duration(seconds: 15),
+              screenSize: MediaQuery.of(context).size,
             ),
           ),
         if (currentCompany == null)
