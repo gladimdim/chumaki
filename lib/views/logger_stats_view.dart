@@ -1,4 +1,5 @@
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/decorated_container.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/logger/logger.dart';
 import 'package:chumaki/views/achievements_progress_view.dart';
@@ -13,11 +14,7 @@ class LoggerStatsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage("images/ui/papyrus_3.png"), fit: BoxFit.fill),
-      ),
+    return DecoratedContainer3(
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,6 +26,29 @@ class LoggerStatsView extends StatelessWidget {
                 TitleText(ChumakiLocalizations.labelGameStats),
                 IconButton(onPressed: onClose, icon: Icon(Icons.close)),
               ],
+            ),
+            Container(
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          "images/wagon/cart.png",
+                          width: 64,
+                        ),
+                        TitleText(
+                            "Ви купили стільки возів: ${logger.boughtWagons}"),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Text("Ви найняли лідерів: ${logger.boughtWagons}"),
+                  ),
+                ],
+              ),
             ),
             Text(
               ChumakiLocalizations.labelLoggerBoughtStats,

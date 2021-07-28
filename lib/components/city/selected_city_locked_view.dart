@@ -5,6 +5,7 @@ import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
+import 'package:chumaki/components/ui/decorated_container.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/views/game_canvas_view.dart';
@@ -19,11 +20,7 @@ class SelectedCityLockedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final company = InheritedCompany.of(context).company;
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage("images/ui/papyrus_3.png"), fit: BoxFit.fill),
-      ),
+    return DecoratedContainer3(
       child: ConstrainedBox(
         constraints: BoxConstraints(
           maxWidth: CITY_DETAILS_VIEW_WIDTH,

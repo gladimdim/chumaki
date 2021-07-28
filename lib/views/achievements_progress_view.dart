@@ -1,6 +1,7 @@
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
+import 'package:chumaki/components/ui/decorated_container.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/logger/achievement.dart';
 import 'package:chumaki/models/logger/logger.dart';
@@ -37,13 +38,7 @@ class AchievementProgressView extends StatelessWidget {
       padding: const EdgeInsets.all(4.0),
       child: BorderedAll(
         color: achievement.achieved ? darkGrey : lightGrey,
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("images/ui/papyrus_3.png"),
-              fit: BoxFit.fill,
-            ),
-          ),
+        child: DecoratedContainer3(
           child: Column(
             children: [
               Padding(

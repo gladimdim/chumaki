@@ -9,6 +9,7 @@ import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/city_menu_item.dart';
 import 'package:chumaki/components/ui/city_menu_item_view.dart';
+import 'package:chumaki/components/ui/decorated_container.dart';
 import 'package:chumaki/components/wagons/wagon_avatar.dart';
 import 'package:chumaki/components/wagons/wagon_details.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
@@ -52,13 +53,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
   @override
   Widget build(BuildContext context) {
     final company = InheritedCompany.of(context).company;
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("images/ui/papyrus_3.png"),
-          fit: BoxFit.fill,
-        ),
-      ),
+    return DecoratedContainer3(
       child: StreamBuilder(
         stream: widget.city.changes,
         builder: (context, data) => AnimatedSize(
