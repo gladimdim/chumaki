@@ -18,7 +18,8 @@ class Leader {
   final double levelDelta = 1000;
   static final levelUpBasePrice = 1000;
   late String imagePath;
-  final BehaviorSubject<LEADER_CHANGES> _innerChanges = BehaviorSubject<LEADER_CHANGES>();
+  final BehaviorSubject<LEADER_CHANGES> _innerChanges =
+      BehaviorSubject<LEADER_CHANGES>();
   late ValueStream<LEADER_CHANGES> changes;
   final int maxLevel = 3;
   static Money defaultAcquirePrice = Money(levelUpBasePrice.toDouble());
@@ -102,8 +103,8 @@ class Leader {
         LeadersLocalizations().localizedMap["en"]!.keys.take(11).toList();
     List<Leader> leaders = List.empty(growable: true);
     for (var i = 0; i < 11; i++) {
-      leaders
-          .add(Leader("leaders.${keyNames[i]}", imagePath: imagePathForId(i), experience: 0));
+      leaders.add(Leader("leaders.${keyNames[i]}",
+          imagePath: imagePathForId(i), experience: 955));
     }
     return leaders;
   }
@@ -148,8 +149,8 @@ class PerkUnit {
 
   static PerkUnit fromJson(Map<String, dynamic> input) {
     return PerkUnit(
-        affectsResourceCategory:
-            resourceCategoryFromString(input["affectsResourceCategory"]),
+      affectsResourceCategory:
+          resourceCategoryFromString(input["affectsResourceCategory"]),
     );
   }
 }

@@ -28,27 +28,37 @@ class LoggerStatsView extends StatelessWidget {
               ],
             ),
             DecoratedContainer2(
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
                       children: [
-                        Image.asset(
-                          "images/wagon/cart.png",
-                          width: 64,
+                        ClipOval(
+                          child: Image.asset(
+                            "images/wagon/cart.png",
+                            width: 64,
+                          ),
                         ),
                         TitleText(
-                            "Ви купили стільки возів: ${logger.boughtWagons}"),
+                            "${ChumakiLocalizations.labelWagonsBought}: ${logger.boughtWagons}"),
                       ],
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text("Ви найняли лідерів: ${logger.leadersHired}"),
-                  ),
-                ],
+                    Column(
+                      children: [
+                        ClipOval(
+                          child: Image.asset(
+                            "images/leaders/leader5.png",
+                            width: 64,
+                          ),
+                        ),
+                        TitleText(
+                            "${ChumakiLocalizations.labelLeadersHired}: ${logger.leadersHired}"),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             Text(

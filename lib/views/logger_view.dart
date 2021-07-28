@@ -21,7 +21,7 @@ class _LoggerViewState extends State<LoggerView> {
     final themeData = Theme.of(context);
     return AnimatedPositioned(
       bottom: 5,
-      left: opened ? 0 : 55 * 3.5 + 15,
+      left: opened ? 0 : 55 * 3 + 15,
       duration: Duration(milliseconds: 150),
       child: AnimatedSize(
         duration: Duration(milliseconds: 150),

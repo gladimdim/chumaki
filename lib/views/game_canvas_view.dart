@@ -25,7 +25,7 @@ import 'package:chumaki/extensions/list.dart';
 import 'package:rxdart/rxdart.dart';
 
 const CITY_SIZE = 50;
-const MENU_ITEM_WIDTH = 25;
+const double MENU_ITEM_WIDTH = 55.0;
 
 final globalViewerKey =
     GlobalKey<GameCanvasViewState>(debugLabel: "interactiveViewer");
@@ -274,8 +274,8 @@ class GameCanvasViewState extends State<GameCanvasView>
         ),
         if (widget.company != null)
           Positioned(
-            bottom: 5,
-            left: _menuShiftFor(0),
+            top: 5,
+            left: 5,
             child: IconButton(
               onPressed: () async {
                 await company?.save();
@@ -289,12 +289,12 @@ class GameCanvasViewState extends State<GameCanvasView>
         if (selected == null && company != null)
           Positioned(
             bottom: 5,
-            left: _menuShiftFor(1),
+            left: _menuShiftFor(0),
             child: Row(
               children: [
                 SizedBox(
-                  width: 55,
-                  height: 55,
+                  width: MENU_ITEM_WIDTH,
+                  height: MENU_ITEM_WIDTH,
                   child: DDDButton(
                     color: mediumGrey,
                     shadowColor: themeData.backgroundColor,
@@ -309,8 +309,8 @@ class GameCanvasViewState extends State<GameCanvasView>
                   ),
                 ),
                 SizedBox(
-                  width: 55,
-                  height: 55,
+                  width: MENU_ITEM_WIDTH,
+                  height: MENU_ITEM_WIDTH,
                   child: Stack(
                     children: [
                       Container(
@@ -332,8 +332,8 @@ class GameCanvasViewState extends State<GameCanvasView>
                   ),
                 ),
                 SizedBox(
-                  width: 55,
-                  height: 55,
+                  width: MENU_ITEM_WIDTH,
+                  height: MENU_ITEM_WIDTH,
                   child: DDDButton(
                     color: mediumGrey,
                     shadowColor: themeData.backgroundColor,
@@ -360,7 +360,7 @@ class GameCanvasViewState extends State<GameCanvasView>
   }
 
   double _menuShiftFor(int index) {
-    return (10 + index * MENU_ITEM_WIDTH).toDouble();
+    return (index * MENU_ITEM_WIDTH).toDouble();
   }
 
   List<Widget> _renderCoordinateLabels() {
