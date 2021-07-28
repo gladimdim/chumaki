@@ -16,9 +16,9 @@ class Achievement {
     this.achieved = false,
   });
 
-  void processChange(Logger logger) {
+  bool processChange(Logger logger) {
     if (achieved) {
-      return;
+      return false;
     }
     final bResource = boughtResource;
     final sResource = soldResource;
@@ -38,6 +38,7 @@ class Achievement {
     }
 
     achieved = boughtSatisfies && soldSatisfies;
+    return achieved;
   }
 
   Map<String, dynamic> toJson() {

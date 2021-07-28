@@ -78,6 +78,8 @@ flutter:
     - images/icons/flags/
     - images/icons/wagon/
     - images/icons/manufacturing/
+    - images/icons/build/
+    - images/icons/upgrade/
     - images/events/vesterfeld/
     - images/leaders/
     - images/manufacturings/

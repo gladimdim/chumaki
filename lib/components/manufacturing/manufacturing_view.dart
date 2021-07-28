@@ -23,11 +23,11 @@ class ManufacturingView extends StatelessWidget {
       children: [
         BorderedBottom(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
                 "${ChumakiLocalizations.getForKey(mfg.fullLocalizedKey)} ${mfg.built ? "(${mfg.level})" : ""}",
-                style: Theme.of(context).textTheme.headline3,
+                style: Theme.of(context).textTheme.headline5,
               ),
               ResourceImageView(
                 mfg.replenishResource(),
@@ -36,10 +36,13 @@ class ManufacturingView extends StatelessWidget {
               if (!mfg.built)
                 TextButton(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Column(
                       children: [
-                        Text(ChumakiLocalizations.labelBuild),
+                        Image.asset(
+                          "images/icons/build/build.png",
+                          width: 44,
+                        ),
                         MoneyUnitView(mfg.priceToBuild),
                       ],
                     ),
@@ -52,9 +55,12 @@ class ManufacturingView extends StatelessWidget {
                 TextButton(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Row(
+                    child: Column(
                       children: [
-                        Text(ChumakiLocalizations.labelUpgrade),
+                        Image.asset(
+                          "images/icons/upgrade/upgrade.png",
+                          width: 44,
+                        ),
                         MoneyUnitView(mfg.priceToBuild),
                       ],
                     ),
