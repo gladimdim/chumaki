@@ -31,12 +31,7 @@ class Leader {
       _perks = affects;
     }
 
-    if (imagePath == null) {
-      this.imagePath = getRandomImage();
-    } else {
-      this.imagePath = imagePath;
-    }
-
+    this.imagePath = imagePath ?? getRandomImage();
     changes = _innerChanges.stream;
   }
 

@@ -100,11 +100,7 @@ class Company {
   List<RouteTask> activeRouteTasks = List.empty(growable: true);
 
   Company({cities, double? money, Logger? logger}) {
-    if (cities == null) {
-      this.allCities = City.generateNewCities();
-    } else {
-      this.allCities = cities;
-    }
+    this.allCities = cities ?? City.generateNewCities();
 
     _money = money ?? 3000;
     changes = _innerChanges.stream;
@@ -118,15 +114,13 @@ class Company {
           save();
       }
     });
-
-    if (logger == null) {
-      this.logger = Logger(
+    this.logger = logger ??
+        Logger(
           boughtStock: Stock([]),
           soldStock: Stock([]),
-          achievements: (Achievement.defaultAchievements()));
-    } else {
-      this.logger = logger;
-    }
+          achievements: (Achievement.defaultAchievements()),
+        );
+
     this.logger.attachToCompany(this);
   }
 
