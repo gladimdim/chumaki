@@ -46,19 +46,24 @@ class AchievementProgressView extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    ChumakiLocalizations.getForKey(achievement.localizedKey),
-                    style: Theme.of(context).textTheme.headline5,
-                  ),
-                  Icon(
-                    achievement.achieved ? Icons.lock_open : Icons.lock_clock,
-                    color: achievement.achieved ? darkGrey : mediumGrey,
-                    size: 42,
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      ChumakiLocalizations.getForKey(achievement.localizedKey),
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                    Image.asset(
+                      achievement.achieved
+                          ? "images/icons/lock/opened_lock.png"
+                          : "images/icons/lock/lock2.png",
+                      // color: achievement.achieved ? darkGrey : mediumGrey,
+                      width: 42,
+                    ),
+                  ],
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,8 +96,9 @@ class AchievementProgressView extends StatelessWidget {
                             ),
                             AchievementProgressBar(
                                 achievementTarget: achievement.boughtResource!,
-                                stockResource: logger.boughtStock.resourceInStock(
-                                        achievement.boughtResource!) ??
+                                stockResource: logger.boughtStock
+                                        .resourceInStock(
+                                            achievement.boughtResource!) ??
                                     achievement.boughtResource!
                                         .cloneWithAmount(0)),
                           ],
@@ -107,7 +113,8 @@ class AchievementProgressView extends StatelessWidget {
                                 achievementTarget: achievement.soldResource!,
                                 stockResource: logger.soldStock.resourceInStock(
                                         achievement.soldResource!) ??
-                                    achievement.soldResource!.cloneWithAmount(0)),
+                                    achievement.soldResource!
+                                        .cloneWithAmount(0)),
                           ],
                         ],
                       ),
