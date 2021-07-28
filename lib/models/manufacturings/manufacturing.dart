@@ -57,7 +57,7 @@ class Manufacturing {
       ];
 
   bool canUpgrade() {
-    return built && level < maxLevel;
+    return level < maxLevel;
   }
 
   void upgrade() {

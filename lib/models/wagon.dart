@@ -25,11 +25,7 @@ class Wagon {
   }
 
   Wagon({Stock? stock, this.totalWeightCapacity = 100.0, this.leader}) {
-    if (stock == null) {
-      this.stock = Stock(List.empty(growable: true));
-    } else {
-      this.stock = stock;
-    }
+    this.stock = stock ?? Stock(List.empty(growable: true));
 
     this.stock.changes.listen((value) {
       changes.add(value);
