@@ -28,15 +28,16 @@ class ManufacturingView extends StatelessWidget {
       children: [
         BorderedBottom(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "${ChumakiLocalizations.getForKey(mfg.fullLocalizedKey)} ${mfg.built ? "(${mfg.level})" : ""}",
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headline4,
               ),
               ResourceImageView(
                 mfg.replenishResource(),
                 showAmount: true,
+                size: 72,
               ),
             ],
           ),
