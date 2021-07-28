@@ -27,12 +27,13 @@ class LoggerStatsView extends StatelessWidget {
                 IconButton(onPressed: onClose, icon: Icon(Icons.close)),
               ],
             ),
-            Container(
+            DecoratedContainer2(
               child: Row(
                 children: [
                   Expanded(
                     flex: 1,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Image.asset(
                           "images/wagon/cart.png",
@@ -45,7 +46,7 @@ class LoggerStatsView extends StatelessWidget {
                   ),
                   Expanded(
                     flex: 1,
-                    child: Text("Ви найняли лідерів: ${logger.boughtWagons}"),
+                    child: Text("Ви найняли лідерів: ${logger.leadersHired}"),
                   ),
                 ],
               ),

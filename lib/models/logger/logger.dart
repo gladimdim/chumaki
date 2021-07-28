@@ -8,11 +8,11 @@ class Logger {
   Logger({
     required this.boughtStock,
     this.boughtWagons = 0,
+    this.leadersHired = 0,
     required this.soldStock,
     required this.achievements,
   }) {
     this.soldStock.changes.listen(_updateStockAchievements);
-
     this.boughtStock.changes.listen(_updateStockAchievements);
   }
 
@@ -20,6 +20,7 @@ class Logger {
   final Stock soldStock;
   final List<Achievement> achievements;
   int boughtWagons;
+  int leadersHired;
 
   void _updateStockAchievements(StockEvent event) {
     if (event.item1 == STOCK_EVENTS.ADDED) {
@@ -39,6 +40,10 @@ class Logger {
     company.changes
         .where((event) => event == COMPANY_EVENTS.WAGON_BOUGHT)
         .listen((_) => wagonListener());
+
+    company.changes
+        .where((event) => event == COMPANY_EVENTS.LEADER_HIRED)
+        .listen((_) => {leaderListener()});
 
     company.allCities.forEach((city) {
       city.stock.changes.listen(cityStockListener);
@@ -61,6 +66,10 @@ class Logger {
     boughtWagons++;
   }
 
+  void leaderListener() {
+    leadersHired++;
+  }
+
   void addBoughtResource(Resource resource) {
     boughtStock.addResource(resource);
   }
@@ -73,6 +82,7 @@ class Logger {
     return {
       "boughtStock": boughtStock.toJson(),
       "ownedWagons": boughtWagons,
+      "leadersHired": leadersHired,
       "soldStock": soldStock.toJson(),
       "achievements": achievements.map((ach) => ach.toJson()).toList(),
     };
@@ -85,6 +95,7 @@ class Logger {
         inputJson["boughtStock"],
       ),
       boughtWagons: inputJson["ownedWagons"],
+      leadersHired: inputJson["leadersHired"],
       soldStock: Stock.fromJson(inputJson["soldStock"]),
       achievements: achJson.map((json) => Achievement.fromJson(json)).toList(),
     );

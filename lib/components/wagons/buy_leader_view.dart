@@ -39,16 +39,18 @@ class BuyLeaderView extends StatelessWidget {
           children: leaders
               .map(
                 (leader) => ActionButton(
-                  onPress: () {
-                    company.hireLeader(leader: leader, forWagon: wagon);
-                  },
+                  onPress: company.hasEnoughMoney(Leader.defaultAcquirePrice)
+                      ? () {
+                          company.hireLeader(leader: leader, forWagon: wagon);
+                        }
+                      : null,
                   image: ClipOval(
-                    child:
-                        Image.asset(leader.imagePath, width: 96, height: 96),
+                    child: Image.asset(leader.imagePath, width: 96, height: 96),
                   ),
                   subTitle: Column(
                     children: [
-                      Text(ChumakiLocalizations.getForKey(leader.fullLocalizedName)),
+                      Text(ChumakiLocalizations.getForKey(
+                          leader.fullLocalizedName)),
                       MoneyUnitView(Leader.defaultAcquirePrice),
                     ],
                   ),
