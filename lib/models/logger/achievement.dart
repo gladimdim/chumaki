@@ -93,6 +93,12 @@ class Achievement {
         iconPath: "images/events/vesterfeld/elite_cossacks.png",
         soldResource: Silk(2200),
         boughtResource: Silk(800),
+      ),
+      Achievement(
+        localizedKey: "achievements.masonBuilder",
+        iconPath: "images/events/vesterfeld/ancient_church.png",
+        soldResource: Stone(1000),
+        boughtResource: Stone(200),
       )
     ];
   }
