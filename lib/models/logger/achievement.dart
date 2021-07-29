@@ -75,6 +75,12 @@ class Achievement {
         localizedKey: "achievements.gunBaron",
         iconPath: "images/events/vesterfeld/cannons_shooting.png",
         soldResource: Cannon(50),
+      ),
+      Achievement(
+        localizedKey: "achievements.tobaccoLover",
+        iconPath: "images/events/vesterfeld/ruins_2.png",
+        soldResource: Tobacco(500),
+        boughtResource: Tobacco(800),
       )
     ];
   }
