@@ -81,6 +81,12 @@ class Achievement {
         iconPath: "images/events/vesterfeld/ruins_2.png",
         soldResource: Tobacco(500),
         boughtResource: Tobacco(800),
+      ),
+      Achievement(
+        localizedKey: "achievements.warPowder",
+        iconPath: "images/events/vesterfeld/wagon_camp.png",
+        soldResource: Tobacco(1500),
+        boughtResource: Tobacco(1000),
       )
     ];
   }
