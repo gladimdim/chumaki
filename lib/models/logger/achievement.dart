@@ -67,7 +67,7 @@ class Achievement {
     return [
       Achievement(
         localizedKey: "achievements.fishSeller",
-        iconPath: "images/events/vesterfeld/town.png",
+        iconPath: "images/events/vesterfeld/cossack_and_bum.png",
         soldResource: Fish(5),
         boughtResource: Fish(15),
       ),
@@ -75,6 +75,52 @@ class Achievement {
         localizedKey: "achievements.gunBaron",
         iconPath: "images/events/vesterfeld/cannons_shooting.png",
         soldResource: Cannon(50),
+      ),
+      Achievement(
+        localizedKey: "achievements.tobaccoLover",
+        iconPath: "images/events/vesterfeld/ruins_2.png",
+        soldResource: Tobacco(500),
+        boughtResource: Tobacco(800),
+      ),
+      Achievement(
+        localizedKey: "achievements.warPowder",
+        iconPath: "images/events/vesterfeld/wagon_camp.png",
+        soldResource: Tobacco(1500),
+        boughtResource: Tobacco(1000),
+      ),
+      Achievement(
+        localizedKey: "achievements.silkSeller",
+        iconPath: "images/events/vesterfeld/elite_cossacks.png",
+        soldResource: Silk(2200),
+        boughtResource: Silk(800),
+      ),
+      Achievement(
+        localizedKey: "achievements.masonBuilder",
+        iconPath: "images/events/vesterfeld/ancient_church.png",
+        soldResource: Stone(1000),
+        boughtResource: Stone(200),
+      ),
+      Achievement(
+        localizedKey: "achievements.europeFeeder",
+        iconPath: "images/events/vesterfeld/town.png",
+        soldResource: Bread(600),
+        boughtResource: Grains(1200),
+      ),
+      Achievement(
+        localizedKey: "achievements.greatBuilder",
+        iconPath: "images/events/vesterfeld/big_city_2.png",
+        soldResource: Planks(600),
+        boughtResource: Wood(500),
+      ),
+      Achievement(
+        localizedKey: "achievements.alconautics",
+        iconPath: "images/events/vesterfeld/crazy_man.png",
+        soldResource: Gorilka(400),
+      ),
+      Achievement(
+        localizedKey: "achievements.warmWinter",
+        iconPath: "images/events/vesterfeld/cossacks_and_sheep.png",
+        soldResource: Fur(100),
       )
     ];
   }
