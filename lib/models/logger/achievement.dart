@@ -99,6 +99,23 @@ class Achievement {
         iconPath: "images/events/vesterfeld/ancient_church.png",
         soldResource: Stone(1000),
         boughtResource: Stone(200),
+      ),
+      Achievement(
+        localizedKey: "achievements.europeFeeder",
+        iconPath: "images/events/vesterfeld/town.png",
+        soldResource: Bread(600),
+        boughtResource: Grains(1200),
+      ),
+      Achievement(
+        localizedKey: "achievements.greatBuilder",
+        iconPath: "images/events/vesterfeld/ruins.png",
+        soldResource: Planks(600),
+        boughtResource: Wood(500),
+      ),
+      Achievement(
+        localizedKey: "achievements.alconautics",
+        iconPath: "images/events/vesterfeld/crazy_man.png",
+        soldResource: Gorilka(400),
       )
     ];
   }

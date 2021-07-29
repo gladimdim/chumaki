@@ -9,6 +9,9 @@ class AchievementsLocalizations extends InternalLocalizations {
       "warPowder": "Powder - the moving power of War",
       "silkSeller": "Top supplier for gentry",
       "masonBuilder": "Church builder",
+      "europeFeeder": "Food provider",
+      "greatBuilder": "The Great Builder",
+      "alconautics": "Alconautics",
     },
     "uk": {
       "fishSeller": "Ви тхнете рибою",
@@ -17,6 +20,9 @@ class AchievementsLocalizations extends InternalLocalizations {
       "warPowder": "Порох - рушій всіх війн",
       "silkSeller": "Шовк для шляхти",
       "masonBuilder": "Будівник церков",
+      "europeFeeder": "Годівник Європи",
+      "greatBuilder": "Величний будівельник",
+      "alconautics": "Алконавтика",
     },
     "ru": {
       "fishSeller": "Ты воняешь рыбой",
@@ -25,6 +31,9 @@ class AchievementsLocalizations extends InternalLocalizations {
       "warPowder": "Порох - двигатель всех войн",
       "silkSeller": "Шелк для шляхты",
       "masonBuilder": "Строитель церквей",
+      "europeFeeder": "Кормилец Европы",
+      "greatBuilder": "Великий строитель",
+      "alconautics": "Алконавтика",
     }
   };
 }
