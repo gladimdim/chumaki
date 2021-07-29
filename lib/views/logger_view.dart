@@ -1,5 +1,7 @@
 import 'package:chumaki/components/ui/3d_button.dart';
+import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/models/company.dart';
+import 'package:chumaki/models/logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/theme.dart';
 import 'logger_stats_view.dart';
@@ -33,14 +35,29 @@ class _LoggerViewState extends State<LoggerView> {
                   logger: widget.company.logger,
                   onClose: _toggleOpen,
                 )
-              : DDDButton(
-                  color: mediumGrey,
-                  shadowColor: themeData.backgroundColor,
-                  onPressed: _toggleOpen,
-                  child: Image.asset(
-                    "images/icons/paths/paths.png",
-                    width: 44,
-                  ),
+              : Stack(
+                  children: [
+                    DDDButton(
+                      color: mediumGrey,
+                      shadowColor: themeData.backgroundColor,
+                      onPressed: _toggleOpen,
+                      child: Image.asset(
+                        "images/icons/paths/paths.png",
+                        width: 44,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: StreamBuilder<LOGGER_EVENTS>(
+                          stream: widget.company.logger.changes,
+                          builder: (context, snapshot) {
+                            return OutlinedText(
+                              widget.company.logger.unreadCount.toString(),
+                              size: 24,
+                            );
+                          }),
+                    ),
+                  ],
                 ),
         ),
       ),
@@ -49,6 +66,7 @@ class _LoggerViewState extends State<LoggerView> {
 
   void _toggleOpen() {
     setState(() {
+      widget.company.logger.resetUnreadCount();
       opened = !opened;
     });
   }

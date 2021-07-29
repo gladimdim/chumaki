@@ -3,24 +3,33 @@ import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/logger/achievement.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/sound/sound_manager.dart';
+import 'package:rxdart/rxdart.dart';
+
+enum LOGGER_EVENTS { ACHEIVEMENT_UNLOCKED }
 
 class Logger {
   Logger({
     required this.boughtStock,
     this.boughtWagons = 0,
     this.leadersHired = 0,
+    this.unreadCount = 0,
     required this.soldStock,
     required this.achievements,
   }) {
     this.soldStock.changes.listen(_updateStockAchievements);
     this.boughtStock.changes.listen(_updateStockAchievements);
+    changes = _innerChanges.stream;
   }
+
+  final BehaviorSubject<LOGGER_EVENTS> _innerChanges = BehaviorSubject();
+  late final ValueStream<LOGGER_EVENTS> changes;
 
   final Stock boughtStock;
   final Stock soldStock;
   final List<Achievement> achievements;
   int boughtWagons;
   int leadersHired;
+  int unreadCount;
 
   void _updateStockAchievements(StockEvent event) {
     if (event.item1 == STOCK_EVENTS.ADDED) {
@@ -31,9 +40,19 @@ class Logger {
   void _processSoldStock() {
     achievements.forEach((Achievement achievement) {
       if (achievement.processChange(this)) {
-        SoundManager.instance.playLeaderLevelUp();
+        achievementUnlock();
       }
     });
+  }
+
+  void achievementUnlock() {
+    SoundManager.instance.playLeaderLevelUp();
+    unreadCount++;
+    _innerChanges.add(LOGGER_EVENTS.ACHEIVEMENT_UNLOCKED);
+  }
+
+  void resetUnreadCount() {
+    unreadCount = 0;
   }
 
   void attachToCompany(Company company) {
@@ -85,6 +104,7 @@ class Logger {
       "leadersHired": leadersHired,
       "soldStock": soldStock.toJson(),
       "achievements": achievements.map((ach) => ach.toJson()).toList(),
+      "unreadCount": unreadCount,
     };
   }
 
@@ -98,6 +118,7 @@ class Logger {
       leadersHired: inputJson["leadersHired"],
       soldStock: Stock.fromJson(inputJson["soldStock"]),
       achievements: achJson.map((json) => Achievement.fromJson(json)).toList(),
+      unreadCount: inputJson["unreadCount"],
     );
   }
 }
