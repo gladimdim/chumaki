@@ -1,4 +1,5 @@
 import 'package:chumaki/components/ui/3d_button.dart';
+import 'package:chumaki/components/ui/bouncing_widget.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/logger/logger.dart';
@@ -51,10 +52,12 @@ class _LoggerViewState extends State<LoggerView> {
                       child: StreamBuilder<LOGGER_EVENTS>(
                           stream: widget.company.logger.changes,
                           builder: (context, snapshot) {
-                            return OutlinedText(
-                              widget.company.logger.unreadCount.toString(),
-                              size: 24,
-                            );
+                            return BouncingWidget(
+                                child: OutlinedText(widget
+                                    .company.logger.unreadCount
+                                    .toString()),
+                                value: widget.company.logger.unreadCount
+                                    .toString());
                           }),
                     ),
                   ],
