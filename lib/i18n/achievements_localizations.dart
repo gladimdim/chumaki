@@ -7,18 +7,21 @@ class AchievementsLocalizations extends InternalLocalizations {
       "gunBaron": "The blood is on your arms",
       "tobaccoLover": "Die from coughing",
       "warPowder": "Powder - the moving power of War",
+      "silkSeller": "Top supplier for gentry",
     },
     "uk": {
       "fishSeller": "Ви тхнете рибою",
       "gunBaron": "Кров на ваших руках",
       "tobaccoLover": "Помрете закашлявшись",
       "warPowder": "Порох - рушій всіх війн",
+      "silkSeller": "Шовк для шляхти",
     },
     "ru": {
       "fishSeller": "Ты воняешь рыбой",
       "gunBaron": "Кров на ваших руках",
       "tobaccoLover": "Умереть закашлявшись",
       "warPowder": "Порох - двигатель всех войн",
+      "silkSeller": "Шелк для шляхты",
     }
   };
 }

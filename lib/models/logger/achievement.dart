@@ -87,6 +87,12 @@ class Achievement {
         iconPath: "images/events/vesterfeld/wagon_camp.png",
         soldResource: Tobacco(1500),
         boughtResource: Tobacco(1000),
+      ),
+      Achievement(
+        localizedKey: "achievements.silkSeller",
+        iconPath: "images/events/vesterfeld/elite_cossacks.png",
+        soldResource: Silk(2200),
+        boughtResource: Silk(800),
       )
     ];
   }
