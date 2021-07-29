@@ -67,7 +67,7 @@ class Achievement {
     return [
       Achievement(
         localizedKey: "achievements.fishSeller",
-        iconPath: "images/events/vesterfeld/town.png",
+        iconPath: "images/events/vesterfeld/cossack_and_bum.png",
         soldResource: Fish(5),
         boughtResource: Fish(15),
       ),
@@ -108,13 +108,18 @@ class Achievement {
       ),
       Achievement(
         localizedKey: "achievements.greatBuilder",
-        iconPath: "images/events/vesterfeld/ruins.png",
+        iconPath: "images/events/vesterfeld/big_city_2.png",
         soldResource: Planks(600),
         boughtResource: Wood(500),
       ),
       Achievement(
         localizedKey: "achievements.alconautics",
         iconPath: "images/events/vesterfeld/crazy_man.png",
+        soldResource: Gorilka(400),
+      ),
+      Achievement(
+        localizedKey: "achievements.warmWinter",
+        iconPath: "images/events/vesterfeld/cossacks_and_sheep.png",
         soldResource: Gorilka(400),
       )
     ];

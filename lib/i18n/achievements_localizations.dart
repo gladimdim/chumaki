@@ -12,6 +12,7 @@ class AchievementsLocalizations extends InternalLocalizations {
       "europeFeeder": "Food provider",
       "greatBuilder": "The Great Builder",
       "alconautics": "Alconautics",
+      "warmWinter": "Ready for winter",
     },
     "uk": {
       "fishSeller": "Ви тхнете рибою",
@@ -23,6 +24,7 @@ class AchievementsLocalizations extends InternalLocalizations {
       "europeFeeder": "Годівник Європи",
       "greatBuilder": "Величний будівельник",
       "alconautics": "Алконавтика",
+      "warmWinter": "До зими готовий",
     },
     "ru": {
       "fishSeller": "Ты воняешь рыбой",
@@ -34,6 +36,7 @@ class AchievementsLocalizations extends InternalLocalizations {
       "europeFeeder": "Кормилец Европы",
       "greatBuilder": "Великий строитель",
       "alconautics": "Алконавтика",
+      "warmWinter": "К зиме готов",
     }
   };
 }
