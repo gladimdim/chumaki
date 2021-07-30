@@ -37,8 +37,8 @@ import 'package:chumaki/models/logger/logger.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/tasks/route.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
-import 'package:chumaki/models/wagons/active_wagon.dart';
 import 'package:chumaki/models/wagons/wagon.dart';
+import 'package:chumaki/models/wagons/active_wagon.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
@@ -167,7 +167,8 @@ class Company {
   }) async {
     var realFrom = refToCityByName(from);
     var realTo = refToCityByName(to);
-    final completeRoute = Queue.from(fullRoute(from: realFrom, to: realTo));
+    final completeRoute =
+        Queue.from(fullRoute(from: realFrom, to: realTo, company: this));
     final wagonWithRoute = ActiveWagon(
       wagon: withWagon,
       from: realFrom,
@@ -356,74 +357,6 @@ class Company {
     forWagon.setLeader(leader);
     removeMoney(Leader.defaultAcquirePrice.amount);
     _innerChanges.add(COMPANY_EVENTS.LEADER_HIRED);
-  }
-
-  bool hasDirectConnection({required City from, required City to}) {
-    return from
-        .connectsTo(inCompany: this)
-        .where((element) => element.equalsTo(to))
-        .isNotEmpty;
-  }
-
-  List<City> fullRoute(
-      {required City from, required City to, bool allowLocked = false}) {
-    List<City>? result = _innerFullRoute(
-        from: from,
-        to: to,
-        ignore: [from],
-        route: [],
-        allowLocked: allowLocked);
-    if (result == null) {
-      throw "Route not found";
-    } else {
-      return result;
-    }
-  }
-
-  List<City>? _innerFullRoute({
-    required City from,
-    required City to,
-    required List<City> ignore,
-    required List<City> route,
-    required bool allowLocked,
-  }) {
-    if (hasDirectConnection(from: from, to: to) &&
-        (allowLocked || to.isUnlocked())) {
-      return [to];
-    }
-
-    Queue<City> neighbours = Queue.from(from
-        .connectsTo(inCompany: this)
-        .where((element) => (allowLocked || element.isUnlocked())));
-    List<City>? bestMatch;
-    while (neighbours.isNotEmpty) {
-      final candidate = neighbours.removeFirst();
-      if (ignore.where((element) => element.equalsTo(candidate)).isNotEmpty) {
-        continue;
-      }
-      if (hasDirectConnection(from: candidate, to: to)) {
-        final List<City> newRoute = List.from(route)..addAll([candidate, to]);
-        return newRoute;
-      } else {
-        final match = _innerFullRoute(
-          from: candidate,
-          to: to,
-          ignore: [...ignore, candidate],
-          route: [...route, candidate],
-          allowLocked: allowLocked,
-        );
-        if (bestMatch == null) {
-          bestMatch = match;
-        } else {
-          if (match != null &&
-              match.isNotEmpty &&
-              match.length < bestMatch.length) {
-            bestMatch = match;
-          }
-        }
-      }
-    }
-    return bestMatch;
   }
 
   bool cityCanUnlockMore(City city) {

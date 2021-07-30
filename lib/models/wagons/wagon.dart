@@ -35,7 +35,9 @@ class Wagon {
   }
 
   void subscribeLeaderChanges() {
-    leader?.changes.where((event) => event == LEADER_CHANGES.CATEGORY_UNLOCKED).listen((event) {
+    leader?.changes
+        .where((event) => event == LEADER_CHANGES.CATEGORY_UNLOCKED)
+        .listen((event) {
       changes.add(this);
     });
   }
@@ -110,7 +112,8 @@ class Wagon {
     if (leader == null) {
       return DEFAULT_CATEGORIES.contains(cat);
     } else {
-      return DEFAULT_CATEGORIES.contains(cat) || leader!.hasPerkForCategory(cat);
+      return DEFAULT_CATEGORIES.contains(cat) ||
+          leader!.hasPerkForCategory(cat);
     }
   }
 }

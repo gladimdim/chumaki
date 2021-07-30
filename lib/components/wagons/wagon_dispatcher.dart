@@ -3,6 +3,7 @@ import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/tasks/path_route.dart';
+import 'package:chumaki/models/tasks/route.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
 import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:chumaki/utils/time.dart';
@@ -34,8 +35,11 @@ class WagonDispatcher extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: toCities.map((toCity) {
               var pathRoute = PathRoute(
-                  stops: company.fullRoute(
-                      from: city, to: toCity, allowLocked: true),
+                  stops: fullRoute(
+                      from: city,
+                      to: toCity,
+                      allowLocked: true,
+                      company: company),
                   allRoutes: company.cityRoutes,
                   from: city);
 

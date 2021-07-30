@@ -5,6 +5,7 @@ import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/company.dart';
+import 'package:chumaki/models/tasks/route.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -12,18 +13,21 @@ void main() {
     test("Can tell if the city has direct connection to other city", () {
       final company = Company(money: 3000);
       expect(
-          company.hasDirectConnection(from: Kyiv(), to: Pereyaslav()), isTrue,
+          hasDirectConnection(
+              from: Kyiv(), to: Pereyaslav(), inCompany: company),
+          isTrue,
           reason: "Kyiv connects to Pereyaslav");
       expect(Kyiv().connectsTo(inCompany: company).length, 5,
           reason: "Kyiv connects to five cities");
-      expect(company.hasDirectConnection(from: Kyiv(), to: Sich()), isFalse,
+      expect(hasDirectConnection(from: Kyiv(), to: Sich(), inCompany: company),
+          isFalse,
           reason: "Kyiv is not directly connected to Sich");
     });
 
     test("Can calculate the full route between two cities", () {
       final company = Company();
-      final fullRoute = company.fullRoute(from: Kyiv(), to: Pereyaslav());
-      expect(fullRoute[0].equalsTo(Pereyaslav()), isTrue,
+      final fullR = fullRoute(from: Kyiv(), to: Pereyaslav(), company: company);
+      expect(fullR[0].equalsTo(Pereyaslav()), isTrue,
           reason: "Has direct connection");
     });
     test("Can show the route between far cities", () {
@@ -32,13 +36,16 @@ void main() {
       company.unlockCity(company.refToCityByName(Ladyzhin()));
       company.unlockCity(company.refToCityByName(Berdychiv()));
       company.unlockCity(company.refToCityByName(Zhytomir()));
-      final route = company.fullRoute(
+      final route = fullRoute(
+          company: company,
           from: company.refToCityByName(Kyiv()),
           to: company.refToCityByName(Berdychiv()));
-      final route2 = company.fullRoute(
+      final route2 = fullRoute(
+          company: company,
           from: company.refToCityByName(Kyiv()),
           to: company.refToCityByName(Sich()));
-      final route3 = company.fullRoute(
+      final route3 = fullRoute(
+        company: company,
         from: company.refToCityByName(Kyiv()),
         to: company.refToCityByName(
           Ladyzhin(),

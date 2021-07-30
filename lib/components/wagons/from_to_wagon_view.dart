@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:chumaki/components/city/city_avatar.dart';
+import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/animations/scaling_widget.dart';
 import 'package:chumaki/components/ui/animations/spinning_widget.dart';
@@ -60,62 +61,66 @@ class FromToWagonView extends StatefulWidget {
 
 class _FromToWagonViewState extends State<FromToWagonView>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _rotateController;
+  late final AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    double upper = 2 * pi;
-    double lower = 0;
-    _rotateController =
-        AnimationController(vsync: this, upperBound: upper, lowerBound: lower)
-          ..duration = Duration(seconds: 2)
-          ..repeat();
+    _controller = AnimationController(
+      vsync: this,
+    )
+      ..duration = Duration(seconds: 15)
+      ..repeat();
 
-    _rotateController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        _rotateController.repeat();
-      }
-    });
-    _rotateController.forward();
+    _controller.repeat(reverse: false);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        CityAvatar(
-          width: 92,
-          city: widget.activeWagon.from,
-        ),
-        ScalingWidget(
-          duration: Duration(seconds: 3),
-          min: 0.7,
-          child: SpinningWidget(
-            child: Image.asset("images/wagon/wheel.png"),
+    return SizedBox(
+      width: CITY_DETAILS_VIEW_WIDTH,
+      child: Stack(
+        children: [
+          AnimatedBuilder(
+            animation: _controller,
+            builder: (BuildContext context, Widget? child) {
+              return Positioned(
+                top: 20,
+                left: _controller.value * CITY_DETAILS_VIEW_WIDTH,
+                child: child!,
+              );
+            },
+            child: ScalingWidget(
+              duration: Duration(seconds: 3),
+              min: 0.7,
+              child: SpinningWidget(
+                child: Image.asset("images/wagon/wheel.png"),
+              ),
+            ),
           ),
-        ),
-        Column(
-          children: [
-            WagonAvatar(wagon: widget.activeWagon.wagon),
-            TitleText(ChumakiLocalizations.getForKey(
-              widget.activeWagon.wagon.fullLocalizedName,
-            ))
-          ],
-        ),
-        ScalingWidget(
-          duration: Duration(seconds: 3),
-          min: 0.7,
-          child: SpinningWidget(
-            child: Image.asset("images/wagon/wheel.png"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CityAvatar(
+                width: 92,
+                city: widget.activeWagon.from,
+              ),
+              Column(
+                children: [
+                  WagonAvatar(wagon: widget.activeWagon.wagon),
+                  TitleText(ChumakiLocalizations.getForKey(
+                    widget.activeWagon.wagon.fullLocalizedName,
+                  ))
+                ],
+              ),
+              CityAvatar(
+                width: 92,
+                city: widget.activeWagon.to,
+              ),
+            ],
           ),
-        ),
-        CityAvatar(
-          width: 92,
-          city: widget.activeWagon.to,
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
