@@ -37,7 +37,8 @@ import 'package:chumaki/models/logger/logger.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/tasks/route.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/wagons/active_wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
@@ -126,6 +127,7 @@ class Company {
 
   final BehaviorSubject<COMPANY_EVENTS> _innerChanges = BehaviorSubject();
   late ValueStream<COMPANY_EVENTS> changes;
+  List<ActiveWagon> _activeFullRoutes = [];
 
   addMoney(double value) {
     _money += value;
@@ -166,7 +168,14 @@ class Company {
     var realFrom = refToCityByName(from);
     var realTo = refToCityByName(to);
     final completeRoute = Queue.from(fullRoute(from: realFrom, to: realTo));
+    final wagonWithRoute = ActiveWagon(
+      wagon: withWagon,
+      from: realFrom,
+      to: realTo,
+    );
+    _activeFullRoutes.add(wagonWithRoute);
     _innerChanges.add(COMPANY_EVENTS.TASK_STARTED);
+
     for (var nextStop in completeRoute) {
       var newTask = RouteTask(realFrom, nextStop, wagon: withWagon);
       // notify from City that the trade company with the given wagon departed
@@ -175,7 +184,22 @@ class Company {
       await _startIntermediateTask(newTask);
       realFrom = nextStop;
     }
+    _activeFullRoutes.remove(wagonWithRoute);
     _innerChanges.add(COMPANY_EVENTS.TASK_ENDED);
+  }
+
+  List<ActiveWagon> activeIncomingRoutes({required City forCity}) {
+    return _activeFullRoutes.where((activeRoute) {
+      final tc = activeRoute.to;
+      return tc.equalsTo(forCity);
+    }).toList();
+  }
+
+  activeOutcomingRoutes({required City forCity}) {
+    return _activeFullRoutes.where((activeRoute) {
+      final fc = activeRoute.from;
+      return fc.equalsTo(forCity);
+    }).toList();
   }
 
   Future _startIntermediateTask(RouteTask newTask) async {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
 import 'package:chumaki/components/ui/action_button.dart';

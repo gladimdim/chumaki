@@ -4,7 +4,7 @@ import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/tasks/path_route.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:chumaki/utils/time.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';

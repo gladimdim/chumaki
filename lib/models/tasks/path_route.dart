@@ -3,7 +3,7 @@ import 'dart:collection';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/tasks/route.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 
 class PathRoute {
   final List<City> stops;

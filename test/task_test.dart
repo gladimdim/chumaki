@@ -2,7 +2,7 @@ import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:test/test.dart';
 
@@ -28,9 +28,7 @@ void main() {
           reason: "To City was restored");
       expect(newTask.from.equalsTo(task.from), isTrue,
           reason: "From City was restored");
-      expect(
-          newTask.wagon, isNotNull,
-          reason: "Wagon was restored");
+      expect(newTask.wagon, isNotNull, reason: "Wagon was restored");
       expect(newTask.finishAt, equals(task.finishAt),
           reason: "Finish at is restored");
       expect(newTask.isStarted, isFalse, reason: "isStarted is restored");

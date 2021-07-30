@@ -24,6 +24,7 @@ import 'dart:ui' as ui;
 import 'package:chumaki/extensions/list.dart';
 import 'package:rxdart/rxdart.dart';
 
+enum MAP_MODE { CITY, RESOURCE }
 const CITY_SIZE = 50;
 const double MENU_ITEM_WIDTH = 55.0;
 
@@ -467,23 +468,3 @@ class GameCanvasViewState extends State<GameCanvasView>
     super.dispose();
   }
 }
-
-class Clipper extends CustomClipper<Path> {
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => true;
-
-  @override
-  Path getClip(Size size) {
-    var path = Path()
-      ..moveTo(0, 0)
-      ..quadraticBezierTo(20, 20, 300, 50)
-      ..lineTo(size.width, 0)
-      ..lineTo(size.width, size.height)
-      ..lineTo(0, size.height)
-      ..close();
-
-    return path;
-  }
-}
-
-enum MAP_MODE { CITY, RESOURCE }

@@ -4,7 +4,7 @@ import 'package:chumaki/components/ui/bordered_top.dart';
 import 'package:chumaki/components/wagons/wagon_details.dart';
 import 'package:chumaki/components/wagons/wagon_list_item.dart';
 import 'package:chumaki/models/cities/city.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:flutter/material.dart';
 
 class CityLocalMarket extends StatefulWidget {
@@ -21,7 +21,8 @@ class _CityLocalMarketState extends State<CityLocalMarket> {
   @override
   void didUpdateWidget(CityLocalMarket old) {
     super.didUpdateWidget(old);
-    if (old.city != widget.city || !widget.city.wagons.contains(selectedWagon)) {
+    if (old.city != widget.city ||
+        !widget.city.wagons.contains(selectedWagon)) {
       selectedWagon = null;
     }
   }
@@ -51,7 +52,8 @@ class _CityLocalMarketState extends State<CityLocalMarket> {
               );
             }).toList(),
           ),
-          if (selWagon != null) WagonDetails(wagon: selWagon, city: widget.city),
+          if (selWagon != null)
+            WagonDetails(wagon: selWagon, city: widget.city),
           // WagonListItem(city: widget.city),
           if (selWagon == null)
             BorderedTop(
@@ -63,8 +65,6 @@ class _CityLocalMarketState extends State<CityLocalMarket> {
       ),
     );
   }
-
-
 
   void onWagonSelected(Wagon wagon) {
     setState(

@@ -6,7 +6,7 @@ import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 
 class BuyNewWagonView extends StatefulWidget {
   final City city;
@@ -26,7 +26,7 @@ class _BuyNewWagonViewState extends State<BuyNewWagonView> {
     final company = InheritedCompany.of(context).company;
     return StreamBuilder(
       stream: company.changes.where((event) =>
-      event == COMPANY_EVENTS.MONEY_REMOVED ||
+          event == COMPANY_EVENTS.MONEY_REMOVED ||
           event == COMPANY_EVENTS.MONEY_ADDED),
       builder: (context, snapshot) => ActionButton(
         onPress: company.hasEnoughMoney(wagonPrice)

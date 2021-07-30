@@ -6,7 +6,7 @@ import 'package:chumaki/models/cities/ochakiv.dart';
 import 'package:chumaki/models/events/event.dart';
 import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 
 class Sich extends City {
   Sich()
