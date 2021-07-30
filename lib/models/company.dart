@@ -168,8 +168,11 @@ class Company {
     var realFrom = refToCityByName(from);
     var realTo = refToCityByName(to);
     final completeRoute = Queue.from(fullRoute(from: realFrom, to: realTo));
-    final wagonWithRoute =
-        ActiveWagon(wagon: withWagon, from: realFrom, to: realTo);
+    final wagonWithRoute = ActiveWagon(
+      wagon: withWagon,
+      from: realFrom,
+      to: realTo,
+    );
     _activeFullRoutes.add(wagonWithRoute);
     _innerChanges.add(COMPANY_EVENTS.TASK_STARTED);
 

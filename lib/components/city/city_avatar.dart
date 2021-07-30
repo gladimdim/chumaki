@@ -12,18 +12,19 @@ class CityAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-          Image.asset(
-            city.avatarImagePath,
-            width: width,
-          ),
-        if (showName) Padding(
-          padding: const EdgeInsets.all(4.0),
-          child:
-              TitleText(ChumakiLocalizations.getForKey(city.localizedKeyName)),
+        Image.asset(
+          city.avatarImagePath,
+          width: width,
         ),
+        if (showName)
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: TitleText(
+                ChumakiLocalizations.getForKey(city.localizedKeyName)),
+          ),
       ],
     );
   }

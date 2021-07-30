@@ -1,5 +1,6 @@
 import 'package:chumaki/components/city/buy_new_wagon_view.dart';
 import 'package:chumaki/components/city/call_wagon_to_city_view.dart';
+import 'package:chumaki/components/wagons/from_to_wagon_view.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class _CityWagonsViewState extends State<CityWagonsView> {
       children: [
         BuyNewWagonView(widget.city),
         CallWagonToCityView(toCity: widget.city, company: company),
+        FromToWagonsView(activeCity: widget.city),
       ],
     );
   }
