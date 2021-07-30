@@ -6,7 +6,7 @@ import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:test/test.dart';
 
@@ -103,16 +103,17 @@ void main() {
         company.buyWagon(Wagon(), forCity: sich, price: Money(5));
         company.buyWagon(Wagon(), forCity: sich, price: Money(5));
         final wagon = sich.wagons.first;
-        sich
-            .sellResource(resource: Fish(3), toWagon: wagon, company: company);
+        sich.sellResource(resource: Fish(3), toWagon: wagon, company: company);
         async.elapse(Duration(seconds: 1));
         final aCompany = Company.fromJson(company.toJson());
 
         expect(aCompany.logger.boughtStock.isEmpty, isFalse,
             reason: "Logger stock should have fish");
-        expect(aCompany.logger.boughtStock.resourceInStock(Fish(3))!.amount, equals(3),
+        expect(aCompany.logger.boughtStock.resourceInStock(Fish(3))!.amount,
+            equals(3),
             reason: "Logger stock should have fish");
-        expect(aCompany.logger.boughtWagons, equals(2), reason: "2 wagons were bought");
+        expect(aCompany.logger.boughtWagons, equals(2),
+            reason: "2 wagons were bought");
       });
     });
   });

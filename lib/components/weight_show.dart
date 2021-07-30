@@ -1,5 +1,5 @@
 import 'package:chumaki/components/ui/bouncing_normal_text.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:flutter/material.dart';
 
 class WeightShow extends StatelessWidget {

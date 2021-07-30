@@ -11,13 +11,12 @@ import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:test/test.dart';
 
 void main() {
   group("Replenish stock", () {
     test("Can replenish stock from mfg", () {
-
       final city = Sich();
       final company = Company();
       city.stock.removeResource(Fish(1490));
@@ -29,7 +28,6 @@ void main() {
     });
 
     test("Does not replenish stock from mfg if there is enough", () {
-
       final city = Sich();
       final company = Company();
       city.stock.removeResource(Fish(1400));

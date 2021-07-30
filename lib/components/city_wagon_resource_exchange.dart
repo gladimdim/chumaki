@@ -6,7 +6,7 @@ import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/resources/resource.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/components/ui/action_button.dart';
@@ -36,10 +36,10 @@ class CityWagonResourceExchange extends StatelessWidget {
         city.buyPriceForResource(resource, company.allCities, withAmount: 1);
     var buyPricePerUnit =
         city.sellPriceForResource(resource, company.allCities, withAmount: 1);
-    var buyPrice = city
-        .buyPriceForResource(resource, company.allCities, withAmount: amountTradeValue);
-    var sellPrice =
-        city.sellPriceForResource(resource, company.allCities, withAmount: amountTradeValue);
+    var buyPrice = city.buyPriceForResource(resource, company.allCities,
+        withAmount: amountTradeValue);
+    var sellPrice = city.sellPriceForResource(resource, company.allCities,
+        withAmount: amountTradeValue);
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -113,8 +113,7 @@ class CityWagonResourceExchange extends StatelessWidget {
                           ? "0"
                           : tradeResource.amount.toString(),
                       size: 32,
-                      fontColor:
-                          getFontColor(company),
+                      fontColor: getFontColor(company),
                     ),
                   ],
                 ),

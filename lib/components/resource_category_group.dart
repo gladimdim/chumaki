@@ -4,7 +4,7 @@ import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/resources/resource_category.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/components/city_wagon_resource_exchange.dart';
 import 'package:chumaki/extensions/list.dart';
@@ -31,7 +31,8 @@ class ResourceCategoryGroup extends StatelessWidget {
           children: [
             Row(
               children: [
-                Image.asset(categoryToImagePath(resources.first.category), width: 92),
+                Image.asset(categoryToImagePath(resources.first.category),
+                    width: 92),
                 Text(
                   ChumakiLocalizations.getForKey(
                     resourceCategoryToLocalizedKey(resources.first.category),

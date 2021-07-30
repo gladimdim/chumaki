@@ -1,5 +1,5 @@
 import 'package:chumaki/models/resources/resource_category.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:flutter/material.dart';
 
 class WagonAvatar extends StatelessWidget {
@@ -12,30 +12,28 @@ class WagonAvatar extends StatelessWidget {
         Align(
           alignment: Alignment.center,
           child: ClipOval(
-            child: Image.asset(wagon.getImagePath(),
-                width: 128),
+            child: Image.asset(wagon.getImagePath(), width: 128),
           ),
         ),
         wagon.leader == null
             ? Container()
             : StreamBuilder(
-          stream: wagon.leader!.changes,
-          builder: (context, _) => Positioned(
-            right: 0,
-            bottom: 0,
-            child: Row(
-              children: wagon.leader!.perks
-                  .map(
-                    (perk) => Image.asset(
-                  categoryToImagePath(perk
-                      .affectsResourceCategory),
-                  width: 32,
+                stream: wagon.leader!.changes,
+                builder: (context, _) => Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: Row(
+                    children: wagon.leader!.perks
+                        .map(
+                          (perk) => Image.asset(
+                            categoryToImagePath(perk.affectsResourceCategory),
+                            width: 32,
+                          ),
+                        )
+                        .toList(),
+                  ),
                 ),
-              )
-                  .toList(),
-            ),
-          ),
-        ),
+              ),
       ],
     );
   }

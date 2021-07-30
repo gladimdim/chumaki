@@ -1,6 +1,6 @@
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/models/resources/resource_category.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:flutter/material.dart';
 
 class StockWagonStatus extends StatelessWidget {

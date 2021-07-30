@@ -34,7 +34,7 @@ import 'package:chumaki/models/price/price_unit.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/tasks/route.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
-import 'package:chumaki/models/wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:rxdart/rxdart.dart';
 
 enum CITY_EVENTS {
