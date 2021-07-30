@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
+import 'package:chumaki/models/wagons/active_wagon.dart';
 
 class CityRoute {
   final City from;
@@ -90,6 +91,30 @@ List<City>? _innerFullRoute({
     }
   }
   return bestMatch;
+}
+
+Duration fullRouteDuration(
+    {required ActiveWagon activeWagon, required Company company}) {
+  Queue<City> stops = Queue.from(
+      fullRoute(from: activeWagon.from, to: activeWagon.to, company: company));
+
+  Duration duration = Duration(seconds: 0);
+  if (stops.isEmpty) {
+    return duration;
+  }
+  var first = stops.removeFirst();
+  var last;
+  while (stops.isNotEmpty) {
+    last = stops.removeFirst();
+    duration =
+        duration + RouteTask(first, last, wagon: activeWagon.wagon).duration!;
+    first = last;
+  }
+
+  duration = duration +
+      RouteTask(last, activeWagon.to, wagon: activeWagon.wagon).duration!;
+
+  return duration;
 }
 
 bool hasDirectConnection(
