@@ -119,7 +119,7 @@ class Achievement {
       ),
       Achievement(
         localizedKey: "achievements.warmWinter",
-        iconPath: "images/events/vesterfeld/cossacks_and_sheep.png",
+        iconPath: "images/events/vesterfeld/cossack_and_sheep.png",
         soldResource: Fur(100),
       )
     ];
