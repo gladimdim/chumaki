@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:chumaki/components/city/city_avatar.dart';
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/animations/scaling_widget.dart';
+import 'package:chumaki/components/ui/animations/spinning_widget.dart';
 import 'package:chumaki/components/wagons/wagon_avatar.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
@@ -87,11 +89,12 @@ class _FromToWagonViewState extends State<FromToWagonView>
           width: 92,
           city: widget.activeWagon.from,
         ),
-        AnimatedBuilder(
-          animation: _rotateController,
-          builder: (context, child) =>
-              Transform.rotate(angle: _rotateController.value, child: child),
-          child: Image.asset("images/wagon/wheel.png"),
+        ScalingWidget(
+          duration: Duration(seconds: 3),
+          min: 0.7,
+          child: SpinningWidget(
+            child: Image.asset("images/wagon/wheel.png"),
+          ),
         ),
         Column(
           children: [
@@ -101,11 +104,12 @@ class _FromToWagonViewState extends State<FromToWagonView>
             ))
           ],
         ),
-        AnimatedBuilder(
-          animation: _rotateController,
-          builder: (context, child) =>
-              Transform.rotate(angle: _rotateController.value, child: child),
-          child: Image.asset("images/wagon/wheel.png"),
+        ScalingWidget(
+          duration: Duration(seconds: 3),
+          min: 0.7,
+          child: SpinningWidget(
+            child: Image.asset("images/wagon/wheel.png"),
+          ),
         ),
         CityAvatar(
           width: 92,
