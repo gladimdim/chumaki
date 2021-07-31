@@ -1,14 +1,16 @@
+import 'dart:collection';
 import 'dart:math';
 
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
+import 'package:chumaki/models/wagons/active_wagon.dart';
 
 class CityRoute {
   final City from;
   final City to;
   final Point<double> bezierPoint;
   List<RouteTask> routeTasks = List.empty(growable: true);
-
 
   CityRoute(this.to, this.from, this.bezierPoint);
 
@@ -23,4 +25,102 @@ class CityRoute {
   //   CityRoute(City.kaniv, City.pereyaslav, Point<double>(100, -50)),
   //   CityRoute(City.ochakiv, City.sich, Point<double>(450, -230)),
   // ];
+}
+
+List<City> fullRoute(
+    {required City from,
+    required City to,
+    bool allowLocked = false,
+    required Company company}) {
+  List<City>? result = _innerFullRoute(
+      from: from,
+      to: to,
+      ignore: [from],
+      route: [],
+      allowLocked: allowLocked,
+      company: company);
+  if (result == null) {
+    throw "Route not found";
+  } else {
+    return result;
+  }
+}
+
+List<City>? _innerFullRoute({
+  required City from,
+  required City to,
+  required List<City> ignore,
+  required List<City> route,
+  required bool allowLocked,
+  required Company company,
+}) {
+  if (hasDirectConnection(from: from, to: to, inCompany: company) &&
+      (allowLocked || to.isUnlocked())) {
+    return [to];
+  }
+
+  Queue<City> neighbours = Queue.from(from
+      .connectsTo(inCompany: company)
+      .where((element) => (allowLocked || element.isUnlocked())));
+  List<City>? bestMatch;
+  while (neighbours.isNotEmpty) {
+    final candidate = neighbours.removeFirst();
+    if (ignore.where((element) => element.equalsTo(candidate)).isNotEmpty) {
+      continue;
+    }
+    if (hasDirectConnection(from: candidate, to: to, inCompany: company)) {
+      final List<City> newRoute = List.from(route)..addAll([candidate, to]);
+      return newRoute;
+    } else {
+      final match = _innerFullRoute(
+          from: candidate,
+          to: to,
+          ignore: [...ignore, candidate],
+          route: [...route, candidate],
+          allowLocked: allowLocked,
+          company: company);
+      if (bestMatch == null) {
+        bestMatch = match;
+      } else {
+        if (match != null &&
+            match.isNotEmpty &&
+            match.length < bestMatch.length) {
+          bestMatch = match;
+        }
+      }
+    }
+  }
+  return bestMatch;
+}
+
+Duration fullRouteDuration(
+    {required ActiveWagon activeWagon, required Company company}) {
+  Queue<City> stops = Queue.from(
+      fullRoute(from: activeWagon.from, to: activeWagon.to, company: company));
+
+  Duration duration = Duration(seconds: 0);
+  if (stops.isEmpty) {
+    return duration;
+  }
+  var first = stops.removeFirst();
+  var last;
+  while (stops.isNotEmpty) {
+    last = stops.removeFirst();
+    duration =
+        duration + RouteTask(first, last, wagon: activeWagon.wagon).duration!;
+    first = last;
+  }
+
+  duration = duration +
+      RouteTask(last, activeWagon.to, wagon: activeWagon.wagon).duration!;
+
+  return duration;
+}
+
+bool hasDirectConnection(
+    {required City from, required City to, required Company inCompany}) {
+  return from
+      .connectsTo(inCompany: inCompany)
+      .where((element) => element.equalsTo(to))
+      .isNotEmpty;
 }
