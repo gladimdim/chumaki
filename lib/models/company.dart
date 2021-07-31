@@ -39,6 +39,7 @@ import 'package:chumaki/models/tasks/route.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
 import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:chumaki/models/wagons/active_wagon.dart';
+import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
@@ -123,6 +124,12 @@ class Company {
         );
 
     this.logger.attachToCompany(this);
+
+    if (kDebugMode) {
+      allCities.forEach((element) {
+        element.unlock();
+      });
+    }
   }
 
   final BehaviorSubject<COMPANY_EVENTS> _innerChanges = BehaviorSubject();

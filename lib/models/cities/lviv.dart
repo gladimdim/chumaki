@@ -37,7 +37,7 @@ class Lviv extends City {
                   payment: Money(1000),
                   requirements: [Wood(50), Planks(80), Wax(300)],
                   localizedKey: "events.lvivUniOpening",
-                  artPath: "iamges/events/vesterfeld/big_town.png"),
+                  artPath: "images/events/vesterfeld/big_town.png"),
               Event(
                   iconPath: "images/manufacturings/church/church_2.png",
                   payment: Money(2000),
@@ -52,7 +52,7 @@ class Lviv extends City {
                     Cloth(50),
                   ],
                   localizedKey: "events.lvivStarFall",
-                  artPath: "iamges/events/vesterfeld/city_and_hills.png"),
+                  artPath: "images/events/vesterfeld/city_and_hills.png"),
               Event(
                   iconPath: "images/resources/metalparts/metalparts_2.png",
                   payment: Money(3000),
@@ -62,7 +62,7 @@ class Lviv extends City {
                     IronOre(200),
                   ],
                   localizedKey: "events.lvivLostTrading",
-                  artPath: "iamges/events/vesterfeld/fortress_town.png"),
+                  artPath: "images/events/vesterfeld/fortress_town.png"),
               Event(
                   iconPath: "images/resources/planks/planks_2.png",
                   payment: Money(3900),
@@ -72,6 +72,6 @@ class Lviv extends City {
                     MetalParts(200),
                   ],
                   localizedKey: "events.lvivBigFire",
-                  artPath: "iamges/events/vesterfeld/ruins_2.png")
+                  artPath: "images/events/vesterfeld/ruins_2.png")
             ]);
 }
