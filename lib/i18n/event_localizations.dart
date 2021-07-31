@@ -36,6 +36,10 @@ class EventLocalizations extends InternalLocalizations {
       "kyivNewChurchTitle": "St. Andrew Church",
       "kyivNewChurchText":
           "To stop the expansion of the catholics local gentry decided to build a new church - St. Andrew. They asked all merchants to provide them building materials.",
+      // Uman
+      "umanWaxProblemTitle": "Wax Problem",
+      "umanWaxProblemText":
+          "The last tartar raid demolished Church stocks. Liturgies cannot be properly handled due to lack of wax and candles. People cannot light them in churches. Bishop Mykola asks traders to bring wax and honey to Uman in order to cover the shortage of church goods.",
     },
     "uk": {
       // sich
@@ -73,6 +77,10 @@ class EventLocalizations extends InternalLocalizations {
       "kyivNewChurchTitle": "Андріївська Церква",
       "kyivNewChurchText":
           "Щоб зупинити експансію католиків місцева шляхта вирішила зібратися та збудувати нову православну церкву - Андріївську. Вони просять всіх торговців продавати їм будівельні матеріали.",
+      // uman
+      "umanWaxProblemTitle": "Воскова халепа",
+      "umanWaxProblemText":
+          "Останній набіг татар зруйнував церковні склади. Богослужіння проводять без потрібного ренаменту через нестачу воску не всі можуть поставити свічку чи освітити церкву належним чином. Протоієрєй Миколай просить торговців привезти воску та меду, щоб покрити церковні потреби.",
     },
     "ru": {
       // Sich
@@ -111,6 +119,9 @@ class EventLocalizations extends InternalLocalizations {
       "kyivNewChurchTitle": "Андреевскяа Церковь",
       "kyivNewChurchText":
           "Чтобы остановить экспансию католиков местная шляхта решила собраться и построить новую церковь - Андреевску. Они просят всех торговцев помочь и привозить им строительные материали.",
+      "umanWaxProblemTitle": "Восковая проблема",
+      "umanWaxProblemText":
+          "Последний набег татар разрушил церковные склады. Богослужения проводят без необходимого ренаменту из-за нестачи воску не все могут поставить свечку или осветить церковь должным образом. Протоиерей Миколай просит привезти в Умань воск и мед, чтобы покрыть церковные потребности.",
     }
   };
 }

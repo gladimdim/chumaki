@@ -45,4 +45,10 @@ class _SpinningWidgetState extends State<SpinningWidget>
       child: widget.child,
     );
   }
+
+  @override
+  void dispose() {
+    _rotateController.stop();
+    super.dispose();
+  }
 }

@@ -96,7 +96,8 @@ class _FromToWagonViewState extends State<FromToWagonView>
                   builder: (BuildContext context, Widget? child) {
                     return Positioned(
                       top: 20,
-                      left: _controller.value * CITY_DETAILS_VIEW_WIDTH,
+                      left: _controller.value *
+                          (CITY_DETAILS_VIEW_WIDTH - CITY_MENU_WIDTH),
                       child: child!,
                     );
                   },
