@@ -39,4 +39,10 @@ class _ScalingWidget extends State<ScalingWidget>
       child: widget.child,
     );
   }
+
+  @override
+  void dispose() {
+    _controller.stop();
+    super.dispose();
+  }
 }

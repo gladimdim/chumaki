@@ -20,6 +20,7 @@ import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 
 const CITY_DETAILS_VIEW_WIDTH = 780.0;
+const CITY_MENU_WIDTH = 195.0;
 
 class SelectedCityView extends StatefulWidget {
   final City city;
@@ -61,8 +62,9 @@ class _SelectedCityViewState extends State<SelectedCityView> {
           duration: Duration(milliseconds: 400),
           child: ConstrainedBox(
             constraints: BoxConstraints(
-                maxWidth:
-                    selectedButton == null ? 195 : CITY_DETAILS_VIEW_WIDTH),
+                maxWidth: selectedButton == null
+                    ? CITY_MENU_WIDTH
+                    : CITY_DETAILS_VIEW_WIDTH),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
