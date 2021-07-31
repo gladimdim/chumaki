@@ -29,32 +29,32 @@ class Uman extends City {
             Horse(100),
           ]),
           availableEvents: [
-            // Event(
-            //     iconPath: "images/resources/wax/wax.png",
-            //     payment: Money(900),
-            //     requirements: [Wax(800), Honey(300)],
-            //     localizedKey: "events.umanWaxProblem",
-            //     artPath: "images/events/vesterfeld/poor_boy_2.png"),
-            // Event(
-            //     iconPath: "images/resources/planks/planks.png",
-            //     payment: Money(2000),
-            //     requirements: [Wood(800), Planks(400), Stone(100), Powder(100)],
-            //     localizedKey: "events.umanFortified",
-            //     artPath: "images/events/vesterfeld/fortress_outer.png"),
-            // Event(
-            //     iconPath: "images/resources/horse/horse_2.png",
-            //     payment: Money(4000),
-            //     requirements: [
-            //       Cannon(3),
-            //       Firearm(100),
-            //       Horse(100),
-            //       Powder(200)
-            //     ],
-            //     localizedKey: "events.umanRealAllies",
-            //     artPath: "images/events/vesterfeld/cannons_shooting.png"),
+            Event(
+                iconPath: "images/resources/wax/wax.png",
+                payment: Money(1400),
+                requirements: [Wax(800), Honey(300)],
+                localizedKey: "events.umanWaxProblem",
+                artPath: "images/events/vesterfeld/poor_boy_2.png"),
+            Event(
+                iconPath: "images/resources/planks/planks.png",
+                payment: Money(2800),
+                requirements: [Wood(200), Planks(130), Stone(100), Powder(40)],
+                localizedKey: "events.umanFortified",
+                artPath: "images/events/vesterfeld/fortress_outer.png"),
+            Event(
+                iconPath: "images/resources/horse/horse_2.png",
+                payment: Money(5200),
+                requirements: [
+                  Cannon(3),
+                  Firearm(100),
+                  Horse(100),
+                  Powder(200)
+                ],
+                localizedKey: "events.umanRealAllies",
+                artPath: "images/events/vesterfeld/cannons_shooting.png"),
             Event(
                 iconPath: "images/icons/military/military.png",
-                payment: Money(6000),
+                payment: Money(10000),
                 requirements: [
                   Bread(1000),
                   Cannon(3),
@@ -62,7 +62,7 @@ class Uman extends City {
                   Firearm(50),
                   Horse(200),
                   Powder(200),
-                  Fish(2000),
+                  Fish(600),
                   Salt(100),
                 ],
                 localizedKey: "events.umanMoldovaQuestion",

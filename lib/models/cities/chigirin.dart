@@ -19,7 +19,7 @@ class Chigirin extends City {
           availableEvents: [
             Event(
               iconPath: "images/resources/cloth/cloth.png",
-              payment: Money(400),
+              payment: Money(700),
               requirements: [Cloth(40), Wool(40)],
               localizedKey: "events.buyClothsForCossacks",
               artPath: "images/events/vesterfeld/cossack_and_sheep.png",
