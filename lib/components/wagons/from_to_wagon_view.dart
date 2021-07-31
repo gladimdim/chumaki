@@ -97,6 +97,7 @@ class _FromToWagonViewState extends State<FromToWagonView>
                     return Positioned(
                       top: 20,
                       left: _controller.value *
+                          1.2 * // correction koefficient for non direct route line
                           (CITY_DETAILS_VIEW_WIDTH - CITY_MENU_WIDTH),
                       child: child!,
                     );
