@@ -63,7 +63,7 @@ class ResourceLocalizations extends InternalLocalizations {
       "honey": "Мед",
       "salt": "Сіль",
       "tobacco": "Тютюн",
-      "wool": "Шерсть",
+      "wool": "Вовна",
       "amber": "Бурштин",
       "cloth": "Сукно",
       "bread": "Хліб",

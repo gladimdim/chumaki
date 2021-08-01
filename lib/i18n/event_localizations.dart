@@ -62,6 +62,16 @@ class EventLocalizations extends InternalLocalizations {
       "lvivBigFireTitle": "Fire",
       "lvivBigFireText":
           "Fire started in city suburbs and quickly approached the city. Only due to corage of townsmen and women it was possible to stop it. Several production centers were destroyed. They need building materials to restore them.",
+      // Ochakiv
+      "ochakivEmbassyTitle": "Osman Embassy",
+      "ochakivEmbassyText":
+          "Osmans sent an embassy to Sich cossacks. They brought traders together with them. While they wait on the guides from Sich, you can trade with them various goods.",
+      "ochakivIndianTravellersTitle": "Guests from India",
+      "ochakivIndianTravellersText":
+          "Indian guests from Silk Road visited Ochakiv. They eagerly buy all the furs they can find on the market.",
+      "ochakivTradeStimulusTitle": "Trade Stimulus",
+      "ochakivTradeStimulusText":
+          "Osman Empire decided to develop trading connections with Ukraine and Poland. They ordered commisars at Ochakiv to buy all available bread for increased prices in order to welcome more traders into the town and open more connections between the countries",
     },
     "uk": {
       // sich
@@ -125,6 +135,16 @@ class EventLocalizations extends InternalLocalizations {
       "lvivBigFireTitle": "Пожежа",
       "lvivBigFireText":
           "Пожежа почалася з північної окраїни міста, але через сильний вітер швидко розповсюдилась по всьому місту, знищуючи будівлі одну за одною. Лише завдяки спритності пожежників та організованної роботи всіх міщан та шляхти, вдалося зупинит це нещастя, коли воно підібралось до самого муру. Тепер  треба матеріали для відбудування втрачених цехів.",
+      // Ochakiv
+      "ochakivEmbassyTitle": "Посольство Османів",
+      "ochakivEmbassyText":
+          "Османи вислали посольство для переговорів з Військом Запорозьким. З собою вони взяли торговців і поки всі чекають на провідників з Січі, ви могли б з ними гарно вторгувати північними товарами.",
+      "ochakivIndianTravellersTitle": "Гості з Індії",
+      "ochakivIndianTravellersText":
+          "З Шовкового шляху до Очакова завітали гості з далекої країни - Індії. Вони дуже щедро скуповують всі хутра, які неможливо добути в їх країні.",
+      "ochakivTradeStimulusTitle": "Стимуляція торговлі",
+      "ochakivTradeStimulusText":
+          "Висока Порта стимулує розвиток торгівлі із Запорізькою Січчю та Річ Посполита. Її делегати отримали наказ придбати весь наявний хліб по завищеним цінам, щоб налагодити відносити між трьому країнами.",
     },
     "ru": {
       // Sich
@@ -190,6 +210,15 @@ class EventLocalizations extends InternalLocalizations {
       "lvivBigFireTitle": "Пожар",
       "lvivBigFireText":
           "Пожар начался з околиц и стал резко приближатся к основному городу. Только благодаря отваге жителей и пожарным, удалось остановить огонь прямо под стенами города. Тепер надо отремонтировать цехи и начать жизнь заново.",
+      "ochakivEmbassyTitle": "Посольство Османов",
+      "ochakivEmbassyText":
+          "Османы вислали посольство для переговоров с Войськом Запорожским. С собой они взяли торговцев, и пока все они ждут на проводника с Сичи, вы могли б поторговать с ними северными товарами за хорошую цену.",
+      "ochakivIndianTravellersTitle": "Гости с Индии",
+      "ochakivIndianTravellersText":
+          "С Шелкового Пути в Очаков прибыли гости с Индии. Торговци щедро покупает все меха, который могут найти на рынке.",
+      "ochakivTradeStimulusTitle": "Стимуляция торговли",
+      "ochakivTradeStimulusText":
+          "Високая Порта хочет улучшить торговые отношения между Запорожской Сечью и Реч Посполитой. та Річ Посполита. Ее делегаты получили приказ скупить весь хлеб на рынке по повышеным ценам, чтобы привлечь еще больше торговцев и наладить отношения.",
     }
   };
 }
