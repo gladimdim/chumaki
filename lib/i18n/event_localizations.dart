@@ -72,6 +72,36 @@ class EventLocalizations extends InternalLocalizations {
       "ochakivTradeStimulusTitle": "Trade Stimulus",
       "ochakivTradeStimulusText":
           "Osman Empire decided to develop trading connections with Ukraine and Poland. They ordered commisars at Ochakiv to buy all available bread for increased prices in order to welcome more traders into the town and open more connections between the countries",
+      // Nizhin
+      "nizhinPokrovaTitle": "Pokrova",
+      "nizhinPokrovaText":
+          "Ukrainians celebrate the religious day of Pokrova. In Nizhin the huge Fairy is held each year.",
+      "nizhinTreasureTitle": "Treasure of Tugaibei",
+      "nizhinTreasureText":
+          "There are rumors that all his gold Tugaibei has hidden into the Oster river. Bishop Manuil organizes expedition in order to find the treasure. He needs lots of provisions.",
+      "nizhinDryLandsTitle": "Dry lands",
+      "nizhinDryLandsText":
+          "Town major decided to dry the lands near the town in order to settle more people there. For this he hired engineers from France. They need lots of hardware goods.",
+      "nizhinReplaceWeaponsTitle": "Regiment Upgrade",
+      "nizhinReplaceWeaponsText":
+          "Colonel Prokop Shumeiko discovered that moscovits plan to make aggressive action against Chernigiv lands. He plans to upgrade the cannons and firearms in next year. The order contains new cannons, good powder and firearms.",
+
+      // Pereyaslav
+      "pereyaslavNewFerryTitle": "New Ferry",
+      "pereyaslavNewFerryText":
+          "Near Pereyaslav on Dnipro river the old ferry collapsed. Traders started to avoid this route. The castle chief ordered to build a new ferry.",
+      "pereyaslavGravesTitle": "Graves",
+      "pereyaslavGravesText":
+          "Locals keep finding gold and other artefacts near the Scythe Graves. Castle chief ordered to form an expedition. Cossacks refused to feed these lazymen that's why chief has to pay for food from his pocket.",
+      "pereyaslavBrotherhoodTitle": "Brotherhood",
+      "pereyaslavBrotherhoodText":
+          "After Azov capture, Turks were enraged and asked Poland to attack cossacks. Polish settled armed men on the Dnipro river in order to block trading routes. Pereyaslav cossacks united with Sich army and agreed to attack these outposts. But they need more money.",
+      "pereyaslavUncalmTimesTitle": "Terrible times",
+      "pereyaslavUncalmTimesText":
+          "Escalating conflict between Ukraine and Poland caused the cossacks to discuss possible military actions. They agreed to buy food and inventories in order to prepare for uncalm times.",
+      "pereyaslavHospitalTitle": "Hospital",
+      "pereyaslavHospitalText":
+          "Continuous fights in steppe causes lots of injured and sick cossacks. Pereyaslav together with Cherkasy decided to join forced and build a new hospital near the Trahtamirov monastery.",
     },
     "uk": {
       // sich
@@ -145,6 +175,35 @@ class EventLocalizations extends InternalLocalizations {
       "ochakivTradeStimulusTitle": "Стимуляція торговлі",
       "ochakivTradeStimulusText":
           "Висока Порта стимулує розвиток торгівлі із Запорізькою Січчю та Річ Посполита. Її делегати отримали наказ придбати весь наявний хліб по завищеним цінам, щоб налагодити відносити між трьому країнами.",
+      // Nizhin
+      "nizhinPokrovaTitle": "Покрова",
+      "nizhinPokrovaText":
+          "Традиційно на свято Покрови в Ніжині відбудеться Покровська ярмарка.",
+      "nizhinTreasureTitle": "Скарб Тугайбея",
+      "nizhinTreasureText":
+          "Ходять чутки, що Тугайбей перед своєю смертю наказав затопити весь свій скарб у Острі. Протоієрєй Мануїл вирішив збити експедицію і знайти скарб. Для цього йому треба спорядження.",
+      "nizhinDryLandsTitle": "Сушка",
+      "nizhinDryLandsText":
+          "Очільник міста Манько вирішив осушити болота на півдні Ніжина. Запросив інженерів з Франції, які займаються змінною ландшафту. Для побудови водовідводів треба чимало дерева та інших матеріалів.",
+      "nizhinReplaceWeaponsTitle": "Оновлення полку",
+      "nizhinReplaceWeaponsText":
+          "Полковник Прокіп Шумейко дізнався про плани Московщини по нападу на Чернігівські землі, тому вирішив оновити арсенал його полку. В замовленні указані нові гармати та добрий порох з самопалами.",
+      // Pereyaslav
+      "pereyaslavNewFerryTitle": "Нова переправа",
+      "pereyaslavNewFerryText":
+          "Неподалік Переялава на Дніпрі стоїть переправа, але вона збудована ще при минулому князі, нею небезпечно пересуваться, тому всі торговці оминають її. Щоб відновити торгові шляхи, староста замку виділив кошти на побудову нової переправи.",
+      "pereyaslavGravesTitle": "Кургани",
+      "pereyaslavGravesText":
+          "Місцеві жителі постійно знаходять артефакти неподалік курганів. Староста заборонив самокопи і відряджує експедицію по розкопу всіх курганів у навколицях. Місцеві козаки відмовляються годувати пройдисвітів, тому староста закуповує харчі сам.",
+      "pereyaslavBrotherhoodTitle": "Допомога братам",
+      "pereyaslavBrotherhoodText":
+          "Після осади і взяття Азова, турки оскаженіли   і пожалілися ляхам, які посилили окупаційний контингент. Біля порогів поставили сторожі, які Січовики вирішили розбити разом з Переяславцями. Їм треба лише трошки більше зброї. ",
+      "pereyaslavUncalmTimesTitle": "Неспокійні часи",
+      "pereyaslavUncalmTimesText":
+          "Загострення у відносинах з Річ Посполитою викликає занепокоєння у козацьких верхів. На раді вирішено приготувати запаси для можливих лихих часів.",
+      "pereyaslavHospitalTitle": "Госпіталь",
+      "pereyaslavHospitalText":
+          "Постійні сутички у степах викликають збільшення калік та хворих. Спільно з Черкаським полком закладено основу Трахтемирівського монастиря-лікарні.",
     },
     "ru": {
       // Sich
@@ -219,6 +278,36 @@ class EventLocalizations extends InternalLocalizations {
       "ochakivTradeStimulusTitle": "Стимуляция торговли",
       "ochakivTradeStimulusText":
           "Високая Порта хочет улучшить торговые отношения между Запорожской Сечью и Реч Посполитой. та Річ Посполита. Ее делегаты получили приказ скупить весь хлеб на рынке по повышеным ценам, чтобы привлечь еще больше торговцев и наладить отношения.",
+      // Nizhin
+      "nizhinPokrovaTitle": "Покрова",
+      "nizhinPokrovaText":
+          "Традиционо праздник Покровы широко отмечается в Нежине в качестве Покровской Ярмарки.",
+      "nizhinTreasureTitle": "Клад Тугайбея",
+      "nizhinTreasureText":
+          "Ходят слухи, что Тугайбей перед своей смертью утопил все свое золото в Остре. Протоиерей Мануил организовывает экспедицию, чтобы найти клад. Для этого ему необходимо снаряжение.",
+      "nizhinDryLandsTitle": "Сушка",
+      "nizhinDryLandsText":
+          "Глава города Манько решил провести осушение земель. Для этого он вызвал инженером из Франции. Для построения водоотводов надо множество ресурсов.",
+      "nizhinReplaceWeaponsTitle": "Обновление полка",
+      "nizhinReplaceWeaponsText":
+          "Полковник Прокоп Шумейко узнал про возможные планы московитов начать агрессивные действия в Черниговских землях. по этому решил обновить вооружение в полку. В заказе указаны новые пушки и хороший порох с самопалами.",
+
+      // Pereyaslav
+      "pereyaslavNewFerryTitle": "Новая переправа",
+      "pereyaslavNewFerryText":
+          "Около Переяслава на Днепре стоит переправа построенная очень давно. Она уже разваливается и торговци обьезжают ее стороной. Чтобы восстановить торговлю в районе, староста замка выделил деньги на построение новой переправы.",
+      "pereyaslavGravesTitle": "Курганы",
+      "pereyaslavGravesText":
+          "Местные жители постояно находять артефакты около курганов. Староста запретил самокопов и отрядил свою собственную экспидицию. Козаки отказались кормить бездельников, по этому старосте нужно кормить их самим.",
+      "pereyaslavBrotherhoodTitle": "Помощь братьям",
+      "pereyaslavBrotherhoodText":
+          "После осады и взятие Азова, турки взбесились и выслали посла поляков из Порты. Поляки, испугавшись, выставили залоги на Днепре, чтобы прервать торговлю. Козаки с Сечи и Переяслава решили разбить их, но им надо побольше оружия.",
+      "pereyaslavUncalmTimesTitle": "Неспокойные времена",
+      "pereyaslavUncalmTimesText":
+          "Обострение в отношениях между Портой и Реч Посполитой вызывает обеспокоеность в козацких верхах. На раде решили приготовится к возможным смутным временам.",
+      "pereyaslavHospitalTitle": "Госпиталь",
+      "pereyaslavHospitalText":
+          "Постоянные бои в степи и на Черном море порождают множество увечных и больных. Совместно с Черкаским полком решено основать госпиталь в стенах Трахтамировского монастыря.",
     }
   };
 }

@@ -9,7 +9,6 @@ import 'package:chumaki/components/wagons/wagon_avatar.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
-import 'package:chumaki/models/tasks/route.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
 import 'package:chumaki/models/wagons/active_wagon.dart';
 import 'package:chumaki/views/inherited_company.dart';
@@ -98,7 +97,7 @@ class _FromToWagonViewState extends State<FromToWagonView>
                       top: 20,
                       left: _controller.value *
                           1.2 * // correction koefficient for non direct route line
-                          (CITY_DETAILS_VIEW_WIDTH - CITY_MENU_WIDTH),
+                          (CITY_DETAILS_VIEW_WIDTH - CITY_MENU_WIDTH * 2),
                       child: child!,
                     );
                   },
