@@ -82,6 +82,9 @@ class EventLocalizations extends InternalLocalizations {
       "nizhinDryLandsTitle": "Dry lands",
       "nizhinDryLandsText":
           "Town major decided to dry the lands near the town in order to settle more people there. For this he hired engineers from France. They need lots of hardware goods.",
+      "nizhinReplaceWeaponsTitle": "Regiment Upgrade",
+      "nizhinReplaceWeaponsText":
+      "Colonel Prokop Shumeiko discovered that moscovits plan to make aggressive action against Chernigiv lands. He plans to upgrade the cannons and firearms in next year. The order contains new cannons, good powder and firearms.",
     },
     "uk": {
       // sich
@@ -165,6 +168,9 @@ class EventLocalizations extends InternalLocalizations {
       "nizhinDryLandsTitle": "Сушка",
       "nizhinDryLandsText":
           "Очільник міста Манько вирішив осушити болота на півдні Ніжина. Запросив інженерів з Франції, які займаються змінною ландшафту. Для побудови водовідводів треба чимало дерева та інших матеріалів.",
+      "nizhinReplaceWeaponsTitle": "Оновлення полку",
+      "nizhinReplaceWeaponsText":
+          "Полковник Прокіп Шумейко дізнався про плани Московщини по нападу на Чернігівські землі, тому вирішив оновити арсенал його полку. В замовленні указані нові гармати та добрий порох з самопалами.",
     },
     "ru": {
       // Sich
@@ -249,6 +255,9 @@ class EventLocalizations extends InternalLocalizations {
       "nizhinDryLandsTitle": "Сушка",
       "nizhinDryLandsText":
           "Глава города Манько решил провести осушение земель. Для этого он вызвал инженером из Франции. Для построения водоотводов надо множество ресурсов.",
+      "nizhinReplaceWeaponsTitle": "Обновление полка",
+      "nizhinReplaceWeaponsText":
+          "Полковник Прокоп Шумейко узнал про возможные планы московитов начать агрессивные действия в Черниговских землях. по этому решил обновить вооружение в полку. В заказе указаны новые пушки и хороший порох с самопалами.",
     }
   };
 }
