@@ -24,13 +24,13 @@ class Kyiv extends City {
             Event(
                 iconPath: "images/resources/firearm/firearm_3.png",
                 payment: Money(400),
-                requirements: [Firearm(10), Silk(30)],
+                requirements: [Firearm(10), Silk(20)],
                 localizedKey: "events.kyivShootingTournament",
                 artPath: "images/events/vesterfeld/archers.png"),
             Event(
                 iconPath: "images/resources/planks/planks_2.png",
                 payment: Money(1500),
-                requirements: [Wood(300), Planks(200), Stone(100)],
+                requirements: [Wood(50), Planks(80), Stone(70)],
                 localizedKey: "events.kyivFlood",
                 artPath: "images/events/vesterfeld/ruined_tower.png"),
             Event(
@@ -48,8 +48,8 @@ class Kyiv extends City {
                 payment: Money(3000),
                 requirements: [
                   Firearm(100),
-                  Horse(100),
-                  Powder(500),
+                  Horse(30),
+                  Powder(100),
                 ],
                 localizedKey: "events.kyivPrivateCompany",
                 artPath: "images/events/vesterfeld/group_of_soldiers.png"),
@@ -57,10 +57,10 @@ class Kyiv extends City {
                 iconPath: "images/manufacturings/church/church_3.png",
                 payment: Money(5000),
                 requirements: [
-                  Wood(1000),
-                  Planks(1200),
-                  Stone(500),
-                  MetalParts(300)
+                  Wood(80),
+                  Planks(120),
+                  Stone(100),
+                  MetalParts(180)
                 ],
                 localizedKey: "events.kyivNewChurch",
                 artPath: "images/events/vesterfeld/ancient_church.png"),

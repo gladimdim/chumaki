@@ -43,6 +43,35 @@ class EventLocalizations extends InternalLocalizations {
       "umanFortifiedTitle": "Fortify Uman ",
       "umanFortifiedText":
           "Town's major announced about fortification of the Uman and its outings. He plans to build wooden fortresses on river crossings and in steppe. Small squads sitting in such fortresses could stop or slow down the tartar raids and give valuable time for the main forces to gather and fight back.",
+      "umanRealAlliesTitle": "True Allies",
+      "umanRealAlliesText":
+          "Poland has no real power over the Uman lands and does not provide any help to defend it against tartar raid. Townmen and cossacks decided to form their own cossack regiment and asked Sich cossacks to provide them training and ammunition. This regiment will take a key part in defending the lands and doing counter raids into Moldova and turkish lands.",
+      "umanMoldovaQuestionTitle": "Moldova's Question",
+      "umanMoldovaQuestionText":
+          "Moldova's ruler is changes each couple years due to constant civil wars. All these bands of war used to raid Uman lands and plunder it. This needs to stop. Ivan Ghanza, cossacks colonel, decided to plunder Moldovian lands in return. This will stop the raids from their lands and Uman people will live in piece. Ivan Ghanzha announced the rally against Moldova and prepares the army.",
+      // Lviv
+      "lvivUniOpeningTitle": "Opening of University",
+      "lvivUniOpeningText":
+          "Lviv University opened new division. For this it needs to build a new building where Ukrainians could learn the science. They need building materials.",
+      "lvivStarFallTitle": "Startfall",
+      "lvivStarFallText":
+          "This summer will be a huge starfall. Townsmen decided to celebrate this event and announced a Fair. You can trade various goods for a very good price.",
+      "lvivLostTradingTitle": "Destroyed trading",
+      "lvivLostTradingText":
+          "Another war clash between germans tribes in central Europe destroyed the trading links between countries. Bavaria produced metal used for cannons but now all connections to it are lost. The Chief Officer of cannon foundry union announced a very lucruative price on any metal merchants can bring to Lviv.",
+      "lvivBigFireTitle": "Fire",
+      "lvivBigFireText":
+          "Fire started in city suburbs and quickly approached the city. Only due to corage of townsmen and women it was possible to stop it. Several production centers were destroyed. They need building materials to restore them.",
+      // Ochakiv
+      "ochakivEmbassyTitle": "Osman Embassy",
+      "ochakivEmbassyText":
+          "Osmans sent an embassy to Sich cossacks. They brought traders together with them. While they wait on the guides from Sich, you can trade with them various goods.",
+      "ochakivIndianTravellersTitle": "Guests from India",
+      "ochakivIndianTravellersText":
+          "Indian guests from Silk Road visited Ochakiv. They eagerly buy all the furs they can find on the market.",
+      "ochakivTradeStimulusTitle": "Trade Stimulus",
+      "ochakivTradeStimulusText":
+          "Osman Empire decided to develop trading connections with Ukraine and Poland. They ordered commisars at Ochakiv to buy all available bread for increased prices in order to welcome more traders into the town and open more connections between the countries",
     },
     "uk": {
       // sich
@@ -93,6 +122,29 @@ class EventLocalizations extends InternalLocalizations {
       "umanMoldovaQuestionTitle": "Молдавське питання",
       "umanMoldovaQuestionText":
           "Постійна зміна влади у Молдові негативно впливає на Уманьські землі. Військові дії, які борються за владу у молдавських землях постійно спустошують і суміжні Уманьські маєтки. Сформований уманьський полк при підтримці Війська Запорозького вирішили уладнати це питання і зруйнувати матеріальну базу молдаван. Полковник Іван Ганжа оголосив похід і почав підготовку.",
+      //Lviv
+      "lvivUniOpeningTitle": "Відкриття Університету",
+      "lvivUniOpeningText":
+          "Львівський університет відкрив кафедру теології. Для цього потрібно збудувати нове приміщення, де б змогли займатися українські студенти.",
+      "lvivStarFallTitle": "Зорепад",
+      "lvivStarFallText":
+          "Влітку буде черговий зорепад і прохід комети. Міщани оголосили ярмарок в честь такої рідкої події. Ви зможете гарно вторгувати різноманітні товари.",
+      "lvivLostTradingTitle": "Завади постачання",
+      "lvivLostTradingText":
+          "Черговий всплеск міжусобних війн в центральній Європі зруйнував торгові шляхи з Баварією, де виробляється метал для гармат. Очільник цеху гармашів скуповує весь наявний метал на ринку.",
+      "lvivBigFireTitle": "Пожежа",
+      "lvivBigFireText":
+          "Пожежа почалася з північної окраїни міста, але через сильний вітер швидко розповсюдилась по всьому місту, знищуючи будівлі одну за одною. Лише завдяки спритності пожежників та організованної роботи всіх міщан та шляхти, вдалося зупинит це нещастя, коли воно підібралось до самого муру. Тепер  треба матеріали для відбудування втрачених цехів.",
+      // Ochakiv
+      "ochakivEmbassyTitle": "Посольство Османів",
+      "ochakivEmbassyText":
+          "Османи вислали посольство для переговорів з Військом Запорозьким. З собою вони взяли торговців і поки всі чекають на провідників з Січі, ви могли б з ними гарно вторгувати північними товарами.",
+      "ochakivIndianTravellersTitle": "Гості з Індії",
+      "ochakivIndianTravellersText":
+          "З Шовкового шляху до Очакова завітали гості з далекої країни - Індії. Вони дуже щедро скуповують всі хутра, які неможливо добути в їх країні.",
+      "ochakivTradeStimulusTitle": "Стимуляція торговлі",
+      "ochakivTradeStimulusText":
+          "Висока Порта стимулує розвиток торгівлі із Запорізькою Січчю та Річ Посполита. Її делегати отримали наказ придбати весь наявний хліб по завищеним цінам, щоб налагодити відносити між трьому країнами.",
     },
     "ru": {
       // Sich
@@ -145,6 +197,28 @@ class EventLocalizations extends InternalLocalizations {
       "umanMoldovaQuestionTitle": "Молдавский вопрос ",
       "umanMoldovaQuestionText":
           "Постояная смена власти в Молдове негативно влияет на состояние дел в Уманском полку. Из-за борьбы за власть через границу проходят вооруженые отряды с целью грабежа. Вновь сформированый Уманський полк при поддержке Сичевиков решил решить молдавский вопрос раз и навсегда, путем разорения матеральной базы отрядов наемников и местных князей. Полковник Иван Ганжа разослал приказ про подготовку полка к рейду в Молдову.",
+      // Lviv
+      "lvivUniOpeningTitle": "Открытие университета",
+      "lvivUniOpeningText":
+          "Львовский университет открыл кафедру теологии. Для этого им необходимо построить новый корпус, а значит нужны строительные материали.",
+      "lvivStarFallTitle": "Звездопад",
+      "lvivStarFallText":
+          "Летом будет очередной звездопад. Жители города обьявили ярмарок в честь такого события. Вы можете хорошо вторговать разнообразные товары.",
+      "lvivLostTradingTitle": "Разорваные связи",
+      "lvivLostTradingText":
+          "Очередной всплеск войн в центральной Европе разрушил торговые связи с Баварией, где добывался метал для пушек. Глава цеха пушкарей огласил хорошую цену на весь метал, который торговци смогут доставить во Львов.",
+      "lvivBigFireTitle": "Пожар",
+      "lvivBigFireText":
+          "Пожар начался з околиц и стал резко приближатся к основному городу. Только благодаря отваге жителей и пожарным, удалось остановить огонь прямо под стенами города. Тепер надо отремонтировать цехи и начать жизнь заново.",
+      "ochakivEmbassyTitle": "Посольство Османов",
+      "ochakivEmbassyText":
+          "Османы вислали посольство для переговоров с Войськом Запорожским. С собой они взяли торговцев, и пока все они ждут на проводника с Сичи, вы могли б поторговать с ними северными товарами за хорошую цену.",
+      "ochakivIndianTravellersTitle": "Гости с Индии",
+      "ochakivIndianTravellersText":
+          "С Шелкового Пути в Очаков прибыли гости с Индии. Торговци щедро покупает все меха, который могут найти на рынке.",
+      "ochakivTradeStimulusTitle": "Стимуляция торговли",
+      "ochakivTradeStimulusText":
+          "Високая Порта хочет улучшить торговые отношения между Запорожской Сечью и Реч Посполитой. та Річ Посполита. Ее делегаты получили приказ скупить весь хлеб на рынке по повышеным ценам, чтобы привлечь еще больше торговцев и наладить отношения.",
     }
   };
 }

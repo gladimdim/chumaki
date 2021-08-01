@@ -21,11 +21,11 @@ class Cherkasy extends City {
           availableEvents: [
             Event(
                 iconPath: "images/icons/luxury/luxury.png",
-                payment: Money(550),
+                payment: Money(890),
                 requirements: [
                   Gorilka(100),
                   Bread(50),
-                  Silk(50),
+                  Silk(20),
                   Amber(20),
                   Honey(20),
                   Tobacco(10)

@@ -88,7 +88,7 @@ class _FromToWagonViewState extends State<FromToWagonView>
       child: BorderedAll(
         child: DecoratedContainer2(
           child: SizedBox(
-            width: CITY_DETAILS_VIEW_WIDTH,
+            width: CITY_DETAILS_VIEW_WIDTH - CITY_MENU_WIDTH,
             child: Stack(
               children: [
                 AnimatedBuilder(
