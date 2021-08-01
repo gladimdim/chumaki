@@ -72,6 +72,16 @@ class EventLocalizations extends InternalLocalizations {
       "ochakivTradeStimulusTitle": "Trade Stimulus",
       "ochakivTradeStimulusText":
           "Osman Empire decided to develop trading connections with Ukraine and Poland. They ordered commisars at Ochakiv to buy all available bread for increased prices in order to welcome more traders into the town and open more connections between the countries",
+      // Nizhin
+      "nizhinPokrovaTitle": "Pokrova",
+      "nizhinPokrovaText":
+          "Ukrainians celebrate the religious day of Pokrova. In Nizhin the huge Fairy is held each year.",
+      "nizhinTreasureTitle": "Treasure of Tugaibei",
+      "nizhinTreasureText":
+          "There are rumors that all his gold Tugaibei has hidden into the Oster river. Bishop Manuil organizes expedition in order to find the treasure. He needs lots of provisions.",
+      "nizhinDryLandsTitle": "Dry lands",
+      "nizhinDryLandsText":
+          "Town major decided to dry the lands near the town in order to settle more people there. For this he hired engineers from France. They need lots of hardware goods.",
     },
     "uk": {
       // sich
@@ -145,6 +155,16 @@ class EventLocalizations extends InternalLocalizations {
       "ochakivTradeStimulusTitle": "Стимуляція торговлі",
       "ochakivTradeStimulusText":
           "Висока Порта стимулує розвиток торгівлі із Запорізькою Січчю та Річ Посполита. Її делегати отримали наказ придбати весь наявний хліб по завищеним цінам, щоб налагодити відносити між трьому країнами.",
+      // Nizhin
+      "nizhinPokrovaTitle": "Покрова",
+      "nizhinPokrovaText":
+          "Традиційно на свято Покрови в Ніжині відбудеться Покровська ярмарка.",
+      "nizhinTreasureTitle": "Скарб Тугайбея",
+      "nizhinTreasureText":
+          "Ходять чутки, що Тугайбей перед своєю смертю наказав затопити весь свій скарб у Острі. Протоієрєй Мануїл вирішив збити експедицію і знайти скарб. Для цього йому треба спорядження.",
+      "nizhinDryLandsTitle": "Сушка",
+      "nizhinDryLandsText":
+          "Очільник міста Манько вирішив осушити болота на півдні Ніжина. Запросив інженерів з Франції, які займаються змінною ландшафту. Для побудови водовідводів треба чимало дерева та інших матеріалів.",
     },
     "ru": {
       // Sich
@@ -219,6 +239,16 @@ class EventLocalizations extends InternalLocalizations {
       "ochakivTradeStimulusTitle": "Стимуляция торговли",
       "ochakivTradeStimulusText":
           "Високая Порта хочет улучшить торговые отношения между Запорожской Сечью и Реч Посполитой. та Річ Посполита. Ее делегаты получили приказ скупить весь хлеб на рынке по повышеным ценам, чтобы привлечь еще больше торговцев и наладить отношения.",
+      // Nizhin
+      "nizhinPokrovaTitle": "Покрова",
+      "nizhinPokrovaText":
+          "Традиционо праздник Покровы широко отмечается в Нежине в качестве Покровской Ярмарки.",
+      "nizhinTreasureTitle": "Клад Тугайбея",
+      "nizhinTreasureText":
+          "Ходят слухи, что Тугайбей перед своей смертью утопил все свое золото в Остре. Протоиерей Мануил организовывает экспедицию, чтобы найти клад. Для этого ему необходимо снаряжение.",
+      "nizhinDryLandsTitle": "Сушка",
+      "nizhinDryLandsText":
+          "Глава города Манько решил провести осушение земель. Для этого он вызвал инженером из Франции. Для построения водоотводов надо множество ресурсов.",
     }
   };
 }
