@@ -125,11 +125,11 @@ class Company {
 
     this.logger.attachToCompany(this);
 
-    if (kDebugMode) {
-      allCities.forEach((element) {
-        element.unlock();
-      });
-    }
+    // if (kDebugMode) {
+    //   allCities.forEach((element) {
+    //     element.unlock();
+    //   });
+    // }
   }
 
   final BehaviorSubject<COMPANY_EVENTS> _innerChanges = BehaviorSubject();
