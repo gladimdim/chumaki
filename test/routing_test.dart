@@ -1,6 +1,8 @@
 import 'package:chumaki/models/cities/berdychiv.dart';
+import 'package:chumaki/models/cities/govtva.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/ladyzhin.dart';
+import 'package:chumaki/models/cities/myrgorod.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/sich.dart';
@@ -64,22 +66,51 @@ void main() {
   group("Route graph algorithms", () {
     test("Can find a route with fewer steps", () {
       final company = Company();
-      company..allCities.forEach((city) {
-        city.unlock();
-      });
+      company
+        ..allCities.forEach((city) {
+          city.unlock();
+        });
 
-      final fullR = fullRoute(from: Sich(), to: Nizhin(), company: company, algoChoice: SHORTEST_ROUTE.FEWER_STOPS);
-      expect(fullR.length, equals(3), reason: "Sich -> Kursk -> Rilsk -> Nizhin has fewer stops than all other routes");
+      final fullR = fullRoute(
+          from: Sich(),
+          to: Nizhin(),
+          company: company,
+          algoChoice: SHORTEST_ROUTE.FEWER_STOPS);
+      expect(fullR.length, equals(3),
+          reason:
+              "Sich -> Kursk -> Rilsk -> Nizhin has fewer stops than all other routes");
     });
 
     test("Can find a map route with min time to reach the town", () {
       final company = Company();
-      company..allCities.forEach((city) {
-        city.unlock();
-      });
+      company
+        ..allCities.forEach((city) {
+          city.unlock();
+        });
 
-      final fullR = fullRoute(from: Sich(), to: Nizhin(), company: company, algoChoice: SHORTEST_ROUTE.LESS_TIME);
-      expect(fullR.length, equals(4), reason: "Sich -> Govtva -> Mirgorod -> Piryatin -> Nizhin has takes less time than other routes.");
+      final fullR = fullRoute(
+          from: Sich(),
+          to: Nizhin(),
+          company: company,
+          algoChoice: SHORTEST_ROUTE.LESS_TIME);
+      expect(fullR.length, equals(4),
+          reason:
+              "Sich -> Govtva -> Mirgorod -> Piryatin -> Nizhin has takes less time than other routes.");
+    });
+
+    test("Can calculate total duration time of the route", () {
+      final route1 = [Sich(), Govtva()];
+      final route2 = [Govtva(), Myrgorod()];
+      final route3 = [...route1, Myrgorod()];
+
+      final dRoute1 = fullRouteDuration(cityStops: route1);
+      final dRoute2 = fullRouteDuration(cityStops: route2);
+      final dRoute3 = fullRouteDuration(cityStops: route3);
+
+      expect(dRoute1.inSeconds, 10, reason: "First duration of route is 10");
+      expect(dRoute2.inSeconds, 3, reason: "Second duration of route is 5");
+      expect(dRoute3.inSeconds, dRoute2.inSeconds + dRoute1.inSeconds,
+          reason: "Third route takes route 1 + route 2 time");
     });
   });
 }

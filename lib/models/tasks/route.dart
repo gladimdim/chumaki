@@ -71,7 +71,8 @@ List<City>? _innerFullRoute({
       .connectsTo(inCompany: company)
       .where((element) => (allowLocked || element.isUnlocked())));
   List<City>? bestMatch;
-  final comparator = algoChoice == SHORTEST_ROUTE.FEWER_STOPS ? hasFewerStops : isShorterRoute;
+  final comparator =
+      algoChoice == SHORTEST_ROUTE.FEWER_STOPS ? hasFewerStops : isShorterRoute;
   while (neighbours.isNotEmpty) {
     final candidate = neighbours.removeFirst();
     if (ignore.where((element) => element.equalsTo(candidate)).isNotEmpty) {
@@ -92,9 +93,7 @@ List<City>? _innerFullRoute({
       if (bestMatch == null) {
         bestMatch = match;
       } else {
-        if (match != null &&
-            match.isNotEmpty &&
-            comparator(bestMatch, match)) {
+        if (match != null && match.isNotEmpty && comparator(bestMatch, match)) {
           bestMatch = match;
         }
       }
