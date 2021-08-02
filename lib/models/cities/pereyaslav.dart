@@ -52,7 +52,7 @@ class Pereyaslav extends City {
                   Salt(10),
                 ],
                 localizedKey: "events.pereyaslavGraves",
-                artPath: "images/events/vesterfeld/river_battle_2.png"),
+                artPath: "images/events/vesterfeld/wandering_men.png"),
             Event(
                 iconPath: "images/resources/horse/horse_2.png",
                 payment: Money(1450),
@@ -62,7 +62,7 @@ class Pereyaslav extends City {
                   Powder(50),
                 ],
                 localizedKey: "events.pereyaslavBrotherhood",
-                artPath: "images/events/vesterfeld/river_battle_2.png"),
+                artPath: "images/events/vesterfeld/pohid.png"),
             Event(
                 iconPath: "images/resources/salt/salt.png",
                 payment: Money(2000),
@@ -74,7 +74,7 @@ class Pereyaslav extends City {
                   Powder(40),
                 ],
                 localizedKey: "events.pereyaslavUncalmTimes",
-                artPath: "images/events/vesterfeld/river_battle_2.png"),
+                artPath: "images/events/vesterfeld/elite_cossacks_2.png"),
             Event(
                 iconPath: "images/resources/stone/stone_2.png",
                 payment: Money(2000),
