@@ -4,7 +4,8 @@ import 'dart:math';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
-import 'package:chumaki/models/wagons/active_wagon.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
+import 'package:tuple/tuple.dart';
 
 class CityRoute {
   final City from;
@@ -14,23 +15,26 @@ class CityRoute {
 
   CityRoute(this.to, this.from, this.bezierPoint);
 
-  // static List<CityRoute> allRoutes = [
-  //   CityRoute(City.cherkasy, City.chigirin, Point<double>(50.0, 50.0)),
-  //   CityRoute(City.pereyaslav, City.nizhin, Point<double>(0.0, 0.0)),
-  //   CityRoute(City.cherkasy, City.kaniv, Point<double>(10.0, 10.0)),
-  //   CityRoute(City.sich, City.chigirin, Point<double>(-675.0, 0.0)),
-  //   CityRoute(City.pereyaslav, City.chigirin, Point<double>(-150.0, 155.0)),
-  //   CityRoute(City.kyiv, City.nizhin, Point<double>(-50, 50)),
-  //   CityRoute(City.kyiv, City.pereyaslav, Point<double>(300, 0)),
-  //   CityRoute(City.kaniv, City.pereyaslav, Point<double>(100, -50)),
-  //   CityRoute(City.ochakiv, City.sich, Point<double>(450, -230)),
-  // ];
+// static List<CityRoute> allRoutes = [
+//   CityRoute(City.cherkasy, City.chigirin, Point<double>(50.0, 50.0)),
+//   CityRoute(City.pereyaslav, City.nizhin, Point<double>(0.0, 0.0)),
+//   CityRoute(City.cherkasy, City.kaniv, Point<double>(10.0, 10.0)),
+//   CityRoute(City.sich, City.chigirin, Point<double>(-675.0, 0.0)),
+//   CityRoute(City.pereyaslav, City.chigirin, Point<double>(-150.0, 155.0)),
+//   CityRoute(City.kyiv, City.nizhin, Point<double>(-50, 50)),
+//   CityRoute(City.kyiv, City.pereyaslav, Point<double>(300, 0)),
+//   CityRoute(City.kaniv, City.pereyaslav, Point<double>(100, -50)),
+//   CityRoute(City.ochakiv, City.sich, Point<double>(450, -230)),
+// ];
 }
+
+typedef RouteMatch = Tuple2<List<CityRoute>, Duration>;
 
 List<City> fullRoute(
     {required City from,
     required City to,
     bool allowLocked = false,
+    SHORTEST_ROUTE algoChoice = SHORTEST_ROUTE.LESS_TIME,
     required Company company}) {
   List<City>? result = _innerFullRoute(
       from: from,
@@ -38,6 +42,7 @@ List<City> fullRoute(
       ignore: [from],
       route: [],
       allowLocked: allowLocked,
+      algoChoice: algoChoice,
       company: company);
   if (result == null) {
     throw "Route not found";
@@ -46,6 +51,8 @@ List<City> fullRoute(
   }
 }
 
+enum SHORTEST_ROUTE { FEWER_STOPS, LESS_TIME }
+
 List<City>? _innerFullRoute({
   required City from,
   required City to,
@@ -53,6 +60,7 @@ List<City>? _innerFullRoute({
   required List<City> route,
   required bool allowLocked,
   required Company company,
+  required SHORTEST_ROUTE algoChoice,
 }) {
   if (hasDirectConnection(from: from, to: to, inCompany: company) &&
       (allowLocked || to.isUnlocked())) {
@@ -63,6 +71,8 @@ List<City>? _innerFullRoute({
       .connectsTo(inCompany: company)
       .where((element) => (allowLocked || element.isUnlocked())));
   List<City>? bestMatch;
+  final comparator =
+      algoChoice == SHORTEST_ROUTE.FEWER_STOPS ? hasFewerStops : isShorterRoute;
   while (neighbours.isNotEmpty) {
     final candidate = neighbours.removeFirst();
     if (ignore.where((element) => element.equalsTo(candidate)).isNotEmpty) {
@@ -78,13 +88,12 @@ List<City>? _innerFullRoute({
           ignore: [...ignore, candidate],
           route: [...route, candidate],
           allowLocked: allowLocked,
+          algoChoice: algoChoice,
           company: company);
       if (bestMatch == null) {
         bestMatch = match;
       } else {
-        if (match != null &&
-            match.isNotEmpty &&
-            match.length < bestMatch.length) {
+        if (match != null && match.isNotEmpty && comparator(bestMatch, match)) {
           bestMatch = match;
         }
       }
@@ -93,12 +102,21 @@ List<City>? _innerFullRoute({
   return bestMatch;
 }
 
-Duration fullRouteDuration(
-    {required ActiveWagon activeWagon, required Company company}) {
-  Queue<City> stops = Queue.from(
-      fullRoute(from: activeWagon.from, to: activeWagon.to, company: company));
+bool isShorterRoute(List<City> route, List<City> thanRoute) {
+  final Duration firstDuration = fullRouteDuration(cityStops: route);
+  final Duration secondDuration = fullRouteDuration(cityStops: thanRoute);
 
+  return firstDuration > secondDuration;
+}
+
+bool hasFewerStops(List<City> route, List<City> thanRoute) {
+  return route.length > thanRoute.length;
+}
+
+Duration fullRouteDuration({required List<City> cityStops}) {
+  final fakeWagon = Wagon();
   Duration duration = Duration(seconds: 0);
+  final Queue<City> stops = Queue.from(cityStops);
   if (stops.isEmpty) {
     return duration;
   }
@@ -106,14 +124,9 @@ Duration fullRouteDuration(
   var last;
   while (stops.isNotEmpty) {
     last = stops.removeFirst();
-    duration =
-        duration + RouteTask(first, last, wagon: activeWagon.wagon).duration!;
+    duration = duration + RouteTask(first, last, wagon: fakeWagon).duration!;
     first = last;
   }
-
-  duration = duration +
-      RouteTask(last, activeWagon.to, wagon: activeWagon.wagon).duration!;
-
   return duration;
 }
 
