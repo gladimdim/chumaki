@@ -9,7 +9,7 @@ import 'package:chumaki/models/resources/resource.dart';
 class Lviv extends City {
   Lviv()
       : super(
-            point: Point(4800, 2400),
+            point: Point(4900, 2400),
             name: "Львів",
             localizedKeyName: 'lviv',
             size: 6,
