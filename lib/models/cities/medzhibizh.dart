@@ -10,7 +10,7 @@ class Medzhibizh extends City {
     point: Point(3950, 2300),
     name: "Меджибіж",
     localizedKeyName: 'medzhibizh',
-    size: 1,
+    size: 2,
     unlocked: false,
     unlockPriceMoney: Money(150.0),
     unlocksCities: [],
