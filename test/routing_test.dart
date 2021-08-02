@@ -1,6 +1,7 @@
 import 'package:chumaki/models/cities/berdychiv.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/ladyzhin.dart';
+import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
@@ -57,6 +58,28 @@ void main() {
           reason: "We need five stops (five cities)");
       expect(route3.length, equals(4),
           reason: "We need four stops (four cities)");
+    });
+  });
+
+  group("Route graph algorithms", () {
+    test("Can find a route with fewer steps", () {
+      final company = Company();
+      company..allCities.forEach((city) {
+        city.unlock();
+      });
+
+      final fullR = fullRoute(from: Sich(), to: Nizhin(), company: company, algoChoice: SHORTEST_ROUTE.FEWER_STOPS);
+      expect(fullR.length, equals(3), reason: "Sich -> Kursk -> Rilsk -> Nizhin has fewer stops than all other routes");
+    });
+
+    test("Can find a map route with min time to reach the town", () {
+      final company = Company();
+      company..allCities.forEach((city) {
+        city.unlock();
+      });
+
+      final fullR = fullRoute(from: Sich(), to: Nizhin(), company: company, algoChoice: SHORTEST_ROUTE.LESS_TIME);
+      expect(fullR.length, equals(4), reason: "Sich -> Govtva -> Mirgorod -> Piryatin -> Nizhin has takes less time than other routes.");
     });
   });
 }
