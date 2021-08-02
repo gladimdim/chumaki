@@ -5,7 +5,6 @@ import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
 import 'package:chumaki/models/wagons/wagon.dart';
-import 'package:tuple/tuple.dart';
 
 class CityRoute {
   final City from;
@@ -27,8 +26,6 @@ class CityRoute {
 //   CityRoute(City.ochakiv, City.sich, Point<double>(450, -230)),
 // ];
 }
-
-typedef RouteMatch = Tuple2<List<CityRoute>, Duration>;
 
 List<City> fullRoute(
     {required City from,
