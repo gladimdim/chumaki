@@ -18,6 +18,7 @@ import 'package:chumaki/models/cities/kursk.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/ladyzhin.dart';
 import 'package:chumaki/models/cities/lviv.dart';
+import 'package:chumaki/models/cities/medzhibizh.dart';
 import 'package:chumaki/models/cities/myrgorod.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/cities/ochakiv.dart';
@@ -28,6 +29,7 @@ import 'package:chumaki/models/cities/rylsk.dart';
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/cities/stavise.dart';
 import 'package:chumaki/models/cities/temryuk.dart';
+import 'package:chumaki/models/cities/ternopil.dart';
 import 'package:chumaki/models/cities/uman.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
@@ -94,6 +96,9 @@ class Company {
     CityRoute(Sich(), Kursk(), Point<double>(250, -1900)),
     CityRoute(Kursk(), Rylsk(), Point<double>(10, -20)),
     CityRoute(Rylsk(), Nizhin(), Point<double>(50, -50)),
+    CityRoute(Ternopil(), Lviv(), Point<double>(50, -50)),
+    CityRoute(Vinnitsa(), Medzhibizh(), Point<double>(50, -50)),
+    CityRoute(Medzhibizh(), Ternopil(), Point<double>(50, -50)),
   ];
 
   late double _money;

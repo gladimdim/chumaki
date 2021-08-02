@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/models/company.dart';
+import 'package:flutter/foundation.dart';
 import 'package:just_audio/just_audio.dart';
+import 'dart:io';
 
 class SoundManager {
   // do not forget to modify this map in web sounds manager implementation
@@ -48,8 +50,12 @@ class SoundManager {
     queueSound(uiActionMapping[name]);
   }
 
+  bool isSoundSupport() {
+    return Platform.isMacOS || Platform.isIOS || Platform.isAndroid || kIsWeb;
+  }
+
   void queueSound(String? track) async {
-    if (track == null || !AppPreferences.instance.getIsSoundEnabled()) {
+    if (track == null || !AppPreferences.instance.getIsSoundEnabled() && !isSoundSupport()) {
       return;
     }
 

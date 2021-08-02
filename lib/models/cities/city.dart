@@ -14,6 +14,7 @@ import 'package:chumaki/models/cities/kursk.dart';
 import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/ladyzhin.dart';
 import 'package:chumaki/models/cities/lviv.dart';
+import 'package:chumaki/models/cities/medzhibizh.dart';
 import 'package:chumaki/models/cities/myrgorod.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/cities/ochakiv.dart';
@@ -24,6 +25,7 @@ import 'package:chumaki/models/cities/rylsk.dart';
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/cities/stavise.dart';
 import 'package:chumaki/models/cities/temryuk.dart';
+import 'package:chumaki/models/cities/ternopil.dart';
 import 'package:chumaki/models/cities/uman.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
@@ -195,6 +197,8 @@ class City {
       Govtva(),
       Kursk(),
       Rylsk(),
+      Ternopil(),
+      Medzhibizh(),
     ];
   }
 
