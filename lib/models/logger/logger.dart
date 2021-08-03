@@ -10,12 +10,16 @@ enum LOGGER_EVENTS { ACHEIVEMENT_UNLOCKED }
 class Logger {
   Logger({
     required this.boughtStock,
-    this.boughtWagons = 0,
-    this.leadersHired = 0,
-    this.unreadCount = 0,
+    boughtWagons = 0,
+    leadersHired = 0,
+    unreadCount = 0,
+    completedCityEvents = 0,
     required this.soldStock,
     required this.achievements,
-  }) {
+  })  : this._unreadCount = unreadCount,
+        this._leadersHired = leadersHired,
+        this._boughtWagons = boughtWagons,
+        this._completedCityEvents = completedCityEvents {
     this.soldStock.changes.listen(_updateStockAchievements);
     this.boughtStock.changes.listen(_updateStockAchievements);
     changes = _innerChanges.stream;
@@ -27,9 +31,18 @@ class Logger {
   final Stock boughtStock;
   final Stock soldStock;
   final List<Achievement> achievements;
-  int boughtWagons;
-  int leadersHired;
-  int unreadCount;
+  int _boughtWagons;
+  int _leadersHired;
+  int _unreadCount;
+  int _completedCityEvents;
+
+  int get unreadCount => _unreadCount;
+
+  int get boughtWagons => _boughtWagons;
+
+  int get leadersHired => _leadersHired;
+
+  int get completedCityEvents => _completedCityEvents;
 
   void _updateStockAchievements(StockEvent event) {
     if (event.item1 == STOCK_EVENTS.ADDED) {
@@ -47,12 +60,12 @@ class Logger {
 
   void achievementUnlock() {
     SoundManager.instance.playLeaderLevelUp();
-    unreadCount++;
+    _unreadCount++;
     _innerChanges.add(LOGGER_EVENTS.ACHEIVEMENT_UNLOCKED);
   }
 
   void resetUnreadCount() {
-    unreadCount = 0;
+    _unreadCount = 0;
   }
 
   void attachToCompany(Company company) {
@@ -82,11 +95,11 @@ class Logger {
   }
 
   void wagonListener() {
-    boughtWagons++;
+    _boughtWagons++;
   }
 
   void leaderListener() {
-    leadersHired++;
+    _leadersHired++;
   }
 
   void addBoughtResource(Resource resource) {
@@ -105,6 +118,7 @@ class Logger {
       "soldStock": soldStock.toJson(),
       "achievements": achievements.map((ach) => ach.toJson()).toList(),
       "unreadCount": unreadCount,
+      "completedCityEvents": completedCityEvents,
     };
   }
 
@@ -114,11 +128,12 @@ class Logger {
       boughtStock: Stock.fromJson(
         inputJson["boughtStock"],
       ),
-      boughtWagons: inputJson["ownedWagons"],
-      leadersHired: inputJson["leadersHired"],
+      boughtWagons: inputJson["ownedWagons"] ?? 0 ,
+      leadersHired: inputJson["leadersHired"] ?? 0,
       soldStock: Stock.fromJson(inputJson["soldStock"]),
       achievements: achJson.map((json) => Achievement.fromJson(json)).toList(),
-      unreadCount: inputJson["unreadCount"],
+      unreadCount: inputJson["unreadCount"] ?? 0,
+      completedCityEvents: inputJson["completedCityEvents"] ?? 0,
     );
   }
 }
