@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 class LoggerStatsView extends StatelessWidget {
   final Logger logger;
   final VoidCallback onClose;
+
   const LoggerStatsView({Key? key, required this.logger, required this.onClose})
       : super(key: key);
 
@@ -17,7 +18,7 @@ class LoggerStatsView extends StatelessWidget {
     return DecoratedContainer3(
       child: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,7 +32,8 @@ class LoggerStatsView extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Column(
                       children: [
@@ -41,20 +43,33 @@ class LoggerStatsView extends StatelessWidget {
                             width: 64,
                           ),
                         ),
-                        TitleText(
+                        Text(
                             "${ChumakiLocalizations.labelWagonsBought}: ${logger.boughtWagons}"),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ClipOval(
+                          child: Image.asset(
+                            "images/leaders/leader4.png",
+                            width: 64,
+                          ),
+                        ),
+                        Text(
+                            "${ChumakiLocalizations.labelLeadersHired}: ${logger.leadersHired}"),
                       ],
                     ),
                     Column(
                       children: [
                         ClipOval(
                           child: Image.asset(
-                            "images/leaders/leader5.png",
+                            "images/leaders/leader1.png",
                             width: 64,
                           ),
                         ),
-                        TitleText(
-                            "${ChumakiLocalizations.labelLeadersHired}: ${logger.leadersHired}"),
+                        Text(
+                            "${ChumakiLocalizations.labelCompletedCityEvents}: ${logger.completedCityEvents}"),
                       ],
                     ),
                   ],
@@ -64,16 +79,19 @@ class LoggerStatsView extends StatelessWidget {
             Text(
               ChumakiLocalizations.labelLoggerBoughtStats,
               style: Theme.of(context).textTheme.headline6,
+              textAlign: TextAlign.center,
             ),
             LoggerStockView(stock: logger.boughtStock),
             Text(
               ChumakiLocalizations.labelLoggerSoldStats,
               style: Theme.of(context).textTheme.headline6,
+              textAlign: TextAlign.center,
             ),
             LoggerStockView(stock: logger.soldStock),
             Text(
               ChumakiLocalizations.labelAchievements,
               style: Theme.of(context).textTheme.headline6,
+              textAlign: TextAlign.center,
             ),
             AchievementsProgressView(logger: logger),
           ],

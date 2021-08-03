@@ -43,7 +43,7 @@ class _LoggerViewState extends State<LoggerView> {
                       shadowColor: themeData.backgroundColor,
                       onPressed: _toggleOpen,
                       child: Image.asset(
-                        "images/icons/paths/paths.png",
+                        "images/ui/glory.png",
                         width: 44,
                       ),
                     ),
