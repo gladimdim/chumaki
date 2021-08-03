@@ -5,7 +5,7 @@ import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/sound/sound_manager.dart';
 import 'package:rxdart/rxdart.dart';
 
-enum LOGGER_EVENTS { ACHEIVEMENT_UNLOCKED }
+enum LOGGER_EVENTS { ACHIEVEMENT_UNLOCKED }
 
 class Logger {
   Logger({
@@ -61,12 +61,13 @@ class Logger {
   void achievementUnlock() {
     SoundManager.instance.playLeaderLevelUp();
     _unreadCount++;
-    _innerChanges.add(LOGGER_EVENTS.ACHEIVEMENT_UNLOCKED);
+    _innerChanges.add(LOGGER_EVENTS.ACHIEVEMENT_UNLOCKED);
   }
 
   void resetUnreadCount() {
     _unreadCount = 0;
   }
+  
 
   void attachToCompany(Company company) {
     company.changes
@@ -76,10 +77,17 @@ class Logger {
     company.changes
         .where((event) => event == COMPANY_EVENTS.LEADER_HIRED)
         .listen((_) => {leaderListener()});
+    
+    company.changes.where((event) => event == COMPANY_EVENTS.CITY_EVENT_DONE)
+    .listen((_) => cityEventListener());
 
     company.allCities.forEach((city) {
       city.stock.changes.listen(cityStockListener);
     });
+  }
+  
+  void cityEventListener() {
+    _completedCityEvents++;
   }
 
   void cityStockListener(StockEvent event) {

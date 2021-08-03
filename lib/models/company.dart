@@ -54,7 +54,7 @@ enum COMPANY_EVENTS {
   CITY_UNLOCKED,
   WAGON_BOUGHT,
   LEADER_HIRED,
-  EVENT_DONE,
+  CITY_EVENT_DONE,
 }
 
 class Company {
@@ -378,12 +378,13 @@ class Company {
   }
 
   void finishEvent(Event event, {required City inCity}) {
+    final realCity = refToCityByName(inCity);
     if (!event.isDone()) {
       return;
     }
     addMoney(event.payment.amount);
-    inCity.finishActiveEvent();
-    this._innerChanges.add(COMPANY_EVENTS.EVENT_DONE);
+    realCity.finishActiveEvent();
+    this._innerChanges.add(COMPANY_EVENTS.CITY_EVENT_DONE);
   }
 
   void donateResource(Resource res,

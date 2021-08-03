@@ -76,5 +76,23 @@ void main() {
             reason: "Three wagons were bought, recorded and restored");
       });
     });
+
+    test("Can log city done event", () {
+      FakeAsync().run((async) {
+        final logger = Logger(
+            boughtStock: Stock([]), soldStock: Stock([]), achievements: []);
+        final company = Company();
+        logger.attachToCompany(company);
+        final sich = company.refToCityByName(Sich());
+        final event = sich.availableEvents.first;
+        event.decreaseResource(Grains(100));
+        company.finishEvent(event, inCity: Sich());
+        async.elapse(Duration(milliseconds: 100));
+        final aLogger = Logger.fromJson(logger.toJson());
+
+        expect(aLogger.completedCityEvents, equals(1),
+            reason: "One city event was saved and restored.");
+      });
+    });
   });
 }
