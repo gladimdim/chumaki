@@ -30,34 +30,51 @@ class LoggerStatsView extends StatelessWidget {
             DecoratedContainer2(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        ClipOval(
-                          child: Image.asset(
-                            "images/wagon/cart.png",
-                            width: 64,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                   crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          ClipOval(
+                            child: Image.asset(
+                              "images/wagon/cart.png",
+                              width: 64,
+                            ),
                           ),
-                        ),
-                        TitleText(
-                            "${ChumakiLocalizations.labelWagonsBought}: ${logger.boughtWagons}"),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        ClipOval(
-                          child: Image.asset(
-                            "images/leaders/leader5.png",
-                            width: 64,
+                          TitleText(
+                              "${ChumakiLocalizations.labelWagonsBought}: ${logger.boughtWagons}"),
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ClipOval(
+                            child: Image.asset(
+                              "images/leaders/leader4.png",
+                              width: 64,
+                            ),
                           ),
-                        ),
-                        TitleText(
-                            "${ChumakiLocalizations.labelLeadersHired}: ${logger.leadersHired}"),
-                      ],
-                    ),
-                  ],
+                          TitleText(
+                              "${ChumakiLocalizations.labelLeadersHired}: ${logger.leadersHired}"),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          ClipOval(
+                            child: Image.asset(
+                              "images/leaders/leader1.png",
+                              width: 64,
+                            ),
+                          ),
+                          TitleText(
+                              "${ChumakiLocalizations.labelCompletedCityEvents}: ${logger.completedCityEvents}"),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
