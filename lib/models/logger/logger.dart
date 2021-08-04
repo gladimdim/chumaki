@@ -3,7 +3,6 @@ import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/logger/achievement_city.dart';
 import 'package:chumaki/models/logger/achievement_stock.dart';
 import 'package:chumaki/models/resources/resource.dart';
-import 'package:chumaki/sound/sound_manager.dart';
 import 'package:rxdart/rxdart.dart';
 
 enum LOGGER_EVENTS { ACHIEVEMENT_UNLOCKED }
@@ -62,7 +61,6 @@ class Logger {
   }
 
   void achievementUnlock() {
-    SoundManager.instance.playLeaderLevelUp();
     _unreadCount++;
     _innerChanges.add(LOGGER_EVENTS.ACHIEVEMENT_UNLOCKED);
 
