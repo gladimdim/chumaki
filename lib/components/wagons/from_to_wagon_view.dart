@@ -137,4 +137,9 @@ class _FromToWagonViewState extends State<FromToWagonView>
       ),
     );
   }
+
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 }
