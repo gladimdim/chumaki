@@ -10,6 +10,7 @@ class AchievementCity extends AchievementBase {
   final amountAchievedNeeded;
   bool achieved;
   int currentProgress;
+
   AchievementCity({
     required this.localizedKey,
     required this.iconPath,
@@ -17,10 +18,10 @@ class AchievementCity extends AchievementBase {
     this.currentProgress = 0,
     this.achieved = false,
   }) : super(
-    localizedKey: localizedKey,
-    iconPath: iconPath,
-    achieved: achieved,
-  );
+          localizedKey: localizedKey,
+          iconPath: iconPath,
+          achieved: achieved,
+        );
 
   bool processChange(Logger logger) {
     if (achieved) {
@@ -51,10 +52,18 @@ class AchievementCity extends AchievementBase {
 
   @override
   Widget toWidget(Logger logger) {
-    return AchievementCityView(achievement: this,);
+    return AchievementCityView(
+      achievement: this,
+    );
   }
 
   static List<AchievementCity> defaultAchievements() {
-    return [];
+    return [
+      AchievementCity(
+        localizedKey: "events.cityHelper",
+        iconPath: "images/events/vesterfeld/cavalery.png",
+        amountAchievedNeeded: 3,
+      ),
+    ];
   }
 }

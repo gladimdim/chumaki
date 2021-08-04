@@ -25,7 +25,7 @@ class AchievementStock extends AchievementBase {
   );
 
   Widget toWidget(Logger logger) {
-    return AchievementProgressView(achievement: this, logger: logger);
+    return AchievementStockProgressView(achievement: this, logger: logger);
   }
 
   bool processChange(Logger logger) {
