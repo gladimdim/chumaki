@@ -34,7 +34,8 @@ import 'package:chumaki/models/cities/uman.dart';
 import 'package:chumaki/models/cities/vinnitsa.dart';
 import 'package:chumaki/models/cities/zhytomir.dart';
 import 'package:chumaki/models/events/event.dart';
-import 'package:chumaki/models/logger/achievement.dart';
+import 'package:chumaki/models/logger/achievement_city.dart';
+import 'package:chumaki/models/logger/achievement_stock.dart';
 import 'package:chumaki/models/logger/logger.dart';
 import 'package:chumaki/models/progress_duration.dart';
 import 'package:chumaki/models/tasks/route.dart';
@@ -124,7 +125,8 @@ class Company {
         Logger(
           boughtStock: Stock([]),
           soldStock: Stock([]),
-          achievements: (Achievement.defaultAchievements()),
+          cityAchievements: AchievementCity.defaultAchievements(),
+          stockAchievements: AchievementStock.defaultAchievements(),
         );
 
     this.logger.attachToCompany(this);

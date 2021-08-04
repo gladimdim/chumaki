@@ -2,6 +2,7 @@ import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
+import 'package:chumaki/models/logger/achievement_city.dart';
 
 import 'package:chumaki/models/logger/logger.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -13,7 +14,10 @@ void main() {
   group("(De)serialize Logger", () {
     test("Can recover bought stock", () {
       final logger = Logger(
-          boughtStock: Stock([]), soldStock: Stock([]), achievements: []);
+          boughtStock: Stock([]),
+          soldStock: Stock([]),
+          stockAchievements: [],
+          cityAchievements: []);
       logger.addBoughtResource(Firearm(10));
       logger.addBoughtResource(Wax(3));
 
@@ -30,7 +34,10 @@ void main() {
 
     test("Can recover sold stock", () {
       final logger = Logger(
-          boughtStock: Stock([]), soldStock: Stock([]), achievements: []);
+          cityAchievements: [],
+          boughtStock: Stock([]),
+          soldStock: Stock([]),
+          stockAchievements: []);
       logger.addSoldStock(Firearm(11));
       logger.addSoldStock(Wax(33));
 
@@ -47,7 +54,10 @@ void main() {
     test("Can recover hired leaders count", () {
       FakeAsync().run((async) {
         final logger = Logger(
-            boughtStock: Stock([]), soldStock: Stock([]), achievements: []);
+            cityAchievements: [],
+            boughtStock: Stock([]),
+            soldStock: Stock([]),
+            stockAchievements: []);
         final company = Company();
         logger.attachToCompany(company);
         company.hireLeader(leader: Leader("dima"), forWagon: Wagon());
@@ -63,7 +73,10 @@ void main() {
     test("Can recover wagons bought count", () {
       FakeAsync().run((async) {
         final logger = Logger(
-            boughtStock: Stock([]), soldStock: Stock([]), achievements: []);
+            cityAchievements: [],
+            boughtStock: Stock([]),
+            soldStock: Stock([]),
+            stockAchievements: []);
         final company = Company();
         logger.attachToCompany(company);
         company.buyWagon(Wagon(), forCity: Sich(), price: Money(200));
@@ -80,7 +93,10 @@ void main() {
     test("Can log city done event", () {
       FakeAsync().run((async) {
         final logger = Logger(
-            boughtStock: Stock([]), soldStock: Stock([]), achievements: []);
+            cityAchievements: [],
+            boughtStock: Stock([]),
+            soldStock: Stock([]),
+            stockAchievements: []);
         final company = Company();
         logger.attachToCompany(company);
         final sich = company.refToCityByName(Sich());
@@ -93,6 +109,25 @@ void main() {
         expect(aLogger.completedCityEvents, equals(1),
             reason: "One city event was saved and restored.");
       });
+    });
+
+    test("Can recover city achievements", () {
+      final logger = Logger(
+          cityAchievements: [
+            AchievementCity(
+                localizedKey: "test",
+                iconPath: "test.png",
+                amountAchievedNeeded: 2),
+          ],
+          boughtStock: Stock([]),
+          soldStock: Stock([]),
+          stockAchievements: []);
+      logger.cityEventListener();
+      logger.cityEventListener();
+      final aLogger = Logger.fromJson(logger.toJson());
+
+      expect(aLogger.cityAchievements.length, equals(1), reason: "Reason restored one city achievement");
+      expect(aLogger.cityAchievements[0].achieved, isTrue, reason: "Achievement restored");
     });
   });
 }

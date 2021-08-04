@@ -23,7 +23,7 @@ class Sich extends City {
               localizedKey: 'events.giveFood',
               iconPath: 'images/resources/bread/bread_1.png',
               requirements: [
-                Grains(100),
+                Grains(5),
               ],
               payment: Money(200),
               artPath: "images/events/vesterfeld/cossack_and_bum.png",

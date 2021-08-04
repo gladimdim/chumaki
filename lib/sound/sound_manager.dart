@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/models/company.dart';
+import 'package:chumaki/models/logger/logger.dart';
 import 'package:flutter/foundation.dart';
 import 'package:just_audio/just_audio.dart';
 import 'dart:io';
@@ -25,6 +26,7 @@ class SoundManager {
   };
 
   StreamSubscription? _sub;
+  StreamSubscription? _loggerSub;
 
   static final SoundManager instance = SoundManager._internal();
 
@@ -40,10 +42,17 @@ class SoundManager {
         .listen((event) {
       playCompanySound(event);
     });
+
+    _loggerSub = company.logger.changes
+        .where((event) => event == LOGGER_EVENTS.ACHIEVEMENT_UNLOCKED)
+        .listen((event) {
+      playLeaderLevelUp();
+    });
   }
 
   detachFromCompany() {
     _sub?.cancel();
+    _loggerSub?.cancel();
   }
 
   playUISound(String name) async {
@@ -55,7 +64,9 @@ class SoundManager {
   }
 
   void queueSound(String? track) async {
-    if (track == null || !AppPreferences.instance.getIsSoundEnabled() && !isSoundSupport()) {
+    if (track == null ||
+        !AppPreferences.instance.getIsSoundEnabled() ||
+        !isSoundSupport()) {
       return;
     }
 
