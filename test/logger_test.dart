@@ -13,7 +13,10 @@ void main() {
   group("(De)serialize Logger", () {
     test("Can recover bought stock", () {
       final logger = Logger(
-          boughtStock: Stock([]), soldStock: Stock([]), achievements: []);
+          boughtStock: Stock([]),
+          soldStock: Stock([]),
+          stockAchievements: [],
+          cityAchievements: []);
       logger.addBoughtResource(Firearm(10));
       logger.addBoughtResource(Wax(3));
 
@@ -30,7 +33,10 @@ void main() {
 
     test("Can recover sold stock", () {
       final logger = Logger(
-          boughtStock: Stock([]), soldStock: Stock([]), achievements: []);
+          cityAchievements: [],
+          boughtStock: Stock([]),
+          soldStock: Stock([]),
+          stockAchievements: []);
       logger.addSoldStock(Firearm(11));
       logger.addSoldStock(Wax(33));
 
@@ -47,7 +53,10 @@ void main() {
     test("Can recover hired leaders count", () {
       FakeAsync().run((async) {
         final logger = Logger(
-            boughtStock: Stock([]), soldStock: Stock([]), achievements: []);
+            cityAchievements: [],
+            boughtStock: Stock([]),
+            soldStock: Stock([]),
+            stockAchievements: []);
         final company = Company();
         logger.attachToCompany(company);
         company.hireLeader(leader: Leader("dima"), forWagon: Wagon());
@@ -63,7 +72,10 @@ void main() {
     test("Can recover wagons bought count", () {
       FakeAsync().run((async) {
         final logger = Logger(
-            boughtStock: Stock([]), soldStock: Stock([]), achievements: []);
+            cityAchievements: [],
+            boughtStock: Stock([]),
+            soldStock: Stock([]),
+            stockAchievements: []);
         final company = Company();
         logger.attachToCompany(company);
         company.buyWagon(Wagon(), forCity: Sich(), price: Money(200));
@@ -80,7 +92,10 @@ void main() {
     test("Can log city done event", () {
       FakeAsync().run((async) {
         final logger = Logger(
-            boughtStock: Stock([]), soldStock: Stock([]), achievements: []);
+            cityAchievements: [],
+            boughtStock: Stock([]),
+            soldStock: Stock([]),
+            stockAchievements: []);
         final company = Company();
         logger.attachToCompany(company);
         final sich = company.refToCityByName(Sich());

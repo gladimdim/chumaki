@@ -1,6 +1,7 @@
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/company.dart';
-import 'package:chumaki/models/logger/achievement.dart';
+import 'package:chumaki/models/logger/achievement_city.dart';
+import 'package:chumaki/models/logger/achievement_stock.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/sound/sound_manager.dart';
 import 'package:rxdart/rxdart.dart';
@@ -15,7 +16,8 @@ class Logger {
     unreadCount = 0,
     completedCityEvents = 0,
     required this.soldStock,
-    required this.achievements,
+    required this.stockAchievements,
+    required this.cityAchievements,
   })  : this._unreadCount = unreadCount,
         this._leadersHired = leadersHired,
         this._boughtWagons = boughtWagons,
@@ -30,7 +32,8 @@ class Logger {
 
   final Stock boughtStock;
   final Stock soldStock;
-  final List<Achievement> achievements;
+  final List<AchievementStock> stockAchievements;
+  final List<AchievementCity> cityAchievements;
   int _boughtWagons;
   int _leadersHired;
   int _unreadCount;
@@ -51,7 +54,7 @@ class Logger {
   }
 
   void _processSoldStock() {
-    achievements.forEach((Achievement achievement) {
+    stockAchievements.forEach((AchievementStock achievement) {
       if (achievement.processChange(this)) {
         achievementUnlock();
       }
@@ -124,14 +127,16 @@ class Logger {
       "ownedWagons": boughtWagons,
       "leadersHired": leadersHired,
       "soldStock": soldStock.toJson(),
-      "achievements": achievements.map((ach) => ach.toJson()).toList(),
+      "stockAchievements": stockAchievements.map((ach) => ach.toJson()).toList(),
+      "cityAchievements": cityAchievements.map((ach) => ach.toJson()).toList(),
       "unreadCount": unreadCount,
       "completedCityEvents": completedCityEvents,
     };
   }
 
   static Logger fromJson(Map<String, dynamic> inputJson) {
-    final achJson = inputJson["achievements"] as List;
+    final achJson = inputJson["stockAchievements"] as List;
+    final cityAchJson = inputJson["cityAchievements"] as List;
     return Logger(
       boughtStock: Stock.fromJson(
         inputJson["boughtStock"],
@@ -139,8 +144,10 @@ class Logger {
       boughtWagons: inputJson["ownedWagons"] ?? 0 ,
       leadersHired: inputJson["leadersHired"] ?? 0,
       soldStock: Stock.fromJson(inputJson["soldStock"]),
-      achievements: achJson.map((json) => Achievement.fromJson(json)).toList(),
+      stockAchievements: achJson.map((json) => AchievementStock.fromJson(json)).toList(),
+      cityAchievements: cityAchJson.map((json) => AchievementCity.fromJson(json)).toList(),
       unreadCount: inputJson["unreadCount"] ?? 0,
+      
       completedCityEvents: inputJson["completedCityEvents"] ?? 0,
     );
   }
