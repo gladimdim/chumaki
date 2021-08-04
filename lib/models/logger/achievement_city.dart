@@ -5,18 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class AchievementCity extends AchievementBase {
-  final String localizedKey;
-  final String iconPath;
   final amountAchievedNeeded;
-  bool achieved;
   int currentProgress;
 
   AchievementCity({
-    required this.localizedKey,
-    required this.iconPath,
+    localizedKey,
+    iconPath,
     required this.amountAchievedNeeded,
     this.currentProgress = 0,
-    this.achieved = false,
+    achieved = false,
   }) : super(
           localizedKey: localizedKey,
           iconPath: iconPath,
@@ -28,7 +25,7 @@ class AchievementCity extends AchievementBase {
       return false;
     }
     currentProgress++;
-    achieved = currentProgress == achieved;
+    achieved = currentProgress == amountAchievedNeeded;
     return achieved;
   }
 

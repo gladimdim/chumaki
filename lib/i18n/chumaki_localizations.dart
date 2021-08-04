@@ -267,7 +267,7 @@ class ChumakiLocalizations {
       "labelLeadersHired": "Найнято отаманів",
       "labelWagonsBought": "Куплено возів",
       "labelCompletedCityEvents": "Завершено подій",
-      "labelRequiredToDoCityEvents": "Виконати завдань",
+      "labelRequiredToDoCityEvents": "Виконати міських завдань",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -364,7 +364,7 @@ class ChumakiLocalizations {
       "labelLeadersHired": "Нанято отаманов",
       "labelWagonsBought": "Куплено возов",
       "labelCompletedCityEvents": "Завершено заданий",
-      "labelRequiredToDoCityEvents": "Выполнить заданий",
+      "labelRequiredToDoCityEvents": "Выполнить городских заданий",
 
     },
   };

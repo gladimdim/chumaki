@@ -65,6 +65,7 @@ class Logger {
     SoundManager.instance.playLeaderLevelUp();
     _unreadCount++;
     _innerChanges.add(LOGGER_EVENTS.ACHIEVEMENT_UNLOCKED);
+
   }
 
   void resetUnreadCount() {
@@ -91,6 +92,11 @@ class Logger {
   
   void cityEventListener() {
     _completedCityEvents++;
+    cityAchievements.forEach((ach) {
+      if (ach.processChange(this)) {
+        achievementUnlock();
+      }
+    });
   }
 
   void cityStockListener(StockEvent event) {

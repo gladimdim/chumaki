@@ -2,6 +2,7 @@ import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
+import 'package:chumaki/models/logger/achievement_city.dart';
 
 import 'package:chumaki/models/logger/logger.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -108,6 +109,25 @@ void main() {
         expect(aLogger.completedCityEvents, equals(1),
             reason: "One city event was saved and restored.");
       });
+    });
+
+    test("Can recover city achievements", () {
+      final logger = Logger(
+          cityAchievements: [
+            AchievementCity(
+                localizedKey: "test",
+                iconPath: "test.png",
+                amountAchievedNeeded: 2),
+          ],
+          boughtStock: Stock([]),
+          soldStock: Stock([]),
+          stockAchievements: []);
+      logger.cityEventListener();
+      logger.cityEventListener();
+      final aLogger = Logger.fromJson(logger.toJson());
+
+      expect(aLogger.cityAchievements.length, equals(1), reason: "Reason restored one city achievement");
+      expect(aLogger.cityAchievements[0].achieved, isTrue, reason: "Achievement restored");
     });
   });
 }
