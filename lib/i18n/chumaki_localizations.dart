@@ -169,6 +169,7 @@ class ChumakiLocalizations {
       "labelLeadersHired": "Leaders hired",
       "labelWagonsBought": "Wagons bought",
       "labelCompletedCityEvents": "Events completed",
+      "labelRequiredToDoCityEvents": "City events to finish",
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -266,6 +267,7 @@ class ChumakiLocalizations {
       "labelLeadersHired": "Найнято отаманів",
       "labelWagonsBought": "Куплено возів",
       "labelCompletedCityEvents": "Завершено подій",
+      "labelRequiredToDoCityEvents": "Виконати завдань",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -361,7 +363,9 @@ class ChumakiLocalizations {
       "labelRequired": "Необходимо",
       "labelLeadersHired": "Нанято отаманов",
       "labelWagonsBought": "Куплено возов",
-      "labelCompletedCityEvents": "Завершено заданий"
+      "labelCompletedCityEvents": "Завершено заданий",
+      "labelRequiredToDoCityEvents": "Выполнить заданий",
+
     },
   };
 
@@ -651,5 +655,10 @@ class ChumakiLocalizations {
 
   static String get labelCompletedCityEvents {
     return _localizedValues[locale.languageCode]!["labelCompletedCityEvents"]!;
+  }
+
+  static String get labelRequiredToDoCityEvents {
+    return _localizedValues[locale.languageCode]![
+        "labelRequiredToDoCityEvents"]!;
   }
 }

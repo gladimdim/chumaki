@@ -7,11 +7,11 @@ import 'package:chumaki/views/achivements/achievement_card_view.dart';
 import 'package:chumaki/views/achivements/achievement_stock_progress_bar.dart';
 import 'package:flutter/material.dart';
 
-class AchievementStockProgressView extends StatelessWidget {
+class AchievementStockView extends StatelessWidget {
   final AchievementStock achievement;
   final Logger logger;
 
-  const AchievementStockProgressView(
+  const AchievementStockView(
       {Key? key, required this.achievement, required this.logger})
       : super(key: key);
 

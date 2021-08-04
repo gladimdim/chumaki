@@ -2,7 +2,7 @@
 import 'package:chumaki/models/logger/achievement.dart';
 import 'package:chumaki/models/logger/logger.dart';
 import 'package:chumaki/models/resources/resource.dart';
-import 'package:chumaki/views/achivements/achivement_progress_view.dart';
+import 'package:chumaki/views/achivements/achivement_stock_view.dart';
 import 'package:flutter/material.dart';
 
 class AchievementStock extends AchievementBase {
@@ -25,7 +25,7 @@ class AchievementStock extends AchievementBase {
   );
 
   Widget toWidget(Logger logger) {
-    return AchievementStockProgressView(achievement: this, logger: logger);
+    return AchievementStockView(achievement: this, logger: logger);
   }
 
   bool processChange(Logger logger) {

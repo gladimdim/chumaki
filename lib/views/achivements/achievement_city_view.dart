@@ -1,3 +1,6 @@
+import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/outlined_text.dart';
+import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/logger/achievement_city.dart';
 import 'package:chumaki/views/achivements/achievement_card_view.dart';
 import 'package:chumaki/views/achivements/achievement_progress_indicator.dart';
@@ -13,8 +16,14 @@ class AchievementCityView extends StatelessWidget {
   Widget build(BuildContext context) {
     return AchievementCardView(
       achievement: achievement,
-      content: AchievementProgressIndicator(
-        value: achievement.currentProgress / achievement.amountAchievedNeeded,
+      content: Column(
+        children: [
+          TitleText(ChumakiLocalizations.labelRequiredToDoCityEvents),
+          OutlinedText("${achievement.currentProgress} / ${achievement.amountAchievedNeeded.toString()}"),
+          AchievementProgressIndicator(
+            value: achievement.currentProgress / achievement.amountAchievedNeeded,
+          ),
+        ],
       ),
     );
   }
