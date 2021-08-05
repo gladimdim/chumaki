@@ -31,7 +31,41 @@ class Cherkasy extends City {
                   Tobacco(10)
                 ],
                 localizedKey: "events.cossackStarshinaWedding",
-                artPath: "images/events/vesterfeld/elite_cossacks.png")
+                artPath: "images/events/vesterfeld/elite_cossacks.png"),
+            Event(
+                iconPath: "images/resources/wood/wood_2.png",
+                payment: Money(420),
+                requirements: [
+                  Bread(50),
+                  Wood(30),
+                  Planks(30),
+                ],
+                localizedKey: "events.cherkasyIncreaseOfPopulation",
+                artPath: "images/events/vesterfeld/cossacks_crowd.png"),
+            Event(
+                iconPath: "images/resources/salt/salt.png",
+                payment: Money(700),
+                requirements: [
+                  Bread(100),
+                  Grains(120),
+                  Salt(40),
+                ],
+                localizedKey: "events.cherkasyLocust",
+                artPath: "images/events/vesterfeld/poor_boy_2.png"),
+            Event(
+                iconPath: "images/resources/metalparts/metalparts.png",
+                payment: Money(2900),
+                requirements: [
+                  MetalParts(40),
+                  Gorilka(20),
+                  Firearm(50),
+                  Cannon(5),
+                  Powder(40),
+                  Horse(50),
+                  Bread(100),
+                ],
+                localizedKey: "events.cherkasyWarPreps",
+                artPath: "images/events/vesterfeld/field_with_horses.png"),
           ],
           stock: Stock([
             Bread(200),

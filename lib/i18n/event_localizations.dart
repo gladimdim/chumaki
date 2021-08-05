@@ -21,6 +21,16 @@ class EventLocalizations extends InternalLocalizations {
       "cossackStarshinaWeddingTitle": "Gentry Wedding",
       "cossackStarshinaWeddingText":
           "One of the top officers at Cherkasy's castle gentry has to conduct a wedding for his daughter. Bring them resources needed to have Wedding of the Century",
+      "cherkasyIncreaseOfPopulationTitle": "Population Increase",
+      "cherkasyIncreaseOfPopulationText":
+      "The population of Cherkasy has increased dramatically in latest decade. The fortress needs to be expanded.",
+      "cherkasyLocustTitle": "Locust",
+      "cherkasyLocustText":
+      "The locust invasion destroyed the fields. Cherkasy Chief opened the town's treasury and asks all traders to bring grains and food to help them survive next year.",
+      "cherkasyWarPrepsTitle": "Prepare for War",
+      "cherkasyWarPrepsText": "Polish parlament approved another invasion of Ukrainian lands with their government army and volunteered bydlo. Cherkas's fortress chied knows that the war always touches his lands and decided to prepare beforehand by stocking ammo, food and horses.",
+
+      // Kyiv
       "kyivShootingTournamentTitle": "Quick Hand",
       "kyivShootingTournamentText":
           "The 'Quick hand' tournament will take place soon in Kyiv. The best bow and firearm shooters will clash in the battle to figure out who is the best shooter in the world. The organizers need several firearms and a valuable price. If you bring them you will get nice payment in return.",
@@ -123,6 +133,14 @@ class EventLocalizations extends InternalLocalizations {
       "cossackStarshinaWeddingTitle": "Шляхетське весілля",
       "cossackStarshinaWeddingText":
           "Один із знатних шляхтичів Черкаського замку має видати свою доньку заміж. Вони хочуть провести весілля століття, тому потребують дуже багато різних дорогих подарунків та страв.",
+      "cherkasyIncreaseOfPopulationTitle": "Збільшення населення",
+      "cherkasyIncreaseOfPopulationText":
+          "Населення Черкас дуже сильно зросло, необхідно розширити фортецю і земляні вали зі сторогами.",
+      "cherkasyLocustTitle": "Сарана",
+      "cherkasyLocustText":
+          "Навала зелених хмар сарани винищила все збіжжя, яке не встишли зібрати. Від отруєння подохли коні та худоба. Староста Черкас відкрив золоті збереження міста та просить торговців забезпечити місто їжею.",
+      "cherkasyWarPrepsTitle": "Підготовка до війни",
+      "cherkasyWarPrepsText": "Польський сейм оголосив збори охочого бидла та військ для чергового нападу на українські землі. Так як війна завжди проходить черкаськими землями, то козацька старшина вирішила закупити необхідне для війни заздалегідь.",
       // Kyiv
       "kyivShootingTournamentTitle": "Швидка рука",
       "kyivShootingTournamentText":
@@ -225,6 +243,15 @@ class EventLocalizations extends InternalLocalizations {
       "cossackStarshinaWeddingTitle": "Шляхетская свадьба",
       "cossackStarshinaWeddingText":
           "Один из шляхтичей из Черкасского замка выдает свою дочку замуж. Они хотять отиграть свадьбу, чтобы запомнилась на столетие. Помогите им собрать дорогие подарки и явства.",
+      "cherkasyIncreaseOfPopulationTitle": "Увеличение населения",
+      "cherkasyIncreaseOfPopulationText":
+      "Население Черкасс постояно растет. Необходимо расширить крепость и земляные валы вокруг степи со сторожками.",
+      "cherkasyLocustTitle": "Саранча",
+      "cherkasyLocustText":
+      "Навала зеленых туч саранчи уничтожило все поля, которые не успели убрать. От отравления подохли кони и скот. Староста Черкас открыл золотые запасы города и просит торговцем обеспечить город едой.",
+      "cherkasyWarPrepsTitle": "Подготовка к войне",
+      "cherkasyWarPrepsText": "Полський сейм снова огласил збор охочего быдла и войск для нападения на украинские земли. Так как война всегда проходит через Черкассы, то старшина приняла решение закупить необходимые материалы и фураж для военных действий.",
+
       // Kyiv
       "kyivShootingTournamentTitle": "Быстрая рука",
       "kyivShootingTournamentText":
