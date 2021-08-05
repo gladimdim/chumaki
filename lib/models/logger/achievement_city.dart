@@ -57,9 +57,25 @@ class AchievementCity extends AchievementBase {
   static List<AchievementCity> defaultAchievements() {
     return [
       AchievementCity(
-        localizedKey: "events.cityHelper",
-        iconPath: "images/events/vesterfeld/cavalery.png",
+        localizedKey: "achievements.cityBeginner",
+        iconPath: "images/events/vesterfeld/wandering_man.png",
         amountAchievedNeeded: 3,
+      ),
+
+      AchievementCity(
+        localizedKey: "achievements.cityKnownMan",
+        iconPath: "images/events/vesterfeld/wandering_men.png",
+        amountAchievedNeeded: 5,
+      ),
+      AchievementCity(
+        localizedKey: "achievements.cityBestHelper",
+        iconPath: "images/events/vesterfeld/elite_cossacks.png",
+        amountAchievedNeeded: 10,
+      ),
+      AchievementCity(
+        localizedKey: "achievements.cityEpicHelperman",
+        iconPath: "images/events/vesterfeld/otaman.png",
+        amountAchievedNeeded: 15,
       ),
     ];
   }

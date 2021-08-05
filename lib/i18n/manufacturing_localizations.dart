@@ -26,6 +26,7 @@ class ManufacturingLocalizations extends InternalLocalizations {
       "honey_maker": "Honey maker",
       "silk_market": "Silk market",
       "quarry": "Quarry",
+      "trappers_house": "Trappers house",
     },
     "uk": {
       "liman": "Солеварня",
@@ -51,6 +52,7 @@ class ManufacturingLocalizations extends InternalLocalizations {
       "honey_maker": "Пасіки",
       "silk_market": "Шовковий ринок",
       "quarry": "Каменярня",
+      "trappers_house": "Курін уходників",
     },
     "ru": {
       "liman": "Солеварение",
@@ -77,6 +79,7 @@ class ManufacturingLocalizations extends InternalLocalizations {
       "honey_maker": "Пасеки",
       "silk_market": "Шелковый рынок",
       "quarry": "Каменярня",
+      "trappers_house": "Курень уходников",
     }
   };
 }
