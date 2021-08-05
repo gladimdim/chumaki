@@ -102,6 +102,23 @@ class EventLocalizations extends InternalLocalizations {
       "pereyaslavHospitalTitle": "Hospital",
       "pereyaslavHospitalText":
           "Continuous fights in steppe causes lots of injured and sick cossacks. Pereyaslav together with Cherkasy decided to join forced and build a new hospital near the Trahtamirov monastery.",
+      // Ostrog
+      "ostrogPeregonkaTitle": "Distillery",
+      "ostrogPeregonkaText":
+      "Distilleries in Ostrog are short on grains resource. They need to fulfill raised requests from local villages and exports.",
+      "ostrogAcademyTitle": "Academy",
+      "ostrogAcademyText":
+      "Due to rising amount of ukrainian students in Ostrog Academy it was decided to expand its territory. For this they need to stock more food and other goods required for studying.",
+      "ostrogBirthdayTitle": "Anniversary of Knyaz Birthday",
+      "ostrogBirthdayText":
+      "To celebrate 100 years from Vasil Ostrozskyi birthday it was decided to conduct at Academy the holiday of Renaissance. Students from all parts of Ukraine may take a part in it and get valuable prizes.",
+      "ostrogHugeOrderTitle": "Record order",
+      "ostrogHugeOrderText":
+      "Metal melting factories in Ostrog received record order from Hetman. Their metal is required to manufacture cannons in Lviv, which has lack of metal in stock. Your task is to bring as much iron ore as possible in order to fulfill the factories needs.",
+      "ostrogUpgradeCastleTitle": "Upgrade Old Castle",
+      "ostrogUpgradeCastleText": "Wooden castle is quite old and cannot stop tartars and turks from raids. The Town Chief decided to upgrade the old walls and requires some building materials.",
+
+
     },
     "uk": {
       // sich
@@ -204,6 +221,21 @@ class EventLocalizations extends InternalLocalizations {
       "pereyaslavHospitalTitle": "Госпіталь",
       "pereyaslavHospitalText":
           "Постійні сутички у степах викликають збільшення калік та хворих. Спільно з Черкаським полком закладено основу Трахтемирівського монастиря-лікарні.",
+      // Ostrog
+      "ostrogPeregonkaTitle": "Перегонка",
+      "ostrogPeregonkaText":
+          "Винокурням Острога не вистачає зерна для виготовлення горілки, щоб задовольнити потреби населення та експорту.",
+      "ostrogAcademyTitle": "Академія",
+      "ostrogAcademyText":
+          "У зв'язку зі збільшенням кількості студентів Острозька Академія розширює свій корпус. Для цього необхідно заготувати більше їжі на учбовий рік та інші товари.",
+      "ostrogBirthdayTitle": "Річниця народження Князя",
+      "ostrogBirthdayText":
+          "До сторіччя народження князя Василя Костянтина Острозського відбудеться свято Просвіти. Студенти з усіх кутків України зможуть позмагаться у різних дисциплінах за коштовні призи",
+      "ostrogHugeOrderTitle": "Рекордне замовлення",
+      "ostrogHugeOrderText":
+          "Плавильні цехи отримали рекордне замовлення від гетьмана на виплавку металу для подальшого виготовлення гармат у Львові. Запасів міста не вистачає, необхідно доставити ще руди.",
+      "ostrogUpgradeCastleTitle": "Оновлення замку",
+      "ostrogUpgradeCastleText": "Дерев'яний замок прийшов в негідність та потребує оновлення. У зв'язку з активізацією рейдів татар, необхідно модернізувати його.",
     },
     "ru": {
       // Sich
@@ -308,6 +340,23 @@ class EventLocalizations extends InternalLocalizations {
       "pereyaslavHospitalTitle": "Госпиталь",
       "pereyaslavHospitalText":
           "Постоянные бои в степи и на Черном море порождают множество увечных и больных. Совместно с Черкаским полком решено основать госпиталь в стенах Трахтамировского монастыря.",
+      // Ostrog
+      "ostrogPeregonkaTitle": "Перегонка",
+      "ostrogPeregonkaText":
+      "Винокурням Острога не хватает зерна, чтобы удовлетворить потребности всего населения и експорта.",
+      "ostrogAcademyTitle": "Академия",
+      "ostrogAcademyText":
+      "В связи с возросшим количеством украинских студентов в Академии, она расширяет свой корпус. Для этого необходимо заготовить больше еды на учебный год и другие товары.",
+      "ostrogBirthdayTitle": "Годовщина рождения Князя",
+      "ostrogBirthdayText":
+      "До столетия рождения князя Василия Константина Острозского будет проведен праздник Просвещения. Студенты со всех областей Украины смогут посоревноватся в разных дисциплинах за дорогие призы.",
+      "ostrogHugeOrderTitle": "Рекордный заказ",
+      "ostrogHugeOrderText":
+      "Плавильные цеха получили рекордный заказ от гетьмана для выплавки новых пушек во Львове. Запасы города в руде исчерпаны, надо доставить как можно больше руды для плавилен.",
+      "ostrogUpgradeCastleTitle": "Обновление замка",
+      "ostrogUpgradeCastleText": "Деревяный замок пришел в негодность и требует обновления. В связи с участившимися рейдами татар и турок необходимо модернезировать стены и вал.",
+
+
     }
   };
 }
