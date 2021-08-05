@@ -46,14 +46,18 @@ class SelectedCityLockedView extends StatelessWidget {
                       .citiesToRealCities(cityThatCanUnlock.unlocksCities)
                       .contains(realCity);
                 }).map((cityThatUnlocks) {
-                  return ActionButton(
-                    image: CityAvatarStacked(
-                      city: cityThatUnlocks,
-                      width: 128,
+                  return SizedBox(
+                    width: CITY_DETAILS_VIEW_WIDTH - CITY_MENU_WIDTH / 4,
+                    height: 280,
+                    child: ActionButton(
+                      image: CityAvatarStacked(
+                        city: cityThatUnlocks,
+                        width: 180,
+                      ),
+                      subTitle: Container(),
+                      action: Text(ChumakiLocalizations.labelGoTo),
+                      onPress: () => _navigateViewerToCity(cityThatUnlocks),
                     ),
-                    subTitle: Container(),
-                    action: Text(ChumakiLocalizations.labelGoTo),
-                    onPress: () => _navigateViewerToCity(cityThatUnlocks),
                   );
                 }).toList(),
               ),

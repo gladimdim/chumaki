@@ -45,13 +45,16 @@ class WagonDispatcher extends StatelessWidget {
 
               return StreamBuilder(
                 stream: toCity.changes,
-                builder: (context, snapshot) => ActionButton(
-                  action: Text(readableDuration(pathRoute.totalDuration())),
-                  subTitle: Text(ChumakiLocalizations.labelSend),
-                  onPress: toCity.isUnlocked()
-                      ? () => dispatch(toCity, context)
-                      : null,
-                  image: SmallCityAvatarWithCenters(city: toCity),
+                builder: (context, snapshot) => SizedBox(
+                  height: 120,
+                  child: ActionButton(
+                    action: Text(readableDuration(pathRoute.totalDuration())),
+                    subTitle: Text(ChumakiLocalizations.labelSend),
+                    onPress: toCity.isUnlocked()
+                        ? () => dispatch(toCity, context)
+                        : null,
+                    image: SmallCityAvatarWithCenters(city: toCity),
+                  ),
                 ),
               );
             }).toList(),

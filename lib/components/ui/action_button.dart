@@ -35,8 +35,8 @@ class _ActionButtonState extends State<ActionButton> {
         child: TextButton(
           onPressed: widget.onPress,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisSize: MainAxisSize.min,
             children: [
               widget.image,
               widget.subTitle,
