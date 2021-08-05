@@ -13,6 +13,10 @@ class AchievementsLocalizations extends InternalLocalizations {
       "greatBuilder": "The Great Builder",
       "alconautics": "Alconautics",
       "warmWinter": "Ready for winter",
+      "cityBeginner": "Problem solver beginner",
+      "cityKnownMan": "Known man",
+      "cityBestHelper": "Famous all over Ukraine",
+      "cityEpicHelperman": "You won",
     },
     "uk": {
       "fishSeller": "Ви тхнете рибою",
@@ -25,6 +29,10 @@ class AchievementsLocalizations extends InternalLocalizations {
       "greatBuilder": "Величний будівельник",
       "alconautics": "Алконавтика",
       "warmWinter": "До зими готовий",
+      "cityKnownMan": "Відомий торговець",
+      "cityBeginner": "Вирішувач проблем",
+      "cityBestHelper": "Відомий на всю Україну",
+      "cityEpicHelperman": "Ви виграли",
     },
     "ru": {
       "fishSeller": "Ты воняешь рыбой",
@@ -37,6 +45,10 @@ class AchievementsLocalizations extends InternalLocalizations {
       "greatBuilder": "Великий строитель",
       "alconautics": "Алконавтика",
       "warmWinter": "К зиме готов",
+      "cityKnownMan": "Известный торговец",
+      "cityBeginner": "Решатель проблем",
+      "cityBestHelper": "Известный на всю Украину",
+      "cityEpicHelperman": "Вы выиграли",
     }
   };
 }
