@@ -2,7 +2,6 @@ import 'dart:collection';
 import 'dart:math';
 
 import 'package:chumaki/models/cities/city.dart';
-import 'package:chumaki/models/cities/temryuk.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
 import 'package:chumaki/models/wagons/wagon.dart';
@@ -57,7 +56,6 @@ List<City>? _innerFullRoute({
       .connectsTo(inCompany: company)
       .where((element) => (allowLocked || element.isUnlocked())));
   List<City>? bestMatch;
-  print("${to.equalsTo(Temryuk())}");
   final comparator =
       algoChoice == SHORTEST_ROUTE.FEWER_STOPS ? hasFewerStops : isShorterRoute;
   while (neighbours.isNotEmpty) {
