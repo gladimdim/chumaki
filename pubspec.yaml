@@ -110,6 +110,7 @@ flutter:
     - images/manufacturings/distillery/
     - images/manufacturings/amber_mine/
     - images/manufacturings/bakery/
+    - images/manufacturings/wax_maker/
     # SOUNDS
     - assets/sounds/
     # OTHER

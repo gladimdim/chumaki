@@ -25,6 +25,7 @@ class ManufacturingView extends StatelessWidget {
   Widget build(BuildContext context) {
     final company = InheritedCompany.of(context).company;
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         BorderedBottom(
           child: Row(
