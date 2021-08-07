@@ -4,8 +4,10 @@ import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/logger/logger.dart';
 import 'package:flutter/foundation.dart';
-import 'package:just_audio/just_audio.dart';
 import 'dart:io';
+
+import 'package:flutter/services.dart';
+import 'package:soundpool/soundpool.dart';
 
 class SoundManager {
   // do not forget to modify this map in web sounds manager implementation
@@ -30,7 +32,35 @@ class SoundManager {
 
   static final SoundManager instance = SoundManager._internal();
 
+// contains ids of loaded sounds
+  Map<String, int> sounds = {};
   SoundManager._internal() {}
+
+  Future initSounds() async {
+    if (sounds.isNotEmpty) {
+      return;
+    }
+    await initSoundsForMap(uiActionMapping);
+    await initSoundsForMap(companyActionMapping);
+  }
+
+  Future initSoundsForMap(Map map) async {
+    await Future.forEach(
+      map.keys,
+      ((element) async {
+        String? path = map[element];
+        if (path != null) {
+          ByteData soundData = await rootBundle.load(path);
+          int soundId;
+          soundId = await pool.load(soundData);
+          sounds[path] = soundId;
+        }
+      }),
+    );
+  }
+
+  Soundpool pool = Soundpool.fromOptions(
+      options: SoundpoolOptions(streamType: StreamType.music));
 
   playCompanySound(COMPANY_EVENTS action) {
     queueSound(companyActionMapping[action]);
@@ -70,11 +100,12 @@ class SoundManager {
       return;
     }
 
-    final player = AudioPlayer();
-    await player.setAsset(track);
-    await player.play();
-    await player.stop();
-    await player.dispose();
+    int? id = sounds[track];
+    if (id == null) {
+      return;
+    } else {
+      await pool.play(id);
+    }
   }
 
   void playLocalMarket() {

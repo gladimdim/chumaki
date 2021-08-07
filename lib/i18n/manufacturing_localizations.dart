@@ -66,7 +66,6 @@ class ManufacturingLocalizations extends InternalLocalizations {
       "bakery": "Пекарня",
       "amber_mine": "Янтарные ямы",
       "field": "Пахотные поля",
-      "trappers_house": "Уходники",
       "distillery": "Перегонка",
       "iron_mine": "Шахты",
       "charcoal_maker": "Угольные ямы",
