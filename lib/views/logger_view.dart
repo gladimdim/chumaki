@@ -53,9 +53,10 @@ class _LoggerViewState extends State<LoggerView> {
                           stream: widget.company.logger.changes,
                           builder: (context, snapshot) {
                             return BouncingWidget(
-                                child: OutlinedText(widget
-                                    .company.logger.unreadCount
-                                    .toString()),
+                                child: OutlinedText(
+                                  widget.company.logger.unreadCount.toString(),
+                                  style: gameTextStyle,
+                                ),
                                 value: widget.company.logger.unreadCount
                                     .toString());
                           }),

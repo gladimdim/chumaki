@@ -6,5 +6,11 @@ class ActionText extends Text {
   final TextStyle? addStyle;
 
   ActionText(this.text, {Key? key, this.addStyle})
-      : super(text, key: key, style: actionTextStyle.merge(addStyle));
+      : super(
+          text,
+          key: key,
+          style: addStyle == null
+              ? actionTextStyle
+              : addStyle.merge(actionTextStyle),
+        );
 }

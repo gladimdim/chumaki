@@ -3,6 +3,7 @@ import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
+import 'package:chumaki/components/ui/game_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/manufacturings/manufacturing.dart';
@@ -31,9 +32,9 @@ class ManufacturingView extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              GameText(
                 "${ChumakiLocalizations.getForKey(mfg.fullLocalizedKey)} ${mfg.built ? "(${mfg.level})" : ""}",
-                style: Theme.of(context).textTheme.headline4,
+                addStyle: Theme.of(context).textTheme.headline4,
               ),
               ResourceImageView(
                 mfg.replenishResource(),

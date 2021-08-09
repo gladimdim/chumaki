@@ -30,7 +30,7 @@ class WagonDispatcher extends StatelessWidget {
         .toList();
     return Column(
       children: [
-        ...nearby.divideBy(4).map((List<City> toCities) {
+        ...nearby.divideBy(3).map((List<City> toCities) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: toCities.map((toCity) {

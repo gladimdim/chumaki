@@ -1,8 +1,10 @@
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/action_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';
+import 'package:chumaki/components/ui/game_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -75,10 +77,10 @@ class StockResourceCategoryGroup extends StatelessWidget {
                                     size: 64,
                                     showAmount: true,
                                   ),
-                                  Text(
+                                  GameText(
                                       ChumakiLocalizations.getForKey(
                                           resource.fullLocalizedKey),
-                                      style: Theme.of(context)
+                                      addStyle: Theme.of(context)
                                           .textTheme
                                           .headline4),
                                 ],
@@ -88,9 +90,9 @@ class StockResourceCategoryGroup extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("${ChumakiLocalizations.labelBuy}:",
-                                    style:
-                                        Theme.of(context).textTheme.headline5),
+                                ActionText(
+                                  "${ChumakiLocalizations.labelBuy}:",
+                                ),
                                 MoneyUnitView(Money(forCity.buyPriceForResource(
                                     resource.cloneWithAmount(1),
                                     company.allCities))),
@@ -99,9 +101,9 @@ class StockResourceCategoryGroup extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("${ChumakiLocalizations.labelSell}:",
-                                    style:
-                                        Theme.of(context).textTheme.headline5),
+                                ActionText(
+                                  "${ChumakiLocalizations.labelSell}:",
+                                ),
                                 MoneyUnitView(Money(
                                     forCity.sellPriceForResource(
                                         resource, company.allCities,

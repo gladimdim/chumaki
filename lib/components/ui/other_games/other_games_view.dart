@@ -1,4 +1,5 @@
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/game_text.dart';
 import 'package:chumaki/components/ui/other_games/other_game.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class OtherGamesView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ClipOval(child: Image.asset(game.image, width: 46)),
-                Text(ChumakiLocalizations.getForKey(game.titleKey)),
+                GameText(ChumakiLocalizations.getForKey(game.titleKey)),
               ],
             ),
           );

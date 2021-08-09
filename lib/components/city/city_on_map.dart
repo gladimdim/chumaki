@@ -1,5 +1,6 @@
 import 'package:chumaki/components/city/AnimatedFlag.dart';
 import 'package:chumaki/components/resource_image_view.dart';
+import 'package:chumaki/components/ui/game_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/wagons/wagon.dart';
@@ -67,9 +68,9 @@ class CityOnMap extends StatelessWidget {
                         Wagon.imagePath,
                         width: 15 * city.size,
                       ),
-                      Text(
+                      GameText(
                         city.wagons.length.toString(),
-                        style: TextStyle(
+                        addStyle: TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                     ],

@@ -6,5 +6,9 @@ class GameText extends Text {
   final TextStyle? addStyle;
 
   GameText(this.text, {Key? key, this.addStyle})
-      : super(text, key: key, style: gameTextStyle.merge(addStyle));
+      : super(text,
+            key: key,
+            style: addStyle == null
+                ? gameTextStyle
+                : addStyle.merge(gameTextStyle));
 }
