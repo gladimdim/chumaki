@@ -8,7 +8,7 @@ final lightGrey = Color(0xFFD6B380);
 final black = Colors.black;
 
 final gameTextStyle = GoogleFonts.neucha();
-final actionTextStyle = GoogleFonts.marmelad(fontSize: 24);
+final actionTextStyle = GoogleFonts.vollkorn();
 
 final mainTheme = ThemeData(
   primaryColor: black,

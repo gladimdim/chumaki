@@ -38,7 +38,7 @@ class CallWagonToCityView extends StatelessWidget {
                     .map((wagon) => Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: SizedBox(
-                            height: 220,
+                            height: 230,
                             child: ActionButton(
                               onPress: () {
                                 company.startTask(
@@ -51,6 +51,7 @@ class CallWagonToCityView extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       WagonAvatar(wagon: wagon.item2),
                                       TitleText(ChumakiLocalizations.getForKey(
