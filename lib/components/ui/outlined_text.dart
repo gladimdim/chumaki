@@ -6,9 +6,10 @@ class OutlinedText extends StatelessWidget {
   final Color? fontColor;
   final Color? outlineColor;
   final double? size;
+  final TextStyle? style;
 
   const OutlinedText(this.text,
-      {this.fontColor, this.outlineColor, this.size = 16});
+      {this.fontColor, this.outlineColor, this.size = 16, this.style});
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +26,14 @@ class OutlinedText extends StatelessWidget {
               ..style = PaintingStyle.stroke
               ..strokeWidth = 3
               ..color = outColor!,
-          ),
+          ).merge(style),
         ),
         Text(
           text,
           style: TextStyle(
             fontSize: size,
             color: fColor!,
-          ),
+          ).merge(style),
         ),
       ],
     );

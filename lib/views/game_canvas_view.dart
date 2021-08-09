@@ -25,6 +25,7 @@ import 'package:chumaki/extensions/list.dart';
 import 'package:rxdart/rxdart.dart';
 
 enum MAP_MODE { CITY, RESOURCE }
+
 const CITY_SIZE = 50;
 const double MENU_ITEM_WIDTH = 55.0;
 
@@ -325,7 +326,8 @@ class GameCanvasViewState extends State<GameCanvasView>
                             company.getMoney().amount.toInt().toString(),
                             outlineColor: Colors.black,
                             fontColor: Colors.yellow,
-                            size: 16,
+                            size: 18,
+                            style: gameTextStyle,
                           ),
                         ),
                       ),

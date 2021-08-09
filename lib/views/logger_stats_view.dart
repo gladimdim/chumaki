@@ -2,6 +2,7 @@ import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/decorated_container.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/logger/logger.dart';
+import 'package:chumaki/theme.dart';
 import 'package:chumaki/views/achievements_progress_view.dart';
 import 'package:chumaki/views/logger_stock_view.dart';
 import 'package:flutter/material.dart';
@@ -78,19 +79,19 @@ class LoggerStatsView extends StatelessWidget {
             ),
             Text(
               ChumakiLocalizations.labelLoggerBoughtStats,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.headline6?.merge(gameTextStyle),
               textAlign: TextAlign.center,
             ),
             LoggerStockView(stock: logger.boughtStock),
             Text(
               ChumakiLocalizations.labelLoggerSoldStats,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.headline6?.merge(gameTextStyle),
               textAlign: TextAlign.center,
             ),
             LoggerStockView(stock: logger.soldStock),
             Text(
               ChumakiLocalizations.labelAchievements,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.headline6?.merge(gameTextStyle),
               textAlign: TextAlign.center,
             ),
             AchievementsProgressView(logger: logger),

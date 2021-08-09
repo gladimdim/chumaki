@@ -39,7 +39,8 @@ class CityAvatarStacked extends StatelessWidget {
                 ),
                 child: OutlinedText(
                     ChumakiLocalizations.getForKey(city.localizedKeyName),
-                    size: 24),
+                    style: gameTextStyle,
+                    size: 32),
               ))
         ],
       ),

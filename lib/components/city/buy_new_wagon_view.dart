@@ -1,5 +1,6 @@
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/ui/action_button.dart';
+import 'package:chumaki/components/ui/action_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
@@ -36,7 +37,7 @@ class _BuyNewWagonViewState extends State<BuyNewWagonView> {
               }
             : null,
         image: Image.asset(Wagon.imagePath, width: 128),
-        action: Text(ChumakiLocalizations.labelBuyNewWagon),
+        action: ActionText(ChumakiLocalizations.labelBuyNewWagon),
         subTitle: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

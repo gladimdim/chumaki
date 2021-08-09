@@ -1,5 +1,5 @@
 import 'package:chumaki/components/resource_image_view.dart';
-import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/game_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/logger/achievement_stock.dart';
 import 'package:chumaki/models/logger/logger.dart';
@@ -25,7 +25,7 @@ class AchievementStockView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (achievement.boughtResource != null) ...[
-              TitleText(ChumakiLocalizations.labelRequiredToBuy),
+              GameText(ChumakiLocalizations.labelRequiredToBuy),
               ResourceImageView(
                 achievement.boughtResource!,
                 size: 32,
@@ -38,7 +38,7 @@ class AchievementStockView extends StatelessWidget {
                       achievement.boughtResource!.cloneWithAmount(0)),
             ],
             if (achievement.soldResource != null) ...[
-              TitleText(ChumakiLocalizations.labelRequiredToSell),
+              GameText(ChumakiLocalizations.labelRequiredToSell),
               ResourceImageView(
                 achievement.soldResource!,
                 size: 32,

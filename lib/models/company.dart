@@ -131,7 +131,7 @@ class Company {
 
     this.logger.attachToCompany(this);
 
- // if (kDebugMode) {
+    // if (kDebugMode) {
     //   allCities.forEach((element) {
     //     element.unlock();
     //   });

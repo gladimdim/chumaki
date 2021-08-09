@@ -1,6 +1,7 @@
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/resources/resource.dart';
+import 'package:chumaki/theme.dart';
 import 'package:flutter/material.dart';
 
 class ResourceImageView extends StatelessWidget {
@@ -22,7 +23,8 @@ class ResourceImageView extends StatelessWidget {
               bottom: 0,
               right: 0,
               child: BouncingOutlinedText(
-                resource.amount.toString()
+                resource.amount.toString(),
+                style: gameTextStyle,
               ),
             ),
         ],
