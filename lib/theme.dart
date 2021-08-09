@@ -8,7 +8,7 @@ final lightGrey = Color(0xFFD6B380);
 final black = Colors.black;
 
 final gameTextStyle = GoogleFonts.neucha();
-final actionTextStyle = GoogleFonts.vollkorn();
+final actionTextStyle = GoogleFonts.vollkorn(fontSize: 24);
 
 final mainTheme = ThemeData(
   primaryColor: black,
@@ -19,8 +19,7 @@ final mainTheme = ThemeData(
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
       textStyle: MaterialStateProperty.resolveWith((states) {
-        return GoogleFonts.montserrat(
-          textStyle: TextStyle(
+        return actionTextStyle.merge(TextStyle(
             fontSize: 16.0,
             fontWeight: FontWeight.w600,
           ),
