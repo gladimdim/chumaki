@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
   await SoundManager.instance.initSounds();
   runApp(MyApp());
