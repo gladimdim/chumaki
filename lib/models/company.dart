@@ -341,14 +341,7 @@ class Company {
   }
 
   City refToCityByName(City city) {
-    City? result;
-    try {
-      result = allCities.firstWhere((c) => c.equalsTo(city));
-    } catch (e) {
-      print("---------city: $city");
-      throw e;
-    }
-    return result;
+    return allCities.firstWhere((c) => c.equalsTo(city));
   }
 
   bool canUnlockMoreCities(City city) {
