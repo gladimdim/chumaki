@@ -3,6 +3,7 @@ import 'package:chumaki/components/ui/bouncing_widget.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/logger/logger.dart';
+import 'package:chumaki/views/game_canvas_view.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/theme.dart';
 import 'logger_stats_view.dart';
@@ -23,14 +24,15 @@ class _LoggerViewState extends State<LoggerView> {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     return AnimatedPositioned(
-      bottom: 5,
-      left: opened ? 0 : 55 * 3 + 15,
+      top: 5,
+      left: opened ? 0 : null,
+      right: opened ? null : 15,
       duration: Duration(milliseconds: 150),
       child: AnimatedSize(
         duration: Duration(milliseconds: 150),
         child: SizedBox(
-          width: opened ? MediaQuery.of(context).size.width : 55,
-          height: opened ? MediaQuery.of(context).size.height : 55,
+          width: opened ? MediaQuery.of(context).size.width : MENU_ITEM_WIDTH,
+          height: opened ? MediaQuery.of(context).size.height : MENU_ITEM_WIDTH,
           child: opened
               ? LoggerStatsView(
                   logger: widget.company.logger,

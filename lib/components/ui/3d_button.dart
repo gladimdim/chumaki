@@ -6,13 +6,16 @@ class DDDButton extends StatefulWidget {
   final Color releaseColor;
   final Color shadowColor;
   final VoidCallback onPressed;
+  final Duration waitTillCallback;
 
   const DDDButton(
       {Key? key,
       required this.child,
       this.color = Colors.grey,
       this.shadowColor = Colors.red,
-      required this.onPressed, this.releaseColor = Colors.green})
+      this.waitTillCallback = const Duration(milliseconds: 200),
+      required this.onPressed,
+      this.releaseColor = Colors.green})
       : super(key: key);
 
   @override
@@ -28,7 +31,7 @@ class _DDDButtonState extends State<DDDButton>
   void initState() {
     _controller = AnimationController(
         vsync: this,
-        duration: Duration(milliseconds: 200),
+        duration: widget.waitTillCallback,
         lowerBound: 0,
         upperBound: 4);
     _controller.addListener(animationListener);
