@@ -274,87 +274,96 @@ class GameCanvasViewState extends State<GameCanvasView>
             ],
           ),
         ),
-        if (widget.company != null)
+        if (company != null)
           Positioned(
             top: 5,
-            left: 5,
-            child: IconButton(
-              onPressed: () async {
-                await company?.save();
-                SoundManager.instance.detachFromCompany();
-                company?.dispose();
-                widget.onBackPressed();
-              },
-              icon: Icon(Icons.arrow_back_ios),
-            ),
-          ),
-        if (selected == null && company != null)
-          Positioned(
-            bottom: 5,
             left: _menuShiftFor(0),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: MENU_ITEM_WIDTH,
-                  height: MENU_ITEM_WIDTH,
-                  child: DDDButton(
-                    color: mediumGrey,
-                    shadowColor: themeData.backgroundColor,
-                    onPressed: _toggleMapMode,
-                    child: mapMode == MAP_MODE.CITY
-                        ? Image.asset("images/resources/wood/wood.png",
-                            width: 44)
-                        : Image.asset(
-                            "images/cities/church.png",
-                            width: 44,
-                          ),
-                  ),
-                ),
-                SizedBox(
-                  width: MENU_ITEM_WIDTH,
-                  height: MENU_ITEM_WIDTH,
-                  child: Stack(
-                    children: [
-                      Container(
-                        color: themeData.backgroundColor,
+            child: AnimatedSize(
+              alignment: Alignment.centerLeft,
+              duration: Duration(milliseconds: 400),
+              child: Row(
+                children: [
+                  Container(
+                    color: themeData.backgroundColor,
+                    child: SizedBox(
+                      width: MENU_ITEM_WIDTH,
+                      height: MENU_ITEM_WIDTH,
+                      child: DDDButton(
+                        color: mediumGrey,
+                        shadowColor: themeData.backgroundColor,
+                        waitTillCallback: Duration(milliseconds: 0),
+                        onPressed: onBackPressed,
+                        child: Icon(Icons.arrow_back_ios),
                       ),
-                      Center(child: Image.asset(Money(0).imagePath, width: 44)),
-                      StreamBuilder(
-                        stream: company.changes,
-                        builder: (context, _) => Center(
-                          child: BouncingOutlinedText(
-                            company.getMoney().amount.toInt().toString(),
-                            outlineColor: Colors.black,
-                            fontColor: Colors.yellow,
-                            size: 18,
-                            style: gameTextStyle,
+                    ),
+                  ),
+                  if (selected == null)
+                    SizedBox(
+                      width: MENU_ITEM_WIDTH,
+                      height: MENU_ITEM_WIDTH,
+                      child: DDDButton(
+                        color: mediumGrey,
+                        shadowColor: themeData.backgroundColor,
+                        onPressed: _toggleMapMode,
+                        child: mapMode == MAP_MODE.CITY
+                            ? Image.asset("images/resources/wood/wood.png",
+                                width: 44)
+                            : Image.asset(
+                                "images/cities/church.png",
+                                width: 44,
+                              ),
+                      ),
+                    ),
+                  SizedBox(
+                    width: MENU_ITEM_WIDTH,
+                    height: MENU_ITEM_WIDTH,
+                    child: Stack(
+                      children: [
+                        Container(
+                          color: themeData.backgroundColor,
+                        ),
+                        Center(
+                            child: Image.asset(Money(0).imagePath, width: 44)),
+                        StreamBuilder(
+                          stream: company.changes,
+                          builder: (context, _) => Center(
+                            child: BouncingOutlinedText(
+                              company.getMoney().amount.toInt().toString(),
+                              outlineColor: Colors.black,
+                              fontColor: Colors.yellow,
+                              size: 18,
+                              style: gameTextStyle,
+                            ),
                           ),
                         ),
+                      ],
+                    ),
+                  ),
+                  if (selected == null)
+                    SizedBox(
+                      width: MENU_ITEM_WIDTH,
+                      height: MENU_ITEM_WIDTH,
+                      child: DDDButton(
+                        color: mediumGrey,
+                        shadowColor: themeData.backgroundColor,
+                        onPressed: _toggleSoundMode,
+                        child: StreamBuilder<APP_PREFERENCES_EVENTS>(
+                            stream: AppPreferences.instance.changes.where(
+                                (event) =>
+                                    event ==
+                                    APP_PREFERENCES_EVENTS.SOUND_CHANGE),
+                            builder: (context, snapshot) {
+                              return Image.asset(
+                                AppPreferences.instance.getIsSoundEnabled()
+                                    ? "images/ui/bandura.png"
+                                    : "images/ui/bandura_back.png",
+                                width: 44,
+                              );
+                            }),
                       ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: MENU_ITEM_WIDTH,
-                  height: MENU_ITEM_WIDTH,
-                  child: DDDButton(
-                    color: mediumGrey,
-                    shadowColor: themeData.backgroundColor,
-                    onPressed: _toggleSoundMode,
-                    child: StreamBuilder<APP_PREFERENCES_EVENTS>(
-                        stream: AppPreferences.instance.changes.where((event) =>
-                            event == APP_PREFERENCES_EVENTS.SOUND_CHANGE),
-                        builder: (context, snapshot) {
-                          return Image.asset(
-                            AppPreferences.instance.getIsSoundEnabled()
-                                ? "images/ui/bandura.png"
-                                : "images/ui/bandura_back.png",
-                            width: 44,
-                          );
-                        }),
-                  ),
-                ),
-              ],
+                    ),
+                ],
+              ),
             ),
           ),
         if (selected == null && company != null) LoggerView(company: company),
@@ -378,6 +387,21 @@ class GameCanvasViewState extends State<GameCanvasView>
           ),
         ));
     return children;
+  }
+
+  onBackPressed() async {
+    final company = widget.company;
+    if (company == null) {
+      return;
+    }
+    if (selected != null ) {
+      dismissSelectedCity();
+    } else {
+      await company.save();
+      SoundManager.instance.detachFromCompany();
+      company.dispose();
+      widget.onBackPressed();
+    }
   }
 
   Point<double> getShiftedSelectedCity() {

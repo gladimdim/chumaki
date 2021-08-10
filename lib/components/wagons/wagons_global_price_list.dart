@@ -1,6 +1,7 @@
-import 'package:chumaki/components/city/small_city_avatar.dart';
+import 'package:chumaki/components/city/city_avatar.dart';
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
@@ -26,23 +27,29 @@ class WagonsGlobalPriceList extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: ExpandablePanel(
             title: TitleText(
-                "${ChumakiLocalizations.labelTotalPrice}: ${wagon.fullLocalizedName}"),
+                "${ChumakiLocalizations.labelTotalPrice}: ${ChumakiLocalizations.getForKey(wagon.fullLocalizedName)}"),
             content: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: calculateTopForWagon(wagon, company)
                   .divideBy(3)
                   .map((rowResult) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: rowResult.map((result) {
-                    return Column(
-                      children: [
-                        SmallCityAvatar(result.item1),
-                        MoneyUnitView(Money(result.item2),
-                            isEnough: result.item2 > 0),
-                      ],
-                    );
-                  }).toList(),
+                return SizedBox(
+                  height: 175,
+                  child: Row(
+                    children: rowResult.map((result) {
+                      return Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: ActionButton(
+                            image: CityAvatar(city: result.item1, showName: true,),
+                            subTitle: Container(),
+                            action: MoneyUnitView(Money(result.item2),
+                                isEnough: result.item2 > 0),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 );
               }).toList(),
             ),

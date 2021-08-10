@@ -116,6 +116,8 @@ class ChumakiLocalizations {
       "medzhibizh": "Medzhibizh",
       "labelSell": "Sell",
       "labelBuy": "Buy",
+      "labelSell2": "Selling",
+      "labelBuy2": "Buying",
       "labelContains": "Contains",
       "labelNothing": "Nothing",
       "labelMarket": "Market",
@@ -214,6 +216,8 @@ class ChumakiLocalizations {
       "medzhibizh": "Меджибіж",
       "labelSell": "Продати",
       "labelBuy": "Купити",
+      "labelSell2": "Продаж",
+      "labelBuy2": "Купівля",
       "labelContains": "Містить",
       "labelNothing": "Нічого",
       "labelMarket": "Ринок",
@@ -309,8 +313,10 @@ class ChumakiLocalizations {
       "rylsk": "Рильск",
       "ternopil": "Тернополь",
       "medzhibizh": "Меджибож",
-      "labelSell": "Продажа",
-      "labelBuy": "Покупка",
+      "labelSell": "Продать",
+      "labelBuy": "Купить",
+      "labelSell2": "Продажа",
+      "labelBuy2": "Покупка",
       "labelContains": "Имеет",
       "labelNothing": "Ничего",
       "labelMarket": "Рынок",
@@ -365,7 +371,6 @@ class ChumakiLocalizations {
       "labelWagonsBought": "Возов",
       "labelCompletedCityEvents": "Заданий",
       "labelRequiredToDoCityEvents": "Выполнить городских заданий",
-
     },
   };
 
@@ -461,8 +466,16 @@ class ChumakiLocalizations {
     return _localizedValues[locale.languageCode]!["labelSell"]!;
   }
 
+  static String get labelSell2 {
+    return _localizedValues[locale.languageCode]!["labelSell2"]!;
+  }
+
   static String get labelBuy {
     return _localizedValues[locale.languageCode]!["labelBuy"]!;
+  }
+
+  static String get labelBuy2 {
+    return _localizedValues[locale.languageCode]!["labelBuy2"]!;
   }
 
   static String get labelNewGame {

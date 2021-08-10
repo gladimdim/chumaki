@@ -133,8 +133,8 @@ class Company {
 
     // if (kDebugMode) {
     //   allCities.forEach((element) {
-    //     element.unlock();
-    //   });
+        // element.unlock();
+      // });
     // }
   }
 

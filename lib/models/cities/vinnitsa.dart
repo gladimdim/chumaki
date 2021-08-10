@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/ladyzhin.dart';
+import 'package:chumaki/models/cities/medzhibizh.dart';
 import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
@@ -15,7 +16,7 @@ class Vinnitsa extends City {
           localizedKeyName: 'vinnitsa',
           unlockPriceMoney: Money(150),
           size: 3,
-          unlocksCities: [Ladyzhin()],
+          unlocksCities: [Ladyzhin(), Medzhibizh()],
           manufacturings: [Smith(), Quarry()],
           stock: Stock([
             Bread(1000),

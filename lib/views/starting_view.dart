@@ -62,7 +62,6 @@ class _StartingViewState extends State<StartingView> {
                   ),
                   Column(
                     mainAxisSize: MainAxisSize.min,
-                    // mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       OutlinedButton(

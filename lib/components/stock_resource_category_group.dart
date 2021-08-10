@@ -1,6 +1,5 @@
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/title_text.dart';
-import 'package:chumaki/components/ui/action_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';
@@ -90,8 +89,9 @@ class StockResourceCategoryGroup extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                ActionText(
-                                  "${ChumakiLocalizations.labelBuy}:",
+                                GameText(
+                                  "${ChumakiLocalizations.labelBuy2}:",
+                                  addStyle: Theme.of(context).textTheme.headline5,
                                 ),
                                 MoneyUnitView(Money(forCity.buyPriceForResource(
                                     resource.cloneWithAmount(1),
@@ -101,8 +101,9 @@ class StockResourceCategoryGroup extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                ActionText(
-                                  "${ChumakiLocalizations.labelSell}:",
+                                GameText(
+                                  "${ChumakiLocalizations.labelSell2}:",
+                                  addStyle: Theme.of(context).textTheme.headline5,
                                 ),
                                 MoneyUnitView(Money(
                                     forCity.sellPriceForResource(

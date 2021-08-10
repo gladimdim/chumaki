@@ -8,7 +8,7 @@ import 'package:chumaki/models/resources/resource.dart';
 class Govtva extends City {
   Govtva()
       : super(
-          point: Point(1600, 1900),
+          point: Point(1550, 1900),
           name: "Говтва",
           localizedKeyName: 'govtva',
           size: 2,
