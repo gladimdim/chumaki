@@ -1,5 +1,6 @@
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/decorated_container.dart';
+import 'package:chumaki/components/ui/game_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/logger/logger.dart';
 import 'package:chumaki/theme.dart';
@@ -44,7 +45,7 @@ class LoggerStatsView extends StatelessWidget {
                             width: 64,
                           ),
                         ),
-                        Text(
+                        GameText(
                             "${ChumakiLocalizations.labelWagonsBought}: ${logger.boughtWagons}"),
                       ],
                     ),
@@ -57,7 +58,7 @@ class LoggerStatsView extends StatelessWidget {
                             width: 64,
                           ),
                         ),
-                        Text(
+                        GameText(
                             "${ChumakiLocalizations.labelLeadersHired}: ${logger.leadersHired}"),
                       ],
                     ),
@@ -69,7 +70,7 @@ class LoggerStatsView extends StatelessWidget {
                             width: 64,
                           ),
                         ),
-                        Text(
+                        GameText(
                             "${ChumakiLocalizations.labelCompletedCityEvents}: ${logger.completedCityEvents}"),
                       ],
                     ),

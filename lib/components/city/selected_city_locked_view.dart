@@ -50,7 +50,7 @@ class SelectedCityLockedView extends StatelessWidget {
                 }).map((cityThatUnlocks) {
                   return SizedBox(
                     // width: CITY_DETAILS_VIEW_WIDTH - CITY_MENU_WIDTH / 4,
-                    height: 300,
+                    height: 310,
                     child: ActionButton(
                       image: CityAvatarStacked(
                         city: cityThatUnlocks,

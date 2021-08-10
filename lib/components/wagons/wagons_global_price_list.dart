@@ -26,7 +26,7 @@ class WagonsGlobalPriceList extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: ExpandablePanel(
             title: TitleText(
-                "${ChumakiLocalizations.labelTotalPrice}: ${wagon.fullLocalizedName}"),
+                "${ChumakiLocalizations.labelTotalPrice}: ${ChumakiLocalizations.getForKey(wagon.fullLocalizedName)}"),
             content: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: calculateTopForWagon(wagon, company)

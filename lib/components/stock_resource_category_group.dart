@@ -91,7 +91,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 ActionText(
-                                  "${ChumakiLocalizations.labelBuy}:",
+                                  "${ChumakiLocalizations.labelBuy2}:",
                                 ),
                                 MoneyUnitView(Money(forCity.buyPriceForResource(
                                     resource.cloneWithAmount(1),
@@ -102,7 +102,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 ActionText(
-                                  "${ChumakiLocalizations.labelSell}:",
+                                  "${ChumakiLocalizations.labelSell2}:",
                                 ),
                                 MoneyUnitView(Money(
                                     forCity.sellPriceForResource(
