@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
-import 'package:chumaki/models/cities/ternopil.dart';
 import 'package:chumaki/models/events/event.dart';
 import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -16,7 +15,7 @@ class Lviv extends City {
             size: 6,
             unlocked: false,
             unlockPriceMoney: Money(1250.0),
-            unlocksCities: [Ternopil()],
+            unlocksCities: [],
             manufacturings: [CannonFoundry(), Smith()],
             stock: Stock(
               [
