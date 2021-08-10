@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/cities/ternopil.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class Medzhibizh extends City {
@@ -13,7 +14,7 @@ class Medzhibizh extends City {
     size: 2,
     unlocked: false,
     unlockPriceMoney: Money(150.0),
-    unlocksCities: [],
+    unlocksCities: [Ternopil()],
     manufacturings: [],
     stock: Stock(
       [

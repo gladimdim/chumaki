@@ -133,8 +133,8 @@ class Company {
 
     // if (kDebugMode) {
     //   allCities.forEach((element) {
-    //     element.unlock();
-    //   });
+        // element.unlock();
+      // });
     // }
   }
 
@@ -341,7 +341,14 @@ class Company {
   }
 
   City refToCityByName(City city) {
-    return allCities.firstWhere((c) => c.equalsTo(city));
+    City? result;
+    try {
+      result = allCities.firstWhere((c) => c.equalsTo(city));
+    } catch (e) {
+      print("---------city: $city");
+      throw e;
+    }
+    return result;
   }
 
   bool canUnlockMoreCities(City city) {
