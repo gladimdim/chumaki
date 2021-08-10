@@ -3,9 +3,11 @@ import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/city/small_city_avatar.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/ui/action_button.dart';
+import 'package:chumaki/components/ui/action_text.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/decorated_container.dart';
+import 'package:chumaki/components/ui/game_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/views/game_canvas_view.dart';
@@ -28,14 +30,14 @@ class SelectedCityLockedView extends StatelessWidget {
         child: Column(
           children: [
             BorderedBottom(
-              child: Text(
+              child: GameText(
                 ChumakiLocalizations.labelCityIsLocked,
-                style: Theme.of(context).textTheme.headline3,
+                addStyle: Theme.of(context).textTheme.headline3,
               ),
             ),
-            Text(
+            GameText(
               ChumakiLocalizations.labelUnlockAt,
-              style: Theme.of(context).textTheme.headline5,
+              addStyle: Theme.of(context).textTheme.headline3,
             ),
             BorderedAll(
               child: Row(
@@ -48,14 +50,14 @@ class SelectedCityLockedView extends StatelessWidget {
                 }).map((cityThatUnlocks) {
                   return SizedBox(
                     // width: CITY_DETAILS_VIEW_WIDTH - CITY_MENU_WIDTH / 4,
-                    height: 280,
+                    height: 300,
                     child: ActionButton(
                       image: CityAvatarStacked(
                         city: cityThatUnlocks,
                         width: 180,
                       ),
                       subTitle: Container(),
-                      action: Text(ChumakiLocalizations.labelGoTo),
+                      action: ActionText(ChumakiLocalizations.labelGoTo),
                       onPress: () => _navigateViewerToCity(cityThatUnlocks),
                     ),
                   );
@@ -68,8 +70,8 @@ class SelectedCityLockedView extends StatelessWidget {
                 child: BorderedAll(
                   child: Column(
                     children: [
-                      Text(ChumakiLocalizations.labelProductionCenter,
-                          style: Theme.of(context).textTheme.headline3),
+                      GameText(ChumakiLocalizations.labelProductionCenter,
+                          addStyle: Theme.of(context).textTheme.headline3),
                       Row(
                         children: city.manufacturings
                             .map((mfg) => ResourceImageView(

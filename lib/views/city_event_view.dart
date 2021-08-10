@@ -2,6 +2,7 @@ import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
+import 'package:chumaki/components/ui/game_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
@@ -30,24 +31,28 @@ class _CityEventViewState extends State<CityEventView> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         BorderedBottom(
-          child: Text(
+          child: GameText(
             ChumakiLocalizations.getForKey(event.localizedKeyTitle),
-            style: Theme.of(context).textTheme.headline3,
+            addStyle: Theme.of(context).textTheme.headline2,
           ),
         ),
+        SizedBox(height: 10,),
         Image.asset(
           event.artPath,
           width: CITY_DETAILS_VIEW_WIDTH / 2,
           fit: BoxFit.fitWidth,
         ),
-        Text(
+        GameText(
           ChumakiLocalizations.getForKey(event.localizedKeyText),
-          style: Theme.of(context).textTheme.headline5,
+          addStyle: Theme.of(context).textTheme.headline3,
         ),
+        SizedBox(height: 10,),
         if (!event.isDone())
           BorderedBottom(
-            child: Text(ChumakiLocalizations.labelRequirements,
-                style: Theme.of(context).textTheme.headline4),
+            child: GameText(
+              ChumakiLocalizations.labelRequirements,
+              addStyle: Theme.of(context).textTheme.headline2,
+            ),
           ),
         if (!event.isDone())
           Padding(
@@ -57,48 +62,50 @@ class _CityEventViewState extends State<CityEventView> {
                       .divideBy(3)
                       .map((List<Resource> reses) {
                 return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: reses
                       .map(
-                        (req) => Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: StreamBuilder(
-                              stream: widget.city.changes.where((event) =>
-                                  event == CITY_EVENTS.STOCK_CHANGED),
-                              builder: (context, _snapshot) {
-                                Wagon? wagon;
+                        (req) => Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: StreamBuilder(
+                                stream: widget.city.changes.where((event) =>
+                                    event == CITY_EVENTS.STOCK_CHANGED),
+                                builder: (context, _snapshot) {
+                                  Wagon? wagon;
 
-                                try {
-                                  wagon = widget.city.wagons.firstWhere(
-                                    (wagon) => wagon.stock
-                                        .hasEnough(req.cloneWithAmount(1)),
+                                  try {
+                                    wagon = widget.city.wagons.firstWhere(
+                                      (wagon) => wagon.stock
+                                          .hasEnough(req.cloneWithAmount(1)),
+                                    );
+                                  } catch (e) {
+                                    print(
+                                        "No wagons found to satisfy need for res: ${req.localizedKey}");
+                                  }
+
+                                  bool canGive = false;
+                                  if (wagon == null) {
+                                    canGive = false;
+                                  } else {
+                                    canGive = true;
+                                  }
+                                  return EventRequirementView(
+                                    requirement: req,
+                                    onDonate: canGive
+                                        ? () => _onDonate(company, req, wagon!)
+                                        : null,
                                   );
-                                } catch (e) {
-                                  print(
-                                      "No wagons found to satisfy need for res: ${req.localizedKey}");
-                                }
-
-                                bool canGive = false;
-                                if (wagon == null) {
-                                  canGive = false;
-                                } else {
-                                  canGive = true;
-                                }
-                                return EventRequirementView(
-                                  requirement: req,
-                                  onDonate: canGive
-                                      ? () => _onDonate(company, req, wagon!)
-                                      : null,
-                                );
-                              }),
+                                }),
+                          ),
                         ),
                       )
                       .toList(),
                 );
               }).toList())),
         BorderedBottom(
-          child: Text(ChumakiLocalizations.labelPayment,
-              style: Theme.of(context).textTheme.headline4),
+          child: GameText(ChumakiLocalizations.labelPayment,
+              addStyle: Theme.of(context).textTheme.headline4),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),

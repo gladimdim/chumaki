@@ -21,7 +21,7 @@ class SmallCityAvatarWithCenters extends StatelessWidget {
       children: [
         Image.asset(
           city.avatarImagePath,
-          width: 32,
+          width: 40,
         ),
         Padding(
           padding: const EdgeInsets.all(4.0),

@@ -1,4 +1,6 @@
+import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/models/resources/resource.dart';
+import 'package:chumaki/theme.dart';
 import 'package:flutter/material.dart';
 
 class MoneyUnitView extends StatefulWidget {
@@ -57,7 +59,7 @@ class _MoneyUnitViewState extends State<MoneyUnitView>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(widget.money.imagePath, width: widget.size),
-          Text(
+          TitleText(
             widget.money.amount.toStringAsFixed(1),
             style: style(widget.money.amount, context),
           )
@@ -68,7 +70,7 @@ class _MoneyUnitViewState extends State<MoneyUnitView>
 
   TextStyle style(double value, BuildContext context) {
     final colorTheme = Theme.of(context).colorScheme;
-    return Theme.of(context).textTheme.headline5!.copyWith(
+    return gameTextStyle.copyWith(
           fontWeight: FontWeight.bold,
           color: widget.isEnough
               ? Colors.green[800]

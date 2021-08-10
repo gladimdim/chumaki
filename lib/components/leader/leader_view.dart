@@ -11,6 +11,7 @@ import 'package:chumaki/components/ui/scale_animated.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
 import 'package:chumaki/sound/sound_manager.dart';
+import 'package:chumaki/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
 
@@ -27,6 +28,7 @@ class _LeaderViewState extends State<LeaderView> {
   final double _progressWidth = 200;
   late final StreamSubscription _leaderSub;
   final GlobalKey<PageFlipBuilderState> avatarFlipper = GlobalKey();
+
   @override
   void initState() {
     super.initState();
@@ -69,6 +71,7 @@ class _LeaderViewState extends State<LeaderView> {
                         size: 24,
                         fontColor: Theme.of(context).primaryColor,
                         outlineColor: Theme.of(context).backgroundColor,
+                        style: gameTextStyle,
                       ),
                     ],
                   ),
@@ -98,6 +101,7 @@ class _LeaderViewState extends State<LeaderView> {
                               "${ChumakiLocalizations.labelAvailablePerks}: "),
                           BouncingOutlinedText(
                               widget.leader.availablePerks.toString(),
+                              style: gameTextStyle,
                               size: 24),
                         ],
                       ),
@@ -134,9 +138,10 @@ class _LeaderViewState extends State<LeaderView> {
                                     Align(
                                       alignment: Alignment.center,
                                       child: BouncingOutlinedText(
-                                        "$experience/${widget.leader.levelDelta}",
+                                        "${experience.toInt()}/${widget.leader.levelDelta.toInt()}",
                                         fontColor: Colors.yellow,
                                         size: 18,
+                                        style: gameTextStyle,
                                       ),
                                     )
                                   ],

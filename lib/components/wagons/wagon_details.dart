@@ -5,6 +5,7 @@ import 'package:chumaki/components/ui/bordered_container_with_side.dart';
 import 'package:chumaki/components/ui/bordered_top.dart';
 import 'package:chumaki/components/leader/leader_view.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';
+import 'package:chumaki/components/ui/game_text.dart';
 import 'package:chumaki/components/wagons/wagon_dispatcher.dart';
 import 'package:chumaki/components/wagons/wagon_resource_exchanger.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
@@ -30,9 +31,9 @@ class WagonDetails extends StatelessWidget {
           BorderedBottom(
             child: BorderedTop(
               child: Center(
-                child: Text(
+                child: GameText(
                   ChumakiLocalizations.getForKey(wagon.fullLocalizedName),
-                  style: Theme.of(context).textTheme.headline4,
+                  addStyle: Theme.of(context).textTheme.headline3,
                 ),
               ),
             ),
@@ -41,9 +42,9 @@ class WagonDetails extends StatelessWidget {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                GameText(
                   ChumakiLocalizations.labelLeader,
-                  style: Theme.of(context).textTheme.headline4,
+                  addStyle: Theme.of(context).textTheme.headline3,
                 ),
                 LeaderAvatar(leader: wagon.leader),
               ],
@@ -60,9 +61,9 @@ class WagonDetails extends StatelessWidget {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                GameText(
                   ChumakiLocalizations.labelSend,
-                  style: Theme.of(context).textTheme.headline4,
+                  addStyle: Theme.of(context).textTheme.headline3,
                 ),
                 Image.asset("images/icons/paths/paths.png", width: 64),
               ],
@@ -76,9 +77,9 @@ class WagonDetails extends StatelessWidget {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                GameText(
                   ChumakiLocalizations.labelTrade,
-                  style: Theme.of(context).textTheme.headline4,
+                  addStyle: Theme.of(context).textTheme.headline3,
                 ),
                 Image.asset("images/icons/money/money.png", width: 64),
               ],

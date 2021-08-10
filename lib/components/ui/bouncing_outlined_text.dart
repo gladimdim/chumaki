@@ -7,9 +7,10 @@ class BouncingOutlinedText extends BouncingText {
   final double? size;
   final Color? fontColor;
   final Color? outlineColor;
+  final TextStyle? style;
 
   const BouncingOutlinedText(this.text,
-      {this.size, this.fontColor, this.outlineColor})
+      {this.size, this.fontColor, this.outlineColor, this.style})
       : super(text);
 
   Widget getChild() => OutlinedText(
@@ -17,5 +18,6 @@ class BouncingOutlinedText extends BouncingText {
         size: size,
         fontColor: fontColor,
         outlineColor: outlineColor,
+        style: style,
       );
 }

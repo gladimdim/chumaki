@@ -1,5 +1,7 @@
 import 'package:chumaki/components/city/city_avatar.dart';
+import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/action_button.dart';
+import 'package:chumaki/components/ui/action_text.dart';
 import 'package:chumaki/components/wagons/wagon_avatar.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
@@ -36,7 +38,7 @@ class CallWagonToCityView extends StatelessWidget {
                     .map((wagon) => Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: SizedBox(
-                            height: 200,
+                            height: 230,
                             child: ActionButton(
                               onPress: () {
                                 company.startTask(
@@ -49,9 +51,10 @@ class CallWagonToCityView extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       WagonAvatar(wagon: wagon.item2),
-                                      Text(ChumakiLocalizations.getForKey(
+                                      TitleText(ChumakiLocalizations.getForKey(
                                         wagon.item2.fullLocalizedName,
                                       ))
                                     ],
@@ -64,10 +67,9 @@ class CallWagonToCityView extends StatelessWidget {
                               ),
                               subTitle: Container(),
                               action: Container(
-                                child: Text(
-                                    "${ChumakiLocalizations.labelRecall} (${readableDuration(RouteTask(wagon.item1, toCity, wagon: wagon.item2).duration!)})",
-                                    style:
-                                        Theme.of(context).textTheme.headline5),
+                                child: ActionText(
+                                  "${ChumakiLocalizations.labelRecall} (${readableDuration(RouteTask(wagon.item1, toCity, wagon: wagon.item2).duration!)})",
+                                ),
                               ),
                             ),
                           ),

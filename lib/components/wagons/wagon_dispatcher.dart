@@ -11,6 +11,8 @@ import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/extensions/list.dart';
 
+const SEND_TO_TILE_HEIGHT = 130.0;
+
 class WagonDispatcher extends StatelessWidget {
   final Wagon wagon;
   final City city;
@@ -30,34 +32,39 @@ class WagonDispatcher extends StatelessWidget {
         .toList();
     return Column(
       children: [
-        ...nearby.divideBy(4).map((List<City> toCities) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: toCities.map((toCity) {
-              var pathRoute = PathRoute(
-                  stops: fullRoute(
-                      from: city,
-                      to: toCity,
-                      allowLocked: true,
-                      company: company),
-                  allRoutes: company.cityRoutes,
-                  from: city);
+        ...nearby.divideBy(3).map((List<City> toCities) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4.0),
+            child: Row(
+              children: toCities.map((toCity) {
+                var pathRoute = PathRoute(
+                    stops: fullRoute(
+                        from: city,
+                        to: toCity,
+                        allowLocked: true,
+                        company: company),
+                    allRoutes: company.cityRoutes,
+                    from: city);
 
-              return StreamBuilder(
-                stream: toCity.changes,
-                builder: (context, snapshot) => SizedBox(
-                  height: 120,
-                  child: ActionButton(
-                    action: Text(readableDuration(pathRoute.totalDuration())),
-                    subTitle: Text(ChumakiLocalizations.labelSend),
-                    onPress: toCity.isUnlocked()
-                        ? () => dispatch(toCity, context)
-                        : null,
-                    image: SmallCityAvatarWithCenters(city: toCity),
+                return Expanded(
+                  flex: 1,
+                  child: StreamBuilder(
+                    stream: toCity.changes,
+                    builder: (context, snapshot) => SizedBox(
+                      height: SEND_TO_TILE_HEIGHT,
+                      child: ActionButton(
+                        action: Text(readableDuration(pathRoute.totalDuration())),
+                        subTitle: Text(ChumakiLocalizations.labelSend),
+                        onPress: toCity.isUnlocked()
+                            ? () => dispatch(toCity, context)
+                            : null,
+                        image: SmallCityAvatarWithCenters(city: toCity),
+                      ),
+                    ),
                   ),
-                ),
-              );
-            }).toList(),
+                );
+              }).toList(),
+            ),
           );
         }).toList(),
         Text(
@@ -75,7 +82,7 @@ class WagonDispatcher extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 2.0),
                     child: SizedBox(
-                      height: 120,
+                      height: SEND_TO_TILE_HEIGHT,
                       child: StreamBuilder(
                         stream: toCity.changes,
                         builder: (context, snapshot) => ActionButton(

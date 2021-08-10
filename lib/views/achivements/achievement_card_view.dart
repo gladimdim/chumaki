@@ -1,5 +1,6 @@
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/decorated_container.dart';
+import 'package:chumaki/components/ui/game_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/logger/achievement.dart';
 import 'package:chumaki/theme.dart';
@@ -24,9 +25,9 @@ class AchievementCardView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    GameText(
                       ChumakiLocalizations.getForKey(achievement.localizedKey),
-                      style: Theme.of(context).textTheme.headline5,
+                      addStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)
                     ),
                     Image.asset(
                       achievement.achieved

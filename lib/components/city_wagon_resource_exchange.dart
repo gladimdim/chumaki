@@ -7,6 +7,7 @@ import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagons/wagon.dart';
+import 'package:chumaki/theme.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/components/ui/action_button.dart';
@@ -114,6 +115,7 @@ class CityWagonResourceExchange extends StatelessWidget {
                           : tradeResource.amount.toString(),
                       size: 32,
                       fontColor: getFontColor(company),
+                      style: gameTextStyle,
                     ),
                   ],
                 ),

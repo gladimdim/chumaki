@@ -2,6 +2,7 @@ import 'package:chumaki/components/city/small_city_avatar.dart';
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/ui/action_button.dart';
+import 'package:chumaki/components/ui/action_text.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';
 import 'package:chumaki/components/wagons/wagons_global_price_list.dart';
@@ -107,18 +108,22 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                                 Align(
                                   alignment: Alignment.centerRight,
                                   child: BorderedBottom(
-                                    child: TitleText(
-                                      "${ChumakiLocalizations.getForKey(
-                                        city.localizedKeyName,
-                                      )} (${city.stock.resourceInStock(selectedResource)?.amount ?? "0"})",
+                                    child: Column(
+                                      children: [
+                                        TitleText(
+                                          "${ChumakiLocalizations.getForKey(
+                                            city.localizedKeyName,
+                                          )}",
+                                        ),
+                                        TitleText("(${city.stock.resourceInStock(selectedResource)?.amount ?? "0"})")
+                                      ],
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-                            action: Text(
+                            action: ActionText(
                               ChumakiLocalizations.labelGoTo,
-                              style: Theme.of(context).textTheme.headline5,
                             ),
                             subTitle: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

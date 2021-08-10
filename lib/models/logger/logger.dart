@@ -139,8 +139,8 @@ class Logger {
   }
 
   static Logger fromJson(Map<String, dynamic> inputJson) {
-    final achJson = inputJson["stockAchievements"] as List;
-    final cityAchJson = inputJson["cityAchievements"] as List;
+    final List achJson = inputJson["stockAchievements"] ?? [];
+    final List cityAchJson = inputJson["cityAchievements"] ?? [];
     return Logger(
       boughtStock: Stock.fromJson(
         inputJson["boughtStock"],

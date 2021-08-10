@@ -2,6 +2,7 @@ import 'package:chumaki/components/city/small_city_avatar.dart';
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/action_button.dart';
+import 'package:chumaki/components/ui/action_text.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
@@ -47,7 +48,7 @@ class CanUnlockCitiesView extends StatelessWidget {
                               city: unlockCity,
                               width: 128,
                             ),
-                            action: TitleText(ChumakiLocalizations.labelBuy),
+                            action: ActionText(ChumakiLocalizations.labelBuy),
                             subTitle: StreamBuilder(
                                 stream: company.changes.where((event) =>
                                     event == COMPANY_EVENTS.MONEY_REMOVED ||
