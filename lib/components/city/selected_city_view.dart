@@ -10,6 +10,7 @@ import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/city_menu_item.dart';
 import 'package:chumaki/components/ui/city_menu_item_view.dart';
 import 'package:chumaki/components/ui/decorated_container.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/components/wagons/wagon_avatar.dart';
 import 'package:chumaki/components/wagons/wagon_details.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
@@ -80,7 +81,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                       children: [
                         CityMenuItem(
                             menuKey: "new_wheel",
-                            image: Image.asset(
+                            image: ResizedImage(
                               "images/icons/wagon/wagon_2d.png",
                               width: 128,
                             ),
@@ -90,7 +91,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                                 CityWagonsView(city: widget.city)),
                         CityMenuItem(
                             menuKey: "market",
-                            image: Image.asset(
+                            image:ResizedImage(
                               "images/icons/market/market.png",
                               width: 128,
                             ),
@@ -113,7 +114,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                                 CityStockView(city: widget.city)),
                         CityMenuItem(
                             menuKey: "global_market",
-                            image: Image.asset(
+                            image: ResizedImage(
                               "images/icons/market/market2.png",
                               width: 128,
                             ),
@@ -127,7 +128,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                         if (company.cityCanUnlockMore(widget.city))
                           CityMenuItem(
                               menuKey: "unlock",
-                              image: Image.asset(
+                              image: ResizedImage(
                                 "images/icons/paths/paths.png",
                                 width: 128,
                               ),
@@ -138,7 +139,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                         if (widget.city.manufacturings.isNotEmpty)
                           CityMenuItem(
                             menuKey: "manufacturing",
-                            image: Image.asset(
+                            image: ResizedImage(
                               "images/icons/manufacturing/manufacturing.png",
                               width: 128,
                             ),
@@ -173,7 +174,7 @@ class _SelectedCityViewState extends State<SelectedCityView> {
                           CityMenuItem(
                             menuKey: "activeEvent",
                             image:
-                                Image.asset(widget.city.activeEvent!.iconPath),
+                                ResizedImage(widget.city.activeEvent!.iconPath, width: 128,),
                             contentBuilder: (context) => Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: CityEventView(city: widget.city),

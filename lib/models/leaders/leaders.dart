@@ -103,8 +103,10 @@ class Leader {
         LeadersLocalizations().localizedMap["en"]!.keys.take(11).toList();
     List<Leader> leaders = List.empty(growable: true);
     for (var i = 0; i < 11; i++) {
-      leaders.add(Leader("leaders.${keyNames[i]}",
-          imagePath: imagePathForId(i), experience: 955));
+      leaders.add(Leader(
+        "leaders.${keyNames[i]}",
+        imagePath: imagePathForId(i),
+      ));
     }
     return leaders;
   }

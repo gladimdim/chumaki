@@ -1,6 +1,7 @@
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/decorated_container.dart';
 import 'package:chumaki/components/ui/game_text.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/logger/achievement.dart';
 import 'package:chumaki/theme.dart';
@@ -29,7 +30,7 @@ class AchievementCardView extends StatelessWidget {
                       ChumakiLocalizations.getForKey(achievement.localizedKey),
                       addStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)
                     ),
-                    Image.asset(
+                    ResizedImage(
                       achievement.achieved
                           ? "images/icons/lock/opened_lock.png"
                           : "images/icons/lock/lock2.png",
@@ -48,7 +49,7 @@ class AchievementCardView extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
-                          child: Image.asset(
+                          child: ResizedImage(
                             achievement.iconPath,
                             width: 128,
                           ),

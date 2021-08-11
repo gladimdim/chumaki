@@ -1,4 +1,5 @@
 import 'package:chumaki/app_preferences.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:flutter/material.dart';
 
 class LocaleSelection extends StatefulWidget {
@@ -23,9 +24,9 @@ class _LocaleSelectionState extends State<LocaleSelection> {
           groupValue: widget.locale.languageCode,
           onChanged: _setNewLocale,
         ),
-        Image.asset(
+        ResizedImage(
           "images/icons/flags/ukrainian_flag.png",
-          width: 64,
+          width: 32,
           height: 32,
         ),
         Radio(
@@ -33,9 +34,9 @@ class _LocaleSelectionState extends State<LocaleSelection> {
           groupValue: widget.locale.languageCode,
           onChanged: _setNewLocale,
         ),
-        Image.asset(
+        ResizedImage(
           "images/icons/flags/usa_flag.png",
-          width: 64,
+          width: 32,
           height: 32,
         ),
         Radio(

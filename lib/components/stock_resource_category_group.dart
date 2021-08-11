@@ -4,6 +4,7 @@ import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';
 import 'package:chumaki/components/ui/game_text.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -32,7 +33,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.asset(categoryToImagePath(resources.first.category),
+              ResizedImage(categoryToImagePath(resources.first.category),
                   width: 72),
               TitleText(ChumakiLocalizations.getForKey(
                   resourceCategoryToLocalizedKey(resources.first.category))),
@@ -41,6 +42,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
           Row(
             children: resources
                 .where((res) => forCity.stock.hasResource(res))
+                .take(5)
                 .map((res) => ResourceImageView(
                       res,
                       showAmount: true,
@@ -91,7 +93,8 @@ class StockResourceCategoryGroup extends StatelessWidget {
                               children: [
                                 GameText(
                                   "${ChumakiLocalizations.labelBuy2}:",
-                                  addStyle: Theme.of(context).textTheme.headline5,
+                                  addStyle:
+                                      Theme.of(context).textTheme.headline5,
                                 ),
                                 MoneyUnitView(Money(forCity.buyPriceForResource(
                                     resource.cloneWithAmount(1),
@@ -103,7 +106,8 @@ class StockResourceCategoryGroup extends StatelessWidget {
                               children: [
                                 GameText(
                                   "${ChumakiLocalizations.labelSell2}:",
-                                  addStyle: Theme.of(context).textTheme.headline5,
+                                  addStyle:
+                                      Theme.of(context).textTheme.headline5,
                                 ),
                                 MoneyUnitView(Money(
                                     forCity.sellPriceForResource(

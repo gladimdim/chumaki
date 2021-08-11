@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/tasks/route_task.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class _RouteTaskRowProgressState extends State<RouteTaskRowProgress>
                   left: calculateRelativePositionForProgress(),
                   child: Transform.rotate(
                     angle: 2 * pi * widget.task.leftProgress(),
-                    child: Image.asset("images/wagon/wheel.png", width: 32),
+                    child: ResizedImage("images/wagon/wheel.png", width: 32),
                   ),
                 ),
               Positioned(

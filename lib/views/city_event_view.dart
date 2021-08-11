@@ -3,6 +3,7 @@ import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/game_text.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
@@ -147,7 +148,7 @@ class EventRequirementView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ActionButton(
       onPress: onDonate,
-      image: Image.asset(this.requirement.imagePath, width: 128),
+      image: ResizedImage(this.requirement.imagePath, width: 128),
       subTitle: Text(this.requirement.amount.toString()),
       action: Text(ChumakiLocalizations.labelGive),
     );

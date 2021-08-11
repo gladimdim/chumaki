@@ -1,5 +1,6 @@
 import 'package:chumaki/components/ui/expandable_panel.dart';
 import 'package:chumaki/components/ui/game_text.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/components/wagons/stock_wagon_status.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
@@ -32,7 +33,7 @@ class ResourceCategoryGroup extends StatelessWidget {
           children: [
             Row(
               children: [
-                Image.asset(categoryToImagePath(resources.first.category),
+                ResizedImage(categoryToImagePath(resources.first.category),
                     width: 92),
                 GameText(
                   ChumakiLocalizations.getForKey(

@@ -1,3 +1,4 @@
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class LeaderAvatar extends StatelessWidget {
     final person = leader;
     final imagePath = person == null ? "images/icons/unknown/unknown.png" : person.imagePath;
     return ClipOval(
-      child: Image.asset(imagePath, width: 64),
+      child: ResizedImage(imagePath, width: 64),
     );
   }
 }

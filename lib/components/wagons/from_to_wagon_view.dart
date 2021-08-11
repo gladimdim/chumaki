@@ -5,6 +5,7 @@ import 'package:chumaki/components/ui/animations/scaling_widget.dart';
 import 'package:chumaki/components/ui/animations/spinning_widget.dart';
 import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/decorated_container.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/components/wagons/wagon_avatar.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
@@ -105,7 +106,7 @@ class _FromToWagonViewState extends State<FromToWagonView>
                     duration: Duration(seconds: 3),
                     min: 0.7,
                     child: SpinningWidget(
-                      child: Image.asset("images/wagon/wheel.png"),
+                      child: ResizedImage("images/wagon/wheel.png", width: 90),
                     ),
                   ),
                 ),

@@ -1,6 +1,7 @@
 
 import 'package:chumaki/components/city/city_avatar.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/theme.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +27,9 @@ class CityAvatarStacked extends StatelessWidget {
       constraints: BoxConstraints(maxWidth: width),
       child: Stack(
         children: [
-          Image.asset(
+          ResizedImage(
             city.avatarImagePath,
-            width: width,
+            width: width.toInt(),
           ),
           Align(
               alignment: Alignment.topCenter,
