@@ -71,7 +71,8 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                             });
                           },
                           child: Transform.scale(
-                            scale: selectedResource.sameType(resource) ? 1.5 : 1.0,
+                            scale:
+                                selectedResource.sameType(resource) ? 1.5 : 1.0,
                             child: Opacity(
                               opacity: resource.amount != 0 ? 1 : 0.4,
                               child: ResourceImageView(
@@ -99,14 +100,15 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                         var saldo = buyPrice - currentResourceSellPrice;
                         return Expanded(
                           flex: 1,
-                          child: Opacity(
-                            opacity: city.isUnlocked() ? 1 : 0.6,
-                            child: Padding(
-                              padding: const EdgeInsets.all(1.0),
-                              child: ActionButton(
-                                onPress: () => _navigateToCity(city),
-                                image: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          child: Padding(
+                            padding: const EdgeInsets.all(1.0),
+                            child: ActionButton(
+                              onPress: () => _navigateToCity(city),
+                              image: Opacity(
+                                opacity: city.isUnlocked() ? 1 : 0.6,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     CityAvatar(
                                       city: city,
@@ -123,18 +125,24 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                                                 city.localizedKeyName,
                                               )}",
                                             ),
-                                            TitleText("(${city.stock.resourceInStock(selectedResource)?.amount ?? "0"})")
+                                            TitleText(
+                                              "(${city.stock.resourceInStock(selectedResource)?.amount ?? "0"})",
+                                            ),
                                           ],
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
-                                action: ActionText(
-                                  ChumakiLocalizations.labelGoTo,
-                                ),
-                                subTitle: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              ),
+                              action: ActionText(
+                                ChumakiLocalizations.labelGoTo,
+                              ),
+                              subTitle: Opacity(
+                                opacity: city.isUnlocked() ? 1 : 0.6,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Expanded(
                                       flex: 1,
@@ -147,7 +155,8 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                                               Expanded(
                                                   flex: 1,
                                                   child: Text(
-                                                    ChumakiLocalizations.labelPrice,
+                                                    ChumakiLocalizations
+                                                        .labelPrice,
                                                     textAlign: TextAlign.end,
                                                   )),
                                               Expanded(
@@ -167,7 +176,8 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                                                   )),
                                               Expanded(
                                                 flex: 3,
-                                                child: MoneyUnitView(Money(saldo),
+                                                child: MoneyUnitView(
+                                                    Money(saldo),
                                                     isEnough: saldo > 0),
                                               ),
                                             ],

@@ -41,6 +41,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
           Row(
             children: resources
                 .where((res) => forCity.stock.hasResource(res))
+                .take(5)
                 .map((res) => ResourceImageView(
                       res,
                       showAmount: true,
@@ -91,7 +92,8 @@ class StockResourceCategoryGroup extends StatelessWidget {
                               children: [
                                 GameText(
                                   "${ChumakiLocalizations.labelBuy2}:",
-                                  addStyle: Theme.of(context).textTheme.headline5,
+                                  addStyle:
+                                      Theme.of(context).textTheme.headline5,
                                 ),
                                 MoneyUnitView(Money(forCity.buyPriceForResource(
                                     resource.cloneWithAmount(1),
@@ -103,7 +105,8 @@ class StockResourceCategoryGroup extends StatelessWidget {
                               children: [
                                 GameText(
                                   "${ChumakiLocalizations.labelSell2}:",
-                                  addStyle: Theme.of(context).textTheme.headline5,
+                                  addStyle:
+                                      Theme.of(context).textTheme.headline5,
                                 ),
                                 MoneyUnitView(Money(
                                     forCity.sellPriceForResource(

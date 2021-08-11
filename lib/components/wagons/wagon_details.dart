@@ -62,6 +62,19 @@ class WagonDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GameText(
+                  ChumakiLocalizations.labelTrade,
+                  addStyle: Theme.of(context).textTheme.headline3,
+                ),
+                Image.asset("images/icons/money/money.png", width: 64),
+              ],
+            ),
+            content: WagonResourceExchanger(wagon, city),
+          ),
+          ExpandablePanel(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GameText(
                   ChumakiLocalizations.labelSend,
                   addStyle: Theme.of(context).textTheme.headline3,
                 ),
@@ -72,19 +85,6 @@ class WagonDetails extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: WagonDispatcher(wagon: wagon, city: city),
             ),
-          ),
-          ExpandablePanel(
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GameText(
-                  ChumakiLocalizations.labelTrade,
-                  addStyle: Theme.of(context).textTheme.headline3,
-                ),
-                Image.asset("images/icons/money/money.png", width: 64),
-              ],
-            ),
-            content: WagonResourceExchanger(wagon, city),
           ),
         ],
       ),
