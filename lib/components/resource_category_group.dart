@@ -54,7 +54,7 @@ class ResourceCategoryGroup extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                ChumakiLocalizations.labelBuy,
+                ChumakiLocalizations.labelBuy2,
                 style: Theme.of(context).textTheme.headline4,
               ),
               ...resources.divideBy(2).map((List<Resource> resources) {
@@ -81,7 +81,7 @@ class ResourceCategoryGroup extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                ChumakiLocalizations.labelSell,
+                ChumakiLocalizations.labelSell2,
                 style: Theme.of(context).textTheme.headline4,
               ),
               ...resources.divideBy(2).map((List<Resource> resources) {
