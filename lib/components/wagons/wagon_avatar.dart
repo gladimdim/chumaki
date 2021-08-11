@@ -1,3 +1,4 @@
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class WagonAvatar extends StatelessWidget {
         Align(
           alignment: Alignment.center,
           child: ClipOval(
-            child: Image.asset(wagon.getImagePath(), width: 128),
+            child: ResizedImage(wagon.getImagePath(), width: 128),
           ),
         ),
         wagon.leader == null

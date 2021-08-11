@@ -1,6 +1,7 @@
 import 'package:chumaki/components/ui/3d_button.dart';
 import 'package:chumaki/components/ui/bouncing_widget.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/logger/logger.dart';
 import 'package:chumaki/views/game_canvas_view.dart';
@@ -44,7 +45,7 @@ class _LoggerViewState extends State<LoggerView> {
                       color: mediumGrey,
                       shadowColor: themeData.backgroundColor,
                       onPressed: _toggleOpen,
-                      child: Image.asset(
+                      child: ResizedImage(
                         "images/ui/glory.png",
                         width: 44,
                       ),

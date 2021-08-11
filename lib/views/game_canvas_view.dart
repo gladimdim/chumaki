@@ -8,6 +8,7 @@ import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/ui/3d_button.dart';
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/models/cities/city.dart';
 
 import 'package:chumaki/models/cities/sich.dart';
@@ -99,10 +100,10 @@ class GameCanvasViewState extends State<GameCanvasView>
           maxScale: 3.0,
           child: Stack(
             children: [
-              Image.asset(
+              ResizedImage(
                 "images/boplan_map_huge.jpg",
-                width: CANVAS_WIDTH,
-                height: CANVAS_HEIGHT,
+                width: CANVAS_WIDTH.toInt(),
+                height: CANVAS_HEIGHT.toInt(),
               ),
               if (showCoordinates)
                 ...List.generate(53, (index) {
@@ -306,9 +307,9 @@ class GameCanvasViewState extends State<GameCanvasView>
                         shadowColor: themeData.backgroundColor,
                         onPressed: _toggleMapMode,
                         child: mapMode == MAP_MODE.CITY
-                            ? Image.asset("images/resources/wood/wood.png",
+                            ? ResizedImage("images/resources/wood/wood.png",
                                 width: 44)
-                            : Image.asset(
+                            : ResizedImage(
                                 "images/cities/church.png",
                                 width: 44,
                               ),
@@ -323,7 +324,7 @@ class GameCanvasViewState extends State<GameCanvasView>
                           color: themeData.backgroundColor,
                         ),
                         Center(
-                            child: Image.asset(Money(0).imagePath, width: 44)),
+                            child: ResizedImage(Money(0).imagePath, width: 44)),
                         StreamBuilder(
                           stream: company.changes,
                           builder: (context, _) => Center(
@@ -353,7 +354,7 @@ class GameCanvasViewState extends State<GameCanvasView>
                                     event ==
                                     APP_PREFERENCES_EVENTS.SOUND_CHANGE),
                             builder: (context, snapshot) {
-                              return Image.asset(
+                              return ResizedImage(
                                 AppPreferences.instance.getIsSoundEnabled()
                                     ? "images/ui/bandura.png"
                                     : "images/ui/bandura_back.png",

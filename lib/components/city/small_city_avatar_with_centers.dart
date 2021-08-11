@@ -1,5 +1,6 @@
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class SmallCityAvatarWithCenters extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
+        ResizedImage(
           city.avatarImagePath,
           width: 40,
         ),

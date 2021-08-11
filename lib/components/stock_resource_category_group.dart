@@ -4,6 +4,7 @@ import 'package:chumaki/components/ui/bordered_all.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';
 import 'package:chumaki/components/ui/game_text.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -32,7 +33,7 @@ class StockResourceCategoryGroup extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.asset(categoryToImagePath(resources.first.category),
+              ResizedImage(categoryToImagePath(resources.first.category),
                   width: 72),
               TitleText(ChumakiLocalizations.getForKey(
                   resourceCategoryToLocalizedKey(resources.first.category))),

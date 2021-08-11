@@ -5,6 +5,7 @@ import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/components/ui/action_text.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/components/wagons/wagons_global_price_list.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
@@ -51,7 +52,7 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TitleText(ChumakiLocalizations.labelGlobalPrices),
-                Image.asset("images/icons/money/money_2d.png", width: 55),
+                ResizedImage("images/icons/money/money_2d.png", width: 55),
               ],
             ),
             content: Column(

@@ -1,6 +1,7 @@
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/decorated_container.dart';
 import 'package:chumaki/components/ui/game_text.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/logger/logger.dart';
 import 'package:chumaki/theme.dart';
@@ -40,7 +41,7 @@ class LoggerStatsView extends StatelessWidget {
                     Column(
                       children: [
                         ClipOval(
-                          child: Image.asset(
+                          child: ResizedImage(
                             "images/wagon/cart.png",
                             width: 64,
                           ),
@@ -53,7 +54,7 @@ class LoggerStatsView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ClipOval(
-                          child: Image.asset(
+                          child: ResizedImage(
                             "images/leaders/leader4.png",
                             width: 64,
                           ),
@@ -65,7 +66,7 @@ class LoggerStatsView extends StatelessWidget {
                     Column(
                       children: [
                         ClipOval(
-                          child: Image.asset(
+                          child: ResizedImage(
                             "images/leaders/leader1.png",
                             width: 64,
                           ),

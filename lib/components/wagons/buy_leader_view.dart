@@ -1,3 +1,4 @@
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:flutter/material.dart';
 import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:chumaki/views/inherited_company.dart';
@@ -45,7 +46,7 @@ class BuyLeaderView extends StatelessWidget {
                         }
                       : null,
                   image: ClipOval(
-                    child: Image.asset(leader.imagePath, width: 96, height: 96),
+                    child: ResizedImage(leader.imagePath, width: 96, height: 96),
                   ),
                   subTitle: Column(
                     children: [

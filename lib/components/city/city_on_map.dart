@@ -1,6 +1,7 @@
 import 'package:chumaki/components/city/AnimatedFlag.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/ui/game_text.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/wagons/wagon.dart';
@@ -64,9 +65,9 @@ class CityOnMap extends StatelessWidget {
                   alignment: Alignment.topRight,
                   child: Wrap(
                     children: [
-                      Image.asset(
+                      ResizedImage(
                         Wagon.imagePath,
-                        width: 15 * city.size,
+                        width: 15 * city.size.toInt(),
                       ),
                       GameText(
                         city.wagons.length.toString(),
@@ -85,8 +86,8 @@ class CityOnMap extends StatelessWidget {
 
   Widget _avatarForMode() {
     if (mapMode == MAP_MODE.CITY) {
-      return Image.asset(city.avatarImagePath,
-          width: CITY_SIZE.toDouble() * city.size);
+      return ResizedImage(city.avatarImagePath,
+          width: CITY_SIZE * city.size.toInt());
     } else {
       final base = 80;
       final count = city.manufacturings.length;

@@ -1,3 +1,4 @@
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/resources/resource_category.dart';
@@ -12,7 +13,7 @@ class ResourceCategoryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Row(
       children: [
-        Image.asset(categoryToImagePath(category), width: width),
+        ResizedImage(categoryToImagePath(category), width: width.toInt()),
         Text(
           ChumakiLocalizations.getForKey(
             resourceCategoryToLocalizedKey(category),

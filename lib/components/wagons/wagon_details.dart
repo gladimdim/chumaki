@@ -6,6 +6,7 @@ import 'package:chumaki/components/ui/bordered_top.dart';
 import 'package:chumaki/components/leader/leader_view.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';
 import 'package:chumaki/components/ui/game_text.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/components/wagons/wagon_dispatcher.dart';
 import 'package:chumaki/components/wagons/wagon_resource_exchanger.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
@@ -65,7 +66,7 @@ class WagonDetails extends StatelessWidget {
                   ChumakiLocalizations.labelTrade,
                   addStyle: Theme.of(context).textTheme.headline3,
                 ),
-                Image.asset("images/icons/money/money.png", width: 64),
+                ResizedImage("images/icons/money/money.png", width: 64),
               ],
             ),
             content: WagonResourceExchanger(wagon, city),
@@ -78,7 +79,7 @@ class WagonDetails extends StatelessWidget {
                   ChumakiLocalizations.labelSend,
                   addStyle: Theme.of(context).textTheme.headline3,
                 ),
-                Image.asset("images/icons/paths/paths.png", width: 64),
+                ResizedImage("images/icons/paths/paths.png", width: 64),
               ],
             ),
             content: Padding(

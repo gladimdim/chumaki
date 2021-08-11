@@ -1,4 +1,5 @@
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/theme.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +59,7 @@ class _MoneyUnitViewState extends State<MoneyUnitView>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(widget.money.imagePath, width: widget.size),
+          ResizedImage(widget.money.imagePath, width: widget.size.toInt()),
           TitleText(
             widget.money.amount.toStringAsFixed(1),
             style: style(widget.money.amount, context),
