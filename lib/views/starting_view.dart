@@ -95,7 +95,7 @@ class _StartingViewState extends State<StartingView> {
                                   TitleText(ChumakiLocalizations.labelLoadSave),
                                   IconButton(
                                       onPressed: _removeSave,
-                                      icon: Icon(Icons.delete)),
+                                      icon: Icon(Icons.delete, color: darkGrey,)),
                                 ],
                               ),
                             );
