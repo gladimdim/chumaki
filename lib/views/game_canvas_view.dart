@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/components/city/city_on_map.dart';
 import 'package:chumaki/components/city/selected_city_locked_view.dart';
 import 'package:chumaki/components/route_paint.dart';
@@ -340,29 +339,6 @@ class GameCanvasViewState extends State<GameCanvasView>
                       ],
                     ),
                   ),
-                  if (selected == null)
-                    SizedBox(
-                      width: MENU_ITEM_WIDTH,
-                      height: MENU_ITEM_WIDTH,
-                      child: DDDButton(
-                        color: mediumGrey,
-                        shadowColor: themeData.backgroundColor,
-                        onPressed: _toggleSoundMode,
-                        child: StreamBuilder<APP_PREFERENCES_EVENTS>(
-                            stream: AppPreferences.instance.changes.where(
-                                (event) =>
-                                    event ==
-                                    APP_PREFERENCES_EVENTS.SOUND_CHANGE),
-                            builder: (context, snapshot) {
-                              return ResizedImage(
-                                AppPreferences.instance.getIsSoundEnabled()
-                                    ? "images/ui/bandura.png"
-                                    : "images/ui/bandura_back.png",
-                                width: 44,
-                              );
-                            }),
-                      ),
-                    ),
                 ],
               ),
             ),
@@ -482,10 +458,6 @@ class GameCanvasViewState extends State<GameCanvasView>
         mapMode = MAP_MODE.CITY;
       }
     });
-  }
-
-  void _toggleSoundMode() async {
-    await AppPreferences.instance.toogleIsSoundEnabled();
   }
 
   @override

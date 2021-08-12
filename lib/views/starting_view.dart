@@ -1,9 +1,12 @@
 import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/3d_button.dart';
 import 'package:chumaki/components/ui/other_games/other_games_view.dart';
+import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/sound/sound_manager.dart';
+import 'package:chumaki/theme.dart';
 import 'package:chumaki/views/game_canvas_view.dart';
 import 'package:flutter/material.dart';
 import 'package:async/async.dart';
@@ -18,6 +21,7 @@ class StartingView extends StatefulWidget {
 class _StartingViewState extends State<StartingView> {
   Company? currentCompany;
   AsyncMemoizer _appPreferencesInitter = AsyncMemoizer();
+  final double menuHeight = 350.0;
 
   _appPreferencesInit() {
     return _appPreferencesInitter.runOnce(() => AppPreferences.instance.init());
@@ -52,13 +56,15 @@ class _StartingViewState extends State<StartingView> {
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 maxWidth: 800,
-                maxHeight: 400,
+                maxHeight: menuHeight,
               ),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
                   Image.asset(
                     "images/ui/papyrus_1.png",
+                    height: menuHeight,
+                    fit: BoxFit.fill,
                   ),
                   Column(
                     mainAxisSize: MainAxisSize.min,
@@ -104,6 +110,41 @@ class _StartingViewState extends State<StartingView> {
                           });
                         },
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: TitleText(ChumakiLocalizations.labelSound),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: SizedBox(
+                              width: MENU_ITEM_WIDTH,
+                              height: MENU_ITEM_WIDTH,
+                              child: DDDButton(
+                                color: mediumGrey,
+                                shadowColor: Theme.of(context).backgroundColor,
+                                onPressed: _toggleSoundMode,
+                                child: StreamBuilder<APP_PREFERENCES_EVENTS>(
+                                    stream: AppPreferences.instance.changes.where(
+                                        (event) =>
+                                            event ==
+                                            APP_PREFERENCES_EVENTS.SOUND_CHANGE),
+                                    builder: (context, snapshot) {
+                                      return ResizedImage(
+                                        AppPreferences.instance
+                                                .getIsSoundEnabled()
+                                            ? "images/ui/bandura.png"
+                                            : "images/ui/bandura_back.png",
+                                        width: 44,
+                                      );
+                                    }),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                       OtherGamesView(),
                     ],
                   ),
@@ -113,6 +154,10 @@ class _StartingViewState extends State<StartingView> {
           ),
       ],
     );
+  }
+
+  void _toggleSoundMode() async {
+    await AppPreferences.instance.toogleIsSoundEnabled();
   }
 
   onBackPressed() {
