@@ -18,6 +18,7 @@ import 'package:chumaki/models/cities/medzhibizh.dart';
 import 'package:chumaki/models/cities/myrgorod.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/cities/ochakiv.dart';
+import 'package:chumaki/models/cities/ohtirka.dart';
 import 'package:chumaki/models/cities/ostrog.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/pyryatin.dart';
@@ -158,6 +159,8 @@ class City {
         return Ternopil();
       case "medzhibizh":
         return Medzhibizh();
+      case "ohtirka":
+        return Ohtirka();
       default:
         throw "City with key $name is not recognized";
     }
@@ -203,6 +206,7 @@ class City {
       Rylsk(),
       Ternopil(),
       Medzhibizh(),
+      Ohtirka(),
     ];
   }
 

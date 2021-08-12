@@ -22,6 +22,7 @@ import 'package:chumaki/models/cities/medzhibizh.dart';
 import 'package:chumaki/models/cities/myrgorod.dart';
 import 'package:chumaki/models/cities/nizhin.dart';
 import 'package:chumaki/models/cities/ochakiv.dart';
+import 'package:chumaki/models/cities/ohtirka.dart';
 import 'package:chumaki/models/cities/ostrog.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/cities/pyryatin.dart';
@@ -99,6 +100,8 @@ class Company {
     CityRoute(Ternopil(), Lviv(), Point<double>(50, -50)),
     CityRoute(Vinnitsa(), Medzhibizh(), Point<double>(50, -50)),
     CityRoute(Medzhibizh(), Ternopil(), Point<double>(50, -50)),
+    CityRoute(Govtva(), Ohtirka(), Point<double>(150, -50)),
+    CityRoute(Ohtirka(), Myrgorod(), Point<double>(-100, 200)),
   ];
 
   late double _money;
@@ -133,8 +136,8 @@ class Company {
 
     // if (kDebugMode) {
     //   allCities.forEach((element) {
-        // element.unlock();
-      // });
+    // element.unlock();
+    // });
     // }
   }
 

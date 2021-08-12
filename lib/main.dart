@@ -1,3 +1,4 @@
+import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/sound/sound_manager.dart';
 import 'package:chumaki/theme.dart';
 import 'package:chumaki/views/starting_view.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/services.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-
+  await AppPreferences.instance.init();
   await SoundManager.instance.initSounds();
   runApp(MyApp());
 }

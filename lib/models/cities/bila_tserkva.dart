@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/resources/resource.dart';
 
 class BilaTserkva extends City {
@@ -12,7 +13,7 @@ class BilaTserkva extends City {
           unlocked: true,
           localizedKeyName: 'bilatserkva',
           size: 2,
-          unlocksCities: [],
+          unlocksCities: [Kyiv()],
           manufacturings: [],
           stock: Stock([
             Bread(1000),

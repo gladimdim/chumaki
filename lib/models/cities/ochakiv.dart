@@ -17,14 +17,14 @@ class Ochakiv extends City {
           unlocked: false,
           unlocksCities: [Temryuk()],
           unlockPriceMoney: Money(50),
-          manufacturings: [River(), Liman(), TobaccoMaker()],
+          manufacturings: [River(), Liman(),],
           stock: Stock(
             [
-              Powder(1000),
-              Fish(1500),
-              Salt(2000),
-              Silk(300),
-              Tobacco(2000),
+              Powder(200),
+              Fish(800),
+              Salt(500),
+              Silk(100),
+              Tobacco(350),
             ],
           ),
           availableEvents: [
