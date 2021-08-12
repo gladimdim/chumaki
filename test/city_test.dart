@@ -19,18 +19,18 @@ void main() {
     test("Can replenish stock from mfg", () {
       final city = Sich();
       final company = Company();
-      city.stock.removeResource(Fish(1490));
+      city.stock.removeResource(Fish(230));
       city.buildManufacturing(River(), company);
       city.replenishStock();
 
-      expect(city.stock.resourceInStock(Fish(1))!.amount, equals(110),
+      expect(city.stock.resourceInStock(Fish(1))!.amount, equals(470),
           reason: "100 fish from River was added.");
     });
 
     test("Does not replenish stock from mfg if there is enough", () {
       final city = Sich();
       final company = Company();
-      city.stock.removeResource(Fish(1400));
+      city.stock.removeResource(Fish(700));
       city.buildManufacturing(River(), company);
       city.replenishStock();
 
