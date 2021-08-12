@@ -22,7 +22,7 @@ enum RESOURCES {
   GORILKA, // Korsun, Ostrog, Uman
   WAX, // Kyiv
   HONEY, // Pereyaslav
-  TOBACCO, // Ochakiv
+  TOBACCO, // Ohtirka
   AMBER, // Zhitomir
   CLOTH, // Nizhin
 }

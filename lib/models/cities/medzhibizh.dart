@@ -19,10 +19,10 @@ class Medzhibizh extends City {
     stock: Stock(
       [
         MetalParts(100),
-        Firearm(250),
+        Firearm(100),
         Honey(100),
-        Gorilka(250),
-        Stone(600),
+        Gorilka(180),
+        Stone(180),
       ],
     ),
     wagons: [],

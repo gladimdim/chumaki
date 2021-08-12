@@ -19,9 +19,9 @@ class Vinnitsa extends City {
           unlocksCities: [Ladyzhin(), Medzhibizh()],
           manufacturings: [Smith(), Quarry()],
           stock: Stock([
-            Bread(1000),
+            Bread(800),
             Cannon(30),
-            Grains(1000),
+            Grains(400),
             MetalParts(100),
             Firearm(300),
             Wool(150),

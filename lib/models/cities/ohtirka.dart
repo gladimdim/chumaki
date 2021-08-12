@@ -25,7 +25,7 @@ class Ohtirka extends City {
         Gorilka(150),
         Wax(200),
         Honey(400),
-        Tobacco(80),
+        Tobacco(800),
         Planks(50),
       ],
     ),

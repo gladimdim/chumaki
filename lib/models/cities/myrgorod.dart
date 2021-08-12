@@ -19,10 +19,10 @@ class Myrgorod extends City {
           manufacturings: [Pasture()],
           stock: Stock(
             [
-              Wood(500),
+              Wood(200),
               Horse(10),
               Fur(100),
-              Wool(2000),
+              Wool(800),
               Gorilka(50),
               Amber(50),
               Firearm(50),
