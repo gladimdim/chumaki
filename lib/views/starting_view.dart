@@ -85,40 +85,37 @@ class _StartingViewState extends State<StartingView> {
                                   ChumakiLocalizations.labelNoSave,
                                 ));
                           } else {
-                            return OutlinedButton(
-                              onPressed: () => _loadGamePressed(
-                                  context, Company.fromJson(savedGame)),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  TitleText(ChumakiLocalizations.labelLoadSave),
-                                  IconButton(
-                                      onPressed: _removeSave,
-                                      icon: Icon(Icons.delete, color: darkGrey,)),
-                                ],
-                              ),
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                OutlinedButton(
+                                  onPressed: () => _loadGamePressed(
+                                      context, Company.fromJson(savedGame)),
+                                  child: TitleText(
+                                      ChumakiLocalizations.labelLoadSave),
+                                ),
+                                IconButton(
+                                    onPressed: _removeSave,
+                                    icon: Icon(
+                                      Icons.delete,
+                                      color: darkGrey,
+                                    )),
+                              ],
                             );
                           }
-                        },
-                      ),
-                      LocaleSelection(
-                        locale: ChumakiLocalizations.locale,
-                        onLocaleChanged: (Locale locale) {
-                          setState(() {
-                            ChumakiLocalizations.locale = locale;
-                          });
                         },
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
                             child: TitleText(ChumakiLocalizations.labelSound),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
                             child: SizedBox(
                               width: MENU_ITEM_WIDTH,
                               height: MENU_ITEM_WIDTH,
@@ -127,10 +124,11 @@ class _StartingViewState extends State<StartingView> {
                                 shadowColor: Theme.of(context).backgroundColor,
                                 onPressed: _toggleSoundMode,
                                 child: StreamBuilder<APP_PREFERENCES_EVENTS>(
-                                    stream: AppPreferences.instance.changes.where(
-                                        (event) =>
+                                    stream: AppPreferences.instance.changes
+                                        .where((event) =>
                                             event ==
-                                            APP_PREFERENCES_EVENTS.SOUND_CHANGE),
+                                            APP_PREFERENCES_EVENTS
+                                                .SOUND_CHANGE),
                                     builder: (context, snapshot) {
                                       return ResizedImage(
                                         AppPreferences.instance
@@ -146,6 +144,14 @@ class _StartingViewState extends State<StartingView> {
                         ],
                       ),
                       OtherGamesView(),
+                      LocaleSelection(
+                        locale: ChumakiLocalizations.locale,
+                        onLocaleChanged: (Locale locale) {
+                          setState(() {
+                            ChumakiLocalizations.locale = locale;
+                          });
+                        },
+                      ),
                     ],
                   ),
                 ],

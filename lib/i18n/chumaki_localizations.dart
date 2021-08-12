@@ -5,7 +5,7 @@ import 'package:chumaki/i18n/manufacturing_localizations.dart';
 import 'package:chumaki/i18n/resource_localizations.dart';
 import 'package:flutter/material.dart';
 
-const APP_VERSION = "1.0.6";
+const APP_VERSION = "1.0.0";
 
 String getDefaultOrUrlLanguage() {
   var savedLangCode = "uk";
