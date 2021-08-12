@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/korsun.dart';
-import 'package:chumaki/models/cities/kyiv.dart';
 import 'package:chumaki/models/cities/pereyaslav.dart';
 import 'package:chumaki/models/events/event.dart';
 import 'package:chumaki/models/resources/resource.dart';
@@ -17,7 +16,7 @@ class Cherkasy extends City {
           size: 2,
           unlocked: true,
           manufacturings: [],
-          unlocksCities: [Pereyaslav(), Kyiv(), Korsun()],
+          unlocksCities: [Pereyaslav(), Korsun()],
           availableEvents: [
             Event(
                 iconPath: "images/icons/luxury/luxury.png",

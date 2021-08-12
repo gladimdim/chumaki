@@ -12,7 +12,7 @@ class AppPreferences {
   }
 
   static final AppPreferences instance = AppPreferences._internal();
-  late SharedPreferences _preferences;
+  SharedPreferences? _preferences;
   String _languageCode = 'languageCode';
   String _gameSaveKey = 'gameSaveKey';
   String _isSoundEnabled = "isSoundEnabled";
@@ -22,16 +22,19 @@ class AppPreferences {
   late final ValueStream<APP_PREFERENCES_EVENTS> changes;
 
   Future<SharedPreferences> init() async {
-    _preferences = await SharedPreferences.getInstance();
-    return _preferences;
+    if (_preferences == null) {
+      _preferences = await SharedPreferences.getInstance();
+
+    }
+    return _preferences!;
   }
 
   bool getIsSoundEnabled() {
-    return _preferences.getBool(_isSoundEnabled) ?? true;
+    return _preferences!.getBool(_isSoundEnabled) ?? true;
   }
 
   Future setIsSoundEnabled(bool value) async {
-    final result = await _preferences.setBool(_isSoundEnabled, value);
+    final result = await _preferences!.setBool(_isSoundEnabled, value);
     _innerChanges.add(APP_PREFERENCES_EVENTS.SOUND_CHANGE);
     return result;
   }
@@ -42,16 +45,16 @@ class AppPreferences {
   }
 
   String? getUILanguage() {
-    return _preferences.getString(_languageCode);
+    return _preferences!.getString(_languageCode);
   }
 
   Future setUILanguage(String languageCode) async {
-    return await _preferences.setString(_languageCode, languageCode);
+    return await _preferences!.setString(_languageCode, languageCode);
   }
 
   Map<String, dynamic>? readGameSave() {
     try {
-      var s = _preferences.getString(_gameSaveKey);
+      var s = _preferences!.getString(_gameSaveKey);
       if (s != null) {
         return jsonDecode(s);
       } else {
@@ -65,13 +68,13 @@ class AppPreferences {
   Future saveGameToDisk(Map<String, dynamic> json) async {
     var string = jsonEncode(json);
     try {
-      return await _preferences.setString(_gameSaveKey, string);
+      return await _preferences!.setString(_gameSaveKey, string);
     } catch (e) {
       return null;
     }
   }
 
   Future<bool> removeSavedGame() async {
-    return await _preferences.remove(_gameSaveKey);
+    return await _preferences!.remove(_gameSaveKey);
   }
 }
