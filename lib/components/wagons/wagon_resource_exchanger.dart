@@ -16,8 +16,6 @@ class WagonResourceExchanger extends StatefulWidget {
 }
 
 class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
-  final int amountTradeValue = 1;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,7 +29,6 @@ class _WagonResourceExchangerState extends State<WagonResourceExchanger> {
               city: widget.city,
               wagon: widget.wagon,
               resources: groupedResources,
-              amountTradeValue: amountTradeValue,
             );
           },
         ).toList(),

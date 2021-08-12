@@ -19,14 +19,14 @@ class Pyryatin extends City {
           manufacturings: [Forest()],
           stock: Stock(
             [
-              Wood(1500),
+              Wood(1100),
               Horse(30),
               Fur(100),
               Wool(200),
               Gorilka(50),
               Wax(300),
-              Honey(1500),
-              Tobacco(800),
+              Honey(100),
+              Tobacco(120),
             ],
           ),
           wagons: [],

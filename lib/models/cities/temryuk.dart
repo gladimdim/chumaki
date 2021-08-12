@@ -21,7 +21,7 @@ class Temryuk extends City {
               Fish(3500),
               Salt(2000),
               Silk(500),
-              Tobacco(2200),
+              Tobacco(300),
             ],
           ),
         );

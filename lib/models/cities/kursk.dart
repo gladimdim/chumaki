@@ -18,9 +18,9 @@ class Kursk extends City {
           manufacturings: [TrappersHouse()],
           stock: Stock(
             [
-              Fur(1500),
-              Wax(1000),
-              Grains(500),
+              Fur(500),
+              Wax(200),
+              Grains(200),
               Wood(500),
               Horse(50),
               Powder(150),

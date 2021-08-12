@@ -18,12 +18,12 @@ class Govtva extends City {
           stock: Stock(
             [
               Wood(50),
-              Horse(100),
-              Fur(150),
-              Wool(100),
+              Horse(40),
+              Fur(75),
+              Wool(50),
               Gorilka(150),
-              Wax(200),
-              Honey(400),
+              Wax(150),
+              Honey(200),
               Tobacco(80),
               Planks(50),
             ],

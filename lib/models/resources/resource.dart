@@ -22,7 +22,7 @@ enum RESOURCES {
   GORILKA, // Korsun, Ostrog, Uman
   WAX, // Kyiv
   HONEY, // Pereyaslav
-  TOBACCO, // Ochakiv
+  TOBACCO, // Ohtirka
   AMBER, // Zhitomir
   CLOTH, // Nizhin
 }
@@ -175,7 +175,7 @@ class Charcoal extends Resource {
   Charcoal(int amount)
       : super("charcoal", amount,
             type: RESOURCES.CHARCOAL,
-            weightPerPoint: 0.2,
+            weightPerPoint: 0.4,
             color: Colors.black,
             category: RESOURCE_CATEGORY.RESOURCES);
 }
@@ -193,7 +193,7 @@ class Fish extends Resource {
   Fish(int amount)
       : super("fish", amount,
             type: RESOURCES.FISH,
-            weightPerPoint: 0.1,
+            weightPerPoint: 0.3,
             color: Colors.blueGrey,
             category: RESOURCE_CATEGORY.FOOD);
 }
@@ -201,7 +201,7 @@ class Fish extends Resource {
 class Bread extends Resource {
   Bread(int amount)
       : super("bread", amount,
-            weightPerPoint: 0.1,
+            weightPerPoint: 0.4,
             type: RESOURCES.BREAD,
             color: Colors.amber,
             category: RESOURCE_CATEGORY.FOOD);
@@ -265,7 +265,7 @@ class Silk extends Resource {
   Silk(int amount)
       : super("silk", amount,
             type: RESOURCES.SILK,
-            weightPerPoint: 0.3,
+            weightPerPoint: 0.4,
             color: Colors.yellow,
             category: RESOURCE_CATEGORY.LUXURY);
 }
@@ -274,7 +274,7 @@ class Salt extends Resource {
   Salt(int amount)
       : super("salt", amount,
             type: RESOURCES.SALT,
-            weightPerPoint: 0.2,
+            weightPerPoint: 0.7,
             color: Colors.white,
             category: RESOURCE_CATEGORY.FOOD);
 }
@@ -283,7 +283,7 @@ class Wool extends Resource {
   Wool(int amount)
       : super("wool", amount,
             type: RESOURCES.WOOL,
-            weightPerPoint: 0.2,
+            weightPerPoint: 0.5,
             color: Colors.green,
             category: RESOURCE_CATEGORY.CLOTHS);
 }

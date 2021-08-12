@@ -20,10 +20,10 @@ class Stavise extends City {
             Cannon(5),
             Grains(800),
             Planks(500),
-            Wood(1000),
-            IronOre(300),
+            Wood(300),
+            IronOre(150),
             MetalParts(100),
-            Wax(500),
+            Wax(300),
           ]),
         );
 }

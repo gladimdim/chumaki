@@ -15,13 +15,11 @@ class ResourceCategoryGroup extends StatelessWidget {
   final List<Resource> resources;
   final City city;
   final Wagon wagon;
-  final int amountTradeValue;
 
   ResourceCategoryGroup({
     required this.resources,
     required this.city,
     required this.wagon,
-    required this.amountTradeValue,
   });
 
   Widget build(BuildContext context) {
@@ -68,7 +66,6 @@ class ResourceCategoryGroup extends StatelessWidget {
                         wagon: wagon,
                         city: city,
                         resource: resource,
-                        amountTradeValue: amountTradeValue,
                         mode: EXCHANGE_MOD.BUY,
                       ),
                     );
@@ -96,7 +93,6 @@ class ResourceCategoryGroup extends StatelessWidget {
                         wagon: wagon,
                         city: city,
                         resource: resource,
-                        amountTradeValue: amountTradeValue,
                         mode: EXCHANGE_MOD.SELL,
                       ),
                     );

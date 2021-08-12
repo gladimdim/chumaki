@@ -16,13 +16,13 @@ class Gaivoron extends City {
           unlockPriceMoney: Money(50),
           manufacturings: [],
           stock: Stock([
-            Stone(800),
-            Grains(800),
-            Planks(500),
-            Wood(1000),
-            Wax(500),
-            Wood(300),
-            Powder(120),
+            Stone(200),
+            Grains(100),
+            Planks(100),
+            Wood(200),
+            Wax(50),
+            Wood(50),
+            Powder(30),
           ]),
         );
 }

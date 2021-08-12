@@ -17,10 +17,10 @@ class Ladyzhin extends City {
           manufacturings: [],
           unlockPriceMoney: Money(150),
           stock: Stock([
-            Bread(500),
-            Grains(800),
+            Bread(200),
+            Grains(300),
             MetalParts(100),
-            Wax(500),
+            Wax(100),
           ]),
         );
 }
