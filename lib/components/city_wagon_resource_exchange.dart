@@ -18,14 +18,13 @@ class CityWagonResourceExchange extends StatelessWidget {
   final Resource resource;
   final City city;
   final Wagon wagon;
-  final int amountTradeValue;
+  final int amountTradeValue = 1;
   final EXCHANGE_MOD mode;
 
   CityWagonResourceExchange(
       {required this.city,
       required this.wagon,
       required this.resource,
-      required this.amountTradeValue,
       required this.mode});
 
   @override
@@ -37,17 +36,13 @@ class CityWagonResourceExchange extends StatelessWidget {
         city.buyPriceForResource(resource, company.allCities, withAmount: 1);
     var buyPricePerUnit =
         city.sellPriceForResource(resource, company.allCities, withAmount: 1);
-    var buyPrice = city.buyPriceForResource(resource, company.allCities,
-        withAmount: amountTradeValue);
-    var sellPrice = city.sellPriceForResource(resource, company.allCities,
-        withAmount: amountTradeValue);
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         getTradeUnit(
           company: company,
           pricePerUnit: isBuyMode() ? buyPricePerUnit : sellPricePerUnit,
-          price: isBuyMode() ? buyPrice : sellPrice,
+          price: isBuyMode() ? buyPricePerUnit : sellPricePerUnit,
           tradeResource: isBuyMode() ? cityRes : wagonRes,
           actionText: isBuyMode()
               ? ChumakiLocalizations.labelBuy
@@ -121,15 +116,10 @@ class CityWagonResourceExchange extends StatelessWidget {
                 ),
               ],
             ),
-            subTitle: Column(
-              children: [
-                MoneyUnitView(Money(price),
-                    isEnough: isBuyMode()
-                        ? enableBuyButton(company)
-                        : enableSellButton()),
-                Text("(${pricePerUnit}x$amountTradeValue)"),
-              ],
-            ),
+            subTitle:  MoneyUnitView(Money(price),
+                isEnough: isBuyMode()
+                    ? enableBuyButton(company)
+                    : enableSellButton()),
           ),
         ),
       ],
