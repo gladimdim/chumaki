@@ -181,62 +181,64 @@ class ChumakiLocalizations {
       "labelSound": "Sound",
       "labelHelp": "Help",
       "labelHelpOverviewTitle": "Gameplay",
-      "labelHelpTitleOverview1": "Игра коротко 👉",
+      "labelHelpTitleOverview1": "TLDR 👉",
       "labelHelpTextOverview1":
-          """Покупай дешево. Продавай дорого. Выполняй задачи.""",
-      "labelHelpTitleOverview2": "Игра не коротко 😎 👇",
+          """Buy low. Sell high. Do the tasks.""",
+      "labelHelpTitleOverview2": "Game full description 😎 👇",
       "labelHelpTextOverview2": """
 
-Вы начинаете как торговец с одним возом. Первой задачей будет разведать маршруты между городами, посмотреть чем торгуют и какая будет маржа.
-Все товары имеют центры производства, где цена на них самая минимальная. По этому, чтобы продать подороже, надо отьехать подальше :).
-Чтобы оптимизировать путешествия, найдите такой маршрут, который будет выгодным в обе стороны.
-Наймите атамана для ватаги, тогда сможете его прокачивать и получаете доступ к новым категориям товаров.
-Когда вы заходите в город, то может появится новая задача за выполнения которой получаете ОЧЕНЬ хорошие деньги.
-Просмотрите список достижений, чтобы было интересней играть :)
+You start as a tarder with a single wagon. The first is to identify valuable roots between cities, what city trades what and so on.
+All goods have manufacturing centers, where the price is the lowest. So, to make some money, you have to buy at manufacturing center
+and sell it in some far city for higher price.
+To optimize the travels, find such a route that benefits you in both directions.
+Hire a leader for the wagon then you can get experience and unlock new goods categories.
+When you enter a town, an event can be generated for you. Doing it gives you LOTS of money.
+Look at the Achievements list to make game more fun. :)
 """,
-      "labelHelpTitleOtamans": "Атаманы 🤠",
+      "labelHelpTitleOtamans": "Leaders 🤠",
       "labelHelpTextOtamans": """
 
-Вы можете нанять атамана в ватагу. Это даст возможность его прокачать. Каждый раз, когда идет продажа, атаман получает опыт.
-После достижения нового уровня, можна получить перк, который откроет новую категорию товаров.""",
-      "labelHelpTitleTowns": "Города 🏙",
+You can hire leader for the wagon. This gives you possibility to earn experience. Each time when you sell your leader will get exp.
+After getting new level one perk is available and you can use it to pick category to unlock.
+""",
+      "labelHelpTitleTowns": "Towns 🏙",
       "labelHelpTextTowns": """
 
-Много городов заблокировано с начала игры. Надо платить деньги, чтобы купить к ним маршрут и открыть торговлю.
-Большинство городов являются центрами производства, по этому цена там наименьшая, а также на рынке будет их побольше.""",
-      "labelHelpTitleEvents": "События 🎆",
+Lots of towns are blocked at the beginning. You need to pay money to buy routes.
+Some towns are manufacturing centers, that is why the prices for such goods are lower and more plent on the market.""",
+      "labelHelpTitleEvents": "Events 🎆",
       "labelHelpTextEvents": """
 
-При визите ватаги в город может появится задача. Если ее выполнить, то получите ОЧЕНЬ хорошие деньги. А также возможность получить еще одну задачку :)
+When wagon visits the town an event get be generated for you. If completed you get LOTS of money. And the possibility to get another one :)
 """,
-      "labelHelpTitleWagons": "Ватаги 🛺",
+      "labelHelpTitleWagons": "Wagons 🛺",
       "labelHelpTextWagons": """
 
-Можете купить еще одну ватагу в любом городе. Все ватаги независимы, но имеют общий банк денег.
-Ватага имет ограничения по весу - 100 кг.
-Каждая ватага может нанять атамана и отдельно его прокачивать, чтобы открыть новые категории товаров.""",
-      "labelHelpTitleManufacturing": "Производства 🏭",
+You can buy a new wagon in any city. All wagons are independent but share the bank.
+Wagon has a limit - 100 kg.
+Each wagon can hire a leader and level him up to unlock more goods for trade.""",
+      "labelHelpTitleManufacturing": "Manufacturings 🏭",
       "labelHelpTextManufacturing": """
  
- В городах надо строить производства профильных товаров. Это дает возможность пополнять запасы на рынке.
- Ресурсы генерируются каждый раз, как ватага заходит в город.
- Для увеличения запасов прокачайте производство до 2-3 уровней.""",
-      "labelHelpTitleAchievements": "Достижения 🦸",
+ You need to build manufacturings in order to regenerate goods on the market.
+ They are replenished each time you visit a town.
+ To get even more resources - level up manufacturings to 2-3 levels.""",
+      "labelHelpTitleAchievements": "Achievements 🦸",
       "labelHelpTextAchievements": """
 
-В игре есть больеш 20 разных достижений. В игре нету войны, по этому они все завязаны на торговлю или на выполнение задач.""",
-      "labelHelpTitleMarket": "Торговля/Рынок 🛃",
+The game has more than 20 achievements. There is no war so all of them are about trading.""",
+      "labelHelpTitleMarket": "Trading/Market 🛃",
       "labelHelpTextMarket": """
 
-Когда ватага останавливается в городе, она может торговать с этим рынком.
-Для этого откройте меню с ватагой, перейдите на секцию Торговля и начните продавать или покупать товары.
-Для того, чтобы проверить цену на товар и маржу на них по всей карте - откроей Мировой Рынок.
+When the wagon stops in town it can start a trade.
+For this open the Wagon menu, go to Trade section and start moving the goods.
+To check the prices and the benefits - open World Market menu.
 """,
-      "labelHelpTitleGlobalMarket": "Мировой рынок 🗺️",
+      "labelHelpTitleGlobalMarket": "World Market 🗺️",
       "labelHelpTextGlobalMarket": """
 
-Тут можна проверить цены на все товары в разных городах, а также выгоду, которую получите, если продадите товар.
-Но будьте внимательны - можна уйти в минус! Правило простое - центр производства товара имеет самую низкую цену. Чем дальше от него, тем дороже товар.
+Here you can check the prices in different towns and the margins you may earn.
+But be careful - you can go below zero! The rule is simple - manufacturing centers have the lowest price. The farther from it the highter the price.
 """,
     },
     "uk": {
