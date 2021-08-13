@@ -175,6 +175,13 @@ class ChumakiLocalizations {
       "labelRequiredToDoCityEvents": "City events to finish",
       "labelWagonContains": "Wagon contains",
       "labelSound": "Sound",
+      "labelHelp": "Help",
+      "labelHelpOverviewTitle": "Gameplay",
+      "labelHelpOverviewText":
+          """You start as a trader in a world set in XVII century in Ukraine.
+Your goals are to find trade routes that give the most profit and get some money.
+Lots of cities give you tasks to fulfill: you have to bring them specific resources and in return get some money.
+      """,
     },
     "uk": {
       "labelTitle": "Дике Поле: Чумаки",
@@ -278,6 +285,41 @@ class ChumakiLocalizations {
       "labelRequiredToDoCityEvents": "Виконати міських завдань",
       "labelWagonContains": "Вміст ватаги",
       "labelSound": "Звук",
+      "labelHelp": "Допомога",
+      "labelHelpOverviewTitle": "Ігролад",
+      "labelHelpTextOverview1":
+          """Гра коротко 👉 купуй дешево продавай дорого. Виконуй задачі.""",
+      "labelHelpTextOverview2": """
+Гра не коротко 😎 👇
+Ви починаєте як торговець з однією ватагою. Ваша задача знайти маршрути, які дають прибуток: треба купити задешево, а продати дорожче.
+Майже кожне з міст є центром виробництва якогось ресурсу. Тут ресурс найдешевший.
+Чим далі від цього міста, тим ціна зростає. Міста дають вам різноманітні задачі, за виконання яких ви отримуєте значну винагороду
+Деякі з міст є закриті, доступ до них треба купувати окремо.""",
+      "labelHelpTextOtamans": """
+Отамани 🤠
+Ви можете винайняти отамана у ватагу. Це дає вам змогу прокачувати його. Кожен раз, коли ви щось продаєте, отаман ватаги отримує досвід.
+Після досягнення нового рівня ви зможете відкрити нову категорію товару для торгівлі цією ватагою.""",
+      "labelHelpTextTowns": """
+Міста 🏙
+Багато міст заблоковано на початку гри. Треба заплатити кошти, щоб їх відкрити для торгівлі.
+Більшість міст є центром виробництва якогось ресурсу, тому там ціна найменша. А також на ринку цих ресурсів буде значно більше, ніж в інших містах.""",
+      "labelHelpTextEvents": """
+Події 🎆
+При відвідуванні міста, може з'явитися задача. Виконавши її ви отримуєте ДУЖЕ значні кошти. А також можливість отримати ще одну задачку :)
+""",
+      "labelHelpTextWagons": """
+Ватаги 🛺
+Ви можете купити ще одну ватагу у будь-якому місті. Вона діє незалежно від інших ватаг, але кошти всі спільні.
+Ватага має обмеження по перевезенню - 100 кг.
+Кожній ватазі можна найняти отамана і окремо його прокачувати, щоб відкрити нові товари для торгівлі.""",
+      "labelHelpTextManufacturing": """
+ Виробництва 🏭
+ В містах можна будувати виробництва профільних товарів. Це дає змогу поповнювати запаси ресурсів на ринку.
+ Ресурси регенеруються кожен раз, як ватага заходить у місто.
+ Виробництво можна теж прокачати до 2-3 рівнів, тоді ще більше ресурсів буде генеруватися.""",
+      "labelHelpTextAchievements": """
+Досягнення 🦸
+В грі є більше 20 різноманітних досягнень. В грі немає війни, тому вони всі зав'язані на торгівлю або на виконання задач.""",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -380,6 +422,8 @@ class ChumakiLocalizations {
       "labelRequiredToDoCityEvents": "Выполнить городских заданий",
       "labelWagonContains": "Состав ватаги",
       "labelSound": "Звук",
+      "labelHelp": "Помощь",
+      "labelHelpOverviewTitle": "Игролад",
     },
   };
 
@@ -690,5 +734,41 @@ class ChumakiLocalizations {
 
   static String get labelSound {
     return _localizedValues[locale.languageCode]!["labelSound"]!;
+  }
+
+  static String get labelHelp {
+    return _localizedValues[locale.languageCode]!["labelHelp"]!;
+  }
+
+  static String get labelHelpOverviewTitle {
+    return _localizedValues[locale.languageCode]!["labelHelpOverviewTitle"]!;
+  }
+
+  static String get labelHelpTextOverview1 {
+    return _localizedValues[locale.languageCode]!["labelHelpTextOverview1"]!;
+  }
+
+  static String get labelHelpTextOverview2 {
+    return _localizedValues[locale.languageCode]!["labelHelpTextOverview2"]!;
+  }
+
+  static String get labelHelpTextOtamans {
+    return _localizedValues[locale.languageCode]!["labelHelpTextOtamans"]!;
+  }
+
+  static String get labelHelpTextTowns {
+    return _localizedValues[locale.languageCode]!["labelHelpTextTowns"]!;
+  }
+
+  static String get labelHelpTextAchievements {
+    return _localizedValues[locale.languageCode]!["labelHelpTextAchievements"]!;
+  }
+
+  static String get labelHelpTextWagons {
+    return _localizedValues[locale.languageCode]!["labelHelpTextWagons"]!;
+  }
+
+  static String get labelHelpTextEvents {
+    return _localizedValues[locale.languageCode]!["labelHelpTextEvents"]!;
   }
 }

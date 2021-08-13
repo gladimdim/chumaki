@@ -18,6 +18,7 @@ import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/sound/sound_manager.dart';
 import 'package:chumaki/theme.dart';
 import 'package:chumaki/utils/points.dart';
+import 'package:chumaki/views/general_help_view.dart';
 import 'package:chumaki/views/logger_view.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
@@ -344,6 +345,7 @@ class GameCanvasViewState extends State<GameCanvasView>
             ),
           ),
         if (selected == null && company != null) LoggerView(company: company),
+        if (selected == null && company != null) GeneralHelpViewButton(),
       ],
     );
   }
