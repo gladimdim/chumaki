@@ -287,46 +287,60 @@ Lots of cities give you tasks to fulfill: you have to bring them specific resour
       "labelSound": "Звук",
       "labelHelp": "Допомога",
       "labelHelpOverviewTitle": "Ігролад",
+      "labelHelpTitleOverview1": "Гра коротко 👉",
       "labelHelpTextOverview1":
-          """Гра коротко 👉 купуй дешево продавай дорого. Виконуй задачі.""",
+          """Купуй дешево. Продавай дорого. Виконуй задачі.""",
+      "labelHelpTitleOverview2": "Гра не коротко 😎 👇",
       "labelHelpTextOverview2": """
-Гра не коротко 😎 👇
 
 Ви починаєте як торговець з однією ватагою. Ваша задача знайти маршрути, які дають прибуток: треба купити задешево, а продати дорожче.
 Майже кожне з міст є центром виробництва якогось ресурсу. Тут ресурс найдешевший.
 Чим далі від цього міста, тим ціна зростає. Міста дають вам різноманітні задачі, за виконання яких ви отримуєте значну винагороду
 Деякі з міст є закриті, доступ до них треба купувати окремо.""",
+      "labelHelpTitleOtamans": "Отамани 🤠",
       "labelHelpTextOtamans": """
-Отамани 🤠
 
 Ви можете винайняти отамана у ватагу. Це дає вам змогу прокачувати його. Кожен раз, коли ви щось продаєте, отаман ватаги отримує досвід.
 Після досягнення нового рівня ви зможете відкрити нову категорію товару для торгівлі цією ватагою.""",
+      "labelHelpTitleTowns": "Міста 🏙",
       "labelHelpTextTowns": """
-Міста 🏙
 
 Багато міст заблоковано на початку гри. Треба заплатити кошти, щоб їх відкрити для торгівлі.
 Більшість міст є центром виробництва якогось ресурсу, тому там ціна найменша. А також на ринку цих ресурсів буде значно більше, ніж в інших містах.""",
+      "labelHelpTitleEvents": "Події 🎆",
       "labelHelpTextEvents": """
-Події 🎆
 
 При відвідуванні міста, може з'явитися задача. Виконавши її ви отримуєте ДУЖЕ значні кошти. А також можливість отримати ще одну задачку :)
 """,
+      "labelHelpTitleWagons": "Ватаги 🛺",
       "labelHelpTextWagons": """
-Ватаги 🛺
 
 Ви можете купити ще одну ватагу у будь-якому місті. Вона діє незалежно від інших ватаг, але кошти всі спільні.
 Ватага має обмеження по перевезенню - 100 кг.
 Кожній ватазі можна найняти отамана і окремо його прокачувати, щоб відкрити нові товари для торгівлі.""",
+      "labelHelpTitleManufacturing": "Виробництва 🏭",
       "labelHelpTextManufacturing": """
- Виробництва 🏭
  
  В містах можна будувати виробництва профільних товарів. Це дає змогу поповнювати запаси ресурсів на ринку.
  Ресурси регенеруються кожен раз, як ватага заходить у місто.
  Виробництво можна теж прокачати до 2-3 рівнів, тоді ще більше ресурсів буде генеруватися.""",
+      "labelHelpTitleAchievements": "Досягнення 🦸",
       "labelHelpTextAchievements": """
-Досягнення 🦸
 
 В грі є більше 20 різноманітних досягнень. В грі немає війни, тому вони всі зав'язані на торгівлю або на виконання задач.""",
+      "labelHelpTitleMarket": "Торгівля/Ринок 🛃",
+      "labelHelpTextMarket": """
+
+Коли ватага стає в місті, вона може торгувати на місцевому ринку.
+Для цього відкрийте меню з ватагою, перейдіть на секцію Торгівля та почніть продавати або купувати товари.
+Для того, щоб перевірити ціну на товар та маржу на них на всій мапі - відкрийте Світовий Ринок.
+""",
+      "labelHelpTitleGlobalMarket": "Світовий ринок 🗺️",
+      "labelHelpTextGlobalMarket": """
+
+Тут можна перевірити ціни на всі товари в різних місцях, а також вигоду, як отримаєте, якщо купите товар, а продасте в іншому місті.
+Але будьте уважні - можна уйти в мінус! Правило просте - центр виробництва товару має найнижчу ціну. Чим далі від центру, тим дорожчає товар.
+""",
     },
     "ru": {
       "labelTitle": "Дикое Поле: Чумаки",
@@ -755,32 +769,86 @@ Lots of cities give you tasks to fulfill: you have to bring them specific resour
     return _localizedValues[locale.languageCode]!["labelHelpTextOverview1"]!;
   }
 
+  static String get labelHelpTitleOverview1 {
+    return _localizedValues[locale.languageCode]!["labelHelpTitleOverview1"]!;
+  }
+
   static String get labelHelpTextOverview2 {
     return _localizedValues[locale.languageCode]!["labelHelpTextOverview2"]!;
+  }
+
+  static String get labelHelpTitleOverview2 {
+    return _localizedValues[locale.languageCode]!["labelHelpTitleOverview2"]!;
   }
 
   static String get labelHelpTextOtamans {
     return _localizedValues[locale.languageCode]!["labelHelpTextOtamans"]!;
   }
 
+  static String get labelHelpTitleOtamans {
+    return _localizedValues[locale.languageCode]!["labelHelpTitleOtamans"]!;
+  }
+
   static String get labelHelpTextTowns {
     return _localizedValues[locale.languageCode]!["labelHelpTextTowns"]!;
+  }
+
+  static String get labelHelpTitleTowns {
+    return _localizedValues[locale.languageCode]!["labelHelpTitleTowns"]!;
   }
 
   static String get labelHelpTextAchievements {
     return _localizedValues[locale.languageCode]!["labelHelpTextAchievements"]!;
   }
 
+  static String get labelHelpTitleAchievements {
+    return _localizedValues[locale.languageCode]![
+        "labelHelpTitleAchievements"]!;
+  }
+
   static String get labelHelpTextWagons {
     return _localizedValues[locale.languageCode]!["labelHelpTextWagons"]!;
+  }
+
+  static String get labelHelpTitleWagons {
+    return _localizedValues[locale.languageCode]!["labelHelpTitleWagons"]!;
   }
 
   static String get labelHelpTextEvents {
     return _localizedValues[locale.languageCode]!["labelHelpTextEvents"]!;
   }
 
+  static String get labelHelpTitleEvents {
+    return _localizedValues[locale.languageCode]!["labelHelpTitleEvents"]!;
+  }
+
   static String get labelHelpTextManufacturing {
     return _localizedValues[locale.languageCode]![
         "labelHelpTextManufacturing"]!;
+  }
+
+  static String get labelHelpTitleManufacturing {
+    return _localizedValues[locale.languageCode]![
+        "labelHelpTitleManufacturing"]!;
+  }
+
+  static String get labelHelpTitleMarket {
+    return _localizedValues[locale.languageCode]![
+        "labelHelpTitleMarket"]!;
+  }
+
+  static String get labelHelpTextMarket {
+    return _localizedValues[locale.languageCode]![
+        "labelHelpTextMarket"]!;
+  }
+
+  static String get labelHelpTitleGlobalMarket {
+    return _localizedValues[locale.languageCode]![
+    "labelHelpTitleGlobalMarket"]!;
+  }
+
+  static String get labelHelpTextGlobalMarket {
+    return _localizedValues[locale.languageCode]![
+    "labelHelpTextGlobalMarket"]!;
   }
 }

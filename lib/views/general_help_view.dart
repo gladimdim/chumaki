@@ -5,6 +5,7 @@ import 'package:chumaki/components/ui/3d_button.dart';
 import 'package:chumaki/components/ui/animations/animated_menu_button.dart';
 import 'package:chumaki/components/ui/bordered_container_with_side.dart';
 import 'package:chumaki/components/ui/decorated_container.dart';
+import 'package:chumaki/components/ui/game_text.dart';
 import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/theme.dart';
@@ -75,88 +76,236 @@ class GeneralHelpView extends StatelessWidget {
               ),
               DecoratedContainer2(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TitleText(ChumakiLocalizations.labelHelpOverviewTitle),
-                    ),
+
                     BorderedContainerWithSides(
-                      borderDirections: [AxisDirection.left, AxisDirection.right, AxisDirection.up],
+                      borderDirections: [
+                        AxisDirection.left,
+                        AxisDirection.right,
+                        AxisDirection.up
+                      ],
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          ChumakiLocalizations.labelHelpTextOverview1,
-                          style: Theme.of(context).textTheme.headline6,
+                        child: Column(
+                          children: [
+                            GameText(
+                              ChumakiLocalizations.labelHelpTitleOverview1,
+                              addStyle: Theme.of(context).textTheme.headline5,
+                            ),
+                            GameText(
+                              ChumakiLocalizations.labelHelpTextOverview1,
+                              addStyle: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
                         ),
                       ),
                     ),
                     BorderedContainerWithSides(
-                      borderDirections: [AxisDirection.left, AxisDirection.right, AxisDirection.up, AxisDirection.down],
+                      borderDirections: [
+                        AxisDirection.left,
+                        AxisDirection.right,
+                        AxisDirection.up,
+                        AxisDirection.down
+                      ],
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          ChumakiLocalizations.labelHelpTextOverview2,
-                          style: Theme.of(context).textTheme.headline6,
+                        child: Column(
+                          children: [
+                            GameText(
+                              ChumakiLocalizations.labelHelpTitleOverview2,
+                              addStyle: Theme.of(context).textTheme.headline5,
+                            ),
+                            HelpImage(imagePath: "map.png"),
+                            GameText(
+                              ChumakiLocalizations.labelHelpTextOverview2,
+                              addStyle: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
                         ),
                       ),
                     ),
                     BorderedContainerWithSides(
-                      borderDirections: [AxisDirection.left, AxisDirection.right, AxisDirection.down],
+                      borderDirections: [
+                        AxisDirection.left,
+                        AxisDirection.right,
+                        AxisDirection.down
+                      ],
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          ChumakiLocalizations.labelHelpTextOtamans,
-                          style: Theme.of(context).textTheme.headline6,
+                        child: Column(
+                          children: [
+                            GameText(
+                              ChumakiLocalizations.labelHelpTitleOtamans,
+                              addStyle: Theme.of(context).textTheme.headline5,
+                            ),
+                            HelpImage(imagePath: "leader.png"),
+                            GameText(
+                              ChumakiLocalizations.labelHelpTextOtamans,
+                              addStyle: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
                         ),
                       ),
                     ),
                     BorderedContainerWithSides(
-                      borderDirections: [AxisDirection.left, AxisDirection.right, AxisDirection.down],
+                      borderDirections: [
+                        AxisDirection.left,
+                        AxisDirection.right,
+                        AxisDirection.down
+                      ],
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          ChumakiLocalizations.labelHelpTextTowns,
-                          style: Theme.of(context).textTheme.headline6,
+                        child: Column(
+                          children: [
+                            GameText(
+                              ChumakiLocalizations.labelHelpTitleWagons,
+                              addStyle: Theme.of(context).textTheme.headline5,
+                            ),
+                            HelpImage(imagePath: "wagon.png"),
+                            GameText(
+                              ChumakiLocalizations.labelHelpTextWagons,
+                              addStyle: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
                         ),
                       ),
                     ),
                     BorderedContainerWithSides(
-                      borderDirections: [AxisDirection.left, AxisDirection.right, AxisDirection.down],
+                      borderDirections: [
+                        AxisDirection.left,
+                        AxisDirection.right,
+                        AxisDirection.down
+                      ],
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          ChumakiLocalizations.labelHelpTextManufacturing,
-                          style: Theme.of(context).textTheme.headline6,
+                        child: Column(
+                          children: [
+                            GameText(
+                              ChumakiLocalizations.labelHelpTitleTowns,
+                              addStyle: Theme.of(context).textTheme.headline5,
+                            ),
+                            HelpImage(imagePath: "town.png"),
+                            GameText(
+                              ChumakiLocalizations.labelHelpTextTowns,
+                              addStyle: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
                         ),
                       ),
                     ),
                     BorderedContainerWithSides(
-                      borderDirections: [AxisDirection.left, AxisDirection.right, AxisDirection.down],
+                      borderDirections: [
+                        AxisDirection.left,
+                        AxisDirection.right,
+                        AxisDirection.down
+                      ],
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          ChumakiLocalizations.labelHelpTextWagons,
-                          style: Theme.of(context).textTheme.headline6,
+                        child: Column(
+                          children: [
+                            GameText(
+                              ChumakiLocalizations.labelHelpTitleManufacturing,
+                              addStyle: Theme.of(context).textTheme.headline5,
+                            ),
+                            HelpImage(imagePath: "manufacturing.png"),
+                            GameText(
+                              ChumakiLocalizations.labelHelpTextManufacturing,
+                              addStyle: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
                         ),
                       ),
                     ),
                     BorderedContainerWithSides(
-                      borderDirections: [AxisDirection.left, AxisDirection.right, AxisDirection.down],
+                      borderDirections: [
+                        AxisDirection.left,
+                        AxisDirection.right,
+                        AxisDirection.down
+                      ],
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          ChumakiLocalizations.labelHelpTextAchievements,
-                          style: Theme.of(context).textTheme.headline6,
+                        child: Column(
+                          children: [
+                            GameText(
+                              ChumakiLocalizations.labelHelpTitleMarket,
+                              addStyle: Theme.of(context).textTheme.headline5,
+                            ),
+                            HelpImage(imagePath: "market.png"),
+                            Text(
+                              ChumakiLocalizations.labelHelpTextMarket,
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
                         ),
                       ),
                     ),
                     BorderedContainerWithSides(
-                      borderDirections: [AxisDirection.left, AxisDirection.right, AxisDirection.down],
+                      borderDirections: [
+                        AxisDirection.left,
+                        AxisDirection.right,
+                        AxisDirection.down
+                      ],
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          ChumakiLocalizations.labelHelpTextEvents,
-                          style: Theme.of(context).textTheme.headline6,
+                        child: Column(
+                          children: [
+                            GameText(
+                              ChumakiLocalizations.labelHelpTitleGlobalMarket,
+                              addStyle: Theme.of(context).textTheme.headline5,
+                            ),
+                            HelpImage(imagePath: "global_market.png"),
+                            Text(
+                              ChumakiLocalizations.labelHelpTextGlobalMarket,
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    BorderedContainerWithSides(
+                      borderDirections: [
+                        AxisDirection.left,
+                        AxisDirection.right,
+                        AxisDirection.down
+                      ],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            GameText(
+                              ChumakiLocalizations.labelHelpTitleAchievements,
+                              addStyle: Theme.of(context).textTheme.headline5,
+                            ),
+                            HelpImage(imagePath: "achievements.png"),
+                            Text(
+                              ChumakiLocalizations.labelHelpTextAchievements,
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    BorderedContainerWithSides(
+                      borderDirections: [
+                        AxisDirection.left,
+                        AxisDirection.right,
+                        AxisDirection.down
+                      ],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            GameText(
+                              ChumakiLocalizations.labelHelpTitleEvents,
+                              addStyle: Theme.of(context).textTheme.headline5,
+                            ),
+                            HelpImage(imagePath: "event.png"),
+                            Text(
+                              ChumakiLocalizations.labelHelpTextEvents,
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -168,5 +317,27 @@ class GeneralHelpView extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class HelpImage extends StatelessWidget {
+  final String imagePath;
+
+  const HelpImage({Key? key, required this.imagePath}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(
+      imageToLocalizedImage(imagePath),
+      width: 350,
+    );
+  }
+
+  String imageToLocalizedImage(String image) {
+    var lang = ChumakiLocalizations.locale.languageCode;
+    if (lang == "ru") {
+      lang = "uk";
+    }
+    return "images/help/$lang/$imagePath";
   }
 }

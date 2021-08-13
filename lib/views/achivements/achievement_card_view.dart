@@ -49,7 +49,7 @@ class AchievementCardView extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
-                          child: ResizedImage(
+                          child: Image.asset(
                             achievement.iconPath,
                             width: 128,
                           ),
