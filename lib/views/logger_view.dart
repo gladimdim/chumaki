@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:chumaki/components/ui/3d_button.dart';
+import 'package:chumaki/components/ui/animations/animated_menu_button.dart';
 import 'package:chumaki/components/ui/bouncing_widget.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/components/ui/resized_image.dart';
@@ -24,50 +27,42 @@ class _LoggerViewState extends State<LoggerView> {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    return AnimatedPositioned(
-      top: 5,
-      left: opened ? 0 : null,
-      right: opened ? null : 15,
-      duration: Duration(milliseconds: 150),
-      child: AnimatedSize(
-        duration: Duration(milliseconds: 150),
-        child: SizedBox(
-          width: opened ? MediaQuery.of(context).size.width : MENU_ITEM_WIDTH,
-          height: opened ? MediaQuery.of(context).size.height : MENU_ITEM_WIDTH,
-          child: opened
-              ? LoggerStatsView(
-                  logger: widget.company.logger,
-                  onClose: _toggleOpen,
-                )
-              : Stack(
-                  children: [
-                    DDDButton(
-                      color: mediumGrey,
-                      shadowColor: themeData.backgroundColor,
-                      onPressed: _toggleOpen,
-                      child: ResizedImage(
-                        "images/ui/glory.png",
-                        width: 44,
+    return AnimatedMenuButton(
+      opened: opened,
+      button: Stack(
+
+        children: [
+          DDDButton(
+            color: mediumGrey,
+            shadowColor: themeData.backgroundColor,
+            onPressed: _toggleOpen,
+            child: ResizedImage(
+              "images/ui/glory.png",
+              width: 44,
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: StreamBuilder<LOGGER_EVENTS>(
+                stream: widget.company.logger.changes,
+                builder: (context, snapshot) {
+                  return BouncingWidget(
+                      child: OutlinedText(
+                        widget.company.logger.unreadCount.toString(),
+                        style: gameTextStyle,
                       ),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: StreamBuilder<LOGGER_EVENTS>(
-                          stream: widget.company.logger.changes,
-                          builder: (context, snapshot) {
-                            return BouncingWidget(
-                                child: OutlinedText(
-                                  widget.company.logger.unreadCount.toString(),
-                                  style: gameTextStyle,
-                                ),
-                                value: widget.company.logger.unreadCount
-                                    .toString());
-                          }),
-                    ),
-                  ],
-                ),
-        ),
+                      value: widget.company.logger.unreadCount.toString());
+                }),
+          ),
+        ],
       ),
+      content: LoggerStatsView(
+        logger: widget.company.logger,
+        onClose: _toggleOpen,
+      ),
+      expandAnimation: Duration(milliseconds: 150),
+      closedPosition: Point(MediaQuery.of(context).size.width - MENU_ITEM_WIDTH - 15, 5),
+      openedPosition: Point(0, 5),
     );
   }
 

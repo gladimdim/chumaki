@@ -116,3 +116,6 @@ flutter:
     - assets/sounds/
     # OTHER
     - images/other/
+    # HELP
+    - images/help/uk/
+    - images/help/en/
