@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/3d_button.dart';
 import 'package:chumaki/components/ui/animations/animated_menu_button.dart';
+import 'package:chumaki/components/ui/bordered_container_with_side.dart';
 import 'package:chumaki/components/ui/decorated_container.dart';
 import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
@@ -75,54 +76,88 @@ class GeneralHelpView extends StatelessWidget {
               DecoratedContainer2(
                 child: Column(
                   children: [
-                    TitleText(ChumakiLocalizations.labelHelpOverviewTitle),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        ChumakiLocalizations.labelHelpTextOverview1,
-                        style: Theme.of(context).textTheme.headline6,
+                      child: TitleText(ChumakiLocalizations.labelHelpOverviewTitle),
+                    ),
+                    BorderedContainerWithSides(
+                      borderDirections: [AxisDirection.left, AxisDirection.right, AxisDirection.up],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          ChumakiLocalizations.labelHelpTextOverview1,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        ChumakiLocalizations.labelHelpTextOverview2,
-                        style: Theme.of(context).textTheme.headline6,
+                    BorderedContainerWithSides(
+                      borderDirections: [AxisDirection.left, AxisDirection.right, AxisDirection.up, AxisDirection.down],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          ChumakiLocalizations.labelHelpTextOverview2,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        ChumakiLocalizations.labelHelpTextOtamans,
-                        style: Theme.of(context).textTheme.headline6,
+                    BorderedContainerWithSides(
+                      borderDirections: [AxisDirection.left, AxisDirection.right, AxisDirection.down],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          ChumakiLocalizations.labelHelpTextOtamans,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        ChumakiLocalizations.labelHelpTextTowns,
-                        style: Theme.of(context).textTheme.headline6,
+                    BorderedContainerWithSides(
+                      borderDirections: [AxisDirection.left, AxisDirection.right, AxisDirection.down],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          ChumakiLocalizations.labelHelpTextTowns,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        ChumakiLocalizations.labelHelpTextWagons,
-                        style: Theme.of(context).textTheme.headline6,
+                    BorderedContainerWithSides(
+                      borderDirections: [AxisDirection.left, AxisDirection.right, AxisDirection.down],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          ChumakiLocalizations.labelHelpTextManufacturing,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        ChumakiLocalizations.labelHelpTextAchievements,
-                        style: Theme.of(context).textTheme.headline6,
+                    BorderedContainerWithSides(
+                      borderDirections: [AxisDirection.left, AxisDirection.right, AxisDirection.down],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          ChumakiLocalizations.labelHelpTextWagons,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        ChumakiLocalizations.labelHelpTextEvents,
-                        style: Theme.of(context).textTheme.headline6,
+                    BorderedContainerWithSides(
+                      borderDirections: [AxisDirection.left, AxisDirection.right, AxisDirection.down],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          ChumakiLocalizations.labelHelpTextAchievements,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                      ),
+                    ),
+                    BorderedContainerWithSides(
+                      borderDirections: [AxisDirection.left, AxisDirection.right, AxisDirection.down],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          ChumakiLocalizations.labelHelpTextEvents,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
                       ),
                     ),
                   ],
