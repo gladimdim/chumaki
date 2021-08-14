@@ -15,8 +15,8 @@ class Leader {
 
   int get level => experience ~/ levelDelta;
   double experience;
-  final double levelDelta = 1000;
-  static final levelUpBasePrice = 1000;
+  final double levelDelta = 500;
+  static final levelUpBasePrice = 750;
   late String imagePath;
   final BehaviorSubject<LEADER_CHANGES> _innerChanges =
       BehaviorSubject<LEADER_CHANGES>();
