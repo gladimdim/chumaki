@@ -61,7 +61,7 @@ class _LoggerViewState extends State<LoggerView> {
         onClose: _toggleOpen,
       ),
       expandAnimation: Duration(milliseconds: 150),
-      closedPosition: Point(MediaQuery.of(context).size.width - MENU_ITEM_WIDTH - 15, 5),
+      closedPosition: Point(MediaQuery.of(context).size.width - MENU_ITEM_WIDTH * 2 - 15, 5),
       openedPosition: Point(0, 5),
     );
   }

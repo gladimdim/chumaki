@@ -1,4 +1,6 @@
 import 'package:chumaki/components/manufacturing/manufacturing_view.dart';
+import 'package:chumaki/components/ui/inline_help.dart';
+import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/manufacturings/manufacturing.dart';
@@ -7,6 +9,7 @@ import 'package:flutter/material.dart';
 
 class CityManufacturingView extends StatelessWidget {
   final City city;
+
   const CityManufacturingView({Key? key, required this.city}) : super(key: key);
 
   @override
@@ -30,7 +33,12 @@ class CityManufacturingView extends StatelessWidget {
                     ),
                   ),
                 )
-                .toList(),
+                .toList()
+              ..add(Padding(
+                padding: const EdgeInsets.all(8.0),
+                child:
+                    InlineHelp(ChumakiLocalizations.labelHelpTextManufacturing),
+              )),
           );
         });
   }

@@ -5,6 +5,7 @@ import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/components/ui/action_text.dart';
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';
+import 'package:chumaki/components/ui/inline_help.dart';
 import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/components/wagons/wagons_global_price_list.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
@@ -198,6 +199,10 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
                 }).toList(),
               ],
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InlineHelp(ChumakiLocalizations.labelHelpTextGlobalMarket),
           ),
         ],
       ),
