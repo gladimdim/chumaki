@@ -395,7 +395,7 @@ class Company {
 
   void donateResource(Resource res,
       {required Wagon fromWagon, required City toCity}) {
-    if (fromWagon.stock.removeResource(res)) {
+    if (fromWagon.sellResource(res)) {
       toCity.activeEvent!.decreaseResource(res);
     }
   }
