@@ -69,7 +69,7 @@ class Kyiv extends City {
             Wax(1000),
             Wood(1000),
             Horse(200),
-            Bread(20000),
+            Bread(2000),
             Stone(300),
             Firearm(700),
             Powder(1000),

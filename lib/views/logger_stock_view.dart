@@ -24,30 +24,33 @@ class LoggerStockView extends StatelessWidget {
               return Expanded(
                 flex: 1,
                 child: Padding(
-                  padding: const EdgeInsets.all(4.0),
+                  padding: const EdgeInsets.all(1.0),
                   child: DecoratedContainer1(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Wrap(
-                          alignment: WrapAlignment.center,
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: [
-                            ResourceImageView(
-                              resource,
-                              size: 32,
-                            ),
-                            Text(
-                                ChumakiLocalizations.getForKey(
-                                    resource.fullLocalizedKey),
-                                style: Theme.of(context).textTheme.headline6),
-                          ],
-                        ),
-                        OutlinedText(
-                          resource.amount.toString(),
-                          size: 18,
-                        ),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Wrap(
+                            alignment: WrapAlignment.center,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: [
+                              ResourceImageView(
+                                resource,
+                                size: 32,
+                              ),
+                              Text(
+                                  ChumakiLocalizations.getForKey(
+                                      resource.fullLocalizedKey),
+                                  style: Theme.of(context).textTheme.headline6),
+                            ],
+                          ),
+                          OutlinedText(
+                            resource.amount.toString(),
+                            size: 12,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
