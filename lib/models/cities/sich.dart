@@ -4,9 +4,11 @@ import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/ochakiv.dart';
 import 'package:chumaki/models/events/event.dart';
+import 'package:chumaki/models/leaders/leaders.dart';
 import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagons/wagon.dart';
+import 'package:chumaki/extensions/list.dart';
 
 class Sich extends City {
   Sich()
@@ -67,10 +69,13 @@ class Sich extends City {
           ),
           wagons: [
             Wagon(
+              leader: Leader.allLeaders().takeRandom(),
               stock: Stock(
                 [
-                  Grains(50),
+                  Grains(20),
                   Fish(50),
+                  Bread(80),
+                  Wood(50),
                 ],
               ),
             ),

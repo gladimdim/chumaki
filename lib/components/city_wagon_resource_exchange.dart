@@ -41,8 +41,8 @@ class CityWagonResourceExchange extends StatelessWidget {
       children: [
         getTradeUnit(
           company: company,
-          pricePerUnit: isBuyMode() ? buyPricePerUnit : sellPricePerUnit,
-          price: isBuyMode() ? buyPricePerUnit : sellPricePerUnit,
+          pricePerUnit: isBuyMode() ?  sellPricePerUnit : buyPricePerUnit,
+          price: isBuyMode() ? sellPricePerUnit : buyPricePerUnit,
           tradeResource: isBuyMode() ? cityRes : wagonRes,
           actionText: isBuyMode()
               ? ChumakiLocalizations.labelBuy
