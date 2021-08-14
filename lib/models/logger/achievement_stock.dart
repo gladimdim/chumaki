@@ -77,8 +77,8 @@ class AchievementStock extends AchievementBase {
       AchievementStock(
         localizedKey: "achievements.fishSeller",
         iconPath: "images/events/vesterfeld/cossack_and_bum.png",
-        soldResource: Fish(5),
-        boughtResource: Fish(15),
+        soldResource: Fish(50),
+        boughtResource: Fish(150),
       ),
       AchievementStock(
         localizedKey: "achievements.gunBaron",
@@ -88,19 +88,19 @@ class AchievementStock extends AchievementBase {
       AchievementStock(
         localizedKey: "achievements.tobaccoLover",
         iconPath: "images/events/vesterfeld/ruins_2.png",
-        soldResource: Tobacco(500),
-        boughtResource: Tobacco(800),
+        soldResource: Tobacco(200),
+        boughtResource: Tobacco(400),
       ),
       AchievementStock(
         localizedKey: "achievements.warPowder",
         iconPath: "images/events/vesterfeld/wagon_camp.png",
-        soldResource: Tobacco(1500),
-        boughtResource: Tobacco(1000),
+        soldResource: Powder(300),
+        boughtResource: Powder(500),
       ),
       AchievementStock(
         localizedKey: "achievements.silkSeller",
         iconPath: "images/events/vesterfeld/elite_cossacks.png",
-        soldResource: Silk(2200),
+        soldResource: Silk(1200),
         boughtResource: Silk(800),
       ),
       AchievementStock(
