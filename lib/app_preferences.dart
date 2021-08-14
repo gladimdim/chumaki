@@ -14,7 +14,7 @@ class AppPreferences {
   static final AppPreferences instance = AppPreferences._internal();
   SharedPreferences? _preferences;
   String _languageCode = 'languageCode';
-  String _gameSaveKey = 'gameSaveKey';
+  String _gameSaveKey = 'gameSaveKey1';
   String _isSoundEnabled = "isSoundEnabled";
 
   final BehaviorSubject<APP_PREFERENCES_EVENTS> _innerChanges =

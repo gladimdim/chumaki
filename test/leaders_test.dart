@@ -39,18 +39,18 @@ void main() {
 
     test("Can add experience", () {
       final leader = Leader("test",
-          experience: 950,
+          experience: 450,
           affects: Set.from([
             PerkUnit(
                 affectsResourceCategory: RESOURCE_CATEGORY.MILITARY,)
           ]));
       leader.addExperience(51);
       expect(leader.level, equals(1), reason: "Level is now 1");
-      leader.addExperience(1000);
+      leader.addExperience(500);
       expect(leader.level, equals(2), reason: "Level is now 2");
-      leader.addExperience(1000);
+      leader.addExperience(500);
       expect(leader.level, equals(3), reason: "Level is now 3");
-      leader.addExperience(1000);
+      leader.addExperience(500);
       expect(leader.level, equals(3), reason: "Level is still 3 (max)");
     });
   });
@@ -65,7 +65,7 @@ void main() {
                 affectsResourceCategory: RESOURCE_CATEGORY.LUXURY,)
           ],
         ),
-        experience: 2300);
+        experience: 1002);
     final newLeader = Leader.fromJson(leader.toJson());
     test("Can convert to and back from json", () {
       expect(newLeader.localizedNameKey, equals("test"),

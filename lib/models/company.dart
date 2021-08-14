@@ -272,6 +272,7 @@ class Company {
 
   Map<String, dynamic> toJson() {
     return {
+      "timestamp": DateTime.now().toString(),
       "logger": logger.toJson(),
       "money": _money,
       "allCities": allCities.map((city) => city.toJson()).toList(),

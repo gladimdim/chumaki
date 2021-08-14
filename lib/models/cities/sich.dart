@@ -18,16 +18,16 @@ class Sich extends City {
           unlocked: true,
           unlocksCities: [Ochakiv()],
           manufacturings: [PowderCellar(), River()],
+          activeEvent: Event(
+            localizedKey: 'events.giveFood',
+            iconPath: 'images/resources/bread/bread_1.png',
+            requirements: [
+              Grains(50),
+            ],
+            payment: Money(200),
+            artPath: "images/events/vesterfeld/cossack_and_bum.png",
+          ),
           availableEvents: [
-            Event(
-              localizedKey: 'events.giveFood',
-              iconPath: 'images/resources/bread/bread_1.png',
-              requirements: [
-                Grains(5),
-              ],
-              payment: Money(200),
-              artPath: "images/events/vesterfeld/cossack_and_bum.png",
-            ),
             Event(
               localizedKey: 'events.giveFood',
               iconPath: 'images/resources/bread/bread_1.png',
