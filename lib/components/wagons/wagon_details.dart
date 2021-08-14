@@ -6,6 +6,7 @@ import 'package:chumaki/components/ui/bordered_top.dart';
 import 'package:chumaki/components/leader/leader_view.dart';
 import 'package:chumaki/components/ui/expandable_panel.dart';
 import 'package:chumaki/components/ui/game_text.dart';
+import 'package:chumaki/components/ui/inline_help.dart';
 import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/components/wagons/wagon_dispatcher.dart';
 import 'package:chumaki/components/wagons/wagon_resource_exchanger.dart';
@@ -86,6 +87,11 @@ class WagonDetails extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: WagonDispatcher(wagon: wagon, city: city),
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InlineHelp(
+                "${ChumakiLocalizations.labelHelpTextWagons}\n ${ChumakiLocalizations.labelHelpTextMarket}"),
           ),
         ],
       ),

@@ -40,8 +40,8 @@ class _GeneralHelpViewButtonState extends State<GeneralHelpViewButton> {
         onClose: _toggleOpen,
       ),
       expandAnimation: Duration(milliseconds: 150),
-      closedPosition: Point(
-          MediaQuery.of(context).size.width - MENU_ITEM_WIDTH - 15, 5),
+      closedPosition:
+          Point(MediaQuery.of(context).size.width - MENU_ITEM_WIDTH - 15, 5),
       openedPosition: Point(0, 5),
     );
   }
@@ -78,7 +78,6 @@ class GeneralHelpView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-
                     BorderedContainerWithSides(
                       borderDirections: [
                         AxisDirection.left,

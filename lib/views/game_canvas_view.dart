@@ -462,6 +462,10 @@ class GameCanvasViewState extends State<GameCanvasView>
     });
   }
 
+  void showHelp() {
+
+  }
+
   @override
   void dispose() {
     _animationController.dispose();
