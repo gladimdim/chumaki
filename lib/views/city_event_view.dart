@@ -78,7 +78,7 @@ class _CityEventViewState extends State<CityEventView> {
                                   try {
                                     wagon = widget.city.wagons.firstWhere(
                                       (wagon) => wagon.stock
-                                          .hasEnough(req.cloneWithAmount(1)),
+                                          .hasResource(req.cloneWithAmount(1)),
                                     );
                                   } catch (e) {
                                     print(
@@ -129,8 +129,11 @@ class _CityEventViewState extends State<CityEventView> {
   }
 
   void _onDonate(Company company, Resource res, Wagon wagon) {
+    var reqAmount = res.amount;
+    var stockAmount = wagon.stock.resourceInStock(res)!.amount;
+    var amount = reqAmount < stockAmount ? reqAmount : stockAmount;
     setState(() {
-      company.donateResource(res.cloneWithAmount(1),
+      company.donateResource(res.cloneWithAmount(amount),
           fromWagon: wagon, toCity: widget.city);
     });
   }

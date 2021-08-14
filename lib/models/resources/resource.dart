@@ -166,7 +166,7 @@ class Cannon extends Resource {
   Cannon(int amount)
       : super("cannon", amount,
             type: RESOURCES.CANNON,
-            weightPerPoint: 4,
+            weightPerPoint: 15,
             color: Colors.grey,
             category: RESOURCE_CATEGORY.MILITARY);
 }
@@ -265,7 +265,7 @@ class Silk extends Resource {
   Silk(int amount)
       : super("silk", amount,
             type: RESOURCES.SILK,
-            weightPerPoint: 0.4,
+            weightPerPoint: 1,
             color: Colors.yellow,
             category: RESOURCE_CATEGORY.LUXURY);
 }
