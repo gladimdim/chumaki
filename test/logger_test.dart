@@ -100,7 +100,7 @@ void main() {
         final company = Company();
         logger.attachToCompany(company);
         final sich = company.refToCityByName(Sich());
-        final event = sich.availableEvents.first;
+        final event = sich.activeEvent!;
         event.decreaseResource(Grains(100));
         company.finishEvent(event, inCity: Sich());
         async.elapse(Duration(milliseconds: 100));
