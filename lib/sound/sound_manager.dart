@@ -3,9 +3,6 @@ import 'dart:async';
 import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/logger/logger.dart';
-import 'package:flutter/foundation.dart';
-import 'dart:io';
-
 import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
 
@@ -34,6 +31,7 @@ class SoundManager {
 
 // contains ids of loaded sounds
   Map<String, int> sounds = {};
+
   SoundManager._internal() {}
 
   Future initSounds() async {
@@ -89,14 +87,8 @@ class SoundManager {
     queueSound(uiActionMapping[name]);
   }
 
-  bool isSoundSupport() {
-    return Platform.isMacOS || Platform.isIOS || Platform.isAndroid || kIsWeb;
-  }
-
   void queueSound(String? track) async {
-    if (track == null ||
-        !AppPreferences.instance.getIsSoundEnabled() ||
-        !isSoundSupport()) {
+    if (track == null || !AppPreferences.instance.getIsSoundEnabled()) {
       return;
     }
 

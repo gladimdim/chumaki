@@ -386,7 +386,7 @@ class GameCanvasViewState extends State<GameCanvasView>
   Point<double> getShiftedSelectedCity() {
     var point = selected!.point;
     var x = min<double>(point.x, CANVAS_WIDTH - CITY_DETAILS_VIEW_WIDTH);
-    var y = min<double>(point.y, CANVAS_HEIGHT - CITY_DETAILS_VIEW_WIDTH * 2);
+    var y = min<double>(point.y, CANVAS_HEIGHT - CITY_DETAILS_VIEW_WIDTH * 1.7);
     return Point<double>(x, y);
   }
 
