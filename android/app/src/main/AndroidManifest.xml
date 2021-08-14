@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gladimdim.chumaki">
    <application
-        android:label="chumaki"
+        android:label="Chumaki"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
