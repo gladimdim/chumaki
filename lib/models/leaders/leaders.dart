@@ -101,11 +101,12 @@ class Leader {
   static List<Leader> allLeaders() {
     List keyNames =
         LeadersLocalizations().localizedMap["en"]!.keys.take(11).toList();
-    List<Leader> leaders = List.empty(growable: true);
+    List<Leader> leaders = List.empty(growable: true,);
     for (var i = 0; i < 11; i++) {
       leaders.add(Leader(
         "leaders.${keyNames[i]}",
         imagePath: imagePathForId(i),
+        experience: 1200,
       ));
     }
     return leaders;

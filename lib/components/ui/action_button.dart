@@ -5,13 +5,16 @@ import 'package:flutter/material.dart';
 
 class ActionButton extends StatefulWidget {
   final VoidCallback? onPress;
+  final VoidCallback? onDoublePress;
   final Widget image;
   final Widget subTitle;
   final Widget action;
   final Duration tickPeriod;
   final int speedUpAfter;
+
   const ActionButton(
       {this.onPress,
+      this.onDoublePress,
       required this.image,
       required this.subTitle,
       this.speedUpAfter = 5,
@@ -26,11 +29,13 @@ class _ActionButtonState extends State<ActionButton> {
   Timer? _timer;
   int _execCount = 0;
   bool _wasSpeedup = false;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPressStart: onLongPressStart,
       onLongPressEnd: onLongPressEnd,
+      onDoubleTap: widget.onDoublePress,
       child: BorderedAll(
         child: TextButton(
           onPressed: widget.onPress,
