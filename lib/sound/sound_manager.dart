@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:chumaki/app_preferences.dart';
+import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/logger/logger.dart';
 import 'package:flutter/services.dart';
@@ -22,10 +23,12 @@ class SoundManager {
     "openLocalMarket": "assets/sounds/local_market.mp3",
     "openGlobalMarket": "assets/sounds/global_market.mp3",
     "leaderLevelUp": "assets/sounds/fanfare.mp3",
+    "buildingBuilt": "assets/sounds/building_upgrade.mp3",
   };
 
   StreamSubscription? _sub;
   StreamSubscription? _loggerSub;
+  List<StreamSubscription> _citiesSubs = [];
 
   static final SoundManager instance = SoundManager._internal();
 
@@ -76,11 +79,22 @@ class SoundManager {
         .listen((event) {
       playLeaderLevelUp();
     });
+
+    company.allCities.forEach((city) {
+      final sub = city.changes
+          .where((event) =>
+              [CITY_EVENTS.MFG_BUILT, CITY_EVENTS.MFG_UPGRADED].contains(event))
+          .listen((event) {
+            playBuildingBuilt();
+      });
+      _citiesSubs.add(sub);
+    });
   }
 
   detachFromCompany() {
     _sub?.cancel();
     _loggerSub?.cancel();
+    _citiesSubs.forEach((element) => element.cancel());
   }
 
   playUISound(String name) async {
@@ -110,5 +124,9 @@ class SoundManager {
 
   void playLeaderLevelUp() {
     playUISound("leaderLevelUp");
+  }
+
+  void playBuildingBuilt() {
+    playUISound("buildingBuilt");
   }
 }

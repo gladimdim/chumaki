@@ -106,7 +106,6 @@ class Leader {
       leaders.add(Leader(
         "leaders.${keyNames[i]}",
         imagePath: imagePathForId(i),
-        experience: 1200,
       ));
     }
     return leaders;
