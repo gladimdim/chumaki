@@ -3,6 +3,7 @@ import 'package:chumaki/i18n/achievements_localizations.dart';
 import 'package:chumaki/i18n/event_localizations.dart';
 import 'package:chumaki/i18n/leaders_localizations.dart';
 import 'package:chumaki/i18n/manufacturing_localizations.dart';
+import 'package:chumaki/i18n/notification_localizations.dart';
 import 'package:chumaki/i18n/resource_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +48,8 @@ class ChumakiLocalizations {
   static ResourceLocalizations resourceLocalizations = ResourceLocalizations();
   static LeadersLocalizations leadersLocalizations = LeadersLocalizations();
   static EventLocalizations eventLocalizations = EventLocalizations();
-  static ManufacturingLocalizations manufacutringLocalizations =
+  static NotificationLocalizations notificationLocalizations = NotificationLocalizations();
+  static ManufacturingLocalizations manufacturingLocalizations =
       ManufacturingLocalizations();
   static AchievementsLocalizations achievementsLocalizations =
       AchievementsLocalizations();
@@ -64,9 +66,11 @@ class ChumakiLocalizations {
         case "events":
           return eventLocalizations[split[1]];
         case "manufacturings":
-          return manufacutringLocalizations[split[1]];
+          return manufacturingLocalizations[split[1]];
         case "achievements":
           return achievementsLocalizations[split[1]];
+        case "notifications":
+          return notificationLocalizations[split[1]];
         default:
           return key;
       }
