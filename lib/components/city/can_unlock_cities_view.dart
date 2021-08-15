@@ -24,7 +24,7 @@ class CanUnlockCitiesView extends StatelessWidget {
         .where((unlockCity) => !unlockCity.isUnlocked());
     return StreamBuilder(
       stream: company.changes,
-      builder: (context, snapshot) => Column(
+      builder: (context, _) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           BorderedBottom(
@@ -51,9 +51,9 @@ class CanUnlockCitiesView extends StatelessWidget {
                             action: ActionText(ChumakiLocalizations.labelBuy),
                             subTitle: StreamBuilder(
                                 stream: company.changes.where((event) =>
-                                    event == COMPANY_EVENTS.MONEY_REMOVED ||
-                                    event == COMPANY_EVENTS.MONEY_ADDED),
-                                builder: (context, snapshot) => MoneyUnitView(
+                                    event.item1 == COMPANY_EVENTS.MONEY_REMOVED ||
+                                    event.item1 == COMPANY_EVENTS.MONEY_ADDED),
+                                builder: (context, _) => MoneyUnitView(
                                     unlockCity.unlockPriceMoney,
                                     isEnough: company.hasEnoughMoney(
                                         unlockCity.unlockPriceMoney))),

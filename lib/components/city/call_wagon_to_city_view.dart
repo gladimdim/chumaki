@@ -25,9 +25,9 @@ class CallWagonToCityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<COMPANY_EVENTS>(stream: company.changes.where((event) {
-      return event == COMPANY_EVENTS.TASK_ENDED ||
-          event == COMPANY_EVENTS.TASK_STARTED;
+    return StreamBuilder<CompanyEvent>(stream: company.changes.where((event) {
+      return event.item1 == COMPANY_EVENTS.TASK_ENDED ||
+          event.item1 == COMPANY_EVENTS.TASK_STARTED;
     }), builder: (context, snapshot) {
       return Column(
         children: allOtherWagons()

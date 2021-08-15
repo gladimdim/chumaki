@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:chumaki/components/ui/game_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
+import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/views/game_canvas_view.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +19,13 @@ class NotificationBox extends StatefulWidget {
 class _NotificationBoxState extends State<NotificationBox> {
   StreamSubscription? _sub;
   Timer? _timer;
-  COMPANY_EVENTS? _event;
+  CompanyEvent? _event;
 
   @override
   void initState() {
     super.initState();
     _sub = widget.company.changes
-        .where((event) => event == COMPANY_EVENTS.TASK_ENDED)
+        .where((event) => event.item1 == COMPANY_EVENTS.TASK_ENDED)
         .listen((event) {
       _timer?.cancel();
       setShow(event);
@@ -34,7 +35,7 @@ class _NotificationBoxState extends State<NotificationBox> {
     });
   }
 
-  void setShow(COMPANY_EVENTS? event) {
+  void setShow(CompanyEvent? event) {
     setState(() {
       _event = event;
     });
@@ -62,10 +63,11 @@ class _NotificationBoxState extends State<NotificationBox> {
     );
   }
 
-  String eventToText(COMPANY_EVENTS event) {
-    switch (event) {
+  String eventToText(CompanyEvent event) {
+    switch (event.item1) {
       case COMPANY_EVENTS.TASK_ENDED:
-        return ChumakiLocalizations.getForKey("notifications.taskEnded");
+        final city = event.item2 as City;
+        return "${ChumakiLocalizations.getForKey(city.localizedKeyName)} ${ChumakiLocalizations.getForKey("notifications.taskEnded")}";
       default:
         return "";
     }

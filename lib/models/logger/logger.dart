@@ -73,14 +73,14 @@ class Logger {
 
   void attachToCompany(Company company) {
     company.changes
-        .where((event) => event == COMPANY_EVENTS.WAGON_BOUGHT)
+        .where((event) => event.item1 == COMPANY_EVENTS.WAGON_BOUGHT)
         .listen((_) => wagonListener());
 
     company.changes
-        .where((event) => event == COMPANY_EVENTS.LEADER_HIRED)
-        .listen((_) => {leaderListener()});
+        .where((event) => event.item1 == COMPANY_EVENTS.LEADER_HIRED)
+        .listen((_) => leaderListener());
     
-    company.changes.where((event) => event == COMPANY_EVENTS.CITY_EVENT_DONE)
+    company.changes.where((event) => event.item1 == COMPANY_EVENTS.CITY_EVENT_DONE)
     .listen((_) => cityEventListener());
 
     company.allCities.forEach((city) {

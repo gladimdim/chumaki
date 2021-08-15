@@ -69,9 +69,9 @@ class SoundManager {
 
   attachToCompany(Company company) {
     _sub = company.changes
-        .where((event) => companyActionMapping[event] != null)
+        .where((event) => companyActionMapping[event.item1] != null)
         .listen((event) {
-      playCompanySound(event);
+      playCompanySound(event.item1);
     });
 
     _loggerSub = company.logger.changes

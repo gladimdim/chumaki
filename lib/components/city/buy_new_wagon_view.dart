@@ -28,8 +28,8 @@ class _BuyNewWagonViewState extends State<BuyNewWagonView> {
     final company = InheritedCompany.of(context).company;
     return StreamBuilder(
       stream: company.changes.where((event) =>
-          event == COMPANY_EVENTS.MONEY_REMOVED ||
-          event == COMPANY_EVENTS.MONEY_ADDED),
+          event.item1 == COMPANY_EVENTS.MONEY_REMOVED ||
+          event.item1 == COMPANY_EVENTS.MONEY_ADDED),
       builder: (context, snapshot) => ActionButton(
         onPress: company.hasEnoughMoney(wagonPrice)
             ? () {

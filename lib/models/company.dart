@@ -45,9 +45,11 @@ import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:chumaki/models/wagons/active_wagon.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:chumaki/models/resources/resource.dart';
+import 'package:tuple/tuple.dart';
 
 import 'leaders/leaders.dart';
 
+typedef CompanyEvent = Tuple2<COMPANY_EVENTS, dynamic>;
 enum COMPANY_EVENTS {
   TASK_STARTED,
   TASK_ENDED,
@@ -115,7 +117,7 @@ class Company {
     _money = money ?? 3000;
     changes = _innerChanges.stream;
     changes.listen((event) {
-      switch (event) {
+      switch (event.item1) {
         case COMPANY_EVENTS.TASK_STARTED:
         case COMPANY_EVENTS.TASK_ENDED:
         case COMPANY_EVENTS.CITY_UNLOCKED:
@@ -141,19 +143,19 @@ class Company {
     // }
   }
 
-  final BehaviorSubject<COMPANY_EVENTS> _innerChanges = BehaviorSubject();
-  late ValueStream<COMPANY_EVENTS> changes;
+  final BehaviorSubject<CompanyEvent> _innerChanges = BehaviorSubject();
+  late ValueStream<CompanyEvent> changes;
   List<ActiveWagon> _activeFullRoutes = [];
 
   addMoney(double value) {
     _money += value;
-    _innerChanges.add(COMPANY_EVENTS.MONEY_ADDED);
+    _innerChanges.add(CompanyEvent(COMPANY_EVENTS.MONEY_ADDED, value));
   }
 
   bool removeMoney(double value) {
     if (value <= _money) {
       _money -= value;
-      _innerChanges.add(COMPANY_EVENTS.MONEY_REMOVED);
+      _innerChanges.add(CompanyEvent(COMPANY_EVENTS.MONEY_REMOVED, value));
       return true;
     }
     return false;
@@ -191,7 +193,7 @@ class Company {
       to: realTo,
     );
     _activeFullRoutes.add(wagonWithRoute);
-    _innerChanges.add(COMPANY_EVENTS.TASK_STARTED);
+    _innerChanges.add(CompanyEvent(COMPANY_EVENTS.TASK_STARTED, from));
 
     for (var nextStop in completeRoute) {
       var newTask = RouteTask(realFrom, nextStop, wagon: withWagon);
@@ -202,7 +204,7 @@ class Company {
       realFrom = nextStop;
     }
     _activeFullRoutes.remove(wagonWithRoute);
-    _innerChanges.add(COMPANY_EVENTS.TASK_ENDED);
+    _innerChanges.add(CompanyEvent(COMPANY_EVENTS.TASK_ENDED, to));
   }
 
   List<ActiveWagon> activeIncomingRoutes({required City forCity}) {
@@ -336,7 +338,7 @@ class Company {
     if (hasEnoughMoney(price)) {
       removeMoney(price.amount);
       realCity.unlock();
-      _innerChanges.add(COMPANY_EVENTS.CITY_UNLOCKED);
+      _innerChanges.add(CompanyEvent(COMPANY_EVENTS.CITY_UNLOCKED, realCity));
     }
   }
 
@@ -363,7 +365,7 @@ class Company {
     if (getMoney().amount >= price.amount) {
       removeMoney(price.amount);
       forCity.addWagon(wagon);
-      _innerChanges.add(COMPANY_EVENTS.WAGON_BOUGHT);
+      _innerChanges.add(CompanyEvent(COMPANY_EVENTS.WAGON_BOUGHT, wagon));
     }
   }
 
@@ -373,7 +375,7 @@ class Company {
     }
     forWagon.setLeader(leader);
     removeMoney(Leader.defaultAcquirePrice.amount);
-    _innerChanges.add(COMPANY_EVENTS.LEADER_HIRED);
+    _innerChanges.add(CompanyEvent(COMPANY_EVENTS.LEADER_HIRED, leader));
   }
 
   bool cityCanUnlockMore(City city) {
@@ -390,7 +392,7 @@ class Company {
     }
     addMoney(event.payment.amount);
     realCity.finishActiveEvent();
-    this._innerChanges.add(COMPANY_EVENTS.CITY_EVENT_DONE);
+    this._innerChanges.add(CompanyEvent(COMPANY_EVENTS.CITY_EVENT_DONE, inCity));
   }
 
   void donateResource(Resource res,
