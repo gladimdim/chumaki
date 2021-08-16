@@ -4,7 +4,7 @@ class PriceUnit {
   final Resource resource;
   final double price;
   final double _sellPriceAdjust = 0.85;
-
+  static double priceCorrectionForDistance = 0.001;
   PriceUnit(this.resource, this.price);
 
   PriceUnit adjustToModifier(double mod) {

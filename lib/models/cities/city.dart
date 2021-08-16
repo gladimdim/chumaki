@@ -356,11 +356,12 @@ class City {
     double distance = max(1,
         findClosestResourceCenter(resource, cities).distanceTo(toCity: this));
     final priceUnit = PriceUnit.defaultPriceUnitForResourceType(resource.type);
-    return double.parse(
+    final price = double.parse(
         (priceUnit.sellPriceForResource(withAmount: withAmount) *
                 distance *
-                (distance == 1 ? 1 : 0.001))
+                (distance == 1 ? 1 : PriceUnit.priceCorrectionForDistance))
             .toStringAsFixed(1));
+    return price >= priceUnit.price ? price : priceUnit.price;
   }
 
   double buyPriceForResource(Resource resource, List<City> cities,
@@ -379,7 +380,7 @@ class City {
     final priceUnit = PriceUnit.defaultPriceUnitForResourceType(resource.type);
     final newPrice = double.parse((priceUnit.buyPriceForResource(withAmount: withAmount) *
             distance *
-            (distance == 1 ? 1 : 0.001))
+            (distance == 1 ? 1 : PriceUnit.priceCorrectionForDistance))
         .toStringAsFixed(1));
     return newPrice >= priceUnit.price ? newPrice : priceUnit.price;
   }
