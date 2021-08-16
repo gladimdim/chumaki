@@ -276,6 +276,8 @@ class GameCanvasViewState extends State<GameCanvasView>
             ],
           ),
         ),
+        if (selected == null && company != null) LoggerView(company: company),
+        if (selected == null && company != null) GeneralHelpViewButton(),
         if (company != null)
           Positioned(
             top: 5,
@@ -348,8 +350,7 @@ class GameCanvasViewState extends State<GameCanvasView>
               ),
             ),
           ),
-        if (selected == null && company != null) LoggerView(company: company),
-        if (selected == null && company != null) GeneralHelpViewButton(),
+
       ],
     );
   }

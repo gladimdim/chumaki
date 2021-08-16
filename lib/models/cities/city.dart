@@ -242,10 +242,10 @@ class City {
       required Company company}) {
     var price = sellPriceForResource(resource, company.allCities,
         withAmount: resource.amount);
-
-    final canSell = fromWagon.sellResource(resource);
+    final resourceUnattached = resource.clone();
+    final canSell = fromWagon.sellResource(resource.clone());
     if (canSell) {
-      stock.addResource(resource);
+      stock.addResource(resourceUnattached);
       company.addMoney(price);
     }
     return canSell;

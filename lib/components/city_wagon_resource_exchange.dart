@@ -1,6 +1,8 @@
+
 import 'package:chumaki/components/money_unit_view.dart';
 import 'package:chumaki/components/resource_image_view.dart';
 import 'package:chumaki/components/title_text.dart';
+import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
@@ -10,7 +12,6 @@ import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:chumaki/theme.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
-import 'package:chumaki/components/ui/action_button.dart';
 
 enum EXCHANGE_MOD { BUY, SELL }
 
@@ -41,14 +42,16 @@ class CityWagonResourceExchange extends StatelessWidget {
       children: [
         getTradeUnit(
           company: company,
-          pricePerUnit: isBuyMode() ?  sellPricePerUnit : buyPricePerUnit,
+          pricePerUnit: isBuyMode() ? sellPricePerUnit : buyPricePerUnit,
           price: isBuyMode() ? sellPricePerUnit : buyPricePerUnit,
           tradeResource: isBuyMode() ? cityRes : wagonRes,
           actionText: isBuyMode()
               ? ChumakiLocalizations.labelBuy
               : ChumakiLocalizations.labelSell,
           onPress: onPressHandler(company),
-          onDoublePress: isBuyMode() ? null : () => onDoublePressHandler(company),
+          onDoublePress: isBuyMode()
+              ? () => onDoublePressBuyHandler(company)
+              : () => onDoublePressSellHandler(company),
         ),
       ],
     );
@@ -78,11 +81,35 @@ class CityWagonResourceExchange extends StatelessWidget {
             : null);
   }
 
-  void onDoublePressHandler(Company company) {
+  void onDoublePressSellHandler(Company company) {
     final availableToSell = wagon.stock.resourceInStock(resource);
     if (availableToSell != null) {
       city.buyResource(
           resource: availableToSell, fromWagon: wagon, company: company);
+    }
+  }
+
+  void onDoublePressBuyHandler(Company company) {
+    final res = city.stock.resourceInStock(resource);
+    if (res == null) {
+      return;
+    }
+
+    final amounts = findAmounts(res: res, amount: 20, company: company);
+    city.sellResource(
+        resource: res.cloneWithAmount(amounts), toWagon: wagon, company: company);
+  }
+
+  int findAmounts(
+      {required Resource res, required int amount, required Company company}) {
+    final newRes = res.cloneWithAmount(amount);
+    final price = city.sellPriceForResource(newRes, company.allCities);
+    if (company.hasEnoughMoney(Money(price)) &&
+        city.canSellResource(newRes) &&
+        wagon.canFitNewResource(newRes)) {
+      return amount;
+    } else {
+      return findAmounts(res: newRes, amount: amount ~/ 2, company: company);
     }
   }
 
@@ -127,7 +154,7 @@ class CityWagonResourceExchange extends StatelessWidget {
                 ),
               ],
             ),
-            subTitle:  MoneyUnitView(Money(price),
+            subTitle: MoneyUnitView(Money(price),
                 isEnough: isBuyMode()
                     ? enableBuyButton(company)
                     : enableSellButton()),
