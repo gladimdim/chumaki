@@ -28,7 +28,7 @@ class WagonAvatar extends StatelessWidget {
                         .map(
                           (perk) => Image.asset(
                             categoryToImagePath(perk.affectsResourceCategory),
-                            width: 32,
+                            width: 42,
                           ),
                         )
                         .toList(),

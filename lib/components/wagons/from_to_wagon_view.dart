@@ -24,11 +24,11 @@ class FromToWagonsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final company = InheritedCompany.of(context).company;
-    return StreamBuilder<COMPANY_EVENTS>(
+    return StreamBuilder<CompanyEvent>(
         stream: company.changes.where((event) => [
               COMPANY_EVENTS.TASK_ENDED,
               COMPANY_EVENTS.TASK_STARTED
-            ].contains(event)),
+            ].contains(event.item1)),
         builder: (context, snapshot) {
           return Column(
             children: [

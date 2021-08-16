@@ -48,6 +48,7 @@ class CityWagonResourceExchange extends StatelessWidget {
               ? ChumakiLocalizations.labelBuy
               : ChumakiLocalizations.labelSell,
           onPress: onPressHandler(company),
+          onDoublePress: isBuyMode() ? null : () => onDoublePressHandler(company),
         ),
       ],
     );
@@ -77,12 +78,21 @@ class CityWagonResourceExchange extends StatelessWidget {
             : null);
   }
 
+  void onDoublePressHandler(Company company) {
+    final availableToSell = wagon.stock.resourceInStock(resource);
+    if (availableToSell != null) {
+      city.buyResource(
+          resource: availableToSell, fromWagon: wagon, company: company);
+    }
+  }
+
   Widget getTradeUnit({
     required Company company,
     Resource? tradeResource,
     required double pricePerUnit,
     required double price,
     VoidCallback? onPress,
+    VoidCallback? onDoublePress,
     required String actionText,
   }) {
     return Row(
@@ -91,6 +101,7 @@ class CityWagonResourceExchange extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(4.0),
           child: ActionButton(
+            onDoublePress: onDoublePress,
             onPress: onPress,
             action: TitleText(actionText),
             image: Column(

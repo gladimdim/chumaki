@@ -6,6 +6,7 @@ import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/ui/3d_button.dart';
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
+import 'package:chumaki/components/ui/notification_box.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/models/cities/city.dart';
@@ -340,6 +341,9 @@ class GameCanvasViewState extends State<GameCanvasView>
                       ],
                     ),
                   ),
+                  NotificationBox(
+                    company: company,
+                  ),
                 ],
               ),
             ),
@@ -373,7 +377,7 @@ class GameCanvasViewState extends State<GameCanvasView>
     if (company == null) {
       return;
     }
-    if (selected != null ) {
+    if (selected != null) {
       dismissSelectedCity();
     } else {
       await company.save();
@@ -462,9 +466,7 @@ class GameCanvasViewState extends State<GameCanvasView>
     });
   }
 
-  void showHelp() {
-
-  }
+  void showHelp() {}
 
   @override
   void dispose() {

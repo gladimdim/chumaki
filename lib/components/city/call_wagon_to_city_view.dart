@@ -3,6 +3,7 @@ import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/action_button.dart';
 import 'package:chumaki/components/ui/action_text.dart';
 import 'package:chumaki/components/wagons/wagon_avatar.dart';
+import 'package:chumaki/extensions/list.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
@@ -11,7 +12,6 @@ import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:chumaki/utils/time.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
-import 'package:chumaki/extensions/list.dart';
 
 typedef WagonContainer = List<Tuple2<City, Wagon>>;
 
@@ -25,9 +25,9 @@ class CallWagonToCityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<COMPANY_EVENTS>(stream: company.changes.where((event) {
-      return event == COMPANY_EVENTS.TASK_ENDED ||
-          event == COMPANY_EVENTS.TASK_STARTED;
+    return StreamBuilder<CompanyEvent>(stream: company.changes.where((event) {
+      return event.item1 == COMPANY_EVENTS.TASK_ENDED ||
+          event.item1 == COMPANY_EVENTS.TASK_STARTED;
     }), builder: (context, snapshot) {
       return Column(
         children: allOtherWagons()
@@ -51,7 +51,8 @@ class CallWagonToCityView extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       WagonAvatar(wagon: wagon.item2),
                                       TitleText(ChumakiLocalizations.getForKey(
