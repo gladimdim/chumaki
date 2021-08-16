@@ -9,7 +9,6 @@ class Ladyzhin extends City {
   Ladyzhin()
       : super(
           point: Point(3450, 1750),
-          name: "Ладижин",
           unlocked: false,
           localizedKeyName: 'ladyzhin',
           size: 2,

@@ -8,7 +8,6 @@ class Stavise extends City {
   Stavise()
       : super(
           point: Point(2950, 2100),
-          name: "Ставище",
           unlocked: true,
           localizedKeyName: 'stavise',
           size: 2,

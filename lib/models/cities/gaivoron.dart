@@ -8,7 +8,6 @@ class Gaivoron extends City {
   Gaivoron()
       : super(
           point: Point(3300, 1650),
-          name: "Гайворон",
           unlocked: false,
           localizedKeyName: 'gaivoron',
           size: 2,

@@ -13,7 +13,6 @@ class Kyiv extends City {
   Kyiv()
       : super(
           point: Point(2700, 2830),
-          name: "Київ",
           localizedKeyName: 'kyiv',
           size: 4,
           unlocked: false,

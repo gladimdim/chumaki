@@ -11,7 +11,6 @@ class Zhytomir extends City {
   Zhytomir()
       : super(
           point: Point(3300, 3000),
-          name: "Житомир",
           localizedKeyName: 'zhytomir',
           size: 2,
           unlocked: false,

@@ -9,7 +9,6 @@ class Medzhibizh extends City {
   Medzhibizh()
       : super(
     point: Point(3950, 2300),
-    name: "Меджибіж",
     localizedKeyName: 'medzhibizh',
     size: 2,
     unlocked: false,

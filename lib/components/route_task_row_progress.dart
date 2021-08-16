@@ -77,7 +77,7 @@ class _RouteTaskRowProgressState extends State<RouteTaskRowProgress>
         Expanded(
           flex: 3,
           child: Text(
-            ltr() ? "${widget.task.to.name}" : "${widget.task.from.name}",
+            ltr() ? "${widget.task.to.localizedKeyName}" : "${widget.task.from.localizedKeyName}",
             textDirection: TextDirection.rtl,
           ),
         ),

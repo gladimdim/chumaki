@@ -11,7 +11,6 @@ class Cherkasy extends City {
   Cherkasy()
       : super(
           point: Point(2250, 2000),
-          name: "Черкаси",
           localizedKeyName: 'cherkasy',
           size: 2,
           unlocked: true,

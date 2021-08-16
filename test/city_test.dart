@@ -70,39 +70,39 @@ void main() {
     test("Can serialize/deserialize City object", () {
       var city = City(
         point: Point(15, 13),
-        name: "Testing",
         stock: Stock([Bread(15), Stone(30)]),
         size: 3,
         unlocked: true,
         unlockPriceMoney: Money(42),
         unlocksCities: [Cherkasy()],
-        // manufacturings: [Stone(1), Bread(1)],
-        localizedKeyName: "testing",
+        localizedKeyName: "kyiv",
         wagons: [
           Wagon(),
           Wagon(),
         ],
       );
       var newCity = City.fromJson(city.toJson());
-      expect(newCity.name, equals(city.name), reason: "City name restored");
+      expect(newCity.point, equals(Kyiv().point), reason: "Point is ignored for named cities");
+      expect(newCity.stock.resourceInStock(Bread(1))!.amount, equals(15), reason: "Stock is restored from city constructor");
+      expect(newCity.localizedKeyName, equals(city.localizedKeyName), reason: "City localizedKeyName restored");
       expect(newCity.wagons.length, equals(2), reason: "Wagons restored");
       expect(newCity.buyPriceForResource(Bread(1), [Vinnitsa(), Zhytomir()]),
-          equals(3.6),
-          reason: "3.6 (bread 0.8 ~* 4) is for 1 bread restored");
+          equals(1.0),
+          reason: "1.0 (bread 0.8 * distance * 0.02) is for 1 bread restored");
       expect(newCity.buyPriceForResource(Stone(1), [Vinnitsa(), Zhytomir()]),
-          equals(20.7),
-          reason: "20.7 (stone (5 ~* 4) is for 1 stone restored");
+          equals(10.9),
+          reason: "10.9 (stone (5 ~* distance * 0.02) is for 1 stone restored");
       expect(newCity.wagons.first, isNotNull,
           reason: "Wagon is really from previous save.");
       expect(newCity.isUnlocked(), isTrue, reason: "City is unlocked");
       expect(newCity.unlocksCities, isNotEmpty,
           reason: "Unlocks city list is present");
       expect(newCity.unlocksCities[0].localizedKeyName,
-          Cherkasy().localizedKeyName,
-          reason: "Unlocks Cherkasy");
-      expect(newCity.size, equals(3), reason: "City size restored");
-      expect(newCity.unlockPriceMoney.amount, equals(42),
-          reason: "42 money required for unlocking");
+          Nizhin().localizedKeyName,
+          reason: "Kyiv's first unlock is Nizhin. It ignores the 'wild' city properties and uses hard coded in code instead.");
+      expect(newCity.size, equals(4.0), reason: "City size read from code instead of from json.");
+      expect(newCity.unlockPriceMoney.amount, equals(500),
+          reason: "Ignores constructor input and instead uses from fromName static method for 'kyiv' name.");
     });
   });
 }

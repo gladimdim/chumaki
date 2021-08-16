@@ -11,7 +11,6 @@ class Chigirin extends City {
       : super(
           point: Point(2000, 1750),
           size: 2,
-          name: "Чигирин",
           localizedKeyName: 'chigirin',
           unlocked: true,
           manufacturings: [Pasture()],

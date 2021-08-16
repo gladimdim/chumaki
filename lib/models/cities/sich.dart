@@ -14,7 +14,6 @@ class Sich extends City {
   Sich()
       : super(
           point: Point(1200, 900),
-          name: "Січ",
           localizedKeyName: 'sich',
           size: 4,
           unlocked: true,
