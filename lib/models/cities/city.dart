@@ -53,7 +53,6 @@ enum CITY_EVENTS {
 
 class City {
   final Point<double> point;
-  final String name;
   final Stock stock;
   final String localizedKeyName;
   late bool _unlocked;
@@ -73,7 +72,6 @@ class City {
 
   City({
     required this.point,
-    required this.name,
     required this.stock,
     required this.localizedKeyName,
     unlocked = false,
@@ -308,41 +306,34 @@ class City {
     final event = activeEvent;
     final eventJson = event == null ? null : event.toJson();
     return {
-      "name": name,
       "stock": stock.toJson(),
-      "point": {"x": point.x, "y": point.y},
       "localizedKeyName": localizedKeyName,
-      "size": size,
       "wagons": wagons.map((wagon) => wagon.toJson()).toList(),
       "unlocked": _unlocked,
       "unlockPriceMoney": unlockPriceMoney.amount,
       "manufacturings": manufacturings.map((mfg) => mfg.toJson()).toList(),
-      "unlockCities": unlocksCities.map((e) => e.localizedKeyName).toList(),
       "activeEvent": eventJson,
       "availableEvents": availableEvents.map((e) => e.toJson()).toList(),
     };
   }
 
   static City fromJson(Map<String, dynamic> input) {
-    var pointJson = input["point"];
+    final city = City.fromName(input["localizedKeyName"]);
     List wagonJson = input["wagons"];
-    List unlockCities = input["unlockCities"];
     List manufacturingsJson = input["manufacturings"];
     List availableEventsJson = input["availableEvents"];
     final eventJson = input["activeEvent"];
     return City(
-      point: Point(pointJson["x"], pointJson["y"]),
-      name: input["name"],
+      point: city.point,
       stock: Stock.fromJson(input["stock"]),
-      localizedKeyName: input["localizedKeyName"],
+      localizedKeyName: city.localizedKeyName,
       wagons: wagonJson.map((e) => Wagon.fromJson(e)).toList(),
       manufacturings:
           manufacturingsJson.map((e) => Manufacturing.fromJson(e)).toList(),
-      unlockPriceMoney: Money(input["unlockPriceMoney"]),
+      unlockPriceMoney: city.unlockPriceMoney,
       unlocked: input["unlocked"],
-      unlocksCities:
-          unlockCities.map((cityName) => City.fromName(cityName)).toList(),
-      size: input["size"],
+      unlocksCities: city.unlocksCities,
+      size: city.size,
       activeEvent: eventJson == null ? null : Event.fromJson(eventJson),
       availableEvents:
           availableEventsJson.map((e) => Event.fromJson(e)).toList(),
@@ -368,8 +359,9 @@ class City {
     return double.parse(
         (priceUnit.sellPriceForResource(withAmount: withAmount) *
                 distance *
-                (distance == 1 ? 1 : 0.001))
+                (distance == 1 ? 1 : PriceUnit.priceCorrectionForDistance))
             .toStringAsFixed(1));
+
   }
 
   double buyPriceForResource(Resource resource, List<City> cities,
@@ -386,11 +378,11 @@ class City {
       distance = 1;
     }
     final priceUnit = PriceUnit.defaultPriceUnitForResourceType(resource.type);
-
-    return double.parse((priceUnit.buyPriceForResource(withAmount: withAmount) *
+    final newPrice = double.parse((priceUnit.buyPriceForResource(withAmount: withAmount) *
             distance *
-            (distance == 1 ? 1 : 0.001))
+            (distance == 1 ? 1 : PriceUnit.priceCorrectionForDistance))
         .toStringAsFixed(1));
+    return newPrice >= priceUnit.price ? newPrice : priceUnit.price;
   }
 
   City findClosestResourceCenter(Resource resource, List<City> cities) {

@@ -40,7 +40,7 @@ class WagonDetails extends StatelessWidget {
               ),
             ),
           ),
-          ExpandablePanel(
+          wagon.leader == null ? ExpandablePanel(
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -58,7 +58,7 @@ class WagonDetails extends StatelessWidget {
                       wagon: wagon,
                     ))
                 : BorderedAll(child: LeaderView(wagon.leader!)),
-          ),
+          ) : BorderedAll(child: LeaderView(wagon.leader!)),
           ExpandablePanel(
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

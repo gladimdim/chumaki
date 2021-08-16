@@ -9,7 +9,6 @@ class Kaniv extends City {
   Kaniv()
       : super(
           point: Point(2400, 2200),
-          name: "Канів",
           localizedKeyName: 'kaniv',
           size: 2,
           unlocked: true,

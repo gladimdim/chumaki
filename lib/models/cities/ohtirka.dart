@@ -9,7 +9,6 @@ class Ohtirka extends City {
   Ohtirka()
       : super(
     point: Point(1150, 2250),
-    name: "Охтирка",
     localizedKeyName: 'ohtirka',
     size: 1.5,
     unlocked: false,

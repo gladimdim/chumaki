@@ -10,7 +10,6 @@ class Korsun extends City {
   Korsun()
       : super(
           point: Point(2550, 1920),
-          name: "Корсунь",
           unlocked: false,
           localizedKeyName: 'korsun',
           size: 2,

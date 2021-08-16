@@ -97,9 +97,10 @@ class Wagon {
   }
 
   bool sellResource(Resource resource) {
+    int amount = resource.amount;
     final sold = stock.removeResource(resource);
     if (sold) {
-      addExperienceToLeader(resource.amount);
+      addExperienceToLeader(amount);
     }
     return sold;
   }

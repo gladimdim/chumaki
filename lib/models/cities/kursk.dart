@@ -9,7 +9,6 @@ class Kursk extends City {
   Kursk()
       : super(
           point: Point(300, 3500),
-          name: "Курськ",
           size: 3,
           localizedKeyName: 'kursk',
           unlocked: false,

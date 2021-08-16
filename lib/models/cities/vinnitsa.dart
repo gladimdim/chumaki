@@ -11,7 +11,6 @@ class Vinnitsa extends City {
   Vinnitsa()
       : super(
           point: Point(3550, 2150),
-          name: "Вінниця",
           unlocked: false,
           localizedKeyName: 'vinnitsa',
           unlockPriceMoney: Money(150),

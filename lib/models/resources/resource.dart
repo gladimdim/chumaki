@@ -387,7 +387,7 @@ String resourceCategoryToLocalizedKey(RESOURCE_CATEGORY category) {
 }
 
 List<List<Resource>> groupResourcesByCategory(List<Resource> resources) {
-  List<List<Resource>> result = resources.fold([], (result, current) {
+  List<List<Resource>> result = sortResourcesByCategory(resources).fold([], (result, current) {
     if (result.isEmpty) {
       return [
         [current]
@@ -405,6 +405,26 @@ List<List<Resource>> groupResourcesByCategory(List<Resource> resources) {
     }
   });
   return result;
+}
+
+List<Resource> sortResourcesByCategory(List<Resource> resources) {
+  final order = [
+    RESOURCE_CATEGORY.FOOD,
+    RESOURCE_CATEGORY.RESOURCES,
+    RESOURCE_CATEGORY.CLOTHS,
+    RESOURCE_CATEGORY.MILITARY,
+    RESOURCE_CATEGORY.LUXURY,
+  ];
+
+  List<Resource> res = List.from(resources);
+  res.sort((res1, res2) {
+    if (order.indexOf(res1.category) > order.indexOf(res2.category)) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+  return res;
 }
 
 String resourceTypeToString(RESOURCES type) {

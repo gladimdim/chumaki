@@ -11,7 +11,6 @@ class Ostrog extends City {
   Ostrog()
       : super(
             point: Point(4100, 2800),
-            name: "Острог",
             localizedKeyName: 'ostrog',
             size: 2,
             unlocked: false,

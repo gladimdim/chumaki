@@ -9,7 +9,6 @@ class BilaTserkva extends City {
   BilaTserkva()
       : super(
           point: Point(2700, 2300),
-          name: "Біла Церква",
           unlocked: true,
           localizedKeyName: 'bilatserkva',
           size: 2,

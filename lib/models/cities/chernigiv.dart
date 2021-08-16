@@ -9,7 +9,6 @@ class Chernigiv extends City {
   Chernigiv()
       : super(
           point: Point(2200, 3400),
-          name: "Чернігів",
           localizedKeyName: 'chernigiv',
           size: 3,
           unlocked: false,

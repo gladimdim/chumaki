@@ -9,7 +9,6 @@ class Rylsk extends City {
   Rylsk()
       : super(
           point: Point(880, 3050),
-          name: "Рильськ",
           size: 3,
           localizedKeyName: 'rylsk',
           unlocked: false,

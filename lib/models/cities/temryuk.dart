@@ -9,7 +9,6 @@ class Temryuk extends City {
   Temryuk()
       : super(
           point: Point(600, 300),
-          name: "Темрюк",
           localizedKeyName: 'temryuk',
           size: 2,
           unlocked: false,

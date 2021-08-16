@@ -10,7 +10,6 @@ class Ternopil extends City {
   Ternopil()
       : super(
       point: Point(4550, 2400),
-      name: "Тернопіль",
       localizedKeyName: 'ternopil',
       size: 2,
       unlocked: false,

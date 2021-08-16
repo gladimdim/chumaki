@@ -204,7 +204,7 @@ class GameCanvasViewState extends State<GameCanvasView>
                     left: city.point.x,
                     child: GestureDetector(
                       onTap: () {
-                        print("pressed city: ${city.name}");
+                        print("pressed city: ${city.localizedKeyName}");
                         setState(() {
                           if (selected == city) {
                             selected = null;

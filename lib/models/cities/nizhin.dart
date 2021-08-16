@@ -11,7 +11,6 @@ class Nizhin extends City {
   Nizhin()
       : super(
             point: Point(1950, 2950),
-            name: "Ніжин",
             size: 3,
             localizedKeyName: 'nizhin',
             unlocked: false,

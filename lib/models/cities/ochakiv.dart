@@ -11,7 +11,6 @@ class Ochakiv extends City {
   Ochakiv()
       : super(
           point: Point(2400, 700),
-          name: "Очаків",
           localizedKeyName: 'ochakiv',
           size: 2,
           unlocked: false,

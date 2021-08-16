@@ -10,7 +10,6 @@ class Berdychiv extends City {
   Berdychiv()
       : super(
           point: Point(3500, 2500),
-          name: "Бердичів",
           unlocked: false,
           localizedKeyName: 'berdychiv',
           unlockPriceMoney: Money(250),

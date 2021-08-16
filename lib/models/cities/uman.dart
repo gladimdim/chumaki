@@ -11,7 +11,6 @@ class Uman extends City {
   Uman()
       : super(
           point: Point(3050, 1750),
-          name: "Умань",
           unlocked: false,
           localizedKeyName: 'uman',
           size: 3,

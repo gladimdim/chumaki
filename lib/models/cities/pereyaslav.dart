@@ -11,7 +11,6 @@ class Pereyaslav extends City {
   Pereyaslav()
       : super(
           point: Point(2360, 2450),
-          name: "Переяслав",
           unlocked: true,
           localizedKeyName: 'pereyaslav',
           size: 2,
