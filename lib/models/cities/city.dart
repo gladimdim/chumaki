@@ -379,7 +379,7 @@ class City {
     final priceUnit = PriceUnit.defaultPriceUnitForResourceType(resource.type);
     final newPrice = double.parse((priceUnit.buyPriceForResource(withAmount: withAmount) *
             distance *
-            (distance == 1 ? 1 : 0.002))
+            (distance == 1 ? 1 : 0.001))
         .toStringAsFixed(1));
     return newPrice >= priceUnit.price ? newPrice : priceUnit.price;
   }

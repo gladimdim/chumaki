@@ -45,7 +45,7 @@ void main() {
       final waxPrice = city.buyPriceForResource(Wax(1), cities);
       expect(waxPrice, equals(0.3),
           reason: "Original price as Kyiv produces Wax");
-      expect(city.buyPriceForResource(Cloth(1), cities), equals(0.8),
+      expect(city.buyPriceForResource(Cloth(1), cities), equals(1.0),
           reason:
               "Cloth is produced in Nizhin so the price was adjusted Price(1) * DistanceCorrection(0.8)");
       expect(city.sellPriceForResource(Cloth(1), cities), equals(0.6),
@@ -87,11 +87,11 @@ void main() {
       expect(newCity.localizedKeyName, equals(city.localizedKeyName), reason: "City localizedKeyName restored");
       expect(newCity.wagons.length, equals(2), reason: "Wagons restored");
       expect(newCity.buyPriceForResource(Bread(1), [Vinnitsa(), Zhytomir()]),
-          equals(1.0),
-          reason: "1.0 (bread 0.8 * distance * 0.02) is for 1 bread restored");
+          equals(0.8),
+          reason: "0.8 city is near the bread prod center.");
       expect(newCity.buyPriceForResource(Stone(1), [Vinnitsa(), Zhytomir()]),
-          equals(10.9),
-          reason: "10.9 (stone (5 ~* distance * 0.02) is for 1 stone restored");
+          equals(5.4),
+          reason: "5.4 (stone (5 ~* distance * 0.01) is for 1 stone restored");
       expect(newCity.wagons.first, isNotNull,
           reason: "Wagon is really from previous save.");
       expect(newCity.isUnlocked(), isTrue, reason: "City is unlocked");
