@@ -48,7 +48,7 @@ void main() {
       expect(city.buyPriceForResource(Cloth(1), cities), equals(1.0),
           reason:
               "Cloth is produced in Nizhin so the price was adjusted Price(1) * DistanceCorrection(0.8)");
-      expect(city.sellPriceForResource(Cloth(1), cities), equals(0.6),
+      expect(city.sellPriceForResource(Cloth(1), cities), equals(1.0),
           reason: "Sell price is adjsuted by some coefficient.");
     });
 
