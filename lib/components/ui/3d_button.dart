@@ -13,7 +13,7 @@ class DDDButton extends StatefulWidget {
       required this.child,
       this.color = Colors.grey,
       this.shadowColor = Colors.red,
-      this.waitTillCallback = const Duration(milliseconds: 200),
+      this.waitTillCallback = const Duration(milliseconds: 100),
       required this.onPressed,
       this.releaseColor = Colors.green})
       : super(key: key);

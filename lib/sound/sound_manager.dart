@@ -17,6 +17,7 @@ class SoundManager {
     COMPANY_EVENTS.WAGON_BOUGHT: "assets/sounds/cart_bought.mp3",
     COMPANY_EVENTS.LEADER_HIRED: "assets/sounds/write_on_paper.mp3",
     COMPANY_EVENTS.CITY_EVENT_DONE: "assets/sounds/achievement.mp3",
+    COMPANY_EVENTS.DONATED_TO_EVENT: "assets/sounds/paper_moved.mp3",
   };
 
   Map<String, String> uiActionMapping = {

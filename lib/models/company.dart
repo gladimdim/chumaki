@@ -59,6 +59,7 @@ enum COMPANY_EVENTS {
   WAGON_BOUGHT,
   LEADER_HIRED,
   CITY_EVENT_DONE,
+  DONATED_TO_EVENT,
 }
 
 class Company {
@@ -397,8 +398,13 @@ class Company {
 
   void donateResource(Resource res,
       {required Wagon fromWagon, required City toCity}) {
+    final activeEvent = toCity.activeEvent;
+    if (activeEvent == null) {
+      return;
+    }
     if (fromWagon.sellResource(res)) {
-      toCity.activeEvent!.decreaseResource(res);
+      activeEvent.decreaseResource(res);
+      this._innerChanges.add(CompanyEvent(COMPANY_EVENTS.DONATED_TO_EVENT, activeEvent));
     }
   }
 }

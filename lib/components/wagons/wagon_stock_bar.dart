@@ -10,7 +10,7 @@ class WagonStockBar extends StatelessWidget {
   final Wagon wagon;
   final double _stockContainerHeight = 75.0;
   final double _maxWidth =
-      CITY_DETAILS_VIEW_WIDTH - CITY_DETAILS_VIEW_WIDTH / 4 - 2;
+      CITY_DETAILS_VIEW_WIDTH - CITY_DETAILS_VIEW_WIDTH / 4 - 10;
 
   WagonStockBar({required this.wagon});
 
