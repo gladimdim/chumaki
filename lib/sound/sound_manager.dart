@@ -130,4 +130,8 @@ class SoundManager {
   void playBuildingBuilt() {
     playUISound("buildingBuilt");
   }
+
+  void playNewEvent() {
+    playUISound("leaderLevelUp");
+  }
 }

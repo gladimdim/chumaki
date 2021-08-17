@@ -49,6 +49,7 @@ enum CITY_EVENTS {
   EVENT_DONE,
   MFG_BUILT,
   MFG_UPGRADED,
+  EVENT_NEW,
 }
 
 class City {
@@ -289,6 +290,7 @@ class City {
   Event? queueEvent() {
     if (availableEvents.isNotEmpty && activeEvent == null) {
       activeEvent = availableEvents.removeAt(0);
+      changes.add(CITY_EVENTS.EVENT_NEW);
     }
     return activeEvent;
   }

@@ -4,6 +4,7 @@ import 'package:chumaki/components/ui/game_text.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
+import 'package:chumaki/sound/sound_manager.dart';
 import 'package:chumaki/views/game_canvas_view.dart';
 import 'package:flutter/material.dart';
 
@@ -18,8 +19,9 @@ class NotificationBox extends StatefulWidget {
 
 class _NotificationBoxState extends State<NotificationBox> {
   StreamSubscription? _sub;
+  List<StreamSubscription> _citySub = [];
   Timer? _timer;
-  CompanyEvent? _event;
+  String? _event;
 
   @override
   void initState() {
@@ -28,14 +30,25 @@ class _NotificationBoxState extends State<NotificationBox> {
         .where((event) => event.item1 == COMPANY_EVENTS.TASK_ENDED)
         .listen((event) {
       _timer?.cancel();
-      setShow(event);
+      setShow(eventToText(event));
       _timer = Timer(Duration(seconds: 3), () {
         setShow(null);
       });
     });
+
+    widget.company.allCities.forEach((city) {
+      final sub = city.changes
+          .where((event) => event == CITY_EVENTS.EVENT_NEW)
+          .listen((event) {
+        setShow(
+            "${ChumakiLocalizations.getForKey("notifications.newEvent")} ${ChumakiLocalizations.getForKey(city.localizedKeyName)}");
+        SoundManager.instance.playNewEvent();
+      });
+      _citySub.add(sub);
+    });
   }
 
-  void setShow(CompanyEvent? event) {
+  void setShow(String? event) {
     setState(() {
       _event = event;
     });
@@ -51,15 +64,15 @@ class _NotificationBoxState extends State<NotificationBox> {
               color: Theme.of(context).backgroundColor,
               child: Center(
                 child: GameText(
-                  eventToText(_event!),
+                  _event!,
                   addStyle: Theme.of(context).textTheme.headline5,
                 ),
               ),
             )
           : Container(
-        height: MENU_ITEM_WIDTH,
-        width: 0,
-      ),
+              height: MENU_ITEM_WIDTH,
+              width: 0,
+            ),
     );
   }
 
@@ -76,6 +89,9 @@ class _NotificationBoxState extends State<NotificationBox> {
   void dispose() {
     _sub?.cancel();
     _timer?.cancel();
+    _citySub.forEach((element) {
+      element.cancel();
+    });
     super.dispose();
   }
 }
