@@ -12,7 +12,7 @@ class Gaivoron extends City {
           localizedKeyName: 'gaivoron',
           size: 2,
           unlocksCities: [],
-          unlockPriceMoney: Money(50),
+          unlockPriceMoney: Money(250),
           manufacturings: [],
           stock: Stock([
             Stone(200),

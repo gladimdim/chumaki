@@ -16,7 +16,7 @@ class Uman extends City {
           size: 3,
           unlocksCities: [Gaivoron()],
           manufacturings: [Distillery()],
-          unlockPriceMoney: Money(300),
+          unlockPriceMoney: Money(500),
           stock: Stock([
             Bread(500),
             Stone(300),
@@ -31,13 +31,13 @@ class Uman extends City {
             Event(
                 iconPath: "images/resources/wax/wax.png",
                 payment: Money(1400),
-                requirements: [Wax(800), Honey(300)],
+                requirements: [Wax(200), Honey(100)],
                 localizedKey: "events.umanWaxProblem",
                 artPath: "images/events/vesterfeld/poor_boy_2.png"),
             Event(
                 iconPath: "images/resources/planks/planks.png",
                 payment: Money(2800),
-                requirements: [Wood(200), Planks(130), Stone(100), Powder(40)],
+                requirements: [Wood(200), Planks(130), Stone(80), Powder(40)],
                 localizedKey: "events.umanFortified",
                 artPath: "images/events/vesterfeld/fortress_outer.png"),
             Event(
@@ -45,9 +45,9 @@ class Uman extends City {
                 payment: Money(5200),
                 requirements: [
                   Cannon(3),
-                  Firearm(100),
-                  Horse(100),
-                  Powder(200)
+                  Firearm(60),
+                  Horse(80),
+                  Powder(150)
                 ],
                 localizedKey: "events.umanRealAllies",
                 artPath: "images/events/vesterfeld/cannons_shooting.png"),

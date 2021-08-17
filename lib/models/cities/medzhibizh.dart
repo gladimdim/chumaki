@@ -12,7 +12,7 @@ class Medzhibizh extends City {
     localizedKeyName: 'medzhibizh',
     size: 2,
     unlocked: false,
-    unlockPriceMoney: Money(150.0),
+    unlockPriceMoney: Money(250.0),
     unlocksCities: [Ternopil()],
     manufacturings: [],
     stock: Stock(

@@ -13,7 +13,7 @@ class Lviv extends City {
             localizedKeyName: 'lviv',
             size: 6,
             unlocked: false,
-            unlockPriceMoney: Money(1250.0),
+            unlockPriceMoney: Money(1500.0),
             unlocksCities: [],
             manufacturings: [CannonFoundry(), Smith()],
             stock: Stock(

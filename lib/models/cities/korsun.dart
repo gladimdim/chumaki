@@ -14,7 +14,7 @@ class Korsun extends City {
           localizedKeyName: 'korsun',
           size: 2,
           unlocksCities: [Uman()],
-          unlockPriceMoney: Money(150),
+          unlockPriceMoney: Money(400),
           manufacturings: [Distillery()],
           stock: Stock([
             Bread(400),

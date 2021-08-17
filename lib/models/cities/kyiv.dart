@@ -36,8 +36,8 @@ class Kyiv extends City {
                 iconPath: "images/resources/bread/bread.png",
                 payment: Money(1500),
                 requirements: [
-                  Bread(200),
-                  Grains(800),
+                  Bread(80),
+                  Grains(220),
                   Gorilka(100),
                 ],
                 localizedKey: "events.kyivEaster",

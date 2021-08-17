@@ -46,7 +46,7 @@ class Sich extends City {
             Event(
               localizedKey: 'events.buyCannons',
               iconPath: 'images/resources/cannon/cannon_3.png',
-              requirements: [Cannon(8), Horse(50)],
+              requirements: [Cannon(8), Horse(35)],
               payment: Money(2800),
               artPath: "images/events/vesterfeld/cannons_shooting.png",
             ),

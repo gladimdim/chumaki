@@ -67,8 +67,8 @@ class Pereyaslav extends City {
                 iconPath: "images/resources/salt/salt.png",
                 payment: Money(2000),
                 requirements: [
-                  Bread(200),
-                  Grains(300),
+                  Bread(100),
+                  Grains(180),
                   Fish(400),
                   Salt(50),
                   Powder(40),
@@ -79,7 +79,7 @@ class Pereyaslav extends City {
                 iconPath: "images/resources/stone/stone_2.png",
                 payment: Money(2000),
                 requirements: [
-               Stone(200),
+                  Stone(200),
                   Planks(100),
                   Wood(100),
                   IronOre(30),

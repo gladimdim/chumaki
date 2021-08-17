@@ -12,7 +12,7 @@ class Ohtirka extends City {
     localizedKeyName: 'ohtirka',
     size: 1.5,
     unlocked: false,
-    unlockPriceMoney: Money(100),
+    unlockPriceMoney: Money(500),
     unlocksCities: [],
     manufacturings: [TobaccoMaker()],
     stock: Stock(

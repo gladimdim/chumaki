@@ -14,7 +14,7 @@ class Temryuk extends City {
           unlocked: false,
           unlocksCities: [],
           manufacturings: [SilkMarket()],
-          unlockPriceMoney: Money(50),
+          unlockPriceMoney: Money(500),
           stock: Stock(
             [
               Fish(3500),

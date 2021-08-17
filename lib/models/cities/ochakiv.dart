@@ -15,8 +15,11 @@ class Ochakiv extends City {
           size: 2,
           unlocked: false,
           unlocksCities: [Temryuk()],
-          unlockPriceMoney: Money(50),
-          manufacturings: [River(), Liman(),],
+          unlockPriceMoney: Money(200),
+          manufacturings: [
+            River(),
+            Liman(),
+          ],
           stock: Stock(
             [
               Powder(200),
@@ -39,22 +42,22 @@ class Ochakiv extends City {
                 localizedKey: "events.ochakivEmbassy",
                 artPath: "images/events/vesterfeld/cossacks_crowd2.png"),
             Event(
+                iconPath: "images/resources/bread/bread.png",
+                payment: Money(1800),
+                requirements: [
+                  Bread(200),
+                  Grains(300),
+                ],
+                localizedKey: "events.ochakivTradeStimulus",
+                artPath: "images/events/vesterfeld/elite_cossacks_2.png"),
+            Event(
                 iconPath: "images/resources/fur/fur.png",
                 payment: Money(2500),
                 requirements: [
-                  Fur(300),
+                  Fur(100),
                 ],
                 localizedKey: "events.ochakivIndianTravellers",
                 artPath: "images/events/vesterfeld/cossack_and_sheep.png"),
-            Event(
-                iconPath: "images/resources/bread/bread.png",
-                payment: Money(2300),
-                requirements: [
-                  Bread(500),
-                  Grains(400),
-                ],
-                localizedKey: "events.ochakivTradeStimulus",
-                artPath: "images/events/vesterfeld/elite_cossacks_2.png")
           ],
         );
 }

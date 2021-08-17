@@ -13,7 +13,7 @@ class Ternopil extends City {
       localizedKeyName: 'ternopil',
       size: 2,
       unlocked: false,
-      unlockPriceMoney: Money(150.0),
+      unlockPriceMoney: Money(500.0),
       unlocksCities: [Lviv()],
       manufacturings: [Smith()],
       stock: Stock(

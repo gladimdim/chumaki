@@ -13,7 +13,7 @@ class Vinnitsa extends City {
           point: Point(3550, 2150),
           unlocked: false,
           localizedKeyName: 'vinnitsa',
-          unlockPriceMoney: Money(150),
+          unlockPriceMoney: Money(750),
           size: 3,
           unlocksCities: [Ladyzhin(), Medzhibizh()],
           manufacturings: [Smith(), Quarry()],
