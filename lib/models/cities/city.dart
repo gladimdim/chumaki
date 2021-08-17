@@ -287,12 +287,11 @@ class City {
     });
   }
 
-  Event? queueEvent() {
+  void queueEvent() {
     if (availableEvents.isNotEmpty && activeEvent == null) {
       activeEvent = availableEvents.removeAt(0);
       changes.add(CITY_EVENTS.EVENT_NEW);
     }
-    return activeEvent;
   }
 
   void routeTaskStarted(RouteTask task) {
@@ -363,7 +362,6 @@ class City {
                 distance *
                 (distance == 1 ? 1 : PriceUnit.priceCorrectionForDistance))
             .toStringAsFixed(1));
-
   }
 
   double buyPriceForResource(Resource resource, List<City> cities,
@@ -380,10 +378,11 @@ class City {
       distance = 1;
     }
     final priceUnit = PriceUnit.defaultPriceUnitForResourceType(resource.type);
-    final newPrice = double.parse((priceUnit.buyPriceForResource(withAmount: withAmount) *
-            distance *
-            (distance == 1 ? 1 : PriceUnit.priceCorrectionForDistance))
-        .toStringAsFixed(1));
+    final newPrice = double.parse(
+        (priceUnit.buyPriceForResource(withAmount: withAmount) *
+                distance *
+                (distance == 1 ? 1 : PriceUnit.priceCorrectionForDistance))
+            .toStringAsFixed(1));
     return newPrice >= priceUnit.price ? newPrice : priceUnit.price;
   }
 
@@ -404,6 +403,7 @@ class City {
   void finishActiveEvent() {
     activeEvent = null;
     changes.add(CITY_EVENTS.EVENT_DONE);
+    queueEvent();
   }
 
   bool buildManufacturing(Manufacturing mfg, Company company) {

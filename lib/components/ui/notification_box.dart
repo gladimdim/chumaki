@@ -41,7 +41,7 @@ class _NotificationBoxState extends State<NotificationBox> {
           .where((event) => event == CITY_EVENTS.EVENT_NEW)
           .listen((event) {
         setShow(
-            "${ChumakiLocalizations.getForKey("notifications.newEvent")} ${ChumakiLocalizations.getForKey(city.localizedKeyName)}");
+            "${ChumakiLocalizations.getForKey("notifications.newEvent")} ${ChumakiLocalizations.getForKey(city.localizedKeyName)} ");
         SoundManager.instance.playNewEvent();
       });
       _citySub.add(sub);
@@ -80,7 +80,7 @@ class _NotificationBoxState extends State<NotificationBox> {
     switch (event.item1) {
       case COMPANY_EVENTS.TASK_ENDED:
         final city = event.item2 as City;
-        return "${ChumakiLocalizations.getForKey(city.localizedKeyName)} ${ChumakiLocalizations.getForKey("notifications.taskEnded")}";
+        return "${ChumakiLocalizations.getForKey("notifications.taskEnded")} ${ChumakiLocalizations.getForKey(city.localizedKeyName)} ";
       default:
         return "";
     }

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
+import 'package:chumaki/models/cities/govtva.dart';
 import 'package:chumaki/models/cities/ochakiv.dart';
 import 'package:chumaki/models/events/event.dart';
 import 'package:chumaki/models/leaders/leaders.dart';
@@ -17,7 +18,7 @@ class Sich extends City {
           localizedKeyName: 'sich',
           size: 4,
           unlocked: true,
-          unlocksCities: [Ochakiv()],
+          unlocksCities: [Ochakiv(), Govtva()],
           manufacturings: [PowderCellar(), River()],
           activeEvent: Event(
             localizedKey: 'events.giveFood',

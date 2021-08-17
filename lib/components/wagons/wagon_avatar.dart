@@ -1,11 +1,12 @@
+import 'package:chumaki/components/ui/perk_unit_view.dart';
 import 'package:chumaki/components/ui/resized_image.dart';
-import 'package:chumaki/models/resources/resource_category.dart';
 import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:flutter/material.dart';
 
 class WagonAvatar extends StatelessWidget {
   const WagonAvatar({Key? key, required this.wagon}) : super(key: key);
   final Wagon wagon;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -26,9 +27,8 @@ class WagonAvatar extends StatelessWidget {
                   child: Row(
                     children: wagon.leader!.perks
                         .map(
-                          (perk) => Image.asset(
-                            categoryToImagePath(perk.affectsResourceCategory),
-                            width: 42,
+                          (perk) => PerkUnitView(
+                            perk,
                           ),
                         )
                         .toList(),
