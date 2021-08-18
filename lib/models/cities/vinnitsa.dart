@@ -19,7 +19,6 @@ class Vinnitsa extends City {
           manufacturings: [Smith(), Quarry()],
           stock: Stock([
             Bread(800),
-            Cannon(30),
             Grains(400),
             MetalParts(100),
             Firearm(300),

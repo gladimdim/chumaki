@@ -17,7 +17,7 @@ class BilaTserkva extends City {
           stock: Stock([
             Bread(400),
             Stone(100),
-            Cannon(15),
+            Cannon(1),
             Grains(400),
             Fur(100),
             Planks(400),

@@ -16,7 +16,6 @@ class Stavise extends City {
           stock: Stock([
             Bread(500),
             Stone(300),
-            Cannon(5),
             Grains(800),
             Planks(500),
             Wood(300),

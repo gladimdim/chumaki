@@ -20,7 +20,6 @@ class Pereyaslav extends City {
             Horse(120),
             Bread(450),
             Stone(350),
-            Cannon(3),
             Grains(700),
             Fur(100),
             Planks(500),

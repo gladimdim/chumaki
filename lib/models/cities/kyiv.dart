@@ -75,7 +75,7 @@ class Kyiv extends City {
             Grains(3000),
             Planks(500),
             IronOre(300),
-            Cannon(100),
+            Cannon(5),
             MetalParts(400),
             Fur(200),
             Fish(1000),

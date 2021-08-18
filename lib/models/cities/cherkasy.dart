@@ -57,7 +57,7 @@ class Cherkasy extends City {
                   MetalParts(40),
                   Gorilka(20),
                   Firearm(50),
-                  Cannon(5),
+                  Cannon(2),
                   Powder(40),
                   Horse(50),
                   Bread(100),

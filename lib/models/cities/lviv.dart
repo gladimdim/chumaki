@@ -24,7 +24,7 @@ class Lviv extends City {
                 Wool(500),
                 Wax(1000),
                 Amber(800),
-                Cannon(300),
+                Cannon(10),
                 Firearm(500),
                 Silk(500),
               ],

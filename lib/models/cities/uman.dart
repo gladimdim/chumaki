@@ -20,7 +20,6 @@ class Uman extends City {
           stock: Stock([
             Bread(500),
             Stone(300),
-            Cannon(5),
             Grains(340),
             Fur(80),
             Wool(300),

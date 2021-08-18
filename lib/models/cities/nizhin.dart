@@ -29,7 +29,7 @@ class Nizhin extends City {
                 Planks(150),
                 Stone(50),
                 Fish(100),
-                Cannon(10),
+                Cannon(1),
                 Salt(100),
                 Wool(300),
                 Amber(250),
@@ -75,7 +75,7 @@ class Nizhin extends City {
                   iconPath: "images/resources/cloth/cloth.png",
                   payment: Money(3200),
                   requirements: [
-                    Cannon(10),
+                    Cannon(1),
                     Powder(50),
                     Firearm(100),
                     Cloth(100),
