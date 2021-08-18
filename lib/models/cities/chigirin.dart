@@ -33,7 +33,7 @@ class Chigirin extends City {
             Horse(100),
             Planks(100),
             IronOre(30),
-            Cannon(10),
+            Cannon(2),
             MetalParts(50),
             Salt(100),
             Wool(600),

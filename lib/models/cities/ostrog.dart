@@ -14,7 +14,7 @@ class Ostrog extends City {
             localizedKeyName: 'ostrog',
             size: 2,
             unlocked: false,
-            unlockPriceMoney: Money(200.0),
+            unlockPriceMoney: Money(750.0),
             unlocksCities: [Lviv()],
             manufacturings: [Distillery(), Smeltery()],
             stock: Stock(
@@ -43,7 +43,7 @@ class Ostrog extends City {
               Event(
                   iconPath: "images/resources/wax/wax.png",
                   payment: Money(1250),
-                  requirements: [Wax(250), Bread(200), Grains(200)],
+                  requirements: [Wax(120), Bread(120), Grains(200)],
                   localizedKey: "events.ostrogAcademy",
                   artPath: "images/events/vesterfeld/fortress_outer.png"),
               Event(
@@ -55,13 +55,13 @@ class Ostrog extends City {
               Event(
                   iconPath: "images/resources/ironore/ironore_3.png",
                   payment: Money(2000),
-                  requirements: [IronOre(500),],
+                  requirements: [IronOre(300),],
                   localizedKey: "events.ostrogHugeOrder",
                   artPath: "images/events/vesterfeld/cossacks_rest.png"),
               Event(
                   iconPath: "images/resources/metalparts/metalparts.png",
                   payment: Money(2400),
-                  requirements: [Wood(200), Planks(200), Stone(100), MetalParts(50)],
+                  requirements: [Wood(200), Planks(200), Stone(70), MetalParts(50)],
                   localizedKey: "events.ostrogUpgradeCastle",
                   artPath: "images/events/vesterfeld/fortress_town.png"),
             ]);

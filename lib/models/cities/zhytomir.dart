@@ -14,7 +14,7 @@ class Zhytomir extends City {
           localizedKeyName: 'zhytomir',
           size: 2,
           unlocked: false,
-          unlockPriceMoney: Money(200.0),
+          unlockPriceMoney: Money(1000.0),
           manufacturings: [Bakery(), Field(), AmberMine()],
           unlocksCities: [
             Ostrog(),

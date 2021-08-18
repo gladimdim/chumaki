@@ -25,7 +25,6 @@ class Kaniv extends City {
             Fish(600),
             Planks(250),
             IronOre(50),
-            Cannon(3),
             Charcoal(200),
             MetalParts(100),
             Salt(200),

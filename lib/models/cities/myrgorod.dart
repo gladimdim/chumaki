@@ -15,7 +15,7 @@ class Myrgorod extends City {
           size: 2,
           unlocked: false,
           unlocksCities: [Pyryatin(), Ohtirka()],
-          unlockPriceMoney: Money(100),
+          unlockPriceMoney: Money(500),
           manufacturings: [Pasture()],
           stock: Stock(
             [

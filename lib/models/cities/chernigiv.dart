@@ -12,7 +12,7 @@ class Chernigiv extends City {
           localizedKeyName: 'chernigiv',
           size: 3,
           unlocked: false,
-          unlockPriceMoney: Money(250.0),
+          unlockPriceMoney: Money(500.0),
           manufacturings: [Forest(), CharcoalMaker(), Sawmill()],
           unlocksCities: [],
           stock: Stock(

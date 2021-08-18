@@ -14,7 +14,7 @@ class Ladyzhin extends City {
           size: 2,
           unlocksCities: [Gaivoron()],
           manufacturings: [],
-          unlockPriceMoney: Money(150),
+          unlockPriceMoney: Money(250),
           stock: Stock([
             Bread(200),
             Grains(300),

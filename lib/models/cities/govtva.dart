@@ -12,7 +12,8 @@ class Govtva extends City {
           point: Point(1550, 1900),
           localizedKeyName: 'govtva',
           size: 2,
-          unlocked: true,
+          unlocked: false,
+          unlockPriceMoney: Money(250),
           unlocksCities: [Myrgorod(), Ohtirka()],
           manufacturings: [],
           stock: Stock(

@@ -19,10 +19,10 @@ class Cherkasy extends City {
           availableEvents: [
             Event(
                 iconPath: "images/icons/luxury/luxury.png",
-                payment: Money(890),
+                payment: Money(800),
                 requirements: [
-                  Gorilka(100),
-                  Bread(50),
+                  Gorilka(30),
+                  Bread(40),
                   Silk(20),
                   Amber(20),
                   Honey(20),
@@ -44,8 +44,8 @@ class Cherkasy extends City {
                 iconPath: "images/resources/salt/salt.png",
                 payment: Money(700),
                 requirements: [
-                  Bread(100),
-                  Grains(120),
+                  Bread(50),
+                  Grains(100),
                   Salt(40),
                 ],
                 localizedKey: "events.cherkasyLocust",
@@ -57,7 +57,7 @@ class Cherkasy extends City {
                   MetalParts(40),
                   Gorilka(20),
                   Firearm(50),
-                  Cannon(5),
+                  Cannon(2),
                   Powder(40),
                   Horse(50),
                   Bread(100),
