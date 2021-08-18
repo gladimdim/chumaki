@@ -5,7 +5,10 @@ class ResizedImage extends StatelessWidget {
   final int? width;
   final int? height;
   final BoxFit? fit;
-  const ResizedImage(this.imagePath, {Key? key, this.width, this.height, this.fit}) : super(key: key);
+
+  const ResizedImage(this.imagePath,
+      {Key? key, this.width, this.height, this.fit})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
