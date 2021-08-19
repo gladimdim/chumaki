@@ -14,14 +14,14 @@ class Stavise extends City {
           unlocksCities: [],
           manufacturings: [],
           stock: Stock([
-            Bread(500),
-            Stone(300),
-            Grains(800),
-            Planks(500),
-            Wood(300),
-            IronOre(150),
-            MetalParts(100),
-            Wax(300),
+            Bread(100),
+            Stone(30),
+            Grains(80),
+            Planks(50),
+            Wood(30),
+            IronOre(15),
+            MetalParts(10),
+            Wax(30),
           ]),
         );
 }

@@ -17,19 +17,19 @@ class Pereyaslav extends City {
           unlocksCities: [Kyiv()],
           manufacturings: [Stables(), HoneyMaker()],
           stock: Stock([
-            Horse(120),
-            Bread(450),
-            Stone(350),
-            Grains(700),
-            Fur(100),
-            Planks(500),
-            Wood(850),
-            MetalParts(100),
-            Firearm(40),
+            Horse(80),
+            Bread(90),
+            Stone(30),
+            Grains(70),
+            Fur(10),
+            Planks(50),
+            Wood(50),
+            MetalParts(10),
+            Firearm(10),
             Salt(50),
             Wool(50),
-            Honey(500),
-            Wax(500),
+            Honey(320),
+            Wax(100),
           ]),
           availableEvents: [
             Event(
@@ -86,7 +86,6 @@ class Pereyaslav extends City {
                 ],
                 localizedKey: "events.pereyaslavHospital",
                 artPath: "images/events/vesterfeld/fortress.png"),
-
           ],
         );
 }

@@ -9,23 +9,23 @@ import 'package:chumaki/models/resources/resource.dart';
 class Ternopil extends City {
   Ternopil()
       : super(
-      point: Point(4550, 2400),
-      localizedKeyName: 'ternopil',
-      size: 2,
-      unlocked: false,
-      unlockPriceMoney: Money(500.0),
-      unlocksCities: [Lviv()],
-      manufacturings: [Smith()],
-      stock: Stock(
-        [
-          MetalParts(800),
-          Firearm(200),
-          Honey(100),
-          Tobacco(50),
-          Charcoal(100),
-          Bread(200),
-        ],
-      ),
-      wagons: [],
-   );
+          point: Point(4550, 2400),
+          localizedKeyName: 'ternopil',
+          size: 2,
+          unlocked: false,
+          unlockPriceMoney: Money(500.0),
+          unlocksCities: [Lviv()],
+          manufacturings: [Smith()],
+          stock: Stock(
+            [
+              MetalParts(80),
+              Firearm(105),
+              Honey(10),
+              Tobacco(5),
+              Charcoal(30),
+              Bread(90),
+            ],
+          ),
+          wagons: [],
+        );
 }

@@ -17,10 +17,10 @@ class Temryuk extends City {
           unlockPriceMoney: Money(500),
           stock: Stock(
             [
-              Fish(3500),
-              Salt(2000),
-              Silk(500),
-              Tobacco(300),
+              Fish(350),
+              Salt(100),
+              Silk(230),
+              Tobacco(120),
             ],
           ),
         );

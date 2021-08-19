@@ -8,22 +8,22 @@ import 'package:chumaki/models/resources/resource.dart';
 class Medzhibizh extends City {
   Medzhibizh()
       : super(
-    point: Point(3950, 2300),
-    localizedKeyName: 'medzhibizh',
-    size: 2,
-    unlocked: false,
-    unlockPriceMoney: Money(250.0),
-    unlocksCities: [Ternopil()],
-    manufacturings: [],
-    stock: Stock(
-      [
-        MetalParts(100),
-        Firearm(100),
-        Honey(100),
-        Gorilka(180),
-        Stone(180),
-      ],
-    ),
-    wagons: [],
-  );
+          point: Point(3950, 2300),
+          localizedKeyName: 'medzhibizh',
+          size: 2,
+          unlocked: false,
+          unlockPriceMoney: Money(250.0),
+          unlocksCities: [Ternopil()],
+          manufacturings: [],
+          stock: Stock(
+            [
+              MetalParts(30),
+              Firearm(10),
+              Honey(25),
+              Gorilka(30),
+              Stone(40),
+            ],
+          ),
+          wagons: [],
+        );
 }

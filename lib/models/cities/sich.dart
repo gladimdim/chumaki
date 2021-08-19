@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:chumaki/extensions/list.dart';
 import 'package:chumaki/extensions/stock.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/govtva.dart';
@@ -9,7 +10,6 @@ import 'package:chumaki/models/leaders/leaders.dart';
 import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/models/wagons/wagon.dart';
-import 'package:chumaki/extensions/list.dart';
 
 class Sich extends City {
   Sich()
@@ -54,17 +54,17 @@ class Sich extends City {
           ],
           stock: Stock(
             [
-              Powder(600),
-              Fish(700),
-              Horse(300),
-              Fur(120),
-              Salt(250),
-              Wool(100),
-              Silk(300),
-              Gorilka(250),
-              Wax(400),
-              Honey(150),
-              Tobacco(500),
+              Powder(220),
+              Fish(220),
+              Horse(5),
+              Fur(20),
+              Salt(50),
+              Wool(5),
+              Silk(3),
+              Gorilka(50),
+              Wax(20),
+              Honey(50),
+              Tobacco(50),
             ],
           ),
           wagons: [
