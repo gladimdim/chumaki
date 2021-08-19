@@ -50,3 +50,4 @@ key.properties
 .gradle
 gradle*
 local.properties
+key.jks
