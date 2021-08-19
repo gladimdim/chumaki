@@ -22,11 +22,11 @@ class Ochakiv extends City {
           ],
           stock: Stock(
             [
-              Powder(200),
-              Fish(800),
-              Salt(500),
+              Powder(100),
+              Fish(300),
+              Salt(300),
               Silk(100),
-              Tobacco(350),
+              Tobacco(50),
             ],
           ),
           availableEvents: [

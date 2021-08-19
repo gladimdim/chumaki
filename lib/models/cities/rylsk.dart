@@ -17,11 +17,11 @@ class Rylsk extends City {
           manufacturings: [],
           stock: Stock(
             [
-              Fur(800),
-              Wax(100),
-              Grains(200),
-              Wood(200),
-              Horse(10),
+              Fur(15),
+              Wax(10),
+              Grains(60),
+              Wood(80),
+              Horse(5),
               Wool(50),
             ],
           ),

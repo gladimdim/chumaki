@@ -17,12 +17,12 @@ class Korsun extends City {
           unlockPriceMoney: Money(400),
           manufacturings: [Distillery()],
           stock: Stock([
-            Bread(400),
-            Grains(380),
-            Fur(250),
-            Wool(400),
-            Gorilka(450),
-            Horse(80),
+            Bread(40),
+            Grains(30),
+            Fur(20),
+            Wool(40),
+            Gorilka(250),
+            Horse(8),
           ]),
         );
 }

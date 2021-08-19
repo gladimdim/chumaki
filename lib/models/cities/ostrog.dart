@@ -5,6 +5,7 @@ import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/events/event.dart';
 import 'package:chumaki/models/manufacturings/manufacturing.dart';
 import 'package:chumaki/models/resources/resource.dart';
+
 import 'lviv.dart';
 
 class Ostrog extends City {
@@ -19,17 +20,17 @@ class Ostrog extends City {
             manufacturings: [Distillery(), Smeltery()],
             stock: Stock(
               [
-                Wood(350),
-                Planks(500),
-                Fur(50),
+                Wood(150),
+                Planks(100),
+                Fur(20),
                 Wool(50),
-                Wax(100),
-                Amber(800),
-                Firearm(100),
-                Bread(300),
-                Horse(50),
-                Gorilka(450),
-                MetalParts(750),
+                Wax(10),
+                Amber(80),
+                Firearm(15),
+                Bread(100),
+                Horse(5),
+                Gorilka(50),
+                MetalParts(120),
               ],
             ),
             wagons: [],
@@ -55,13 +56,20 @@ class Ostrog extends City {
               Event(
                   iconPath: "images/resources/ironore/ironore_3.png",
                   payment: Money(2000),
-                  requirements: [IronOre(300),],
+                  requirements: [
+                    IronOre(300),
+                  ],
                   localizedKey: "events.ostrogHugeOrder",
                   artPath: "images/events/vesterfeld/cossacks_rest.png"),
               Event(
                   iconPath: "images/resources/metalparts/metalparts.png",
                   payment: Money(2400),
-                  requirements: [Wood(200), Planks(200), Stone(70), MetalParts(50)],
+                  requirements: [
+                    Wood(200),
+                    Planks(200),
+                    Stone(70),
+                    MetalParts(50)
+                  ],
                   localizedKey: "events.ostrogUpgradeCastle",
                   artPath: "images/events/vesterfeld/fortress_town.png"),
             ]);

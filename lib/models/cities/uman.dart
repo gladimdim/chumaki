@@ -18,13 +18,13 @@ class Uman extends City {
           manufacturings: [Distillery()],
           unlockPriceMoney: Money(500),
           stock: Stock([
-            Bread(500),
-            Stone(300),
-            Grains(340),
-            Fur(80),
-            Wool(300),
-            Gorilka(600),
-            Horse(100),
+            Bread(90),
+            Stone(30),
+            Grains(34),
+            Fur(10),
+            Wool(30),
+            Gorilka(180),
+            Horse(10),
           ]),
           availableEvents: [
             Event(
@@ -42,12 +42,7 @@ class Uman extends City {
             Event(
                 iconPath: "images/resources/horse/horse_2.png",
                 payment: Money(5200),
-                requirements: [
-                  Cannon(3),
-                  Firearm(60),
-                  Horse(80),
-                  Powder(150)
-                ],
+                requirements: [Cannon(3), Firearm(60), Horse(80), Powder(150)],
                 localizedKey: "events.umanRealAllies",
                 artPath: "images/events/vesterfeld/cannons_shooting.png"),
             Event(

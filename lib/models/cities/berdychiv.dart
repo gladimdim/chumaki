@@ -17,13 +17,13 @@ class Berdychiv extends City {
           unlocksCities: [Vinnitsa()],
           manufacturings: [IronMine()],
           stock: Stock([
-            Bread(300),
-            Grains(500),
-            MetalParts(220),
-            Firearm(50),
-            Wool(150),
-            Fish(350),
-            IronOre(400),
+            Bread(50),
+            Grains(150),
+            MetalParts(50),
+            Firearm(10),
+            Wool(30),
+            Fish(50),
+            IronOre(150),
           ]),
         );
 }
