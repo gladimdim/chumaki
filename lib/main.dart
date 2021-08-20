@@ -16,6 +16,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: mainTheme,
       title: 'Дике Поле: Чумаки',
       home: AnnotatedRegion<SystemUiOverlayStyle>(
