@@ -22,8 +22,10 @@ class MyApp extends StatelessWidget {
         value: SystemUiOverlayStyle(
           statusBarColor: Colors.black,
         ),
-        child: Scaffold(
-          body: StartingView(),
+        child: SafeArea(
+          child: Scaffold(
+            body: StartingView(),
+          ),
         ),
       ),
     );
