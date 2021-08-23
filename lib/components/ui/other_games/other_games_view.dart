@@ -14,7 +14,8 @@ class OtherGamesView extends StatelessWidget {
         child: TitleText(ChumakiLocalizations.labelOtherGames),
       ),
       Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.min,
+        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: OtherGame.allGames().map((game) {
           return InkWell(
             onTap: () {
