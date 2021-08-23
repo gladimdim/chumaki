@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/3d_button.dart';
+import 'package:chumaki/components/ui/other_games/other_games_link.dart';
 import 'package:chumaki/components/ui/other_games/other_games_view.dart';
 import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
@@ -143,7 +146,7 @@ class _StartingViewState extends State<StartingView> {
                           ),
                         ],
                       ),
-                      OtherGamesView(),
+                      if (!Platform.isIOS) OtherGamesView(),
                       LocaleSelection(
                         locale: ChumakiLocalizations.locale,
                         onLocaleChanged: (Locale locale) {
@@ -152,6 +155,8 @@ class _StartingViewState extends State<StartingView> {
                           });
                         },
                       ),
+
+                      if (Platform.isIOS) OtherGamesLink(),
                     ],
                   ),
                 ],
