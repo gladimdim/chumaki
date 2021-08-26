@@ -18,7 +18,7 @@ class CityAvatar extends StatelessWidget {
       children: [
         ResizedImage(
           city.avatarImagePath,
-          width: width.toInt(),
+          width: width,
         ),
         if (showName)
           Padding(

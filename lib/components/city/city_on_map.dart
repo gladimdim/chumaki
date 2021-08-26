@@ -67,7 +67,7 @@ class CityOnMap extends StatelessWidget {
                     children: [
                       ResizedImage(
                         Wagon.imagePath,
-                        width: 15 * city.size.toInt(),
+                        width: 15 * city.size,
                       ),
                       GameText(
                         city.wagons.length.toString(),
@@ -87,7 +87,7 @@ class CityOnMap extends StatelessWidget {
   Widget _avatarForMode() {
     if (mapMode == MAP_MODE.CITY) {
       return ResizedImage(city.avatarImagePath,
-          width: CITY_SIZE * city.size.toInt());
+          width: CITY_SIZE * city.size);
     } else {
       final base = 80;
       final count = city.manufacturings.length;

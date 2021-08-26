@@ -11,9 +11,9 @@ class ResourceCategoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Row(
+    return Row(
       children: [
-        ResizedImage(categoryToImagePath(category), width: width.toInt()),
+        ResizedImage(categoryToImagePath(category), width: width),
         Text(
           ChumakiLocalizations.getForKey(
             resourceCategoryToLocalizedKey(category),

@@ -1,19 +1,19 @@
 import 'dart:math';
+import 'dart:ui' as ui;
 
 import 'package:chumaki/components/city/city_on_map.dart';
 import 'package:chumaki/components/city/selected_city_locked_view.dart';
-import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/city/selected_city_view.dart';
+import 'package:chumaki/components/route_paint.dart';
 import 'package:chumaki/components/ui/3d_button.dart';
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
 import 'package:chumaki/components/ui/notification_box.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/components/ui/resized_image.dart';
+import 'package:chumaki/extensions/list.dart';
 import 'package:chumaki/models/cities/city.dart';
-
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
-
 import 'package:chumaki/models/image_on_canvas.dart';
 import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/sound/sound_manager.dart';
@@ -22,8 +22,6 @@ import 'package:chumaki/utils/points.dart';
 import 'package:chumaki/views/general_help_view.dart';
 import 'package:chumaki/views/logger_view.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
-import 'package:chumaki/extensions/list.dart';
 import 'package:rxdart/rxdart.dart';
 
 enum MAP_MODE { CITY, RESOURCE }
@@ -103,8 +101,8 @@ class GameCanvasViewState extends State<GameCanvasView>
             children: [
               ResizedImage(
                 "images/boplan_map_huge.jpg",
-                width: CANVAS_WIDTH.toInt(),
-                height: CANVAS_HEIGHT.toInt(),
+                width: CANVAS_WIDTH,
+                height: CANVAS_HEIGHT,
               ),
               if (showCoordinates)
                 ...List.generate(53, (index) {
@@ -350,7 +348,6 @@ class GameCanvasViewState extends State<GameCanvasView>
               ),
             ),
           ),
-
       ],
     );
   }

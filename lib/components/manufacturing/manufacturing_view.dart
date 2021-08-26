@@ -48,10 +48,11 @@ class ManufacturingView extends StatelessWidget {
         ),
         Row(
           children: [
-            if (mfg.canUpgrade()) Expanded(
-              flex: 2,
-              child: _buildActionButton(company),
-            ),
+            if (mfg.canUpgrade())
+              Expanded(
+                flex: 2,
+                child: _buildActionButton(company),
+              ),
             Expanded(
               flex: 5,
               child: Opacity(
@@ -59,7 +60,7 @@ class ManufacturingView extends StatelessWidget {
                 child: ResizedImage(
                   mfg.imagePath,
                   fit: BoxFit.fill,
-                  width: CITY_DETAILS_VIEW_WIDTH.toInt(),
+                  width: CITY_DETAILS_VIEW_WIDTH,
                 ),
               ),
             ),
@@ -78,22 +79,26 @@ class ManufacturingView extends StatelessWidget {
           height: 128,
         ),
         subTitle: MoneyUnitView(mfg.priceToBuild),
-        onPress: company.hasEnoughMoney(mfg.priceToBuild) ? () {
-          onBuildPress!();
-        } : null,
+        onPress: company.hasEnoughMoney(mfg.priceToBuild)
+            ? () {
+                onBuildPress!();
+              }
+            : null,
         action: TitleText(ChumakiLocalizations.labelBuild),
       );
     if (mfg.canUpgrade())
       return ActionButton(
-        image:    ResizedImage(
+        image: ResizedImage(
           "images/icons/upgrade/upgrade.png",
           width: 128,
           height: 128,
         ),
         subTitle: MoneyUnitView(mfg.priceToBuild),
-        onPress: company.hasEnoughMoney(mfg.priceToBuild) ? () {
-          onUpgradePress!();
-        } : null,
+        onPress: company.hasEnoughMoney(mfg.priceToBuild)
+            ? () {
+                onUpgradePress!();
+              }
+            : null,
         action: TitleText(ChumakiLocalizations.labelUpgrade),
       );
     return Container();

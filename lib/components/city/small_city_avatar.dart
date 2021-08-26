@@ -2,10 +2,10 @@
 import 'package:chumaki/components/city/city_avatar.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/components/ui/resized_image.dart';
+import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:chumaki/i18n/chumaki_localizations.dart';
 
 class SmallCityAvatar extends CityAvatar {
   final City city;
@@ -29,7 +29,7 @@ class CityAvatarStacked extends StatelessWidget {
         children: [
           ResizedImage(
             city.avatarImagePath,
-            width: width.toInt(),
+            width: width,
           ),
           Align(
               alignment: Alignment.topCenter,

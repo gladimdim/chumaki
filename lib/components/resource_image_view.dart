@@ -17,7 +17,7 @@ class ResourceImageView extends StatelessWidget {
       children: [
         ResizedImage(
           resource.imagePath,
-          width: size.toInt(),
+          width: size,
         ),
         if (showAmount)
           Positioned(

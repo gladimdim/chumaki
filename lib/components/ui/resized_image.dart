@@ -1,9 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ResizedImage extends StatelessWidget {
   final String imagePath;
-  final int? width;
-  final int? height;
+  final double? width;
+  final double? height;
   final BoxFit? fit;
 
   const ResizedImage(this.imagePath,
@@ -12,9 +13,14 @@ class ResizedImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image(
-      fit: fit,
-      image: ResizeImage(AssetImage(imagePath), width: width, height: height),
-    );
+    int? width2 = width == null ? null : width!.toInt();
+    int? height2 = height == null ? null : height!.toInt();
+    return kIsWeb
+        ? Image.asset(imagePath, width: width, height: height)
+        : Image(
+            fit: fit,
+            image: ResizeImage(AssetImage(imagePath),
+                width: width2, height: height2),
+          );
   }
 }
