@@ -1,6 +1,5 @@
 import 'package:chumaki/components/ui/bordered_bottom.dart';
 import 'package:chumaki/components/ui/game_text.dart';
-import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/theme.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,8 @@ class OtherGamesLink extends StatelessWidget {
         var locale = ChumakiLocalizations.locale;
         openUrlFor(locale);
       },
-      child: BorderedBottom(child: Row(
+      child: BorderedBottom(
+          child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(Icons.link, color: darkGrey),

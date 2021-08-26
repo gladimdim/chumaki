@@ -41,12 +41,12 @@ class SoundManager {
   SoundManager._internal() {}
 
   Future initSounds() async {
-    if (kIsWeb || Platform.isWindows || Platform.isLinux) {
-      return;
-    } else {
+    // if (kIsWeb || Platform.isWindows || Platform.isLinux) {
+    //   return;
+    // } else {
       pool = Soundpool.fromOptions(
           options: SoundpoolOptions(streamType: StreamType.music));
-    }
+    // }
     if (sounds.isNotEmpty) {
       return;
     }

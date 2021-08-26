@@ -59,7 +59,7 @@ class _MoneyUnitViewState extends State<MoneyUnitView>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ResizedImage(widget.money.imagePath, width: widget.size.toInt()),
+          ResizedImage(widget.money.imagePath, width: widget.size),
           TitleText(
             widget.money.amount.toStringAsFixed(1),
             style: style(widget.money.amount, context),
@@ -72,11 +72,11 @@ class _MoneyUnitViewState extends State<MoneyUnitView>
   TextStyle style(double value, BuildContext context) {
     final colorTheme = Theme.of(context).colorScheme;
     return gameTextStyle.copyWith(
-          fontWeight: FontWeight.bold,
-          color: widget.isEnough
-              ? Colors.green[800]
-              : colorTheme.onSurface.withOpacity(0.38),
-        );
+      fontWeight: FontWeight.bold,
+      color: widget.isEnough
+          ? Colors.green[800]
+          : colorTheme.onSurface.withOpacity(0.38),
+    );
   }
 
   @override
