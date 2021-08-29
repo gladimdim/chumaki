@@ -8,6 +8,7 @@ import 'package:chumaki/components/ui/expandable_panel.dart';
 import 'package:chumaki/components/ui/inline_help.dart';
 import 'package:chumaki/components/ui/resized_image.dart';
 import 'package:chumaki/components/wagons/wagons_global_price_list.dart';
+import 'package:chumaki/extensions/list.dart';
 import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
@@ -15,8 +16,8 @@ import 'package:chumaki/models/resources/resource.dart';
 import 'package:chumaki/views/game_canvas_view.dart';
 import 'package:chumaki/views/inherited_company.dart';
 import 'package:flutter/material.dart';
+
 import 'title_text.dart';
-import 'package:chumaki/extensions/list.dart';
 
 class GlobalMarketView extends StatefulWidget {
   final City currentCity;
@@ -243,6 +244,6 @@ class _GlobalMarketViewState extends State<GlobalMarketView> {
         return 0;
       }
     });
-    return cities;
+    return cities.take(15).toList();
   }
 }
