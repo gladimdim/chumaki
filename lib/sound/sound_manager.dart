@@ -1,11 +1,10 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/logger/logger.dart';
-import 'package:flutter/foundation.dart';
+import 'package:chumaki/utils/universal_platform_vm.dart';
 import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
 
@@ -41,12 +40,12 @@ class SoundManager {
   SoundManager._internal() {}
 
   Future initSounds() async {
-    // if (kIsWeb || Platform.isWindows || Platform.isLinux) {
-    //   return;
-    // } else {
+    if (UniversalPlatform.windows || UniversalPlatform.linux) {
+      return;
+    } else {
       pool = Soundpool.fromOptions(
           options: SoundpoolOptions(streamType: StreamType.music));
-    // }
+    }
     if (sounds.isNotEmpty) {
       return;
     }
