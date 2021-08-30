@@ -218,30 +218,18 @@ class GameCanvasViewState extends State<GameCanvasView>
                     ),
                   );
                 }).toList(),
-              Positioned(
-                left: 200,
-                top: 800,
-                child: TextButton(
-                  child: Text("Reset"),
-                  onPressed: () {
-                    setState(() {
-                      animationValue = 1 - animationValue;
-                    });
-                  },
-                ),
-              ),
-              Positioned(
-                left: 300,
-                top: 900,
-                child: TextButton(
-                  child: Text("Toggle lines"),
-                  onPressed: () {
-                    setState(() {
-                      showCoordinates = !showCoordinates;
-                    });
-                  },
-                ),
-              ),
+              // Positioned(
+              //   left: 300,
+              //   top: 900,
+              //   child: TextButton(
+              //     child: Text("Toggle lines"),
+              //     onPressed: () {
+              //       setState(() {
+              //         showCoordinates = !showCoordinates;
+              //       });
+              //     },
+              //   ),
+              // ),
               if (selected != null)
                 SizedBox(
                   width: CANVAS_WIDTH,
