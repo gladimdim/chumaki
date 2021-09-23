@@ -1,10 +1,8 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
@@ -42,7 +40,7 @@ class FacebookShareTo extends ShareTo {
 }
 
 class ShareImage {
-  static String fileName = "share.png";
+  static String fileName = "share";
 
   static shareWidgetImageAtKey(GlobalKey key, String subject) async {
     RenderRepaintBoundary boundary =
@@ -53,13 +51,15 @@ class ShareImage {
       return;
     }
     ui.Image image = await boundary.toImage(pixelRatio: 3.0);
-    final dir = (await getExternalStorageDirectory())!.path;
+    final dir = (await getApplicationDocumentsDirectory()).path;
     ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     var pngBytes = byteData!.buffer.asUint8List();
-    File imgFile = File("$dir/$fileName");
+    final date = DateTime.now();
+    final fullPath = "$dir/$fileName-${date.toIso8601String()}.png";
+    File imgFile = File(fullPath);
     await imgFile.writeAsBytes(pngBytes);
     Share.shareFiles(
-      ["$dir/$fileName"],
+      [fullPath],
       mimeTypes: ["image/png"],
       subject: subject,
     );
