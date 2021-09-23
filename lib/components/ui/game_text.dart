@@ -12,3 +12,15 @@ class GameText extends Text {
                 ? gameTextStyle
                 : addStyle.merge(gameTextStyle));
 }
+
+class GameSelectableText extends SelectableText {
+  final String text;
+  final TextStyle? addStyle;
+
+  GameSelectableText(this.text, {Key? key, this.addStyle})
+      : super(text,
+      key: key,
+      style: addStyle == null
+          ? gameTextStyle
+          : addStyle.merge(gameTextStyle));
+}

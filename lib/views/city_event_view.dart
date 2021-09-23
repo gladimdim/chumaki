@@ -43,7 +43,7 @@ class _CityEventViewState extends State<CityEventView> {
           width: CITY_DETAILS_VIEW_WIDTH / 2,
           fit: BoxFit.fitWidth,
         ),
-        GameText(
+        GameSelectableText(
           ChumakiLocalizations.getForKey(event.localizedKeyText),
           addStyle: Theme.of(context).textTheme.headline3,
         ),
