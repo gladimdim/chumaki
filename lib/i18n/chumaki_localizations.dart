@@ -48,7 +48,8 @@ class ChumakiLocalizations {
   static ResourceLocalizations resourceLocalizations = ResourceLocalizations();
   static LeadersLocalizations leadersLocalizations = LeadersLocalizations();
   static EventLocalizations eventLocalizations = EventLocalizations();
-  static NotificationLocalizations notificationLocalizations = NotificationLocalizations();
+  static NotificationLocalizations notificationLocalizations =
+      NotificationLocalizations();
   static ManufacturingLocalizations manufacturingLocalizations =
       ManufacturingLocalizations();
   static AchievementsLocalizations achievementsLocalizations =
@@ -184,10 +185,12 @@ class ChumakiLocalizations {
       "labelWagonContains": "Wagon contains",
       "labelSound": "Sound",
       "labelHelp": "Help",
+      "labelMyAchievementProgress": "My achievement progress",
+      "labelShortGameDescription":
+      "Download game Chumaki at https://locadeserta.com/locadesertachumaki/index_en",
       "labelHelpOverviewTitle": "Gameplay",
       "labelHelpTitleOverview1": "TLDR 👉",
-      "labelHelpTextOverview1":
-          """Buy low. Sell high. Do the tasks.""",
+      "labelHelpTextOverview1": """Buy low. Sell high. Do the tasks.""",
       "labelHelpTitleOverview2": "Game full description 😎 👇",
       "labelHelpTextOverview2": """
 
@@ -350,6 +353,9 @@ But be careful - you can go below zero! The rule is simple - manufacturing cente
       "labelWagonContains": "Вміст ватаги",
       "labelSound": "Звук",
       "labelHelp": "Допомога",
+      "labelMyAchievementProgress": "Мій прогрес в досягнені",
+      "labelShortGameDescription":
+          "Скачай гру Чумаки: https://locadeserta.com/locadesertachumaki",
       "labelHelpOverviewTitle": "Ігролад",
       "labelHelpTitleOverview1": "Гра коротко 👉",
       "labelHelpTextOverview1":
@@ -514,6 +520,9 @@ But be careful - you can go below zero! The rule is simple - manufacturing cente
       "labelWagonContains": "Состав ватаги",
       "labelSound": "Звук",
       "labelHelp": "Помощь",
+      "labelMyAchievementProgress": "Мой прогресс в достижении",
+      "labelShortGameDescription":
+          "Скачай игру Чумаки: https://locadeserta.com/locadesertachumaki",
       "labelHelpOverviewTitle": "Игролад",
       "labelHelpTitleOverview1": "Игра коротко 👉",
       "labelHelpTextOverview1":
@@ -977,5 +986,14 @@ But be careful - you can go below zero! The rule is simple - manufacturing cente
 
   static String get labelHelpTextGlobalMarket {
     return _localizedValues[locale.languageCode]!["labelHelpTextGlobalMarket"]!;
+  }
+
+  static String get labelMyAchievementProgress {
+    return _localizedValues[locale.languageCode]![
+        "labelMyAchievementProgress"]!;
+  }
+
+  static String get labelShortGameDescription {
+    return _localizedValues[locale.languageCode]!["labelShortGameDescription"]!;
   }
 }
