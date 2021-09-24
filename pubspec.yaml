@@ -3,7 +3,7 @@ description: A trade game based in Ukraine of XVIII century.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.2+6
+version: 1.0.3+7
 
 environment:
   sdk: '>=2.13.0 <3.0.0'
