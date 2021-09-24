@@ -45,11 +45,6 @@ class ShareImage {
   static shareWidgetImageAtKey(GlobalKey key, String subject) async {
     RenderRepaintBoundary boundary =
         key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
-    if (boundary.debugNeedsPaint) {
-      Timer(Duration(seconds: 1),
-          () => ShareImage.shareWidgetImageAtKey(key, subject));
-      return;
-    }
     ui.Image image = await boundary.toImage(pixelRatio: 3.0);
     final dir = (await getApplicationDocumentsDirectory()).path;
     ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
