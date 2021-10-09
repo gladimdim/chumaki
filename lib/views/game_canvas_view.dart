@@ -384,6 +384,7 @@ class GameCanvasViewState extends State<GameCanvasView>
                   ),
                   NotificationBox(
                     company: company,
+                    key: globalKeyNoficationBox,
                   ),
                 ],
               ),

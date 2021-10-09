@@ -8,6 +8,7 @@ import 'package:chumaki/sound/sound_manager.dart';
 import 'package:chumaki/views/game_canvas_view.dart';
 import 'package:flutter/material.dart';
 
+final globalKeyNoficationBox = GlobalKey();
 class NotificationBox extends StatefulWidget {
   final Company company;
 
@@ -26,7 +27,7 @@ class _NotificationBoxState extends State<NotificationBox> {
   @override
   void initState() {
     super.initState();
-    _sub = widget.company.changes
+    _sub = widget.company.changes.asBroadcastStream()
         .where((event) => event.item1 == COMPANY_EVENTS.TASK_ENDED)
         .listen((event) {
       _timer?.cancel();
@@ -46,6 +47,10 @@ class _NotificationBoxState extends State<NotificationBox> {
       });
       _citySub.add(sub);
     });
+  }
+
+  void didUpdate(NotificationBox oldWidget) {
+    super.didUpdateWidget(oldWidget);
   }
 
   void setShow(String? event) {
