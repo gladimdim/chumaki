@@ -4,7 +4,7 @@ import 'package:chumaki/app_preferences.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/logger/logger.dart';
-import 'package:chumaki/utils/universal_platform_vm.dart';
+import 'package:chumaki/utils/universal_platform/loader.dart';
 import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
 
