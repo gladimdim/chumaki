@@ -272,7 +272,7 @@ class GameCanvasViewState extends State<GameCanvasView>
         if (company != null && selected == null)
           Positioned(
             top: MENU_ITEM_WIDTH + 5,
-            right: 15,
+            right: 5,
             child: Column(
               children: [
                 ...company.activeRouteTasks.map((e) => Tuple2(e.to, e.wagon)),
