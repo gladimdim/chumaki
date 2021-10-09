@@ -31,7 +31,7 @@
   <link rel="icon" type="image/png" href="icons/favicon.ico"/>
 
   <title>Loca Deserta: Chumaki. A Trade Game set in Ukraine XVI-XVIII Centuries.</title>
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="chumaki/manifest.json">
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139608005-1"></script>
   <script>
@@ -62,7 +62,7 @@
         // Wait for registration to finish before dropping the <script> tag.
         // Otherwise, the browser will load the script multiple times,
         // potentially different versions.
-        var serviceWorkerUrl = 'chumaki/flutter_service_worker.js?v=' + serviceWorkerVersion;
+        var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
         navigator.serviceWorker.register(serviceWorkerUrl)
           .then((reg) => {
             function waitForActivation(serviceWorker) {
