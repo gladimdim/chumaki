@@ -1,21 +1,26 @@
 import 'dart:math';
 import 'dart:ui' as ui;
 
+import 'package:chumaki/components/city/city_avatar.dart';
 import 'package:chumaki/components/city/city_on_map.dart';
 import 'package:chumaki/components/city/selected_city_locked_view.dart';
 import 'package:chumaki/components/city/selected_city_view.dart';
 import 'package:chumaki/components/route_paint.dart';
+import 'package:chumaki/components/title_text.dart';
 import 'package:chumaki/components/ui/3d_button.dart';
 import 'package:chumaki/components/ui/bouncing_outlined_text.dart';
 import 'package:chumaki/components/ui/notification_box.dart';
 import 'package:chumaki/components/ui/outlined_text.dart';
 import 'package:chumaki/components/ui/resized_image.dart';
+import 'package:chumaki/components/wagons/wagon_avatar.dart';
 import 'package:chumaki/extensions/list.dart';
+import 'package:chumaki/i18n/chumaki_localizations.dart';
 import 'package:chumaki/models/cities/city.dart';
 import 'package:chumaki/models/cities/sich.dart';
 import 'package:chumaki/models/company.dart';
 import 'package:chumaki/models/image_on_canvas.dart';
 import 'package:chumaki/models/resources/resource.dart';
+import 'package:chumaki/models/wagons/wagon.dart';
 import 'package:chumaki/sound/sound_manager.dart';
 import 'package:chumaki/theme.dart';
 import 'package:chumaki/utils/points.dart';
@@ -23,6 +28,7 @@ import 'package:chumaki/views/general_help_view.dart';
 import 'package:chumaki/views/logger_view.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:tuple/tuple.dart';
 
 enum MAP_MODE { CITY, RESOURCE }
 
@@ -129,6 +135,7 @@ class GameCanvasViewState extends State<GameCanvasView>
                   );
                 }).toList(),
               if (showCoordinates) ..._renderCoordinateLabels(),
+
               if (company != null)
                 ...company.cityRoutes.map((route) {
                   var first = route.from;
@@ -262,6 +269,52 @@ class GameCanvasViewState extends State<GameCanvasView>
             ],
           ),
         ),
+        if (company != null && selected == null)
+          Positioned(
+            top: MENU_ITEM_WIDTH + 5,
+            right: 15,
+            child: StreamBuilder(
+                stream: company.changes.where((event) => [
+                      COMPANY_EVENTS.LEADER_HIRED,
+                      COMPANY_EVENTS.TASK_STARTED,
+                      COMPANY_EVENTS.TASK_ENDED,
+                      COMPANY_EVENTS.WAGON_BOUGHT
+                    ].contains(event)),
+                builder: (context, snapshot) {
+                  return Column(
+                    children: [
+                      ...company.activeRouteTasks
+                          .map((e) => Tuple2(e.to, e.wagon)),
+                      ...company.allCities.fold<List<Tuple2<City, Wagon>>>(
+                        [],
+                        (acc, city) {
+                          for (var wagon in city.wagons) {
+                            acc.add(Tuple2(city, wagon));
+                          }
+                          return acc;
+                        },
+                      )
+                    ]
+                        .map((cityAndWagon) => ConstrainedBox(
+                              constraints: BoxConstraints.tight(
+                                Size(MENU_ITEM_WIDTH, MENU_ITEM_WIDTH),
+                              ),
+                              child: DDDButton(
+                                color: mediumGrey,
+                                shadowColor: themeData.backgroundColor,
+                                onPressed: () {
+                                  navigateToCity(to: cityAndWagon.item1);
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: WagonAvatar(wagon: cityAndWagon.item2),
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                  );
+                }),
+          ),
         if (selected == null && company != null) LoggerView(company: company),
         if (selected == null && company != null) GeneralHelpViewButton(),
         if (company != null)
