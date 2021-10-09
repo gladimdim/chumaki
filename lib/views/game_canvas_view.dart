@@ -273,47 +273,37 @@ class GameCanvasViewState extends State<GameCanvasView>
           Positioned(
             top: MENU_ITEM_WIDTH + 5,
             right: 15,
-            child: StreamBuilder(
-                stream: company.changes.where((event) => [
-                      COMPANY_EVENTS.LEADER_HIRED,
-                      COMPANY_EVENTS.TASK_STARTED,
-                      COMPANY_EVENTS.TASK_ENDED,
-                      COMPANY_EVENTS.WAGON_BOUGHT
-                    ].contains(event)),
-                builder: (context, snapshot) {
-                  return Column(
-                    children: [
-                      ...company.activeRouteTasks
-                          .map((e) => Tuple2(e.to, e.wagon)),
-                      ...company.allCities.fold<List<Tuple2<City, Wagon>>>(
-                        [],
-                        (acc, city) {
-                          for (var wagon in city.wagons) {
-                            acc.add(Tuple2(city, wagon));
-                          }
-                          return acc;
-                        },
-                      )
-                    ]
-                        .map((cityAndWagon) => ConstrainedBox(
-                              constraints: BoxConstraints.tight(
-                                Size(MENU_ITEM_WIDTH, MENU_ITEM_WIDTH),
-                              ),
-                              child: DDDButton(
-                                color: mediumGrey,
-                                shadowColor: themeData.backgroundColor,
-                                onPressed: () {
-                                  navigateToCity(to: cityAndWagon.item1);
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: WagonAvatar(wagon: cityAndWagon.item2),
-                                ),
-                              ),
-                            ))
-                        .toList(),
-                  );
-                }),
+            child: Column(
+              children: [
+                ...company.activeRouteTasks.map((e) => Tuple2(e.to, e.wagon)),
+                ...company.allCities.fold<List<Tuple2<City, Wagon>>>(
+                  [],
+                  (acc, city) {
+                    for (var wagon in city.wagons) {
+                      acc.add(Tuple2(city, wagon));
+                    }
+                    return acc;
+                  },
+                )
+              ]
+                  .map((cityAndWagon) => ConstrainedBox(
+                        constraints: BoxConstraints.tight(
+                          Size(MENU_ITEM_WIDTH, MENU_ITEM_WIDTH),
+                        ),
+                        child: DDDButton(
+                          color: mediumGrey,
+                          shadowColor: themeData.backgroundColor,
+                          onPressed: () {
+                            navigateToCity(to: cityAndWagon.item1);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: WagonAvatar(wagon: cityAndWagon.item2),
+                          ),
+                        ),
+                      ))
+                  .toList(),
+            ),
           ),
         if (selected == null && company != null) LoggerView(company: company),
         if (selected == null && company != null) GeneralHelpViewButton(),
