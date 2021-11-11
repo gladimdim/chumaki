@@ -49,7 +49,7 @@ The game starts at Sich. You have only one wagon with an otaman and an access to
 
 ## Trading and Market
 <p align="center">
- <img src="./images/en/market.png" width="350">
+ <img src="docs/images/en/market.png" width="350">
 </p>
 
 At market you can check the town stocks and the prices.
